@@ -15,7 +15,9 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-
+	
+	<resources mapping="/assets/**" location="/assets/" />
+	
 	<!-- Tiles -->
 	<beans:bean p:order="2" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	 <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />

@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title><tiles:insertAttribute name="title" /></title>
 </head>
-<body>-----
+<body>
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="menu" />
 	<tiles:insertAttribute name="body" />

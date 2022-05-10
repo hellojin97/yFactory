@@ -7,13 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	 <div class="wrapper">
-        <!--Top menu -->
-        <div class="sidebar">
-           <!--profile image & text-->
-            <!--menu item-->
-        </div>
-
-    </div>
+iiiii
 </body>
 </html>

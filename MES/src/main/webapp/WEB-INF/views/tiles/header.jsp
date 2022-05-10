@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
 
 </head>
 
@@ -11,8 +10,9 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+
+        <span class="d-none d-lg-block" style=" color:#fad145 ">YAFS</span>
+        <span style="font-size: small; color:#ff8000; padding: 8px 0px 0px 7px ">Yedam Automize Factory System</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->

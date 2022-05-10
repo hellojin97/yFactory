@@ -7,7 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>김세명입니다.수정</h1>
-	
+	 <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+            <!--menu item-->
+        </div>
+
+    </div>
 </body>
 </html>

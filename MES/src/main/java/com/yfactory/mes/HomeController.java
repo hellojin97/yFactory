@@ -20,4 +20,9 @@ public class HomeController {
 		return "common/home";
 	}
 	
+	@RequestMapping("/loginForm.do")
+	public String loginForm() {
+		return "loginForm";
+	}
+	
 }

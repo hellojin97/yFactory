@@ -30,11 +30,16 @@
   <link href="${pageContext.request.contextPath}/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
   
   <!-- END CSS -->
 	
 	
+</head>
+<body>
+	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="menu" />
+	<tiles:insertAttribute name="body" />
    <!-- Vendor JS Files -->
   <script src="${pageContext.request.contextPath}/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -46,11 +51,6 @@
   <script src="${pageContext.request.contextPath}/assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-</head>
-<body>
-	<tiles:insertAttribute name="header" />
-	<tiles:insertAttribute name="menu" />
-	<tiles:insertAttribute name="body" />
+  <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </body>
 </html>

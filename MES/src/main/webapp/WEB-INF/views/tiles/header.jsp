@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -11,7 +10,8 @@
         <span style="font-size: small; color:#ff8000; padding: 8px 0px 0px 7px ">Yedam Automize Factory System</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+    </div>
+    <!-- End Logo -->
 
     <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
@@ -227,10 +227,10 @@
         </li><!-- End Profile Nav -->
 
       </ul>
+      
     </nav><!-- End Icons Navigation -->
-
+	  
   </header><!-- End Header -->
 	
-  <div class="blank">
- 	a
-  </div>
+<div class="blank">aaa</div>
+ 	

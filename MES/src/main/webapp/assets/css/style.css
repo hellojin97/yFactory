@@ -15,7 +15,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
-  color: #444444;
+  color: white;
 }
 
 a {
@@ -242,7 +242,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 .card-body {
-  padding: 0 20px 20px 20px;
+  padding: 30px 20px 20px 20px;
+  background-color: #2c3e50;
 }
 
 .card-img-overlay {
@@ -1089,4 +1090,19 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+.loginTitle{
+	color:#fad145;
+	font-size: 3em;
+	text-align: center;		
+	font-weight: bolder;
+}
+
+.loginSubTitle{
+	font-size: 1em;
+	text-align: center;
+	margin-top: -15px;
+	color: #ff8000;
+	padding-bottom: 40px;
 }

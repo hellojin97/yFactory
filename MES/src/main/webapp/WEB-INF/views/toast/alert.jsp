@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10" ></script>
-<title>Insert title here</title>
+<title>Insert a here</title>
 </head>
 <body>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>

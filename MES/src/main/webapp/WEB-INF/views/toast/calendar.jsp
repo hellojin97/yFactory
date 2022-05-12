@@ -8,13 +8,14 @@
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-calendar.css" />
+
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/calendar/default.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/calendar/icons.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/calendar/icons.css" /> 
 <title>Insert title here</title>
 </head>
 <body>
-<div>
-  <div class="code-html" style="max-height: 300px; max-width: 300px;">
+  <main id="main" class="main">
+  <div class="code-html">
     <div id="menu">
       <span id="menu-navi">
         <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
@@ -30,8 +31,6 @@
 
     <div id="calendar"></div>
   </div>
- </div>
-  
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
       crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -115,7 +114,6 @@
   });
   </script>
   <script src="${pageContext.request.contextPath}/assets/toast/js/calendar/default.js"></script>
-
-</body>
+</main>
 </body>
 </html>

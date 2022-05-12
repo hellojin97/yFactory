@@ -5,9 +5,11 @@
  * @license MIT
  */
 .tui-full-calendar-layout {
-  height: 100%;
+  max-width : 50%;
+  max-height : 50%;
   position: relative;
   box-sizing: border-box;
+  
 }
 .tui-full-calendar-layout * {
   box-sizing: border-box;

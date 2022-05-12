@@ -15,7 +15,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
-  color: white;
+  color: black;
 }
 
 a {
@@ -836,6 +836,10 @@ h1, h2, h3, h4, h5, h6 {
 .dashboard .top-selling img {
   border-radius: 5px;
   max-width: 60px;
+}
+
+.mainTitle{
+	font-weight: 900;
 }
 
 /*--------------------------------------------------------------

@@ -14,7 +14,7 @@
 </head>
 <body>
 <div>
-  <div class="code-html">
+  <div class="code-html" style="max-height: 300px; max-width: 300px;">
     <div id="menu">
       <span id="menu-navi">
         <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>

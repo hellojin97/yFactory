@@ -59,8 +59,32 @@
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         
           <li>
+            <a href="orderForm">
+              <i class="bi bi-circle"></i><span>발주관리</span>
+            </a>
+          </li>
+
+          <li>
             <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>INDEX</span>
+              <i class="bi bi-circle"></i><span>발주이력조회</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="tables-general.html">
+              <i class="bi bi-circle"></i><span>입고관리</span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="tables-general.html">
+              <i class="bi bi-circle"></i><span>LOT재고조회</span>
+            </a>
+          </li>
+           
+          <li>
+            <a href="tables-general.html">
+              <i class="bi bi-circle"></i><span>불량조회</span>
             </a>
           </li>
           

@@ -39,4 +39,9 @@ public class HomeController {
 	public String alert(Locale lc) {
 		return "toast/alert";
 	}
+	
+	@RequestMapping("/toast")
+	public String toast(Locale lc) {
+		return "toast/home";
+	}
 }

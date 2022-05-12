@@ -154,6 +154,11 @@
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
+            <a href="toast">
+              <i class="bi bi-circle"></i><span>토스트홈</span>
+            </a>
+          </li>
+          <li>
             <a href="alert">
               <i class="bi bi-circle"></i><span>알림</span>
             </a>

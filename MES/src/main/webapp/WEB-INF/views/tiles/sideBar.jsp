@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<div class="blank" >aaa</div>
+<div class="blank" >a</div>
 <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 	

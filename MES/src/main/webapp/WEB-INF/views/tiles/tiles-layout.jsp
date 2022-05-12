@@ -38,13 +38,13 @@
 </head>
 <body>
 	<header>
-	<tiles:insertAttribute name="header" />
+		<tiles:insertAttribute name="header" />
 	</header>
 	<aside>
-	<tiles:insertAttribute name="menu" />
+		<tiles:insertAttribute name="menu" />
 	</aside>
-	<main style="margin-left: 23em;padding-top: 9em;">
-	<tiles:insertAttribute name="body" />
+	<main id="main" class="main">
+		<tiles:insertAttribute name="body" />
 	</main>
 	
 	

@@ -29,7 +29,7 @@ public class HomeController {
 	
 	@RequestMapping("/calendar")
 	public String calendar(Locale lc) {
-		return "toast/ui/calendar";
+		return "toast/calendar";
 	}
 	@RequestMapping("/modal")
 	public String modal(Locale lc) {

@@ -1,5 +1,7 @@
 package com.yfactory.mes;
 
+import java.util.Locale;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,4 +27,16 @@ public class HomeController {
 		return "loginForm";
 	}
 	
+	@RequestMapping("/calendar")
+	public String calendar(Locale lc) {
+		return "toast/calendar";
+	}
+	@RequestMapping("/modal")
+	public String modal(Locale lc) {
+		return "toast/modal";
+	}
+	@RequestMapping("/alert")
+	public String alert(Locale lc) {
+		return "toast/alert";
+	}
 }

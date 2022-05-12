@@ -6,9 +6,10 @@
 </head>
 
 <body>
+<div class="blank" >aaa</div>
 <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
+	
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">

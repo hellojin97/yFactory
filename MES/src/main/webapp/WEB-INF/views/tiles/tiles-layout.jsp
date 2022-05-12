@@ -37,9 +37,17 @@
 	
 </head>
 <body>
+	<header>
 	<tiles:insertAttribute name="header" />
+	</header>
+	<aside>
 	<tiles:insertAttribute name="menu" />
+	</aside>
+	<main style="margin-left: 23em;padding-top: 9em;">
 	<tiles:insertAttribute name="body" />
+	</main>
+	
+	
    <!-- Vendor JS Files -->
   <script src="${pageContext.request.contextPath}/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

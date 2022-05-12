@@ -10,6 +10,8 @@
 <body>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
 <button id="alertSuccess">AlertSuccess 실행</button>
 <button id="alertFail">AlertFail 실행</button>
 <button id="confirmStart">confirm 실행</button>

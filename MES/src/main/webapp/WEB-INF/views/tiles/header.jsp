@@ -4,7 +4,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="home.do" class="logo d-flex align-items-center">
 
         <span class="d-none d-lg-block" style=" color:#fad145 ">YAFS</span>
         <span style="font-size: small; color:#ff8000; padding: 8px 0px 0px 7px ">Yedam Automize Factory System</span>

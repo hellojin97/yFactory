@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="contentTitle">
-		<h1>주문현황</h1>
-		
-	</div>
+
 </body>
 </html>

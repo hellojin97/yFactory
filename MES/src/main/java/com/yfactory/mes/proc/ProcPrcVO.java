@@ -25,5 +25,5 @@ public class ProcPrcVO {
 	//PROC_MGR		관리자		FK	EMPLOYEE.emp_no
 	private int proc_mgr;
 	//PROC_QTY		투입량
-	private String proc_qty;
+	private int proc_qty;
 }

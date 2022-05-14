@@ -1,4 +1,4 @@
-package com.yfactory.mes.proc;
+package com.yfactory.mes.proc.vo;
 
 import java.sql.Timestamp;
 

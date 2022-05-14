@@ -1,4 +1,4 @@
-package com.yfactory.mes.proc;
+package com.yfactory.mes.proc.vo;
 
 /*
  *  등록일자 : 2022-05-15

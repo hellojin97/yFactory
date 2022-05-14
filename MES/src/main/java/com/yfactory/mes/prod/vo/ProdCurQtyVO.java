@@ -1,4 +1,4 @@
-package com.yfactory.mes.prod;
+package com.yfactory.mes.prod.vo;
 
 import lombok.Data;
 

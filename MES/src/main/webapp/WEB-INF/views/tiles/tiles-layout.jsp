@@ -34,18 +34,41 @@
   
   <!-- END CSS -->
 	
+	<style type="text/css">
+	#header {
+		width: 100%;
+		height: 50px;
+		text-align: center;
+	}
+	
+	#menu {
+		float: left;
+		width: 20%;
+	}
+	
+	#body {
+		float: left;
+		width: 80%;
+		padding-top: 80px;
+	}
+	
+	#menu, #body{
+		min-height: 600px;
+	}
+</style>
+	
 	
 </head>
 <body>
-	<header>
-		<tiles:insertAttribute name="header" />
-	</header>
-	<aside>
-		<tiles:insertAttribute name="menu" />
-	</aside>
-	<main id="main" class="main">
-		<tiles:insertAttribute name="body" />
-	</main>
+
+
+<div id="header"><tiles:insertAttribute name="header" /></div>
+<div id="menu"><tiles:insertAttribute name="menu" /></div>
+<div id="body"><tiles:insertAttribute name="body" /></div>
+
+		
+		
+		
 	
 	
    <!-- Vendor JS Files -->

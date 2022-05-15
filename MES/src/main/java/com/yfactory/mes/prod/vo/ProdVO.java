@@ -1,6 +1,6 @@
-package com.yfactory.mes.prod;
+package com.yfactory.mes.prod.vo;
 
-
+import lombok.Data;
 
 /*
  *  등록일자 : 2022-05-14
@@ -9,6 +9,7 @@ package com.yfactory.mes.prod;
  *  테이블 물리명 : 완제품
  */
 
+@Data
 public class ProdVO {
 //	Prod_cd			완제품코드	PK
 	private String prod_cd;

@@ -1,5 +1,7 @@
 package com.yfactory.mes.common.vo;
 
+import lombok.Data;
+
 /*
  *  등록일자 : 2022-05-14
  *  등록자    : 김현진
@@ -7,6 +9,7 @@ package com.yfactory.mes.common.vo;
  *  테이블 물리명 : 부서
  */
 
+@Data
 public class DeptVO {
 
 //	Dept_no		부서번호 PK

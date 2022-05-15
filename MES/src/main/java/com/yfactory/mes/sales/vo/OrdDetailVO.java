@@ -1,6 +1,7 @@
 package com.yfactory.mes.sales.vo;
 
-import java.sql.Date;
+
+import lombok.Data;
 
 /*
  *  등록일자 : 2022-05-14
@@ -8,7 +9,7 @@ import java.sql.Date;
  *  연결 테이블 명 : Ord_dtl
  *  테이블 물리명 : 주문상세
  */
-
+@Data
 public class OrdDetailVO {
 	
 	

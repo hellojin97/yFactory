@@ -1,4 +1,4 @@
-package com.yfactory.mes.proc;
+package com.yfactory.mes.proc.vo;
 
 import java.sql.Timestamp;
 
@@ -22,8 +22,8 @@ public class ProcPrcVO {
 	private Timestamp proc_sttm;
 	//PROC_EDTM		작업종료시간
 	private Timestamp proc_edtm;
-	//PROC_MGR		관리자		FK	EMPLOYEE.EMP_NO !!팀장에게 확인할 것
-	private String proc_mgr;
+	//PROC_MGR		관리자		FK	EMPLOYEE.emp_no
+	private int proc_mgr;
 	//PROC_QTY		투입량
-	private String proc_qty;
+	private int proc_qty;
 }

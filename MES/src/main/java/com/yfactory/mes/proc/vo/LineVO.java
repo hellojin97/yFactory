@@ -1,12 +1,14 @@
 package com.yfactory.mes.proc.vo;
 
+import lombok.Data;
+
 /*
  *  등록일자 : 2022-05-15
  *  등록자    : 김세명
  *  연결 테이블 명 : LINE
  *  테이블 물리명 : 라인
  */
-
+@Data
 public class LineVO {
 	//LINE_CD	라인코드	PK
 	private String line_cd;

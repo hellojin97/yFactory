@@ -2,13 +2,15 @@ package com.yfactory.mes.proc.vo;
 
 import java.sql.Date;
 
+import lombok.Data;
+
 /*
  *  등록일자 : 2022-05-15
  *  등록자    : 김세명
  *  연결 테이블 명 : PROC_ST
  *  테이블 물리명 : 공정상태
  */
-
+@Data
 public class ProcStVO {
 	//PROC_LOG		LOG시간		PK
 	private	Date proc_log;

@@ -2,13 +2,15 @@ package com.yfactory.mes.proc.vo;
 
 import java.sql.Timestamp;
 
+import lombok.Data;
+
 /*
  *  등록일자 : 2022-05-15
  *  등록자    : 김세명
  *  연결 테이블 명 : PROC_PRC
  *  테이블 물리명 : 진행공정관리
  */
-
+@Data
 public class ProcPrcVO {
 	//PROC_PRCD		진행공정코드	PK
 	private String proc_prcd;

@@ -2,6 +2,8 @@ package com.yfactory.mes.common.vo;
 
 import java.sql.Date;
 
+import lombok.Data;
+
 
 
 /*
@@ -11,7 +13,7 @@ import java.sql.Date;
  *  테이블 물리명 : 공통코드
  */
 
-
+@Data
 public class CommVO {
 
 	

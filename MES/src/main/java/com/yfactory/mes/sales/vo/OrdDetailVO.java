@@ -14,13 +14,12 @@ public class OrdDetailVO {
 	
 	
 //	Ordtl_cd		주문상세코드 PK
-	private String ordtl_cd;
-	
+	private String ordtl_cd;	
 //	Ord_cd			주문코드 FK Orders.ord_cd
 	private String ord_cd;
-//	Prdt_cd			완제품코드 FK Prod_prod_cd
+//	Prdt_cd			완제품코드 FK Prod.prod_cd
 	private String prdt_cd;
 //	Ord_qty			수량
 	private int ord_qty;
-	
+
 }

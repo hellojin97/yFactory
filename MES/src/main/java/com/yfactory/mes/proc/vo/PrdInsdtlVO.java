@@ -2,13 +2,15 @@ package com.yfactory.mes.proc.vo;
 
 import java.sql.Date;
 
+import lombok.Data;
+
 /*
  *  등록일자 : 2022-05-15
  *  등록자    : 김세명
  *  연결 테이블 명 : PRD_INSDTL
  *  테이블 물리명 : 생산지시상세
  */
-
+@Data
 public class PrdInsdtlVO {
 	//PRD_DTLCD		생산지시상세코드 PK
 	private String prd_dtlcd;

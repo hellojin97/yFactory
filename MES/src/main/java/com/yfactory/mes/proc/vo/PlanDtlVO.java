@@ -1,12 +1,14 @@
 package com.yfactory.mes.proc.vo;
 
+import lombok.Data;
+
 /*
  *  등록일자 : 2022-05-15
  *  등록자    : 김세명
  *  연결 테이블 명 : PLAN_DTL
  *  테이블 물리명 : 생산계획상세
  */
-
+@Data
 public class PlanDtlVO {
 	//PD_CD		생산계획상세코드	PK
 	private	String pd_cd;

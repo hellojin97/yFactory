@@ -1,12 +1,14 @@
 package com.yfactory.mes.proc.vo;
 
+import lombok.Data;
+
 /*
  *  등록일자 : 2022-05-15
  *  등록자    : 김세명
  *  연결 테이블 명 : PRD_INS
  *  테이블 물리명 : 생산지시
  */
-
+@Data
 public class PrdInsVO {
 	//INS_CD	생산지시코드 PK
 	private String ins_cd;

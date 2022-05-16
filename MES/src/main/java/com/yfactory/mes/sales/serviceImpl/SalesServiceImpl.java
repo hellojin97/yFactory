@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.yfactory.mes.sales.mapper.SalesMapper;
 import com.yfactory.mes.sales.service.SalesService;
-import com.yfactory.mes.test.TestVO;
 
 @Service
 public class SalesServiceImpl implements SalesService {

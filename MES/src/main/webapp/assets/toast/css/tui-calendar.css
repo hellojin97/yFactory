@@ -7,8 +7,7 @@
 .tui-full-calendar-layout {
   height : 50%;
   width :50%;
-  left : 300px;
-  top : 150px;
+
   position: relative;
   box-sizing: border-box;
   

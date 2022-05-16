@@ -34,6 +34,10 @@
   
   <!-- END CSS -->
 	
+
+  <!-- 캘린더 -->	
+  <!-- 캘린더끝 -->
+
 	<style type="text/css">
 	#header {
 		width: 100%;
@@ -66,9 +70,6 @@
 <div id="menu"><tiles:insertAttribute name="menu" /></div>
 <div id="body"><tiles:insertAttribute name="body" /></div>
 
-		
-		
-		
 	
 	
    <!-- Vendor JS Files -->

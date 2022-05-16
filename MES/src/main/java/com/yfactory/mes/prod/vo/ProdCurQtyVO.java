@@ -14,6 +14,6 @@ public class ProdCurQtyVO {
 //	prod_lot		완제품 LOT		PK & FK PROD_LOT.prod_lot
 	private String prod_lot;
 //	prod_qty		수량
-	private int prdo_qty;
+	private int prod_qty;
 
 }

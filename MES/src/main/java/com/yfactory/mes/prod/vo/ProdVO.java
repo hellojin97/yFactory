@@ -16,9 +16,9 @@ public class ProdVO {
 //	Prod_nm			제품명
 	private String prod_nm;
 //	Prod_unit		단위
-	private String unit;
+	private String prod_unit;
 //	Prod_saqty		안전재고
-	private int prod_saqty;
+	private int prod_sfqty;
 //	uuid			FK		Img_attach.uuid
 	private String uuid;
 }

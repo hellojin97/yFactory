@@ -79,7 +79,7 @@
 	</resultMap>
 
 	<!-- EQ_UPHCAL -->
-	<resultMap type="com.yfactory.mes.eq.vo.EqUphcalVO" id="equph">
+	<resultMap type="com.yfactory.mes.eq.vo.UphcalVO" id="equph">
 		<!-- 계산일자 -->
 		<result property="cal_dt" column="CAL_DT" />
 		<!-- 설비코드 -->
@@ -91,10 +91,8 @@
 		<!-- 시간당 총 생산량 UPH -->
 		<result property="eq_uph" column="EQ_UPH" />
 	</resultMap>
-<resultMap type="" id="">
-<collection property=""></collection>
 
-</resultMap>
+<select id="" ></select>
 
 
 

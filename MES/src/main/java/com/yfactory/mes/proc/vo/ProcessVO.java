@@ -13,7 +13,7 @@ public class ProcessVO {
 	//PROC_CD	공정코드	PK
 	private String proc_cd;
 	//EQ_CD		설비코드	FK	EQ.EQ_CD;
-	private String eq_dd;
+	private String eq_cd;
 	//PROC_NM	공정명
 	private String proc_nm;
 }

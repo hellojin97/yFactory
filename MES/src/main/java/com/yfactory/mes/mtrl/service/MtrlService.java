@@ -1,4 +1,4 @@
-package com.yfactory.mes.mtrl.mapper;
+package com.yfactory.mes.mtrl.service;
 
 import java.util.List;
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yfactory.mes.common.mapper.CommonMapper">
+
+	<resultMap type="com.yfactory.mes.common.vo.CommVO" id="common">
+		<result property="comm_cd" column="COMM_CD" />
+		<result property="hcomm_cd" column="HCOMM_CD" />
+		<result property="cd_nm" column="CD_NM" />
+		<result property="cd_explan" column="CD_EXPLAN" />
+		<result property="cd_ins_tm" column="CD_INS_TM" />
+		<result property="cd_upd_tm" column="CD_UPD_TM" />
+	</resultMap>
+
+	<resultMap type="com.yfactory.mes.common.vo.DeptVO" id="dept">
+		<result property="dept_no" column="DEPT_NO" />
+		<result property="dept_nm" column="DEPT_NM" />
+	</resultMap>
+
+	<resultMap type="com.yfactory.mes.common.vo.EmployeeVO" id="employee">
+		<result property="emp_no" column="EMP_NO" />
+		<result property="dept_no" column="DEPT_NO" />
+		<result property="emp_nm" column="EMP_NM" />
+		<result property="emp_email" column="EMP_EMAIL" />
+		<result property="pw" column="PW" />
+	</resultMap>
+	
+
+</mapper>

@@ -1,5 +1,6 @@
 package com.yfactory.mes.sales.vo;
 
+import lombok.Data;
 
 /*
  *  등록일자 : 2022-05-14
@@ -8,10 +9,11 @@ package com.yfactory.mes.sales.vo;
  *  테이블 물리명 : 주문출고
  */
 
+@Data
 public class OrdResVO {
 
 //	Ordtl_cd	주문상세코드	FK	Ord_dtl.ordtl_cd
-	private String Ordtl_cd;
+	private String ordtl_cd;
 //	Prdt_lot	완제품 LOT	FK	Prod_lot.prod_lot
-	private String Prod_lot;
+	private String prod_lot;
 }

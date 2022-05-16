@@ -2,6 +2,8 @@ package com.yfactory.mes.sales.vo;
 
 import java.sql.Date;
 
+import lombok.Data;
+
 /*
  *  등록일자 : 2022-05-14
  *  등록자    : 김현진
@@ -9,6 +11,7 @@ import java.sql.Date;
  *  테이블 물리명 : 주문
  */
 
+@Data
 public class OrdersVO {
 	
 	

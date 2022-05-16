@@ -20,7 +20,7 @@ public class MaterialController {
 		
 		return "material/orderForm";
 	}
-	@GetMapping("/order")
+	@GetMapping("/mtrlorder")
 	@ResponseBody
 	public List<Map> order() {
 		

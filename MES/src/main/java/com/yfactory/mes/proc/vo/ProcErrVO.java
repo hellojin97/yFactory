@@ -9,7 +9,7 @@ import lombok.Data;
  *  테이블 물리명 : 공정불량
  */
 @Data
-public class ProcErr {
+public class ProcErrVO {
 	//PROC_PRCD		진행공정코드	FK	PROC_PRC.PROC_PRCD
 	private String proc_prcd;
 	//LINE_TURN		순번			FK	PROC_PRC.LINE_TURN

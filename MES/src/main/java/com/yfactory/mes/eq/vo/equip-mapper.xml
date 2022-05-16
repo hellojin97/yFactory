@@ -79,7 +79,7 @@
 	</resultMap>
 
 	<!-- EQ_UPHCAL -->
-	<resultMap type="com.yfactory.mes.eq.vo.UphcalVO" id="equph">
+	<resultMap type="com.yfactory.mes.eq.vo.EqUphcalVO" id="equph">
 		<!-- 계산일자 -->
 		<result property="cal_dt" column="CAL_DT" />
 		<!-- 설비코드 -->

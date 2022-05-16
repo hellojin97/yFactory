@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.sales.mapper.SalesMapper">
 
-
 	<select id="selectOrderList" resultType="map">
 		SELECT ord.ord_cd  "ord_cd " , 
 					   ord.prog_cd ,

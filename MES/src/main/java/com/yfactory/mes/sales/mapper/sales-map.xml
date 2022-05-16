@@ -2,30 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.sales.mapper.SalesMapper">
 
-<<<<<<< HEAD
-   <!-- Orders -->
-   <resultMap type="com.yfactory.mes.sales.vo.OrdersVO" id="ord">
-      <result property="ord_cd" column="ORD_CD" />
-      <result property="vdr_cd" column="VDR_CD" />
-      <result property="req_dt" column="REQ_DT" />
-      <result property="res_dt" column="RES_DT" />
-      <result property="prog_cd" column="PROG_CD" />
-   </resultMap>
-   <!-- Ord_detail -->
-   <resultMap type="com.yfactory.mes.sales.vo.OrdDetailVO"
-      id="ordtl">
-      <result property="ordtl_cd" column="ORDTL_CD" />
-      <result property="ord_cd" column="ORD_CD" />
-      <result property="prdt_cd" column="PRDT_CD" />
-      <result property="ord_qty" column="ORD_QTY" />
-   </resultMap>
-   <!-- Ord_res -->
-   <resultMap type="com.yfactory.mes.sales.vo.OrdResVO"
-      id="ordres">
-      <result property="ordtl_cd" column="ORDTL_CD" />
-      <result property="prod_lot" column="PRDT_LOT" />
-   </resultMap>
-=======
 	<!-- Orders -->
 	<resultMap type="com.yfactory.mes.sales.vo.OrdersVO" id="ord">
 		<result property="ord_cd" column="ORD_CD" />

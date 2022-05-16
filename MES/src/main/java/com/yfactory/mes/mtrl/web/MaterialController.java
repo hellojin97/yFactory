@@ -1,4 +1,4 @@
-package com.yfactory.mes.material;
+package com.yfactory.mes.mtrl.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,3 +11,4 @@ public class MaterialController {
 		return "material/orderForm";
 	}
 }
+ 

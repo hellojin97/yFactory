@@ -39,7 +39,7 @@
 		<result property="pp_dt" column="PP_DT" />
 		<result property="pp_prog" column="PP_PROG" />
 	</resultMap>
-	<resultMap type="com.yfactory.mes.proc.vo.ProcErr"
+	<resultMap type="com.yfactory.mes.proc.vo.ProcErrVO"
 		id="procErr">
 		<result property="proc_prcd" column="PROC_PRCD" />
 		<result property="line_turn" column="LINE_TURN" />

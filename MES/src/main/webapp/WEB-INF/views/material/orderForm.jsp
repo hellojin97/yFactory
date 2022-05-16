@@ -44,7 +44,7 @@
 
 <script>
 $.ajax({
-	url: "order",
+	url: "mtrlorder",
 	method : "GET",
 	dataType : "JSON",
 	success : function(result){
@@ -112,7 +112,7 @@ var unorder = new tui.Grid({
     rowHeaders: ['rowNum'],
     pageOptions: {
       useClient: true,
-      perPage: 5
+      perPage: 3
     }
   });
 

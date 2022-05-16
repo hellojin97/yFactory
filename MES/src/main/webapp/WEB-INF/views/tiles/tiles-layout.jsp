@@ -63,6 +63,12 @@
    }
 
 </style>
+</head>
+
+<body>
+<div id="header"><tiles:insertAttribute name="header" /></div>
+<div id="menu"><tiles:insertAttribute name="menu" /></div>
+<div id="body"><tiles:insertAttribute name="body" /></div>
 
    <!-- Vendor JS Files -->
   <script src="${pageContext.request.contextPath}/assets/vendor/apexcharts/apexcharts.min.js"></script>

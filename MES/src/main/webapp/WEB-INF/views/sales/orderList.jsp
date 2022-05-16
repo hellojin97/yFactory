@@ -74,8 +74,12 @@ window.onload = function(){
                    {
                        header: '진행상황',
                        name: '진행상황',
-                     },
-       ]
+                     }],
+   					rowHeaders: ['rowNum'],
+                     pageOptions: {
+                         useClient: true,
+                         perPage: 5
+                    }
      });
 }
   </script>

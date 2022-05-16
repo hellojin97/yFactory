@@ -22,7 +22,9 @@
 			<button id="prependBtn">prependBtn</button>
 		</div>
 		<div id="grid"></div>
-		<div id="chart-area"></div>
+		<div id="grid1"></div>
+		
+		<!-- <div id="chart-area"></div> -->
 	</div>
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
@@ -62,7 +64,37 @@
       perPage: 5
     }
   });
-
+  const grid1 = new tui.Grid({
+	    el: document.getElementById('grid1'),
+	    data: gridData,
+	    columns: [
+	      {
+	        header: 'Name',
+	        name: 'name'
+	      },
+	      {
+	        header: 'Artist',
+	        name: 'artist'
+	      },
+	      {
+	        header: 'Type',
+	        name: 'type'
+	      },
+	      {
+	        header: 'Release',
+	        name: 'release'
+	      },
+	      {
+	        header: 'Genre',
+	        name: 'genre'
+	      }
+	    ],
+	    rowHeaders: ['rowNum'],
+	    pageOptions: {
+	      useClient: true,
+	      perPage: 5
+	    }
+	  });
   const appendBtn = document.getElementById('appendBtn');
   const prependBtn = document.getElementById('prependBtn');
 

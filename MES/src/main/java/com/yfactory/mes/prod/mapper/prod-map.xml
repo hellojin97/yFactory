@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yfactory.mes.prod.vo.ProdMapper">
+	<resultMap type="com.yfactory.mes.prod.vo.ProdVO" id="prod">
+		<result property="prod_cd" column="PROD_CD" />
+		<result property="prod_nm" column="PROD_NM" />
+		<result property="prod_unit" column="PROD_UNIT" />
+		<result property="prod_sfqty" column="PROD_SFQTY" />
+		<result property="uuid" column="UUID" />
+	</resultMap>
+	<resultMap type="com.yfactory.mes.prod.vo.ProdLotVO"
+		id="prodLot">
+		<result property="prod_lot" column="PROD_LOT" />
+		<result property="prod_cd" column="PROD_CD" />
+		<result property="prod_exp" column="PROD_EXP" />
+		<result property="prod_fdt" column="PROD_FDT" />
+	</resultMap>
+	<resultMap type="com.yfactory.mes.prod.vo.ProdCurQtyVO"
+		id="prodCurQty">
+		<result property="prod_lot" column="PROD_LOT" />
+		<result property="prod_qty" column="PROD_QTY" />
+	</resultMap>
+	<resultMap type="com.yfactory.mes.prod.vo.ProdWrnVO"
+		id="prodWrn">
+		<result property="prod_num" column="PROD_NUM" />
+		<result property="prod_lot" column="PROD_LOT" />
+		<result property="wr_cd" column="WR_CD" />
+		<result property="prod_wrqty" column="PROD_WRQTY" />
+		<result property="prod_rdt" column="PROD_RDT" />
+		<result property="prod_note" column="PROD_NOTE" />
+	</resultMap>
+</mapper>

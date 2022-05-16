@@ -34,7 +34,6 @@ import com.yfactory.mes.quality.vo.ErrCodeVO;
 import com.yfactory.mes.quality.vo.MtCheckVO;
 import com.yfactory.mes.quality.vo.MtErrListVO;
 import com.yfactory.mes.quality.vo.ProdErrListVO;
-import com.yfactory.mes.quality.vo.Prod_check;
 import com.yfactory.mes.sales.vo.OrdDetailVO;
 import com.yfactory.mes.sales.vo.OrdResVO;
 import com.yfactory.mes.sales.vo.OrdersVO;
@@ -89,7 +88,6 @@ public class TestVO {
 	private ErrCodeVO err_code;
 	private MtCheckVO mt_check;
 	private MtErrListVO mt_errList;
-	private Prod_check prod_check;
 	private ProdErrListVO prod_errList;	
 	
 	//SALES

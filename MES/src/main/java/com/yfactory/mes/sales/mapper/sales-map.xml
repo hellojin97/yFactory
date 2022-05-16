@@ -25,5 +25,4 @@
 		<result property="prod_lot" column="PRDT_LOT" />
 	</resultMap>
 	
-	<resultMap type="" id=""></resultMap>
 </mapper>

@@ -91,10 +91,8 @@
 		<!-- 시간당 총 생산량 UPH -->
 		<result property="eq_uph" column="EQ_UPH" />
 	</resultMap>
-<resultMap type="" id="">
-<collection property=""></collection>
 
-</resultMap>
+<select id="" ></select>
 
 
 

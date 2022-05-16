@@ -15,7 +15,7 @@ public class ProdErrListVO {
 //	prod_lot		완제품LOT		PK FK PROD_LOT.prod_lot
 	private String prod_lot;
 //	chk_errqty		불량량
-	private int chl_errqty;
+	private int chk_errqty;
 //	err_cd			불량코드			FK	  ERR_CODE.err_cd
 	private String err_cd;
 }

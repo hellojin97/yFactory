@@ -2,42 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.common.mapper.CommonMapper">
 
-<!-- comm_code -->
-	<resultMap type="com.yfactory.mes.common.vo.CommVO"
-		id="common">
-		<result property="comm_cd" column="COMM_CD" />
-		<result property="hcomm_cd" column="HCOMM_CD" />
-		<result property="cd_nm" column="CD_NM" />
-		<result property="cd_explan" column="CD_EXPLAN" />
-		<result property="cd_ins_tm" column="CD_INS_TM" />
-		<result property="cd_upd_tm" column="CD_UPD_TM" />
-	</resultMap>
-<!-- dept -->
-	<resultMap type="com.yfactory.mes.common.vo.DeptVO" id="dept">
-		<result property="dept_no" column="DEPT_NO" />
-		<result property="dept_nm" column="DEPT_NM" />
-	</resultMap>
 
-<!-- employee -->
-	<resultMap type="com.yfactory.mes.common.vo.EmployeeVO"
-		id="employee">
-		<result property="emp_no" column="EMP_NO" />
-		<result property="dept_no" column="DEPT_NO" />
-		<result property="emp_nm" column="EMP_NM" />
-		<result property="emp_email" column="EMP_EMAIL" />
-		<result property="pw" column="PW" />
-	</resultMap>
-
-<!-- vendor -->
-	<resultMap type="com.yfactory.mes.common.vo.VendorVO"
-		id="vendor">
-		<result property="vdr_cd" column="VDR_CD" />
-		<result property="ven_cd" column="VEN_CD" />
-		<result property="vdr_nm" column="VDR_NM" />
-		<result property="vdr_eid" column="VDR_EID" />
-		<result property="vdr_tel" column="VDR_TEL" />
-		<result property="vdr_mgr" column="VDR_MGR" />
-
-	</resultMap>
 
 </mapper>

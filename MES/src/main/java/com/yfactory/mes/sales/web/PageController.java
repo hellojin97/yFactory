@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.yfactory.mes.sales.service.SalesService;
 
 @Controller
-public class SalesController {
+public class PageController {
 
 	@Autowired private SalesService salesService;
 	
-	@RequestMapping("/selectOrdersList.do")
+	@RequestMapping("/orderList")
 	public String  selectOrdersList() {
-		System.out.println(salesService.selectOrderList());
-		return "common/home";
+		return "sales/orderList";
 	}
 
 }

@@ -3,15 +3,14 @@
 <mapper namespace="com.yfactory.mes.sales.mapper.SalesMapper">
 
 	<select id="selectOrderList" resultType="map">
-		SELECT ord.ord_cd  "ord_cd " , 
-					   ord.prog_cd ,
-					   ord.req_dt ,
-					   ord.res_dt ,
-					   ordtl.prod_cd , 
-					   ordtl.ord_qty ,
-					   vdr.vdr_nm ,
-					   pd.prod_nm ,
-					   cd.cd_explan 
+		SELECT ord.ord_cd  "주문코드" , 
+					   TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
+					   TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
+					   ordtl.prod_cd "완제품코드" ,
+					   ordtl.ord_qty "주문수량",
+					   vdr.vdr_nm "업체명",
+					   pd.prod_nm "완제품명",
+					   cd.cd_explan "진행상황"
 		FROM 
 					   ORDERS ord, 
 					   VENDOR vdr, 

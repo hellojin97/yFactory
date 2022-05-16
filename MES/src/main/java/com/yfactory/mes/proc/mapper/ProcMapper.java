@@ -1,13 +1,11 @@
 package com.yfactory.mes.proc.mapper;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 import com.yfactory.mes.proc.vo.PlanDtlVO;
 
 
 public interface ProcMapper {
+
 
 	Map OrderSelectOk(Map ordCd);	//주문서 조회 (주문코드O)
 	Map OrderSelectNo(Map prodCd);	//주문서 조회 (주문코드X)
@@ -19,4 +17,5 @@ public interface ProcMapper {
 	
 	int prdtPlanInsert(String PP_NM, Date date1);
 	
+
 }

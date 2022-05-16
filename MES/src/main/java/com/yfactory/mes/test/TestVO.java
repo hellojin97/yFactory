@@ -98,4 +98,5 @@ public class TestVO {
 	private OrdDetailVO ord_dtl;
 	
 	
+	
 }

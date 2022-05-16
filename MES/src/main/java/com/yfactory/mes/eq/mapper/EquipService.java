@@ -1,5 +1,5 @@
 package com.yfactory.mes.eq.mapper;
 
-public class EquipService {
+public interface EquipService {
 
 }

@@ -1,5 +1,8 @@
 package com.yfactory.mes.sales.service;
 
-public interface SalesService {
+import java.util.List;
+import java.util.Map;
 
+public interface SalesService {
+	List<Map> selectOrderList();
 }

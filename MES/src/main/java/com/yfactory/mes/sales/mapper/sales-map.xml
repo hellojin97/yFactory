@@ -24,4 +24,6 @@
 		<result property="ordtl_cd" column="ORDTL_CD" />
 		<result property="prod_lot" column="PRDT_LOT" />
 	</resultMap>
+	
+	<resultMap type="" id=""></resultMap>
 </mapper>

@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
 	<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-calendar.css" />
 
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/calendar/default.css" />
+
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/calendar/icons.css" /> 
 <title>Insert title here</title>
 </head>

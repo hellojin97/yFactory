@@ -34,6 +34,8 @@
   
   <!-- END CSS -->
 	
+  <!-- 캘린더 -->	
+  <!-- 캘린더끝 -->
 	
 </head>
 <body>
@@ -43,7 +45,7 @@
 	<aside>
 		<tiles:insertAttribute name="menu" />
 	</aside>
-	<main id="main" class="main">
+	<main id="main" class="main" style="padding: 50px 20px 50px 20px;">
 		<tiles:insertAttribute name="body" />
 	</main>
 	

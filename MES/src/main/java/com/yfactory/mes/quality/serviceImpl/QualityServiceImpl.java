@@ -1,5 +1,7 @@
 package com.yfactory.mes.quality.serviceImpl;
 
-public class QualityServiceImpl {
+import com.yfactory.mes.quality.mapper.QualityService;
+
+public class QualityServiceImpl implements QualityService {
 
 }

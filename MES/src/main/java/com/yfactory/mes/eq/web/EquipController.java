@@ -19,7 +19,7 @@ public class EquipController {
 	@RequestMapping("/eqpartJoin")
 	public List<EqVO> eqlist(){
 		
-		// return mapper.findAll();
+		//return mapper.findAll();
 		return null;
 	}
 }

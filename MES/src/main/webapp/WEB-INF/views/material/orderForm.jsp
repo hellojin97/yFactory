@@ -43,27 +43,33 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
-	
-const unorder = new tui.Grid({
+$.ajax({
+	url: "order",
+	method : "GET",
+	dataType : "JSON",
+	success : function(result){
+		unorder.resetData(result);
+	}
+});
+
+var unorder = new tui.Grid({
     el: document.getElementById('unorder'),
-    url: ,
-    data: ,
     columns: [
       {
         header: '생산계획코드',
-        name: 'ppCd'
+        name: 'pp_cd'
       },
       {
         header: '생산계획명',
-        name: 'ppNm'
+        name: 'pp_nm'
       },
       {
         header: '계획등록일자',
-        name: 'ppDt'
+        name: 'pp_dt'
       },
       {
         header: '총 수량',
-        name: 'pdQty'
+        name: 'pd_qty'
       }
       
     ],

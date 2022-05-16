@@ -40,8 +40,8 @@
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         
           <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>INDEX</span>
+            <a href="orderList">
+              <i class="bi bi-circle"></i><span>주문서 조회</span>
             </a>
           </li>
           

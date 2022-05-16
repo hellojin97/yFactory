@@ -6,5 +6,5 @@ import com.yfactory.mes.proc.service.ProcService;
 
 @Service
 public class ProcServiceImpl implements ProcService{
-
+	
 }

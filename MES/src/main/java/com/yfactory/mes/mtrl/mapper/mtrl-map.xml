@@ -1,58 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yfactory.mes.mtrl.web.MtrlMapper">
+<mapper namespace="com.yfactory.mes.mtrl.mapper.MtrlMapper">
 
-	<!-- Mt_curqty -->
-	<resultMap type="com.yfactory.mes.mtrl.vo.MtCurqtyVO" id="mtCurqty">
-		<result property="mt_lot" column="MT_LOT" />
-		<result property="mt_qty" column="MT_QTY" />
-	</resultMap>
-	
-	<!-- Mt_lot -->
-	<resultMap type="com.yfactory.mes.mtrl.vo.MtLotVO" id="mtLot">
-		<result property="mt_lot" column="MT_LOT" />
-		<result property="mt_cd" column="MT_CD" />
-		<result property="mt_exp" column="MT_EXP" />
-		<result property="mt_wdt" column="MT_WDT" />
-	</resultMap>
-	
-	<!-- Mt_podtl -->
-	<resultMap type="com.yfactory.mes.mtrl.vo.MtPoDtlVO" id="mtPoDtl">
-		<result property="po_dtlcd" column="PO_DTLCD" />
-		<result property="po_cd" column="PO_CD" />
-		<result property="mt_cd" column="MT_CD" />
-		<result property="mt_prc" column="MT_PRC" />
-		<result property="po_qty" column="PO_QTY" />
-		<result property="po_reqdt" column="PO_REQDT" />
-	</resultMap>
-	
-	<!-- Mt_po -->
-	<resultMap type="com.yfactory.mes.mtrl.vo.MtPoVO" id="mtPo">
-		<result property="po_cd" column="PO_CD" />
-		<result property="po_reqdt" column="PO_REQDT" />
-		<result property="vdr_cd" column="VDR_CD" />
-		<result property="emp_no" column="EMP_NO" />
-	</resultMap>
-	
-	<!-- Mt -->
-	<resultMap type="com.yfactory.mes.mtrl.vo.MtVO" id="mt">
-		<result property="mt_cd" column="MT_CD" />
-		<result property="ven_cd" column="VEN_CD" />
-		<result property="mt_nm" column="MT_NM" />
-		<result property="mt_unit" column="MT_UNIT" />
-		<result property="mt_sfqty" column="MT_SFQTY" />
-		<result property="uuid" column="UUID" />
-	</resultMap>
-	
-	<!-- Mt_wrnote -->
-	<resultMap type="com.yfactory.mes.mtrl.vo.MtWrnotVO" id="mtWrnot">
-		<result property="mt_num" column="MT_NUM" />
-		<result property="mt_lot" column="MT_LOT" />
-		<result property="wr_cd" column="WR_CD" />
-		<result property="mt_wrqty" column="MT_WRQTY" />
-		<result property="mt_rdt" column="MT_RDT" />
-		<result property="mt_note" column="MT_NOTE" />
-	</resultMap>
-
-	
+	<select id="selectPl" resultType="map">
+		SELECT pl.pp_cd "pp_cd", 
+       	       pl.pp_nm "pp_nm",
+               pl.pp_dt "pp_dt",
+               dtl.pd_qty "pd_qty"
+		FROM   prdt_pl pl, plan_dtl dtl
+		WHERE  pl.pp_cd = dtl.pd_cd
+	</select>
 </mapper>

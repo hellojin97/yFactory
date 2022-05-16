@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yfactory.mes.mtrl.mapper.MtrlMapper;
-import com.yfactory.mes.mtrl.mapper.MtrlService;
+import com.yfactory.mes.mtrl.service.MtrlService;
 import com.yfactory.mes.proc.vo.PrdtPlVO;
 
 public class MtrlServiceImpl implements MtrlService {

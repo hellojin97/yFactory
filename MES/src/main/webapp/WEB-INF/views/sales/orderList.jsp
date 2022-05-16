@@ -29,7 +29,7 @@
 
 <script type="text/javascript">
 window.onload = function(){
-   const url = "order";
+   const url = "salesOrder";
    $.ajax(url,{
 	   dataType : "JSON",
 	   method: "GET"

@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yfactory.mes.sales.service.SalesService;
 
 @RestController
-public class AjaxController {
+public class SalesAjaxController {
 
 	@Autowired private SalesService salesService;
 	
-	@GetMapping("/order")
+	@GetMapping("/salesOrder")
 	public List<Map>  selectOrdersList() {
 		
 		return salesService.selectOrderList();

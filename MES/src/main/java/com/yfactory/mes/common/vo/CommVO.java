@@ -4,8 +4,6 @@ import java.sql.Date;
 
 import lombok.Data;
 
-
-
 /*
  *  등록일자 : 2022-05-14
  *  등록자    : 김현진
@@ -16,7 +14,6 @@ import lombok.Data;
 @Data
 public class CommVO {
 
-	
 //	Comm_cd  	공통코드 PK
 	private String comm_cd;
 //	Hcomm_cd	상위공통코드 fk Comm_cd
@@ -29,5 +26,5 @@ public class CommVO {
 	private Date cd_ins_tm;
 //	Cd_upd_tm	수정일자
 	private Date cd_upd_tm;
-	
+
 }

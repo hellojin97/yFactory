@@ -1,7 +1,10 @@
 package com.yfactory.mes.sales.serviceImpl;
 
-import com.yfactory.mes.sales.mapper.SalesService;
+import org.springframework.stereotype.Service;
 
+import com.yfactory.mes.sales.service.SalesService;
+
+@Service
 public class SalesServiceImpl implements SalesService {
 
 }

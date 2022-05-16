@@ -16,8 +16,8 @@
 </head>
 <body>
 
-	
-	<div class="mainTitle" style="padding-bottom:15px;">
+	<div class="container">
+	<div class="mainTitle" style="padding-bottom:15px; color: ;">
 		<h1>발주 관리/등록</h1>
 	</div>
 	
@@ -27,14 +27,14 @@
 		<button class="btn btn-primary btn-sm">등록</button>
 	</div>
 	<h4>미지시 생산계획조회</h4>
-	<div id="grid" ></div>
+	<div id="unorder" ></div>
 	</div>
 		<div class="mainTitle">
 		<h4>생산계획별 자재 재고</h4>
 	</div>	
 
 	<div id="grid1"></div>
-
+</div>
 
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
@@ -44,9 +44,10 @@
 
 <script>
 	
-const grid = new tui.Grid({
-    el: document.getElementById('grid'),
-    data: gridData,
+const unorder = new tui.Grid({
+    el: document.getElementById('unorder'),
+    url: ,
+    data: ,
     columns: [
       {
         header: '생산계획코드',

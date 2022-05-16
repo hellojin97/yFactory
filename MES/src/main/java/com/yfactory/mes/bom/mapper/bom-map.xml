@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yfactory.mes.bom.mapper.BomMapper">
+	<resultMap type="com.yfactory.mes.bom.vo.BomVO" id="bom">
+		<result property="bom_cd" column="BOM_CD" />
+		<result property="bom_turn" column="BOM_TURN" />
+		<result property="prod_cd" column="PROD_CD" />
+		<result property="mt_cd" column="MT_CD" />
+		<result property="cs_qty" column="CS_QTY" />
+		<result property="proc_cd" column="PROC_CD" />
+		<result property="step_div" column="STEP_DIV" />
+		<result property="bom_note" column="BOM_NOTE" />
+	</resultMap>
+</mapper>

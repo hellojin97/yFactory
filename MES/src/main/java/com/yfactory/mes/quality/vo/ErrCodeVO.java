@@ -13,6 +13,11 @@ import lombok.Data;
 @Data
 public class ErrCodeVO {
 //	err_cd			불량코드		PK
+	private String err_cd;
+
 //	err_nm			불량명
+	private String err_nm;
+
 //	err_dtl			상세내용
+	private String err_dtl;
 }

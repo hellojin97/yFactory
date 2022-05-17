@@ -25,6 +25,13 @@ public class MtrlServiceImpl implements MtrlService {
 		// TODO Auto-generated method stub
 		return map.listMtrlLot();
 	}
-	
+
+	@Override
+	public List<Map> mtcdList() {
+		// TODO Auto-generated method stub
+		return map.mtcdList();
+	}
+
+
 
 }

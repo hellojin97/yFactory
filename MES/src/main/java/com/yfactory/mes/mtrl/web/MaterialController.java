@@ -41,5 +41,12 @@ public class MaterialController {
 	public List<Map> mtrlLot() {
 		return service.listMtrlLot();
 	}
+	
+	@GetMapping("/mtcd")
+	@ResponseBody
+	public List<Map> mtcd(){
+		return service.mtcdList();
+	}
+	
 }
  

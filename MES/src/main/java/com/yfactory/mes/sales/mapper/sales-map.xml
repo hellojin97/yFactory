@@ -22,4 +22,37 @@
 		AND      ordtl.prod_cd = pd.prod_cd
 		AND      cd.comm_cd = ord.prog_cd
 	</select>
+	
+	<select id="searchOrderList" resultType="map">
+	SELECT ord.ord_cd  "주문코드" , 
+					   TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
+					   TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
+					   ordtl.prod_cd "완제품코드" ,
+					   ordtl.ord_qty "주문수량",
+					   vdr.vdr_nm "업체명",
+					   pd.prod_nm "완제품명",
+					   cd.cd_explan "진행상황"
+		FROM 
+					   ORDERS ord, 
+					   VENDOR vdr, 
+					   ORD_DTL ordtl, 
+					   PROD pd, 
+					   COMM_CODE cd
+	WHERE     ord.vdr_cd = vdr.vdr_cd
+		AND      ord.ord_cd = ordtl.ord_cd
+		AND      ordtl.prod_cd = pd.prod_cd
+		AND      cd.comm_cd = ord.prog_cd
+		<if test="pnm isNotNull">
+        AND      pd.prod_nm LIKE '%'||#{pnm}||'%'
+        </if>
+        <if test="vnm isNotNull">
+        AND      vdr.vdr_nm LIKE '%'||#{vnm}||'%'
+        </if>
+        <if test="req1 isNotNull and req2 isNotNull">        
+        AND      ord.req_dt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
+        </if>
+        <if test="res1 isNotNull and res2 isNotNull">
+        AND      ord.res_dt between TO_DATE(#{res1},'YYYY-MM-DD') AND TO_DATE(#{res2},'YYYY-MM-DD')
+        </if>
+	</select>
 </mapper>

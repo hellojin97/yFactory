@@ -21,4 +21,10 @@ public class SalesServiceImpl implements SalesService {
 		return map.selectOrderList();
 	}
 
+	@Override
+	public List<Map> selectBomList() {
+		// TODO Auto-generated method stub
+		return map.selectBomList();
+	}
+
 }

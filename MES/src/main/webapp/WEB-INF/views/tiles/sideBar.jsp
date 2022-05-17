@@ -44,6 +44,11 @@
               <i class="bi bi-circle"></i><span>주문서 조회</span>
             </a>
           </li>
+            <li>
+            <a href="bomList">
+              <i class="bi bi-circle"></i><span>BOM 관리</span>
+            </a>
+          </li>
           
         </ul>
         

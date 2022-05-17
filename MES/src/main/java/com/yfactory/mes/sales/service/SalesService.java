@@ -5,4 +5,5 @@ import java.util.Map;
 
 public interface SalesService {
 	List<Map> selectOrderList();
+	List<Map> selectBomList();
 }

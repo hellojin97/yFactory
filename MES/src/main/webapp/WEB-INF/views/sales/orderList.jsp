@@ -37,7 +37,7 @@ window.onload = function(){
 	   grid.resetData(result);
 	  console.log(result);
    })
-
+	
    var grid = new tui.Grid({
        el: document.getElementById('ordeList'),
        scrollX: false,

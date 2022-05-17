@@ -22,4 +22,16 @@
 		AND      ordtl.prod_cd = pd.prod_cd
 		AND      cd.comm_cd = ord.prog_cd
 	</select>
+	<select id="selectBomList" resultType="map">
+	SELECT 		b.prod_cd "완제품코드",
+				   		pd.prod_nm "완제품명", 
+				 		b.mt_cd "원자재 코드", 
+				  		m.mt_nm "원자재명", 
+				 		b.cs_qty "소요량"
+	FROM 		    bom b,
+			            prod pd, 
+			            mt m
+	WHERE 		b.prod_cd = pd.prod_cd
+	AND 			b.mt_cd = m.mt_cd
+	</select>
 </mapper>

@@ -6,4 +6,6 @@ import java.util.Map;
 public interface SalesMapper {
 	//주문서 조회
 	List<Map> selectOrderList();
+	List<Map> selectBomList();
 }
+

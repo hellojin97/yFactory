@@ -54,38 +54,35 @@
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">제품명</label>
                   <div class="col-sm-10">
-                    <input type="text" class="input-group form-control" style="width: 150px" id="prodNm">
-                    <span type="input-group-btn">
-                    	<button type="submit" title="Search"><i class="bi bi-search"></i></button>
-                    </span>
+                    <input type="text" class="input-group form-control" style="width: 150px" id="pnm">                    
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">업체명</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" style="width: 150px" id="">
+                    <input type="text" class="form-control" style="width: 150px" id="vnm">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-md-2 col-form-label">주문일자</label>
                   <div class="col-md-2">
-                    <input type="text" class="form-control" style="width: 150px" id="">
+                    <input type="date" class="form-control" style="width: 150px" id="req1">
                   </div>
                   <div class="col-md-2">
-                    <input type="text" class="form-control" style="width: 150px" id="">
+                    <input type="date" class="form-control" style="width: 150px" id="req2">
                   </div>                  
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-md-2 col-form-label">납기일자</label>
                   <div class="col-md-2">
-                    <input type="text" class="form-control" style="width: 150px" id="">
+                    <input type="date" class="form-control" style="width: 150px" id="res1">
                   </div>
                   <div class="col-md-2">
-                    <input type="text" class="form-control" style="width: 150px" id="">
+                    <input type="date" class="form-control" style="width: 150px" id="res2">
                   </div>                  
                 </div>             
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">검색</button>
+                  <button type="button" id="search" class="btn btn-primary">검색</button>
                 </div>
               </form><!-- End Horizontal Form -->
               <hr>
@@ -158,6 +155,35 @@ window.onload = function(){
                     }
      });
 }
+
+$("#search").on("click", function() {
+	console.log("click!")
+	var pnm = $("#pnm").val();
+	var vnm = $("#vnm").val();
+	var req1 = $("#req1").val();
+	var req2 = $("#req2").val();
+	var res1 = $("#res1").val();
+	var res2 = $("#res2").val();
+	
+	console.log(pnm + vnm + req1 + req2 + req1 + req2)
+	$.ajax({
+		url : "searchOrderList",
+		data : {
+				pnm : pnm,
+				vnm : vnm,
+				req1 : req1,
+				req2 : req2,
+				res1 : res1,
+				res2 : res2
+		},
+		dataType: 'JSON',
+		contentType : "application/json; charset=utf-8"
+	}).done(function(result){
+		grid.resetData(result);
+		  console.log(result);
+	});
+})
+
   </script>
 
 </body>

@@ -91,6 +91,7 @@
 					<h5 class="modal-title" style="font-size: 17px;">품목코드</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
+				<!-- 모달 내용 -->
 				<div class="modal-body">
 					<div class="col-md-8 " style="padding-bottom: 20px;">
 						<div class="input-group ">
@@ -101,12 +102,11 @@
 								onclick="myBtn"> <i class="bi bi-search"
 								style="color: #2c3e50"></i>
 							</a>
-
-
 						</div>
 					</div>
-					<div id="grid"></div>
+					<div id="mtcdGrid"></div>
 				</div>
+				<!-- 내용끝 -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">Cancel</button>
@@ -169,26 +169,31 @@
 			perPage : 10
 		}
 	});
+	$.ajax({
+		url : "mtcd",
+		method : "GET",
+		dataType : "JSON",
+		success : function(result) {
+			mtcdList.resetData(result);
+		}
+	});
 
-  const grid = new tui.Grid({
-    el: document.getElementById('grid'),
-    data: gridData,
-    columns: [
-      {
-        header: '품목명',
-        name: 'name'
-      },
-      {
-        header: '품목코드',
-        name: 'artist'
-      }
-    ],
-    rowHeaders: ['rowNum'],
-    pageOptions: {
-      useClient: true,
-      perPage: 5
-    }
-  });
+	var mtcdList = new tui.Grid({
+		el : document.getElementById('mtcdGrid'),
+		columns : [ {
+			header : '자재명',
+			name : '자재명'
+		}, {
+			header : '자재코드',
+			name : '자재코드'
+		} 
+		],
+		rowHeaders : [ 'rowNum' ],
+		pageOptions : {
+			useClient : true,
+			perPage : 3
+		}
+	});
 
   
   $("#btnSav").click(function () {
@@ -236,5 +241,5 @@
 	
       grid.refresh(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
   })
-</script>
+ </script>
 </html>

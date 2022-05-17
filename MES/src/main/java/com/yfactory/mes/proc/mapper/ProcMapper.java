@@ -19,7 +19,7 @@ public interface ProcMapper {
 	List<Map> PrdSelect();		//제품 목록 조회
 	List<Map> prdtPlanSelect(Date date1, Date date2);	//생산계획 조회
 	
-	int prdtPlanInsert(String PP_NM, Date date1);
+	int prdtPlanInsert(String PP_NM, Date date1);	//
 	
 
 }

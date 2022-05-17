@@ -20,10 +20,86 @@
 	<div class="mainTitle" style="padding-bottom:15px; color: ;">
 		<h1>주문서 조회</h1>
 	</div>
+
+<section class="section">
+      <div class="row">
+        <div class="">
+
+          <div class="card">
+            <div class="card-body">
+              <!-- Horizontal Form -->
+              <form>
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-md-2 pt-0">구분</legend>
+                    <div class="form-check col-md-1">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                      <label class="form-check-label" for="gridRadios1">
+                        진행
+                      </label>
+                    </div>
+                    <div class="form-check col-md-1">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                      <label class="form-check-label" for="gridRadios2">
+                        완료
+                      </label>
+                    </div>
+                    <div class="form-check col-md-1">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                      <label class="form-check-label" for="gridRadios3">
+                        전체
+                      </label>
+                    </div>                  
+                </fieldset>
+                
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">제품명</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="input-group form-control" style="width: 150px" id="prodNm">
+                    <span type="input-group-btn">
+                    	<button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                    </span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">업체명</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" style="width: 150px" id="">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-md-2 col-form-label">주문일자</label>
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" style="width: 150px" id="">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" style="width: 150px" id="">
+                  </div>                  
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-md-2 col-form-label">납기일자</label>
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" style="width: 150px" id="">
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" style="width: 150px" id="">
+                  </div>                  
+                </div>             
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">검색</button>
+                </div>
+              </form><!-- End Horizontal Form -->
+              <hr>
+				<div id="ordeList"></div>
+            </div>
+          </div>          
+        </div>
+      </div>
+      
+    </section>	
+
+
+
 	
-
-
-	<div id="ordeList"></div>
 </div>
 
 

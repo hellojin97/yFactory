@@ -19,6 +19,12 @@ public class MtrlServiceImpl implements MtrlService {
 		// TODO Auto-generated method stub
 		return map.selectPl();
 	}
+
+	@Override
+	public List<Map> listMtrlLot() {
+		// TODO Auto-generated method stub
+		return map.listMtrlLot();
+	}
 	
 
 }

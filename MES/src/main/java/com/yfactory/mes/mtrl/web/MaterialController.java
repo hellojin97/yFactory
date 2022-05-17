@@ -15,16 +15,31 @@ import com.yfactory.mes.mtrl.service.MtrlService;
 public class MaterialController {
 	@Autowired MtrlService service;
 	
+	//발주조회,등록폼
 	@RequestMapping("/orderForm")
 	public String orderForm() {
 		
 		return "material/orderForm";
 	}
+	//미지시 생산품조회
 	@GetMapping("/mtrlorder")
 	@ResponseBody
-	public List<Map> order() {
+	public List<Map> mtrlorder() {
 		
 		return service.selectPl();
+	}
+	
+	//LOT재고조회폼
+	@RequestMapping("/mtrlLotForm")
+	public String mtrlLotForm() {
+		return "material/mtrlLotForm";
+	}
+	
+	//LOT재고조회
+	@GetMapping("/mtrlLot")
+	@ResponseBody
+	public List<Map> mtrlLot() {
+		return service.listMtrlLot();
 	}
 }
  

@@ -30,6 +30,15 @@
     </beans:property>
 </beans:bean>
 
+	<!-- multipartResolver 빈 설정 FILE UPLOAD PART-->
+		<beans:bean id="multipartResolver"
+					class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<beans:property name="maxUploadSize" value="52428800" />
+			<beans:property name="maxInMemorySize" value="10000000" />
+			<beans:property name="defaultEncoding" value="utf-8" />
+		</beans:bean>
+
+
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean p:order="3" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -43,3 +52,6 @@
 	
 	
 </beans:beans>
+
+	
+

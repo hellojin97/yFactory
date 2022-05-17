@@ -77,7 +77,7 @@
           </li>
           
           <li>
-            <a href="tables-general.html">
+            <a href="mtrlLotForm">
               <i class="bi bi-circle"></i><span>LOT재고조회</span>
             </a>
           </li>

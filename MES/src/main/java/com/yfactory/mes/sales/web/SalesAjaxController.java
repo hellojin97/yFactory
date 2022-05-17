@@ -20,6 +20,7 @@ public class SalesAjaxController {
 		return salesService.selectOrderList();
 	}
 	
+
 	@GetMapping("/searchOrderList")
 	public List<Map> searchOrderList(String pnm, String vnm,
 			  String req1, String req2,
@@ -27,5 +28,14 @@ public class SalesAjaxController {
 		
 		return salesService.searchOrderList(pnm, vnm, req1, req2, res1, res2);
 	}
+
+
+	@GetMapping("/bomListAjax")
+	public List<Map> BomList(){
+		return salesService.selectBomList();
+	}
+
+
+
 
 }

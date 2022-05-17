@@ -44,6 +44,11 @@
               <i class="bi bi-circle"></i><span>주문서 조회</span>
             </a>
           </li>
+            <li>
+            <a href="bomList">
+              <i class="bi bi-circle"></i><span>BOM 관리</span>
+            </a>
+          </li>
           
         </ul>
         
@@ -77,7 +82,7 @@
           </li>
           
           <li>
-            <a href="tables-general.html">
+            <a href="mtrlLotForm">
               <i class="bi bi-circle"></i><span>LOT재고조회</span>
             </a>
           </li>
@@ -101,8 +106,8 @@
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         
           <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>INDEX</span>
+            <a href="procPlList">
+              <i class="bi bi-circle"></i><span>생산계획관리</span>
             </a>
           </li>
           

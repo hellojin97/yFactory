@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.mtrl.mapper.MtrlMapper">
-
+	<!-- 미지시 생산조회 -->
 	<select id="selectPl" resultType="map">
 		SELECT pl.pp_cd "pp_cd", 
        	       pl.pp_nm "pp_nm",
@@ -9,5 +9,22 @@
                dtl.pd_qty "pd_qty"
 		FROM   prdt_pl pl, plan_dtl dtl
 		WHERE  pl.pp_cd = dtl.pd_cd
+	</select>
+	
+	<!-- 자재lot재고조회 -->
+	<select id="listMtrlLot" resultType="map">
+		SELECT lot.mt_lot "mt_lot",
+			   lot.mt_cd "mt_cd",
+			   m.mt_nm "mt_nm", 
+			   vd.vdr_nm "vdr_nm", 
+			   cy.mt_qty "mt_qty", 
+			   lot.mt_exp "mt_exp"
+		FROM   mt_lot lot, 
+			   mt m,  
+			   vendor vd, 
+			   mt_curqty cy
+		WHERE  m.mt_cd = lot.mt_cd
+		AND    m.ven_cd = vd.vdr_cd
+		AND    lot.mt_lot = cy.mt_lot
 	</select>
 </mapper>

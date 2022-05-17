@@ -8,18 +8,18 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
+   href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
+   href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 
-	<div class="container">
-	<div class="mainTitle" style="padding-bottom:15px; color: ;">
-		<h1>주문서 조회</h1>
-	</div>
+   <div class="container">
+   <div class="mainTitle" style="padding-bottom:15px; color: ;">
+      <h1>주문서 조회</h1>
+   </div>
 
 <section class="section">
       <div class="row">
@@ -86,17 +86,17 @@
                 </div>
               </form><!-- End Horizontal Form -->
               <hr>
-				<div id="ordeList"></div>
+            <div id="ordeList"></div>
             </div>
           </div>          
         </div>
       </div>
       
-    </section>	
+    </section>   
 
 
 
-	
+   
 </div>
 
 
@@ -105,13 +105,13 @@
 window.onload = function(){
    const url = "salesOrder";
    $.ajax(url,{
-	   dataType : "JSON",
-	   method: "GET"
+      dataType : "JSON",
+      method: "GET"
    }).done(function(result){
-	   grid.resetData(result);
-	  console.log(result);
+      grid.resetData(result);
+     console.log(result);
    })
-	
+   
    var grid = new tui.Grid({
        el: document.getElementById('ordeList'),
        scrollX: false,
@@ -149,7 +149,7 @@ window.onload = function(){
                        header: '진행상황',
                        name: '진행상황',
                      }],
-   					rowHeaders: ['rowNum'],
+                  rowHeaders: ['rowNum'],
                      pageOptions: {
                          useClient: true,
                          perPage: 3
@@ -159,31 +159,30 @@ window.onload = function(){
 
 /* 주문서 단건 조회 */
 $("#search").on("click", function() {
-	console.log("click!")
-	var pnm = $("#pnm").val();
-	var vnm = $("#vnm").val();
-	var req1 = $("#req1").val();
-	var req2 = $("#req2").val();
-	var res1 = $("#res1").val();
-	var res2 = $("#res2").val();
-	
-	console.log(pnm + vnm + req1 + req2 + req1 + req2)
-	$.ajax({
-		url : "searchOrderList",
-		data : {
-				pnm : pnm,
-				vnm : vnm,
-				req1 : req1,
-				req2 : req2,
-				res1 : res1,
-				res2 : res2
-		},
-		dataType: 'JSON',
-		contentType : "application/json; charset=utf-8"
-	}).done(function(result){
-		 grid.resetData(result);
-		  
-	});
+   console.log("click!")
+   var pnm = $("#pnm").val();
+   var vnm = $("#vnm").val();
+   var req1 = $("#req1").val();
+   var req2 = $("#req2").val();
+   var res1 = $("#res1").val();
+   var res2 = $("#res2").val();
+   
+   $.ajax({
+      url : "searchOrderList",
+      data : {
+            pnm : pnm,
+            vnm : vnm,
+            req1 : req1,
+            req2 : req2,
+            res1 : res1,
+            res2 : res2
+      },
+      dataType: 'JSON',
+      contentType : "application/json; charset=utf-8"
+   }).done(function(result){
+       grid.resetData(result);
+        
+   });
 })
 }
   </script>

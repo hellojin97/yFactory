@@ -10,7 +10,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">HOME INCOMING</h5>
+                    <h5 class="modal-title">주문서 목록</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -34,46 +34,34 @@ $(function(){
 		   method: "GET"
 	   }).done(function(result){
 		   grid.resetData(result);
-		  console.log(result);
 	   })
 
 	   var grid = new tui.Grid({
+
 	       el: document.getElementById('grid'),
 	       scrollX: false,
 	       scrollY: false,
 	       columns: [
+	    	 {
+		           header: '주문코드',
+		           name: '주문코드',
+		      },
 	         {
-	           header: '주문코드',
-	           name: '주문코드',
+	           header: '주문일자',
+	           name: '주문일자',
 	         },
 	         {
 	             header: '업체명',
 	             name: '업체명',
 	           },
 	           {
-	               header: '주문일자',
-	               name: '주문일자',
+	               header: '납기일자',
+	               name: '납기일자',
 	             },
 	             {
-	                 header: '납기일자',
-	                 name: '납기일자',
-	               },
-	             {
-	                 header: '제품코드',
-	                 name: '완제품코드',
-	               },
-	               {
-	                   header: '제품명',
-	                   name: '완제품명',
-	                 },
-	                 {
-	                     header: '수량',
-	                     name: '주문수량',
-	                   },
-	                   {
-	                       header: '진행상황',
-	                       name: '진행상황',
-	                     }],
+	                 header: '주문수량',
+	                 name: '주문수량',
+	               }],
 	   					rowHeaders: ['rowNum'],
 	                     pageOptions: {
 	                         useClient: true,
@@ -118,6 +106,23 @@ $(function(){
 	setTimeout(function(){
 		grid.refreshLayout();
 	},300)
+	grid.on("click",function(e) {
+		//debugger
+		let ordCd = grid.getValue(e.rowKey, '주문코드');
+		console.log(ordCd);
+		if(ordCd != null){
+			 $('#myModal').modal('hide');
+			 $.ajax({
+					   url  : "procPlListAjax",
+					   data : {ordCd : ordCd},
+					   dataType : "JSON",
+					   contentType : "application/json; charset = UTF-8;"
+				   }).done(function(result){
+					   console.log(result);
+				   }) 
+		}
+		
+	})	 
 
 })
 </script>

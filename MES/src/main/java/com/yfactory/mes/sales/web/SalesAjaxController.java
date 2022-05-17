@@ -23,8 +23,8 @@ public class SalesAjaxController {
 	}
 	
 
-	@PostMapping("/searchOrderList")
-	public List<Map> searchOrderList(@RequestParam String pnm, String vnm,
+	@GetMapping("/searchOrderList")
+	public List<Map> searchOrderList( String pnm, String vnm,
 			  String req1, String req2,
 			  String res1, String res2) {
 

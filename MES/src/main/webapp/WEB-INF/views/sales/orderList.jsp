@@ -167,7 +167,6 @@ $("#search").on("click", function() {
    var res1 = $("#res1").val();
    var res2 = $("#res2").val();
    
-   console.log(pnm + vnm + req1 + req2 + req1 + req2)
    $.ajax({
       url : "searchOrderList",
       data : {

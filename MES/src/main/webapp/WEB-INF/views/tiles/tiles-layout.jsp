@@ -46,12 +46,12 @@
    
    #menu {
       float: left;
-      width: 20%;
+      width: 5%;
    }
    
    #body {
       float: left;
-      width: 80%;
+      width: 95%;
       padding-top: 80px;
    }
    

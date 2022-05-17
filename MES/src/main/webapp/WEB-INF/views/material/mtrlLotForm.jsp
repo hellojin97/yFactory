@@ -169,6 +169,7 @@
 			perPage : 10
 		}
 	});
+
 	$.ajax({
 		url : "mtcd",
 		method : "GET",
@@ -182,10 +183,10 @@
 		el : document.getElementById('mtcdGrid'),
 		columns : [ {
 			header : '자재명',
-			name : '자재명'
+			name : 'mt_nm'
 		}, {
 			header : '자재코드',
-			name : '자재코드'
+			name : 'mt_cd'
 		} 
 		],
 		rowHeaders : [ 'rowNum' ],
@@ -238,8 +239,8 @@
   myModal.addEventListener('shown.bs.modal', function () {
 	  //ajax 호출
 	  //grid.resetData(data)
-	
-      grid.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
+	  
+      mtcdList.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
   })
  </script>
 </html>

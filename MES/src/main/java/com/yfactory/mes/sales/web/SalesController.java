@@ -12,8 +12,13 @@ public class SalesController {
 	@Autowired private SalesService salesService;
 	
 	@RequestMapping("/orderList")
-	public String  selectOrdersList() {
+	public String  OrderList() {
 		return "sales/orderList";
+	}
+	
+	@RequestMapping("/bomList")
+	public String BomList() {
+		return "sales/bomList";
 	}
 
 }

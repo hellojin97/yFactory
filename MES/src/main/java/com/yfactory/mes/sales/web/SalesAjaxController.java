@@ -21,5 +21,11 @@ public class SalesAjaxController {
 	}
 	
 
+	@GetMapping("/bomListAjax")
+	public List<Map> BomList(){
+		return salesService.selectBomList();
+	}
+
+
 
 }

@@ -29,59 +29,48 @@
 
 
 	<script type="text/javascript">
-window.onload = function (){
-	var resultDt = [];
-const url = "bomListAjax";
-$.ajax(url,{
-	   dataType : "JSON",
-	   method: "GET"
-}).done(function(result){
-	console.log(result);
-	for(var i in result){
-	resultDt.push( {
-				   				완제품명 : result[i].완제품명,
-				  				 _attributes: {expanded: true },
-				   				 _children: [ { 완제품명 : result[i].원자재명 }]
-						  });
-	}
-	console.log(resultDt);
-	
-	
-	const grid = new tui.Grid({
-	      el: document.getElementById('grid'),
-	      data: resultDt,
-	      rowHeaders: ['checkbox'],
-	      bodyHeight: 500,
-	      treeColumnOptions: {
-	        name: '완제품명',
-	        useCascadingCheckbox: true
-	      },
-	      columns: [
-	        {
-	          header: '완제품명',
-	          name: '완제품명',
-	          width: 300,
-	          _children:
-		      {
-		    	  header : '원자재명',
-	        	  name : '원자재명'
-		      }
-	        }
-	          
-			    ,
-	          ]
-	      });
-	grid.on('expand', (ev) => {
-		  const {rowKey} = ev;
-		  const descendantRows = grid.getDescendantRows(rowKey);
-
-		  console.log('rowKey: ' + rowKey);
-		  console.log('descendantRows: ' + descendantRows);
-		});
-	        
-})
-}
-;
+	window.onload = function(){
+		   const url = "bomListAjax";
+		   $.ajax(url,{
+			   dataType : "JSON",
+			   method: "GET"
+		   }).done(function(result){
+			   grid.resetData(result);
+			  console.log(result);
+		   })
+			
+		   var grid = new tui.Grid({
+		       el: document.getElementById('grid'),
+		       scrollX: false,
+		       scrollY: false,
+		       columns: [
+		         {
+		           header: '완제품명',
+		           name: '완제품명',
+		         },
+		         {
+		             header: '완제품코드',
+		             name: '완제품코드',
+		           },
+		           {
+		               header: '원자재명',
+		               name: '원자재명',
+		             },
+		             {
+		                 header: '원자재 코드',
+		                 name: '원자재 코드',
+		               },
+		             {
+		                 header: '소요량',
+		                 name: '소요량',
+		               }],
+		   					rowHeaders: ['rowNum'],
+		                     pageOptions: {
+		                         useClient: true,
+		                         perPage: 15
+		                    }
+		     });
+		}
   </script>
 
 </body>

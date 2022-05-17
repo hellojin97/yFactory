@@ -27,4 +27,11 @@
 		AND    m.ven_cd = vd.vdr_cd
 		AND    lot.mt_lot = cy.mt_lot
 	</select>
+	
+	<!-- 자재명 조회 -->
+	<select id="mtcdList" resultType="map">
+		SELECT mt_nm "자재명", 
+			   mt_cd "자재코드"
+		FROM   mt
+	</select>
 </mapper>

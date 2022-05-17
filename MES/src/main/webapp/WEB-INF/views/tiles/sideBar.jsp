@@ -142,10 +142,31 @@
         <ul id="labels-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         
           <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>INDEX</span>
+            <a href="eqInsert">
+              <i class="bi bi-circle"></i><span>설비등록</span>
             </a>
           </li>
+          <li>
+            <a href="eqMng">
+              <i class="bi bi-circle"></i><span>설비관리</span>
+            </a>
+          </li>
+          <li>
+            <a href="eqChkMng">
+              <i class="bi bi-circle"></i><span>설비 점검 관리</span>
+            </a>
+          </li>
+          <li>
+            <a href="eqIna">
+              <i class="bi bi-circle"></i><span>설비 비가동 관리</span>
+            </a>
+          </li>
+          <li>
+            <a href="eqRstat">
+              <i class="bi bi-circle"></i><span>실시간 설비 상태</span>
+            </a>
+          </li>
+          
           
         </ul>
       </li>

@@ -164,22 +164,23 @@ $("#search").on("click", function() {
 	var req2 = $("#req2").val();
 	var res1 = $("#res1").val();
 	var res2 = $("#res2").val();
+	let srhData =  {
+		pnm : pnm,
+		vnm : vnm,
+		req1 : req1,
+		req2 : req2,
+		res1 : res1,
+		res2 : res2
+		}
 	
-	console.log(pnm + vnm + req1 + req2 + req1 + req2)
 	$.ajax({
 		url : "searchOrderList",
-		data : {
-				pnm : pnm,
-				vnm : vnm,
-				req1 : req1,
-				req2 : req2,
-				res1 : res1,
-				res2 : res2
-		},
+		data : JSON.stringify(srhData),
+		method : 'POST',
 		dataType: 'JSON',
 		contentType : "application/json; charset=utf-8"
 	}).done(function(result){
-		grid.resetData(result);
+		/* grid.resetData(result); */
 		  console.log(result);
 	});
 })

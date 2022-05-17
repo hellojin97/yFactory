@@ -55,10 +55,10 @@
 		AND      ord.ord_cd = ordtl.ord_cd
 		AND      ordtl.prod_cd = pd.prod_cd
 		AND      cd.comm_cd = ord.prog_cd
-		<if test="pnm isNotNull">
+		<if test='pnm != ""' >
         AND      pd.prod_nm LIKE '%'||#{pnm}||'%'
         </if>
-        <if test="vnm isNotNull">
+        <!-- <if test="vnm isNotNull">
         AND      vdr.vdr_nm LIKE '%'||#{vnm}||'%'
         </if>
         <if test="req1 isNotNull and req2 isNotNull">        
@@ -66,7 +66,7 @@
         </if>
         <if test="res1 isNotNull and res2 isNotNull">
         AND      ord.res_dt between TO_DATE(#{res1},'YYYY-MM-DD') AND TO_DATE(#{res2},'YYYY-MM-DD')
-        </if>
+        </if> -->
 
 	</select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.yfactory.mes.eq.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -37,4 +38,5 @@ public class EqVO {
 	private int eq_inster;
 	//UUID			설비이미지	FK	IMG_ATTATCH.UUID
 	private String uuid;
+	
 }

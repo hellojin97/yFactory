@@ -34,7 +34,7 @@
 			            mt m
 	WHERE 		b.prod_cd = pd.prod_cd
 	AND 			b.mt_cd = m.mt_cd
-
+	</select>
 	
 	<select id="searchOrderList" resultType="map">
 	SELECT ord.ord_cd  "주문코드" , 

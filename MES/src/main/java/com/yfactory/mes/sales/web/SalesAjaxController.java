@@ -19,5 +19,7 @@ public class SalesAjaxController {
 		
 		return salesService.selectOrderList();
 	}
+	
+
 
 }

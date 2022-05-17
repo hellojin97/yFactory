@@ -12,4 +12,7 @@ public interface MtrlMapper {
 	
 	//자재명 조회
 	List<Map>mtcdList();
+	
+	//업체명 조회
+	List<Map>vendorList();
 }

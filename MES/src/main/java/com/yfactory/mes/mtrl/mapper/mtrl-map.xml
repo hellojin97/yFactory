@@ -34,4 +34,13 @@
 			   mt_cd "mt_cd"
 		FROM   mt
 	</select>
+	
+	<!-- 업체명 조회 -->
+	<select id="vendorList" resultType="map">
+		SELECT cd.cd_nm "cd_nm",
+      		   vd.vdr_nm "vdr_nm", 
+       		   vd.vdr_cd "vdr_cd"
+		FROM   vendor vd, COMM_CODE cd
+		WHERE  vd.ven_cd = cd.comm_cd
+	</select>
 </mapper>

@@ -28,7 +28,13 @@
   <link href="${pageContext.request.contextPath}/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath}/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
+  <!-- Toast UI AND Modal -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Template Main CSS File -->
   <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
   
@@ -67,8 +73,11 @@
 <div id="menu"><tiles:insertAttribute name="menu" /></div>
 <div id="body"><tiles:insertAttribute name="body" /></div>
 
-
-
+  <!-- Toast UI AND Modal -->
+ <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
+ <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
+ <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
+ <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
    <!-- Vendor JS Files -->
   <script src="${pageContext.request.contextPath}/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

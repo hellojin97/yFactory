@@ -78,7 +78,7 @@ window.onload = function(){
    					rowHeaders: ['rowNum'],
                      pageOptions: {
                          useClient: true,
-                         perPage: 5
+                         perPage: 3
                     }
      });
 }

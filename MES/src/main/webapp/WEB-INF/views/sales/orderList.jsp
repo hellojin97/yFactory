@@ -101,6 +101,7 @@
 
 
 <script type="text/javascript">
+/* 주문서 전체 조회 */
 window.onload = function(){
    const url = "salesOrder";
    $.ajax(url,{
@@ -154,8 +155,9 @@ window.onload = function(){
                          perPage: 3
                     }
      });
-}
 
+
+/* 주문서 단건 조회 */
 $("#search").on("click", function() {
 	console.log("click!")
 	var pnm = $("#pnm").val();
@@ -179,11 +181,11 @@ $("#search").on("click", function() {
 		dataType: 'JSON',
 		contentType : "application/json; charset=utf-8"
 	}).done(function(result){
-		grid.resetData(result);
-		  console.log(result);
+		 grid.resetData(result);
+		  
 	});
 })
-
+}
   </script>
 
 </body>

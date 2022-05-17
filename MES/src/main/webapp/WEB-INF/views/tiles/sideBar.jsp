@@ -106,8 +106,8 @@
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         
           <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>INDEX</span>
+            <a href="procPlList">
+              <i class="bi bi-circle"></i><span>생산계획관리</span>
             </a>
           </li>
           

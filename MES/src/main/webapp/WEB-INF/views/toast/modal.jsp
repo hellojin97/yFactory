@@ -6,21 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-/* $(document).ready(function(){
+ $(document).ready(function(){
     $("#myBtn").click(function(){
         $("#myModal").modal("show");
     });
     $('body').css("overflow", "hidden");		
 	
 });
- */
+
 </script>
 </head>
 <body>
@@ -136,7 +131,7 @@
   });
   $("#myBtn").click(function(){
       $("#myModal").modal("show");
-
+	
   });
   $('body').css("overflow", "hidden");		
 

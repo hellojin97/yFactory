@@ -239,7 +239,7 @@
 	  //ajax 호출
 	  //grid.resetData(data)
 	
-      grid.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
+      grid.refresh(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기s
   })
  </script>
 </html>

@@ -16,13 +16,14 @@ public class SalesAjaxController {
 
 	@Autowired private SalesService salesService;
 	
+	//주문서 조회
 	@GetMapping("/salesOrder")
 	public List<Map>  selectOrdersList() {
 		
 		return salesService.selectOrderList();
 	}
 	
-
+	//주문서 검색
 	@GetMapping("/searchOrderList")
 	public List<Map> searchOrderList( String pnm, String vnm,
 			  String req1, String req2,
@@ -35,6 +36,19 @@ public class SalesAjaxController {
 	@GetMapping("/bomListAjax")
 	public List<Map> BomList(){
 		return salesService.selectBomList();
+	}
+	
+	//완제품LOT 조회
+	@GetMapping("/prodLot")
+	public List<Map> prodLot(){
+		return salesService.selectProdLotList();
+	}
+	
+	//완제품LOT 검색
+	@GetMapping("/searchProdLot")
+	public List<Map> searchProdLot(String pnm, String fdt1, String fdt2){
+		System.out.println("11111"+pnm+fdt1+fdt2);
+		return salesService.searchProdLotList(pnm, fdt1, fdt2);
 	}
 
 

@@ -50,18 +50,18 @@
 						<label for="inputText" class="col-form-label"
 							style="padding-right: 10px;">입고날짜</label>
 						<div class="col-sm-2">
-							<input type="date" class="form-control">
+							<input type="date" id="req1" class="form-control">
 						</div>
 
 						<div style="padding: 0px 22px 0px 22px;">
 							<p>~</p>
 						</div>
 						<div class="col-sm-2" style="padding-right: 20px;">
-							<input type="date" class="form-control">
+							<input type="date" id="req2" class="form-control">
 						</div>
 
 						<div style="padding-right: 10px;">
-							<button class="btn1">조회</button>
+							<button class="btn1" id="search">조회</button>
 						</div>
 
 						<div>
@@ -181,7 +181,35 @@
   });
 
   // 자재명 검색
-  
+  $("#search").on("click", function() {
+   console.log("click!")
+   var mtNminput = $("#mtNminput").val();
+   var vdrNminput = $("#vdrNminput").val();
+   var req1 = $("#req1").val();
+   var req2 = $("#req2").val();
+   
+   console.log(req1);
+   console.log(req2);
+
+   $.ajax({
+      url : "lotSelectSearch",
+      data : {
+    	  m1 : mtNminput,
+    	  m2 : vdrNminput,
+            req1 : req1,
+            req2 : req2
+      },
+      method : 'get',
+      dataType: 'JSON',
+      contentType : "application/json; charset=utf-8"
+   }).done(function(result){
+	   /* listMtrlLot.resetData(result); */
+       console.log(result);
+       
+   }).fail(function(result){
+	   console.log(result);
+   });
+})
 
  </script>
 </html>

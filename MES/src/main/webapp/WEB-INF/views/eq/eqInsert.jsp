@@ -10,6 +10,7 @@
 <style>
 input {
 	vertical-align: middle;
+	margin : 3px  2px;
 }
 
 input.img-button {
@@ -28,50 +29,55 @@ input.img-button {
 #title {
 	font-size: 30px;
 }
+
+
+
 </style>
 </head>
 <body>
 <div class="container">
-	<form name="frm" id="frm" action="#" method="post" enctype="multipart/form-data">
+	<form name="frm" id="frm" method="post" enctype="multipart/form-data">
 	<div class="row">
 	<div class="col-8">
 	
-		<hr />
+		<hr  />
 		<div align="right">
 			<button type="reset" class="button btnpart">초기화</button>
 			&nbsp;&nbsp;
-			<button type="submit" class="button btnpart">저장</button>
+			<button type="submit" id="btnok" class="button btnpart">저장</button>
 		</div>
 		<hr />
-		<span>설비명*&nbsp;&nbsp;
+		설비명*
 					<input id="eq_id" size=10 maxlength=8>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					사용여부&nbsp;&nbsp;
-						Y<input	type="radio" id="yes" name="chk" value="Y" checked>&nbsp;
+							
+					사용여부
+						Y<input	type="radio" id="yes" name="chk" value="Y" checked>
 						N<input type="radio" id="no" name="chk" value="N">
-			&nbsp;&nbsp;&nbsp;&nbsp;
-					구분코드&nbsp;&nbsp;<input id="vdr_cd" size=10 	maxlength=8>&nbsp;
-					<input type="button" id="eqdiv" value="조회">&nbsp;
-					<input id="eq_nm" size=10 maxlength=8>
-		</span> <br /><br/>
-			<span>
-				모델번호&nbsp;&nbsp;<input 	id="eq_mdno" size=10 maxlength=8>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-				제작업체&nbsp;&nbsp;<input id="vdr_cd" size=10 	maxlength=8>
-				&nbsp;&nbsp;&nbsp;&nbsp;
-				UPH*&nbsp;&nbsp;&nbsp;&nbsp;<input id="uph" size=10 maxlength=8>
-
-		</span> <br /><br/> 
-		<span> 
-					가용온도&nbsp;&nbsp;&nbsp;&nbsp;<input id="eq_min" size=10 maxlength=8>&nbsp;&nbsp;~&nbsp;&nbsp;
-					<input id="eq_max" size=10 maxlength=8> ℃ &nbsp;
-					점검주기&nbsp;&nbsp;<input 	id="eq_chkcyc" size=10 maxlength=8>
-					&nbsp;&nbsp;등록인&nbsp;&nbsp;<input	id="eq_inster" size=10 maxlength=8>
-		</span><br/><br/>
-		<span>
 			
-			&nbsp;&nbsp;구매일자&nbsp;&nbsp;<input type="date"	id="eq_purdt" size=10 maxlength=8>
-	</span>
+			<br/><br/>
+					구분코드<input id="vdr_cd" size=10 	maxlength=8>
+					<input type="button" id="eqdiv" value="조회">
+					<input id="eq_nm" size=10 maxlength=8>
+					모델번호<input id="eq_mdno" size=10 maxlength=8>
+				
+		<br /><br/>
+		
+				
+				제작업체<input id="vdr_cd" size=10 	maxlength=8>
+				
+				UPH*<input id="uph" size=10 maxlength=8>
+
+		 <br /><br/> 
+		
+					가용온도<input id="eq_min" size=10 maxlength=8>
+					<input id="eq_max" size=10 maxlength=8> ℃ 
+					점검주기<input 	id="eq_chkcyc" size=10 maxlength=8>
+					
+		<br/><br/>
+		
+			등록인<input	id="eq_inster" size=10 maxlength=8>
+			구매일자<input type="date"	id="eq_purdt" size=10 maxlength=8>
+	
 	
 	
 	
@@ -79,9 +85,9 @@ input.img-button {
 	</div>
 	
 	<div class="col-4">
-	<img id="prevu" src="#" />
+	<img id="prevu" src="#" onError="this.style.visibility='hidden'" />
 	<div class="input-file">
-	 	<input type="text" readonly="readonly" class="file-name" /> 
+	 	<input type="text" id="imgNm" readonly="readonly" class="file-name" /> 
 		<label for="upload02" class="file-label"></label> 
 		<input type="file" name="file" id="upldfile" class="file-upload" onchange="readURL(this)" accept="assets/img/*" />
 
@@ -98,18 +104,35 @@ input.img-button {
 </div>
 </body>
 <script>
+console.log(  $("input[name='chk']:checked").val()  );
+$("#btnok").on("click" , function(){
+	
+	
+	
+})
+
+
+
+
 // 이미지 파일 업로드 구현 시도중
 function readURL(input) {
     	if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.readAsDataURL(input.files[0]);
-
+		
+        //파일이름 가져옴
+        var imgNm = input.files[0].name;
+        console.log(imgNm);
     
         reader.onload = function (e) {
-    
+    	
         	var tempImage=new Image();
         	tempImage.src=reader.result;
-        	console.log(tempImage);
+        	
+        	console.log(tempImage.src);
+        	
+        	
+        	
         	tempImage.onload=function(){
         		var canvas=document.createElement('canvas');
         		var canvasContext=canvas.getContext("2d");
@@ -127,7 +150,7 @@ function readURL(input) {
         		var dataURI=canvas.toDataURL("image/png");
         		
         		document.querySelector("#prevu").src=dataURI;
-   
+        		document.querySelector("#prevu").style.visibility="visible"; 
         	}
         };
     
@@ -139,7 +162,7 @@ function readURL(input) {
 
 	//console.log($("#upload02").html());
 
-	$("#upldfile").change(function(){
+	/* $("#upldfile").change(function(){
 		var formData = new FormData($("#frm"));
 		$.ajax({
 			method:"post",
@@ -157,7 +180,7 @@ function readURL(input) {
 		           
 		        }
 		});
-	});
+	}); */
 	
 	// 조회 버튼을 클릭시  > 모달 호출
 	eqdiv.addEventListener("click" , function(){

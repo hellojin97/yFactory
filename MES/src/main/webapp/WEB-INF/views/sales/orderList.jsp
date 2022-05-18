@@ -110,7 +110,7 @@
 						</div>
 
 						<div>
-							<button type="reset" class="btn1">초기화</button>
+							<button type="reset" id="reset" class="btn1">초기화</button>
 						</div>
 					</div>
 				</div>
@@ -144,7 +144,7 @@ venderBtn.addEventListener("click", function(){
 		});
 
 /* 주문서 전체 조회 */
-window.onload = function(){
+window.onload = function (){
    const url = "salesOrder";
    $.ajax(url,{
       dataType : "JSON",
@@ -231,6 +231,18 @@ $("#search").on("click", function() {
        console.log(result);
         
    });
+})
+
+
+$('#reset').on('click',function(){
+	const url = "salesOrder";
+	   $.ajax(url,{
+	      dataType : "JSON",
+	      method: "GET"
+	   }).done(function(result){
+	      grid.resetData(result);
+	     console.log(result);
+	   });
 })
 }
   </script>

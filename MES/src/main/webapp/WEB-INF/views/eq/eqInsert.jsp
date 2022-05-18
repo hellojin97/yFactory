@@ -32,7 +32,6 @@ input.img-button {
 </head>
 <body>
 
-	<div id="title">설비등록</div>
 	<form name="frm" id="frm"  method="post" enctype="multipart/form-data">
 	<div class="row">
 	<div class="col-8">
@@ -99,6 +98,7 @@ input.img-button {
 <script>
 	// 이미지 파일 업로드 구현 시도중
 	//console.log($("#upload02").html());
+
 	$("#upldfile").change(function(){
 		var fdt = new FormData($("#frm"));
 		$.ajax({
@@ -150,6 +150,7 @@ input.img-button {
 		
 	
 				
+
 
 	
 	

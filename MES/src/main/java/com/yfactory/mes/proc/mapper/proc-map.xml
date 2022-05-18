@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.proc.mapper.ProcMapper">
 	<select id="OrderSelectOk" resultType="map">
-	
+		SELECT ord.ord_cd  "주문코드" , 
+					   TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
+					   TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
+					   ordtl.prod_cd "완제품코드" ,
+					   ordtl.ord_qty "주문수량",
+					   vdr.vdr_nm "업체명",
+					   pd.prod_nm "완제품명",
+					   cd.cd_explan "진행상황"
+		FROM 
+					   ORDERS ord, 
+					   VENDOR vdr, 
+					   ORD_DTL ordtl, 
+					   PROD pd, 
+					   COMM_CODE cd
+	WHERE     ord.vdr_cd = vdr.vdr_cd
+		AND      ord.ord_cd = ordtl.ord_cd
+		AND      ordtl.prod_cd = pd.prod_cd
+		AND      cd.comm_cd = ord.prog_cd
+		AND		 ord.ord_cd = #{ordCd}
 	</select>
 </mapper>

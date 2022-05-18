@@ -16,7 +16,6 @@ public interface EquipMapper {
 	  
 	  List<Map> searchEq(); // 설비 코드 + 설비 명 조회 메서드
 	  
-	  
 	  List<Map> eqInaAll(); // 설비 비가동 리스트(설비비가동 페치지)
 	  int eqInaIns(); // 설비 비가동 등록(설비 비가동 페이지)
 	  

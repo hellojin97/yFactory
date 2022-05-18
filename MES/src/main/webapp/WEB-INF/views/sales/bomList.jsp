@@ -17,15 +17,13 @@
 </head>
 <body>
 
-	<div class="container">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
-			<h1>bom 조회</h1>
+			<h1>BOM 조회</h1>
 		</div>
 
 
 
 		<div id="grid"></div>
-	</div>
 
 
 	<script type="text/javascript">

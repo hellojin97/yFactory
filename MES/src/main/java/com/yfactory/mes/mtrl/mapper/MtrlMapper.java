@@ -9,4 +9,10 @@ public interface MtrlMapper {
 	
 	//LOT재고조회
 	List<Map>listMtrlLot();
+	
+	//자재명 조회
+	List<Map>mtcdList();
+	
+	//업체명 조회
+	List<Map>vendorList();
 }

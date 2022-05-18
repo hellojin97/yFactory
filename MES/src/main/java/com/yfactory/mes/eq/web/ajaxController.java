@@ -39,7 +39,6 @@ public class ajaxController {
 	@ResponseBody
 	public List<Map>getEqDivList() {
 		return mapper.searchEq(); 
-	}
-	
+  }
 	
 }

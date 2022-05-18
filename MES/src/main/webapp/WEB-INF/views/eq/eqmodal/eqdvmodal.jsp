@@ -93,8 +93,10 @@
 		console.log(eqNm);
 		if(eqCd != null){
 			 $('#myModal').modal('hide');
-			 
-			 $.ajax({
+			 $("#vdr_cd").val(eqCd);
+			 $("#eq_nm").val(eqNm);
+					
+			 /* $.ajax({
 				   url  : "eqSelectAjax",
 				   data : {eqCd : eqCd , eqNm : eqNm},
 				   dataType : "JSON",
@@ -103,7 +105,7 @@
 				   console.log(result);
 				
 				 
-			   }) 
+			   })  */
 			 
 			 
 		}

@@ -32,7 +32,7 @@ input.img-button {
 </head>
 <body>
 <div class="container">
-	<form name="frm" id="frm"  method="post" enctype="multipart/form-data">
+	<form name="frm" id="frm" action="#" method="post" enctype="multipart/form-data">
 	<div class="row">
 	<div class="col-8">
 	
@@ -40,7 +40,7 @@ input.img-button {
 		<div align="right">
 			<button type="reset" class="button btnpart">초기화</button>
 			&nbsp;&nbsp;
-			<button type="submit" class="button btnpart" onClick="location.href='#'">저장</button>
+			<button type="submit" class="button btnpart">저장</button>
 		</div>
 		<hr />
 		<span>설비명*&nbsp;&nbsp;
@@ -50,45 +50,47 @@ input.img-button {
 						Y<input	type="radio" id="yes" name="chk" value="Y" checked>&nbsp;
 						N<input type="radio" id="no" name="chk" value="N">
 			&nbsp;&nbsp;&nbsp;&nbsp;
-					설비구분&nbsp;&nbsp;<input id="vdr_cd" size=10 	maxlength=8>&nbsp;&nbsp;
-					<input type="button" id="eqdiv" value="조회">&nbsp;&nbsp;
+					구분코드&nbsp;&nbsp;<input id="vdr_cd" size=10 	maxlength=8>&nbsp;
+					<input type="button" id="eqdiv" value="조회">&nbsp;
 					<input id="eq_nm" size=10 maxlength=8>
 		</span> <br /><br/>
-			<span>규격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input	id="eq_stnd" size=10 maxlength=8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span>
 				모델번호&nbsp;&nbsp;<input 	id="eq_mdno" size=10 maxlength=8>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				제작업체&nbsp;&nbsp;<input id="vdr_cd" size=10 	maxlength=8>
-
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				UPH*&nbsp;&nbsp;&nbsp;&nbsp;<input id="uph" size=10 maxlength=8>
 
 		</span> <br /><br/> 
-		<span> UPH*&nbsp;&nbsp;&nbsp;&nbsp;<input id="uph" size=10 maxlength=8>&nbsp;&nbsp;&nbsp;&nbsp;
-					가용온도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="eq_min" size=10 maxlength=8>&nbsp;&nbsp;~&nbsp;&nbsp;
+		<span> 
+					가용온도&nbsp;&nbsp;&nbsp;&nbsp;<input id="eq_min" size=10 maxlength=8>&nbsp;&nbsp;~&nbsp;&nbsp;
 					<input id="eq_max" size=10 maxlength=8> ℃ &nbsp;
 					점검주기&nbsp;&nbsp;<input 	id="eq_chkcyc" size=10 maxlength=8>
-			
+					&nbsp;&nbsp;등록인&nbsp;&nbsp;<input	id="eq_inster" size=10 maxlength=8>
 		</span><br/><br/>
 		<span>
-			&nbsp;&nbsp;등록인&nbsp;&nbsp;<input	id="eq_inster" size=10 maxlength=8>
+			
 			&nbsp;&nbsp;구매일자&nbsp;&nbsp;<input type="date"	id="eq_purdt" size=10 maxlength=8>
 	</span>
 	
-	</div>
 	
+	
+	
+	</div>
 	
 	<div class="col-4">
-	<div class="input-file"> <input type="text"
-			readonly="readonly" class="file-name" /> <label for="upload02"
-			class="file-label"></label> <input type="file" name="file" id="upldfile"
-			class="file-upload" accept="assets/img/*" />
+	<img id="prevu" src="#" />
+	<div class="input-file">
+	 	<input type="text" readonly="readonly" class="file-name" /> 
+		<label for="upload02" class="file-label"></label> 
+		<input type="file" name="file" id="upldfile" class="file-upload" onchange="readURL(this)" accept="assets/img/*" />
 
-		</div>
-		
-	
+	</div>
 	</div>
 	
-	</div> 	
-</form>
+	
+	</div>
+	</form>
 
 		<hr />
 		<div id="modalDiv"></div>
@@ -96,7 +98,45 @@ input.img-button {
 </div>
 </body>
 <script>
-	// 이미지 파일 업로드 구현 시도중
+// 이미지 파일 업로드 구현 시도중
+function readURL(input) {
+    	if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.readAsDataURL(input.files[0]);
+
+    
+        reader.onload = function (e) {
+    
+        	var tempImage=new Image();
+        	tempImage.src=reader.result;
+        	console.log(tempImage);
+        	tempImage.onload=function(){
+        		var canvas=document.createElement('canvas');
+        		var canvasContext=canvas.getContext("2d");
+        		
+        		
+            	var img = new Image();
+	        	img.src = e.target.result;
+	        	
+	        	
+        		canvas.width=img.width*0.7;
+        		canvas.height=img.height*0.7;
+        		
+        		canvasContext.drawImage(this,0,0,canvas.width,canvas.height);
+        		
+        		var dataURI=canvas.toDataURL("image/png");
+        		
+        		document.querySelector("#prevu").src=dataURI;
+   
+        	}
+        };
+    
+    	}
+	}
+
+
+
+
 	//console.log($("#upload02").html());
 
 	$("#upldfile").change(function(){

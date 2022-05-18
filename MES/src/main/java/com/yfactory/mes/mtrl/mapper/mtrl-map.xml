@@ -28,6 +28,32 @@
 		AND    lot.mt_lot = cy.mt_lot
 	</select>
 	
+	<!-- LOT 검색조회 -->
+	<select id="lotSelectSearch" resultType="map">
+		SELECT  lot.mt_lot "mt_lot",
+			    lot.mt_cd "mt_cd",
+			    m.mt_nm "mt_nm", 
+			    vd.vdr_nm "vdr_nm", 
+			    cy.mt_qty "mt_qty", 
+			    TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
+		FROM    mt_lot lot, 
+			    mt m,  
+			    vendor vd, 
+			    mt_curqty cy
+		WHERE   m.mt_cd = lot.mt_cd
+		AND     m.ven_cd = vd.vdr_cd
+		AND     lot.mt_lot = cy.mt_lot
+			<if test="m1 != ''">
+		AND m.mt_nm LIKE '%'||#{m1}||'%'
+			</if>
+			<if test="m2 != ''">
+		AND m.mt_cd LIKE '%'||#{m2}||'%'
+			</if>
+			<if test="req1 != '' and req2 != ''">
+		AND lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
+			</if>
+	</select>
+	
 	<!-- 자재 코드,이름 전체조회 -->
 	<select id="mtcdList" resultType="map">
 		SELECT mt_nm "mt_nm", 
@@ -59,8 +85,8 @@
        		   vd.vdr_cd "vdr_cd"
         FROM   vendor vd, COMM_CODE cd
         WHERE  vd.ven_cd = cd.comm_cd
-        AND    vd.vdr_nm LIKE '%'||#{vdrnm}||'%'
-			   
+        AND    vd.vdr_nm LIKE '%'||#{vdrnm}||'%'		   
 	</select>
+
 	
 </mapper>

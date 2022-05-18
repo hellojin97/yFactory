@@ -49,5 +49,18 @@ public class MaterialAjaxController {
 			return service.selectPl();
 		}
 		
+		//LOT 검색
+		@GetMapping("/lotSelectSearch")
+		public List<Map> lotSelectSearch(String m1,
+										 String m2,
+										 String req1,
+										 String req2){
+			
+			System.out.println(m1);
+			System.out.println(m2);
+			System.out.println(req1);
+			System.out.println(req2);
+			return service.lotSelectSearch(m1, m2, req1, req2);
+		}
 		
 }

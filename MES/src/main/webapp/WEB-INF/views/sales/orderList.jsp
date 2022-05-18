@@ -198,12 +198,14 @@ $("#search").on("click", function() {
             req1 : req1,
             req2 : req2,
             res1 : res1,
-            res2 : res2
+            res2 : res2,
+            key : radio
       },
       dataType: 'JSON',
       contentType : "application/json; charset=utf-8"
    }).done(function(result){
        grid.resetData(result);
+       console.log(result);
         
    });
 })

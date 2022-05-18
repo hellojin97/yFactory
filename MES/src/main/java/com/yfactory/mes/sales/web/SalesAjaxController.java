@@ -26,9 +26,9 @@ public class SalesAjaxController {
 	@GetMapping("/searchOrderList")
 	public List<Map> searchOrderList( String pnm, String vnm,
 			  String req1, String req2,
-			  String res1, String res2) {
-
-		return salesService.searchOrderList(pnm, vnm, req1, req2, res1, res2);
+			  String res1, String res2, String key) {
+		
+		return salesService.searchOrderList(pnm, vnm, req1, req2, res1, res2, key);
 	}
 
 

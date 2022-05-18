@@ -68,15 +68,13 @@
         <if test="res1 != '' and res2 != ''">
         AND      ord.res_dt between TO_DATE(#{res1},'YYYY-MM-DD') AND TO_DATE(#{res2},'YYYY-MM-DD')
         </if>
-        <!-- <if test="exp == '1'">
-        AND      cd_explan = 주문접수
+        <if test="key == 1">
+        AND      cd_explan LIKE '주문접수'
         </if>
-        <if test="exp == '2'">
-        AND      cd_explan = 출고완료
+        <if test="key == 2">
+        AND      cd_explan LIKE '출고처리완료'
         </if>
-        <if test="exp == '3'">
-        AND      cd_explan = 주문접수
-        OR		 cd_explan = 출고완료
-        </if> -->
+        <if test="key == 3">        
+        </if>
 	</select>
 </mapper>

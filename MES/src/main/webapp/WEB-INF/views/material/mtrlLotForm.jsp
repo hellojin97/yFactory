@@ -18,12 +18,14 @@
 <body>
 
 		<h1>자재 LOT재고조회</h1>
-
+<form>
 		<div style="background-color: #e0e0e0; padding: 8px;">
 			<div class="mainTitle" style="padding: 15px;">
 				<!-- 자재명 -->
+				
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
+					
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재명</label> 
 						<input type="text" class="form-control" style="width: 50px" id="mtNminput" placeholder="자재명">
 						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn"> 
@@ -61,11 +63,11 @@
 						</div>
 
 						<div style="padding-right: 10px;">
-							<button class="btn1" id="search">조회</button>
+							<button class="btn1"  type="button" id="search">조회</button>
 						</div>
 
 						<div>
-							<button class="btn1">초기화</button>
+							<button class="btn1" type="reset" id="reset">초기화</button>
 						</div>
 					</div>
 				</div>
@@ -80,7 +82,7 @@
 			</div>
 
 		</div>
-
+</form>
 	
 
 </body>
@@ -208,5 +210,16 @@
    });
 })
 
+/* 검색 결과 초기화  */
+$('#reset').on('click',function(){
+	const url = "mtrlLot";
+	   $.ajax(url,{
+	      dataType : "JSON",
+	      method: "GET"
+	   }).done(function(result){
+		   listMtrlLot.resetData(result);
+	     console.log(result);
+	   });
+})
  </script>
 </html>

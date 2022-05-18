@@ -2,6 +2,7 @@ package com.yfactory.mes.eq.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yfactory.mes.eq.mapper.EquipMapper;
@@ -48,6 +49,10 @@ public class pageController {
 		return "eq/eqRstat";
 		
 	}
-	
+	// 설비 구분 모달창 출력
+	@GetMapping("/eqdvmodal")
+	public String eqmodal() {
+		return "/eq/eqmodal/eqdvmodal";
+	}
 	
 }

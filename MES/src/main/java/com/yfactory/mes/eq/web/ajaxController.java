@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,12 +34,11 @@ public class ajaxController {
 	 */
 	
 	
-	// 돋보기 클릭시 리스트를 가져오는 메서드
-	@PostMapping("/getEqListAjax")
+	// 조회 클릭시 리스트를 가져오는 메서드
+	@GetMapping("/getEqDivList")
 	@ResponseBody
-	public List<Map<String, String>> getEqListAjax(@PathVariable String  eq_cd) {
-		return mapper.searchEq(eq_cd); 
-	}
-	
+	public List<Map>getEqDivList() {
+		return mapper.searchEq(); 
+  }
 	
 }

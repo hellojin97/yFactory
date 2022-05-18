@@ -31,8 +31,8 @@ input.img-button {
 </style>
 </head>
 <body>
-	<div id="title">설비등록</div>
-	<form name="frm" id="frm" action="/eqinsert.do" method="post" enctype="multipart/form-data">
+
+	<form name="frm" id="frm"  method="post" enctype="multipart/form-data">
 	<div class="row">
 	<div class="col-8">
 	
@@ -40,7 +40,7 @@ input.img-button {
 		<div align="right">
 			<button type="reset" class="button btnpart">초기화</button>
 			&nbsp;&nbsp;
-			<button type="submit" class="button btnpart">저장</button>
+			<button type="submit" class="button btnpart" onClick="location.href='#'">저장</button>
 		</div>
 		<hr />
 		<span>설비명*&nbsp;&nbsp;
@@ -51,7 +51,7 @@ input.img-button {
 						N<input type="radio" id="no" name="chk" value="N">
 			&nbsp;&nbsp;&nbsp;&nbsp;
 					설비구분&nbsp;&nbsp;<input id="vdr_cd" size=10 	maxlength=8>&nbsp;&nbsp;
-					<input type="button" 	class="img-button" >&nbsp;&nbsp;
+					<input type="button" id="eqdiv" value="조회">&nbsp;&nbsp;
 					<input id="eq_nm" size=10 maxlength=8>
 		</span> <br /><br/>
 			<span>규격&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -61,18 +61,16 @@ input.img-button {
 				제작업체&nbsp;&nbsp;<input id="vdr_cd" size=10 	maxlength=8>
 
 
-		</span> <br /><br/> <span> UPH*&nbsp;&nbsp;&nbsp;&nbsp;<input
-			id="uph" size=10 maxlength=8>&nbsp;&nbsp;&nbsp;&nbsp;가용온도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-			id="eq_min" size=10 maxlength=8>&nbsp;&nbsp;~&nbsp;&nbsp;<input
-			id="eq_max" size=10 maxlength=8>℃&nbsp;점검주기&nbsp;&nbsp;<input
-			id="eq_chkcyc" size=10 maxlength=8>
+		</span> <br /><br/> 
+		<span> UPH*&nbsp;&nbsp;&nbsp;&nbsp;<input id="uph" size=10 maxlength=8>&nbsp;&nbsp;&nbsp;&nbsp;
+					가용온도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="eq_min" size=10 maxlength=8>&nbsp;&nbsp;~&nbsp;&nbsp;
+					<input id="eq_max" size=10 maxlength=8> ℃ &nbsp;
+					점검주기&nbsp;&nbsp;<input 	id="eq_chkcyc" size=10 maxlength=8>
 			
-			</span><br/><br/>
-			<span>
-	&nbsp;&nbsp;등록인&nbsp;&nbsp;<input
-			id="eq_inster" size=10 maxlength=8>
-			&nbsp;&nbsp;구매일자&nbsp;&nbsp;<input type="date"
-			id="eq_purdt" size=10 maxlength=8>
+		</span><br/><br/>
+		<span>
+			&nbsp;&nbsp;등록인&nbsp;&nbsp;<input	id="eq_inster" size=10 maxlength=8>
+			&nbsp;&nbsp;구매일자&nbsp;&nbsp;<input type="date"	id="eq_purdt" size=10 maxlength=8>
 	</span>
 	
 	</div>
@@ -93,40 +91,14 @@ input.img-button {
 </form>
 
 		<hr />
+		<div id="modalDiv"></div>
 
-
-<!-- Modal -->
-<div class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">EQUIPMENT LIST</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table>
-        <thead>
-        	<tr>
-        	<th><b>No.</b></th>
-        	<th>EQUIP_CODE</th>
-        	<th>EQUIP_NAME</th>
-        	</tr>
-        	</thead>
-        	<tbody id="eq_list">
-        	
-        	</tbody>
-        </table>
-      </div>
-     
-    </div>
-  </div>
-</div>
 
 </body>
 <script>
-	console.log($("#upload02").html());
+	// 이미지 파일 업로드 구현 시도중
+	//console.log($("#upload02").html());
+
 	$("#upldfile").change(function(){
 		var fdt = new FormData($("#frm"));
 		$.ajax({
@@ -146,25 +118,40 @@ input.img-button {
 		        }
 		});
 	});
-	// 돋보기 버튼을 클릭시 모달이 보여지며 데이터를 불러온다
-	$(".img-button").on("click" , function(){
-		var eq_cd = $("#vdr_cd").val();
-		$.ajax({
-			method:"POST",
-			url : "/getEqListAjax",
-			data:JSON.stringify({eq_cd :  eq_cd  }),
-			success:{function(){alert("데이터 베이스 접속 완료!")}}
-		})
-		.done(function(datas){
-			for(item of datas){
-				$("#eq_list").append(   $("<tr>").append(  $("<td>").html(item.eq_cd), $("<td>").html(item.eq_cd) , $("<td>").html(item.eq_nm)  )   )	
-			}
-				
-			
+	
+	// 조회 버튼을 클릭시 모달이 보여지며 데이터를 불러온다
+	eqdiv.addEventListener("click" , function(){
+		$("#modalDiv").load("eqdvmodal" , function(){
+			const mmd = new bootstrap.Modal('#myModal');
+			mmd.show();
 			
 		})
+		
+		
+		
+		
+	});
+		
+		
+		
+/* 	window.onload = function(){
+		   const url = "/getEqDivList";
+		   $.ajax(url,{
+			   dataType : "JSON",
+			   method: "GET"
+		   }).done(function(result){
+			   grid.resetData(result);
+			  console.log(result);
+   })
+		}; */
+		
+		
+		
+		
+	
 				
-	})
+
+
 	
 	
 	

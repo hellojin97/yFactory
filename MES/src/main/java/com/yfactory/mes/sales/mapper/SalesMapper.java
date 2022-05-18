@@ -14,7 +14,7 @@ public interface SalesMapper {
 	//주문서 검색
 	List<Map> searchOrderList(@Param("pnm") String pnm, @Param("vnm") String vnm, 
 							  @Param("req1") String req1,@Param("req2") String req2 ,
-							  @Param("res1") String res1, @Param("res2") String res2);	
+							  @Param("res1") String res1, @Param("res2") String res2, @Param("key") String key);	
 
 }
 

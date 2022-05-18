@@ -14,6 +14,6 @@ public interface SalesService {
 	//주문서 검색
 	List<Map> searchOrderList(String pnm, String vnm,
 							  String req1, String req2,
-							  String res1, String res2);
+							  String res1, String res2, String key);
 
 }

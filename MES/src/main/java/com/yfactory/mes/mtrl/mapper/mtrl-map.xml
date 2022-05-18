@@ -47,7 +47,7 @@
 		AND m.mt_nm LIKE '%'||#{m1}||'%'
 			</if>
 			<if test="m2 != ''">
-		AND m.mt_cd LIKE '%'||#{m2}||'%'
+		AND vd.vdr_nm LIKE '%'||#{m2}||'%'
 			</if>
 			<if test="req1 != '' and req2 != ''">
 		AND lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')

@@ -187,10 +187,7 @@
    var vdrNminput = $("#vdrNminput").val();
    var req1 = $("#req1").val();
    var req2 = $("#req2").val();
-   
-   console.log(req1);
-   console.log(req2);
-
+	console.log(vdrNminput);
    $.ajax({
       url : "lotSelectSearch",
       data : {
@@ -203,7 +200,7 @@
       dataType: 'JSON',
       contentType : "application/json; charset=utf-8"
    }).done(function(result){
-	   /* listMtrlLot.resetData(result); */
+	    listMtrlLot.resetData(result);
        console.log(result);
        
    }).fail(function(result){

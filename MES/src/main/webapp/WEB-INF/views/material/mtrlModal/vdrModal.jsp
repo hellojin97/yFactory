@@ -108,8 +108,6 @@
          $("#vdrNminput").val(vdrNm);
          $("#vdrCdinput").val(vdrCd);
          $('#myModal').modal('hide');
-         console.log(mtrlNm);
-         console.log(mtrlCd);
          }
       ); 
 		  

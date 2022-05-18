@@ -18,7 +18,7 @@
 			   m.mt_nm "mt_nm", 
 			   vd.vdr_nm "vdr_nm", 
 			   cy.mt_qty "mt_qty", 
-			   lot.mt_exp "mt_exp"
+			   TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
 		FROM   mt_lot lot, 
 			   mt m,  
 			   vendor vd, 
@@ -28,11 +28,19 @@
 		AND    lot.mt_lot = cy.mt_lot
 	</select>
 	
-	<!-- 자재명 조회 -->
+	<!-- 자재 코드,이름 전체조회 -->
 	<select id="mtcdList" resultType="map">
 		SELECT mt_nm "mt_nm", 
 			   mt_cd "mt_cd"
 		FROM   mt
+	</select>
+	
+	<!-- 자재명 단건조회 -->
+	<select id="mtnmSelectSearch" resultType="map">
+		SELECT mt_nm "mt_nm", 
+			   mt_cd "mt_cd"
+		FROM   mt
+		WHERE  mt_nm LIKE '%'||#{mtnm}||'%'
 	</select>
 	
 	<!-- 업체명 조회 -->

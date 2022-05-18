@@ -38,6 +38,12 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.vendorList();
 	}
 
+	@Override
+	public List<Map> mtnmSelectSearch(String mtnm) {
+		// TODO Auto-generated method stub
+		return map.mtnmSelectSearch(mtnm);
+	}
+
 
 
 }

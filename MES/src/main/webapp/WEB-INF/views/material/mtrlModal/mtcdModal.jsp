@@ -22,9 +22,9 @@
 						<div class="input-group ">
 							<label for="inputText" class="col-form-label"
 								style="padding-right: 10px;">자재명</label> <input type="text"
-								class="form-control" style="width: 50px" placeholder="자재명">
-							<a class="nav-link nav-icon search-bar-toggle " id="myBtn"
-								onclick="myBtn"> <i class="bi bi-search"
+								class="form-control" style="width: 50px" id="mtnm" placeholder="자재명">
+							<a class="nav-link nav-icon search-bar-toggle " id="mtnmSearch"
+								onclick="mtnmSearch"> <i class="bi bi-search"
 								style="color: #2c3e50"></i>
 							</a>
 						</div>
@@ -46,7 +46,7 @@
 	<!-- 모달끝 -->
 
 	<script>
-		//자재명 검색
+		//자재명 전체조회
 		$.ajax({
 			url : "mtcd",
 			method : "GET",
@@ -68,7 +68,7 @@
 			rowHeaders : [ 'rowNum' ],
 			pageOptions : {
 				useClient : true,
-				perPage : 3
+				perPage : 5
 			}
 		});
 		
@@ -113,6 +113,26 @@
 			  
 		      mtcdList.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
 		  })
+		  
+	//자재명 검색
+	$("#mtnmSearch").on("click",function(){
+		console.log("확인")
+	
+	var mtnm = $("#mtnm").val();
+		console.log(mtnm);
+	
+	$.ajax({
+		url : "mtnmSelectSearch",
+		data : {
+			mtnm : mtnm
+		},
+		dataType: 'JSON',
+		contentType : "application/json; charset=utf-8"
+	}).done(function(result){
+		mtcdList.resetData(result); 
+		 console.log(result)
+	})
+	})
 	</script>
 </body>
 </html>

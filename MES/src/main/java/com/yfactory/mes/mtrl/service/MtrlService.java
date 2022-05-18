@@ -15,6 +15,9 @@ public interface MtrlService {
 	//자재명 조회
 	List<Map>mtcdList();
 	
+	//자재명 검색
+	List<Map>mtnmSelectSearch(String mtnm);
+	
 	//업체명 조회
 	List<Map>vendorList();
 }

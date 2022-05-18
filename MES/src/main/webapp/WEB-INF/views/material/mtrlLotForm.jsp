@@ -55,7 +55,7 @@
 							<input type="date" class="form-control">
 						</div>
 
-						<div style="padding: 0px 15px 0px 15px;">
+						<div style="padding: 0px 22px 0px 22px;">
 							<p>~</p>
 						</div>
 						<div class="col-sm-2" style="padding-right: 20px;">
@@ -184,9 +184,10 @@
           }
       })
   });
-  
-  
 
+
+  // 자재명 검색
+  
 
  </script>
 </html>

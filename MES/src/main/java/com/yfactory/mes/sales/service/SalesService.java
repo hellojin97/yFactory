@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.GetMapping;
 
 public interface SalesService {
 	//주문서 조회
@@ -20,6 +21,9 @@ public interface SalesService {
 	List<Map> selectProdLotList();
 	
 	//완제품LOT 검색
-	List<Map> searchProdLotList(String pnm, String fdt1, String fdt2);
+	List<Map> searchProdLotList(String pnm, String pcd, String fdt1, String fdt2);
+	
+	//완제품modal리스트
+	List<Map> prodModalList();
 
 }

@@ -26,5 +26,11 @@ public class SalesController {
 	public String prodLotForm() {
 		return "sales/prodLotForm";
 	}
+	
+	//완제품modal호출
+	@RequestMapping("/prodModal")
+	public String prodModal() {
+		return "sales/salesModal/prodModal";
+	}
 
 }

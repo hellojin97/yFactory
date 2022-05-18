@@ -21,6 +21,10 @@ public interface SalesMapper {
 	List<Map> selectProdLotList();
 	
 	//완제품LOT 검색
-	List<Map> searchProdLotList(@Param("pnm") String pnm, @Param("fdt1") String fdt1, @Param("fdt2") String fdt2);
+	List<Map> searchProdLotList(@Param("pnm") String pnm, @Param("pcd") String pcd, @Param("fdt1") String fdt1, @Param("fdt2") String fdt2);
+	
+	//완제품modal리스트
+		List<Map> prodModalList();
+	
 }
 

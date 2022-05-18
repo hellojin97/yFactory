@@ -28,7 +28,7 @@
 						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn">
 							<i class="bi bi-search" style="color: #2c3e50"></i>
 						</a>
-						<input type="text" class="form-control" readonly="readonly">
+						<input type="text" id="pcd" class="form-control" readonly="readonly">
 					</div>
 				</div>				
 
@@ -83,7 +83,7 @@
 
 <script>
 	myBtn.addEventListener("click", function(){
-	$("#test").load("mtcdModal", function(){
+	$("#test").load("prodModal", function(){
 		const myModal = new bootstrap.Modal('#myModal');
 		myModal.show();
 	})
@@ -97,12 +97,11 @@
 		method : "GET",
 		dataType : "JSON",
 		success : function(result) {
-			listMtrlLot.resetData(result);
-			console.log(result);
+			listProdLot.resetData(result);			
 		}
 	});
 
-	var listMtrlLot = new tui.Grid({
+	var listProdLot = new tui.Grid({
 		el : document.getElementById('prodLotorder'),
 		columns : [ {
 			header : '완제품LOT',
@@ -132,39 +131,6 @@
 		}
 	});
 	
-
-	
-
-  
-  $("#btnSav").click(function () {
-      Swal.fire({
-          title: '정말로 그렇게 하시겠습니까?',
-          text: "다시 되돌릴 수 없습니다. 신중하세요.",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: '승인',
-          cancelButtonText: '취소'
-      }).then((result) => {
-      	console.log(result);
-      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
-          if (result.isConfirmed) {
-              Swal.fire(
-                  '승인이 완료되었습니다.',
-                  '화끈하시네요~!',
-                  'success'
-              )
-              $('#myModal').modal('hide')
-          }else{
-          	Swal.fire(
-                      '승인이 취소되었습니다.',
-                      '섹시하시네요~!',
-                      'error'
-                  )
-          }
-      })
-  });
   $("#myBtn").click(function(){
       $("#myModal").modal("show");
 
@@ -172,51 +138,19 @@
   $('body').css("overflow", "hidden");		
 
   
-  var myModal = document.getElementById('myModal')
-
-
-  /*myModal.addEventListener('shown.bs.modal', function () {
-	  //ajax 호출
-	  //grid.resetData(data)
-	  	
-	  $.ajax({
-			url : "mtcd",
-			method : "GET",
-			dataType : "JSON",
-			success : function(result) {
-				mtcdList.resetData(result);
-			}
-		});
-	  	var mtcdList = new tui.Grid({
-			el : document.getElementById('mtcdGrid'),
-			columns : [ {
-				header : '자재명',
-				name : '자재명'
-			}, {
-				header : '자재코드',
-				name : '자재코드'
-			} 
-			],
-			rowHeaders : [ 'rowNum' ],
-			pageOptions : {
-				useClient : true,
-				perPage : 3
-			}
-		});
-
-  })*/
+  var myModal = document.getElementById('myModal');
 	
   /* 주문서 단건 조회 */
-  $("#search").on("click", function() {
-     console.log("click!")
-     var pnm = $("#pnm").val();     
+  $("#search").on("click", function() {     
+     var pnm = $("#pnm").val();
+     var pcd = $("#pcd").val();
      var fdt1 = $("#fdt1").val();
      var fdt2 = $("#fdt2").val();     
-     console.log(pnm+fdt1+fdt2);
      $.ajax({
         url : "searchProdLot",
         data : {
-              pnm : pnm,              
+              pnm : pnm,  
+              pcd : pcd,
               fdt1 : fdt1,
               fdt2 : fdt2              
         },
@@ -224,7 +158,7 @@
         contentType : "application/json; charset=utf-8"
      }).done(function(result){
          console.log(result);
-         grid.resetData(result);
+         listProdLot.resetData(result);
           
      });
   })

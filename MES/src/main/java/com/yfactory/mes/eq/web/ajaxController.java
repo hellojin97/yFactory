@@ -40,5 +40,10 @@ public class ajaxController {
 	public List<Map>getEqDivList() {
 		return mapper.searchEq(); 
   }
+	@GetMapping("/eqSelectAjax")
+	@ResponseBody
+	public List<Map> eqSelect(String eqCd){
+		return mapper.selectEq(eqCd);
+	}
 	
 }

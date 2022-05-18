@@ -14,6 +14,7 @@ public interface SalesService {
 
 	//주문서 검색
 	List<Map> searchOrderList(String pnm, String vnm,
+							  String pcd, String vcd,
 							  String req1, String req2,
 							  String res1, String res2, String key);
 	
@@ -25,5 +26,8 @@ public interface SalesService {
 	
 	//완제품modal리스트
 	List<Map> prodModalList();
+	
+	//완제품modal 검색
+	List<Map> prodModalSearch(String key);
 
 }

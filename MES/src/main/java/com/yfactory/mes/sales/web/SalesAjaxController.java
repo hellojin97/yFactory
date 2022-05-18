@@ -26,10 +26,11 @@ public class SalesAjaxController {
 	//주문서 검색
 	@GetMapping("/searchOrderList")
 	public List<Map> searchOrderList( String pnm, String vnm,
-			  String req1, String req2,
-			  String res1, String res2, String key) {
+									  String pcd, String vcd,
+			  						  String req1, String req2,
+			  						  String res1, String res2, String key) {
 		
-		return salesService.searchOrderList(pnm, vnm, req1, req2, res1, res2, key);
+		return salesService.searchOrderList(pnm, vnm, pcd, vcd, req1, req2, res1, res2, key);
 	}
 
 
@@ -54,6 +55,13 @@ public class SalesAjaxController {
 	@GetMapping("/prodModalList")
 	public List<Map> prodModalList(){
 		return salesService.prodModalList();
+	}
+	
+	//완제품modal 검색
+	@GetMapping("/prodModalSearch")
+	public List<Map> prodModalSearch(String key){
+		System.out.println(key);
+		return salesService.prodModalSearch(key);
 	}
 	
 

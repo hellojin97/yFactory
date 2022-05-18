@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- 자재명모달  -->
+	<!-- 완제품명모달  -->
 	<div id="myModal" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
@@ -21,9 +21,8 @@
 				<div class="modal-body">
 					<div class="col-md-8 " style="padding-bottom: 20px;">
 						<div class="input-group ">
-							<label for="inputText" class="col-form-label"
-								style="padding-right: 10px;">제품명</label> <input type="text"
-								class="form-control" style="width: 50px" id="prod" placeholder="자재명">
+							<label for="inputText" class="col-form-label" style="padding-right: 10px;">제품명</label>
+								<input type="text" class="form-control" style="width: 50px" id="prod" placeholder="제품명">
 							<a class="nav-link nav-icon search-bar-toggle " id="prodSearch"	onclick="prodSearch">
 								<i class="bi bi-search"	style="color: #2c3e50"></i>
 							</a>
@@ -83,15 +82,13 @@
 		  
 	//자재명 검색
 	$("#prodSearch").on("click",function(){
-		console.log("확인")
-	
-		var prod = $("#prod").val();
-		console.log(prod);
+		var key = $("#prod").val();
+		console.log(key);
 	
 	$.ajax({
 		url : "prodModalSearch",
 		data : {
-			prod : prod
+			key : key
 		},
 		dataType: 'JSON',
 		contentType : "application/json; charset=utf-8"

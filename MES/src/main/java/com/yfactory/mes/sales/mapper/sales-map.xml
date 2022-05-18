@@ -59,10 +59,16 @@
 		AND      ord.ord_cd = ordtl.ord_cd
 		AND      ordtl.prod_cd = pd.prod_cd
 		AND      cd.comm_cd = ord.prog_cd		
-		<if test="pnm != ''">
-        AND      pd.prod_nm LIKE #{pnm}
+		<if test="pcd != ''">
+        AND      pd.prod_cd LIKE #{pcd}
         </if>       
+        <if test="pcd == '' and pnm != ''">
+        AND      pd.prod_nm LIKE #{pnm}
+        </if>        
         <if test="vnm != ''">
+        AND      vdr.vdr_cd LIKE '%'||#{vcd}||'%'
+        </if>
+        <if test="vcd == '' and vnm != ''">
         AND      vdr.vdr_nm LIKE '%'||#{vnm}||'%'
         </if>
         <if test="req1 != '' and req2 != ''">        
@@ -105,7 +111,10 @@
 		FROM		prod pd, prod_lot pdlot, prod_curqty pdc
 		WHERE		pd.prod_cd = pdlot.prod_cd
 		AND     	pdlot.prod_lot = pdc.prod_lot
-		<if test="pnm != ''">
+		<if test="pcd != ''">
+		AND			pdlot.prod_cd LIKE #{pcd}
+		</if>
+		<if test="pcd == '' and pnm != ''">
 		AND		    pd.prod_nm LIKE #{pnm}
 		</if>		
 		<if test="fdt1 != '' and fdt2 != ''">
@@ -118,6 +127,14 @@
 		SELECT 		prod_nm AS "제품명",
 					prod_cd AS "제품코드"
 		FROM   		prod	
+	</select>
+	
+	<!-- 완제품modal 검색 -->
+	<select id="prodModalSearch" resultType="map">
+		SELECT 		prod_nm AS "제품명",
+					prod_cd AS "제품코드"
+		FROM   		prod
+		WHERE		prod_nm LIKE '%'||#{key}||'%'
 	</select>
 	
 </mapper>

@@ -124,7 +124,6 @@ input.img-button {
   </div>
 </div>
 
-
 </body>
 <script>
 	console.log($("#upload02").html());

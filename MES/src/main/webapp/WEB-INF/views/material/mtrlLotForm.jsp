@@ -17,7 +17,6 @@
 </head>
 <body>
 
-	<div class="container">
 		<h1>자재 LOT재고조회</h1>
 
 		<div style="background-color: #e0e0e0; padding: 8px;">
@@ -83,49 +82,6 @@
 			</div>
 
 		</div>
-	</div>
-<<<<<<< HEAD
-	<!-- 모달 -->
-	<div id="myModal" class="modal fade" tabindex="-1">
-	<form>
-		<div class="modal-dialog modal-lg modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header"
-					style="background-color: #2c3e50; color: white; font-size: small; padding: 10px;">
-					<h5 class="modal-title" style="font-size: 17px;">품목코드</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-				<!-- 모달 내용 -->
-				<div class="modal-body">
-					<div class="col-md-8 " style="padding-bottom: 20px;">
-						<div class="input-group ">
-							<label for="inputText" class="col-form-label"
-								style="padding-right: 10px;">자재명</label> <input type="text"
-								class="form-control" style="width: 50px" placeholder="자재명">
-							<a class="nav-link nav-icon search-bar-toggle " id="myBtn"
-								onclick="myBtn"> <i class="bi bi-search"
-								style="color: #2c3e50"></i>
-							</a>
-						</div>
-					</div>
-					<div id="mtcdGrid"></div>
-				</div>
-				<!-- 내용끝 -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal" id="cancel">Cancel</button>
-					<button type="button" id="btnSav" class="btn btn-primary"
-						style="background-color: #2c3e50; border-color: #2c3e50;">Save
-						changes</button>
-					<!-- 사용시 필히 onclick 이용 onclick="location.href='/board'"  -->
-				</div>
-			</div>
-		</div>
-		</form>
-	</div>
-=======
-	
->>>>>>> branch 'main' of https://github.com/Hyeonjinkk/yFactory.git
 
 	
 
@@ -196,7 +152,6 @@
 	});
 	
 
-<<<<<<< HEAD
 	
 
   

@@ -71,7 +71,9 @@
 <body>
 <div id="header"><tiles:insertAttribute name="header" /></div>
 <div id="menu"><tiles:insertAttribute name="menu" /></div>
-<div id="body"><tiles:insertAttribute name="body" /></div>
+
+	<div id="body"><div class="container"><tiles:insertAttribute name="body" /></div>
+</div>
 
   <!-- Toast UI AND Modal -->
  <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>

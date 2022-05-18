@@ -7,14 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
 	<div class="mainTitle" style="padding-bottom:15px; color: ;">
 		<h1>주문서 조회</h1>
 	</div>
 	<div id="orderList"></div>
 	<button id="btnModal">주문서등록</button>
 	<div id="test"></div>
-</div>
 
 <script>
 

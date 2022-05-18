@@ -84,6 +84,7 @@
 	</div>
 	<!-- 모달 -->
 	<div id="myModal" class="modal fade" tabindex="-1">
+	<form>
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header"
@@ -109,7 +110,7 @@
 				<!-- 내용끝 -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Cancel</button>
+						data-bs-dismiss="modal" id="cancel">Cancel</button>
 					<button type="button" id="btnSav" class="btn btn-primary"
 						style="background-color: #2c3e50; border-color: #2c3e50;">Save
 						changes</button>
@@ -117,6 +118,7 @@
 				</div>
 			</div>
 		</div>
+		</form>
 	</div>
 
 
@@ -169,31 +171,9 @@
 			perPage : 10
 		}
 	});
-	$.ajax({
-		url : "mtcd",
-		method : "GET",
-		dataType : "JSON",
-		success : function(result) {
-			mtcdList.resetData(result);
-		}
-	});
+	
 
-	var mtcdList = new tui.Grid({
-		el : document.getElementById('mtcdGrid'),
-		columns : [ {
-			header : '자재명',
-			name : '자재명'
-		}, {
-			header : '자재코드',
-			name : '자재코드'
-		} 
-		],
-		rowHeaders : [ 'rowNum' ],
-		pageOptions : {
-			useClient : true,
-			perPage : 3
-		}
-	});
+	
 
   
   $("#btnSav").click(function () {
@@ -238,8 +218,33 @@
   myModal.addEventListener('shown.bs.modal', function () {
 	  //ajax 호출
 	  //grid.resetData(data)
-	
-      grid.refresh(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기s
+	  	
+	  $.ajax({
+			url : "mtcd",
+			method : "GET",
+			dataType : "JSON",
+			success : function(result) {
+				mtcdList.resetData(result);
+			}
+		});
+	  	var mtcdList = new tui.Grid({
+			el : document.getElementById('mtcdGrid'),
+			columns : [ {
+				header : '자재명',
+				name : '자재명'
+			}, {
+				header : '자재코드',
+				name : '자재코드'
+			} 
+			],
+			rowHeaders : [ 'rowNum' ],
+			pageOptions : {
+				useClient : true,
+				perPage : 3
+			}
+		});
   })
+
+  
  </script>
 </html>

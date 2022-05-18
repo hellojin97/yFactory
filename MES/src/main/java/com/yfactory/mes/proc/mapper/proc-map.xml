@@ -22,4 +22,8 @@
 		AND      cd.comm_cd = ord.prog_cd
 		AND		 ord.ord_cd = #{ordCd}
 	</select>
+	<select id="ProductSelect" resultType="map">
+		SELECT PROD_CD "제품코드", PROD_NM "제품코드" 
+		FROM  PROD  
+	</select>
 </mapper>

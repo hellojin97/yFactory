@@ -14,7 +14,6 @@
 	<div id="orderList"></div>
 	<div id="orderList1"></div>
 	<button id="btnModal">주문서등록</button>
-	<div id="test2"></div>
 	<div id="test"></div>
 	<script>
 	

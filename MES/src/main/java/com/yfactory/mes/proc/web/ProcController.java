@@ -3,7 +3,6 @@ package com.yfactory.mes.proc.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yfactory.mes.proc.service.ProcService;
 
@@ -25,6 +24,10 @@ public class ProcController {
 		
 		return "proc/procPlList";
 	}
-	
+	// 제품목록 모달
+	@GetMapping("/prdmodal")
+	public String ProductSelect(){
+		return "proc/procmodal/prdmodal";
+	}
 
 }

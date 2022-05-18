@@ -35,7 +35,7 @@ public class ProcServiceImpl implements ProcService{
 	}
 
 	@Override
-	public List<Map> PrdSelect() {
+	public List<Map> ProductSelect() {
 		// TODO Auto-generated method stub
 		return null;
 	}

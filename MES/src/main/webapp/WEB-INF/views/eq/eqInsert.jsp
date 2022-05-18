@@ -31,7 +31,7 @@ input.img-button {
 </style>
 </head>
 <body>
-
+<div class="container">
 	<form name="frm" id="frm"  method="post" enctype="multipart/form-data">
 	<div class="row">
 	<div class="col-8">
@@ -93,7 +93,7 @@ input.img-button {
 		<hr />
 		<div id="modalDiv"></div>
 
-
+</div>
 </body>
 <script>
 	// 이미지 파일 업로드 구현 시도중
@@ -119,32 +119,35 @@ input.img-button {
 		});
 	});
 	
-	// 조회 버튼을 클릭시 모달이 보여지며 데이터를 불러온다
+	// 조회 버튼을 클릭시  > 모달 호출
 	eqdiv.addEventListener("click" , function(){
+		
+		//모달 페이지 호출 부
 		$("#modalDiv").load("eqdvmodal" , function(){
 			const myModal = new bootstrap.Modal('#myModal');
-			myModal.show();
+			myModal.show();	
+			
 			
 		})
-		
-
-		
+					
 	});
+
+	
 		
-		
-		
-/* 	window.onload = function(){
-		   const url = "/getEqDivList";
+	/* window.onload = function(){
+		   const url = "/eqSelectAjax";
 		   $.ajax(url,{
 			   dataType : "JSON",
 			   method: "GET"
 		   }).done(function(result){
-			   grid.resetData(result);
-			  console.log(result);
-   })
-		}; */
+			
+			  	console.log(result);
+				
+   			})
+		};  */
 		
-		
+		/* $("#vdr_cd").value = result.eqCd;
+		$("#eq_nm").value = result.eqNm; */
 		
 		
 	

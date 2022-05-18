@@ -19,6 +19,12 @@ public class EquipServiceImpl implements EquipService{
 	public List<Map> searchEq(){
 		return mapper.searchEq();
 	}
+
+	@Override
+	public List<Map> selectEq(String eqCd) {
+	
+		return mapper.selectEq(eqCd);
+	}
 	
 	
 	

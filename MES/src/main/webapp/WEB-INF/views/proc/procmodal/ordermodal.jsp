@@ -122,51 +122,18 @@ $(function(){
 			 
  			  $.ajax({
 					   url  : "procPlListAjax",
-					   data : {ordCd : ordCd},
+					   data : {
+						   ordCd : ordCd
+						   },
 					   dataType : "JSON",
 					   contentType : "application/json; charset = UTF-8;"
 				   }).done(function(result){
-
-					    /* $('#orderList').empty();		
-					   console.log(result);	
-					   
-						if ($('#orderList:empty')) { */ 
-
- 							 var orderList = new tui.Grid({
-								el : document.getElementById('orderList'),
-								scrollX : false,
-								scrollY : false,
-								columns : [ {
-									header : '주문코드',
-									name : '주문코드',
-								}, {
-									header : '제품명',
-									name : '완제품명',
-								}, {
-									header : '주문일자',
-									name : '주문일자',
-								}, {
-									header : '계획량',
-									name : '납기일자',
-								}, {
-									header : '생산일수',
-									name : '완제품코드',
-								}, {
-									header : '작업우선순위',
-									name : '완제품명',
-								}, {
-									header : '수량',
-									name : '주문수량',
-								}, ],
-								rowHeaders : [ 'checkbox' ],
-								pageOptions : {
-									useClient : true,
-									perPage : 5
-								}
-							}); 
-							orderList.appendRows(result);  
-						//}
-
+							for (var i = 0; i < result.length; i++) {
+								resultGrid.appendRow(result[i]);
+							}
+							//resultGrid.appendRow(result, {at : 0});  
+							//resultGrid.setPerPage(5);
+							//resultGrid.getPagination();
 								
 			
 				   })

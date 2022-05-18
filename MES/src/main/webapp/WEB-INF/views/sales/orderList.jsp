@@ -138,8 +138,8 @@ prodBtn.addEventListener("click", function(){
 //업체명 modal
 venderBtn.addEventListener("click", function(){
 		$("#venderModal").load("salesVenderModal", function(){
-			const myModal = new bootstrap.Modal('#myModal');
-			myModal.show();
+			const venModal = new bootstrap.Modal('#venModal');
+			venModal.show();
 		})
 		});
 

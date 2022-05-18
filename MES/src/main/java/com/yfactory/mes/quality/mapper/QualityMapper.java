@@ -1,26 +1,44 @@
 package com.yfactory.mes.quality.mapper;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-import com.yfactory.mes.quality.vo.*;
+import org.apache.ibatis.annotations.Param;
+
+import com.yfactory.mes.quality.vo.MtCheckVO;
+
 
 public interface QualityMapper {
-	// 불량코드 ( 조회 )
-	List<ErrCodeVO> findErrCd(); // 불량코드 전체조회
-	List<ErrCodeVO> ErrCdsearch(); // 불량코드 단건조회
-
-	// 자재검사 ( 조회 / 수정 )
-	List<MtCheckVO> findMtChk(); // 자재검사 전체조회
-	List<MtCheckVO> MtChkSearch(); // 자재검사 단건조회 
-	int UpdMtChk(MtCheckVO mtchk); // 자재검사 수정
-//  						  ( => 검사일자(sysdate로 입력), 합격량, 불량량(발주량 - 합격량), 담당자, 검사여부(진행 전, 진행 완료 구분) 수정 가능 )
-
-	// 자재불량내역 ( 조회 )
-	List<MtErrListVO> findMtErrList(); // 자재불량내역 전체조회
-	List<MtErrListVO> MtErrSearch(); // 자재불량내역 단건조회
-
-	// 제품불량내역 ( 조회 )
-	List<ProdErrListVO> findProdErrList(); // 제품불량내역 전체조회
-	List<ProdErrListVO> ProdErrSearch(); // 제품불량내역 단건조회
+	// 입력
+	int requestQualityM(MtCheckVO MCVO); // 자재 품질검사요청 입력
+	int requestQualityP(); // 제품 품질검사요청 입력
+	
+	
+	// 조회
+	List<Map> selectErrCode(); // 불량코드	
+	List<Map> selectMtCheck(); // 자재검사
+	List<Map> selectProdCheck(); // 제품검사
+	List<Map> selectMtErrList(); // 자재불량내역
+	List<Map> selectProdErrList(); // 제품불량내역
+	
+	
+	// 검색
+	// 자재품질결과
+	List<Map> searchMtQuality(@Param("startDate") Date startDate, @Param("endDate") Date endDate,
+			@Param("mtName") String mtName);
+	// 제품품질결과
+	List<Map> searchProdQuality(@Param("prodName") String prodName);
+	
+	// 불량
+	// 자재불량내역
+	List<Map> searchMtErrList(@Param("errDtl") String errDtl,	@Param("mtName") String mtName);
+	// 제품불량내역
+	List<Map> searchProdErrList(@Param("errDtl") String errDtl,	@Param("prodName") String prodName);
+	
+	
+	// 수정
+	int resultQualityM(); // 자재품질검사 수정
+	int resultQualityP(); // 제품품질검사 수정
 	
 }

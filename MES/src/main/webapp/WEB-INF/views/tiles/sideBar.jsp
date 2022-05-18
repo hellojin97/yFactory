@@ -131,11 +131,25 @@
         <ul id="rows-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         
           <li>
-            <a href="charts-chartjs.html">
-              <i class="bi bi-circle"></i><span>INDEX</span>
+            <a href="qa_request">
+              <i class="bi bi-circle"></i><span>품질검사요청</span>
             </a>
           </li>
-          
+          <li>
+            <a href="qa_requestMgr">
+              <i class="bi bi-circle"></i><span>품질검사관리</span>
+            </a>
+          </li>
+          <li>
+            <a href="qa_result">
+              <i class="bi bi-circle"></i><span>품질검사결과</span>
+            </a>
+          </li>
+          <li>
+            <a href="qa_errlot">
+              <i class="bi bi-circle"></i><span>불량내역조회</span>
+            </a>
+          </li>
         </ul>
       </li>
       

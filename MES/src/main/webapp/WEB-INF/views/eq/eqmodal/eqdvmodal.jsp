@@ -25,18 +25,23 @@
 					</div>
 
 					<div class="modal-body">
-						<div id="grid"></div>
+						<div id="grid">
+						<input type="hidden" name="hdeqCd" id="eqCe" value="">
+						<input type="hidden" name="hdeqNm" id="eqNm" value="">
+						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
+							<!-- <button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">Cancel</button>
 							<button type="button" id="btnSav" class="btn btn-primary">Save
-								changes</button>
+								changes</button> -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	
 </body>
 
 <script>
@@ -80,22 +85,40 @@
 		grid.on("click",function(e) {
 		//debugger
 		let eqCd = grid.getValue(e.rowKey, '설비코드');
+		let eqNm = grid.getValue(e.rowKey , '설비명');
+		$("input[name='eqCdinp']").value=eqCd;
+		$("input[name='eqNminp']").value=eqNm;
+		
 		console.log(eqCd);
+		console.log(eqNm);
 		if(eqCd != null){
 			 $('#myModal').modal('hide');
 			 
 			 $.ajax({
 				   url  : "eqSelectAjax",
-				   data : {eqCd : eqCd},
+				   data : {eqCd : eqCd , eqNm : eqNm},
 				   dataType : "JSON",
 				   contentType : "application/json; charset = UTF-8;"
 			   }).done(function(result){
 				   console.log(result);
+				
+				 
 			   }) 
 			 
 			 
 		}
 	})
+	
+	   // window.dialogArguments : 부모창에서 값을 받을 때 사용하는 속성
+   		// var obj = window.dialogArguments;
+
+	//    var retVal = {objcode , objname};
+
+    // window.returnValue : 부모창으로 값을 넘겨줄 때 사용하는 속성
+	//    window.returnValue = retVal;
+
+
+	
 	
 	});
 </script>

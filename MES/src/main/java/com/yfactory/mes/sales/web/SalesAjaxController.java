@@ -46,10 +46,16 @@ public class SalesAjaxController {
 	
 	//완제품LOT 검색
 	@GetMapping("/searchProdLot")
-	public List<Map> searchProdLot(String pnm, String fdt1, String fdt2){
-		System.out.println("11111"+pnm+fdt1+fdt2);
-		return salesService.searchProdLotList(pnm, fdt1, fdt2);
+	public List<Map> searchProdLot(String pnm, String pcd, String fdt1, String fdt2){		
+		return salesService.searchProdLotList(pnm, pcd, fdt1, fdt2);
 	}
+		
+	//완제품modal리스트
+	@GetMapping("/prodModalList")
+	public List<Map> prodModalList(){
+		return salesService.prodModalList();
+	}
+	
 
 
 

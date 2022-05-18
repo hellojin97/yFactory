@@ -106,10 +106,18 @@
 		WHERE		pd.prod_cd = pdlot.prod_cd
 		AND     	pdlot.prod_lot = pdc.prod_lot
 		<if test="pnm != ''">
-		AND		    pdlot.prod_cd = #{pnm}
+		AND		    pd.prod_nm LIKE #{pnm}
 		</if>		
 		<if test="fdt1 != '' and fdt2 != ''">
 		AND		    pdlot.prod_fdt between TO_DATE(#{fdt1},'YYYY-MM-DD') AND TO_DATE(#{fdt2},'YYYY-MM-DD')			
 		</if>
 	</select>
+	
+	<!-- 완제품modal리스트 -->
+	<select id="prodModalList" resultType="map">
+		SELECT 		prod_nm AS "제품명",
+					prod_cd AS "제품코드"
+		FROM   		prod	
+	</select>
+	
 </mapper>

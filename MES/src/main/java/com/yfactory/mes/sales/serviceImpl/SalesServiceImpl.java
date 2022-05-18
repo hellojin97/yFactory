@@ -39,9 +39,14 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public List<Map> searchProdLotList(String pnm, String fdt1, String fdt2) {
+	public List<Map> searchProdLotList(String pnm, String pcd, String fdt1, String fdt2) {
 		
-		return map.searchProdLotList(pnm, fdt1, fdt2);
+		return map.searchProdLotList(pnm, pcd, fdt1, fdt2);
+	}
+
+	@Override
+	public List<Map> prodModalList() {
+		return map.prodModalList();
 	}
 
 }

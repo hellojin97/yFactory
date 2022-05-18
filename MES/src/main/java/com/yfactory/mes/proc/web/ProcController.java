@@ -13,14 +13,18 @@ public class ProcController {
 	@Autowired
 	private ProcService procService;
 
-	@RequestMapping("/procPlList")
-	public String selectOrdersList() {
-		return "proc/procPlList";
-	}
+
 
 	@GetMapping("/ordermodal")
 	public String loginModal() {
 		return "/proc/procmodal/ordermodal";
 	}
+	
+	@GetMapping("/procPlList")
+	public String selectOrdersList() {
+		
+		return "proc/procPlList";
+	}
+	
 
 }

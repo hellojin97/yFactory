@@ -21,6 +21,7 @@
 		AND      ord.ord_cd = ordtl.ord_cd
 		AND      ordtl.prod_cd = pd.prod_cd
 		AND      cd.comm_cd = ord.prog_cd
+		
 	</select>
 
 	<select id="selectBomList" resultType="map">

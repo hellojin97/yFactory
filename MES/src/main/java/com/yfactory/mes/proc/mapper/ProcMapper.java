@@ -11,7 +11,7 @@ import com.yfactory.mes.proc.vo.PlanDtlVO;
 public interface ProcMapper {
 
 	
-	Map OrderSelectOk(Map ordCd);	//주문서 조회 (주문코드O)
+	List<Map> OrderSelectOk(String ordCd);	//주문서 조회 (주문코드O)
 	Map OrderSelectNo(Map prodCd);	//주문서 조회 (주문코드X)
  
 	int PlanInsert(PlanDtlVO vo);	//계획 등록

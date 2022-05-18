@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.sales.mapper.SalesMapper">
 
+	<!-- 주문서 조회 -->
 	<select id="selectOrderList" resultType="map">
 		SELECT ord.ord_cd  "주문코드" , 
 					   TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
@@ -23,7 +24,8 @@
 		AND      cd.comm_cd = ord.prog_cd
 		
 	</select>
-
+	
+	<!-- BOM 조회 -->
 	<select id="selectBomList" resultType="map">
 	SELECT 		b.prod_cd "완제품코드",
 				   		pd.prod_nm "완제품명", 
@@ -37,6 +39,7 @@
 	AND 			b.mt_cd = m.mt_cd
 	</select>
 	
+	<!-- 주문서 검색 -->
 	<select id="searchOrderList" resultType="map">
 	SELECT ord.ord_cd  "주문코드" , 
 					   TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
@@ -76,5 +79,37 @@
         </if>
         <if test="key == 3">        
         </if>
+	</select>
+	
+	<!-- 완제품LOT조회 -->
+	<select id="selectProdLotList" resultType="map">
+		SELECT		pdlot.prod_lot AS "완제품LOT",
+					pdlot.prod_cd AS "제품코드",
+					pd.prod_nm AS "제품명",
+					pdc.prod_qty AS "완제품수량",
+        			TO_CHAR(pdlot.prod_fdt,'YYYY-MM-DD') AS "제조일자",
+        			TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한"
+		FROM		prod pd, prod_lot pdlot, prod_curqty pdc
+		WHERE		pd.prod_cd = pdlot.prod_cd
+		AND     	pdlot.prod_lot = pdc.prod_lot
+	</select>
+	
+	<!-- 완제품LOT검색 -->
+	<select id="searchProdLotList" resultType="map">
+		SELECT		pdlot.prod_lot AS "완제품LOT",
+					pdlot.prod_cd AS "제품코드",
+					pd.prod_nm AS "제품명",
+					pdc.prod_qty AS "완제품수량",
+        			TO_CHAR(pdlot.prod_fdt,'YYYY-MM-DD') AS "제조일자",
+        			TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한"
+		FROM		prod pd, prod_lot pdlot, prod_curqty pdc
+		WHERE		pd.prod_cd = pdlot.prod_cd
+		AND     	pdlot.prod_lot = pdc.prod_lot
+		<if test="pnm != ''">
+		AND		    pdlot.prod_cd = #{pnm}
+		</if>		
+		<if test="fdt1 != '' and fdt2 != ''">
+		AND		    pdlot.prod_fdt between TO_DATE(#{fdt1},'YYYY-MM-DD') AND TO_DATE(#{fdt2},'YYYY-MM-DD')			
+		</if>
 	</select>
 </mapper>

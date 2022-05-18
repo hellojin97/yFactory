@@ -15,5 +15,11 @@ public interface SalesService {
 	List<Map> searchOrderList(String pnm, String vnm,
 							  String req1, String req2,
 							  String res1, String res2, String key);
+	
+	//완제품LOT 조회
+	List<Map> selectProdLotList();
+	
+	//완제품LOT 검색
+	List<Map> searchProdLotList(String pnm, String fdt1, String fdt2);
 
 }

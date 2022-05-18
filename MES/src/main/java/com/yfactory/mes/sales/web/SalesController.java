@@ -21,4 +21,10 @@ public class SalesController {
 		return "sales/bomList";
 	}
 
+	//완제품LOT재고조회폼
+	@RequestMapping("/prodLotForm")
+	public String prodLotForm() {
+		return "sales/prodLotForm";
+	}
+
 }

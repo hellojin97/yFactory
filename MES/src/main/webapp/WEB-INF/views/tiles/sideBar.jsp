@@ -44,10 +44,17 @@
               <i class="bi bi-circle"></i><span>주문서 조회</span>
             </a>
           </li>
+          
             <li>
             <a href="bomList">
               <i class="bi bi-circle"></i><span>BOM 관리</span>
             </a>
+          </li>        
+          
+          <li>
+          	<a href="prodLotForm">
+          	  <i class="bi bi-circle"></i><span>완제품LOT조회</span>
+          	</a>
           </li>
           
         </ul>
@@ -85,7 +92,7 @@
             <a href="mtrlLotForm">
               <i class="bi bi-circle"></i><span>LOT재고조회</span>
             </a>
-          </li>
+          </li>          
            
           <li>
             <a href="tables-general.html">

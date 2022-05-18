@@ -51,4 +51,16 @@
 		FROM   vendor vd, COMM_CODE cd
 		WHERE  vd.ven_cd = cd.comm_cd
 	</select>
+	
+	<!-- 업체명 단건조회 -->
+	<select id="vdrnmSelectSearch" resultType="map">
+		SELECT cd.cd_nm "cd_nm",
+      		   vd.vdr_nm "vdr_nm", 
+       		   vd.vdr_cd "vdr_cd"
+        FROM   vendor vd, COMM_CODE cd
+        WHERE  vd.ven_cd = cd.comm_cd
+        AND    vd.vdr_nm LIKE '%'||#{vdrnm}||'%'
+			   
+	</select>
+	
 </mapper>

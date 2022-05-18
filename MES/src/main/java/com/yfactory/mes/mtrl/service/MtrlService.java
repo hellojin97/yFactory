@@ -3,6 +3,8 @@ package com.yfactory.mes.mtrl.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface MtrlService {
 	
 	//미지시 생산계획조회
@@ -20,4 +22,7 @@ public interface MtrlService {
 	
 	//업체명 조회
 	List<Map>vendorList();
+	
+	//업체명 검색
+	List<Map>vdrnmSelectSearch(String vdrnm);
 }

@@ -104,9 +104,7 @@
       //debugger
          let mtrlNm = mtcdList.getValue(e.rowKey, 'mt_nm');
          let mtrlCd = mtcdList.getValue(e.rowKey, 'mt_cd');
-         
-         
-         
+    
          $("#mtNminput").val(mtrlNm);
          $("#mtCdinput").val(mtrlCd);
          $('#myModal').modal('hide');

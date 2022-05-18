@@ -18,6 +18,9 @@ public interface MtrlMapper {
 	//자재명 검색
 	List<Map>mtnmSelectSearch(@Param("mtnm")String mtnm);
 	
-	//업체명 조회
+	//업체명 전체조회
 	List<Map>vendorList();
+	
+	//업체명 검색
+	List<Map>vdrnmSelectSearch(@Param("vdrnm")String vdrnm);
 }

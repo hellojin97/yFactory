@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.GetMapping;
+
 import com.yfactory.mes.proc.vo.PlanDtlVO;
 
 public interface ProcService {
@@ -12,7 +14,7 @@ public interface ProcService {
  
 	int PlanInsert(PlanDtlVO vo);	//계획 등록
 	
-	List<Map> PrdSelect();		//제품 목록 조회
+	List<Map> ProductSelect();		//제품 목록 조회
 	List<Map> prdtPlanSelect(Date date1, Date date2);	//생산계획 조회
 	
 	int prdtPlanInsert(String PP_NM, Date date1);

@@ -20,33 +20,24 @@
 				<div class="modal-body">
 					<div class="col-md-8 " style="padding-bottom: 20px;">
 						<div class="input-group ">
-							<label for="inputText" class="col-form-label"
-								style="padding-right: 10px;">업체명</label> <input type="text"
-								class="form-control" style="width: 50px" placeholder="업체명">
-							<a class="nav-link nav-icon search-bar-toggle " id="myBtn"
-								onclick="myBtn"> <i class="bi bi-search"
-								style="color: #2c3e50"></i>
+							<label for="inputText" class="col-form-label" style="padding-right: 10px;">업체명</label> 
+							<input type="text" class="form-control" style="width: 50px" id="vdrnm" placeholder="업체명">
+							<a class="nav-link nav-icon search-bar-toggle " id="vdrnmSearch" onclick="vdrnmSearch"> 
+								<i class="bi bi-search" style="color: #2c3e50"></i>
 							</a>
 						</div>
 					</div>
 					<div id="vdrGrid"></div>
 				</div>
 				<!-- 내용끝 -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Cancel</button>
-					<button type="button" id="btnSav" class="btn btn-primary"
-						style="background-color: #2c3e50; border-color: #2c3e50;">Save
-						changes</button>
-					<!-- 사용시 필히 onclick 이용 onclick="location.href='/board'"  -->
-				</div>
+				
 			</div>
 		</div>
 	</div>
 	<!-- 모달끝 -->
 
 	<script>
-		//자재명 검색
+		//업체명 검색
 		$.ajax({
 			url : "vdrcd",
 			method : "GET",
@@ -74,36 +65,7 @@
 				perPage : 5
 			}
 		});
-		
-		  $("#btnSav").click(function () {
-		      Swal.fire({
-		          title: '정말로 그렇게 하시겠습니까?',
-		          text: "다시 되돌릴 수 없습니다. 신중하세요.",
-		          icon: 'warning',
-		          showCancelButton: true,
-		          confirmButtonColor: '#3085d6',
-		          cancelButtonColor: '#d33',
-		          confirmButtonText: '승인',
-		          cancelButtonText: '취소'
-		      }).then((result) => {
-		      	console.log(result);
-		      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
-		          if (result.isConfirmed) {
-		              Swal.fire(
-		                  '승인이 완료되었습니다.',
-		                  '화끈하시네요~!',
-		                  'success'
-		              )
-		              $('#myModal').modal('hide')
-		          }else{
-		          	Swal.fire(
-		                      '승인이 취소되었습니다.',
-		                      '섹시하시네요~!',
-		                      'error'
-		                  )
-		          }
-		      })
-		  });
+	
 		  
 		  $('body').css("overflow", "hidden");
 		  
@@ -116,6 +78,41 @@
 			  
 		      vendorList.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
 		  })
+		  
+	//업체명 검색
+	$("#vdrnmSearch").on("click",function(){
+		console.log("확인")
+		var vdrnm = $("#vdrnm").val();
+		console.log(vdrnm);
+	
+		$.ajax({
+			url : "vdrnmSelectSearch",
+			data : {
+				vdrnm : vdrnm
+			},
+			dataType: 'JSON',
+			contentType : "application/json; charset=utf-8"
+		}).done(function(result){
+			vendorList.resetData(result); 
+			 console.log(result)
+		})
+	})
+	
+		  
+	//모달 데이터값 받아오기
+	vendorList.on("dblclick",function(e) {
+      //debugger
+         let vdrNm = vendorList.getValue(e.rowKey, 'vdr_nm');
+         let vdrCd = vendorList.getValue(e.rowKey, 'vdr_cd');
+
+         $("#vdrNminput").val(vdrNm);
+         $("#vdrCdinput").val(vdrCd);
+         $('#myModal').modal('hide');
+         console.log(mtrlNm);
+         console.log(mtrlCd);
+         }
+      ); 
+		  
 	</script>
 </body>
 </html>

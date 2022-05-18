@@ -44,6 +44,12 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.mtnmSelectSearch(mtnm);
 	}
 
+	@Override
+	public List<Map> vdrnmSelectSearch(String vdrnm) {
+		// TODO Auto-generated method stub
+		return map.vdrnmSelectSearch(vdrnm);
+	}
+
 
 
 }

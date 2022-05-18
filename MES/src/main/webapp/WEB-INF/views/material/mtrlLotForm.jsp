@@ -36,11 +36,11 @@
 				<div class="col-md-5 " style="padding-bottom: 10px;">
 					<div class="input-group  " style="padding-bottom: 10px;">
 						<label for="inputText" class="col-form-label"style="padding-right: 27px;">업체명</label> 
-						<input type="text" class="form-control" style="width: 50px" placeholder="업체명">
+						<input type="text" class="form-control" style="width: 50px" id="vdrNminput" placeholder="업체명">
 						<a class="nav-link nav-icon search-bar-toggle "id="vdr" onclick="vdr"> 
 							<i class="bi bi-search" style="color: #2c3e50"></i>
 						</a> 
-						<input type="text" class="form-control" readonly="readonly">
+						<input type="text" class="form-control" id="vdrCdinput" readonly="readonly">
 					</div>
 				</div>
 

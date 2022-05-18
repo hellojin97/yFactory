@@ -37,11 +37,15 @@ public class MaterialAjaxController {
 			return service.vendorList();
 		}
 		
+		//업체명 조회
+		@GetMapping("/vdrnmSelectSearch")
+		public List<Map> vdrnmSelectSearch(String vdrnm){
+			return service.vdrnmSelectSearch(vdrnm);
+		}
 		
 		//미지시 생산품조회
 		@GetMapping("/mtrlorder")
-		public List<Map> mtrlorder() {
-			
+		public List<Map> mtrlorder() {		
 			return service.selectPl();
 		}
 		

@@ -13,7 +13,8 @@ public interface SalesMapper {
 	List<Map> selectBomList();
 
 	//주문서 검색
-	List<Map> searchOrderList(@Param("pnm") String pnm, @Param("vnm") String vnm, 
+	List<Map> searchOrderList(@Param("pnm") String pnm, @Param("vnm") String vnm,
+							  @Param("pcd")String pcd, @Param("vcd")String vcd,
 							  @Param("req1") String req1,@Param("req2") String req2 ,
 							  @Param("res1") String res1, @Param("res2") String res2, @Param("key") String key);
 
@@ -24,7 +25,9 @@ public interface SalesMapper {
 	List<Map> searchProdLotList(@Param("pnm") String pnm, @Param("pcd") String pcd, @Param("fdt1") String fdt1, @Param("fdt2") String fdt2);
 	
 	//완제품modal리스트
-		List<Map> prodModalList();
+	List<Map> prodModalList();
 	
+	//완제품modal 검색
+	List<Map> prodModalSearch(String key);
 }
 

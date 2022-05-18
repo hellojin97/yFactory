@@ -31,6 +31,12 @@ public class SalesController {
 	@RequestMapping("/prodModal")
 	public String prodModal() {
 		return "sales/salesModal/prodModal";
+	}	
+	
+	//업체명modal호출
+	@RequestMapping("/salesVenderModal")
+	public String salesVenderModal() {
+		return "sales/salesModal/vdrModal";
 	}
 
 }

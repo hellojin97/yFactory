@@ -21,13 +21,7 @@ public class MaterialController {
 		
 		return "material/orderForm";
 	}
-	//미지시 생산품조회
-	@GetMapping("/mtrlorder")
-	@ResponseBody
-	public List<Map> mtrlorder() {
-		
-		return service.selectPl();
-	}
+	
 	
 	//LOT재고조회폼
 	@RequestMapping("/mtrlLotForm")
@@ -35,18 +29,18 @@ public class MaterialController {
 		return "material/mtrlLotForm";
 	}
 	
-	//LOT재고조회
-	@GetMapping("/mtrlLot")
-	@ResponseBody
-	public List<Map> mtrlLot() {
-		return service.listMtrlLot();
+	
+	/*
+	 * MODAL 이동 
+	 */
+	@RequestMapping("/mtcdModal")
+	public String mtcdModal() {
+		return "material/mtrlModal/mtcdModal";
 	}
 	
-	@GetMapping("/mtcd")
-	@ResponseBody
-	public List<Map> mtcd(){
-		return service.mtcdList();
+	@RequestMapping("/vdrModal")
+	public String vdrModal() {
+		return "material/mtrlModal/vdrModal";
 	}
-	
 }
  

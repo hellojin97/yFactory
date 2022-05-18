@@ -40,7 +40,8 @@
 						<label for="inputText" class="col-form-label"
 							style="padding-right: 27px;">업체명</label> <input type="text"
 							class="form-control" style="width: 50px" placeholder="업체명">
-						<a class="nav-link nav-icon search-bar-toggle " href="#"> <i
+						<a class="nav-link nav-icon search-bar-toggle "id="vdr"
+							onclick="vdr"> <i
 							class="bi bi-search" style="color: #2c3e50"></i>
 						</a> <input type="text" class="form-control" readonly="readonly">
 					</div>
@@ -78,10 +79,12 @@
 			<!-- 테이블 -->
 			<div class="code-html contents" style="padding-bottom: 10px;">
 				<div id="mtrlLotorder"></div>
+				<div id="test"></div>
 			</div>
 
 		</div>
 	</div>
+<<<<<<< HEAD
 	<!-- 모달 -->
 	<div id="myModal" class="modal fade" tabindex="-1">
 	<form>
@@ -120,7 +123,11 @@
 		</div>
 		</form>
 	</div>
+=======
+	
+>>>>>>> branch 'main' of https://github.com/Hyeonjinkk/yFactory.git
 
+	
 
 </body>
 <script type="text/javascript"
@@ -133,6 +140,22 @@
 	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
+	myBtn.addEventListener("click", function(){
+	$("#test").load("mtcdModal", function(){
+		const myModal = new bootstrap.Modal('#myModal');
+		myModal.show();
+	})
+	});
+
+	vdr.addEventListener("click", function(){
+		$("#test").load("vdrModal", function(){
+			const myModal = new bootstrap.Modal('#myModal');
+			myModal.show();
+		})
+		});
+
+
+	//LOT 전체조회
 	$.ajax({
 		url : "mtrlLot",
 		method : "GET",
@@ -173,6 +196,7 @@
 	});
 	
 
+<<<<<<< HEAD
 	
 
   
@@ -243,8 +267,9 @@
 				perPage : 3
 			}
 		});
+
   })
 
-  
+
  </script>
 </html>

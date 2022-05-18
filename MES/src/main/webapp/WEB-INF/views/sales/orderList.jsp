@@ -8,96 +8,119 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
+   href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
+   href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 
-	<div class="container">
-	<div class="mainTitle" style="padding-bottom:15px; color: ;">
-		<h1>주문서 조회</h1>
-	</div>
-
-<section class="section">
-      <div class="row">
-        <div class="">
-
-          <div class="card">
-            <div class="card-body">
-              <!-- Horizontal Form -->
-              <form>
-                <fieldset class="row mb-3">
-                  <legend class="col-form-label col-md-2 pt-0">구분</legend>
-                    <div class="form-check col-md-1">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                      <label class="form-check-label" for="gridRadios1">
-                        진행
-                      </label>
-                    </div>
-                    <div class="form-check col-md-1">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                      <label class="form-check-label" for="gridRadios2">
-                        완료
-                      </label>
-                    </div>
-                    <div class="form-check col-md-1">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-                      <label class="form-check-label" for="gridRadios3">
-                        전체
-                      </label>
-                    </div>                  
+   <div class="container">
+   <div class="mainTitle" style="padding-bottom:15px; color: ;">
+      <h1>주문서 조회</h1>
+   </div>
+   
+   <div style="background-color: #e0e0e0; padding: 8px;">
+			<div class="mainTitle" style="padding: 15px;">
+				<!-- 구분 -->				
+				<fieldset class="col-md-5" style="padding-bottom: 10px;">				
+                  	<div class="input-group">
+                  		<p style="padding-right: 30px;">구분</p>
+	                    <div class="form-check">
+	                      <input class="form-check-input" type="radio" name="radios" id="1" value="1" checked>
+	                      <label class="form-check-label" for="gridRadios1" style="padding-right: 10px;">
+	                        진행
+	                      </label>
+	                    </div>
+	                    <div class="form-check">
+	                      <input class="form-check-input" type="radio" name="radios" id="2" value="2">
+	                      <label class="form-check-label" for="gridRadios2" style="padding-right: 10px;">
+	                        완료
+	                      </label>
+	                    </div>
+	                    <div class="form-check">
+	                      <input class="form-check-input" type="radio" name="radios" id="3" value="3">
+	                      <label class="form-check-label" for="gridRadios3" style="padding-right: 10px;">
+	                        전체
+	                      </label>
+	                    </div>        
+                    </div>                              
                 </fieldset>
                 
-                <div class="row mb-3">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">제품명</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="input-group form-control" style="width: 150px" id="pnm">                    
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">업체명</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" style="width: 150px" id="vnm">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputPassword3" class="col-md-2 col-form-label">주문일자</label>
-                  <div class="col-md-2">
-                    <input type="date" class="form-control" style="width: 150px" id="req1">
-                  </div>
-                  <div class="col-md-2">
-                    <input type="date" class="form-control" style="width: 150px" id="req2">
-                  </div>                  
-                </div>
-                <div class="row mb-3">
-                  <label for="inputPassword3" class="col-md-2 col-form-label">납기일자</label>
-                  <div class="col-md-2">
-                    <input type="date" class="form-control" style="width: 150px" id="res1">
-                  </div>
-                  <div class="col-md-2">
-                    <input type="date" class="form-control" style="width: 150px" id="res2">
-                  </div>                  
-                </div>             
-                <div class="text-center">
-                  <button type="button" id="search" class="btn btn-primary">검색</button>
-                </div>
-              </form><!-- End Horizontal Form -->
-              <hr>
-				<div id="ordeList"></div>
+                <!-- 제품명 -->
+				<div class="col-md-5 " style="padding-bottom: 10px;">
+					<div class="input-group  " style="padding-bottom: 10px;">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">제품명</label> 
+							<input type="text" class="form-control" style="width: 50px" placeholder="제품명" id="pnm">
+						<a class="nav-link nav-icon search-bar-toggle " href="#"> <i
+							class="bi bi-search" style="color: #2c3e50"></i>
+						</a>
+					</div>
+				</div>
+                
+				<!-- 업체명 -->
+				<div class="col-md-5 " style="padding-bottom: 10px;">
+					<div class="input-group  " style="padding-bottom: 10px;">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">업체명</label>
+						<input type="text" class="form-control" style="width: 50px" placeholder="업체명" id="vnm">
+						<a class="nav-link nav-icon search-bar-toggle " href="#"> 
+							<i class="bi bi-search" style="color: #2c3e50"></i>
+						</a>
+					</div>
+				</div>
+				
+				<!-- 주문일자 -->
+				<div class="col-md-12" style="padding-bottom: 10px;">
+					<div class="input-group">
+						<label for="inputText" class="col-form-label"
+							style="padding-right: 10px;">주문일자</label>
+						<div class="col-sm-2">
+							<input type="date" class="form-control" id="req1">
+						</div>
+
+						<div style="padding: 0px 15px 0px 15px;">
+							<p>~</p>
+						</div>
+						<div class="col-sm-2" style="padding-right: 20px;">
+							<input type="date" class="form-control" id="req2">
+						</div>
+					</div>
+				</div>
+
+				<!-- 납품일자 -->
+				<div class="col-md-12">
+					<div class="input-group">
+						<label for="inputText" class="col-form-label"
+							style="padding-right: 10px;">납품일자</label>
+						<div class="col-sm-2">
+							<input type="date" class="form-control" id="res1">
+						</div>
+
+						<div style="padding: 0px 15px 0px 15px;">
+							<p>~</p>
+						</div>
+						<div class="col-sm-2" style="padding-right: 20px;">
+							<input type="date" class="form-control" id="res2">
+						</div>
+
+						<div style="padding-right: 10px;">
+							<button type="button" id="search" class="btn1">검색</button>							
+						</div>
+
+						<div>
+							<button type="reset" class="btn1">초기화</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<hr style="border: solid 1px gray;">
+
+			<!-- 테이블 -->
+			<div id="ordeList"></div>
             </div>
-          </div>          
-        </div>
-      </div>
-      
-    </section>	
-
-
-
-	
-</div>
+		</div>
 
 
 <script type="text/javascript">
@@ -105,13 +128,13 @@
 window.onload = function(){
    const url = "salesOrder";
    $.ajax(url,{
-	   dataType : "JSON",
-	   method: "GET"
+      dataType : "JSON",
+      method: "GET"
    }).done(function(result){
-	   grid.resetData(result);
-	  console.log(result);
+      grid.resetData(result);
+     console.log(result);
    })
-	
+   
    var grid = new tui.Grid({
        el: document.getElementById('ordeList'),
        scrollX: false,
@@ -149,7 +172,7 @@ window.onload = function(){
                        header: '진행상황',
                        name: '진행상황',
                      }],
-   					rowHeaders: ['rowNum'],
+                  rowHeaders: ['rowNum'],
                      pageOptions: {
                          useClient: true,
                          perPage: 3
@@ -159,31 +182,32 @@ window.onload = function(){
 
 /* 주문서 단건 조회 */
 $("#search").on("click", function() {
-	console.log("click!")
-	var pnm = $("#pnm").val();
-	var vnm = $("#vnm").val();
-	var req1 = $("#req1").val();
-	var req2 = $("#req2").val();
-	var res1 = $("#res1").val();
-	var res2 = $("#res2").val();
-	
-	console.log(pnm + vnm + req1 + req2 + req1 + req2)
-	$.ajax({
-		url : "searchOrderList",
-		data : {
-				pnm : pnm,
-				vnm : vnm,
-				req1 : req1,
-				req2 : req2,
-				res1 : res1,
-				res2 : res2
-		},
-		dataType: 'JSON',
-		contentType : "application/json; charset=utf-8"
-	}).done(function(result){
-		 grid.resetData(result);
-		  
-	});
+   console.log("click!")
+   var pnm = $("#pnm").val();
+   var vnm = $("#vnm").val();
+   var req1 = $("#req1").val();
+   var req2 = $("#req2").val();
+   var res1 = $("#res1").val();
+   var res2 = $("#res2").val();
+   var radio = $('input[name="radios"]:checked').val();
+   console.log(radio);
+   
+   $.ajax({
+      url : "searchOrderList",
+      data : {
+            pnm : pnm,
+            vnm : vnm,
+            req1 : req1,
+            req2 : req2,
+            res1 : res1,
+            res2 : res2
+      },
+      dataType: 'JSON',
+      contentType : "application/json; charset=utf-8"
+   }).done(function(result){
+       grid.resetData(result);
+        
+   });
 })
 }
   </script>

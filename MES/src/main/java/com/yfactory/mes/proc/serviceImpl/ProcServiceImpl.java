@@ -17,9 +17,9 @@ public class ProcServiceImpl implements ProcService{
 	@Autowired	ProcMapper map;
 	
 	@Override
-	public Map OrderSelectOk(Map ordCd) {
+	public List<Map> OrderSelectOk(String ordCd) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.OrderSelectOk(ordCd);
 	}
 
 	@Override

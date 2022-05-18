@@ -24,25 +24,23 @@
 				<!-- 자재명 -->
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
-						<label for="inputText" class="col-form-label"
-							style="padding-right: 27px;">자재명</label> <input type="text"
-							class="form-control" style="width: 50px" placeholder="자재명">
-						<a class="nav-link nav-icon search-bar-toggle " id="myBtn"
-							onclick="myBtn"> <i class="bi bi-search"
-							style="color: #2c3e50"></i>
-						</a> <input type="text" class="form-control" readonly="readonly">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재명</label> 
+						<input type="text" class="form-control" style="width: 50px" id="mtNminput" placeholder="자재명">
+						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn"> 
+							<i class="bi bi-search"style="color: #2c3e50"></i>
+						</a> 
+						<input type="text" class="form-control" id="mtCdinput" readonly="readonly">
 					</div>
 				</div>
 				<!-- 업체명 -->
 				<div class="col-md-5 " style="padding-bottom: 10px;">
 					<div class="input-group  " style="padding-bottom: 10px;">
-						<label for="inputText" class="col-form-label"
-							style="padding-right: 27px;">업체명</label> <input type="text"
-							class="form-control" style="width: 50px" placeholder="업체명">
-						<a class="nav-link nav-icon search-bar-toggle "id="vdr"
-							onclick="vdr"> <i
-							class="bi bi-search" style="color: #2c3e50"></i>
-						</a> <input type="text" class="form-control" readonly="readonly">
+						<label for="inputText" class="col-form-label"style="padding-right: 27px;">업체명</label> 
+						<input type="text" class="form-control" style="width: 50px" placeholder="업체명">
+						<a class="nav-link nav-icon search-bar-toggle "id="vdr" onclick="vdr"> 
+							<i class="bi bi-search" style="color: #2c3e50"></i>
+						</a> 
+						<input type="text" class="form-control" readonly="readonly">
 					</div>
 				</div>
 
@@ -150,11 +148,7 @@
 			perPage : 10
 		}
 	});
-	
 
-	
-
-  
   $("#btnSav").click(function () {
       Swal.fire({
           title: '정말로 그렇게 하시겠습니까?',
@@ -168,6 +162,7 @@
       }).then((result) => {
       	console.log(result);
       	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
+      	$("#mtCdinput").val(result);
           if (result.isConfirmed) {
               Swal.fire(
                   '승인이 완료되었습니다.',
@@ -184,7 +179,6 @@
           }
       })
   });
-
 
   // 자재명 검색
   

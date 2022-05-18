@@ -100,11 +100,11 @@ input.img-button {
 	//console.log($("#upload02").html());
 
 	$("#upldfile").change(function(){
-		var fdt = new FormData($("#frm"));
+		var formData = new FormData($("#frm"));
 		$.ajax({
 			method:"post",
 			url : "/eqinsert",
-			data : fdt,
+			data : formData,
 			processData : false,
 		    dataType : "json",
 		    contentType : false,
@@ -122,13 +122,12 @@ input.img-button {
 	// 조회 버튼을 클릭시 모달이 보여지며 데이터를 불러온다
 	eqdiv.addEventListener("click" , function(){
 		$("#modalDiv").load("eqdvmodal" , function(){
-			const mmd = new bootstrap.Modal('#myModal');
-			mmd.show();
+			const myModal = new bootstrap.Modal('#myModal');
+			myModal.show();
 			
 		})
 		
-		
-		
+
 		
 	});
 		

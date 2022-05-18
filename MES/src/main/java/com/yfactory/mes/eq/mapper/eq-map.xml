@@ -3,11 +3,17 @@
 <mapper namespace="com.yfactory.mes.eq.mapper.EquipMapper">
 <select id="searchEq" resultType="map" >
 
-	SELECT EQ_CD "eq_cd" , EQ_NM "eq_nm"
+	SELECT EQ_CD "설비코드" , EQ_NM "설비명"
 	FROM EQ "eq"
 	
 </select>
 
+<select id="selectEq" resultType="map">
+	SELECT EQ_CD "설비코드" , EQ_NM "설비명"
+	FROM EQ "eq"
+	WHERE EQ_CD = #{eqCd} 
+
+</select>
 
 
 </mapper>

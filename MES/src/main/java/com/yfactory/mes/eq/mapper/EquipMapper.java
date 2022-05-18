@@ -14,7 +14,7 @@ public interface EquipMapper {
 	  int eqUpd(); // 설비 가동상태 수정 및 데이터 수정(설비관리 페이지)
 	  
 	  
-	  List<Map<String, String>> searchEq(String eq_cd); // 설비 코드 + 설비 명 조회 메서드
+	  List<Map> searchEq(); // 설비 코드 + 설비 명 조회 메서드
 	  
 	  
 	  List<Map> eqInaAll(); // 설비 비가동 리스트(설비비가동 페치지)

@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yfactory.mes.eq.vo.EquipMapper">
-	
-<select id="findAll" resultType="map">
-SELECT * FROM EQ
-
-</select>
-
+<mapper namespace="com.yfactory.mes.eq.mapper.EquipMapper">
 <select id="searchEq" resultType="map" >
 
-SELECT eq_cd , eq_nm
-FROM EQ
-WEHRE eq_cd = #{eq_cd}
-
+	SELECT EQ_CD "eq_cd" , EQ_NM "eq_nm"
+	FROM EQ "eq"
+	
 </select>
 
 

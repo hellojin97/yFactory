@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yfactory.mes.mtrl.service.MtrlService;
@@ -25,11 +24,19 @@ public class MaterialAjaxController {
 		public List<Map> mtcd(){
 			return service.mtcdList();
 		}
+		
+		//자재검색
+		@GetMapping("/mtnmSelectSearch")
+		public List<Map> mtnmSelectSearch(String mtnm){
+			return service.mtnmSelectSearch(mtnm);
+		}
+		
 		//업체명 조회
 		@GetMapping("/vdrcd")
 		public List<Map> vdrcd(){
 			return service.vendorList();
 		}
+		
 		
 		//미지시 생산품조회
 		@GetMapping("/mtrlorder")

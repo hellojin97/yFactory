@@ -71,7 +71,7 @@
 			rowHeaders : [ 'rowNum' ],
 			pageOptions : {
 				useClient : true,
-				perPage : 3
+				perPage : 5
 			}
 		});
 		

@@ -55,7 +55,7 @@
 							<input type="date" class="form-control">
 						</div>
 
-						<div style="padding: 0px 15px 0px 15px;">
+						<div style="padding: 0px 22px 0px 22px;">
 							<p>~</p>
 						</div>
 						<div class="col-sm-2" style="padding-right: 20px;">
@@ -184,47 +184,13 @@
           }
       })
   });
-  $("#myBtn").click(function(){
-      $("#myModal").modal("show");
-
-  });
-  $('body').css("overflow", "hidden");		
+	
 
   
-  var myModal = document.getElementById('myModal')
 
 
-  myModal.addEventListener('shown.bs.modal', function () {
-	  //ajax 호출
-	  //grid.resetData(data)
-	  	
-	  $.ajax({
-			url : "mtcd",
-			method : "GET",
-			dataType : "JSON",
-			success : function(result) {
-				mtcdList.resetData(result);
-			}
-		});
-	  	var mtcdList = new tui.Grid({
-			el : document.getElementById('mtcdGrid'),
-			columns : [ {
-				header : '자재명',
-				name : '자재명'
-			}, {
-				header : '자재코드',
-				name : '자재코드'
-			} 
-			],
-			rowHeaders : [ 'rowNum' ],
-			pageOptions : {
-				useClient : true,
-				perPage : 3
-			}
-		});
-
-  })
-
+  // 자재명 검색
+  
 
  </script>
 </html>

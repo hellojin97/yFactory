@@ -10,7 +10,7 @@ public interface EquipMapper {
 	// 설비 메인 페이지
 	List<Map> findAll(); // 설비 조회(설비관리 페이지)
 
-	List<Map> insertEq(); // 설비 등록
+	int insertEq(EqVO vo); // 설비 등록
 
 	EqVO findSelect(EqVO vo); // 설비 단건조회(설비등록 페이지)
 

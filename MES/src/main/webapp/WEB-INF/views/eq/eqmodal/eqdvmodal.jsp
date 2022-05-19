@@ -93,7 +93,7 @@
 		console.log(eqNm);
 		if(eqCd != null){
 			 $('#myModal').modal('hide');
-			 $("#vdr_cd").val(eqCd);
+			 $("#eq_cd").val(eqCd);
 			 $("#eq_nm").val(eqNm);
 					
 			 /* $.ajax({

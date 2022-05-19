@@ -28,6 +28,7 @@ public class EqVO {
 	private int eq_chkcyc;
 	//EQ_MDNO		모델번호
 	private String eq_mdno;
+	
 	//EQ_PURDT		구매일자
 	private Date eq_purdt;
 	//EQ_ACTST		사용여부	FK	COMM_CODE.COMM_CD
@@ -38,5 +39,7 @@ public class EqVO {
 	private int eq_inster;
 	//UUID			설비이미지	FK	IMG_ATTATCH.UUID
 	private String uuid;
+	//EQ_MDNM		모델명
+	private String eq_mdnm;
 	
 }

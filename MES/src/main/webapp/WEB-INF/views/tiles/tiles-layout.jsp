@@ -48,6 +48,18 @@
   <!-- 캘린더끝 -->
 
    <style type="text/css">
+  
+  
+  /* 폰트 */
+  
+  @font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+   
+   
    #header {
       width: 100%;
       height: 50px;

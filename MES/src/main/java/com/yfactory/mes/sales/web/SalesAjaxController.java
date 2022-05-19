@@ -39,52 +39,57 @@ public class SalesAjaxController {
 		return salesService.selectBomList();
 	}
 	
-	//완제품LOT 조회
+	//완제품조회 - 완제품LOT 조회
 	@GetMapping("/prodLot")
 	public List<Map> prodLot(){
 		return salesService.selectProdLotList();
 	}
 	
-	//완제품LOT 검색
+	//완제품조회 - 완제품LOT 검색
 	@GetMapping("/searchProdLot")
 	public List<Map> searchProdLot(String pnm, String pcd, String fdt1, String fdt2){		
 		return salesService.searchProdLotList(pnm, pcd, fdt1, fdt2);
 	}
 		
-	//완제품modal리스트
+	//완제품조회 - 완제품modal리스트
 	@GetMapping("/prodModalList")
 	public List<Map> prodModalList(){
 		return salesService.prodModalList();
 	}
 	
-	//완제품modal 검색
+	//완제품조회 - 완제품modal 검색
 	@GetMapping("/prodModalSearch")
 	public List<Map> prodModalSearch(String key){		
 		return salesService.prodModalSearch(key);
 	}
 	
-	//입고 리스트
+	//입/출고 조회 - 입고 리스트
 	@GetMapping("/prodWrnoteIn")
 	public List<Map> prodWrnoteIn(){
 		return salesService.prodWrnoteIn();
 	}
 	
-	//출고 리스트
+	//입/출고 조회 - 출고 리스트
 	@GetMapping("/prodWrnoteOut")
 	public List<Map> prodWrnoteOut(){
 		return salesService.prodWrnoteOut();
 	}
 	
-	//입고 검색
+	//입/출고 조회 - 입고 검색
 	@GetMapping("/searchWrnIn")
 	public List<Map> searchWrnIn(String pnm, String pcd, String fdt1, String fdt2){
 		return salesService.searchWrnIn(pnm, pcd, fdt1, fdt2);
 	}
 	
-	//출고 검색
+	//입/출고 조회 - 출고 검색
 	@GetMapping("/searchWrnOut")
 	public List<Map> searchWrnOut(String pnm, String pcd, String fdt1, String fdt2){
 		return salesService.searchWrnOut(pnm, pcd, fdt1, fdt2);
 	}
 	
+	//출고 관리 - 주문 상세 리스트
+	@GetMapping("/ordDtpList")
+	public List<Map> ordDtpList(){
+		return salesService.ordDtpList();
+	}
 }

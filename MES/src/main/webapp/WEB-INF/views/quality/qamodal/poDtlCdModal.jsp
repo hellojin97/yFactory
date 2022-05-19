@@ -3,15 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<!-- 발주상세코드 Modal  -->
-	<div id="
-
-" class="modal fade" tabindex="-1">
+	<div id="poDtlCdModal" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header"
@@ -23,39 +21,47 @@
 				<div class="modal-body">
 					<div class="col-md-8 " style="padding-bottom: 20px;">
 						<div class="input-group ">
-							<label for="inputText" class="col-form-label" style="padding-right: 10px;">발주상세코드</label>
-								<input type="text" class="form-control" style="width: 50px" id="poDtlCd" placeholder="발주상세코드">
-							<a class="nav-link nav-icon search-bar-toggle " id="poDtlCdSearch"	onclick="poDtlCdSearch">
-								<i class="bi bi-search"	style="color: #2c3e50"></i>
+							<label for="inputText" class="col-form-label"
+								style="padding-right: 10px;">자재명</label> <input type="text"
+								class="form-control" style="width: 50px" id="mtName"
+								placeholder="자재명"> <a
+								class="nav-link nav-icon search-bar-toggle " id="mtnmSearch"
+								onclick="mtnmSearch"> <i class="bi bi-search"
+								style="color: #2c3e50"></i>
 							</a>
 						</div>
 					</div>
-					<div id="poDtlCdGrid"></div>
+					<div id="poDtlCd"></div>
 				</div>
 				<!-- 내용끝 -->
-				
 			</div>
 		</div>
 	</div>
 	<!-- 모달끝 -->
-	
+
 	<script>
+	
 	// 발주상세코드 조회
 	$.ajax({
-		url: "poDtlCdModalList",
-		dataType: "JSON"
+		url: "selectpoDtlRequest",
+		dataType: "JSON",
+		contentType : "application/json; charset=utf-8"
 	}).done(function(result){
 		grid.resetData(result);
+		console.log(result);
 	});
 	
-	var pocdList = new tui.grid({
-		el: document.getElementById('poDtlCdGrid'),
+	var grid = new tui.Grid({
+		el: document.getElementById('poDtlCd'),
 		columns: [ {
-			header: '발주상세코드'
-			name: '발주상세코드'
+			header: '발주상세코드',
+			name: '발주상세코드',
 		}, {
-			header: '자재명'
-			name: '자재명'
+			header: '자재코드',
+			name: '자재코드',
+		}, {
+			header: '자재명',
+			name: '자재명',
 		}],
 		rowHeaders: [ 'rowNum' ],
 		pageOptions : {
@@ -63,6 +69,41 @@
 			perPage : 5
 		}
 	});
+	
+	
+	// 자재명 검색
+	$("#mtnmSearch").on("click",function(){
+		var key = $("#mtnm").val();
+		console.log(key);
+	
+	$.ajax({
+		url : "pocdModalSearch",
+		data : {
+			key : key
+		},
+		dataType: 'JSON',
+		contentType : "application/json; charset=utf-8"
+	}).done(function(result){
+		prodList.resetData(result);
+		})
+	});
+	
+	//모달 데이터값 받아오기
+	grid.on("dblclick",function(e) {
+    //debugger
+       let poDtlCd = grid.getValue(e.rowKey, '발주상세코드');
+       let mtcd = grid.getValue(e.rowKey, '자재코드');
+       let mtnm = grid.getValue(e.rowKey, '자재명');
+       
+       
+       
+       $("#pdt").val(poDtlCd);
+       $("#mcd").val(mtcd);
+       $("#mnm").val(mtnm);
+       $('#poDtlCdModal').modal('hide');
+       }
+    );
 	</script>
+
 </body>
 </html>

@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yfactory.mes.quality.mapper.quality-map">
+<mapper namespace="com.yfactory.mes.quality.mapper.QualityMapper">
 	<!-- 조회 -->
-	<!-- 불량코드 조회 -->
-	<select id="selectErrCode" resultType="map">
-		SELECT *
-		FROM err_code
+	<!-- 자재 품질검사요청(modal) 조회 -->
+	<select id="selectpoDtlRequest" resultType="map">
+		SELECT	mpd.po_dtlcd as "발주상세코드",
+				mp.mt_cd as "자재코드",
+				mt.mt_nm as "자재명"
+		FROM	mt_podtl mpd,
+				mt_po mp,
+				mt mt
+		WHERE	mpd.po_cd = mp.po_cd
+		AND		mp.mt_cd = mt.mt_cd
 	</select>
+	<!-- 제품 품질검사요청(modal) 조회 -->
+	
 	<!-- 자재검사관리 조회 -->
 	<select id="selectMtCheckMgr" resultType="map">
 		SELECT  chk.po_dtlcd as "발주상세코드",
@@ -133,7 +141,7 @@
 		AND 	pe.prd_dtlcd = ppr.prd_dtlcd
 		AND 	pe.err_cd = err.err_cd
 	</select>
-	<!-- 자재불량 조회 -->
+	<!-- 자재불량내역 조회 -->
 	<select id="selectMtErrList" resultType="map">
 		SELECT	mel.po_dtlcd as "발주상세코드",
 				chk.chk_dt as "검사일자",
@@ -157,7 +165,7 @@
 		AND 	mel.mtrl_cd = mt.mt_cd
 		AND 	mel.err_cd = err.err_cd
 	</select>
-	<!-- 제품불량 조회 -->
+	<!-- 제품불량내역 조회 -->
 	<select id="selectProdErrList" resultType="map">
 		SELECT	per.prod_lot as "제품LOT",
 				ppr.proc_cd as "공정코드",
@@ -187,8 +195,19 @@
 		AND 	pe.prd_dtlcd = ppr.prd_dtlcd
 		AND 	pe.err_cd = err.err_cd
 	</select>
-	
+
 	<!-- 검색 -->
+	<!-- 자재 품질검사요청(modal) 조회 -->
+	<select id="searchpoDtlRequest">
+		SELECT	mpd.po_dtlcd as "발주상세코드",
+				mp.mt_cd as "자재코드",
+				mt.mt_nm as "자재명"
+		FROM	mt_podtl mpd,
+				mt_po mp,
+				mt mt
+		WHERE	mpd.po_cd = mp.po_cd
+		AND		mp.mt_cd = mt.mt_cd
+	</select>
 	<!-- 자재검사결과 검색 -->
 	<select id="searchMtQuality" resultType="map">
 		SELECT  chk.po_dtlcd as "발주상세코드",
@@ -265,7 +284,7 @@
 	</select>
 	<!-- 자재불량내역 검색 -->
 	<select id="searchMtErrList" resultType="map">
-		select	mel.po_dtlcd as "발주상세코드",
+		SELECT	mel.po_dtlcd as "발주상세코드",
 				chk.chk_dt as "검사일자",
 				v.vdr_nm as "업체명",
 				mt.mt_nm as "자재명",
@@ -273,7 +292,7 @@
 				err.err_dtl as "불량내역",
 				mpd.mt_prc as "단가"
 		
-		from 	mt_chk chk,
+		FROM 	mt_chk chk,
 				mt_podtl mpd,
 				mt_po po,
 				vendor v,
@@ -281,11 +300,11 @@
 				err_code err,
 				mt mt
 		
-		where 	mel.po_dtlcd = mpd.po_dtlcd
-		and		mpd.po_cd = po.po_cd
-		and 	po.vdr_cd = v.vdr_cd
-		and 	mel.mtrl_cd = mt.mt_cd
-		and 	mel.err_cd = err.err_cd
+		WHERE 	mel.po_dtlcd = mpd.po_dtlcd
+		AND		mpd.po_cd = po.po_cd
+		AND 	po.vdr_cd = v.vdr_cd
+		AND 	mel.mtrl_cd = mt.mt_cd
+		AND 	mel.err_cd = err.err_cd
 		<if test="errDtl != null errDtl = ''">
 		AND		err.err_dtl LIKE '%' || {#errDtl} || '%'
 		</if>
@@ -330,19 +349,23 @@
 		</if>
 	</select>
 	
-	<!-- 수정 -->
-	<update id="resultQualityM">
-		
-	</update>
-	<update id="resultQualityP">
-		
-	</update>
-	
 	<!-- 입력 -->
+	<!-- 자재 품질검사요청 -->
 	<insert id="requestQualityM">
 		
 	</insert>
+	<!-- 제품 품질검사요청 -->
 	<insert id="requestQualityP">
 		
 	</insert>
+	
+	<!-- 수정 -->
+	<!-- 자재 품질검사 -->
+	<update id="resultQualityM">
+		
+	</update>
+	<!-- 제품 품질검사 -->
+	<update id="resultQualityP">
+		
+	</update>
 </mapper>

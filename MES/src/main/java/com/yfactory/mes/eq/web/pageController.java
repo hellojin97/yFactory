@@ -32,8 +32,7 @@ public class pageController {
 		
 	}
 	
-	@RequestMapping("/eqInsAjax")
-	@ResponseBody
+	@RequestMapping("/eqMng")
 	public String eqMng(EqVO vo , MultipartFile file , Model model){
 		if(file.isEmpty()) { // 파일이 비어있다면 TRUE
 			mapper.insertEq(vo); // 비어있다면 DB에 저장을 시도
@@ -61,7 +60,7 @@ public class pageController {
 		System.out.println("--------------------------");
 		System.out.println(vo.getUuid());
 		model.addAttribute("src" , vo.getUuid());
-		return "redirect:eq/eqInsert"; // 다 처리 하고 설비관리로 가라 
+		return "eq/eqMng"; // 다 처리 하고 설비관리로 가라 
 	}
 	
 	@RequestMapping("/eqChkMng")

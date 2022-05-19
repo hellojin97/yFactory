@@ -20,7 +20,7 @@
 	<script>
 	//제품목록 테스트
 	btntest.addEventListener("click", function() {
-		$("#test1").load("prdmodal", function() {
+		$("#test").load("prdmodal", function() {
 			
 			const prdModal = new bootstrap.Modal('#prdModal');
 			prdModal.show();
@@ -88,10 +88,22 @@
 		
 		});
 			
-		 	
-			
+
 		 	resultGrid.on("click",function(e){
-		 		console.log(1);
+		 		let prd = resultGrid.getFocusedCell('완제품코드');
+
+		 		if(prd.columnName == '완제품명'){
+		 			if(prd.value == null){
+		 				$("#test").load("prdmodal", function() {
+			 				const prdModal = new bootstrap.Modal('#prdModal');
+			 				prdModal.show();
+			 				
+
+			 			})
+		 			}
+		 		}
+		 		
+
 		 	})
 			
 		} 

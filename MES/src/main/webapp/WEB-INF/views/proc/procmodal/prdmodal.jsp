@@ -38,7 +38,6 @@ $(function(){
 		   dataType : "JSON",
 		   method: "GET"
 	   }).done(function(result){
-		   console.log(result);
 		   prdGrid.resetData(result);
 	   })
 	   
@@ -117,10 +116,10 @@ $(function(){
 					   dataType : "JSON",
 					   contentType : "application/json; charset = UTF-8;"
 				   }).done(function(result){
-							for (var i = 0; i < result.length; i++) {
-								resultGrid.appendRow(result[i]);
-							}
-							//resultGrid.appendRow(result, {at : 0});  
+					  		let prd = resultGrid.getFocusedCell('완제품코드');
+							 for (var i = 0; i < result.length; i++) {
+								 resultGrid.setRow(prd.rowKey,result[i]);
+							} 
 								
 			
 				   })

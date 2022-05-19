@@ -5,6 +5,10 @@
 
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" ></link>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>
+
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
@@ -36,7 +40,7 @@ input.img-button {
 </head>
 <body>
 <div class="container">
-	<form name="frm" id="frm" action="eqInsAjax" method="post" enctype="multipart/form-data">
+	<form name="frm" id="frm" action="eqMng" method="POST" enctype="multipart/form-data">
 	<div class="row">
 	<div class="col-8">
 		<h2>설비 등록</h2>
@@ -44,7 +48,8 @@ input.img-button {
 		<div align="right">
 			<button type="reset" class="button btnpart">초기화</button>
 			&nbsp;&nbsp;
-			<button type="submit" id="btnok" class="button btnpart">저장</button>
+			<button type="button" id="btnok" class="button btnpart">저장</button>
+			<!-- <input type="submit" id="btnok" class="button btnpart" value="저장"> -->
 		</div>
 		<hr />
 					설비명*
@@ -106,7 +111,12 @@ input.img-button {
 </body>
 <script>
 console.log(  $("input[name='chk']:checked").val()  ); // 사용여부 실시간 체크 Y or N
-
+$("#btnok").on("click",function(){
+	
+	toastr.success('등록완료!');
+	$("form").submit();
+	
+})
 
 // 이미지 파일 썸네일 보기 구현완료
 function readURL(input) {
@@ -262,7 +272,7 @@ function readURL(input) {
 
 	
 	
-	
+
 </script>
 
 </html>

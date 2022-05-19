@@ -33,7 +33,7 @@
 <script>
 $(function(){
 	
-	const url = "salesOrder";
+	const url = "procOrderListAjax";
 	   $.ajax(url,{
 		   dataType : "JSON",
 		   method: "GET"
@@ -50,7 +50,7 @@ $(function(){
 	       scrollY: false,
 	       columns: [
 	    	 {
-		           header: '주문코드',
+		           header: '주문상세코드',
 		           name: '주문코드',
 		      },
 	         {
@@ -132,8 +132,6 @@ $(function(){
 								resultGrid.appendRow(result[i]);
 							}
 							//resultGrid.appendRow(result, {at : 0});  
-							//resultGrid.setPerPage(5);
-							//resultGrid.getPagination();
 								
 			
 				   })

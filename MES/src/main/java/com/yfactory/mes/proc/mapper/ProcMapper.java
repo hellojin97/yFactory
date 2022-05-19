@@ -10,7 +10,7 @@ import com.yfactory.mes.proc.vo.PlanDtlVO;
 
 public interface ProcMapper {
 
-	
+	List<Map> ProcOrderSelectAll(); //주문서 조회
 	List<Map> OrderSelectOk(String ordCd);	//주문서 조회 (주문코드O)
 	Map OrderSelectNo(Map prodCd);	//주문서 조회 (주문코드X)
  
@@ -21,5 +21,6 @@ public interface ProcMapper {
 	
 	int prdtPlanInsert(String PP_NM, Date date1);	//
 	
+	List<Map>  PrdSelectOne(String prodCd);
 	
 }

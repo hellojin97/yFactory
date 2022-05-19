@@ -35,9 +35,9 @@ public class ProcServiceImpl implements ProcService{
 	}
 
 	@Override
-	public List<Map> ProductSelect() {
+	public List<Map> PrdSelect() {
 		// TODO Auto-generated method stub
-		return null;
+		return map.PrdSelect();
 	}
 
 	@Override
@@ -50,6 +50,18 @@ public class ProcServiceImpl implements ProcService{
 	public int prdtPlanInsert(String PP_NM, Date date1) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Map> ProcOrderSelectAll() {
+		// TODO Auto-generated method stub
+		return map.ProcOrderSelectAll();
+	}
+
+	@Override
+	public List<Map> PrdSelectOne(String prodCd) {
+		// TODO Auto-generated method stub
+		return map.PrdSelectOne(prodCd);
 	}
 	
 }

@@ -19,7 +19,7 @@
 
 		<h1>자재 LOT재고조회</h1>
 <form>
-		<div style="background-color: #e0e0e0; padding: 8px;">
+		<div style="background-color: #e9ecef; padding: 8px;">
 			<div class="mainTitle" style="padding: 15px;">
 				<!-- 자재명 -->
 				

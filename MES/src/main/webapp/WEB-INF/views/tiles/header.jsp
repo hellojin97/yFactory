@@ -7,7 +7,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="home.do" class="logo d-flex align-items-center">
 
-        <span class="d-none d-lg-block" style=" color:#fad145 ">YAFS</span>
+        <span class="d-none d-lg-block title" style=" color:#fad145 ;font-family: 'Allan', cursive; font-style: italic;">YAFS</span>
         <span style="font-size: small; color:#ff8000; padding: 8px 0px 0px 7px ">Yedam Automize Factory System</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>

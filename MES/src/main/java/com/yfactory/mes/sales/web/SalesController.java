@@ -38,5 +38,11 @@ public class SalesController {
 	public String salesVenderModal() {
 		return "sales/salesModal/vdrModal";
 	}
+	
+	//입/출고 관리
+	@RequestMapping("/prodWrnote")
+	public String prodWrnote() {
+		return "sales/prodWrnote";
+	}
 
 }

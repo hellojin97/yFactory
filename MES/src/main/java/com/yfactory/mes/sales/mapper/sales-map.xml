@@ -137,4 +137,78 @@
 		WHERE		prod_nm LIKE '%'||#{key}||'%'
 	</select>
 	
+	<!-- 입고 조회 -->
+	<select id="prodWrnoteIn" resultType="map">
+		SELECT	pdlot.prod_lot AS "완제품LOT",
+    	    	pdlot.prod_cd AS "제품코드",
+        		pd.prod_nm AS "제품명",
+        		pdw.prod_wrqty AS "입고량",
+        		TO_CHAR(pdlot.prod_fdt,'YYYY-MM-DD') AS "입고일자",
+        		TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한"
+		FROM	prod pd, prod_lot pdlot, prod_wrnote pdw
+		WHERE	pdlot.prod_lot = pdw.prod_lot
+		AND	    pd.prod_cd = pdlot.prod_cd
+		AND     pdw.wr_cd LIKE 'INOUT01'
+	</select>
+	
+	<!-- 출고 조회 -->
+	<select id="prodWrnoteOut" resultType="map">
+		SELECT	pdlot.prod_lot AS "완제품LOT",
+    	    	pdlot.prod_cd AS "제품코드",
+        		pd.prod_nm AS "제품명",
+        		pdw.prod_wrqty AS "출고량",
+        		TO_CHAR(pdw.prod_rdt,'YYYY-MM-DD') AS "출고일자",
+        		TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한"
+		FROM	prod pd, prod_lot pdlot, prod_wrnote pdw
+		WHERE	pdlot.prod_lot = pdw.prod_lot
+		AND	    pd.prod_cd = pdlot.prod_cd
+		AND     pdw.wr_cd LIKE 'INOUT02'
+	</select>
+	
+	<!-- 입고 검색 -->
+	<select id="searchWrnIn" resultType="map">
+		SELECT	pdlot.prod_lot AS "완제품LOT",
+    	    	pdlot.prod_cd AS "제품코드",
+        		pd.prod_nm AS "제품명",
+        		pdw.prod_wrqty AS "입고량",
+        		TO_CHAR(pdlot.prod_fdt,'YYYY-MM-DD') AS "입고일자",
+        		TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한"
+		FROM	prod pd, prod_lot pdlot, prod_wrnote pdw
+		WHERE	pdlot.prod_lot = pdw.prod_lot
+		AND	    pd.prod_cd = pdlot.prod_cd
+		AND     pdw.wr_cd LIKE 'INOUT01'
+		<if test="pcd != ''">
+		AND		pdlot.prod_cd LIKE #{pcd}
+		</if>
+		<if test="pcd == '' and pnm != ''">
+		AND		pd.prod_nm LIKE #{pnm}
+		</if>		
+		<if test="fdt1 != '' and fdt2 != ''">
+		AND		pdlot.prod_fdt between TO_DATE(#{fdt1},'YYYY-MM-DD') AND TO_DATE(#{fdt2},'YYYY-MM-DD')			
+		</if>
+	</select>
+	
+	<!-- 출고 검색 -->
+	<select id="searchWrnOut" resultType="map">
+		SELECT	pdlot.prod_lot AS "완제품LOT",
+    	    	pdlot.prod_cd AS "제품코드",
+        		pd.prod_nm AS "제품명",
+        		pdw.prod_wrqty AS "출고량",
+        		TO_CHAR(pdw.prod_rdt,'YYYY-MM-DD') AS "출고일자",
+        		TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한"
+		FROM	prod pd, prod_lot pdlot, prod_wrnote pdw
+		WHERE	pdlot.prod_lot = pdw.prod_lot
+		AND	    pd.prod_cd = pdlot.prod_cd
+		AND     pdw.wr_cd LIKE 'INOUT02'
+		<if test="pcd != ''">
+		AND			pdlot.prod_cd LIKE #{pcd}
+		</if>
+		<if test="pcd == '' and pnm != ''">
+		AND		    pd.prod_nm LIKE #{pnm}
+		</if>		
+		<if test="fdt1 != '' and fdt2 != ''">
+		AND		    pdw.prod_rdt between TO_DATE(#{fdt1},'YYYY-MM-DD') AND TO_DATE(#{fdt2},'YYYY-MM-DD')			
+		</if>
+	</select>
+	
 </mapper>

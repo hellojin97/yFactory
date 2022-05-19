@@ -63,7 +63,7 @@
 			rowHeaders : [ 'checkbox' ],
 			pageOptions : {
 				useClient : true,
-				perPage : 1
+				perPage : 5
 			}
 		
 		});

@@ -59,13 +59,32 @@ public class SalesAjaxController {
 	
 	//완제품modal 검색
 	@GetMapping("/prodModalSearch")
-	public List<Map> prodModalSearch(String key){
-		System.out.println(key);
+	public List<Map> prodModalSearch(String key){		
 		return salesService.prodModalSearch(key);
 	}
 	
-
-
-
-
+	//입고 리스트
+	@GetMapping("/prodWrnoteIn")
+	public List<Map> prodWrnoteIn(){
+		return salesService.prodWrnoteIn();
+	}
+	
+	//출고 리스트
+	@GetMapping("/prodWrnoteOut")
+	public List<Map> prodWrnoteOut(){
+		return salesService.prodWrnoteOut();
+	}
+	
+	//입고 검색
+	@GetMapping("/searchWrnIn")
+	public List<Map> searchWrnIn(String pnm, String pcd, String fdt1, String fdt2){
+		return salesService.searchWrnIn(pnm, pcd, fdt1, fdt2);
+	}
+	
+	//출고 검색
+	@GetMapping("/searchWrnOut")
+	public List<Map> searchWrnOut(String pnm, String pcd, String fdt1, String fdt2){
+		return salesService.searchWrnOut(pnm, pcd, fdt1, fdt2);
+	}
+	
 }

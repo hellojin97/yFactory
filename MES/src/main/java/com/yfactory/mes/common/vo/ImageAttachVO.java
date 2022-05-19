@@ -16,4 +16,10 @@ public class ImageAttachVO {
 	private String img_path;
 //	img_nm		파일이름
 	private String img_nm;
+	
+	
+// blob 타입으로  파일 경로 저장
+	private byte[] blob;
+	
+	
 }

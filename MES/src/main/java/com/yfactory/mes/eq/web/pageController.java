@@ -22,12 +22,12 @@ public class pageController {
 		
 	}
 	
-	@RequestMapping("/eqMng")
-	public String eqMng(){
-		// 설비 페이지 - 설비관리
-		return "eq/eqMng";
-		
-	}
+//	@RequestMapping("/eqMng")
+//	public String eqMng(){
+//		// 설비 페이지 - 설비관리
+//		return "eq/eqMng";
+//		
+//	}
 	
 	@RequestMapping("/eqChkMng")
 	public String eqChkMng(){

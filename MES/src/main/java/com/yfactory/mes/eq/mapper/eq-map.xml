@@ -19,5 +19,11 @@
 
 </select>
 
+<insert id="insertEq" >
+
+INSERT INTO EQ
+VALUES()
+
+</insert>
 
 </mapper>

@@ -29,5 +29,18 @@ public interface SalesService {
 	
 	//완제품modal 검색
 	List<Map> prodModalSearch(String key);
+	
+	//입고 리스트
+	List<Map> prodWrnoteIn();
+	
+	//출고 리스트
+	List<Map> prodWrnoteOut();
+	
+	//입고 검색
+	List<Map> searchWrnIn(String pnm, String pcd, String fdt1, String fdt2);
+	
+	//출고 검색
+	List<Map> searchWrnOut(String pnm, String pcd, String fdt1, String fdt2);
+	
 
 }

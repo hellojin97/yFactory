@@ -29,5 +29,17 @@ public interface SalesMapper {
 	
 	//완제품modal 검색
 	List<Map> prodModalSearch(String key);
+	
+	//입고 리스트
+	List<Map> prodWrnoteIn();
+	
+	//출고 리스트
+	List<Map> prodWrnoteOut();
+	
+	//입고 검색
+	List<Map> searchWrnIn(@Param("pnm") String pnm, @Param("pcd") String pcd, @Param("fdt1") String fdt1, @Param("fdt2") String fdt2);
+		
+	//출고 검색
+	List<Map> searchWrnOut(@Param("pnm") String pnm, @Param("pcd") String pcd, @Param("fdt1") String fdt1, @Param("fdt2") String fdt2);
 }
 

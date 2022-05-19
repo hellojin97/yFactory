@@ -46,7 +46,6 @@
 			method : "GET",
 			dataType : "JSON",
 			success : function(result) {
-				console.log()
 				prodList.resetData(result);
 			}
 		});

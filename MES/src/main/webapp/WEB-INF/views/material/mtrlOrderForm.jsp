@@ -20,11 +20,11 @@
 		<h1>발주 관리/등록</h1>
 	</div>
 
-	<div class="btn-wrapper" style="padding-bottom:7px;">
-		<button  class="btn1">관리</button>
-		<button class="btn1">등록</button>
+	<div class="min2" >
+		<button  class="btn2">관리</button>
+		<button class="btn2">등록</button>
 	</div>
-	
+	<div class="min1" >
 	<h4>미지시 생산계획조회</h4>
 	<div id="unorder" ></div>
 
@@ -33,6 +33,7 @@
 	
 	<h4>발주요청서 등록</h4>
 	<div id="prodPlan"></div>
+	</div>
 	</div>
 	
 

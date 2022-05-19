@@ -25,4 +25,10 @@ public interface MtrlService {
 	
 	//업체명 검색
 	List<Map>vdrnmSelectSearch(String vdrnm);
+	
+	//LOT재고 검색
+	List<Map>lotSelectSearch(String m1,
+							 String m2,
+							 String req1,
+							 String req2);
 }

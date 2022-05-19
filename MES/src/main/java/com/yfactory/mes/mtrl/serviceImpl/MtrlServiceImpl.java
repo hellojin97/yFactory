@@ -50,6 +50,12 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.vdrnmSelectSearch(vdrnm);
 	}
 
+	@Override
+	public List<Map> lotSelectSearch(String m1, String m2, String req1, String req2) {
+		// TODO Auto-generated method stub
+		return map.lotSelectSearch(m1, m2, req1, req2);
+	}
+
 
 
 }

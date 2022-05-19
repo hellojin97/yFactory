@@ -20,6 +20,7 @@
 
 		<div style="background-color: #e0e0e0; padding: 8px;">
 			<div class="mainTitle" style="padding: 15px;">
+				<form>
 				<!-- 제품명 -->
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
@@ -49,7 +50,7 @@
 						</div>
 
 						<div style="padding-right: 10px;">
-							<button id="search" class="btn1">조회</button>
+							<button type="button" id="search" class="btn1">조회</button>
 						</div>
 
 						<div>
@@ -57,7 +58,7 @@
 						</div>
 					</div>
 				</div>
-
+				</form>
 			</div>
 			<hr style="border: solid 1px gray;">
 
@@ -131,14 +132,7 @@
 		}
 	});
 	
-  $("#myBtn").click(function(){
-      $("#myModal").modal("show");
 
-  });
-  $('body').css("overflow", "hidden");		
-
-  
-  var myModal = document.getElementById('myModal');
 	
   /* 주문서 단건 조회 */
   $("#search").on("click", function() {     

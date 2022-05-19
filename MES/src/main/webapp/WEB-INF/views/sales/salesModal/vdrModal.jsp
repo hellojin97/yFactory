@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!-- 업체명모달  -->
-	<div id="myModal" class="modal fade" tabindex="-1">
+	<div id="venModal" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header"
@@ -69,10 +69,10 @@
 		  
 		  $('body').css("overflow", "hidden");
 		  
-		  var myModal = document.getElementById('myModal')
+		  var venModal = document.getElementById('venModal')
 
 
-		  myModal.addEventListener('shown.bs.modal', function () {
+		  venModal.addEventListener('shown.bs.modal', function () {
 			  //ajax 호출
 			  //grid.resetData(data)
 			  
@@ -105,9 +105,11 @@
          let vdrNm = vendorList.getValue(e.rowKey, 'vdr_nm');
          let vdrCd = vendorList.getValue(e.rowKey, 'vdr_cd');
 
-         $("#vdrNminput").val(vdrNm);
-         $("#vdrCdinput").val(vdrCd);
-         $('#myModal').modal('hide');
+         $("#vnm").val(vdrNm);
+         $("#vcd").val(vdrCd);
+         $('#venModal').modal('hide');
+         console.log(mtrlNm);
+         console.log(mtrlCd);
          }
       ); 
 		  

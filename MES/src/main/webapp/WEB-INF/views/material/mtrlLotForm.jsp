@@ -18,12 +18,14 @@
 <body>
 
 		<h1>자재 LOT재고조회</h1>
-
+<form>
 		<div style="background-color: #e0e0e0; padding: 8px;">
 			<div class="mainTitle" style="padding: 15px;">
 				<!-- 자재명 -->
+				
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
+					
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재명</label> 
 						<input type="text" class="form-control" style="width: 50px" id="mtNminput" placeholder="자재명">
 						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn"> 
@@ -50,22 +52,22 @@
 						<label for="inputText" class="col-form-label"
 							style="padding-right: 10px;">입고날짜</label>
 						<div class="col-sm-2">
-							<input type="date" class="form-control">
+							<input type="date" id="req1" class="form-control">
 						</div>
 
 						<div style="padding: 0px 22px 0px 22px;">
 							<p>~</p>
 						</div>
 						<div class="col-sm-2" style="padding-right: 20px;">
-							<input type="date" class="form-control">
+							<input type="date" id="req2" class="form-control">
 						</div>
 
 						<div style="padding-right: 10px;">
-							<button class="btn1">조회</button>
+							<button class="btn1"  type="button" id="search">조회</button>
 						</div>
 
 						<div>
-							<button class="btn1">초기화</button>
+							<button class="btn1" type="reset" id="reset">초기화</button>
 						</div>
 					</div>
 				</div>
@@ -80,7 +82,7 @@
 			</div>
 
 		</div>
-
+</form>
 	
 
 </body>
@@ -181,7 +183,43 @@
   });
 
   // 자재명 검색
-  
+  $("#search").on("click", function() {
+   console.log("click!")
+   var mtNminput = $("#mtNminput").val();
+   var vdrNminput = $("#vdrNminput").val();
+   var req1 = $("#req1").val();
+   var req2 = $("#req2").val();
+	console.log(vdrNminput);
+   $.ajax({
+      url : "lotSelectSearch",
+      data : {
+    	  m1 : mtNminput,
+    	  m2 : vdrNminput,
+            req1 : req1,
+            req2 : req2
+      },
+      method : 'get',
+      dataType: 'JSON',
+      contentType : "application/json; charset=utf-8"
+   }).done(function(result){
+	    listMtrlLot.resetData(result);
+       console.log(result);
+       
+   }).fail(function(result){
+	   console.log(result);
+   });
+})
 
+/* 검색 결과 초기화  */
+$('#reset').on('click',function(){
+	const url = "mtrlLot";
+	   $.ajax(url,{
+	      dataType : "JSON",
+	      method: "GET"
+	   }).done(function(result){
+		   listMtrlLot.resetData(result);
+	     console.log(result);
+	   });
+})
  </script>
 </html>

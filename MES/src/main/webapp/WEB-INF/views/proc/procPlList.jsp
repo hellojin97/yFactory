@@ -14,7 +14,6 @@
 	<div id="orderList"></div>
 	<div id="orderList1"></div>
 	<button id="btnModal">주문서등록</button>
-	<div id="test2"></div>
 	<div id="test"></div>
 	<script>
 	
@@ -28,46 +27,51 @@
 
 			})
 		});
-	
+		var resultGrid
 		window.onload = function() {
+		 	resultGrid = new tui.Grid({
+			el : document.getElementById('orderList'),
+			scrollX : false,
+			scrollY : false,
+			columns : [ {
+				header : '주문코드',
+				name : '주문코드',
+			}, {
+				header : '제품명',
+				name : '완제품명',
+			}, {
+				header : '제품코드',
+				name : '완제품코드',
+			}, {
+				header : '계획량',
+				name : '계획량',
+				editor: "text"
+
+		        }, {
+				header : '생산일수',
+				name : '생산일수',
+				editor: "text"
+			}, {
+				header : '작업우선순위',
+				name : '작업우선순위',
+				editor: "text"
+			}, {
+				header : '수량',
+				name : '수량',
+				editor: "text"
+			}, ],
+			rowHeaders : [ 'checkbox' ],
+			pageOptions : {
+				useClient : true,
+				perPage : 1
+			}
+		
+		});
+		 
 			
-				
 			
-			var resultGrid = new tui.Grid({
-				el : document.getElementById('orderList'),
-				scrollX : false,
-				scrollY : false,
-				columns : [ {
-					header : '주문코드',
-					name : '주문코드',
-				}, {
-					header : '제품명',
-					name : '제품명',
-				}, {
-					header : '제품코드',
-					name : '제품코드',
-				}, {
-					header : '계획량',
-					name : '계획량',
-				}, {
-					header : '생산일수',
-					name : '생산일수',
-				}, {
-					header : '작업우선순위',
-					name : '작업우선순위',
-				}, {
-					header : '수량',
-					name : '수량',
-				}, ],
-				rowHeaders : [ 'checkbox' ],
-				pageOptions : {
-					useClient : true,
-					perPage : 5
-				}
-			});
-			
-			
-		}
+		} 
+			 
 				
 		
 		

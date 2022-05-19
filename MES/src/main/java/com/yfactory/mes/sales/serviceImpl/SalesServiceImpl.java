@@ -28,9 +28,13 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public List<Map> searchOrderList(String pnm, String vnm, String req1, String req2, String res1, String res2, String key) {
+	public List<Map> searchOrderList(String pnm, String vnm,
+									 String pcd, String vcd,
+									 String req1, String req2,
+									 String res1, String res2,
+									 String key) {
 		
-		return map.searchOrderList(pnm, vnm, req1, req2, res1, res2, key);
+		return map.searchOrderList(pnm, vnm, pcd, vcd, req1, req2, res1, res2, key);
 	}
 
 	@Override
@@ -47,6 +51,11 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public List<Map> prodModalList() {
 		return map.prodModalList();
+	}
+
+	@Override
+	public List<Map> prodModalSearch(String key) {
+		return map.prodModalSearch(key);
 	}
 
 }

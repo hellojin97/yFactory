@@ -1,5 +1,348 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.quality.mapper.quality-map">
+	<!-- 조회 -->
+	<!-- 불량코드 조회 -->
+	<select id="selectErrCode" resultType="map">
+		SELECT *
+		FROM err_code
+	</select>
+	<!-- 자재검사관리 조회 -->
+	<select id="selectMtCheckMgr" resultType="map">
+		SELECT  chk.po_dtlcd as "발주상세코드",
+				chk.mtrl_cd as "자재코드",
+				mt.mt_nm as "자재명",
+				mpd.mt_prc as "단가",
+				mpd.po_qty as "발주량",
+				chk.chk_passqty as "합격량",
+				mel.chk_errqty as "불량량",
+				mel.err_cd as "불량코드",
+				err.err_dtl as "불량내역",
+				chk.chk_insp as "상태"
+		
+		FROM 	mt_chk chk,
+				mt mt,
+				mt_podtl mpd,
+				mt_errlist mel,
+				err_code err,
+		        mt_po po
+		
+		WHERE	chk.po_dtlcd = mpd.po_dtlcd
+		AND 	mpd.po_cd = po.po_cd
+		AND 	chk.mtrl_cd = mt.mt_cd
+		AND 	mel.po_dtlcd = mpd.po_dtlcd
+		AND 	mel.err_cd = err.err_cd
+	</select>
+	<!-- 제품검사관리 조회 -->
+	<select id="selectProdCheckMgr" resultType="map">
+		SELECT	per.prod_lot as "제품LOT",
+				pid.prod_cd as "제품코드",
+				p.prod_nm as "제품명",
+				ppr.proc_cd as "공정코드",
+				pc.eq_cd as "설비코드",
+				ps.proc_qty as "생산량",
+				ps.proc_passqty as "합격량",
+				pe.err_qty as "불량량",
+				pe.err_cd as "불량코드",
+				err.err_dtl as "불량내역",
+				ps.proc_st as "상태"
+		
+		FROM	prod_err per,
+				prod_lot plo,
+				prd_insdtl pid,
+				proc_prc ppr,
+				prod p,
+				process pc,
+				proc_st ps,
+				proc_err pe,
+				err_code err
+		
+		WHERE	pid.prod_cd = p.prod_cd
+		AND 	ppr.prd_dtlcd = pid.prd_dtlcd
+		AND		ppr.proc_cd = pc.proc_cd
+		AND 	ps.proc_prcd = ppr.proc_prcd
+		AND 	ps.line_turn = ppr.line_turn
+		AND 	ps.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.proc_prcd = ppr.proc_prcd
+		AND 	pe.line_turn = ppr.line_turn
+		AND 	pe.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.err_cd = err.err_cd
+	</select>
+	<!-- 자재검사결과 조회 -->
+	<select id="selectMtCheck" resultType="map">
+		SELECT  chk.po_dtlcd as "발주상세코드",
+		        chk.chk_dt as "검사일자",
+		        v.vdr_nm as "업체명",
+		        mt.mt_nm as "자재명",
+		        mt.mt_unit as "관리단위",
+		        mpd.po_qty as "발주량",
+		        chk.chk_passqty as "합격량",
+		        mel.chk_errqty as "불량량",
+		        mel.err_cd as "불량코드",
+		        err.err_dtl as "불량내역",
+		        chk.chk_insp as "상태"
+		
+		FROM 	mt_chk chk,
+				mt_po po,
+				mt mt,
+				mt_podtl mpd,
+				mt_errlist mel,
+				err_code err,
+		        vendor v
+		
+		WHERE	chk.po_dtlcd = mpd.po_dtlcd
+		AND 	chk.mtrl_cd = mt.mt_cd
+		AND 	mpd.po_cd = po.po_cd
+		AND 	po.vdr_cd = v.vdr_cd
+		AND		mel.po_dtlcd = mpd.po_dtlcd
+		AND		mel.err_cd = err.err_cd
+	</select>
+	<!-- 제품검사결과 조회 -->
+	<select id="selectProdCheck" resultType="map">
+		SELECT	per.prod_lot as "제품LOT",
+				pid.prod_cd as "제품코드",
+				ppr.proc_cd as "공정코드",
+				pc.eq_cd as "설비코드",
+				p.prod_nm as "제품명",
+				ps.proc_qty as "생산량",
+				ps.proc_passqty as "합격량",
+				pe.err_qty as "불량량",
+				pe.err_cd as "불량코드",
+				err.err_dtl as "불량내역",
+				ps.proc_st as "상태"
+		
+		FROM 	prod_err per,
+				prod_lot plo,
+				prd_insdtl pid,
+				proc_prc ppr,
+				process pc,
+				prod p,
+				proc_st ps,
+				proc_err pe,
+				err_code err
+		
+		WHERE 	per.prod_lot = plo.prod_lot
+		AND 	ppr.prd_dtlcd = pid.prd_dtlcd
+		AND 	ppr.proc_cd = pc.proc_cd
+		AND 	pid.prod_cd = p.prod_cd
+		AND 	ps.proc_prcd = ppr.proc_prcd
+		AND 	ps.line_turn = ppr.line_turn
+		AND 	ps.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.proc_prcd = ppr.proc_prcd
+		AND 	pe.line_turn = ppr.line_turn
+		AND 	pe.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.err_cd = err.err_cd
+	</select>
+	<!-- 자재불량 조회 -->
+	<select id="selectMtErrList" resultType="map">
+		SELECT	mel.po_dtlcd as "발주상세코드",
+				chk.chk_dt as "검사일자",
+				v.vdr_nm as "업체명",
+				mt.mt_nm as "자재명",
+				mel.chk_errqty as "불량량",
+				err.err_dtl as "불량내역",
+				mpd.mt_prc as "단가"
+		
+		FROM 	mt_chk chk,
+				mt_podtl mpd,
+				mt_po po,
+				vendor v,
+				mt_errlist mel,
+				err_code err,
+				mt mt
+		
+		WHERE 	mel.po_dtlcd = mpd.po_dtlcd
+		AND		mpd.po_cd = po.po_cd
+		AND 	po.vdr_cd = v.vdr_cd
+		AND 	mel.mtrl_cd = mt.mt_cd
+		AND 	mel.err_cd = err.err_cd
+	</select>
+	<!-- 제품불량 조회 -->
+	<select id="selectProdErrList" resultType="map">
+		SELECT	per.prod_lot as "제품LOT",
+				ppr.proc_cd as "공정코드",
+				pe.line_turn as "순번",
+				p.prod_nm as "제품명",
+				per.chk_errqty as "불량량",
+				pe.err_cd as "불량코드",
+				err.err_dtl as "불량내역",
+				ps.proc_st as "상태"
+		
+		FROM 	prod_err per,
+				prod_lot plo,
+				prd_insdtl pid,
+				proc_prc ppr,
+				proc_st ps,
+				proc_err pe,
+				err_code err,
+				prod p
+		
+		WHERE	per.prod_lot = plo.prod_lot
+		AND		pid.prod_cd = p.prod_cd
+		AND 	ps.proc_prcd = ppr.proc_prcd
+		AND 	ps.line_turn = ppr.line_turn
+		AND 	ps.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.proc_prcd = ppr.proc_prcd
+		AND 	pe.line_turn = ppr.line_turn
+		AND 	pe.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.err_cd = err.err_cd
+	</select>
 	
+	<!-- 검색 -->
+	<!-- 자재검사결과 검색 -->
+	<select id="searchMtQuality" resultType="map">
+		SELECT  chk.po_dtlcd as "발주상세코드",
+		        chk.chk_dt as "검사일자",
+		        v.vdr_nm as "업체명",
+		        mt.mt_nm as "자재명",
+		        mt.mt_unit as "관리단위",
+		        mpd.po_qty as "발주량",
+		        chk.chk_passqty as "합격량",
+		        mel.chk_errqty as "불량량",
+		        mel.err_cd as "불량코드",
+		        err.err_dtl as "불량내역",
+		        chk.chk_insp as "상태"
+		
+		FROM 	mt_chk chk,
+				mt_po po,
+				mt mt,
+				mt_podtl mpd,
+				mt_errlist mel,
+				err_code err,
+		        vendor v
+		
+		WHERE	chk.po_dtlcd = mpd.po_dtlcd
+		AND 	chk.mtrl_cd = mt.mt_cd
+		AND 	mpd.po_cd = po.po_cd
+		AND 	po.vdr_cd = v.vdr_cd
+		AND		mel.po_dtlcd = mpd.po_dtlcd
+		AND		mel.err_cd = err.err_cd
+		<if test="startDate != null and endDate !=null">
+		AND		chk.chk_dt BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+		</if>
+		<if test="mtName != null and mtName = ''">
+		AND 	mt.mt_nm LIKE '%' || {#mtName} || '%'
+		</if>
+	</select>
+	<!-- 제품검사결과 검색 -->
+	<select id="searchProdQuality" resultType="map">
+		SELECT	per.prod_lot as "제품LOT",
+				pid.prod_cd as "제품코드",
+				ppr.proc_cd as "공정코드",
+				pc.eq_cd as "설비코드",
+				p.prod_nm as "제품명",
+				ps.proc_qty as "생산량",
+				ps.proc_passqty as "합격량",
+				pe.err_qty as "불량량",
+				pe.err_cd as "불량코드",
+				err.err_dtl as "불량내역",
+				ps.proc_st as "상태"
+		
+		FROM 	prod_err per,
+				prod_lot plo,
+				prd_insdtl pid,
+				proc_prc ppr,
+				process pc,
+				prod p,
+				proc_st ps,
+				proc_err pe,
+				err_code err
+		
+		WHERE 	per.prod_lot = plo.prod_lot
+		AND 	ppr.prd_dtlcd = pid.prd_dtlcd
+		AND 	ppr.proc_cd = pc.proc_cd
+		AND 	pid.prod_cd = p.prod_cd
+		AND 	ps.proc_prcd = ppr.proc_prcd
+		AND 	ps.line_turn = ppr.line_turn
+		AND 	ps.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.proc_prcd = ppr.proc_prcd
+		AND 	pe.line_turn = ppr.line_turn
+		AND 	pe.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.err_cd = err.err_cd
+		<if test="prodName != null">
+		AND		p.prod_nm LIKE '%' || {#prodName} || '%'
+		</if>
+	</select>
+	<!-- 자재불량내역 검색 -->
+	<select id="searchMtErrList" resultType="map">
+		select	mel.po_dtlcd as "발주상세코드",
+				chk.chk_dt as "검사일자",
+				v.vdr_nm as "업체명",
+				mt.mt_nm as "자재명",
+				mel.chk_errqty as "불량량",
+				err.err_dtl as "불량내역",
+				mpd.mt_prc as "단가"
+		
+		from 	mt_chk chk,
+				mt_podtl mpd,
+				mt_po po,
+				vendor v,
+				mt_errlist mel,
+				err_code err,
+				mt mt
+		
+		where 	mel.po_dtlcd = mpd.po_dtlcd
+		and		mpd.po_cd = po.po_cd
+		and 	po.vdr_cd = v.vdr_cd
+		and 	mel.mtrl_cd = mt.mt_cd
+		and 	mel.err_cd = err.err_cd
+		<if test="errDtl != null errDtl = ''">
+		AND		err.err_dtl LIKE '%' || {#errDtl} || '%'
+		</if>
+		<if test="mtName != nul mtName = ''">
+		AND 	mt.mt_nm LIKE '%' || {#mtName} || '%'
+		</if>
+	</select>
+	<!-- 제품불량내역 검색 -->
+	<select id="searchProdErrList" resultType="map">
+		SELECT	per.prod_lot as "제품LOT",
+				ppr.proc_cd as "공정코드",
+				pe.line_turn as "순번",
+				p.prod_nm as "제품명",
+				per.chk_errqty as "불량량",
+				pe.err_cd as "불량코드",
+				err.err_dtl as "불량내역",
+				ps.proc_st as "상태"
+		
+		FROM 	prod_err per,
+				prod_lot plo,
+				prd_insdtl pid,
+				proc_prc ppr,
+				proc_st ps,
+				proc_err pe,
+				err_code err,
+				prod p
+		
+		WHERE	per.prod_lot = plo.prod_lot
+		AND		pid.prod_cd = p.prod_cd
+		AND 	ps.proc_prcd = ppr.proc_prcd
+		AND 	ps.line_turn = ppr.line_turn
+		AND 	ps.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.proc_prcd = ppr.proc_prcd
+		AND 	pe.line_turn = ppr.line_turn
+		AND 	pe.prd_dtlcd = ppr.prd_dtlcd
+		AND 	pe.err_cd = err.err_cd
+		<if test="errDtl != null and errDtl = ''">
+		AND		err.err_dtl LIKE '%' || {#errDtl} || '%'
+		</if>
+		<if test="prodName != null and prodName = ''">
+		AND 	p.prod_nm LIKE '%' || {#prodName} || '%'
+		</if>
+	</select>
+	
+	<!-- 수정 -->
+	<update id="resultQualityM">
+		
+	</update>
+	<update id="resultQualityP">
+		
+	</update>
+	
+	<!-- 입력 -->
+	<insert id="requestQualityM">
+		
+	</insert>
+	<insert id="requestQualityP">
+		
+	</insert>
 </mapper>

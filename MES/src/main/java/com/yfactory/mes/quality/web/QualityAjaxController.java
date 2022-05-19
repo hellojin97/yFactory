@@ -15,8 +15,9 @@ public class QualityAjaxController {
 	
 	// 조회
 	// 자재 품질검사요청(modal)
-	@GetMapping("/poDtlCdModalList")
+	@GetMapping("/selectpoDtlRequest")
 	public List<Map> selectpoDtlRequest() {
+		
 		return qaService.selectpoDtlRequest();
 	}
 	
@@ -39,8 +40,8 @@ public class QualityAjaxController {
 	// 검색
 	// 자재 품질검사요청(modal)
 	@GetMapping("/pocdModalSearch")
-	public List<Map> selectMtCheckMgr() {
-		return qaService.selectMtCheckMgr();
+	public List<Map> searchpoDtlRequest() {
+		return qaService.searchpoDtlRequest();
 	}
 	// 자재품질결과
 	

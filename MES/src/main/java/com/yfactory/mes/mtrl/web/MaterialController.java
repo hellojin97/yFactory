@@ -16,28 +16,33 @@ public class MaterialController {
 	@Autowired MtrlService service;
 	
 	//발주조회,등록폼
-	@RequestMapping("/orderForm")
-	public String orderForm() {
+	@RequestMapping("/mtrlOrderForm")
+	public String mtrlOrderForm() {
 		
-		return "material/orderForm";
+		return "material/mtrlOrderForm";
 	}
-	
-	
+
 	//LOT재고조회폼
 	@RequestMapping("/mtrlLotForm")
 	public String mtrlLotForm() {
 		return "material/mtrlLotForm";
+	}
+	//불량재고조회
+	@RequestMapping("/mtrlFaultyForm")
+	public String mtrlFaultyForm() {
+		return "material/mtrlFaultyForm";
 	}
 	
 	
 	/*
 	 * MODAL 이동 
 	 */
+	//자제명 검색
 	@RequestMapping("/mtcdModal")
 	public String mtcdModal() {
 		return "material/mtrlModal/mtcdModal";
 	}
-	
+	//업체명 검색
 	@RequestMapping("/vdrModal")
 	public String vdrModal() {
 		return "material/mtrlModal/vdrModal";

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yfactory.mes.proc.service.ProcService;
@@ -36,6 +37,11 @@ public class ProcAjaxController {
 	public List<Map>  PrdSelectOne(String prodCd) {
 		return procService.PrdSelectOne(prodCd);
 	}	
+	@PostMapping("/procPlanInsert")
+	public int ProcPlanInsert(List<Map> procPI) {
+		return procService.ProcPlanInsert(procPI);
+	}
+	
 
 	
 }

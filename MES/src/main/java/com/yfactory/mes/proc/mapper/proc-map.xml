@@ -10,6 +10,7 @@
 					   vdr.vdr_nm "업체명",
 					   pd.prod_nm "완제품명",
 					   cd.cd_explan "진행상황"
+					   
 		FROM 
 					   ORDERS ord, 
 					   VENDOR vdr, 
@@ -51,4 +52,7 @@
 		FROM  PROD  
 		WHERE PROD_CD = #{prodCd}
 	</select>
+	<insert id="ProcPlanInsert">
+	
+	</insert>
 </mapper>

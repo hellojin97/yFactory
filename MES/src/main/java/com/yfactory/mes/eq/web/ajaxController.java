@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +17,9 @@ public class ajaxController {
 	// 매퍼 연결
 	@Autowired
 	public EquipMapper mapper;
+	
+	
+	
 	
 	// 이미지 등록 구현 시도 
 	/*
@@ -47,16 +48,15 @@ public class ajaxController {
 		return mapper.selectEq(eqCd);
 	}
 	
-	//설비 등록시 설비관리 페이지로 이동하면서 자동으로 등록되는 메서드
-	@RequestMapping("/insertAjax")
-	@ResponseBody
-	public List<Map> eqMng(Model model){
-		
-		//model.addAttribute("msg", "다시 확인");
-		// 설비 페이지 - 설비등록
-		return mapper.insertEq();
-		}
-		
-	
+//	//설비 등록시 설비관리 페이지로 이동하면서 자동으로 등록되는 메서드
+//	@RequestMapping("/insertAjax")
+//	@ResponseBody
+//	public List<Map> eqMng(Model model){
+//		
+//		//model.addAttribute("msg", "다시 확인");
+//		// 설비 페이지 - 설비등록
+//		return mapper.insertEq();
+//		}
+//	
 	
 }

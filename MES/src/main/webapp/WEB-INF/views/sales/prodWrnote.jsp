@@ -216,8 +216,7 @@
 			url : "prodWrnoteOut",
 			method : "GET",
 			dataType : "JSON",
-			success : function(result) {
-				
+			success : function(result) {				
 				listWrnOut.resetData(result);			
 			}
 		});
@@ -261,6 +260,36 @@
      var fdt1 = $("#fdt1").val();
      var fdt2 = $("#fdt2").val();     
      if($("#search").hasClass("inSearch btn1")){
+    	 $('#prodWrnoteList').empty();
+    	 var listWrnIn = new tui.Grid({
+    			el : document.getElementById('prodWrnoteList'),
+    			columns : [ {
+    				header : '완제품LOT',
+    				name : '완제품LOT'
+    			}, {
+    				header : '제품코드',
+    				name : '제품코드'
+    			}, {
+    				header : '제품명',
+    				name : '제품명'
+    			}, {
+    				header : '입고량',
+    				name : '입고량'
+    			}, {
+    				header : '입고일자',
+    				name : '입고일자'
+    			}, {
+    				header : '유통기한',
+    				name : '유통기한'
+    			}
+
+    			],
+    			rowHeaders : [ 'rowNum' ],
+    			pageOptions : {
+    				useClient : true,
+    				perPage : 10
+    			}
+    		});
 		     $.ajax({
 		        url : "searchWrnIn",
 		        data : {
@@ -272,9 +301,41 @@
 		        dataType: 'JSON',
 		        contentType : "application/json; charset=utf-8"
 		     }).done(function(result){         
+		    	 console.log(result);
 		    	 listWrnIn.resetData(result);          
 		     });
-	 }else if($("#search").hasClass("outSearch btn1")){
+	 }
+     if($("#search").hasClass("outSearch btn1")){
+    	 $('#prodWrnoteList').empty();
+    	 var listWrnOut = new tui.Grid({
+ 			el : document.getElementById('prodWrnoteList'),
+ 			columns : [ {
+ 				header : '완제품LOT',
+ 				name : '완제품LOT'
+ 			}, {
+ 				header : '제품코드',
+ 				name : '제품코드'
+ 			}, {
+ 				header : '제품명',
+ 				name : '제품명'
+ 			}, {
+ 				header : '출고량',
+ 				name : '출고량'
+ 			}, {
+ 				header : '출고일자',
+ 				name : '출고일자'
+ 			}, {
+ 				header : '유통기한',
+ 				name : '유통기한'
+ 			}
+
+ 			],
+ 			rowHeaders : [ 'rowNum' ],
+ 			pageOptions : {
+ 				useClient : true,
+ 				perPage : 10
+ 			}
+ 		});
 			 $.ajax({
 			        url : "searchWrnOut",
 			        data : {
@@ -285,7 +346,8 @@
 			        },
 			        dataType: 'JSON',
 			        contentType : "application/json; charset=utf-8"
-			     }).done(function(result){         
+			     }).done(function(result){
+			    	 console.log(result);
 			    	 listWrnOut.resetData(result);          
 			     });
      }

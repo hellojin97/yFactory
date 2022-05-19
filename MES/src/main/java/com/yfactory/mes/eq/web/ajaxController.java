@@ -18,6 +18,9 @@ public class ajaxController {
 	@Autowired
 	public EquipMapper mapper;
 	
+	
+	
+	
 	// 이미지 등록 구현 시도 
 	/*
 	 * @RequestMapping("/eqinsert.do")
@@ -45,6 +48,15 @@ public class ajaxController {
 		return mapper.selectEq(eqCd);
 	}
 	
-	
+//	//설비 등록시 설비관리 페이지로 이동하면서 자동으로 등록되는 메서드
+//	@RequestMapping("/insertAjax")
+//	@ResponseBody
+//	public List<Map> eqMng(Model model){
+//		
+//		//model.addAttribute("msg", "다시 확인");
+//		// 설비 페이지 - 설비등록
+//		return mapper.insertEq();
+//		}
+//	
 	
 }

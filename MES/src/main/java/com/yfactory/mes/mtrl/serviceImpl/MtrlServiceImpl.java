@@ -56,6 +56,12 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.lotSelectSearch(m1, m2, req1, req2);
 	}
 
+	@Override
+	public List<Map> mtrlPlanList(String ppCd) {
+		// TODO Auto-generated method stub
+		return map.mtrlPlanList(ppCd);
+	}
+
 
 
 }

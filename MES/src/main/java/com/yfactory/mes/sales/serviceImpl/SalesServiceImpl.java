@@ -58,4 +58,24 @@ public class SalesServiceImpl implements SalesService {
 		return map.prodModalSearch(key);
 	}
 
+	@Override
+	public List<Map> prodWrnoteIn() {
+		return map.prodWrnoteIn();
+	}
+
+	@Override
+	public List<Map> prodWrnoteOut() {
+		return map.prodWrnoteOut();
+	}
+
+	@Override
+	public List<Map> searchWrnIn(String pnm, String pcd, String fdt1, String fdt2) {
+		return map.searchWrnOut(pnm, pcd, fdt1, fdt2);
+	}
+
+	@Override
+	public List<Map> searchWrnOut(String pnm, String pcd, String fdt1, String fdt2) {
+		return map.searchWrnOut(pnm, pcd, fdt1, fdt2);
+	}
+
 }

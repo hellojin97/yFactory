@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.yfactory.mes.eq.mapper.EquipMapper;
 import com.yfactory.mes.eq.service.EquipService;
+import com.yfactory.mes.eq.vo.EqVO;
 
 @Service
 public class EquipServiceImpl implements EquipService{
@@ -24,6 +25,12 @@ public class EquipServiceImpl implements EquipService{
 	public List<Map> selectEq(String eqCd) {
 	
 		return mapper.selectEq(eqCd);
+	}
+
+	@Override
+	public int insertEq(EqVO vo) {
+		
+		return mapper.insertEq(vo);
 	}
 	
 	

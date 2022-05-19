@@ -9,25 +9,29 @@ import com.yfactory.mes.proc.service.ProcService;
 @Controller
 public class ProcController {
 
-	@Autowired
-	private ProcService procService;
+	@Autowired private ProcService procService;
 
 
 
-	@GetMapping("/ordermodal")
-	public String loginModal() {
-		return "/proc/procmodal/ordermodal";
-	}
 	
 	@GetMapping("/procPlList")
 	public String selectOrdersList() {
 		
 		return "proc/procPlList";
 	}
+	
+
+	
+	// 주문서목록 모달
+	@GetMapping("/ordermodal")
+	public String loginModal() {
+		return "/proc/procmodal/ordermodal";
+	}
 	// 제품목록 모달
 	@GetMapping("/prdmodal")
 	public String ProductSelect(){
-		return "proc/procmodal/prdmodal";
+		return "/proc/procmodal/prdmodal";
 	}
+	
 
 }

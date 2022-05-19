@@ -57,6 +57,12 @@
           	</a>
           </li>
           
+          <li>
+          	<a href="prodWrnote">
+          	  <i class="bi bi-circle"></i><span>입/출고 관리</span>
+          	</a>
+          </li>
+          
         </ul>
         
       </li><!-- End Forms Nav -->
@@ -71,7 +77,7 @@
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         
           <li>
-            <a href="orderForm">
+            <a href="mtrlOrderForm">
               <i class="bi bi-circle"></i><span>발주관리</span>
             </a>
           </li>
@@ -95,13 +101,14 @@
           </li>          
            
           <li>
-            <a href="tables-general.html">
+            <a href="mtrlFaultyForm">
               <i class="bi bi-circle"></i><span>불량조회</span>
             </a>
           </li>
           
         </ul>
-      </li><!-- End Tables Nav -->
+      </li>
+      <!-- ================ END자재관리 ================ -->	
 
 	 <!-- ================ 생산관리 ================ -->	
       <li class="nav-item">

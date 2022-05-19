@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--  file 저장 위치 지정 -->
+	<bean class="java.lang.String" id="saveDir">
+	<!--  초기(경로)값 설정 -->
+	<constructor-arg value="c:/Temp/" />
+	</bean>
+</beans>

@@ -36,10 +36,10 @@ input.img-button {
 </head>
 <body>
 <div class="container">
-	<form name="frm" id="frm" method="post" enctype="multipart/form-data">
+	<form name="frm" id="frm" action="eqInsAjax" method="post" enctype="multipart/form-data">
 	<div class="row">
 	<div class="col-8">
-	
+		<h2>설비 등록</h2>
 		<hr  />
 		<div align="right">
 			<button type="reset" class="button btnpart">초기화</button>
@@ -47,36 +47,37 @@ input.img-button {
 			<button type="submit" id="btnok" class="button btnpart">저장</button>
 		</div>
 		<hr />
-		설비명*
-					<input id="eq_id" size=10 maxlength=8>
+					설비명*
+					<input id="eq_mdnm" name="eq_mdnm"size=10 maxlength=8>
 							
 					사용여부
-						Y<input	type="radio" id="yes" name="chk" value="Y" checked>
-						N<input type="radio" id="no" name="chk" value="N">
+						Y<input	type="radio" id="yes" name="eq_actst" value="Y" checked>
+						N<input type="radio" id="no" name="eq_actst" value="N">
 			
 			<br/><br/>
-					구분코드<input id="vdr_cd" size=10 	maxlength=8>
+					구분코드<input id="eq_cd" name="eq_cd" size=10 	maxlength=8>
 					<input type="button" id="eqdiv" value="조회">
-					<input id="eq_nm" size=10 maxlength=8>
-					모델번호<input id="eq_mdno" size=10 maxlength=8>
+					<input id="eq_nm" name="eq_nm" size=10 maxlength=8>
+					모델번호<input id="eq_mdno" name="eq_mdno" size=10 maxlength=8>
 				
 		<br /><br/>
 		
 				
-				제작업체<input id="vdr_cd" size=10 	maxlength=8>
+				제작업체<input id="vdr_code" name="vdr_code" size=10 	maxlength=8>
 				
-				UPH*<input id="uph" size=10 maxlength=8>
+				UPH*<input id="uph" name="uph" size=10 maxlength=8>
+				
 
 		 <br /><br/> 
 		
-					가용온도<input id="eq_min" size=10 maxlength=8>
-					<input id="eq_max" size=10 maxlength=8> ℃ 
-					점검주기<input 	id="eq_chkcyc" size=10 maxlength=8>
+					가용온도<input id="eq_min" name="eq_min" size=10 maxlength=8 placeholder="최소온도 기입">&nbsp;~&nbsp;
+					<input id="eq_max" name="eq_max" size=10 maxlength=8 placeholder="최대온도 기입"> ℃ 
+					점검주기<input 	id="eq_chkcyc" name="eq_chkcyc" size=10 maxlength=8>
 					
 		<br/><br/>
 		
-			등록인<input	id="eq_inster" size=10 maxlength=8>
-			구매일자<input type="date"	id="eq_purdt" size=10 maxlength=8>
+			등록인<input	id="eq_inster" name="eq_inster" size=10 maxlength=8>
+			구매일자<input type="date"	id="eq_purdt" name="eq_purdt" size=10 maxlength=8>
 	
 	
 	
@@ -104,17 +105,10 @@ input.img-button {
 </div>
 </body>
 <script>
-console.log(  $("input[name='chk']:checked").val()  );
-$("#btnok").on("click" , function(){
-	
-	
-	
-})
+console.log(  $("input[name='chk']:checked").val()  ); // 사용여부 실시간 체크 Y or N
 
 
-
-
-// 이미지 파일 업로드 구현 시도중
+// 이미지 파일 썸네일 보기 구현완료
 function readURL(input) {
     	if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -149,13 +143,59 @@ function readURL(input) {
         		
         		var dataURI=canvas.toDataURL("image/png");
         		
-        		document.querySelector("#prevu").src=dataURI;
-        		document.querySelector("#prevu").style.visibility="visible"; 
+        		document.querySelector("#prevu").src=dataURI; // 
+        		document.querySelector("#prevu").style.visibility="visible"; // 엑박이 아닐경우 보이기 
         	}
         };
     
     	}
 	}
+	
+	
+//$("#btnok").on("click" , function(){
+	//makeUUID(file_nm);
+	
+	
+	
+	 /* var url = "insertAjax";
+	 $.ajax(url , {
+		 method : "POST",
+		 data: $("#frm").serialize(),
+		 dataType:'json',
+		 success : function(){alert("DB 접속 완료");}
+		 
+	 }).done(function(result){
+		 // 처리 완료시
+		 console.log(result);
+		 // 처리후 리턴 페이지 지정
+		 $("form").attr('action' , '/eq/eqMng');
+		 // submit 진행
+		 $("form").submit();
+	 }) */
+	 
+	 
+	 
+	/* var bytes, blob; 
+	bytes = new Uint8Array(data.blob); 
+	blob = new Blob([bytes], {type:'image/bmp'}); 
+	data['imgSrc'] = URL.createObjectURL(blob);
+	console.log(data['imgSrc']); */
+	
+
+	
+			
+	
+//})
+
+
+// UUID 생성 부 - 미사용 중
+// 참고 : https://developyo.tistory.com/110
+/* function makeUUID(file_nm){
+	   function s4() {
+	     return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+	   }
+	   return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + file_nm.substr(file_nm.indexOf("."), file_nm.length-1);
+	} */
 
 
 
@@ -181,6 +221,9 @@ function readURL(input) {
 		        }
 		});
 	}); */
+	
+	
+	
 	
 	// 조회 버튼을 클릭시  > 모달 호출
 	eqdiv.addEventListener("click" , function(){

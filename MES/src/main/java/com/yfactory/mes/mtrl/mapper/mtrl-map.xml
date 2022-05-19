@@ -3,12 +3,47 @@
 <mapper namespace="com.yfactory.mes.mtrl.mapper.MtrlMapper">
 	<!-- 미지시 생산조회 -->
 	<select id="selectPl" resultType="map">
-		SELECT pl.pp_cd "pp_cd", 
-       	       pl.pp_nm "pp_nm",
-               pl.pp_dt "pp_dt",
-               dtl.pd_qty "pd_qty"
-		FROM   prdt_pl pl, plan_dtl dtl
-		WHERE  pl.pp_cd = dtl.pd_cd
+		SELECT    pl.pp_cd "pp_cd",
+	       		  pl.pp_nm "pp_nm",
+	              pl.pp_dt "pp_dt",
+	              sum(dt.pd_qty) "pd_qty"
+		FROM      plan_dtl dt, prdt_pl pl
+		WHERE     dt.pp_cd = pl.pp_cd
+		AND       LOWER(pl.pp_prog) = 'plan01'
+		group by  pl.pp_cd, pl.pp_nm, pl.pp_dt
+	</select>
+	
+	<!-- 생산계획별 자재재고 -->
+	<select id="mtrlPlanList" resultType="map">
+		SELECT    dt.prod_cd "완제품코드",
+        		  pd.prod_nm "완제품명",
+        		  pl.pp_dt "계획일자",
+       			  b.mt_cd "자재코드",
+        		  m.mt_nm "자재명",
+        		  CASE WHEN
+        			mc.mt_qty -((dt.pd_qty-pdc.prod_qty) * b.cs_qty) > 0 THEN '충분'
+        		  ELSE '부족'
+        		  END AS "완제품 대비 소요량"
+       
+		FROM      plan_dtl dt, 
+		          prdt_pl pl, 
+		          prod pd, 
+		          bom b, 
+		          mt m, 
+		          mt_curqty mc, 
+		          mt_lot ml, 
+		          prod_lot pdl,
+		          prod_curqty pdc
+		        
+		WHERE     dt.pp_cd = pl.pp_cd
+		AND       dt.prod_cd = pd.prod_cd
+		AND 	  b.prod_cd = pd.prod_cd
+		AND       m.mt_cd = b.mt_cd
+		AND       m.mt_cd = ml.mt_cd
+		AND       mc.mt_lot = ml.mt_lot
+		AND       pd.prod_cd = pdl.prod_cd
+		AND       pdl.prod_lot = pdc.prod_lot
+		AND       UPPER(pl.pp_cd) = #{ppCd}
 	</select>
 	
 	<!-- 자재lot재고조회 -->
@@ -44,13 +79,13 @@
 		AND     m.ven_cd = vd.vdr_cd
 		AND     lot.mt_lot = cy.mt_lot
 			<if test="m1 != ''">
-		AND m.mt_nm LIKE '%'||#{m1}||'%'
+		AND 	m.mt_nm LIKE '%'||#{m1}||'%'
 			</if>
 			<if test="m2 != ''">
-		AND vd.vdr_nm LIKE '%'||#{m2}||'%'
+		AND 	vd.vdr_nm LIKE '%'||#{m2}||'%'
 			</if>
 			<if test="req1 != '' and req2 != ''">
-		AND lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
+		AND 	lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
 			</if>
 	</select>
 	

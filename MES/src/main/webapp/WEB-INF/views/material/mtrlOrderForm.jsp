@@ -15,24 +15,26 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
-
+	<div>
 	<div class="mainTitle" style="padding-bottom:15px; color: ;">
 		<h1>발주 관리/등록</h1>
 	</div>
-	
-	<div class="code-html contents">
+
 	<div class="btn-wrapper" style="padding-bottom:7px;">
-		<button  class="btn btn-primary btn-sm">관리</button>
-		<button class="btn btn-primary btn-sm">등록</button>
+		<button  class="btn1">관리</button>
+		<button class="btn1">등록</button>
 	</div>
+	
 	<h4>미지시 생산계획조회</h4>
 	<div id="unorder" ></div>
-	</div>
-		<div class="mainTitle">
-		<h4>생산계획별 자재 재고</h4>
-	</div>	
 
-	<div id="grid1"></div>
+	<h4>생산계획별 자재 재고</h4>
+	<div id="prodPlan"></div>
+	
+	<h4>발주요청서 등록</h4>
+	<div id="prodPlan"></div>
+	</div>
+	
 
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
@@ -41,6 +43,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
+
+// 미지시 생산계획조회 토스트
 $.ajax({
 	url: "mtrlorder",
 	method : "GET",
@@ -77,54 +81,74 @@ var unorder = new tui.Grid({
       perPage: 3
     }
   });
-
-  const grid1 = new tui.Grid({
-    el: document.getElementById('grid1'),
-    data: gridData,
+//모달 데이터값 받아오기
+unorder.on("dblclick",function(e) {
+//debugger
+   let ppCd1 = unorder.getValue(e.rowKey, 'pp_cd');
+   
+   $.ajax({
+		url: "mtrlPlan",
+		data : {ppCd : ppCd1},
+		method : "GET",
+		dataType : "JSON",
+		contentType : "application/json; charset=utf-8"
+	  	}).done(function(result){
+	  		 prodPlan.resetData(result); 
+	     	console.log(result);
+	  	 }).fail(function(result){
+	  	    console.log(result);
+	     });
+   }
+);
+  //생산계획별 자재재고 토스트
+/*   $.ajax({
+	url: "mtrlPlan",
+	method : "GET",
+	dataType : "JSON",
+	contentType : "application/json; charset=utf-8"
+  	}).done(function(result){
+  		prodPlan.resetData(result);
+     	console.log(result);
+  	 }).fail(function(result){
+  	    console.log(result);
+     }); */
+  
+  var prodPlan = new tui.Grid({
+    el: document.getElementById('prodPlan'),
     columns: [
       {
-        header: '완제품목코드',
-        name: 'name'
+        header: '완제품코드',
+        name: '완제품코드'
       },
       {
-        header: '완제품목명',
-        name: 'artist'
+        header: '완제품명',
+        name: '완제품명'
       },
       {
         header: '계획일자',
-        name: 'type'
+        name: '계획일자'
       },
       {
-        header: '소모품목 코드',
-        name: 'release'
+        header: '자재코드',
+        name: '자재코드'
       },
       {
-          header: '소모품목명',
-          name: 'release'
+          header: '자재명',
+          name: '자재명'
         },
       {
           header: '재고 구분',
-          name: 'release'
+          name: '완제품 대비 소요량'
         }
     ],
     rowHeaders: ['rowNum'],
     pageOptions: {
       useClient: true,
-      perPage: 3
+      perPage: 5
     }
   });
 
-  const appendBtn = document.getElementById('appendBtn');
-  const prependBtn = document.getElementById('prependBtn');
-
-  const appendedData = {
-    name: 'Music',
-    artist: 'Lee',
-    type: 'Deluxe',
-    release: '2019.09.09',
-    genre: 'Pop'
-  };
-
+	
   
 </script>
 

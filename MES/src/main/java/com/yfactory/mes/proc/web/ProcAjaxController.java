@@ -22,8 +22,20 @@ public class ProcAjaxController {
 		return procService.OrderSelectOk(ordCd);
 		
 	}
-
+	@GetMapping("/procOrderListAjax")
+	public List<Map>  ProcOrderSelectAll() {
+		
+		return procService.ProcOrderSelectAll();
 	
+	}
+	@GetMapping("/prdSelect")
+	public List<Map>  PrdSelect() {
+		return procService.PrdSelect();
+	}
+	@GetMapping("/prdSelectOne")
+	public List<Map>  PrdSelectOne(String prodCd) {
+		return procService.PrdSelectOne(prodCd);
+	}	
 
 	
 }

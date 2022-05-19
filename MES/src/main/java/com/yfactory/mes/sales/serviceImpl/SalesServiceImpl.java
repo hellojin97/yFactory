@@ -70,7 +70,7 @@ public class SalesServiceImpl implements SalesService {
 
 	@Override
 	public List<Map> searchWrnIn(String pnm, String pcd, String fdt1, String fdt2) {
-		return map.searchWrnOut(pnm, pcd, fdt1, fdt2);
+		return map.searchWrnIn(pnm, pcd, fdt1, fdt2);
 	}
 
 	@Override

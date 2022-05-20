@@ -23,6 +23,10 @@ public class QualityAjaxController {
 	// 제품 품질검사요청(modal)
 	
 	// 자재 품질검사관리
+	@GetMapping("/selectMtCheckMgr")
+	public List<Map> selectMtCheckMgr() {
+		return qaService.selectMtCheckMgr();
+	}
 	
 	// 제품 품질검사관리
 	

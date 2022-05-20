@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
 	<!-- 발주상세코드 Modal  -->
@@ -44,15 +43,10 @@
 			dataType: "JSON",
 			method : "GET",
 			contentType : "application/json; charset=utf-8",
-			success : function(result) {
-				console.log(result);
-				grid.refreshLayout();
-				grid.resetData(result);
-			}
-		//}).done(function(result){
-			//grid.resetData(result);
-			//grid.refreshLayout();
-			//console.log(result);
+		}).done(function(result) {
+			console.log(result);
+			grid.refreshLayout();
+			grid.resetData(result);
 		});
 	
 	

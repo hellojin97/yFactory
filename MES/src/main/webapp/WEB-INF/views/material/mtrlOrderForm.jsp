@@ -87,7 +87,7 @@ var unorder = new tui.Grid({
 unorder.on("dblclick",function(e) {
 //debugger
    let ppCd1 = unorder.getValue(e.rowKey, 'pp_cd');
-   
+   console.log(ppCd1);
    $.ajax({
 		url: "mtrlPlan",
 		data : {ppCd : ppCd1},
@@ -96,7 +96,6 @@ unorder.on("dblclick",function(e) {
 		contentType : "application/json; charset=utf-8"
 	  	}).done(function(result){
 	  		 prodPlan.resetData(result); 
-	     	console.log(result);
 	  	 }).fail(function(result){
 	  	    console.log(result);
 	     });

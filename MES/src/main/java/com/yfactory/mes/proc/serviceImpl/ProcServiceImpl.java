@@ -22,17 +22,8 @@ public class ProcServiceImpl implements ProcService{
 		return map.OrderSelectOk(ordCd);
 	}
 
-	@Override
-	public Map OrderSelectNo(Map prodCd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public int PlanInsert(PlanDtlVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	public List<Map> PrdSelect() {
@@ -62,6 +53,13 @@ public class ProcServiceImpl implements ProcService{
 	public List<Map> PrdSelectOne(String prodCd) {
 		// TODO Auto-generated method stub
 		return map.PrdSelectOne(prodCd);
+	}
+
+
+	@Override
+	public int ProcPlanInsert(List<Map> procPI) {
+		// TODO Auto-generated method stub
+		return map.ProcPlanInsert(procPI);
 	}
 	
 }

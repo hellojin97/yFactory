@@ -20,7 +20,7 @@
 						<div class="col-md-3">
 							<label for="inputText" class="col-form-label" style="padding-right: 27px;">발주상세코드</label>
 						</div>
-							<input type="text" class="form-control" style="width: 50px" placeholder="발주상세코드를 입력해주십시오" id="pdt">
+							<input type="text" class="form-control" style="width: 50px" placeholder="발주상세코드를 입력해주십시오" id="pdt" readonly>
 							<a class="nav-link nav-icon search-bar-toggle" id="pdcBtn" onclick="pdcBtn">
 								<i class="bi bi-search" style="color: #2c3e50"></i>
 							</a>
@@ -43,7 +43,7 @@
 						<div class="col-md-3">
 							<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재명</label>
 						</div> 
-						<input type="text" class="form-control" style="width: 50px" placeholder="자재명을 입력해주십시오" id="mnm" readonly="readonly">
+						<input type="text" class="form-control" style="width: 50px" placeholder="자재명을 입력해주십시오" id="mnm" disabled>
 					</div>
 				</div>
 				
@@ -53,7 +53,7 @@
 						<div class="col-md-3">
 							<label for="inputText" class="col-form-label" style="padding-right: 27px;">업체명</label>
 						</div> 
-						<input type="text" class="form-control" style="width: 50px" placeholder="업체명을 입력해주십시오" id="vnm" readonly="readonly">
+						<input type="text" class="form-control" style="width: 50px" placeholder="업체명을 입력해주십시오" id="vnm" disabled>
 					</div>
 				</div>
 				
@@ -63,14 +63,14 @@
 						<div class="col-md-3">
 							<label for="inputText" class="col-form-label" style="padding-right: 27px;">발주량</label>
 						</div> 
-						<input type="text" class="form-control" style="width: 50px" placeholder="발주량을 입력해주십시오" id="pqty" readonly="readonly">
+						<input type="text" class="form-control" style="width: 50px" placeholder="발주량을 입력해주십시오" id="pqty" disabled>
 					</div>
 				</div>
 				
 				<div class="col-md-5" style="padding-bottom: 10px;">
 					<div class="input-group">
 						<div style="padding-right: 10px;">
-							<button type="button" id="insert" class="btn1">신청</button>							
+							<button type="button" id="insert" class="btn1" onclick="insert">신청</button>							
 						</div>
 						<div>
 							<button type="reset" id="reset" class="btn1">초기화</button>
@@ -91,6 +91,11 @@
 			pocdModal.show();
 		})
 	});
+	
+	// 자재 품질검사요청 신청
+	insert.addEventListener("click", function() {
+		
+	})
 	</script>
 </body>
 </html>

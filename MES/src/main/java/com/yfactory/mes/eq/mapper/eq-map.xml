@@ -19,12 +19,9 @@
 
 </select>
 
-
+<!-- 프로시저 컴파일 무조건 한번은 해야 mybatis 에서 프로시저를 인식합니다-->
 <insert id="insertEq" statementType="CALLABLE" parameterType="com.yfactory.mes.eq.vo.EqVO">
-	{call eq_insert(#{vdr_code}, #{eq_nm}, #{eq_min}, #{eq_max} , 
-				#{eq_chkcyc}, #{eq_mdno} ,#{eq_purdt} , #{eq_actst}, #{eq_uph},
-				#{eq_inster} , #{uuid} , #{eq_mdnm}, #{img_path}, #{img_nm}
-				)
+	{CALL eq_insert(#{vdr_code},#{eq_nm}, #{eq_min}, #{eq_max}, #{eq_chkcyc}, #{eq_mdno},#{eq_purdt}, #{eq_actst},#{eq_uph}, #{eq_inster}, #{uuid}, #{eq_mdnm}, #{img_nm}, #{img_path})
 	}			
 </insert>
 

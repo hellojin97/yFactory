@@ -29,7 +29,7 @@ public class pageController {
 	
 	@RequestMapping("/eqMng")
 	public String eqMng(EqVO vo , MultipartFile file , Model model){
-	
+		System.out.println( vo.getImg_path() );
 		//System.out.println(vo);
 		mapper.insertEq(vo); 
 		

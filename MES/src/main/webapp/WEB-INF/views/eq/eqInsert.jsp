@@ -61,7 +61,8 @@ input.img-button {
 						N<input type="radio" id="no" name="eq_actst" value="N">
 			
 			<br/><br/>
-					구분코드<input id="eq_cd" name="eq_cd" size=10 	maxlength=13>
+			<!--  eq_cd는 함수로 알아서 생성 > 인자값을 일부러 넘기지 않음 -->
+					구분코드<input id="eq_cd" size=10 maxlength=13>
 					<input type="button" id="eqdiv" value="조회">
 					<input id="eq_nm" name="eq_nm" size=10 maxlength=13>
 					모델번호<input id="eq_mdno" name="eq_mdno" size=10 maxlength=13>
@@ -87,7 +88,7 @@ input.img-button {
 	
 	
 			<input type="hidden" id="uuid" name="uuid"  size=10 >
-			<input type="hidden" id="img_path" name="img_path" size=10 value="">
+			<input type="text" id="img_path" name="img_path" size=10 value="">
 			<input type="hidden" id="img_nm" name="img_nm"  size=10 value="">
 			
 	</div>
@@ -167,10 +168,10 @@ function readURL(input) {
         		
             	var img = new Image();
 	        	img.src = e.target.result;
-	        	console.log("img.src:" + img.src);
+	        	//console.log("img.src:" + img.src);
 	        	
-	        	img_path.value=img.src;
-	        	
+	        	$("#img_path").val(img.src);
+	        	$("#imgNm").val(img.src);
 	        	
 	        	
         		canvas.width=img.width*0.7;
@@ -195,10 +196,9 @@ function readURL(input) {
     	
     	
     	console.log("img_nm: "+ img_nm.value);
-    	console.log("img_src: "+ imgSrc);
+    	console.log("img_src: "+ $("#img_path").val());
     	
     	console.log("eq_mdnm: "+ eq_mdnm.value);
-    	console.log("eq_cd: "+ eq_cd.value);
     	console.log("vdr_code: "+ vdr_code.value);
     	console.log("eq_min: "+ eq_min.value); 
     	console.log("eq_max: "+ eq_max.value); 

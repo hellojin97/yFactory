@@ -95,7 +95,7 @@ public class SalesAjaxController {
 	
 	//출고 관리 - 완제품 modal 리스트
 	@GetMapping("/outProdModal")
-	public List<Map> outProdModal(String key){
+	public List<Map> outProdModal(String key){		
 		return salesService.outProdModal(key);
 	}
 }

@@ -21,11 +21,11 @@
 					<div class="col-md-8 " style="padding-bottom: 20px;">
 						<div class="input-group ">
 							<label for="inputText" class="col-form-label" style="padding-right: 10px;">주문 수량 : </label>
-								<input type="text" class="form-control" style="width: 50px" id="ordNum" disabled>							
+								<input type="text" class="form-control" style="width: 50px" id="ordModalNum" disabled>							
 						</div>
 						<div class="input-group ">
 							<label for="inputText" class="col-form-label" style="padding-right: 10px;">선택 수량 : </label>
-								<input type="text" class="form-control" style="width: 50px" id="selNum">							
+								<input type="text" class="form-control" style="width: 50px" id="selNum" disabled>							
 						</div>
 					</div>
 					<div id="prodGrid"></div>
@@ -38,6 +38,8 @@
 	<!-- 모달끝 -->
 
 	<script>
+	let omn = $("#ordNum").val(); 
+	$("#ordModalNum").val(omn);
 		//완제품명 전체조회
 		key = $("#ordTL").val()
 		$.ajax({
@@ -45,6 +47,7 @@
 			data : {key : key},
 			method : "GET",
 			dataType : "JSON",
+			contentType : "application/json; charset=utf-8",
 			success : function(result) {
 				prodList.resetData(result);
 			}
@@ -63,7 +66,8 @@
 				name : '완제품 현재고'
 			}, {
 				header : '출고량',
-				name : 'text'
+				name : '출고량',
+				editor : 'text'
 			}, {
 				header : '제조일자',
 				name : '제조일자',

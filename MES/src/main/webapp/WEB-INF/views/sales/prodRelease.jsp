@@ -41,6 +41,7 @@
 	
 <div id="test"></div>
 <input type="hidden" id="ordTL"> 
+<input type="hidden" id="ordNum">
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
@@ -136,13 +137,16 @@ var ordDtpList = new tui.Grid({
             name: '유통기한'
           }
     ],
+    rowHeaders : [ 'checkbox' ]
     
   });
 	
   	//완제품 lot 모달 호출
   ordDtpList.on("dblclick", function(e) {
 	  let ordtl = ordDtpList.getValue(e.rowKey,"주문상세코드");
+	  let ordNum = ordDtpList.getValue(e.rowKey, "주문수량");
 	  $("#ordTL").val(ordtl);
+	  $("#ordNum").val(ordNum);
 	  
   	$("#test").load("releaseModal", function() {
 			const ProdModal = new bootstrap.Modal('#myModal');

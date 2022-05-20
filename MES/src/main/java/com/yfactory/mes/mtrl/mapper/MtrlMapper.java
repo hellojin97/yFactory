@@ -12,7 +12,8 @@ public interface MtrlMapper {
 	List<Map>selectPl();
 	//생산계획별 자재재고
 	List<Map>mtrlPlanList(@Param("ppCd") String ppCd);
-	
+	//발주요청서 등록
+	List<Map>mtrlOrderList(@Param("ppCd")String ppCd, @Param("mtCd")String mtCd);
 	
 	/*LOT페이지*/
 	//LOT재고조회

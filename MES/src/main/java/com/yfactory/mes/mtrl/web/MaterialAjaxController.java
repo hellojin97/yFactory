@@ -27,7 +27,11 @@ public class MaterialAjaxController {
 			System.out.println("테스트: " +ppCd);
 			return service.mtrlPlanList(ppCd);
 		}
-		
+		// 발주요청서 등록
+		@GetMapping("/mtrlOrderList")
+		public List<Map> mtrlOrderList(String ppCd, String mtCd){
+			return service.mtrlOrderList(ppCd, mtCd);
+		}
 	
 		//LOT재고조회
 		@GetMapping("/mtrlLot")

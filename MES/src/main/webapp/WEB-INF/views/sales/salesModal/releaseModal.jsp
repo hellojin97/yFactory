@@ -19,13 +19,14 @@
 				<!-- 모달 내용 -->
 				<div class="modal-body">
 					<div class="col-md-8 " style="padding-bottom: 20px;">
-						<div class="input-group ">
+						<div class="input-group" style="padding-bottom: 15px;">
 							<label for="inputText" class="col-form-label" style="padding-right: 10px;">주문 수량 : </label>
-								<input type="text" class="form-control" style="width: 50px" id="ordModalNum" disabled>							
+								<input type="text" class="form-control" id="ordModalNum" disabled>							
 						</div>
-						<div class="input-group ">
-							<label for="inputText" class="col-form-label" style="padding-right: 10px;">선택 수량 : </label>
-								<input type="text" class="form-control" style="width: 50px" id="selNum" disabled>							
+						<div class="input-group">
+							<label for="inputText" class="col-form-label">선택 수량 : </label>
+								<input type="text" class="form-control" id="selNum" readonly="readonly" style="padding-right: 10px;">	
+								<button id="btnInsert" class="btn1">등록</button>						
 						</div>
 					</div>
 					<div id="prodGrid"></div>
@@ -38,7 +39,7 @@
 	<!-- 모달끝 -->
 
 	<script>
-	let omn = $("#ordNum").val(); 
+	var omn = $("#ordNum").val();
 	$("#ordModalNum").val(omn);
 		//완제품명 전체조회
 		key = $("#ordTL").val()
@@ -82,6 +83,17 @@
 			}
 		});
 		
+		prodList.on('afterChange', ev =>{
+			orgin: 'cell';					
+			let evn = ev.changes;
+			var res = 0;
+			for (var i = 0; i < evn.length; i++) {
+				res = res + parseInt(evn[i].value);
+				}
+			console.log(res);
+			$("#selNum").val(res);
+		})
+		
 		 
 		  
 		$('body').css("overflow", "hidden");
@@ -97,7 +109,7 @@
 		  })
 
 	//모달 데이터값 받아오기
-	/*btnDtlInsert.addEventListener("click", function() {
+	btnInsert.addEventListener("click", function() {
 		let checkedAry = [];
 		 let prd = resultGrid.getCheckedRows();
 		 for (var i = 0; i < prd.length; i++) {
@@ -117,7 +129,7 @@
        $("#pcd").val(prodCd);
        $('#myModal').modal('hide');       
        }
-    );*/    
+    );    
 	</script>
 </body>
 </html>

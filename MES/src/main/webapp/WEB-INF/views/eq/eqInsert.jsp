@@ -57,8 +57,8 @@ input.img-button {
 					<input id="eq_mdnm" name="eq_mdnm"size=10 maxlength=8>
 							
 					사용여부
-						Y<input	type="radio" id="yes" name="eq_actst" value="Y" checked>
-						N<input type="radio" id="no" name="eq_actst" value="N">
+						Y<input	type="radio" id="yes" name="eq_actst" value="1" checked>
+						N<input type="radio" id="no" name="eq_actst" value="0">
 			
 			<br/><br/>
 			<!--  eq_cd는 함수로 알아서 생성 > 인자값을 일부러 넘기지 않음 -->
@@ -117,7 +117,7 @@ input.img-button {
 
 console.log(  $("input[name='chk']:checked").val()  ); // 사용여부 실시간 체크 Y or N
 $("#btnok").on("click",function(){
-	$("#frm").attr('action' , "eqMng"); 
+	$("#frm").attr('action' , "eqMngPage"); 
 	toastr.success('등록완료!');
 	$("form").submit();
 	
@@ -212,71 +212,7 @@ function readURL(input) {
     	
 	}
 	
-//$("#btnok").on("click" , function(){
-	//makeUUID(file_nm);
-	
-	
-	
-	 /* var url = "insertAjax";
-	 $.ajax(url , {
-		 method : "POST",
-		 data: $("#frm").serialize(),
-		 dataType:'json',
-		 success : function(){alert("DB 접속 완료");}
-		 
-	 }).done(function(result){
-		 // 처리 완료시
-		 console.log(result);
-		 // 처리후 리턴 페이지 지정
-		 $("form").attr('action' , '/eq/eqMng');
-		 // submit 진행
-		 $("form").submit();
-	 }) */
-	 
-	 
-	 
-	/* var bytes, blob; 
-	bytes = new Uint8Array(data.blob); 
-	blob = new Blob([bytes], {type:'image/bmp'}); 
-	data['imgSrc'] = URL.createObjectURL(blob);
-	console.log(data['imgSrc']); */
-	
 
-	
-			
-	
-//})
-
-
-
-
-
-
-
-	//console.log($("#upload02").html());
-
-	/* $("#upldfile").change(function(){
-		var formData = new FormData($("#frm"));
-		$.ajax({
-			method:"post",
-			url : "/eqinsert",
-			data : formData,
-			processData : false,
-		    dataType : "json",
-		    contentType : false,
-		    async    : false,
-		    success : function(data) {
-		            alert("파일 업로드 성공.");
-		    },
-		    error : function(error) {
-		            alert("파일 업로드에 실패하였습니다.");
-		           
-		        }
-		});
-	}); */
-	
-	
-	
 	
 	// 조회 버튼을 클릭시  > 모달 호출
 	eqdiv.addEventListener("click" , function(){
@@ -293,29 +229,7 @@ function readURL(input) {
 
 	
 		
-	/* window.onload = function(){
-		   const url = "/eqSelectAjax";
-		   $.ajax(url,{
-			   dataType : "JSON",
-			   method: "GET"
-		   }).done(function(result){
-			
-			  	console.log(result);
-				
-   			})
-		};  */
-		
-		/* $("#vdr_cd").value = result.eqCd;
-		$("#eq_nm").value = result.eqNm; */
-		
-		
 	
-				
-
-
-	
-	
-
 </script>
 
 </html>

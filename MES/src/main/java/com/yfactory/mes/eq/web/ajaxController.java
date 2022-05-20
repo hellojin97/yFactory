@@ -47,6 +47,11 @@ public class ajaxController {
 	public List<Map> eqSelect(String eqCd){
 		return mapper.selectEq(eqCd);
 	}
+	@GetMapping("/getEqMngList")
+	@ResponseBody
+	public List<Map> getEqMngList(){
+		return mapper.searchEqMngList();
+	}
 	
 //	//설비 등록시 설비관리 페이지로 이동하면서 자동으로 등록되는 메서드
 //	@RequestMapping("/insertAjax")

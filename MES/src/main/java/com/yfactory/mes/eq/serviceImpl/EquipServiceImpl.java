@@ -32,6 +32,12 @@ public class EquipServiceImpl implements EquipService{
 		
 		return mapper.insertEq(vo);
 	}
+
+	@Override
+	public List<Map> searchEqMngList() {
+		
+		return mapper.searchEqMngList();
+	}
 	
 	
 	

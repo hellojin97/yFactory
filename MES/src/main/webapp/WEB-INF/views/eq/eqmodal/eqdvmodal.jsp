@@ -25,7 +25,7 @@
 					</div>
 
 					<div class="modal-body">
-						<div id="grid">
+						<div id="grid2">
 						<input type="hidden" name="hdeqCd" id="eqCe" value="">
 						<input type="hidden" name="hdeqNm" id="eqNm" value="">
 						</div>
@@ -50,12 +50,12 @@
 		$.ajax(url, {
 			dataType : "JSON",
 		}).done(function(rs) {
-			grid.resetData(rs);
+			grid2.resetData(rs);
 			console.log(rs);
 		})
 
-		const grid = new tui.Grid({
-			el : document.getElementById('grid'),
+		const grid2 = new tui.Grid({
+			el : document.getElementById('grid2'),
 			scrollX : false,
 			scrollY : false,
 			columns : [
@@ -79,13 +79,13 @@
 		});
 
 		setTimeout(function() {
-			grid.refreshLayout();
+			grid2.refreshLayout();
 		}, 300)
 		
-		grid.on("click",function(e) {
+		grid1.on("click",function(e) {
 		//debugger
-		let eqCd = grid.getValue(e.rowKey, '설비코드');
-		let eqNm = grid.getValue(e.rowKey , '설비명');
+		let eqCd = grid2.getValue(e.rowKey, '설비코드');
+		let eqNm = grid2.getValue(e.rowKey , '설비명');
 		$("input[name='eqCdinp']").value=eqCd;
 		$("input[name='eqNminp']").value=eqNm;
 		

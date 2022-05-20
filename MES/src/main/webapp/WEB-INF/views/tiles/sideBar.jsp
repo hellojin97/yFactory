@@ -175,7 +175,7 @@
             </a>
           </li>
           <li>
-            <a href="eqMng">
+            <a href="eqMngPage">
               <i class="bi bi-circle"></i><span>설비관리</span>
             </a>
           </li>

@@ -59,8 +59,14 @@ public class pageController {
 //		System.out.println("--------------------------");
 //		System.out.println(vo.getUuid());
 //		model.addAttribute("src" , vo.getUuid());
-		return "eq/eqMng"; // 다 처리 하고 설비관리로 가라 
+		return "eq/eqMngPage"; // 다 처리 하고 설비관리로 가라 
 	}
+	
+	@RequestMapping("/eqMngPage")
+	public String eqMngPage() {
+		return "eq/eqMngPage";
+	}
+	
 	
 	@RequestMapping("/eqChkMng")
 	public String eqChkMng(){

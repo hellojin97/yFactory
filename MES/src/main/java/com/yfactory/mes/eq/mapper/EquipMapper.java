@@ -17,6 +17,10 @@ public interface EquipMapper {
 	int eqUpd(); // 설비 가동상태 수정 및 데이터 수정(설비관리 페이지)
 
 	List<Map> searchEq(); // 설비 코드 + 설비 명 조회 메서드
+	
+	List<Map> searchEqMngList(); // 서비스 관리 페이지 이동시 기본으로 나타나는 리스트 테이블 쿼리 메서드
+	
+	
 
 	List<Map> selectEq(String eqCd); // 설비 코드를 조회하여 데이터를 모달에서 현재페이지로 전송
 

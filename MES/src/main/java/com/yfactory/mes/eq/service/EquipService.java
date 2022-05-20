@@ -16,4 +16,8 @@ public interface EquipService {
 	// 설비 등록
 	int insertEq(EqVO vo);
 	
+	// 설비관리 기본으로 나타나는 리스트 테이블 쿼리 메서드
+	List<Map> searchEqMngList();  
+	
+	
 }

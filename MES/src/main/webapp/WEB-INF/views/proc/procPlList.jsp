@@ -47,7 +47,7 @@
 				<div class="input-group">
 					<label for="inputText" class="col-form-label"
 						style="padding-right: 40px;">주문일자</label>
-					<div class="col-sm-2" style="padding-right: 10px;">
+					<div class="col-sm-6" style="padding-right: 10px;">
 						<input type="date" class="form-control" id="date">
 					</div>
 					<button id="BtnClear" class="btn1">초기화</button>
@@ -55,7 +55,7 @@
 			
 		</div>
 		</div>
-		<!--  <input type="hidden" id="HNum" />-->
+		  <input type="hidden" id="HNum" />
 		<hr style="border: solid 1px gray;">
 		<!-- 테이블 -->
 		<div id="orderList"></div>
@@ -64,7 +64,16 @@
 		<button id="btnInsert" class="btn1">행추가</button>
 		<button id="btnDelete" class="btn1">행삭제</button>
 	</div>
-	
+				<!-- 제품명 -->
+			<div id="PNM1">
+			
+		<!--  <input type="hidden" id="HNum" />-->
+		<hr style="border: solid 1px gray;">
+		<!-- 테이블 -->
+		<div id="orderList1"></div>
+		<button id="btnPlanSelect" class="btn1">계획조회</button>
+		<button id="btnPlanCancel" class="btn1">계획취소</button>
+	</div>
 
 	<div id="test"></div>
 	</div>
@@ -75,17 +84,54 @@
 	
 $('#inBtn').on('click', function(){
 	$('#PNM').hide();
-	$('#orderList').empty();
+	$('#PNM1').show();
+	$('#orderList1').empty();
 	$('#outBtn').removeClass();
 	$('#outBtn').attr("class", "clickB");
 	$('#inBtn').removeClass();
 	$('#inBtn').attr("class", "btn1");
-		
+	
+	 resultGrid = new tui.Grid({
+			el : document.getElementById('orderList1'),
+			scrollX : false,
+			scrollY : false,
+			columns : [ {
+				header : '주문코드',
+				name : '주문코드',
+			}, {
+				header : '제품명',
+				name : '완제품명',
+			}, {
+				header : '제품코드',
+				name : '완제품코드',
+			}, {
+				header : '계획량',
+				name : '계획량',
+				editor : "text"
+
+			}, {
+				header : '생산일수',
+				name : '생산일수',
+				editor : "text"
+			}, {
+				header : '작업우선순위',
+				name : '작업우선순위',
+				editor : "text"
+			},
+			],
+			rowHeaders : [ 'checkbox' ],
+			pageOptions : {
+				useClient : true,
+				perPage : 5
+			}
+
+		});
 		
 })
 
 
 $("#outBtn").on("click", function(){
+	$('#PNM1').hide();
 	$('#PNM').show();
 	$('#orderList').empty();
 	$('#inBtn').removeClass();
@@ -246,7 +292,7 @@ $("#outBtn").on("click", function(){
 				
 		 }); */
 		btnModal.addEventListener("click", function() {
-			//$("#HNum").val("2");
+			$("#HNum").val("1");
 			$("#test").load("ordermodal", function() {
 
 				const myModal = new bootstrap.Modal('#myModal');
@@ -254,6 +300,15 @@ $("#outBtn").on("click", function(){
 		
 			})
 		});
+		 btnPlanSelect.addEventListener("click", function() {
+				$("#HNum").val("2");
+				$("#test").load("ordermodal", function() {
+
+					const ProcPlModal = new bootstrap.Modal('#ProcPlModal');
+					ProcPlModal.show();
+			
+				})
+			});
 		btnInsert.addEventListener("click", function() {
 			resultGrid.appendRow();
 		});

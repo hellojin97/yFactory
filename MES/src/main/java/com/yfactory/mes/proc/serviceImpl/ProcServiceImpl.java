@@ -31,16 +31,15 @@ public class ProcServiceImpl implements ProcService{
 	}
 
 	@Override
-	public List<Map> prdtPlanSelect(Date date1, Date date2) {
+	public List<Map> prdtPlanSelect(String date1, String date2) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.prdtPlanSelect(date1, date2);
 	}
 
-	@Override
-	public int prdtPlanInsert(String PP_NM, Date date1) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	/*
+	 * @Override public int prdtPlanInsert(String PP_NM, Date date1) { // TODO
+	 * Auto-generated method stub return 0; }
+	 */
 
 	@Override
 	public List<Map> ProcOrderSelectAll() {
@@ -66,5 +65,33 @@ public class ProcServiceImpl implements ProcService{
 		//return map.ProcPlanInsert(procPI);
 		return 1;
 	}
+
+
+
+
+	@Override
+	public List<Map> procPlanAll() {
+		// TODO Auto-generated method stub
+		return map.procPlanAll();
+	}
+
+
+
+
+	@Override
+	public int prdtPlanInsert(String PP_NM, java.util.Date date1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+
+
+
+
+
+
 	
 }

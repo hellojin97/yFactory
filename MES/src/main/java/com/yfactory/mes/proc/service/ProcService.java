@@ -1,6 +1,7 @@
 package com.yfactory.mes.proc.service;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +13,12 @@ public interface ProcService {
 	int ProcPlanInsert(HashMap<String, Object> procPI);	//계획 등록
 	
 	List<Map> PrdSelect();		//제품 목록 조회
-	List<Map> prdtPlanSelect(Date date1, Date date2);	//생산계획 조회
 	
 	int prdtPlanInsert(String PP_NM, Date date1);
 	
 	List<Map>  PrdSelectOne(String prodCd);
 	
+	public List<Map> procPlanAll();
+	List<Map> prdtPlanSelect(String date1, String date2);	//날짜별 생산계획조회
 	
 }

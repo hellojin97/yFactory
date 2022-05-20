@@ -94,8 +94,13 @@ unorder.on("dblclick",function(e) {
 		dataType : "JSON",
 		contentType : "application/json; charset=utf-8"
 	  	}).done(function(result){
-	  		 prodPlan.resetData(result); 
-	     	console.log(result);
+	  		for (var i = 0; i < result.length; i++) {
+				if(result[i].구분 != null){
+					prodPlan.appendRow(result[i]);
+				}			
+			}
+	  		 
+	     	
 	  	 }).fail(function(result){
 	  	    console.log(result);
 	     });
@@ -131,15 +136,15 @@ unorder.on("dblclick",function(e) {
       },
       {
         header: '자재코드',
-        name: '자재코드'
+        name: '원자재코드'
       },
       {
           header: '자재명',
-          name: '자재명'
+          name: '원자재명'
         },
       {
           header: '재고 구분',
-          name: '완제품 대비 소요량'
+          name: '구분'
         }
     ],
     rowHeaders: ['rowNum'],

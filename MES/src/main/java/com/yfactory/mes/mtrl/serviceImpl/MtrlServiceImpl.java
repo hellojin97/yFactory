@@ -62,6 +62,12 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.mtrlPlanList(ppCd);
 	}
 
+	@Override
+	public List<Map> mtrlOrderList(String ppCd, String mtCd) {
+		// TODO Auto-generated method stub
+		return map.mtrlOrderList(ppCd, mtCd);
+	}
+
 
 
 }

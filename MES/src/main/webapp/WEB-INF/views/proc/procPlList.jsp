@@ -19,10 +19,10 @@
 				<div class="col-md-5 " style="padding-bottom: 10px;">
 					<div class="input-group  " style="padding-bottom: 10px;">
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">생산계획명</label> 
-							<input type="text" id="ProcPN" class="form-control" style="width: 50px" placeholder="생산계획명" id="">
-							<a class="nav-link nav-icon search-bar-toggle" id="NmSearch" onclick="NmSearch">
+							<input type="text" id="ProcPN" class="form-control" style="width: 50px" placeholder="생산계획명" >
+<!-- 							<a class="nav-link nav-icon search-bar-toggle" id="NmSearch" onclick="NmSearch">
 							<i class="bi bi-search" style="color: #2c3e50"></i>
-							</a>
+							</a> -->
 					</div>
 				</div>
                 
@@ -37,7 +37,7 @@
 					</div>
 				</div>
 			</div>
-			<input type="hidden" id="HNum" />
+			<!--  <input type="hidden" id="HNum" />-->
 			<hr style="border: solid 1px gray;">
 			<!-- 테이블 -->
 				<div id="orderList"></div>
@@ -63,16 +63,24 @@
 
 		 })
 		 }); */
-		
+		 //초기화 버튼클릭시
+		 BtnClear.addEventListener("click", function() {
+			 $('#ProcPN').val('');
+			 resultGrid.clear();
+		 });
+		 
 		 btnDtlInsert.addEventListener("click", function() {
 			 let checkedAry = [];
+			 let ary = [];
 			 let prd = resultGrid.getCheckedRows();
-			 for (var i = 0; i < prd.length; i++) {
-				checkedAry.push(prd[i].rowKey);
-			}
+			 //console.log(prd);
+ 			 for (var i = 0; i < prd.length; i++) {
+				checkedAry.push((prd[i].rowKey)); // %f6y => 빼빼로
+				//checkedAry.push(decodeURI(prd[i])); // %f6y => 빼빼로
+			} 
 			
 			//console.log(index);
-			 Swal.fire({
+			  Swal.fire({
 		          title: '정말로 그렇게 하시겠습니까?',
 		          text: "다시 되돌릴 수 없습니다. 신중하세요.",
 		          icon: 'warning',
@@ -90,18 +98,24 @@
 		                  '화끈하시네요~!',
 		                  'success'
 		              )
+		              let ppNm = $('#ProcPN').val();
+		              let ppDt = $('#date').val();
+		              
+		              //JSON 
 		              //승인시 계획등록 ajax
+		              var data = {
+							   ppNm : ppNm,
+							   ppDt : ppDt,
+							   array : prd,
+							   }
+		              console.log(data);
 		               $.ajax({
 					   url  : "procPlanInsert",
-					   data : {
-						   ppNm : ppNm,
-						   ppDt : ppDt,
-						   pdQty : pdQty,
-						   pdDt : pdDt,
-						   pdRank : pdRank
-						   },
+					   data : JSON.stringify(data),
+					   type : "POST",
 					   dataType : "JSON",
 					   contentType : "application/json; charset = UTF-8;"
+						   
 				   }).done(function(result){
 						alert("등록완료");
 				   })
@@ -115,9 +129,10 @@
 		                      'error'
 		                  )
 		          }
-		      })
+		      }) 
 		});
-		 ProcPN.addEventListener("dblclick", function() {
+		 
+/* 		 ProcPN.addEventListener("dblclick", function() {
 			 $("#HNum").val("1");
 			 
 			$("#test").load("ordermodal", function() {
@@ -132,11 +147,11 @@
 					const myModal = new bootstrap.Modal('#myModal');
 					myModal.show();
 			
-				})*/
+				})
 				
-		 });
+		 }); */
 		btnModal.addEventListener("click", function() {
-			$("#HNum").val("2");
+			//$("#HNum").val("2");
 			$("#test").load("ordermodal", function() {
 
 				const myModal = new bootstrap.Modal('#myModal');
@@ -179,11 +194,8 @@
 					header : '작업우선순위',
 					name : '작업우선순위',
 					editor : "text"
-				}, {
-					header : '수량',
-					name : '수량',
-					editor : "text"
-				}, ],
+				},
+				],
 				rowHeaders : [ 'checkbox' ],
 				pageOptions : {
 					useClient : true,

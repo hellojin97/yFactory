@@ -28,7 +28,7 @@
 			</div>
 		</div>
 		</div>
-			<div id="ProcModal" class="modal fade" tabindex="-1">
+<!-- 			<div id="ProcModal" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -43,16 +43,16 @@
 						data-bs-dismiss="modal">Cancel</button>
 					<button type="button" id="btnSav" class="btn btn-primary">Save
 						changes</button>
-					<!-- 사용시 필히 onclick 이용 onclick="location.href='/board'"  -->
+					사용시 필히 onclick 이용 onclick="location.href='/board'" 
 				</div>
 
 		</div>
 	</div>
-</div>
+</div> -->
 
 <script>
 $(function(){
-	if($("#HNum").val() == 1){
+	/* if($("#HNum").val() == 1){
 	const url = "procOrderListAjax";
 	   $.ajax(url,{
 		   dataType : "JSON",
@@ -93,7 +93,8 @@ $(function(){
 	                    }
 	     });
 	   
-	}else{
+	 }else{
+	}  */
 		const url = "procOrderListAjax";
 		   $.ajax(url,{
 			   dataType : "JSON",
@@ -136,7 +137,7 @@ $(function(){
 		                         perPage: 5
 		                    }
 		     });
-	}
+	
 
   
   $("#btnSav").click(function () {

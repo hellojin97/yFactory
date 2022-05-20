@@ -71,22 +71,22 @@ input.img-button {
 				
 				제작업체<input id="vdr_code" name="vdr_code" size=10 	maxlength=8>
 				
-				UPH*<input id="uph" name="uph" size=10 maxlength=8>
+				UPH*<input type="number" min="1" max="500" id="eq_uph" name="eq_uph" size=10 maxlength=8>
 				
 
 		 <br /><br/> 
 		
-					가용온도<input id="eq_min" name="eq_min" size=10 maxlength=8 placeholder="최소온도 기입">&nbsp;~&nbsp;
-					<input id="eq_max" name="eq_max" size=10 maxlength=8 placeholder="최대온도 기입"> ℃ 
-					점검주기<input 	id="eq_chkcyc" name="eq_chkcyc" size=10 maxlength=8>
+					가용온도<input type="number" min="-20" max="0" id="eq_min" name="eq_min" size=10 maxlength=8 placeholder="최소온도 기입">&nbsp;~&nbsp;
+					<input type="number"  min="20" max="200" id="eq_max" name="eq_max" size=10 maxlength=8 placeholder="최대온도 기입"> ℃ 
+					점검주기<input type="number" min="3" max="7"	id="eq_chkcyc" name="eq_chkcyc" size=10 maxlength=8>
 					
 		<br/><br/>
 		
-			등록인<input	id="eq_inster" name="eq_inster" size=10 maxlength=8>
+			등록인<input type="number" min="1000" id="eq_inster" name="eq_inster" size=10 maxlength=8>
 			구매일자<input type="date"	id="eq_purdt" name="eq_purdt" size=10 maxlength=8>
 	
 	
-			<input type="hidden" id="uuid" name="uuid"  size=10 value="">
+			<input type="hidden" id="uuid" name="uuid"  size=10 >
 			<input type="hidden" id="img_path" name="img_path" size=10 value="">
 			<input type="hidden" id="img_nm" name="img_nm"  size=10 value="">
 			
@@ -122,6 +122,20 @@ $("#btnok").on("click",function(){
 	
 })
 
+// UUID 생성 부 - 미사용 중
+// 참고 : https://developyo.tistory.com/110
+function makeUUID(){
+	
+	return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+	
+	//   	function s4() {
+	   //  return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+	   // 	}
+	   // 	 return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + file_nm.substr(file_nm.indexOf("."), file_nm.length-1); */
+	} 
+
+
+
 // 이미지 파일 썸네일 보기 구현완료
 function readURL(input) {
     	if (input.files && input.files[0]) {
@@ -130,7 +144,7 @@ function readURL(input) {
 		
         //파일이름 가져옴
         var imgNm = input.files[0].name;
-      	
+      	var imgSrc = null;
         
         // 이미지 파일 명 input 에 넣기
         img_nm.value = imgNm;
@@ -142,7 +156,8 @@ function readURL(input) {
         	
         	
         	 // 이미지 고유 경로 input에 넣기
-        	img_path.value=tempImage.src;
+        	//img_path.value=tempImage.src;
+        	
         	//console.log("img_path: "+ img_path.value);
         	
         	tempImage.onload=function(){
@@ -152,6 +167,10 @@ function readURL(input) {
         		
             	var img = new Image();
 	        	img.src = e.target.result;
+	        	console.log("img.src:" + img.src);
+	        	
+	        	img_path.value=img.src;
+	        	
 	        	
 	        	
         		canvas.width=img.width*0.7;
@@ -163,16 +182,33 @@ function readURL(input) {
         		
         		document.querySelector("#prevu").src=dataURI; // 
         		document.querySelector("#prevu").style.visibility="visible"; // 엑박이 아닐경우 보이기 
+        		
+        		imgSrc = img.src;
+        		
         		}
         
-        	
         	
         	};
         	
     	}
+    	uuid.value = makeUUID();
+    	
     	
     	console.log("img_nm: "+ img_nm.value);
-    	console.log("img_path: "+ img_path.value);
+    	console.log("img_src: "+ imgSrc);
+    	
+    	console.log("eq_mdnm: "+ eq_mdnm.value);
+    	console.log("eq_cd: "+ eq_cd.value);
+    	console.log("vdr_code: "+ vdr_code.value);
+    	console.log("eq_min: "+ eq_min.value); 
+    	console.log("eq_max: "+ eq_max.value); 
+    	console.log("eq_uph: "+ eq_uph.value); 
+    	console.log("eq_purdt: "+ eq_purdt.value); 
+    	
+    	console.log("eq_inster: "+ eq_inster.value); 
+    	console.log("uuid: "+ uuid.value); 
+    	
+    	
     	
 	}
 	
@@ -212,14 +248,7 @@ function readURL(input) {
 //})
 
 
-// UUID 생성 부 - 미사용 중
-// 참고 : https://developyo.tistory.com/110
-/* function makeUUID(file_nm){
-	   function s4() {
-	     return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
-	   }
-	   return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + file_nm.substr(file_nm.indexOf("."), file_nm.length-1);
-	} */
+
 
 
 

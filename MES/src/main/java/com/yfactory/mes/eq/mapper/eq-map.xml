@@ -20,13 +20,12 @@
 </select>
 
 
-<insert id="insertEq" statementType="CALLABLE" >
-
-	{ call eq_insert(GET_EQ_CD , #{vdr_code}, #{eq_nm}, #{eq_min}, #{eq_max} , 
+<insert id="insertEq" statementType="CALLABLE" parameterType="com.yfactory.mes.eq.vo.EqVO">
+	{call eq_insert(#{vdr_code}, #{eq_nm}, #{eq_min}, #{eq_max} , 
 				#{eq_chkcyc}, #{eq_mdno} ,#{eq_purdt} , #{eq_actst}, #{eq_uph},
-				#{eq_inster} , #{uuid} , #{eq_mdnm}, #{img_path}, #{img_nm})
-	}
-				
+				#{eq_inster} , #{uuid} , #{eq_mdnm}, #{img_path}, #{img_nm}
+				)
+	}			
 </insert>
 
 	<!-- INSERT INTO EQ(

@@ -4,77 +4,82 @@
 	<!-- 조회 -->
 	<!-- 자재 품질검사요청(modal) 조회 -->
 	<select id="selectpoDtlRequest" resultType="map">
-		SELECT	mpd.po_dtlcd as "발주상세코드",
-				mp.mt_cd as "자재코드",
-				mt.mt_nm as "자재명"
-		FROM	mt_podtl mpd,
-				mt_po mp,
-				mt mt
-		WHERE	mpd.po_cd = mp.po_cd
-		AND		mp.mt_cd = mt.mt_cd
+		SELECT 
+		        MPD.PO_DTLCD as "발주상세코드",
+		        MT.MT_CD as "자재코드",
+		        MT.MT_NM as "자재명",
+		        VDR.VDR_NM as "업체명",
+		        MPD.PO_QTY as "발주량"
+		FROM 	MT_PODTL MPD, MT MT, VENDOR VDR, MT_PO MP
+		WHERE 	MPD.PO_CD = MP.PO_CD
+		AND     MP.MT_CD = MT.MT_CD
+		AND     MP.VDR_CD = VDR.VDR_CD
 	</select>
 	<!-- 제품 품질검사요청(modal) 조회 -->
 	
+	<!-- 자재 품질검사요청 -->
+	
+	
 	<!-- 자재검사관리 조회 -->
 	<select id="selectMtCheckMgr" resultType="map">
-		SELECT  chk.po_dtlcd as "발주상세코드",
-				chk.mtrl_cd as "자재코드",
-				mt.mt_nm as "자재명",
-				mpd.mt_prc as "단가",
-				mpd.po_qty as "발주량",
-				chk.chk_passqty as "합격량",
-				mel.chk_errqty as "불량량",
-				mel.err_cd as "불량코드",
-				err.err_dtl as "불량내역",
-				chk.chk_insp as "상태"
+		SELECT  CHK.PO_DTLCD AS "발주상세코드",
+				MT.MT_CD AS "자재코드",
+				MT.MT_NM AS "자재명",
+				MPD.MT_PRC AS "단가",
+				MPD.PO_QTY AS "발주량",
+				CHK.CHK_PASSQTY AS "합격량",
+				MEL.CHK_ERRQTY AS "불량량",
+				MEL.ERR_CD AS "불량코드",
+				ERR.ERR_DTL AS "불량내역",
+				CHK.CHK_INSP AS "상태"
 		
-		FROM 	mt_chk chk,
-				mt mt,
-				mt_podtl mpd,
-				mt_errlist mel,
-				err_code err,
-		        mt_po po
+		FROM 	MT_CHK CHK,
+				MT MT,
+				MT_PODTL MPD,
+				MT_ERRLIST MEL,
+				ERR_CODE ERR,
+		        MT_PO PO
 		
-		WHERE	chk.po_dtlcd = mpd.po_dtlcd
-		AND 	mpd.po_cd = po.po_cd
-		AND 	chk.mtrl_cd = mt.mt_cd
-		AND 	mel.po_dtlcd = mpd.po_dtlcd
-		AND 	mel.err_cd = err.err_cd
+		WHERE	CHK.PO_DTLCD = MPD.PO_DTLCD
+		AND 	MPD.PO_CD = PO.PO_CD
+		AND 	CHK.MTRL_CD = MT.MT_CD
+		AND 	MEL.PO_DTLCD = MPD.PO_DTLCD
+		AND 	MEL.ERR_CD = ERR.ERR_CD
 	</select>
 	<!-- 제품검사관리 조회 -->
 	<select id="selectProdCheckMgr" resultType="map">
-		SELECT	per.prod_lot as "제품LOT",
-				pid.prod_cd as "제품코드",
-				p.prod_nm as "제품명",
-				ppr.proc_cd as "공정코드",
-				pc.eq_cd as "설비코드",
-				ps.proc_qty as "생산량",
-				ps.proc_passqty as "합격량",
-				pe.err_qty as "불량량",
-				pe.err_cd as "불량코드",
-				err.err_dtl as "불량내역",
-				ps.proc_st as "상태"
+		SELECT	PER.PROD_LOT AS "제품LOT",
+				P.PROD_CD AS "제품코드",
+				P.PROD_NM AS "제품명",
+				PC.PROC_CD AS "공정코드",
+				PC.EQ_CD AS "설비코드",
+				PS.PROC_QTY AS "생산량",
+				PS.PROC_PASSQTY AS "합격량",
+				PE.ERR_QTY AS "불량량",
+				PE.ERR_CD AS "불량코드",
+				ERR.ERR_DTL AS "불량내역",
+				PS.PROC_ST AS "상태"
 		
-		FROM	prod_err per,
-				prod_lot plo,
-				prd_insdtl pid,
-				proc_prc ppr,
-				prod p,
-				process pc,
-				proc_st ps,
-				proc_err pe,
-				err_code err
+		FROM	PROD_ERR PER,
+				PROD_LOT PLO,
+				PRD_INSDTL PID,
+				PROC_PRC PPR,
+				PROD P,
+				PROCESS PC,
+				PROC_ST PS,
+				PROC_ERR PE,
+				ERR_CODE ERR
 		
-		WHERE	pid.prod_cd = p.prod_cd
-		AND 	ppr.prd_dtlcd = pid.prd_dtlcd
-		AND		ppr.proc_cd = pc.proc_cd
-		AND 	ps.proc_prcd = ppr.proc_prcd
-		AND 	ps.line_turn = ppr.line_turn
-		AND 	ps.prd_dtlcd = ppr.prd_dtlcd
-		AND 	pe.proc_prcd = ppr.proc_prcd
-		AND 	pe.line_turn = ppr.line_turn
-		AND 	pe.prd_dtlcd = ppr.prd_dtlcd
-		AND 	pe.err_cd = err.err_cd
+		WHERE	PID.PROD_CD = P.PROD_CD
+		AND 	PPR.PRD_DTLCD = PID.PRD_DTLCD
+		AND		PPR.PROC_CD = PC.PROC_CD
+		AND 	PS.PROC_PRCD = PPR.PROC_PRCD
+		AND 	PS.LINE_TURN = PPR.LINE_TURN
+		AND 	PS.PRD_DTLCD = PPR.PRD_DTLCD
+		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
+		AND 	PE.LINE_TURN = PPR.LINE_TURN
+		AND 	PE.PRD_DTLCD = PPR.PRD_DTLCD
+		AND 	PE.ERR_CD = ERR.ERR_CD
 	</select>
 	<!-- 자재검사결과 조회 -->
 	<select id="selectMtCheck" resultType="map">
@@ -198,15 +203,22 @@
 
 	<!-- 검색 -->
 	<!-- 자재 품질검사요청(modal) 조회 -->
-	<select id="searchpoDtlRequest">
+	<select id="searchpoDtlRequest" resultType="map">
 		SELECT	mpd.po_dtlcd as "발주상세코드",
 				mp.mt_cd as "자재코드",
-				mt.mt_nm as "자재명"
+				mt.mt_nm as "자재명",
+				vdr.vdr_nm as "업체명",
+				mpd.po_qty "발주량"
 		FROM	mt_podtl mpd,
 				mt_po mp,
-				mt mt
+				mt mt,
+				vendor vdr
 		WHERE	mpd.po_cd = mp.po_cd
 		AND		mp.mt_cd = mt.mt_cd
+		AND 	mp.vdr_cd = vdr.vdr_cd
+		<if test="mtName != ''">
+		AND 	mt.mt_nm LIKE '%' || #{mtName} || '%'
+		</if>
 	</select>
 	<!-- 자재검사결과 검색 -->
 	<select id="searchMtQuality" resultType="map">

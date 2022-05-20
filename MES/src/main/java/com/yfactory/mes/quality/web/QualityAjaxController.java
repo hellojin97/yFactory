@@ -20,7 +20,6 @@ public class QualityAjaxController {
 		
 		return qaService.selectpoDtlRequest();
 	}
-	
 	// 제품 품질검사요청(modal)
 	
 	// 자재 품질검사관리
@@ -40,8 +39,8 @@ public class QualityAjaxController {
 	// 검색
 	// 자재 품질검사요청(modal)
 	@GetMapping("/pocdModalSearch")
-	public List<Map> searchpoDtlRequest() {
-		return qaService.searchpoDtlRequest();
+	public List<Map> searchpoDtlRequest(String mtName) {
+		return qaService.searchpoDtlRequest(mtName);
 	}
 	// 자재품질결과
 	

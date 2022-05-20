@@ -41,5 +41,11 @@ public interface SalesMapper {
 		
 	//출고 검색
 	List<Map> searchWrnOut(@Param("pnm") String pnm, @Param("pcd") String pcd, @Param("fdt1") String fdt1, @Param("fdt2") String fdt2);
+	
+	//주문상세 조회
+	List<Map> ordDtpList();
+	
+	//출고 완제품 modal 조회
+	List<Map> outProdModal(String key);
 }
 

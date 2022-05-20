@@ -27,12 +27,32 @@
 
 			</div>
 		</div>
+		</div>
+<!-- 			<div id="ProcModal" class="modal fade" tabindex="-1">
+		<div class="modal-dialog modal-lg modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">상세 계획 목록</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<div id="pGrid"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cancel</button>
+					<button type="button" id="btnSav" class="btn btn-primary">Save
+						changes</button>
+					사용시 필히 onclick 이용 onclick="location.href='/board'" 
+				</div>
+
+		</div>
 	</div>
-</div>
+</div> -->
 
 <script>
 $(function(){
-	
+	/* if($("#HNum").val() == 1){
 	const url = "procOrderListAjax";
 	   $.ajax(url,{
 		   dataType : "JSON",
@@ -45,7 +65,7 @@ $(function(){
 		   
 	   var grid = new tui.Grid({
 
-	       el: document.getElementById('grid'),
+	       el: document.getElementById('pGrid'),
 	       scrollX: false,
 	       scrollY: false,
 	       columns: [
@@ -65,10 +85,7 @@ $(function(){
 	               header: '납기일자',
 	               name: '납기일자',
 	             },
-	             {
-	                 header: '주문수량',
-	                 name: '주문수량',
-	               }],
+	             ],
 	   					rowHeaders: ['rowNum'],
 	                     pageOptions: {
 	                         useClient: true,
@@ -76,7 +93,51 @@ $(function(){
 	                    }
 	     });
 	   
+	 }else{
+	}  */
+		const url = "procOrderListAjax";
+		   $.ajax(url,{
+			   dataType : "JSON",
+			   method: "GET"
+		   }).done(function(result){
+			   
+			   grid.resetData(result);
+		   })
+		   
+			   
+		   var grid = new tui.Grid({
 
+		       el: document.getElementById('grid'),
+		       scrollX: false,
+		       scrollY: false,
+		       columns: [
+		    	 {
+			           header: '주문상세코드',
+			           name: '주문코드',
+			      },
+		         {
+		           header: '주문일자',
+		           name: '주문일자',
+		         },
+		         {
+		             header: '업체명',
+		             name: '업체명',
+		           },
+		           {
+		               header: '납기일자',
+		               name: '납기일자',
+		             },
+		             {
+		                 header: '주문수량',
+		                 name: '주문수량',
+		               }],
+		   					rowHeaders: ['rowNum'],
+		                     pageOptions: {
+		                         useClient: true,
+		                         perPage: 5
+		                    }
+		     });
+	
 
   
   $("#btnSav").click(function () {

@@ -42,5 +42,10 @@ public interface SalesService {
 	//출고 검색
 	List<Map> searchWrnOut(String pnm, String pcd, String fdt1, String fdt2);
 	
+	//주문상세 조회
+	List<Map> ordDtpList();
+	
+	//출고 완제품 modal 조회
+	List<Map> outProdModal(String key);
 
 }

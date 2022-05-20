@@ -1,28 +1,36 @@
-package com.yfactory.mes.quality.service;
+package com.yfactory.mes.quality.web;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public interface QualityService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.yfactory.mes.quality.service.QualityService;
+
+@RestController
+public class QualityAjaxController {
+	@Autowired private QualityService qaService;
+	
 	// 조회
 	// 자재 품질검사요청(modal)
-	List<Map> selectpoDtlRequest();
-	
+	@GetMapping("/selectpoDtlRequest")
+	public List<Map> selectpoDtlRequest() {
+		
+		return qaService.selectpoDtlRequest();
+	}
 	// 제품 품질검사요청(modal)
 	
 	// 자재 품질검사관리
-	List<Map> selectMtCheckMgr();
 	
 	// 제품 품질검사관리
 	
 	// 자재 검사결과
-	List<Map> selectMtCheck();
 	
 	// 제품 검사결과
 	
 	// 자재 불량내역
-	List<Map> selectMtErrList();
 	
 	// 제품 불량내역
 	
@@ -30,19 +38,17 @@ public interface QualityService {
 	
 	// 검색
 	// 자재 품질검사요청(modal)
-	List<Map> searchpoDtlRequest(String mtName);
-	
+	@GetMapping("/pocdModalSearch")
+	public List<Map> searchpoDtlRequest(String mtName) {
+		return qaService.searchpoDtlRequest(mtName);
+	}
 	// 자재품질결과
-	List<Map> searchMtQuality( Date startDate, Date endDate, String mtName);
 	
 	// 제품품질결과
-	List<Map> searchProdQuality(String prodName);
 	
 	// 자재불량내역
-	List<Map> searchMtErrList(String errDtl, String mtName);
 	
 	// 제품불량내역
-	List<Map> searchProdErrList(String errDtl, String prodName);
 	
 	// ------------------------------------------------
 	
@@ -57,4 +63,5 @@ public interface QualityService {
 	// 자재 품질검사
 	
 	// 제품 품질검사
+	
 }

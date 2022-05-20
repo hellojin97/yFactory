@@ -78,4 +78,14 @@ public class SalesServiceImpl implements SalesService {
 		return map.searchWrnOut(pnm, pcd, fdt1, fdt2);
 	}
 
+	@Override
+	public List<Map> ordDtpList() {
+		return map.ordDtpList();
+	}
+
+	@Override
+	public List<Map> outProdModal(String key) {
+		return map.outProdModal(key);
+	}
+
 }

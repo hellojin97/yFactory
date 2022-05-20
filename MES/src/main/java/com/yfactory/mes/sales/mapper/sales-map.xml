@@ -218,11 +218,21 @@
 		FROM	ord_dtl ordtl, orders ord, prod pd
 		WHERE	ordtl.ord_cd = ord.ord_cd
 		AND		ordtl.prod_cd = pd.prod_cd
+		AND     ord.prog_cd NOT LIKE '출고처리완료'
 	</select>
 	
 	<!-- 출고관리-완제품modal -->
 	<select id="outProdModal" resultType="map">
-		
+		SELECT      pdlot.prod_lot AS "완제품 LOT 번호",
+                	pd.prod_nm AS "완제품명",
+                	pdc.prod_qty AS "완제품 현재고",                
+                	pdlot.prod_fdt AS "제조일자",
+                	pdlot.prod_exp AS "유통기한"
+		FROM        ord_dtl ordtl, prod pd, prod_lot pdlot, prod_curqty pdc
+		WHERE       ordtl.prod_cd = pd.prod_cd
+		AND         pd.prod_cd = pdlot.prod_cd
+		AND         pdc.prod_lot = pdlot.prod_lot
+		AND         ordtl.ordtl_cd = #{key}
 	</select>
 	
 </mapper>

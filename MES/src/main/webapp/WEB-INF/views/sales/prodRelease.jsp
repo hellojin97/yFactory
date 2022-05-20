@@ -23,7 +23,7 @@
 	
 	<div class="min1" >
 	<h4>주문 상세</h4>
-	<div id="ordDtpList" ></div>
+	<div id="ordDtpList"></div>
 	
 	<hr style="border: solid 1px gray;">
 

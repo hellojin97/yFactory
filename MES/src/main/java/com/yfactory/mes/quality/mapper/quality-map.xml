@@ -22,16 +22,14 @@
 	
 	<!-- 자재검사관리 조회 -->
 	<select id="selectMtCheckMgr" resultType="map">
-		SELECT	CHK.PO_DTLCD "발주상세코드", MT.MT_CD "자재코드", MT.MT_NM "자재명", CHK.CHK_DT "검사일자", 
-				MPD.PO_QTY "발주량", CHK.CHK_PASSQTY "합격량", MEL.CHK_ERRQTY "불량량", MEL.ERR_CD "불량코드", 
-				ERR.ERR_NM "불량명", ERR.ERR_DTL "불량내역", E.EMP_NM "담당자", CC.CD_NM "상태" 
-		FROM	MT_CHK CHK, MT_ERRLIST MEL, MT MT, ERR_CODE ERR, EMPLOYEE E, COMM_CODE CC, MT_PODTL MPD
-		WHERE	CHK.PO_DTLCD = MPD.PO_DTLCD
-		AND		CHK.MTRL_CD = MT.MT_CD
-		AND		CHK.CHK_MNGR = E.EMP_NO
-		AND		CHK.CHK_INSP = CC.COMM_CD
-		AND		MEL.ERR_CD = ERR.ERR_CD
-		AND		MEL.PO_DTLCD = MPD.PO_DTLCD
+		SELECT 	MPD.PO_DTLCD "발주상세코드", MT.MT_CD "자재코드", 
+				MT.MT_NM "자재명", MPD.PO_QTY "발주량", CC.CD_NM "상태"
+		FROM 	MT_PODTL MPD, MT_PO MP, MT MT, COMM_CODE CC, MT_CHK CHK
+		WHERE 	MPD.PO_CD = MP.PO_CD
+		AND 	MP.MT_CD = MT.MT_CD
+		AND 	CHK.PO_DTLCD = MPD.PO_DTLCD
+		AND 	CHK.CHK_INSP = CC.COMM_CD
+		AND 	COMM_CD = 'MTRL01'
 	</select>
 	<!-- 제품검사관리 조회 -->
 	<select id="selectProdCheckMgr" resultType="map">

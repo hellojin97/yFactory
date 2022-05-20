@@ -39,8 +39,8 @@ public interface QualityMapper {
 	List<Map> searchProdErrList(@Param("errDtl") String errDtl,	@Param("prodName") String prodName);
 	
 	// 입력
-	int requestQualityM(MtCheckVO MCVO); // 자재 품질검사요청 입력
+	// 자재 품질검사요청 입력
 	
 	// 수정
-	int resultQualityM(); // 자재품질검사 수정
+	// 자재품질검사 수정
 }

@@ -2,6 +2,8 @@ package com.yfactory.mes.quality.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 /*
@@ -18,6 +20,7 @@ public class MtCheckVO {
 //	Mtrl_cd			자재코드			FK 		MT.mt_cd
 	private String mtrl_cd;
 //	chk_dt			검사일자
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date chk_dt;
 //	chk_passqty		합격량
 	private int chk_passqty;

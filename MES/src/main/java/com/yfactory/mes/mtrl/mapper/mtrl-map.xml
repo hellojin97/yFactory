@@ -46,6 +46,24 @@
 		AND       UPPER(pl.pp_cd) = #{ppCd}
 	</select>
 	
+	<!-- 발주요청서 등록 조회 -->
+	<select id="">
+		SELECT   M.MT_CD  "원자재코드",
+         		 M.MT_NM  "원자재명",
+        		 V.VDR_NM    "업체명",
+        		 MC.MT_QTY   "현재고",
+         		 SUM(B.CS_QTY * PLD.PD_QTY)   "계획대비 필요수량"
+		FROM     MT M, VENDOR V, MT_LOT ML ,MT_CURQTY MC, BOM B, PLAN_DTL PLD
+		WHERE    M.VEN_CD = V.VDR_CD
+		AND      M.MT_CD = ML.MT_CD
+		AND      ML.MT_LOT = MC.MT_LOT
+		AND      M.MT_CD = B.MT_CD
+		AND      B.PROD_CD = PLD.PROD_CD
+		AND      PLD.PP_CD = 'PL220519001'
+		AND      M.MT_CD = 'MT001'
+		GROUP BY M.MT_CD, M.MT_NM, V.VDR_NM, MC.MT_QTY;
+	</select>
+	
 	<!-- 자재lot재고조회 -->
 	<select id="listMtrlLot" resultType="map">
 		SELECT lot.mt_lot "mt_lot",

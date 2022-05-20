@@ -147,7 +147,7 @@
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 4
+			perPage : 10
 		}
 	});
 

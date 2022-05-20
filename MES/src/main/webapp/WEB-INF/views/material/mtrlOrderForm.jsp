@@ -27,12 +27,13 @@
 	<div class="min1" >
 	<h4>미지시 생산계획조회</h4>
 	<div id="unorder" ></div>
-
+	<input type="hidden" id="ppCd">
+	
 	<h4>생산계획별 자재 재고</h4>
 	<div id="prodPlan"></div>
 	
 	<h4>발주요청서 등록</h4>
-	<div id="prodPlan"></div>
+	<div id="mtrlRequest"></div>
 	</div>
 	</div>
 	
@@ -82,7 +83,7 @@ var unorder = new tui.Grid({
       perPage: 3
     }
   });
-//모달 데이터값 받아오기
+//생산계획코드 불러오기
 unorder.on("dblclick",function(e) {
 //debugger
    let ppCd1 = unorder.getValue(e.rowKey, 'pp_cd');
@@ -102,18 +103,6 @@ unorder.on("dblclick",function(e) {
    }
 );
   //생산계획별 자재재고 토스트
-/*   $.ajax({
-	url: "mtrlPlan",
-	method : "GET",
-	dataType : "JSON",
-	contentType : "application/json; charset=utf-8"
-  	}).done(function(result){
-  		prodPlan.resetData(result);
-     	console.log(result);
-  	 }).fail(function(result){
-  	    console.log(result);
-     }); */
-  
   var prodPlan = new tui.Grid({
     el: document.getElementById('prodPlan'),
     columns: [
@@ -140,6 +129,59 @@ unorder.on("dblclick",function(e) {
       {
           header: '재고 구분',
           name: '완제품 대비 소요량'
+        }
+    ],
+    rowHeaders: ['rowNum'],
+    pageOptions: {
+      useClient: true,
+      perPage: 5
+    }
+  });
+//생산계획코드,자재코드 불러오기
+  prodPlan.on("dblclick",function(e) {
+  //debugger
+     let ppCd1 = unorder.getValue(e.rowKey, 'pp_cd');
+     let p1 = $('#ppCd').val(ppCd1);
+	 let mtCd  = prodPlan.getValue(e.rowKey, '자재코드');
+     console.log(p1.val());
+	 console.log(mtCd);
+     }
+  );
+  //발주서 요청 조회
+  var mtrlRequest = new tui.Grid({
+    el: document.getElementById('mtrlRequest'),
+    columns: [
+      {
+        header: '원자재코드',
+        name: '원자재코드'
+      },
+      {
+        header: '원자재명',
+        name: '원자재명'
+      },
+      {
+        header: '업체명',
+        name: '업체명'
+      },
+      {
+        header: '납기요청일',
+        name: '납기요청일'
+      },
+      {
+          header: '현재고',
+          name: '현재고'
+        },
+      {
+          header: '현재고',
+          name: '현재고'
+        },
+      {
+          header: '계획대비 필요수량',
+          name: '계획대비 필요수량'
+        },
+      {
+          header: '발주량',
+          name: '발주량'
         }
     ],
     rowHeaders: ['rowNum'],

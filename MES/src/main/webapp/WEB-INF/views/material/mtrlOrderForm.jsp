@@ -39,6 +39,8 @@
 	
 
 </body>
+
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
@@ -203,7 +205,8 @@ unorder.on("dblclick",function(e) {
       },
       {
     	    header: '날짜',
-    	    name: 'date',
+    	    name: '납기요청일자',
+    	    editor: 'datePicker'
     	  },
       {
           header: '현재고',

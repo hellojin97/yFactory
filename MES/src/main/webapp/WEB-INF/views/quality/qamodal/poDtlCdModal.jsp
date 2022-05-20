@@ -21,13 +21,10 @@
 				<div class="modal-body">
 					<div class="col-md-8 " style="padding-bottom: 20px;">
 						<div class="input-group ">
-							<label for="inputText" class="col-form-label"
-								style="padding-right: 10px;">자재명</label> <input type="text"
-								class="form-control" style="width: 50px" id="mtName"
-								placeholder="자재명"> <a
-								class="nav-link nav-icon search-bar-toggle " id="mtnmSearch"
-								onclick="mtnmSearch"> <i class="bi bi-search"
-								style="color: #2c3e50"></i>
+							<label for="inputText" class="col-form-label" style="padding-right: 10px;">자재명</label> 
+							<input type="text" class="form-control" style="width: 50px" id="mtName" placeholder="자재명">
+							<a class="nav-link nav-icon search-bar-toggle " id="mtNameSearch" onclick="mtNameSearch">
+								<i class="bi bi-search" style="color: #2c3e50"></i>
 							</a>
 						</div>
 					</div>
@@ -42,14 +39,22 @@
 	<script>
 	
 	// 발주상세코드 조회
-	$.ajax({
-		url: "selectpoDtlRequest",
-		dataType: "JSON",
-		contentType : "application/json; charset=utf-8"
-	}).done(function(result){
-		grid.resetData(result);
-		console.log(result);
-	});
+	 $.ajax({
+			url: "selectpoDtlRequest",
+			dataType: "JSON",
+			method : "GET",
+			contentType : "application/json; charset=utf-8",
+			success : function(result) {
+				console.log(result);
+				grid.refreshLayout();
+				grid.resetData(result);
+			}
+		//}).done(function(result){
+			//grid.resetData(result);
+			//grid.refreshLayout();
+			//console.log(result);
+		});
+	
 	
 	var grid = new tui.Grid({
 		el: document.getElementById('poDtlCd'),
@@ -62,6 +67,12 @@
 		}, {
 			header: '자재명',
 			name: '자재명',
+		}, {
+			header: '업체명',
+			name: '업체명',
+		}, {
+			header: '발주량',
+			name: '발주량',
 		}],
 		rowHeaders: [ 'rowNum' ],
 		pageOptions : {
@@ -71,9 +82,20 @@
 	});
 	
 	
+	 
+	$('body').css("overflow", "hidden");
+	  
+	  var myModal = document.getElementById('poDtlCdModal')
+
+	  myModal.addEventListener('shown.bs.modal', function () {
+		  //ajax 호출
+		  //grid.resetData(data)
+	      grid.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
+	  })
+	
 	// 자재명 검색
-	$("#mtnmSearch").on("click",function(){
-		var key = $("#mtnm").val();
+	$("#mtNameSearch").on("click",function(){
+		var key = $("#mtName").val();
 		console.log(key);
 	
 	$.ajax({
@@ -84,7 +106,7 @@
 		dataType: 'JSON',
 		contentType : "application/json; charset=utf-8"
 	}).done(function(result){
-		prodList.resetData(result);
+		grid.resetData(result);
 		})
 	});
 	
@@ -92,15 +114,19 @@
 	grid.on("dblclick",function(e) {
     //debugger
        let poDtlCd = grid.getValue(e.rowKey, '발주상세코드');
-       let mtcd = grid.getValue(e.rowKey, '자재코드');
-       let mtnm = grid.getValue(e.rowKey, '자재명');
+	   let mtCd = grid.getValue(e.rowKey, '자재코드');
+       let mtName = grid.getValue(e.rowKey, '자재명');
+       let vName = grid.getValue(e.rowKey, '업체명');
+       let poQty = grid.getValue(e.rowKey, '발주량'); 
        
        
        
        $("#pdt").val(poDtlCd);
-       $("#mcd").val(mtcd);
-       $("#mnm").val(mtnm);
-       $('#poDtlCdModal').modal('hide');
+       $("#mcd").val(mtCd);
+       $("#mnm").val(mtName);
+       $("#vnm").val(vName);
+       $("#pqty").val(poQty);
+       $('#myModal').modal('hide');       
        }
     );
 	</script>

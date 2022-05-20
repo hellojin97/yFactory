@@ -30,7 +30,7 @@ public interface QualityService {
 	
 	// 검색
 	// 자재 품질검사요청(modal)
-	List<Map> searchpoDtlRequest();
+	List<Map> searchpoDtlRequest(String mtName);
 	
 	// 자재품질결과
 	List<Map> searchMtQuality( Date startDate, Date endDate, String mtName);

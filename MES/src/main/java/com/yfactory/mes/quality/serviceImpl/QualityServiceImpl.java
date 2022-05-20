@@ -36,8 +36,8 @@ public class QualityServiceImpl implements QualityService {
 	}
 	
 	@Override
-	public List<Map> searchpoDtlRequest() {
-		return map.searchpoDtlRequest();
+	public List<Map> searchpoDtlRequest(String mtName) {
+		return map.searchpoDtlRequest(mtName);
 	}
 
 	@Override

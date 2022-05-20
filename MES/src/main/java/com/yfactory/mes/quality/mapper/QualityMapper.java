@@ -23,7 +23,7 @@ public interface QualityMapper {
 	List<Map> selectMtErrList();
 	
 	// 자재 품질검사요청(modal) 검색
-	List<Map> searchpoDtlRequest();
+	List<Map> searchpoDtlRequest(@Param("mtName") String mtName);
 	
 	// 자재품질결과 검색
 	List<Map> searchMtQuality(@Param("startDate") Date startDate, @Param("endDate") Date endDate,

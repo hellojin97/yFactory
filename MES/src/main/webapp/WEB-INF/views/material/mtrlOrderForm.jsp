@@ -13,6 +13,19 @@
 	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<style type="text/css">
+.clickB {     
+	color: black;
+    text-align: center;
+    
+    border: solid 1px #2c3e50;
+    margin: 3px;
+    line-height: 25px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px 5px 0px 0px;
+		    }
+</style>
+
 </head>
 <body>
 	<div>
@@ -21,8 +34,8 @@
 	</div>
 
 	<div class="min2" >
-		<button  class="btn2">관리</button>
-		<button class="btn2">등록</button>
+		<button  class="btn2" id="btnMg">등록</button>
+		<button class="clickB" id="btnIn">관리</button>
 	</div>
 	<div class="min1" >
 	<h4>미지시 생산계획조회</h4>
@@ -47,6 +60,27 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
+
+// 발주 등록
+$('#btnMg').on('click', function(){
+	$('#btnMg').removeClass();
+	$('#btnMg').attr("class", "btn2");
+	$('#btnIn').removeClass();
+	$('#btnIn').attr("class", "clickB");
+	
+	$.ajax({
+		url: "mtrlorder",
+		method : "GET",
+		dataType : "JSON",
+		success : function(result){
+			unorder.resetData(result);
+			console.log(result);
+			
+		}
+	});
+	
+	
+})
 
 // 미지시 생산계획조회 토스트
 $.ajax({
@@ -235,6 +269,26 @@ unorder.on("dblclick",function(e) {
     }
   });
 
+// 발주 관리
+$('#btnIn').on('click', function(){
+	$('#btnIn').removeClass();
+	$('#btnIn').attr("class", "btn2");
+	$('#btnMg').removeClass();
+	$('#btnMg').attr("class", "clickB");
+	
+
+	 ㅍㄹ
+	
+	
+	
+})
+
+
+
+
+
+	
+	
 	
   
 </script>

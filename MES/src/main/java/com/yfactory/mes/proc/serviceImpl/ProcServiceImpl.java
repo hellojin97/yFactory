@@ -1,6 +1,7 @@
 package com.yfactory.mes.proc.serviceImpl;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.yfactory.mes.proc.mapper.ProcMapper;
 import com.yfactory.mes.proc.service.ProcService;
-import com.yfactory.mes.proc.vo.PlanDtlVO;
-import com.yfactory.mes.sales.mapper.SalesMapper;
 
 @Service
 public class ProcServiceImpl implements ProcService{
@@ -57,9 +56,15 @@ public class ProcServiceImpl implements ProcService{
 
 
 	@Override
-	public int ProcPlanInsert(List<Map> procPI) {
+	public int ProcPlanInsert(HashMap<String, Object> procPI) {
 		// TODO Auto-generated method stub
-		return map.ProcPlanInsert(procPI);
+		// ajax 해온 값
+		System.out.println(procPI);
+		List<Map<String, String>> list = (List<Map<String, String>>) procPI.get("array");
+		// 배열에 뽑은 값
+		System.out.println(list);
+		//return map.ProcPlanInsert(procPI);
+		return 1;
 	}
 	
 }

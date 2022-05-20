@@ -6,51 +6,146 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.clickB {
+	color: black;
+	font-weight: bold;
+	background: white;
+	border: solid 1px gray;
+	line-height: 30px;
+	margin: 3px;
+}
+</style>
 </head>
 <body>
 	<div class="mainTitle" style="padding-bottom: 15px; color:;">
 		<h1>주문서 조회</h1>
 	</div>
-	
+	<div>
+		<button type="button" id="inBtn" class="btn1">입고</button>
+		<button type="button" id="outBtn" class="clickB">출고</button>
+	</div>
 	<div style="background-color: #e0e0e0; padding: 8px;">
-			<div class="mainTitle" style="padding: 15px;">
-				
-                <!-- 제품명 -->
-				<div class="col-md-5 " style="padding-bottom: 10px;">
-					<div class="input-group  " style="padding-bottom: 10px;">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">생산계획명</label> 
-							<input type="text" id="ProcPN" class="form-control" style="width: 50px" placeholder="생산계획명" >
-<!-- 							<a class="nav-link nav-icon search-bar-toggle" id="NmSearch" onclick="NmSearch">
+		<div class="mainTitle" style="padding: 15px;">
+
+			<!-- 제품명 -->
+			<div id="PNM">
+			<div class="col-md-5 " style="padding-bottom: 10px;">
+				<div class="input-group  " style="padding-bottom: 10px;">
+					<label for="inputText" class="col-form-label"
+						style="padding-right: 27px;">생산계획명</label> <input type="text"
+						id="ProcPN" class="form-control" style="width: 50px"
+						placeholder="생산계획명">
+					<!-- 							<a class="nav-link nav-icon search-bar-toggle" id="NmSearch" onclick="NmSearch">
 							<i class="bi bi-search" style="color: #2c3e50"></i>
 							</a> -->
-					</div>
 				</div>
-                
-				<!-- 주문일자 -->
-				<div class="col-md-12" style="padding-bottom: 10px;">
-					<div class="input-group">
-						<label for="inputText" class="col-form-label" style="padding-right: 40px;">주문일자</label>
-						<div class="col-sm-2" style="padding-right: 10px;">
-							<input type="date" class="form-control" id="date">
-						</div>
-						<button id="BtnClear" class="btn1">초기화</button>
+			
+			
+			<!-- 주문일자 -->
+			<div class="col-md-12" style="padding-bottom: 10px;">
+				<div class="input-group">
+					<label for="inputText" class="col-form-label"
+						style="padding-right: 40px;">주문일자</label>
+					<div class="col-sm-2" style="padding-right: 10px;">
+						<input type="date" class="form-control" id="date">
 					</div>
+					<button id="BtnClear" class="btn1">초기화</button>
 				</div>
-			</div>
-			<!--  <input type="hidden" id="HNum" />-->
-			<hr style="border: solid 1px gray;">
-			<!-- 테이블 -->
-				<div id="orderList"></div>
-				<button id="btnModal" class="btn1">주문서등록</button>
-				<button id="btnDtlInsert" class="btn1">계획등록</button>
-				<button id="btnInsert" class="btn1">행추가</button>
-				<button id="btnDelete" class="btn1">행삭제</button>			
-            </div>
+			
+		</div>
+		</div>
+		<!--  <input type="hidden" id="HNum" />-->
+		<hr style="border: solid 1px gray;">
+		<!-- 테이블 -->
+		<div id="orderList"></div>
+		<button id="btnModal" class="btn1">주문서등록</button>
+		<button id="btnDtlInsert" class="btn1">계획등록</button>
+		<button id="btnInsert" class="btn1">행추가</button>
+		<button id="btnDelete" class="btn1">행삭제</button>
+	</div>
 	
 
 	<div id="test"></div>
+	</div>
+	</div>
+	
 	<script>
-	//날짜
+	var resultGrid
+	
+$('#inBtn').on('click', function(){
+	$('#PNM').hide();
+	$('#orderList').empty();
+	$('#outBtn').removeClass();
+	$('#outBtn').attr("class", "clickB");
+	$('#inBtn').removeClass();
+	$('#inBtn').attr("class", "btn1");
+		
+		
+})
+
+
+$("#outBtn").on("click", function(){
+	$('#PNM').show();
+	$('#orderList').empty();
+	$('#inBtn').removeClass();
+	$('#inBtn').attr("class", "clickB");
+	$('#outBtn').removeClass();
+	$('#outBtn').attr("class", "btn1");
+	
+	 resultGrid = new tui.Grid({
+		el : document.getElementById('orderList'),
+		scrollX : false,
+		scrollY : false,
+		columns : [ {
+			header : '주문코드',
+			name : '주문코드',
+		}, {
+			header : '제품명',
+			name : '완제품명',
+		}, {
+			header : '제품코드',
+			name : '완제품코드',
+		}, {
+			header : '계획량',
+			name : '계획량',
+			editor : "text"
+
+		}, {
+			header : '생산일수',
+			name : '생산일수',
+			editor : "text"
+		}, {
+			header : '작업우선순위',
+			name : '작업우선순위',
+			editor : "text"
+		},
+		],
+		rowHeaders : [ 'checkbox' ],
+		pageOptions : {
+			useClient : true,
+			perPage : 5
+		}
+
+	});
+
+			resultGrid.on("click", function(e) {
+			let prd = resultGrid.getFocusedCell('완제품코드');
+
+			if (prd.columnName == '완제품명') {
+				if (prd.value == null) {
+					$("#test").load("prdmodal", function() {
+						const prdModal = new bootstrap.Modal('#prdModal');
+						prdModal.show();
+
+					})
+				}
+			}
+
+		})
+	
+})
+	//날짜 
 	document.getElementById('date').value = new Date().toISOString().substring(0, 10);
 		
 		//제품목록 테스트
@@ -166,58 +261,9 @@
 			resultGrid.removeCheckedRows(false);
 		});
 
-		var resultGrid
+		// var resultGrid
 		window.onload = function() {
-			resultGrid = new tui.Grid({
-				el : document.getElementById('orderList'),
-				scrollX : false,
-				scrollY : false,
-				columns : [ {
-					header : '주문코드',
-					name : '주문코드',
-				}, {
-					header : '제품명',
-					name : '완제품명',
-				}, {
-					header : '제품코드',
-					name : '완제품코드',
-				}, {
-					header : '계획량',
-					name : '계획량',
-					editor : "text"
-
-				}, {
-					header : '생산일수',
-					name : '생산일수',
-					editor : "text"
-				}, {
-					header : '작업우선순위',
-					name : '작업우선순위',
-					editor : "text"
-				},
-				],
-				rowHeaders : [ 'checkbox' ],
-				pageOptions : {
-					useClient : true,
-					perPage : 5
-				}
-
-			});
-
-			resultGrid.on("click", function(e) {
-				let prd = resultGrid.getFocusedCell('완제품코드');
-
-				if (prd.columnName == '완제품명') {
-					if (prd.value == null) {
-						$("#test").load("prdmodal", function() {
-							const prdModal = new bootstrap.Modal('#prdModal');
-							prdModal.show();
-
-						})
-					}
-				}
-
-			})
+			$("#inBtn").trigger('click'); 
 
 		}
 	</script>

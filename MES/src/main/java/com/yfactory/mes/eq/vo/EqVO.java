@@ -1,7 +1,8 @@
 package com.yfactory.mes.eq.vo;
 
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -30,6 +31,7 @@ public class EqVO {
 	private String eq_mdno;
 	
 	//EQ_PURDT		구매일자
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date eq_purdt;
 	//EQ_ACTST		사용여부	FK	COMM_CODE.COMM_CD
 	private String eq_actst;

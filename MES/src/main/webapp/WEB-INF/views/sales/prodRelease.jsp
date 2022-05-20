@@ -31,16 +31,16 @@
 	<div id="releaseList"></div>
 	
 	</div>
-	
-	<div class="min2" >
-		<button  class="btn2">관리</button>
+		
+		<button class="btn2">관리</button>
 		<button class="btn2">등록</button>
-	</div>
+	
 	
 	</div>
 	</div>
 	
-
+<div id="test"></div>
+<input type="hidden" id="ordTL"> 
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
@@ -71,16 +71,16 @@ var ordDtpList = new tui.Grid({
             name: '주문코드'
           },
           {
-            header: '제품코드',
-            name: '제품코드'
+            header: '완제품코드',
+            name: '완제품코드'
           },
           {
             header: '제품명',
             name: '제품명'
           },
           {
-              header: '수량',
-              name: '수량'
+              header: '주문수량',
+              name: '주문수량'
             },
           {
               header: '납기일자',
@@ -138,8 +138,18 @@ var ordDtpList = new tui.Grid({
     ],
     
   });
-
 	
+  	//완제품 lot 모달 호출
+  ordDtpList.on("dblclick", function(e) {
+	  let ordtl = ordDtpList.getValue(e.rowKey,"주문상세코드");
+	  $("#ordTL").val(ordtl);
+	  
+  	$("#test").load("releaseModal", function() {
+			const ProdModal = new bootstrap.Modal('#myModal');
+			ProdModal.show();
+			}); 
+  });	
+  
   
 </script>
 

@@ -44,5 +44,8 @@ public interface SalesMapper {
 	
 	//주문상세 조회
 	List<Map> ordDtpList();
+	
+	//출고 완제품 modal 조회
+	List<Map> outProdModal(String key);
 }
 

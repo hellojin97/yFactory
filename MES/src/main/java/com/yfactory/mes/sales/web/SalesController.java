@@ -50,5 +50,11 @@ public class SalesController {
 	public String prodRelease() {
 		return "sales/prodRelease";
 	}
+	
+	//출고관리 modal호출
+	@RequestMapping("/releaseModal")
+	public String releaseModal() {
+		return "sales/salesModal/releaseModal";
+	}
 
 }

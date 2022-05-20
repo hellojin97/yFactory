@@ -53,6 +53,7 @@ $.ajax({
 	dataType : "JSON",
 	success : function(result){
 		unorder.resetData(result);
+		
 	}
 });
 
@@ -97,11 +98,13 @@ unorder.on("dblclick",function(e) {
 	  	}).done(function(result){
 	  		for (var i = 0; i < result.length; i++) {
 				if(result[i].구분 != null){
+	  				
 					prodPlan.appendRow(result[i]);
+					
+					
 				}			
 			}
-	  		 
-	     	
+	  		console.log(result)
 	  	 }).fail(function(result){
 	  	    console.log(result);
 	     });
@@ -134,27 +137,54 @@ unorder.on("dblclick",function(e) {
       {
           header: '재고 구분',
           name: '구분'
-        }
+        },
+        {
+            header: '생산계획코드',
+            name: '생산계획코드'
+          },
+
+
     ],
     rowHeaders: ['rowNum'],
     pageOptions: {
       useClient: true,
-      perPage: 5
+      perPage: 3
     }
   });
+  
 //생산계획코드,자재코드 불러오기
   prodPlan.on("dblclick",function(e) {
   //debugger
-     let ppCd1 = unorder.getValue(e.rowKey, 'pp_cd');
-     let p1 = $('#ppCd').val(ppCd1);
-	 let mtCd  = prodPlan.getValue(e.rowKey, '자재코드');
-     console.log(p1.val());
+     
+    let ppCd =  prodPlan.getValue(e.rowKey, '생산계획코드');
+	 let mtCd  = prodPlan.getValue(e.rowKey, '원자재코드');
+  
+     console.log(ppCd);
 	 console.log(mtCd);
+	 	
+	 	// AJAX 발주등록 DATA 요청
+	 	$.ajax({
+	 		url : 'mtrlOrderList',
+	 		method : 'GET',
+	 		data : { ppCd : ppCd, mtCd : mtCd },
+	 		dataType : 'JSON',
+	 		contentType : 'application/json; charset=utf-8'
+	 	}).done(function (result){
+	 			console.log(result);
+	 			for (var i = 0; i < result.length; i++) {
+	 				mtrlRequest.appendRow(result[i]);
+				}
+	 			
+	 			
+	 	})
+	 	
+	 
      }
-  );
+  )
   //발주서 요청 조회
   var mtrlRequest = new tui.Grid({
     el: document.getElementById('mtrlRequest'),
+        
     columns: [
       {
         header: '원자재코드',
@@ -169,9 +199,9 @@ unorder.on("dblclick",function(e) {
         name: '업체명'
       },
       {
-        header: '납기요청일',
-        name: '납기요청일'
-      },
+    	    header: '날짜',
+    	    name: 'date',
+    	  },
       {
           header: '현재고',
           name: '현재고'
@@ -186,7 +216,10 @@ unorder.on("dblclick",function(e) {
         },
       {
           header: '발주량',
-          name: '발주량'
+          name: '발주량',
+          editor : {
+        	  type : 'text'
+          }
         }
     ],
     rowHeaders: ['rowNum'],

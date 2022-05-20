@@ -40,7 +40,8 @@ input.img-button {
 </head>
 <body>
 <div class="container">
-	<form name="frm" id="frm" action="eqMng" method="POST" enctype="multipart/form-data">
+<!-- 	<form name="frm" id="frm" action="eqMng" method="POST" enctype="multipart/form-data"> -->
+	<form name="frm" id="frm" method="POST" enctype="multipart/form-data">
 	<div class="row">
 	<div class="col-8">
 		<h2>설비 등록</h2>
@@ -60,10 +61,10 @@ input.img-button {
 						N<input type="radio" id="no" name="eq_actst" value="N">
 			
 			<br/><br/>
-					구분코드<input id="eq_cd" name="eq_cd" size=10 	maxlength=8>
+					구분코드<input id="eq_cd" name="eq_cd" size=10 	maxlength=13>
 					<input type="button" id="eqdiv" value="조회">
-					<input id="eq_nm" name="eq_nm" size=10 maxlength=8>
-					모델번호<input id="eq_mdno" name="eq_mdno" size=10 maxlength=8>
+					<input id="eq_nm" name="eq_nm" size=10 maxlength=13>
+					모델번호<input id="eq_mdno" name="eq_mdno" size=10 maxlength=13>
 				
 		<br /><br/>
 		
@@ -85,9 +86,10 @@ input.img-button {
 			구매일자<input type="date"	id="eq_purdt" name="eq_purdt" size=10 maxlength=8>
 	
 	
-	
-	
-	
+			<input type="hidden" id="uuid" name="uuid"  size=10 value="">
+			<input type="hidden" id="img_path" name="img_path" size=10 value="">
+			<input type="hidden" id="img_nm" name="img_nm"  size=10 value="">
+			
 	</div>
 	
 	<div class="col-4">
@@ -110,9 +112,11 @@ input.img-button {
 </div>
 </body>
 <script>
+
+
 console.log(  $("input[name='chk']:checked").val()  ); // 사용여부 실시간 체크 Y or N
 $("#btnok").on("click",function(){
-	
+	$("#frm").attr('action' , "eqMng"); 
 	toastr.success('등록완료!');
 	$("form").submit();
 	
@@ -126,16 +130,20 @@ function readURL(input) {
 		
         //파일이름 가져옴
         var imgNm = input.files[0].name;
-        console.log(imgNm);
-    
+      	
+        
+        // 이미지 파일 명 input 에 넣기
+        img_nm.value = imgNm;
+        
         reader.onload = function (e) {
     	
         	var tempImage=new Image();
         	tempImage.src=reader.result;
         	
-        	console.log(tempImage.src);
         	
-        	
+        	 // 이미지 고유 경로 input에 넣기
+        	img_path.value=tempImage.src;
+        	//console.log("img_path: "+ img_path.value);
         	
         	tempImage.onload=function(){
         		var canvas=document.createElement('canvas');
@@ -155,12 +163,18 @@ function readURL(input) {
         		
         		document.querySelector("#prevu").src=dataURI; // 
         		document.querySelector("#prevu").style.visibility="visible"; // 엑박이 아닐경우 보이기 
-        	}
-        };
-    
+        		}
+        
+        	
+        	
+        	};
+        	
     	}
+    	
+    	console.log("img_nm: "+ img_nm.value);
+    	console.log("img_path: "+ img_path.value);
+    	
 	}
-	
 	
 //$("#btnok").on("click" , function(){
 	//makeUUID(file_nm);

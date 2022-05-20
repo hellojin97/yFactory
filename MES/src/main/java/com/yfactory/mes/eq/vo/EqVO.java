@@ -42,4 +42,14 @@ public class EqVO {
 	//EQ_MDNM		모델명
 	private String eq_mdnm;
 	
+	//설비 등록시 들고갈 경로
+	private String img_path;
+	//설비 등록시 들고갈 파일명
+	private String img_nm;
+	
+	
+	
+	
+	
+	
 }

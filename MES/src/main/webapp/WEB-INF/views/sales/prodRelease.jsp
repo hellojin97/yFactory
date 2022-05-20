@@ -15,7 +15,8 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
-	<div>
+	<div style="background-color: #e0e0e0; padding: 8px;">
+	<div class="mainTitle" style="padding: 15px;">
 	<div class="mainTitle" style="padding-bottom:15px; color: ;">
 		<h1>출고 관리</h1>
 	</div>
@@ -23,6 +24,8 @@
 	<div class="min1" >
 	<h4>주문 상세</h4>
 	<div id="ordDtpList" ></div>
+	
+	<hr style="border: solid 1px gray;">
 
 	<h4>출고 현황</h4>
 	<div id="releaseList"></div>
@@ -35,6 +38,7 @@
 	</div>
 	
 	</div>
+	</div>
 	
 
 </body>
@@ -45,9 +49,9 @@
 
 <script>
 
-// 미지시 생산계획조회 토스트
+// 주문 상세 리스트
 $.ajax({
-	url: "",
+	url: "ordDtpList",
 	method : "GET",
 	dataType : "JSON",
 	success : function(result){
@@ -90,13 +94,15 @@ var ordDtpList = new tui.Grid({
     }
   });
 
-주문상세코드,
-제품코드,
-완제품LOT,
-출고날짜,
-출고량,
-제조일자,
-유통기한
+	//출고 현황 리스트
+	$.ajax({
+		url: "",
+		method : "GET",
+		dataType : "JSON",
+		success : function(result){
+			releaseList.resetData(result);
+		}
+	});
 
   var releaseList = new tui.Grid({
     el: document.getElementById('releaseList'),
@@ -130,11 +136,7 @@ var ordDtpList = new tui.Grid({
             name: '유통기한'
           }
     ],
-    rowHeaders: ['rowNum'],
-    pageOptions: {
-      useClient: true,
-      perPage: 5
-    }
+    
   });
 
 	

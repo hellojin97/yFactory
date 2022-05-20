@@ -107,7 +107,7 @@
            
           <li>
             <a href="mtrlFaultyForm">
-              <i class="bi bi-circle"></i><span>불량조회</span>
+              <i class="bi bi-circle"></i><span>안전재고관리</span>
             </a>
           </li>
           

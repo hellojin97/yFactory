@@ -12,7 +12,8 @@ public interface MtrlService {
 	List<Map>selectPl();
 	//생산계획별 자재재고
 	List<Map>mtrlPlanList(String ppCd);
-	
+	//발주요청서 등록
+	List<Map>mtrlOrderList(String ppCd, String mtCd);
 	
 	/*LOT페이지*/
 	//LOT재고조회

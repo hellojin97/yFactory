@@ -15,35 +15,55 @@
 	
 	<!-- 생산계획별 자재재고 -->
 	<select id="mtrlPlanList" resultType="map">
-		SELECT    dt.prod_cd "완제품코드",
-        		  pd.prod_nm "완제품명",
-        		  pl.pp_dt "계획일자",
-       			  b.mt_cd "자재코드",
-        		  m.mt_nm "자재명",
-        		  CASE WHEN
-        			mc.mt_qty -((dt.pd_qty-pdc.prod_qty) * b.cs_qty) > 0 THEN '충분'
-        		  ELSE '부족'
-        		  END AS "완제품 대비 소요량"
-       
-		FROM      plan_dtl dt, 
-		          prdt_pl pl, 
-		          prod pd, 
-		          bom b, 
-		          mt m, 
-		          mt_curqty mc, 
-		          mt_lot ml, 
-		          prod_lot pdl,
-		          prod_curqty pdc
-		        
-		WHERE     dt.pp_cd = pl.pp_cd
-		AND       dt.prod_cd = pd.prod_cd
-		AND 	  b.prod_cd = pd.prod_cd
-		AND       m.mt_cd = b.mt_cd
-		AND       m.mt_cd = ml.mt_cd
-		AND       mc.mt_lot = ml.mt_lot
-		AND       pd.prod_cd = pdl.prod_cd
-		AND       pdl.prod_lot = pdc.prod_lot
-		AND       UPPER(pl.pp_cd) = #{ppCd}
+	SELECT 
+		    PL.PP_CD       "생산계획코드",
+            P.PROD_CD    "완제품코드",
+            P.PROD_NM    "완제품명",
+            TO_CHAR(PL.PP_DT,'YY/MM/DD')     "계획일자",
+            M.MT_CD      "원자재코드",
+            M.MT_NM      "원자재명",
+            CASE
+                  COUNT (DISTINCT  CASE
+                        WHEN      MC.MT_QTY - ( B.CS_QTY * PLD.PD_QTY )  > 0 THEN '부족'
+                        ELSE NULL    
+                    END) 
+                    when 0 then '부족'
+            END AS "구분"
+            
+FROM        PROD P, 
+            PLAN_DTL PLD, 
+            PRDT_PL PL,
+            BOM B,
+            MT M,
+            MT_CURQTY MC,
+            MT_LOT ML
+WHERE       PL.PP_CD = PLD.PP_CD
+AND         P.PROD_CD = B.PROD_CD
+AND         M.MT_CD = B.MT_CD
+AND         M.MT_CD = ML.MT_CD
+AND         ML.MT_LOT = MC.MT_LOT
+AND         PL.PP_CD = #{ppCd}
+GROUP BY PL.PP_CD, P.PROD_CD, P.PROD_NM, PL.PP_DT  , M.MT_CD, M.MT_NM 
+ORDER BY    6 ASC
+	</select>
+	
+	<!-- 발주요청서 등록 조회 -->
+	<select id="mtrlOrderList" resultType="map">
+		SELECT   M.MT_CD  "원자재코드",
+         		 M.MT_NM  "원자재명",
+        		 V.VDR_NM    "업체명",
+        		 MC.MT_QTY   "현재고",
+        		 TO_CHAR(SYSDATE,'YY-MM-DD') "납기요청일자",
+         		 SUM(B.CS_QTY * PLD.PD_QTY)   "계획대비 필요수량"
+		FROM     MT M, VENDOR V, MT_LOT ML ,MT_CURQTY MC, BOM B, PLAN_DTL PLD
+		WHERE    M.VEN_CD = V.VDR_CD
+		AND      M.MT_CD = ML.MT_CD
+		AND      ML.MT_LOT = MC.MT_LOT
+		AND      M.MT_CD = B.MT_CD
+		AND      B.PROD_CD = PLD.PROD_CD
+		AND      PLD.PP_CD = #{ppCd}
+		AND      M.MT_CD = #{mtCd}
+		GROUP BY  M.MT_CD, SYSDATE ,M.MT_NM, V.VDR_NM, MC.MT_QTY
 	</select>
 	
 	<!-- 자재lot재고조회 -->

@@ -300,8 +300,7 @@
 		        },
 		        dataType: 'JSON',
 		        contentType : "application/json; charset=utf-8"
-		     }).done(function(result){         
-		    	 console.log(result);
+		     }).done(function(result){         		    	 
 		    	 listWrnIn.resetData(result);          
 		     });
 	 }

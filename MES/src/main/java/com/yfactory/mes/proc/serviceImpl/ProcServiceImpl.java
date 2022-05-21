@@ -1,6 +1,7 @@
 package com.yfactory.mes.proc.serviceImpl;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.yfactory.mes.proc.mapper.ProcMapper;
 import com.yfactory.mes.proc.service.ProcService;
-import com.yfactory.mes.proc.vo.PlanDtlVO;
-import com.yfactory.mes.sales.mapper.SalesMapper;
 
 @Service
 public class ProcServiceImpl implements ProcService{
@@ -22,17 +21,8 @@ public class ProcServiceImpl implements ProcService{
 		return map.OrderSelectOk(ordCd);
 	}
 
-	@Override
-	public Map OrderSelectNo(Map prodCd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public int PlanInsert(PlanDtlVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	public List<Map> PrdSelect() {
@@ -41,16 +31,15 @@ public class ProcServiceImpl implements ProcService{
 	}
 
 	@Override
-	public List<Map> prdtPlanSelect(Date date1, Date date2) {
+	public List<Map> prdtPlanSelect(String date1, String date2) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.prdtPlanSelect(date1, date2);
 	}
 
-	@Override
-	public int prdtPlanInsert(String PP_NM, Date date1) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	/*
+	 * @Override public int prdtPlanInsert(String PP_NM, Date date1) { // TODO
+	 * Auto-generated method stub return 0; }
+	 */
 
 	@Override
 	public List<Map> ProcOrderSelectAll() {
@@ -63,5 +52,46 @@ public class ProcServiceImpl implements ProcService{
 		// TODO Auto-generated method stub
 		return map.PrdSelectOne(prodCd);
 	}
+
+
+	@Override
+	public int ProcPlanInsert(HashMap<String, Object> procPI) {
+		// TODO Auto-generated method stub
+		// ajax 해온 값
+		System.out.println(procPI);
+		List<Map<String, String>> list = (List<Map<String, String>>) procPI.get("array");
+		// 배열에 뽑은 값
+		System.out.println(list);
+		//return map.ProcPlanInsert(procPI);
+		return 1;
+	}
+
+
+
+
+	@Override
+	public List<Map> procPlanAll() {
+		// TODO Auto-generated method stub
+		return map.procPlanAll();
+	}
+
+
+
+
+	@Override
+	public int prdtPlanInsert(String PP_NM, java.util.Date date1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+
+
+
+
+
+
 	
 }

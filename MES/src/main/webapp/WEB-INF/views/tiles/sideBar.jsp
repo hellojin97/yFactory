@@ -59,10 +59,15 @@
           
           <li>
           	<a href="prodWrnote">
-          	  <i class="bi bi-circle"></i><span>입/출고 관리</span>
+          	  <i class="bi bi-circle"></i><span>입/출고 조회</span>
           	</a>
           </li>
           
+          <li>
+          	<a href="prodRelease">
+          	  <i class="bi bi-circle"></i><span>출고 관리</span>
+          	</a>
+          </li>
         </ul>
         
       </li><!-- End Forms Nav -->
@@ -102,7 +107,7 @@
            
           <li>
             <a href="mtrlFaultyForm">
-              <i class="bi bi-circle"></i><span>불량조회</span>
+              <i class="bi bi-circle"></i><span>안전재고관리</span>
             </a>
           </li>
           

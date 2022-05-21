@@ -15,28 +15,33 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
-	<div>
+	<div style="background-color: #e0e0e0; padding: 8px;">
+	<div class="mainTitle" style="padding: 15px;">
 	<div class="mainTitle" style="padding-bottom:15px; color: ;">
 		<h1>출고 관리</h1>
 	</div>
 	
 	<div class="min1" >
 	<h4>주문 상세</h4>
-	<div id="ordDtpList" ></div>
+	<div id="ordDtpList"></div>
+	
+	<hr style="border: solid 1px gray;">
 
 	<h4>출고 현황</h4>
 	<div id="releaseList"></div>
 	
 	</div>
-	
-	<div class="min2" >
-		<button  class="btn2">관리</button>
+		
+		<button class="btn2">관리</button>
 		<button class="btn2">등록</button>
-	</div>
+	
 	
 	</div>
+	</div>
 	
-
+<div id="test"></div>
+<input type="hidden" id="ordTL"> 
+<input type="hidden" id="ordNum">
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
@@ -45,9 +50,9 @@
 
 <script>
 
-// 미지시 생산계획조회 토스트
+// 주문 상세 리스트
 $.ajax({
-	url: "",
+	url: "ordDtpList",
 	method : "GET",
 	dataType : "JSON",
 	success : function(result){
@@ -67,16 +72,16 @@ var ordDtpList = new tui.Grid({
             name: '주문코드'
           },
           {
-            header: '제품코드',
-            name: '제품코드'
+            header: '완제품코드',
+            name: '완제품코드'
           },
           {
             header: '제품명',
             name: '제품명'
           },
           {
-              header: '수량',
-              name: '수량'
+              header: '주문수량',
+              name: '주문수량'
             },
           {
               header: '납기일자',
@@ -90,13 +95,15 @@ var ordDtpList = new tui.Grid({
     }
   });
 
-주문상세코드,
-제품코드,
-완제품LOT,
-출고날짜,
-출고량,
-제조일자,
-유통기한
+	//출고 현황 리스트
+	$.ajax({
+		url: "",
+		method : "GET",
+		dataType : "JSON",
+		success : function(result){
+			releaseList.resetData(result);
+		}
+	});
 
   var releaseList = new tui.Grid({
     el: document.getElementById('releaseList'),
@@ -130,14 +137,23 @@ var ordDtpList = new tui.Grid({
             name: '유통기한'
           }
     ],
-    rowHeaders: ['rowNum'],
-    pageOptions: {
-      useClient: true,
-      perPage: 5
-    }
+    rowHeaders : [ 'checkbox' ]
+    
   });
-
 	
+  	//완제품 lot 모달 호출
+  ordDtpList.on("dblclick", function(e) {
+	  let ordtl = ordDtpList.getValue(e.rowKey,"주문상세코드");
+	  let ordNum = ordDtpList.getValue(e.rowKey, "주문수량");
+	  $("#ordTL").val(ordtl);
+	  $("#ordNum").val(ordNum);
+	  
+  	$("#test").load("releaseModal", function() {
+			const ProdModal = new bootstrap.Modal('#myModal');
+			ProdModal.show();
+			}); 
+  });	
+  
   
 </script>
 

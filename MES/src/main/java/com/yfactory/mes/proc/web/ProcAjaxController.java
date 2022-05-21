@@ -1,5 +1,6 @@
 package com.yfactory.mes.proc.web;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,65 +17,53 @@ import com.yfactory.mes.proc.service.ProcService;
 @RestController
 public class ProcAjaxController {
 
-	@Autowired private ProcService procService;
-	
-	
-	@GetMapping("/procPlListAjax")
+	@Autowired
+	private ProcService procService;
+
+	// 주문서 단건조회 procOrderSelect
+	@GetMapping("/procOrderSelect")
 	public List<Map> selectOrdersList(String ordCd) {
 		return procService.OrderSelectOk(ordCd);
-		
+
 	}
+
+	// 주문서 전체조회
 	@GetMapping("/procOrderListAjax")
-	public List<Map>  ProcOrderSelectAll() {
-		
+	public List<Map> ProcOrderSelectAll() {
+
 		return procService.ProcOrderSelectAll();
-	
+
 	}
+	// 생산계획전체조회 procPlListAjax
+
+	@GetMapping("/procPlanListAjax")
+	public List<Map> procPlanAll() {
+		//System.out.println(procService.procPlanAll());
+		return procService.procPlanAll();
+
+	}
+	// 생산계획날짜별조회 procPlDtAjax
+	@GetMapping("/procPlDtAjax")
+	public List<Map> prdtPlanSelect(String date1, String date2){
+		
+		return procService.prdtPlanSelect(date1, date2);
+	}
+
+	// 제품 조회
 	@GetMapping("/prdSelect")
-	public List<Map>  PrdSelect() {
+	public List<Map> PrdSelect() {
 		return procService.PrdSelect();
 	}
+
 	@GetMapping("/prdSelectOne")
-	public List<Map>  PrdSelectOne(String prodCd) {
+	public List<Map> PrdSelectOne(String prodCd) {
 		return procService.PrdSelectOne(prodCd);
-	}	
+	}
+
 	@PostMapping("/procPlanInsert")
 	public int ProcPlanInsert(@RequestBody HashMap<String, Object> procPI) {
-		//System.out.println(procPI);
-		//System.out.println(procPI.get("array"));
-		
-		//List<Map<String, String>> list = (List<Map<String, String>>) procPI.get("array");
-		/*
-		  for(Map<String, String> map : list) { Set<Entry<String, String>> set =
-		  map.entrySet(); for(Entry<String, String> entry : set) {
-		  System.out.println(entry.getKey()+", "+entry.getValue()); }
-		  System.out.println(); }
-		 */
-		
-/*		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
-			Map<String, String> map = (Map<String, String>) iterator.next();
-			System.out.println(map); 
-			
-		}*/
-		
-		/*
-		 * list.forEach(res -> { procService.prdtPlanInsert(null, null) }).
-		 */
-		
-		/*
-		 * String pdQty = list.get(0).get("계획량"); String pdDt = list.get(0).get("생산일수");
-		 * String pdRank = list.get(0).get("작업우선순위"); System.out.println(pdQty + ' ' +
-		 * pdDt + ' ' + pdRank);
-		 */
-		/*
-		 * for(Map<String, String> map : list) { Set<Entry<String, String>> set =
-		 * map.entrySet(); for(Entry<String, String> entry : set) {
-		 * System.out.println(entry.getKey()+", "+entry.getValue()); } }
-		 */
-		//return procService.ProcPlanInsert(procPI);
+
 		return procService.ProcPlanInsert(procPI);
 	}
-	
 
-	
 }

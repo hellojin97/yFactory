@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 
 public interface ProcMapper {
 
@@ -15,10 +17,13 @@ public interface ProcMapper {
 	int ProcPlanInsert(HashMap<String, Object> procPI);	//계획 등록
 	
 	List<Map> PrdSelect();		//제품 목록 조회
-	List<Map> prdtPlanSelect(Date date1, Date date2);	//생산계획 조회
+	List<Map> prdtPlanSelect(@Param("date1")String date1, @Param("date2")String date2);	//생산계획 조회
 	
 	int prdtPlanInsert(String PP_NM, Date date1);	//
 	
 	List<Map>  PrdSelectOne(String prodCd);
 	
-}
+	 List<Map> procPlanAll(); // 생산계획전체조회
+	
+	
+	}

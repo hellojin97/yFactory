@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
+
 
 <div class="m-4">
 
@@ -64,7 +63,7 @@
 		</div>
 	</div>
 </div> 
-
+</div>
 <script>
 //날짜
  document.getElementById('dateA').value = new Date().toISOString().substring(0, 10);
@@ -72,7 +71,7 @@ document.getElementById('dateB').value = new Date().toISOString().substring(0, 1
 
 $(function(){
 	 if($("#HNum").val() == 1){
-		 const url = "procOrderListAjax";
+		 const url = "procOrderSelectAll";
 		   $.ajax(url,{
 			   dataType : "JSON",
 			   method: "GET"
@@ -116,7 +115,7 @@ $(function(){
 		 //if($("#HNum").val() == 2){
 		 
 	
-		const url = "procPlanListAjax";
+		const url = "procPlanAll";
 		   $.ajax(url,{
 			   dataType : "JSON",
 			   method: "GET"
@@ -165,7 +164,7 @@ $(function(){
 		 let date2 = $("#dateB").val();
 		 
 		 
-		 const url = "procPlDtAjax";
+		 const url = "prdtPlanSelect";
 		   $.ajax(url,{
 			   dataType : "JSON",
 			   method: "GET",
@@ -250,18 +249,48 @@ $(function(){
 			  $('#myModal').modal('hide');
 			 
  			  $.ajax({
-					   url  : "procOrderSelect",
+					   url  : "orderSelectOk",
 					   data : {
 						   ordCd : ordCd
 						   },
 					   dataType : "JSON",
 					   contentType : "application/json; charset = UTF-8;"
 				   }).done(function(result){
+
+				   
+							for (var i = 0; i < result.length; i++) {
+								resultGrid.appendRow(result[i]);
+								
+							}
+							//resultGrid.appendRow(result, {at : 0});  
+								
+			
+				   })
+		} 
+		
+		
+	})
+	grid.on("dblclick",function(e) {
+		//debugger
+		let ppCd = grid.getValue(e.rowKey, '생산계획코드');
+		
+		 if(ppCd != null){
+			  $('#ProcPlModal').modal('hide');
+			 
+ 			  $.ajax({
+					   url  : "procPlanSelect",
+					   data : {
+						   ppCd : ppCd
+						   },
+					   dataType : "JSON",
+					   contentType : "application/json; charset = UTF-8;"
+				   }).done(function(result){
+					  
 							for (var i = 0; i < result.length; i++) {
 								resultGrid.appendRow(result[i]);
 							}
 							//resultGrid.appendRow(result, {at : 0});  
-								
+							//resultGrid.setValue(0,'계획량','테스트');	
 			
 				   })
 		} 

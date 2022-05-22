@@ -3,14 +3,16 @@
 <mapper namespace="com.yfactory.mes.proc.mapper.ProcMapper">
 	<!-- 주문서 전체조회 -->
 	<select id="ProcOrderSelectAll" resultType="map">
-		SELECT ordtl.ordtl_cd "주문코드" ,
+		SELECT ordtl.ordtl_cd
+		"주문코드" ,
 		TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
 		TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
 		ordtl.prod_cd "완제품코드" ,
 		ordtl.ord_qty "주문수량",
 		vdr.vdr_nm "업체명",
 		pd.prod_nm "완제품명",
-		cd.cd_explan "진행상황"
+		cd.cd_explan
+		"진행상황"
 
 		FROM
 		ORDERS ord,
@@ -20,7 +22,8 @@
 		COMM_CODE cd
 		WHERE ord.vdr_cd = vdr.vdr_cd
 		AND ord.ord_cd = ordtl.ord_cd
-		AND ordtl.prod_cd
+		AND
+		ordtl.prod_cd
 		= pd.prod_cd
 		AND cd.comm_cd = ord.prog_cd
 	</select>
@@ -34,7 +37,8 @@
 		ordtl.ord_qty "주문수량",
 		vdr.vdr_nm "업체명",
 		pd.prod_nm "완제품명",
-		cd.cd_explan "진행상황"
+		cd.cd_explan
+		"진행상황"
 		FROM
 		ORDERS ord,
 		VENDOR vdr,
@@ -43,10 +47,12 @@
 		COMM_CODE cd
 		WHERE ord.vdr_cd = vdr.vdr_cd
 		AND ord.ord_cd = ordtl.ord_cd
-		AND ordtl.prod_cd
+		AND
+		ordtl.prod_cd
 		= pd.prod_cd
 		AND cd.comm_cd = ord.prog_cd
-		AND ordtl.ordtl_cd = #{ordCd}
+		AND
+		ordtl.ordtl_cd = #{ordCd}
 	</select>
 	<!-- 제품 전체 조회 -->
 	<select id="PrdSelect" resultType="map">
@@ -62,26 +68,115 @@
 		WHERE PROD_CD = #{prodCd}
 	</select>
 	<!-- 생산 계획 전체조회 -->
-	<select id="procPlanAll" resultType="map">
+	<select id="ProcPlanAll" resultType="map">
 		SELECT pl.pp_cd "생산계획코드",
-		 pl.pp_nm "계획명", 
-		 TO_CHAR(pl.pp_dt,'YYYY-MM-DD') "계획일자", 
-		 dtl.pd_qty "계획량"
+		pl.pp_nm "계획명",
+		dtl.pd_cd "생산계획상세코드",
+		pd.prod_nm "완제품명",
+		TO_CHAR(pl.pp_dt,'YYYY-MM-DD') "계획일자",
+		dtl.pd_qty "계획량"
+		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd
+		WHERE pl.pp_cd = dtl.pp_cd
+		AND dtl.prod_cd = pd.prod_cd
+	</select>
+	<!-- 생산 계획 날짜조회 -->
+	<select id="PrdtPlanSelect" resultType="map">
+		SELECT pl.pp_cd "생산계획코드",
+		pl.pp_nm "계획명",
+		TO_CHAR(pl.pp_dt,'YYYY-MM-DD') "계획일자",
+		dtl.pd_qty "계획량"
 		FROM PRDT_PL pl, PLAN_DTL dtl
 		WHERE pl.pp_cd = dtl.pp_cd
+		<if test="date1 != '' and date2 != ''">
+			AND pl.pp_dt BETWEEN TO_DATE(#{date1},'YY/MM/DD') AND TO_DATE(#{date2},'YY/MM/DD')
+		</if>
 	</select>
-	<!-- 생산 계획 전체조회 -->
-		<select id="prdtPlanSelect" resultType="map">
-		SELECT  pl.pp_cd "생산계획코드",
-		 		pl.pp_nm "계획명", 
-		 		TO_CHAR(pl.pp_dt,'YYYY-MM-DD') "계획일자", 
-		 		dtl.pd_qty "계획량"
-				FROM PRDT_PL pl, PLAN_DTL dtl
-				WHERE pl.pp_cd = dtl.pp_cd
-		<if test="date1 != '' and date2 != ''">				
-        		AND   pl.pp_dt BETWEEN TO_DATE(#{date1},'YY/MM/DD') AND TO_DATE(#{date2},'YY/MM/DD')
-        </if>
+	<!-- 생산 계획 단건조회 -->
+	<select id="ProcPlanSelect" resultType="map">
+		SELECT
+ 		dtl.pp_cd "생산계획코드",
+ 		pl.pp_nm "계획명",
+		pd.prod_nm "완제품명",
+		pd.prod_cd "완제품코드",
+		pl.ord_cd "주문코드",
+		dtl.pd_qty "계획량",
+		dtl.pd_dt "생산일수",
+		dtl.pd_rank "작업우선순위"
+		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord
+		WHERE pl.pp_cd = dtl.pp_cd
+		AND pl.ord_cd = ord.ord_cd
+		AND dtl.prod_cd = pd.prod_cd
+		AND dtl.pp_cd = #{ppCd}
 	</select>
+	<!--  생산계획조회 조건조회 -->
+	<select id="ProcPlanSelectState" resultType="map">
+		SELECT
+	    dtl.pp_cd "생산계획코드",
+        pl.pp_nm "계획명",
+        dtl.pd_cd "생산계획상세코드",
+		pd.prod_nm "완제품명",
+		pd.prod_cd "완제품코드",
+		dtl.pd_qty "계획량",
+        dtl.pd_rank "작업우선순위",
+		dtl.pd_dt "생산일수",
+        ord.prog_cd "상태"
+
+		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord
+		WHERE pl.pp_cd = dtl.pp_cd
+		AND pl.ord_cd = ord.ord_cd
+		AND dtl.prod_cd = pd.prod_cd
+		
+		<if test="prdNm != ''">
+		AND pd.prod_nm = #{prdNm}
+        <if test="date1 != '' and date2 != ''">
+			AND pl.pp_dt BETWEEN TO_DATE(#{date1},'YY/MM/DD') AND TO_DATE(#{date2},'YY/MM/DD')
+		</if>
+		</if>
+	</select>
+		<!-- 생산 미지시계획 조회 -->
+	<select id="NoPlanSelect" resultType="map">
+        SELECT
+	    dtl.pp_cd "생산계획코드",
+        pl.pp_nm "계획명",
+        dtl.pd_cd "생산계획상세코드",
+		pd.prod_nm "완제품명",
+		pd.prod_cd "완제품코드",
+		dtl.pd_qty "계획량",
+        dtl.pd_rank "작업우선순위",
+		dtl.pd_dt "생산일수",
+        ord.prog_cd "상태" <!-- ,
+        ins.ins_st "생산지시상태",
+      insdtl.ins_qty "생산지시량" -->
+        
+
+		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord <!--  , PRD_INS ins, PRD_INSDTL insdtl -->
+		WHERE pl.pp_cd = dtl.pp_cd
+		AND pl.ord_cd = ord.ord_cd
+		AND dtl.prod_cd = pd.prod_cd
+		<!--  상태 -->
+<!--         AND ins.pd_cd = dtl.pd_cd
+        AND ins.ins_cd = insdtl.ins_dtlcd -->
+		<!-- 상세 생산계획 조회  -->
+	</select>
+		<select id="procDtPlanSelect" resultType="map">
+        SELECT
+	    dtl.pp_cd "생산계획코드",
+        pl.pp_nm "계획명",
+        dtl.pd_cd "생산계획상세코드",
+		pd.prod_nm "완제품명",
+		pd.prod_cd "완제품코드",
+		dtl.pd_qty "계획량",
+        dtl.pd_rank "작업우선순위",
+		dtl.pd_dt "생산일수"
+        
+
+		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord 
+		WHERE pl.pp_cd = dtl.pp_cd
+		AND pl.ord_cd = ord.ord_cd
+		AND dtl.prod_cd = pd.prod_cd
+		AND dtl.pd_cd = #{ppCd}
+	</select>
+	
 	<insert id="ProcPlanInsert">
 
 	</insert>

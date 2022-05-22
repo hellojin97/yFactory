@@ -31,9 +31,9 @@ public class ProcServiceImpl implements ProcService{
 	}
 
 	@Override
-	public List<Map> prdtPlanSelect(String date1, String date2) {
+	public List<Map> PrdtPlanSelect(String date1, String date2) {
 		// TODO Auto-generated method stub
-		return map.prdtPlanSelect(date1, date2);
+		return map.PrdtPlanSelect(date1, date2);
 	}
 
 	/*
@@ -70,19 +70,60 @@ public class ProcServiceImpl implements ProcService{
 
 
 	@Override
-	public List<Map> procPlanAll() {
+	public List<Map> ProcPlanAll() {
 		// TODO Auto-generated method stub
-		return map.procPlanAll();
+		return map.ProcPlanAll();
+	}
+
+
+
+	@Override
+	public List<Map> ProcPlanSelect(String ppCd) {
+		// TODO Auto-generated method stub
+		return map.ProcPlanSelect(ppCd);
 	}
 
 
 
 
 	@Override
-	public int prdtPlanInsert(String PP_NM, java.util.Date date1) {
+	//public List<Map> ProcPlanSelectState(String ppCd, String date1, String date2,String radio) {
+	public List<Map> ProcPlanSelectState(HashMap<String, Object> procPlSelect){
+		
+		return map.ProcPlanSelectState(procPlSelect);
+	}
+
+
+
+
+	@Override
+	public int prdtPlanInsert(String PP_NM, String date1) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
+
+	@Override
+	public List<Map> NoPlanSelect() {
+		// TODO Auto-generated method stub
+		return map.NoPlanSelect();
+	}
+
+
+
+
+	@Override
+	public List<Map> procDtPlanSelect(String ppCd) {
+		// TODO Auto-generated method stub
+		return map.procDtPlanSelect(ppCd);
+	}
+
+
+
+
+
 
 
 

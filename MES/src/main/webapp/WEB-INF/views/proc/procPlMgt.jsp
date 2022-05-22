@@ -22,8 +22,8 @@
 		<h1>주문서 조회</h1>
 	</div>
 	<div>
-		<button type="button" id="inBtn" class="btn1">입고</button>
-		<button type="button" id="outBtn" class="clickB">출고</button>
+		<button type="button" id="inBtn" class="btn1">관리</button>
+		<button type="button" id="outBtn" class="clickB">등록</button>
 	</div>
 	<div style="background-color: #e0e0e0; padding: 8px;">
 		<div class="mainTitle" style="padding: 15px;">
@@ -80,6 +80,7 @@
 	</div>
 	
 	<script>
+	// * 자식그리드에서 부모그리드를 사용하려면 전역변수로 지정되어있어야한다 *
 	var resultGrid
 	
 $('#inBtn').on('click', function(){
@@ -313,6 +314,9 @@ $("#outBtn").on("click", function(){
 			resultGrid.appendRow();
 		});
 		btnDelete.addEventListener("click", function() {
+			resultGrid.removeCheckedRows(false);
+		});
+		btnPlanCancel.addEventListener("click", function() {
 			resultGrid.removeCheckedRows(false);
 		});
 

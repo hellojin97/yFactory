@@ -28,8 +28,8 @@
 
 </head>
 <body>
-	<div>
-	<div class="mainTitle" style="padding-bottom:15px; color: ;">
+	<div style="padding-bottom: 70px; ">
+	<div class="mainTitle" style="padding-bottom:15px;">
 		<h1>발주 관리/등록</h1>
 	</div>
 
@@ -47,6 +47,10 @@
 	
 	<h4>발주요청서 등록</h4>
 	<div id="mtrlRequest"></div>
+	<div>
+		<button  class="btn1" id="mtrlsave">저장</button>
+		<button class="btn1" id="mtrlcancel">취소</button>
+	</div>
 	</div>
 	</div>
 	
@@ -61,26 +65,18 @@
 
 <script>
 
-// 발주 등록
-$('#btnMg').on('click', function(){
-	$('#btnMg').removeClass();
-	$('#btnMg').attr("class", "btn2");
-	$('#btnIn').removeClass();
-	$('#btnIn').attr("class", "clickB");
-	
-	$.ajax({
-		url: "mtrlorder",
-		method : "GET",
-		dataType : "JSON",
-		success : function(result){
-			unorder.resetData(result);
-			console.log(result);
-			
-		}
-	});
-	
-	
+//발주 관리
+$('#btnIn').on('click', function(){
+	location.href = 'mtrlListForm';
+
 })
+
+  
+//발주 등록
+  $('#btnMg').on('click', function(){
+	location.href = 'mtrlOrderForm';
+  }) 
+  
 
 // 미지시 생산계획조회 토스트
 $.ajax({
@@ -165,12 +161,12 @@ unorder.on("dblclick",function(e) {
         name: '계획일자'
       },
       {
-        header: '자재코드',
-        name: '자재코드'
+        header: '원자재코드',
+        name: '원자재코드'
       },
       {
-          header: '자재명',
-          name: '자재명'
+          header: '원자재명',
+          name: '원자재명'
         },
       {
           header: '재고 구분',
@@ -195,7 +191,7 @@ unorder.on("dblclick",function(e) {
   prodPlan.on("dblclick",function(e) {
   //debugger
      
-    let ppCd =  prodPlan.getValue(e.rowKey, '생산계획코드');
+     let ppCd =  prodPlan.getValue(e.rowKey, '생산계획코드');
 	 let mtCd  = prodPlan.getValue(e.rowKey, '원자재코드');
   
      console.log(ppCd);
@@ -269,28 +265,6 @@ unorder.on("dblclick",function(e) {
     }
   });
 
-// 발주 관리
-$('#btnIn').on('click', function(){
-	$('#btnIn').removeClass();
-	$('#btnIn').attr("class", "btn2");
-	$('#btnMg').removeClass();
-	$('#btnMg').attr("class", "clickB");
-	
-
-	 ㅍㄹ
-	
-	
-	
-})
-
-
-
-
-
-	
-	
-	
-  
 </script>
 
 </html>

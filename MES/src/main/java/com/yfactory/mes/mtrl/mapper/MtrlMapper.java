@@ -7,13 +7,18 @@ import org.apache.ibatis.annotations.Param;
 
 public interface MtrlMapper {
 	
-	/*발주관리등록*/
+	/*발주등록*/
 	//미지시 생산계획조회
 	List<Map>selectPl();
 	//생산계획별 자재재고
 	List<Map>mtrlPlanList(@Param("ppCd") String ppCd);
 	//발주요청서 등록
 	List<Map>mtrlOrderList(@Param("ppCd")String ppCd, @Param("mtCd")String mtCd);
+	
+	//발주관리 조회
+    List<Map>listRequest();	
+    //발주관리 검색
+    List<Map>mtrlReqSelectSearch(@Param("poCdinput")String poCdinput);
 	
 	/*LOT페이지*/
 	//LOT재고조회
@@ -34,6 +39,7 @@ public interface MtrlMapper {
 	List<Map>vendorList();
 	//업체명 검색
 	List<Map>vdrnmSelectSearch(@Param("vdrnm") String vdrnm);
-	
-	
+	//발주코드 검색
+	List<Map>pocdList();
+	List<Map>pocdSelectSearch(@Param("pocd")String pocd);
 }

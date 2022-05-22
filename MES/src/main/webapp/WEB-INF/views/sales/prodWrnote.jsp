@@ -14,12 +14,14 @@
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <style type="text/css">
-.clickB { color: black;
-		  font-weight: bold;
-		  background: white;
-		  border: solid 1px gray;
-		  line-height: 30px;
-		  margin: 3px;
+.clickB {     
+	color: black;
+    text-align: center;    
+    border: solid 1px #2c3e50;
+    margin: 3px;
+    line-height: 25px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px 5px 0px 0px;
 		    }
 
 
@@ -29,16 +31,17 @@
 
 <body>
 
+		<div id="in/out" style="padding-bottom:15px;">		
 		<h1>제품 입/출고 조회</h1>
-		<div id="in/out">		
 		</div>
-		<div>
-		<button type="button" id="inBtn" class="btn1">입고</button>
+		
+		<div class="min2">
+		<button type="button" id="inBtn" class="btn2">입고</button>
 		<button type="button" id="outBtn" class="clickB">출고</button>
 		</div>
 
-		<div style="background-color: #e0e0e0; padding: 8px;">
-			<div class="mainTitle" style="padding: 15px;">
+		<div class="min1">
+			<div class="mainTitle">
 				<form>
 				<!-- 제품명 -->
 				<div class="col-md-5 " style="padding-bottom: 20px;">
@@ -156,7 +159,7 @@
 		$('#outBtn').removeClass();
 		$('#outBtn').attr("class", "clickB");
 		$('#inBtn').removeClass();
-		$('#inBtn').attr("class", "btn1");
+		$('#inBtn').attr("class", "btn2");
 		$('#search').removeClass();
 		$('#search').attr("class", "inSearch btn1");
 		
@@ -208,7 +211,7 @@
 		$('#inBtn').removeClass();
 		$('#inBtn').attr("class", "clickB");
 		$('#outBtn').removeClass();
-		$('#outBtn').attr("class", "btn1");
+		$('#outBtn').attr("class", "btn2");
 		$('#search').removeClass();
 		$('#search').attr("class", "outSearch btn1");
 		

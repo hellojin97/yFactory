@@ -16,11 +16,11 @@
 </head>
 <body>
 
-   <div class="mainTitle" style="padding-bottom:15px; color: ;">
+   <div style="padding-bottom:15px; color: ;">
       <h1>주문서 조회</h1>
    </div>
    
-   <div style="background-color: #e0e0e0; padding: 8px;">
+   <div class="min1">
 			<div class="mainTitle" style="padding: 15px;">
 				<!-- 구분 -->				
 				<fieldset class="col-md-5" style="padding-bottom: 10px;">				

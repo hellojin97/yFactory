@@ -15,10 +15,11 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
-
+		<div style="padding-bottom:15px; color: ;">
 		<h1>완제품 LOT재고조회</h1>
+		</div>
 
-		<div style="background-color: #e0e0e0; padding: 8px;">
+		<div class="min1">
 			<div class="mainTitle" style="padding: 15px;">
 				<form>
 				<!-- 제품명 -->

@@ -41,6 +41,11 @@
 
 	</div>
 	<script type="text/javascript">
+	// 지역변수로 윈도우에 선언이되있으니까 자식에서 못쳐가지고오는거죠~ 
+	// 그래서 전역으로 돌려야함 숙지하도록 ㅅㄱ 
+	var grid;
+	var rowKey;
+	var gridRowCell;
 		window.onload = function() {
 			const url = "getEqMngList";
 			$.ajax(url, {
@@ -51,7 +56,7 @@
 				console.log(result);
 			})
 
-			var grid = new tui.Grid({
+			 grid = new tui.Grid({
 				el : document.getElementById('grid'),
 				scrollX : false,
 				scrollY : false,
@@ -105,32 +110,34 @@
 			
 			grid.on("dblclick",function(e) {
 				//debugger
-				let eqCd = grid.getValue(e.rowKey, '설비코드');
-				 if(eqCd != null){
-					 $("#grid1").load("eqdvmodal", function() {
-							
-							const prdModal = new bootstrap.Modal('#myModal');
-							prdModal.show();
-							
-
-						})
-				 } 
-		 			 /*  $.ajax({
-							   url  : "procPlListAjax",
-							   data : {
-								   ordCd : ordCd
-								   },
-							   dataType : "JSON",
-							   contentType : "application/json; charset = UTF-8;"
-						   }).done(function(result){
-									for (var i = 0; i < result.length; i++) {
-										resultGrid.appendRow(result[i]);
-									}
-									//resultGrid.appendRow(result, {at : 0}); 
-										
-					
-						   })  */
+				//let eqCd = grid.getValue(e.rowKey, '설비코드');
+				console.log("Parent_e.rowKey: "+e.rowKey);
+				rowKey = e.rowKey;
+				gridRowCell = grid.getFocusedCell().rowKey;
 				
+				let eqCdCol = grid.getFocusedCell('설비코드');
+				let eqPrcCol = grid.getFocusedCell('공정코드');
+					if(eqCdCol.columnName == '설비코드'){ // 설비코드 컬럼을 클릭했다면
+						$("#grid1").load("mngmodal", function(){
+							
+							 
+							 
+							 
+							const mngModal = new bootstrap.Modal('#myModal');
+							mngModal.show();
+							console.log("gridRowCell"+gridRowCell);
+							
+							
+						
+							});
+					}
+					else if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
+						$("#grid1").load("eqPrcmodal", function(){
+							const mngModal = new bootstrap.Modal('#myModal');
+							mngModal.show();
+							
+							});
+					}
 				
 				
 			});
@@ -191,14 +198,14 @@
 
 
 </body>
-<script type="text/javascript"
+<%-- <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
+	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script> --%>
 
 
 

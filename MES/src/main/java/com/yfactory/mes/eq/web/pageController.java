@@ -30,7 +30,7 @@ public class pageController {
 	@RequestMapping("/eqMng")
 	public String eqMng(EqVO vo , MultipartFile file , Model model){
 		System.out.println( vo.getImg_path() );
-		//System.out.println(vo);
+		
 		mapper.insertEq(vo); 
 		
 //		if(file.isEmpty()) { // 파일이 비어있다면 TRUE
@@ -93,5 +93,31 @@ public class pageController {
 	public String eqmodal() {
 		return "/eq/eqmodal/eqdvmodal";
 	}
+	// 설비관리 페이지 - 설비명 + 설비 코드
+	@GetMapping("/mngmodal")
+	public String mngmodal() {
+		return "/eq/eqmodal/mngmodal";
+	}
+	
+	// 설비관리 페이지 - 공정코드 + 공정명
+		@GetMapping("/eqPrcmodal")
+		public String eqPrcmodal() {
+			return "/eq/eqmodal/eqPrcmodal";
+		}
+		
+	
+		// 설비등록 페이지 - 사원번호 + 사원명
+		@GetMapping("/eqInstermodal")
+			public String eqInstermodal() {
+				return "/eq/eqmodal/eqInstermodal";
+		}
+		
+		
+		// 설비등록 페이지 - 업체코드 + 업체구분코드(설비 / 자재(입고 , 출고) ... ) + 업체명
+		@GetMapping("/eqvdrmodal")
+			public String eqvdrmodal() {
+				return "/eq/eqmodal/eqvdrmodal";
+		}
+			
 	
 }

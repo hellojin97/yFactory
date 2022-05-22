@@ -20,7 +20,7 @@
 			<div class="modal-dialog modal-lg modal-dialog-scrollable">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">설비 구분</h5>
+						<h5 class="modal-title">사원 구분</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 					</div>
 
@@ -46,7 +46,7 @@
 
 <script>
 	$(function() {
-		const url = "getEqDivList";
+		const url = "getEmpListAjax";
 		$.ajax(url, {
 			dataType : "JSON",
 		}).done(function(rs) {
@@ -61,13 +61,13 @@
 			columns : [
 
 			{
-				header : '설비코드',
-				name : '설비코드'
+				header : '사원번호',
+				name : '사원번호'
 			},
 
 			{
-				header : '설비명',
-				name : '설비명'
+				header : '사원명',
+				name : '사원명'
 			}
 
 			],
@@ -84,40 +84,20 @@
 		
 		grid2.on("click",function(e) {
 		//debugger
-		let eqCd = grid2.getValue(e.rowKey, '설비코드');
-		let eqNm = grid2.getValue(e.rowKey , '설비명');
+		let empCd = grid2.getValue(e.rowKey, '사원번호');
+		let empNm = grid2.getValue(e.rowKey , '사원명');
 		/* $("input[name='eqCdinp']").value=eqCd;
 		$("input[name='eqNminp']").value=eqNm; */
 		
-		console.log(eqCd);
-		console.log(eqNm);
-		if(eqCd != null){
+		console.log(empCd);
+		console.log(empNm);
+		if(empCd != null){
 			 $('#myModal').modal('hide');
-			 $("#eq_cd").val(eqCd);
-			 $("#eq_nm").val(eqNm);
-					
-			 /* $.ajax({
-				   url  : "eqSelectAjax",
-				   data : {eqCd : eqCd , eqNm : eqNm},
-				   dataType : "JSON",
-				   contentType : "application/json; charset = UTF-8;"
-			   }).done(function(result){
-				   console.log(result);
-				
-				 
-			   })  */
-			 
-			 
+			 $("#eq_inster").val(empNm);
+ 
 		}
 	})
 	
-	   // window.dialogArguments : 부모창에서 값을 받을 때 사용하는 속성
-   		// var obj = window.dialogArguments;
-
-	//    var retVal = {objcode , objname};
-
-    // window.returnValue : 부모창으로 값을 넘겨줄 때 사용하는 속성
-	//    window.returnValue = retVal;
 
 
 	

@@ -38,6 +38,30 @@ public class EquipServiceImpl implements EquipService{
 		
 		return mapper.searchEqMngList();
 	}
+
+	@Override
+	public List<Map> searchPrcList() {
+		
+		return mapper.searchPrcList();
+	}
+
+	@Override
+	public List<Map> selectEqPrc(String eqCd) {
+		
+		return mapper.selectEqPrc(eqCd);
+	}
+
+	@Override
+	public List<Map> searchEmp() {
+		
+		return mapper.searchEmp();
+	}
+
+	@Override
+	public List<Map> getVdrList() {
+		
+		return mapper.getVdrList();
+	}
 	
 	
 	

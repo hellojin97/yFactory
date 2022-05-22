@@ -20,7 +20,7 @@
 			<div class="modal-dialog modal-lg modal-dialog-scrollable">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">설비 구분</h5>
+						<h5 class="modal-title">업체 구분</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 					</div>
 
@@ -46,7 +46,7 @@
 
 <script>
 	$(function() {
-		const url = "getEqDivList";
+		const url = "getVdrListAjax";
 		$.ajax(url, {
 			dataType : "JSON",
 		}).done(function(rs) {
@@ -61,13 +61,18 @@
 			columns : [
 
 			{
-				header : '설비코드',
-				name : '설비코드'
+				header : '업체코드',
+				name : '업체코드'
+			},
+			{
+				header : '업체구분코드',
+				name : '업체구분코드'
 			},
 
+
 			{
-				header : '설비명',
-				name : '설비명'
+				header : '업체명',
+				name : '업체명'
 			}
 
 			],
@@ -84,45 +89,25 @@
 		
 		grid2.on("click",function(e) {
 		//debugger
-		let eqCd = grid2.getValue(e.rowKey, '설비코드');
-		let eqNm = grid2.getValue(e.rowKey , '설비명');
-		/* $("input[name='eqCdinp']").value=eqCd;
-		$("input[name='eqNminp']").value=eqNm; */
+		let vdrCd = grid2.getValue(e.rowKey, '업체코드');
+		let venCd = grid2.getValue(e.rowKey, '업체구분코드');
+		let vdrNm = grid2.getValue(e.rowKey , '업체명');
 		
-		console.log(eqCd);
-		console.log(eqNm);
-		if(eqCd != null){
+		console.log(vdrCd);
+		console.log(venCd);
+		console.log(vdrNm);
+		
+		if(vdrCd != null){
 			 $('#myModal').modal('hide');
-			 $("#eq_cd").val(eqCd);
-			 $("#eq_nm").val(eqNm);
+			 $("#vdrCode").val(vdrCd);
+			
 					
-			 /* $.ajax({
-				   url  : "eqSelectAjax",
-				   data : {eqCd : eqCd , eqNm : eqNm},
-				   dataType : "JSON",
-				   contentType : "application/json; charset = UTF-8;"
-			   }).done(function(result){
-				   console.log(result);
-				
-				 
-			   })  */
-			 
 			 
 		}
 	})
+		
 	
-	   // window.dialogArguments : 부모창에서 값을 받을 때 사용하는 속성
-   		// var obj = window.dialogArguments;
-
-	//    var retVal = {objcode , objname};
-
-    // window.returnValue : 부모창으로 값을 넘겨줄 때 사용하는 속성
-	//    window.returnValue = retVal;
-
-
-	
-	
-	});
+});
 </script>
 
 </html>

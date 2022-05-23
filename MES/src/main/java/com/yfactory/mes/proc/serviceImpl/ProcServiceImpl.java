@@ -106,9 +106,9 @@ public class ProcServiceImpl implements ProcService{
 
 
 	@Override
-	public List<Map> NoPlanSelect() {
+	public List<Map> NoPlanSelect(String state) {
 		// TODO Auto-generated method stub
-		return map.NoPlanSelect();
+		return map.NoPlanSelect(state);
 	}
 
 
@@ -119,6 +119,19 @@ public class ProcServiceImpl implements ProcService{
 		// TODO Auto-generated method stub
 		return map.procDtPlanSelect(ppCd);
 	}
+
+
+
+
+	@Override
+	public List<Map> ProcLineSelect(HashMap<String, Object> prodNm) {
+		return map.ProcLineSelect(prodNm);
+	}
+
+
+
+
+
 
 
 

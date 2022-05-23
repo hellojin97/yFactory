@@ -67,10 +67,11 @@ $(function(){
 			NoPlanSelectGrid.refreshLayout();
 		},300);
 		//생산계획코드를 클릭했을시 ajax
- 		NoPlanSelectGrid.on("click",function(e) {
+ 		NoPlanSelectGrid.on("dblclick",function(e) {
 			//debugger
 			let ppCd = NoPlanSelectGrid.getValue(e.rowKey, '생산계획상세코드');
-			console.log(ppCd);
+			let prodNm = NoPlanSelectGrid.getValue(e.rowKey, '완제품명');
+		    var data= {prodNm : prodNm};
 			if(ppCd != null){
 				  $('#procDtPlanSelect').modal('hide');
 			
@@ -84,33 +85,32 @@ $(function(){
 					   contentType : "application/json; charset = UTF-8;"
 				   }).done(function(result){
 					   //procDtPlan.appendRow(result);
-					   console.log(result)
+					   //console.log(result)
+					   
 							for (var i = 0; i < result.length; i++) {
 								procDtPlan.appendRow(result[i]);
 							}
-					   
+					   		
 
 			
 				   })
 				   //라인코드 넣는 ajax
-				  /*  $.ajax({
-					   url  : "procDtPlanSelect",
-						 data : {
-						   ppCd : ppCd
-						   }, 
+
+				    $.ajax({
+					   url  : "procLineSelect",
+					   data :  JSON.stringify(data), 
 					   dataType : "JSON",
+					   type : "POST",
 					   contentType : "application/json; charset = UTF-8;"
 				   }).done(function(result){
-					   //procDtPlan.appendRow(result);
-					   console.log(result)
-							for (var i = 0; i < result.length; i++) {
-								procDtPlan.appendRow(result[i]);
-							}
+							 for (var i = 0; i < result.length; i++) {
+								 procOrder.appendRow(result[i]);
+							} 
 					   
 
 			
 				   }) 
-				   */
+				   
 			}
 			});  
 

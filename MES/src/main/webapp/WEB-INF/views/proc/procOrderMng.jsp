@@ -60,14 +60,11 @@
 			name : '완제품명',
 
 		}, {
-			header : '계획량',
-			name : '계획량',
-		}, {
 			header : '생산일수',
 			name : '생산일수',
 		},{
 			header : '수량',
-			name : '수량',
+			name : '계획량',
 		},{
 			header : '생산지시량',
 			name : '생산지시량',
@@ -96,13 +93,30 @@
 			}, {
 				header : '작업일자',
 				name : '작업일자',
-
+				editor : {
+	                  type : 'datePicker',
+	                  options : {
+	                     format : 'yyyy-MM-dd'
+	                  }
+				}
 			}, {
 				header : '작업수량',
 				name : '작업수량',
+				editor : {
+	                  type : 'text',
+	                  }
 			}, {
 				header : '일자별 우선순위',
 				name : '일자별 우선순위',
+				editor : {
+	                  type : 'text',
+	                  }
+			},{
+				header : '비고',
+				name : '비고',
+				editor : {
+	                  type : 'text',
+	                  }
 			},
 			
 			],

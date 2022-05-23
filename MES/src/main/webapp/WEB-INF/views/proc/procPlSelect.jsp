@@ -146,13 +146,14 @@
 		 let prdNm = $("#PrdNm").val();
 		 let date1 = $("#dateA").val();
 		 let date2 = $("#dateB").val();
-		 var radio = '전체';
+		 let state = $("input[name=radios]:checked").val();
+		 //let radio = '전체';
 		 if(prdNm != null){
 			 var data= {
 					 prdNm : prdNm,
 					   date1 : date1,
 					   date2 : date2,
-					   radio : radio
+					   state : state
 			 }
 		 
 			  $.ajax({

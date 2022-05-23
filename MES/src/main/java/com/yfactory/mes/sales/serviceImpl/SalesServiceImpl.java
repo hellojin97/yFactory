@@ -83,4 +83,9 @@ public class SalesServiceImpl implements SalesService {
 		return map.ordDtpList();
 	}
 
+	@Override
+	public List<Map> outProdModal(String key) {
+		return map.outProdModal(key);
+	}
+
 }

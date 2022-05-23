@@ -1,6 +1,7 @@
 package com.yfactory.mes.proc.serviceImpl;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.yfactory.mes.proc.mapper.ProcMapper;
 import com.yfactory.mes.proc.service.ProcService;
-import com.yfactory.mes.proc.vo.PlanDtlVO;
-import com.yfactory.mes.sales.mapper.SalesMapper;
 
 @Service
 public class ProcServiceImpl implements ProcService{
@@ -32,16 +31,15 @@ public class ProcServiceImpl implements ProcService{
 	}
 
 	@Override
-	public List<Map> prdtPlanSelect(Date date1, Date date2) {
+	public List<Map> PrdtPlanSelect(String date1, String date2) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.PrdtPlanSelect(date1, date2);
 	}
 
-	@Override
-	public int prdtPlanInsert(String PP_NM, Date date1) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	/*
+	 * @Override public int prdtPlanInsert(String PP_NM, Date date1) { // TODO
+	 * Auto-generated method stub return 0; }
+	 */
 
 	@Override
 	public List<Map> ProcOrderSelectAll() {
@@ -57,9 +55,97 @@ public class ProcServiceImpl implements ProcService{
 
 
 	@Override
-	public int ProcPlanInsert(List<Map> procPI) {
+	public int ProcPlanInsert(HashMap<String, Object> procPI) {
 		// TODO Auto-generated method stub
-		return map.ProcPlanInsert(procPI);
+		// ajax 해온 값
+		System.out.println(procPI);
+		List<Map<String, String>> list = (List<Map<String, String>>) procPI.get("array");
+		// 배열에 뽑은 값
+		System.out.println(list);
+		//return map.ProcPlanInsert(procPI);
+		return 1;
 	}
+
+
+
+
+	@Override
+	public List<Map> ProcPlanAll() {
+		// TODO Auto-generated method stub
+		return map.ProcPlanAll();
+	}
+
+
+
+	@Override
+	public List<Map> ProcPlanSelect(String ppCd) {
+		// TODO Auto-generated method stub
+		return map.ProcPlanSelect(ppCd);
+	}
+
+
+
+
+	@Override
+	//public List<Map> ProcPlanSelectState(String ppCd, String date1, String date2,String radio) {
+	public List<Map> ProcPlanSelectState(HashMap<String, Object> procPlSelect){
+		
+		return map.ProcPlanSelectState(procPlSelect);
+	}
+
+
+
+
+	@Override
+	public int prdtPlanInsert(String PP_NM, String date1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+	@Override
+	public List<Map> NoPlanSelect(String state) {
+		// TODO Auto-generated method stub
+		return map.NoPlanSelect(state);
+	}
+
+
+
+
+	@Override
+	public List<Map> procDtPlanSelect(String ppCd) {
+		// TODO Auto-generated method stub
+		return map.procDtPlanSelect(ppCd);
+	}
+
+
+
+
+	@Override
+	public List<Map> ProcLineSelect(HashMap<String, Object> prodNm) {
+		return map.ProcLineSelect(prodNm);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 }

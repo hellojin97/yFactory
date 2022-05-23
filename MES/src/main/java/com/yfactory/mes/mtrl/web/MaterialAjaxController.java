@@ -27,12 +27,32 @@ public class MaterialAjaxController {
 			System.out.println("테스트: " +ppCd);
 			return service.mtrlPlanList(ppCd);
 		}
-		
+		// 발주요청서 등록
+		@GetMapping("/mtrlOrderList")
+		public List<Map> mtrlOrderList(String ppCd, String mtCd){
+			return service.mtrlOrderList(ppCd, mtCd);
+		}
 	
 		//LOT재고조회
 		@GetMapping("/mtrlLot")
 		public List<Map> mtrlLot() {
 			return service.listMtrlLot();
+		}
+		//LOT 검색
+		@GetMapping("/lotSelectSearch")
+		public List<Map> lotSelectSearch(String m1, String m2,String req1,String req2){
+			return service.lotSelectSearch(m1, m2, req1, req2);
+		}
+		
+		//발주관리 조회
+		@GetMapping("/mtrlRequestList")
+		public List<Map> mtrlRequestList(){
+			return service.listRequest();
+		}
+		//발주관리 검색조회
+		@GetMapping("/mtrlReqSelectSearch")
+		public List<Map> mtrlReqSelectSearch(String poCdinput){
+			return service.mtrlReqSelectSearch(poCdinput);
 		}
 		
 		//자재명 조회
@@ -40,8 +60,7 @@ public class MaterialAjaxController {
 		public List<Map> mtcd(){
 			return service.mtcdList();
 		}
-		
-		//자재검색
+		//자재명 검색
 		@GetMapping("/mtnmSelectSearch")
 		public List<Map> mtnmSelectSearch(String mtnm){
 			return service.mtnmSelectSearch(mtnm);
@@ -52,19 +71,21 @@ public class MaterialAjaxController {
 		public List<Map> vdrcd(){
 			return service.vendorList();
 		}
-		
-		//업체명 조회
 		@GetMapping("/vdrnmSelectSearch")
 		public List<Map> vdrnmSelectSearch(String vdrnm){
 			return service.vdrnmSelectSearch(vdrnm);
 		}
-
 		
-		//LOT 검색
-		@GetMapping("/lotSelectSearch")
-		public List<Map> lotSelectSearch(String m1, String m2,String req1,String req2){
-			return service.lotSelectSearch(m1, m2, req1, req2);
+		//발주코드 조회
+		@GetMapping("/pocd")
+		public List<Map> pocd(String pocd){
+			 return service.pocdList();
 		}
+		@GetMapping("/pocdSelectSearch")
+		public List<Map>pocdSelectSearch(String pocd){
+			return service.pocdSelectSearch(pocd);
+		}
+
 		
 		
 		

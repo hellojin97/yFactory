@@ -15,7 +15,7 @@
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
-<body>
+<body onkeyup="on_key_up()">
 
 		<h1>자재 LOT재고조회</h1>
 <form>
@@ -110,6 +110,17 @@
 		})
 		});
 
+	
+	function on_key_up(){
+		if($("#vdrNminput").val()==""){
+			$("#vdrCdinput").val("");
+		}
+		if($("#mtNminput").val()==""){
+			$("#mtCdinput").val("");
+		}
+	}
+	
+	
 
 	//LOT 전체조회
 	$.ajax({
@@ -147,7 +158,7 @@
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 4
+			perPage : 10
 		}
 	});
 

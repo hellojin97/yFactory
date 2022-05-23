@@ -2,6 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.common.mapper.CommonMapper">
 
+<!--  주문서 조회 -->
+<select id="mainOrdersList" resultType="map">
+	SELECT ord.ord_cd  "주문코드" , 
+					   TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
+					   TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
+					   ordtl.prod_cd "완제품코드" ,
+					   ordtl.ord_qty "주문수량",
+					   vdr.vdr_nm "업체명",
+					   pd.prod_nm "완제품명",
+					   cd.cd_explan "진행상황"
+		FROM 
+					   ORDERS ord, 
+					   VENDOR vdr, 
+					   ORD_DTL ordtl, 
+					   PROD pd, 
+					   COMM_CODE cd
+	WHERE     ord.vdr_cd = vdr.vdr_cd
+		AND      ord.ord_cd = ordtl.ord_cd
+		AND      ordtl.prod_cd = pd.prod_cd
+		AND      cd.comm_cd = ord.prog_cd
+</select>
 
+<!-- 완제품 재고 조회 -->
+<select id="mainProdList" resultType="map">
+	SELECT		PD.PROD_NM "제품명",
+        				SUM(PDC.PROD_QTY) "재고"
+        				
+	FROM 
+						PROD PD,
+						PROD_LOT PDL, 
+						PROD_CURQTY PDC
+						
+	WHERE   PD.PROD_CD = PDL.PROD_CD
+	
+	AND     PDL.PROD_LOT = PDC.PROD_LOT
+	
+	GROUP BY PD.PROD_NM
+</select>
+
+<!-- 원자재 재고 조회 -->
+<select id="mainMtrlList" resultType="map">
+	SELECT 		M.MT_NM "원자재명",
+	     				SUM(MC.MT_QTY) "재고"
+	
+	FROM    		MT M,
+	        			MT_LOT ML,
+	       				MT_CURQTY MC
+	WHERE   	M.MT_CD = ML.MT_CD
+	AND    		ML.MT_LOT = MC.MT_LOT
+	GROUP BY 	M.MT_NM
+</select>
 
 </mapper>

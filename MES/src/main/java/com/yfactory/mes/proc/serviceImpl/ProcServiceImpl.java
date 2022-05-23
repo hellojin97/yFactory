@@ -31,16 +31,15 @@ public class ProcServiceImpl implements ProcService{
 	}
 
 	@Override
-	public List<Map> prdtPlanSelect(Date date1, Date date2) {
+	public List<Map> PrdtPlanSelect(String date1, String date2) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.PrdtPlanSelect(date1, date2);
 	}
 
-	@Override
-	public int prdtPlanInsert(String PP_NM, Date date1) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	/*
+	 * @Override public int prdtPlanInsert(String PP_NM, Date date1) { // TODO
+	 * Auto-generated method stub return 0; }
+	 */
 
 	@Override
 	public List<Map> ProcOrderSelectAll() {
@@ -66,5 +65,74 @@ public class ProcServiceImpl implements ProcService{
 		//return map.ProcPlanInsert(procPI);
 		return 1;
 	}
+
+
+
+
+	@Override
+	public List<Map> ProcPlanAll() {
+		// TODO Auto-generated method stub
+		return map.ProcPlanAll();
+	}
+
+
+
+	@Override
+	public List<Map> ProcPlanSelect(String ppCd) {
+		// TODO Auto-generated method stub
+		return map.ProcPlanSelect(ppCd);
+	}
+
+
+
+
+	@Override
+	//public List<Map> ProcPlanSelectState(String ppCd, String date1, String date2,String radio) {
+	public List<Map> ProcPlanSelectState(HashMap<String, Object> procPlSelect){
+		
+		return map.ProcPlanSelectState(procPlSelect);
+	}
+
+
+
+
+	@Override
+	public int prdtPlanInsert(String PP_NM, String date1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+	@Override
+	public List<Map> NoPlanSelect() {
+		// TODO Auto-generated method stub
+		return map.NoPlanSelect();
+	}
+
+
+
+
+	@Override
+	public List<Map> procDtPlanSelect(String ppCd) {
+		// TODO Auto-generated method stub
+		return map.procDtPlanSelect(ppCd);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 }

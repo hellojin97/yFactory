@@ -125,11 +125,20 @@
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         
           <li>
-            <a href="procPlList">
+            <a href="procPlMgt">
               <i class="bi bi-circle"></i><span>생산계획관리</span>
             </a>
           </li>
-          
+          <li>
+            <a href="procPlSelect">
+              <i class="bi bi-circle"></i><span>생산계획조회</span>
+            </a>
+          </li>
+                    <li>
+            <a href="procOrderMng">
+              <i class="bi bi-circle"></i><span>생산지시관리</span>
+            </a>
+          </li>
         </ul>
       </li>
       
@@ -180,7 +189,7 @@
             </a>
           </li>
           <li>
-            <a href="eqMng">
+            <a href="eqMngPage">
               <i class="bi bi-circle"></i><span>설비관리</span>
             </a>
           </li>

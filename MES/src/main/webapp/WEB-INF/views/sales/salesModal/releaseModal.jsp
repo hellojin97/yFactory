@@ -21,12 +21,14 @@
 					<div class="col-md-8 " style="padding-bottom: 20px;">
 						<div class="input-group" style="padding-bottom: 15px;">
 							<label for="inputText" class="col-form-label" style="padding-right: 10px;">주문 수량 : </label>
-								<input type="text" class="form-control" id="ordModalNum" disabled>							
+								<input type="number" class="form-control" id="ordModalNum" disabled>							
 						</div>
 						<div class="input-group">
-							<label for="inputText" class="col-form-label">선택 수량 : </label>
-								<input type="text" class="form-control" id="selNum" readonly="readonly" style="padding-right: 10px;">	
-								<button id="btnInsert" class="btn1">등록</button>						
+							<label for="inputText" class="col-form-label" style="padding-right: 10px;">선택 수량 : </label>
+								<input type="number" class="form-control" id="selNum" readonly="readonly">
+								<div style="padding-left: 10px;">
+								<button id="btnInsert" class="btn1">등록</button>
+								</div>						
 						</div>
 					</div>
 					<div id="prodGrid"></div>
@@ -40,6 +42,7 @@
 
 	<script>
 	var omn = $("#ordNum").val();
+	var pcd = $("#prodCd").val();
 	$("#ordModalNum").val(omn);
 		//완제품명 전체조회
 		key = $("#ordTL").val()
@@ -57,8 +60,8 @@
 		var prodList = new tui.Grid({
 			el : document.getElementById('prodGrid'),
 			columns : [ {
-				header : '완제품 LOT 번호',
-				name : '완제품 LOT 번호'
+				header : '완제품LOT번호',
+				name : '완제품LOT번호'
 			}, {
 				header : '완제품명',
 				name : '완제품명'
@@ -83,14 +86,16 @@
 			}
 		});
 		
+		//출고량 입력
 		prodList.on('afterChange', ev =>{
 			orgin: 'cell';					
 			let evn = ev.changes;
+			console.log(evn);
+			console.log(ev);
 			var res = 0;
 			for (var i = 0; i < evn.length; i++) {
 				res = res + parseInt(evn[i].value);
-				}
-			console.log(res);
+				}			
 			$("#selNum").val(res);
 		})
 		
@@ -108,28 +113,36 @@
 		      prodList.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
 		  })
 
-	//모달 데이터값 받아오기
+	//등록 버튼
 	btnInsert.addEventListener("click", function() {
-		let checkedAry = [];
-		 let prd = resultGrid.getCheckedRows();
-		 for (var i = 0; i < prd.length; i++) {
-			checkedAry.push(prd[i].rowKey);
-		}
+		var ord = parseInt($("#ordModalNum").val());
+		var sel = parseInt($("#selNum").val());	
+		var orDt = $("#ordTL").val();
+		var today = new Date();
+		var sysDate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
 		
-       let prodLot = prodList.getValue(e.rowKey, '완제품 LOT 번호');
-       let prodNm = prodList.getValue(e.rowKey, '완제품명');
-       let prodNum = prodList.getValue(e.rowKey, '완제품 현재고');
-       let prodOut = prodList.getValue(e.rowKey, '출고량');
-       let prodCre = prodList.getValue(e.rowKey, '제조일자');
-       let prodDt = prodList.getValue(e.rowKey, '유통기한');
-       
-       
-       
-       $("#pnm").val(prodNm);
-       $("#pcd").val(prodCd);
-       $('#myModal').modal('hide');       
-       }
-    );    
+		
+		if(ord < sel) {
+			Swal.fire({
+                icon: 'error',
+                title: '등록이 취소되었습니다.',
+                text: '주문량보다 출고량이 많습니다!',
+            });
+		}else{
+			
+			let checkedAry = {"주문상세코드" : orDt , "완제품코드" : pcd, "출고날짜" : sysDate};
+			let prd = prodList.getCheckedRows();
+			let plus;
+			
+		 	
+			for (var i = 0; i < prd.length; i++) {				
+				plus = {...checkedAry, ...prd[i]};
+				releaseList.appendRow(plus);
+			}
+      
+      		$('#myModal').modal('hide');
+      	}       
+       });    
 	</script>
 </body>
 </html>

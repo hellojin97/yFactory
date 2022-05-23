@@ -213,8 +213,8 @@
 	
 	<!-- 주문 상세 조회 -->
 	<select id="ordDtpList" resultType="map">
-		SELECT	ordtl.ordtl_cd AS "주문상세코드", ordtl.ord_cd AS "주문코드" ,ordtl.prod_cd AS "완제품코드",
-				ordtl.ord_qty AS "주문수량", ord.res_dt AS "납기일자", pd.prod_nm AS "제품명"	
+		SELECT	ordtl.ordtl_cd AS "주문상세코드", ordtl.ord_cd AS "주문코드" , ordtl.prod_cd AS "완제품코드",
+				ordtl.ord_qty AS "주문수량", TO_CHAR(ord.res_dt,'YYYY-MM-DD') AS "납기일자", pd.prod_nm AS "제품명"	
 		FROM	ord_dtl ordtl, orders ord, prod pd
 		WHERE	ordtl.ord_cd = ord.ord_cd
 		AND		ordtl.prod_cd = pd.prod_cd
@@ -223,11 +223,11 @@
 	
 	<!-- 출고관리-완제품modal -->
 	<select id="outProdModal" resultType="map">
-		SELECT      pdlot.prod_lot AS "완제품 LOT 번호",
+		SELECT      pdlot.prod_lot AS "완제품LOT번호",
                 	pd.prod_nm AS "완제품명",
                 	pdc.prod_qty AS "완제품 현재고",                
-                	pdlot.prod_fdt AS "제조일자",
-                	pdlot.prod_exp AS "유통기한"
+                	TO_CHAR(pdlot.prod_fdt,'YYYY-MM-DD') AS "제조일자",
+                	TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한"
 		FROM        ord_dtl ordtl, prod pd, prod_lot pdlot, prod_curqty pdc
 		WHERE       ordtl.prod_cd = pd.prod_cd
 		AND         pd.prod_cd = pdlot.prod_cd

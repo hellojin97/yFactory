@@ -26,16 +26,21 @@
 	</div>
 	
 	<script>
+	window.onload = function (){
 	$.ajax({
 		url: "selectMtCheckMgr",
 		dataType: "JSON",
+		method : "GET",
 		contentType : "application/json; charset=utf-8",
 	}).done(function(result) {
+		console.log(result);
 		grid.resetData(result);
-	})
+	});
 	
 	var grid = new tui.Grid({
 		el: document.getElementById('qaRequestMgr_mt'),
+	       scrollX: false,
+	       scrollY: false,
 		columns: [ {
 			header: '발주상세코드',
 			name: '발주상세코드',
@@ -47,25 +52,29 @@
 			name: '자재명',
 		}, {
 			header: '검사일자',
-			name: '검사일자',
+			name: '검사일자'
 		}, {
 			header: '발주량',
-			name: '발주량',
+			name: '발주량'
 		}, {
 			header: '합격량',
 			name: '합격량',
+			editor : "text"
 		}, {
 			header: '불량량',
 			name: '불량량',
+			editor : "text"
 		}, {
 			header: '불량명',
 			name: '불량명',
+			editor : "text"
 		}, {
 			header: '불량내역',
 			name: '불량내역',
+			editor : "text"
 		}, {
 			header: '상태',
-			name: '상태',
+			name: '상태'
 		} ],
 		rowHeaders: [ 'rowNum' ],
 		pageOptions : {
@@ -73,6 +82,7 @@
 			perPage : 10
 		}
 	});
+	}
 	</script>
 </body>
 </html>

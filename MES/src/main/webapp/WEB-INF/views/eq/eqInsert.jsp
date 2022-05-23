@@ -5,33 +5,28 @@
 
 <head>
 <meta charset="utf-8">
+<!-- 추가 CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" ></link>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>
 
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <style>
-input {
+/* input {
 	vertical-align: middle;
 	margin : 3px  2px;
 }
 
-input.img-button {
-	background: url( "assets/img/glass.png" ) no-repeat; border : none;
-	width: 32px;
-	height: 32px;
-	cursor: pointer;
-	border: none;
-}
+*/
 
 .btnpart {
 	background-color: #555555;
 	color: white;
-}
+} 
 
-#title {
-	font-size: 30px;
+button:hover {
+ 	color: black;
+ 	background-color: white;
 }
 
 
@@ -39,97 +34,187 @@ input.img-button {
 </style>
 </head>
 <body>
-<div class="container">
-<!-- 	<form name="frm" id="frm" action="eqMng" method="POST" enctype="multipart/form-data"> -->
-	<form name="frm" id="frm" method="POST" enctype="multipart/form-data">
-	<div class="row">
-	<div class="col-8">
-		<h2>설비 등록</h2>
-		<hr  />
-		<div align="right">
-			<button type="reset" class="button btnpart">초기화</button>
-			&nbsp;&nbsp;
+<h1>설비 등록</h1>
+<div id="in/out"></div>
+<div align="right">
+			<button type="reset" id="reset" class="button btnpart">초기화</button>
 			<button type="button" id="btnok" class="button btnpart">저장</button>
-			<!-- <input type="submit" id="btnok" class="button btnpart" value="저장"> -->
-		</div>
-		<hr />
-					설비명*
-					<input id="eq_mdnm" name="eq_mdnm"size=10 maxlength=8>
-							
-					사용여부
-						Y<input	type="radio" id="yes" name="eq_actst" value="Y" checked>
-						N<input type="radio" id="no" name="eq_actst" value="N">
 			
-			<br/><br/>
-			<!--  eq_cd는 함수로 알아서 생성 > 인자값을 일부러 넘기지 않음 -->
-					구분코드<input id="eq_cd" size=10 maxlength=13>
-					<input type="button" id="eqdiv" value="조회">
-					<input id="eq_nm" name="eq_nm" size=10 maxlength=13>
-					모델번호<input id="eq_mdno" name="eq_mdno" size=10 maxlength=13>
-				
-		<br /><br/>
-		
-				
-				제작업체<input id="vdr_code" name="vdr_code" size=10 	maxlength=8>
-				
-				UPH*<input type="number" min="1" max="500" id="eq_uph" name="eq_uph" size=10 maxlength=8>
-				
+</div>
 
-		 <br /><br/> 
-		
-					가용온도<input type="number" min="-20" max="0" id="eq_min" name="eq_min" size=10 maxlength=8 placeholder="최소온도 기입">&nbsp;~&nbsp;
-					<input type="number"  min="20" max="200" id="eq_max" name="eq_max" size=10 maxlength=8 placeholder="최대온도 기입"> ℃ 
-					점검주기<input type="number" min="3" max="7"	id="eq_chkcyc" name="eq_chkcyc" size=10 maxlength=8>
+	<div style="background-color: #e0e0e0; padding: 8px;">
+		<div class="mainTitle" style="padding: 15px;">
+	<form name="frm" id="frm" method="POST" enctype="multipart/form-data">
+		<div class="row">
+		<div class="col-8">
+		<hr style="border: solid 2px gray;" />
+					<!-- 설비명 -->
+					<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">모델명*</label>
+						<input type="text" id="eq_mdnm" name="eq_mdnm" class="form-control" style="width: 30px" placeholder="설비 모델명" required>
+						
+					</div>
+					</div>	
 					
-		<br/><br/>
-		
-			등록인<input type="number" min="1000" id="eq_inster" name="eq_inster" size=10 maxlength=8>
-			구매일자<input type="date"	id="eq_purdt" name="eq_purdt" size=10 maxlength=8>
-	
+					
+						
+					<!-- 사용여부 -->
+					<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">사용여부</label>
+						
+					
+						<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="eq_actst" id="yes" value="1" checked>
+					  	<label class="form-check-label" for="flexRadioDefault1" style="width: 30px;">Y</label>
+						</div>
+						
+						<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="eq_actst" id="no" value="0" >
+					  	<label class="form-check-label" for="flexRadioDefault2">N</label>
+						</div>
+						
+						
+					</div>
+					</div>	
+					
+					<!-- 구분코드 --><!--  eq_cd는 함수로 알아서 생성 > 인자값을 일부러 넘기지 않음 -->
+					<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">구분코드</label>
+						<input type="text" id="eq_cd" readonly>
+						<input type="button" id="eqdiv" value="조회">
+						&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;
+						<input type="text" id="eq_nm" name="eq_nm"  >
+						
+					</div>
+					</div>	
+					<!-- 모델번호 -->
+					<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">모델번호</label>
+						<input type="text" class="form-control" id="eqMdno" name="eq_mdno" style="width: 50px" placeholder="모델번호">
+						
+					</div>
+					</div>	
+					
+					
+					<!-- 제작업체 -->
+					<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">제작업체</label>
+						<input type="text" id="vdrCode" name="vdr_code" class="form-control" style="width: 20px" readonly>
+						&nbsp;&nbsp;
+						<label for="inputText" class="col-form-label" style="padding-right: 10px;">UPH*</label>
+						<input type="text" id="eq_uph" name="eq_uph" class="form-control" min="1" max="500" style="width: 50px" required>
+						
+					</div>
+					</div>	
+					
+					<!-- 가용온도 -->
+					<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">가용온도</label>
+						<input type="number" id="eq_min" name="eq_min" class="form-control" min="-20" max="0" style="width: 20px" placeholder="최소">
+						&nbsp; <h3>~</h3> &nbsp;
+						<input type="number" id="eq_max" name="eq_max" class="form-control" min="20" max="200" style="width: 50px" placeholder="최대">
+						 <h3>℃</h3>
+					</div>
+					</div>	
+					
+					<!-- 점검주기 -->
+					<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">점검주기</label>
+						<input type="number" id="eq_chkcyc" name="eq_chkcyc" class="form-control" style="width: 30px" min="3" max="7" placeholder="점검주기">
+						
+					</div>
+					</div>	
+					
+					
+					<!-- 등록인 /  구매일자 -->
+					<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">등록자명</label>
+						<input type="text" id="eq_inster" name="eq_inster" class="form-control" style="width: 20px" readonly>
+						&nbsp;
+						
+						
+					</div>
+					</div>
+					
+					
+					<!-- 구매일자 -->
+					<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">구매일자</label>
+						<input type="date" id="eq_purdt" name="eq_purdt" class="form-control" min="1" max="500" style="width: 50px">
+						
+					</div>
+					</div>	
+					
+					
 	
 			<input type="hidden" id="uuid" name="uuid"  size=10 >
-			<input type="text" id="img_path" name="img_path" size=10 value="">
+			<input type="hidden" id="img_path" name="img_path" size=10 value="">
 			<input type="hidden" id="img_nm" name="img_nm"  size=10 value="">
 			
-	</div>
 	
+	
+	</div>
 	<div class="col-4">
 	<img id="prevu" src="#" onError="this.style.visibility='hidden'" />
-	<div class="input-file">
+	
+	<!-- <div class="input-file">
 	 	<input type="text" id="imgNm" readonly="readonly" class="file-name" /> 
 		<label for="upload02" class="file-label"></label> 
 		<input type="file" name="file" id="upldfile" class="file-upload" onchange="readURL(this)" accept="assets/img/*" />
 
-	</div>
+	</div> -->
+	
+	<div class="mb-2 ">
+ 	<label for="formFile" class="form-label">FILE UPLOAD</label>
+ 	<input class="form-control" type="file" id="upldfile" onchange="readURL(this)" accept="assets/img/*" />
 	</div>
 	
+	</div>
 	
 	</div>
+	
 	</form>
 
-		<hr />
+		<hr style="border: solid 2px gray;" />
 		<div id="modalDiv"></div>
 
-</div>
+</div></div>
+<div></div>
 </body>
 <script>
 
 
 console.log(  $("input[name='chk']:checked").val()  ); // 사용여부 실시간 체크 Y or N
+// 폼 양식 등록 > alert창 출력후 바로 등록
 $("#btnok").on("click",function(){
-	$("#frm").attr('action' , "eqMng"); 
+	$("#frm").attr('action' , "eqMngPage"); 
 	toastr.success('등록완료!');
 	$("form").submit();
 	
 })
 
-// UUID 생성 부 - 미사용 중
+
+reset.addEventListener("click" , function(){
+	$("#prevu").attr("src" , "");
+	document.getElementById('frm').reset();
+})
+
+// UUID 생성 부 - 사용 중
 // 참고 : https://developyo.tistory.com/110
 function makeUUID(){
 	
 	return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
 	
-	//   	function s4() {
+	   // function s4() {
 	   //  return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
 	   // 	}
 	   // 	 return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + file_nm.substr(file_nm.indexOf("."), file_nm.length-1); */
@@ -174,7 +259,7 @@ function readURL(input) {
 	        	$("#imgNm").val(img.src);
 	        	
 	        	
-        		canvas.width=img.width*0.7;
+        		canvas.width=img.width*0.5;
         		canvas.height=img.height*0.7;
         		
         		canvasContext.drawImage(this,0,0,canvas.width,canvas.height);
@@ -212,71 +297,7 @@ function readURL(input) {
     	
 	}
 	
-//$("#btnok").on("click" , function(){
-	//makeUUID(file_nm);
-	
-	
-	
-	 /* var url = "insertAjax";
-	 $.ajax(url , {
-		 method : "POST",
-		 data: $("#frm").serialize(),
-		 dataType:'json',
-		 success : function(){alert("DB 접속 완료");}
-		 
-	 }).done(function(result){
-		 // 처리 완료시
-		 console.log(result);
-		 // 처리후 리턴 페이지 지정
-		 $("form").attr('action' , '/eq/eqMng');
-		 // submit 진행
-		 $("form").submit();
-	 }) */
-	 
-	 
-	 
-	/* var bytes, blob; 
-	bytes = new Uint8Array(data.blob); 
-	blob = new Blob([bytes], {type:'image/bmp'}); 
-	data['imgSrc'] = URL.createObjectURL(blob);
-	console.log(data['imgSrc']); */
-	
 
-	
-			
-	
-//})
-
-
-
-
-
-
-
-	//console.log($("#upload02").html());
-
-	/* $("#upldfile").change(function(){
-		var formData = new FormData($("#frm"));
-		$.ajax({
-			method:"post",
-			url : "/eqinsert",
-			data : formData,
-			processData : false,
-		    dataType : "json",
-		    contentType : false,
-		    async    : false,
-		    success : function(data) {
-		            alert("파일 업로드 성공.");
-		    },
-		    error : function(error) {
-		            alert("파일 업로드에 실패하였습니다.");
-		           
-		        }
-		});
-	}); */
-	
-	
-	
 	
 	// 조회 버튼을 클릭시  > 모달 호출
 	eqdiv.addEventListener("click" , function(){
@@ -290,32 +311,32 @@ function readURL(input) {
 		})
 					
 	});
-
 	
-		
-	/* window.onload = function(){
-		   const url = "/eqSelectAjax";
-		   $.ajax(url,{
-			   dataType : "JSON",
-			   method: "GET"
-		   }).done(function(result){
+	
+	$("#eq_inster").on("click" , function(){
+		//모달 페이지 호출 부
+		$("#modalDiv").load("eqInstermodal" , function(){
+			const myModal = new bootstrap.Modal('#myModal');
+			myModal.show();	
 			
-			  	console.log(result);
-				
-   			})
-		};  */
+			
+		})
 		
-		/* $("#vdr_cd").value = result.eqCd;
-		$("#eq_nm").value = result.eqNm; */
+	});
+	
+	$("#vdrCode").on("click" , function(){
+		//모달 페이지 호출 부
+		$("#modalDiv").load("eqvdrmodal" , function(){
+			const myModal = new bootstrap.Modal('#myModal');
+			myModal.show();	
+			
+			
+		})
 		
-		
-	
-				
-
-
+	})
 	
 	
-
+	
 </script>
 
 </html>

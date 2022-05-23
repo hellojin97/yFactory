@@ -15,33 +15,34 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
-	<div style="background-color: #e0e0e0; padding: 8px;">
-	<div class="mainTitle" style="padding: 15px;">
-	<div class="mainTitle" style="padding-bottom:15px; color: ;">
+	<div style="padding-bottom:15px; color: ;">
 		<h1>출고 관리</h1>
 	</div>
+	<div class="min1">
 	
-	<div class="min1" >
+	
 	<h4>주문 상세</h4>
 	<div id="ordDtpList"></div>
 	
 	<hr style="border: solid 1px gray;">
 
 	<h4>출고 현황</h4>
-	<div id="releaseList"></div>
+	<div id="releaseList" style="padding-bottom:15px;"></div>
+	
+	<button class="btn1">관리</button>
+	<button class="btn1">등록</button>
 	
 	</div>
 		
-		<button class="btn2">관리</button>
-		<button class="btn2">등록</button>
+		
 	
 	
-	</div>
-	</div>
+	
 	
 <div id="test"></div>
 <input type="hidden" id="ordTL"> 
 <input type="hidden" id="ordNum">
+<input type="hidden" id="prodCd">
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
@@ -113,20 +114,20 @@ var ordDtpList = new tui.Grid({
         name: '주문상세코드'
       },
       {
-        header: '제품코드',
-        name: '제품코드'
+        header: '완제품코드',
+        name: '완제품코드'
       },
       {
-        header: '완제품LOT',
-        name: '완제품LOT'
+        header: '완제품LOT번호',
+        name: '완제품LOT번호'
       },
       {
         header: '출고날짜',
         name: '출고날짜'
       },
       {
-          header: '수량',
-          name: '수량'
+          header: '출고량',
+          name: '출고량'
         },
       {
           header: '제조일자',
@@ -145,8 +146,10 @@ var ordDtpList = new tui.Grid({
   ordDtpList.on("dblclick", function(e) {
 	  let ordtl = ordDtpList.getValue(e.rowKey,"주문상세코드");
 	  let ordNum = ordDtpList.getValue(e.rowKey, "주문수량");
+	  let prodCd = ordDtpList.getValue(e.rowKey, "완제품코드");
 	  $("#ordTL").val(ordtl);
 	  $("#ordNum").val(ordNum);
+	  $("#prodCd").val(prodCd);
 	  
   	$("#test").load("releaseModal", function() {
 			const ProdModal = new bootstrap.Modal('#myModal');

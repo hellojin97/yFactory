@@ -24,10 +24,21 @@ public class QualityServiceImpl implements QualityService {
 	public List<Map> selectMtCheckMgr() {
 		return map.selectMtCheckMgr();
 	}
+	
+	@Override
+	public List<Map> selectProdCheckMgr() {
+		return map.selectProdCheckMgr();
+	}
 
 	@Override
 	public List<Map> selectMtCheck() {
 		return map.selectMtCheck();
+	}
+	
+	@Override
+	public List<Map> selectProdCheck() {
+		// TODO Auto-generated method stub
+		return map.selectProdCheck();
 	}
 
 	@Override
@@ -36,8 +47,8 @@ public class QualityServiceImpl implements QualityService {
 	}
 	
 	@Override
-	public List<Map> searchpoDtlRequest(String mtName) {
-		return map.searchpoDtlRequest(mtName);
+	public List<Map> searchpoDtlRequest(String key) {
+		return map.searchpoDtlRequest(key);
 	}
 
 	@Override

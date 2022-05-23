@@ -29,10 +29,22 @@ public class QualityAjaxController {
 	}
 	
 	// 제품 품질검사관리
+	@GetMapping("/selectProdCheckMgr")
+	public List<Map> selectProdCheckMgr() {
+		return qaService.selectProdCheckMgr();
+	}
 	
 	// 자재 검사결과
+	@GetMapping("/selectMtCheck")
+	public List<Map> selectMtCheck() {
+		return qaService.selectMtCheck();
+	}
 	
 	// 제품 검사결과
+	@GetMapping("/selectProdCheck")
+	public List<Map> selectProdCheck() {
+		return qaService.selectProdCheck();
+	}
 	
 	// 자재 불량내역
 	
@@ -43,8 +55,8 @@ public class QualityAjaxController {
 	// 검색
 	// 자재 품질검사요청(modal)
 	@GetMapping("/pocdModalSearch")
-	public List<Map> searchpoDtlRequest(String mtName) {
-		return qaService.searchpoDtlRequest(mtName);
+	public List<Map> searchpoDtlRequest(String key) {
+		return qaService.searchpoDtlRequest(key);
 	}
 	// 자재품질결과
 	

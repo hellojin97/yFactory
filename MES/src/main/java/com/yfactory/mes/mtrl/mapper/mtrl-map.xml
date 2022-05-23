@@ -15,36 +15,36 @@
 	
 	<!-- 생산계획별 자재재고 -->
 	<select id="mtrlPlanList" resultType="map">
-	SELECT 
-		    PL.PP_CD       "생산계획코드",
-            P.PROD_CD    "완제품코드",
-            P.PROD_NM    "완제품명",
-            TO_CHAR(PL.PP_DT,'YY/MM/DD')     "계획일자",
-            M.MT_CD      "원자재코드",
-            M.MT_NM      "원자재명",
-            CASE
-                  COUNT (DISTINCT  CASE
-                        WHEN      MC.MT_QTY - ( B.CS_QTY * PLD.PD_QTY )  > 0 THEN '부족'
-                        ELSE NULL    
-                    END) 
-                    when 0 then '부족'
-            END AS "구분"
-            
-FROM        PROD P, 
-            PLAN_DTL PLD, 
-            PRDT_PL PL,
-            BOM B,
-            MT M,
-            MT_CURQTY MC,
-            MT_LOT ML
-WHERE       PL.PP_CD = PLD.PP_CD
-AND         P.PROD_CD = B.PROD_CD
-AND         M.MT_CD = B.MT_CD
-AND         M.MT_CD = ML.MT_CD
-AND         ML.MT_LOT = MC.MT_LOT
-AND         PL.PP_CD = #{ppCd}
-GROUP BY PL.PP_CD, P.PROD_CD, P.PROD_NM, PL.PP_DT  , M.MT_CD, M.MT_NM 
-ORDER BY    6 ASC
+		SELECT 
+			    PL.PP_CD       "생산계획코드",
+	            P.PROD_CD    "완제품코드",
+	            P.PROD_NM    "완제품명",
+	            TO_CHAR(PL.PP_DT,'YY/MM/DD')     "계획일자",
+	            M.MT_CD      "원자재코드",
+	            M.MT_NM      "원자재명",
+	            CASE
+	                  COUNT (DISTINCT  CASE
+	                        WHEN      MC.MT_QTY - ( B.CS_QTY * PLD.PD_QTY )  > 0 THEN '부족'
+	                        ELSE NULL    
+	                    END) 
+	                    when 0 then '부족'
+	            END AS "구분"
+		            
+		FROM        PROD P, 
+		            PLAN_DTL PLD, 
+		            PRDT_PL PL,
+		            BOM B,
+		            MT M,
+		            MT_CURQTY MC,
+		            MT_LOT ML
+		WHERE       PL.PP_CD = PLD.PP_CD
+		AND         P.PROD_CD = B.PROD_CD
+		AND         M.MT_CD = B.MT_CD
+		AND         M.MT_CD = ML.MT_CD
+		AND         ML.MT_LOT = MC.MT_LOT
+		AND         PL.PP_CD = #{ppCd}
+		GROUP BY PL.PP_CD, P.PROD_CD, P.PROD_NM, PL.PP_DT  , M.MT_CD, M.MT_NM 
+		ORDER BY    6 ASC
 	</select>
 	
 	<!-- 발주요청서 등록 조회 -->
@@ -142,6 +142,64 @@ ORDER BY    6 ASC
         WHERE  vd.ven_cd = cd.comm_cd
         AND    vd.vdr_nm LIKE '%'||#{vdrnm}||'%'		   
 	</select>
-
 	
+	<!-- 발주코드 전체조회 -->
+	<select id="pocdList" resultType="map">
+		SELECT po_cd "발주코드" 
+		FROM   mt_po
+	</select>
+	
+	<!-- 발주코드 단건조회 -->
+	<select id="pocdSelectSearch" resultType="map">
+		SELECT po_cd "발주코드"
+		FROM   mt_po
+		WHERE  po_cd LIKE '%'||#{pocd}||'%'
+	</select>
+	<!-- 발주관리 조회 -->
+	<select id="listRequest" resultType="map">
+	SELECT po.po_cd    "원자재발주코드",
+	       m.mt_cd    "원자재코드",
+	       m.mt_nm    "원자재명",
+	       vdr.vdr_nm   "업체명",
+	       pdl.po_qty   "발주수량",
+	       m.mt_unit  "단위",
+	       to_char(lot.mt_wdt, 'YY-MM-DD') "입고신청일",
+	       to_char(pdl.po_reqdt, 'YY-MM-DD') "납기신청일",
+	       pdl.mt_prc   "단가",
+	       (po_qty*mt_prc)"금액"
+	FROM   mt_po po,
+	       mt m,
+	       vendor vdr,
+	       mt_podtl pdl,
+	       mt_lot lot
+	WHERE  po.po_cd = pdl.po_cd
+	AND    po.mt_cd = m.mt_cd
+	AND    m.mt_cd = lot.mt_cd
+	AND    m.ven_cd = vdr.vdr_cd
+	</select>
+	
+	<select id="mtrlReqSelectSearch" resultType="map">
+	SELECT po.po_cd    "원자재발주코드",
+	       m.mt_cd    "원자재코드",
+	       m.mt_nm    "원자재명",
+	       vdr.vdr_nm   "업체명",
+	       pdl.po_qty   "발주수량",
+	       m.mt_unit  "단위",
+	       to_char(lot.mt_wdt, 'YY-MM-DD') "입고신청일",
+	       to_char(pdl.po_reqdt, 'YY-MM-DD') "납기신청일",
+	       pdl.mt_prc   "단가",
+	       (po_qty*mt_prc)"금액"
+	FROM   mt_po po,
+	       mt m,
+	       vendor vdr,
+	       mt_podtl pdl,
+	       mt_lot lot
+	WHERE  po.po_cd = pdl.po_cd
+	AND    po.mt_cd = m.mt_cd
+	AND    m.mt_cd = lot.mt_cd
+	AND    m.ven_cd = vdr.vdr_cd
+		<if test="poCdinput != ''">
+	AND 	po.po_cd LIKE '%'||#{poCdinput}||'%'
+		</if>
+	</select>
 </mapper>

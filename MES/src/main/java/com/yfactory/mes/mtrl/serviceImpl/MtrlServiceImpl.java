@@ -68,6 +68,30 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.mtrlOrderList(ppCd, mtCd);
 	}
 
+	@Override
+	public List<Map> pocdList() {
+		// TODO Auto-generated method stub
+		return map.pocdList();
+	}
+
+	@Override
+	public List<Map> pocdSelectSearch(String pocd) {
+		// TODO Auto-generated method stub
+		return map.pocdSelectSearch(pocd);
+	}
+
+	@Override
+	public List<Map> listRequest() {
+		// TODO Auto-generated method stub
+		return map.listRequest();
+	}
+
+	@Override
+	public List<Map> mtrlReqSelectSearch(String poCdinput) {
+		// TODO Auto-generated method stub
+		return map.mtrlReqSelectSearch(poCdinput);
+	}
+
 
 
 }

@@ -178,7 +178,6 @@ $("#outBtn").on("click", function(){
 
 			resultGrid.on("click", function(e) {
 			let prd = resultGrid.getFocusedCell('완제품코드');
-
 			if (prd.columnName == '완제품명') {
 				if (prd.value == null) {
 					$("#test").load("prdmodal", function() {

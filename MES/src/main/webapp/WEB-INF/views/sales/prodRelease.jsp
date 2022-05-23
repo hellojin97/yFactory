@@ -29,7 +29,7 @@
 	<h4>출고 현황</h4>
 	<div id="releaseList" style="padding-bottom:15px;"></div>
 	
-	<button class="btn1">출고</button>
+	<button id="releaseBtn" class="btn1">출고</button>
 	<button class="btn1">초기화</button>
 	
 	</div>
@@ -156,7 +156,13 @@ var ordDtpList = new tui.Grid({
 			ProdModal.show();
 			}); 
   });	
-  
+
+  $("#releaseBtn").on("click", function(){
+	  let prd = releaseList.getCheckedRows();
+	  for (var i = 0; i < prd.length; i++) {
+			
+		}
+  })
   
 </script>
 

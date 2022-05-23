@@ -25,7 +25,7 @@
 						</div>
 						<div class="input-group">
 							<label for="inputText" class="col-form-label" style="padding-right: 10px;">선택 수량 : </label>
-								<input type="number" class="form-control" id="selNum" readonly="readonly">
+								<input type="number" class="form-control" id="selNum" value="0" readonly="readonly">
 								<div style="padding-left: 10px;">
 								<button id="btnInsert" class="btn1">등록</button>
 								</div>						
@@ -43,6 +43,10 @@
 	<script>
 	var omn = $("#ordNum").val();
 	var pcd = $("#prodCd").val();
+	var bfN;
+	var nowN;
+	var res = parseInt($("#selNum").val());
+		
 	$("#ordModalNum").val(omn);
 		//완제품명 전체조회
 		key = $("#ordTL").val()
@@ -86,20 +90,38 @@
 			}
 		});
 		
-		//출고량 입력
-		prodList.on('afterChange', ev =>{
-			orgin: 'cell';					
-			let evn = ev.changes;
-			console.log(evn);
-			console.log(ev);
-			var res = 0;
-			for (var i = 0; i < evn.length; i++) {
-				res = res + parseInt(evn[i].value);
-				}			
-			$("#selNum").val(res);
+		//출고량 더블클릭
+		prodList.on("dblclick", function(e) {
+		nowN = prodList.getValue(e.rowKey, "완제품 현재고");			
+		bfN = prodList.getValue(e.rowKey, "출고량");			
+		if (bfN == null){
+			bfN = 0;
+		}			
 		})
 		
-		 
+		//출고량 입력
+     	prodList.on('afterChange', ev =>{
+        orgin: 'cell';               
+        let evn = ev.changes;
+        let affN;
+        for (var i = 0; i < evn.length; i++) {
+           affN = parseInt(evn[i].value);
+           }
+        var sum = parseInt(affN) - parseInt(bfN);
+        console.log(sum);
+        if(nowN < affN) {
+			Swal.fire({
+	               icon: 'error',
+	               title: '등록이 취소되었습니다.',
+	               text: '현재고보다 출고량이 많습니다!',
+				});
+			}else{
+				res = res + sum
+         		$("#selNum").val(res);
+				console.log("수정!");
+			}
+      });
+		
 		  
 		$('body').css("overflow", "hidden");
 		  

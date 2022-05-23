@@ -29,8 +29,8 @@
 	<h4>출고 현황</h4>
 	<div id="releaseList" style="padding-bottom:15px;"></div>
 	
-	<button class="btn1">관리</button>
-	<button class="btn1">등록</button>
+	<button class="btn1">출고</button>
+	<button class="btn1">초기화</button>
 	
 	</div>
 		

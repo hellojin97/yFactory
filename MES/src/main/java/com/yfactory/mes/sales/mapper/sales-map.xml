@@ -213,12 +213,21 @@
 	
 	<!-- 주문 상세 조회 -->
 	<select id="ordDtpList" resultType="map">
-		SELECT	ordtl.ordtl_cd AS "주문상세코드", ordtl.ord_cd AS "주문코드" , ordtl.prod_cd AS "완제품코드",
-				ordtl.ord_qty AS "주문수량", TO_CHAR(ord.res_dt,'YYYY-MM-DD') AS "납기일자", pd.prod_nm AS "제품명"	
-		FROM	ord_dtl ordtl, orders ord, prod pd
+		SELECT	ordtl.ordtl_cd AS "주문상세코드", 
+					    ordtl.ord_cd AS "주문코드" , 
+					    ordtl.prod_cd AS "완제품코드",
+						ordtl.ord_qty AS "주문수량", 
+						TO_CHAR(ord.res_dt,'YYYY-MM-DD') AS "납기일자", 
+						pd.prod_nm AS "제품명"	
+						
+		FROM		ord_dtl ordtl, 
+						orders ord, 
+						prod pd
+						
 		WHERE	ordtl.ord_cd = ord.ord_cd
 		AND		ordtl.prod_cd = pd.prod_cd
-		AND     ord.prog_cd NOT LIKE '출고처리완료'
+		AND     	ord.prog_cd NOT LIKE 'PROG04'
+		AND		ordtl.prog_cd NOT LIKE 'PROG04'
 	</select>
 	
 	<!-- 출고관리-완제품modal -->
@@ -234,5 +243,12 @@
 		AND         pdc.prod_lot = pdlot.prod_lot
 		AND         ordtl.ordtl_cd = #{key}
 	</select>
+	
+	
+	<insert statementType="CALLABLE" id="releaseOrder" parameterType="map">
+	
+		{CALL RELEASE_ORDER (#{prod_lot},#{prod_wrqty},#{ordtl_cd})}
+		
+	</insert>
 	
 </mapper>

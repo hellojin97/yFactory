@@ -1,6 +1,5 @@
 package com.yfactory.mes.proc.serviceImpl;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,6 +125,24 @@ public class ProcServiceImpl implements ProcService{
 	@Override
 	public List<Map> ProcLineSelect(HashMap<String, Object> prodNm) {
 		return map.ProcLineSelect(prodNm);
+	}
+
+
+
+
+	@Override
+	public List<Map> ProcNeedMtrl(HashMap<String, Object> line) {
+		// TODO Auto-generated method stub
+		return map.ProcNeedMtrl(line);
+	}
+
+
+
+
+	@Override
+	public List<Map> ProcNeedMtrlLOT(HashMap<String, Object> mtNm) {
+		// TODO Auto-generated method stub
+		return map.ProcNeedMtrlLOT(mtNm);
 	}
 
 

@@ -20,6 +20,22 @@
 		</div>
 		</div>
 		
+			<div id="needMtrlModal" class="modal fade" tabindex="-1">
+		<div class="modal-dialog modal-lg modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">자재 LOT 목록</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<div id="needMtrlLOTGrid"></div>
+				</div>
+
+
+			</div>
+		</div>
+		</div>
+		
 		</div>
 <script>
 $(function(){
@@ -62,6 +78,49 @@ $(function(){
 	                         perPage: 5
 	                    }
 	     });
+
+		
+		/* const url1 = "procNeedMtrlLOT";
+		   $.ajax(url1,{
+			   dataType : "JSON",
+			   data : {mtNm : "밀"},
+			   method: "POST"
+		   }).done(function(result){
+			   console.log(ppCd);
+			   needMtrlLOTGrid.resetData(result);
+		   })
+		   
+			   
+		   var needMtrlLOTGrid = new tui.Grid({
+				
+		       el: document.getElementById('needMtrlLOTGrid'),
+		       scrollX: false,
+		       scrollY: false,
+		       columns: [
+		    	 {
+			           header: '자재LOT번호',
+			           name: '자재LOT번호',
+			      },
+		         {
+		           header: '현재고',
+		           name: '현재고',
+		         },
+		         {
+		             header: '사용수량',
+		             name: '사용수량',
+		           },
+		           {
+		               header: '유통기한',
+		               name: '유통기한',
+		             },
+		             ],
+		   					rowHeaders: ['checkbox'],
+		                     pageOptions: {
+		                         useClient: true,
+		                         perPage: 5
+		                    }
+		     }); */
+	   	
 	   
 		setTimeout(function(){
 			NoPlanSelectGrid.refreshLayout();

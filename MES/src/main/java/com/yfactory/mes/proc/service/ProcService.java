@@ -36,4 +36,8 @@ public interface ProcService {
 	List<Map> procDtPlanSelect(String ppCd); //상세생산계획
 	
 	List<Map> ProcLineSelect(@RequestBody HashMap<String, Object> prodNm); // 상품 라인코드 조회
+	
+    List<Map> ProcNeedMtrl(@RequestBody HashMap<String, Object> line); // 필요 자재 조회
+    
+    List<Map> ProcNeedMtrlLOT(@RequestBody HashMap<String, Object> mtNm); //필요 자재 LOI 조회
 }

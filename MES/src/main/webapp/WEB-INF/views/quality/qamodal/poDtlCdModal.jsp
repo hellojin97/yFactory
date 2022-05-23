@@ -120,7 +120,7 @@
        $("#mnm").val(mtName);
        $("#vnm").val(vName);
        $("#pqty").val(poQty);
-       $('#myModal').modal('hide');       
+       $('#poDtlCdModal').modal('hide');
        }
     );
 	</script>

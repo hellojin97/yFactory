@@ -5,7 +5,7 @@
 	<select id="selectPl" resultType="map">
 		SELECT    pl.pp_cd "pp_cd",
 	       		  pl.pp_nm "pp_nm",
-	              pl.pp_dt "pp_dt",
+	              TO_CHAR(pl.pp_dt,'yyyy-mm-dd') "pp_dt",
 	              sum(dt.pd_qty) "pd_qty"
 		FROM      plan_dtl dt, prdt_pl pl
 		WHERE     dt.pp_cd = pl.pp_cd
@@ -19,7 +19,7 @@
 			    PL.PP_CD       "생산계획코드",
 	            P.PROD_CD    "완제품코드",
 	            P.PROD_NM    "완제품명",
-	            TO_CHAR(PL.PP_DT,'YY/MM/DD')     "계획일자",
+	            TO_CHAR(PL.PP_DT,'YYyy-MM-DD')     "계획일자",
 	            M.MT_CD      "원자재코드",
 	            M.MT_NM      "원자재명",
 	            CASE
@@ -53,7 +53,7 @@
          		 M.MT_NM  "원자재명",
         		 V.VDR_NM    "업체명",
         		 MC.MT_QTY   "현재고",
-        		 TO_CHAR(SYSDATE,'YY-MM-DD') "납기요청일자",
+        		 TO_CHAR(SYSDATE,'YYyy-MM-DD') "납기요청일자",
          		 SUM(B.CS_QTY * PLD.PD_QTY)   "계획대비 필요수량"
 		FROM     MT M, VENDOR V, MT_LOT ML ,MT_CURQTY MC, BOM B, PLAN_DTL PLD
 		WHERE    M.VDR_CD = V.VDR_CD
@@ -163,9 +163,9 @@
 	       vdr.vdr_nm   "업체명",
 	       pdl.po_qty   "발주수량",
 	       m.mt_unit  "단위",
-	       to_char(lot.mt_wdt, 'YY-MM-DD') "입고신청일",
-	       to_char(pdl.po_reqdt, 'YY-MM-DD') "납기신청일",
-	       pdl.mt_prc   "단가",
+	       to_char(lot.mt_wdt, 'YYyy-MM-DD') "입고신청일",
+	       to_char(pdl.po_reqdt, 'YYyy-MM-DD') "납기신청일",
+	       m.mt_prc   "단가",
 	       (po_qty*mt_prc)"금액"
 	FROM   mt_po po,
 	       mt m,
@@ -185,9 +185,9 @@
 	       vdr.vdr_nm   "업체명",
 	       pdl.po_qty   "발주수량",
 	       m.mt_unit  "단위",
-	       to_char(lot.mt_wdt, 'YY-MM-DD') "입고신청일",
-	       to_char(pdl.po_reqdt, 'YY-MM-DD') "납기신청일",
-	       pdl.mt_prc   "단가",
+	       to_char(lot.mt_wdt, 'YYyy-MM-DD') "입고신청일",
+	       to_char(pdl.po_reqdt, 'YYyy-MM-DD') "납기신청일",
+	       m.mt_prc   "단가",
 	       (po_qty*mt_prc)"금액"
 	FROM   mt_po po,
 	       mt m,

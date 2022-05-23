@@ -42,7 +42,7 @@
 		
 	<div id="procDtPlanDiv"></div>
 	<div id="needMtrlDiv"></div>
-	
+	<input type="hidden" id="modalState" />
 	<script>
 	var procDtPlan
 	var procOrder
@@ -189,13 +189,6 @@
 
 				});
 				
-	$("#btnNoPlanSelect").click(function () {
-		$("#procDtPlanDiv").load("procodermngModal", function() {
-
-			const procDtPlanModal = new bootstrap.Modal('#procDtPlanModal');
-			procDtPlanModal.show();
- 			});
-		});
     
 	// focusChange 변수
 	let selectedRowKey = null;
@@ -244,13 +237,31 @@
 		}
 	});
 	
-	needMtrl.on("dblclick",function(e) {
-		 let ppCd = needMtrl.getValue(e.rowKey, '자재명');
-		 console.log(ppCd);
-			$("#needMtrlDiv").load("procodermngModal", function() {
+
+	$("#btnNoPlanSelect").click(function () {
+		$("#modalState").val("1");
+		$("#procDtPlanDiv").load("procodermngModal", function() {
+
+			const procDtPlanModal = new bootstrap.Modal('#procDtPlanModal');
+			procDtPlanModal.show();
+			 
 			
+ 			});
+		});
+	
+	needMtrl.on("dblclick",function(e) {
+		 $("#modalState").val('2');
+		 let ppCd = needMtrl.getValue(e.rowKey, '자재명');
+		 let mtNm = needMtrl.getValue(e.rowKey, '자재코드');
+		 let pdQty = needMtrl.getValue(e.rowKey, '소모량');
+		 $("#ppCdText").val(ppCd);
+		 $("#pdQtyText").val(pdQty);
+		 $("#mtNmText").val(mtNm);
+
+			$("#needMtrlDiv").load("procodermngModal", function() {
 				const needMtrlModal = new bootstrap.Modal('#needMtrlModal');
 				needMtrlModal.show();
+
 		
 			})
 		})

@@ -15,11 +15,13 @@ public interface QualityService {
 	List<Map> selectMtCheckMgr();
 	
 	// 제품 품질검사관리
+	List<Map> selectProdCheckMgr();
 	
 	// 자재 검사결과
 	List<Map> selectMtCheck();
 	
 	// 제품 검사결과
+	List<Map> selectProdCheck();
 	
 	// 자재 불량내역
 	List<Map> selectMtErrList();
@@ -30,7 +32,7 @@ public interface QualityService {
 	
 	// 검색
 	// 자재 품질검사요청(modal)
-	List<Map> searchpoDtlRequest(String mtName);
+	List<Map> searchpoDtlRequest(String key);
 	
 	// 자재품질결과
 	List<Map> searchMtQuality( Date startDate, Date endDate, String mtName);

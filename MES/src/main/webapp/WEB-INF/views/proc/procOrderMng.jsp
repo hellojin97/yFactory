@@ -196,7 +196,7 @@
 			procDtPlanModal.show();
  			});
 		});
-	
+    
 	// focusChange 변수
 	let selectedRowKey = null;
 	let workDate, bworkDate;

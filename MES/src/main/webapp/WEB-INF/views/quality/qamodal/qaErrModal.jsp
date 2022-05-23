@@ -8,26 +8,26 @@
 </head>
 <body>
 	<!-- 발주상세코드 Modal  -->
-	<div id="poDtlCdModal" class="modal fade" tabindex="-1">
+	<div id="errCodeModalModal" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header"
 					style="background-color: #2c3e50; color: white; font-size: small; padding: 10px;">
-					<h5 class="modal-title" style="font-size: 17px;">발주상세코드</h5>
+					<h5 class="modal-title" style="font-size: 17px;">불량코드</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 				<!-- 모달 내용 -->
 				<div class="modal-body">
-					<div class="col-md-8 " style="padding-bottom: 20px;">
-						<div class="input-group ">
-							<label for="inputText" class="col-form-label" style="padding-right: 10px;">자재명</label> 
+					<div class="col-md-8" style="padding-bottom: 20px;">
+						<div class="input-group">
+							<label for="inputText" class="col-form-label" style="padding-right: 10px;">불량명</label> 
 							<input type="text" class="form-control" style="width: 50px" id="mtName" placeholder="자재명">
 							<a class="nav-link nav-icon search-bar-toggle " id="mtNameSearch" onclick="mtNameSearch">
 								<i class="bi bi-search" style="color: #2c3e50"></i>
 							</a>
 						</div>
 					</div>
-					<div id="poDtlCd"></div>
+					<div id="errCodeModal"></div>
 				</div>
 				<!-- 내용끝 -->
 			</div>
@@ -37,7 +37,7 @@
 
 	<script>
 	
-	// 발주상세코드 조회
+	// 불량코드 조회
 	 $.ajax({
 			url: "selectpoDtlRequest",
 			dataType: "JSON",
@@ -51,22 +51,13 @@
 	
 	
 	var grid = new tui.Grid({
-		el: document.getElementById('poDtlCd'),
+		el: document.getElementById('errCodeModal'),
 		columns: [ {
-			header: '발주상세코드',
-			name: '발주상세코드',
+			header: '불량코드',
+			name: '불량코드',
 		}, {
-			header: '자재코드',
-			name: '자재코드',
-		}, {
-			header: '자재명',
-			name: '자재명',
-		}, {
-			header: '업체명',
-			name: '업체명',
-		}, {
-			header: '발주량',
-			name: '발주량',
+			header: '불량명',
+			name: '불량명',
 		}],
 		rowHeaders: [ 'rowNum' ],
 		pageOptions : {
@@ -74,12 +65,10 @@
 			perPage : 5
 		}
 	});
-	
-	
 	 
 	$('body').css("overflow", "hidden");
 	  
-	  var myModal = document.getElementById('poDtlCdModal')
+	  var myModal = document.getElementById('errCodeModalModal')
 
 	  myModal.addEventListener('shown.bs.modal', function () {
 		  //ajax 호출
@@ -87,7 +76,7 @@
 	      grid.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
 	  })
 	
-	// 자재명 검색
+	// 불량명 검색
 	$("#mtNameSearch").on("click",function(){
 		var key = $("#mtName").val();
 		console.log(key);
@@ -106,21 +95,12 @@
 	
 	//모달 데이터값 받아오기
 	grid.on("dblclick",function(e) {
-    //debugger
-       let poDtlCd = grid.getValue(e.rowKey, '발주상세코드');
-	   let mtCd = grid.getValue(e.rowKey, '자재코드');
-       let mtName = grid.getValue(e.rowKey, '자재명');
-       let vName = grid.getValue(e.rowKey, '업체명');
-       let poQty = grid.getValue(e.rowKey, '발주량'); 
-       
-       
-       
-       $("#pdt").val(poDtlCd);
-       $("#mcd").val(mtCd);
-       $("#mnm").val(mtName);
-       $("#vnm").val(vName);
-       $("#pqty").val(poQty);
-       $('#poDtlCdModal').modal('hide');
+	//debugger
+    	let errCd = grid.getValue(e.rowKey, '불량코드');
+    	let errNm = grid.getValue(e.rowKey, '불량명')
+		
+    	
+		$('#errCodeModalModal').modal('hide');
 	});
 	</script>
 

@@ -88,4 +88,11 @@ public class SalesServiceImpl implements SalesService {
 		return map.outProdModal(key);
 	}
 
+	@Override
+	public int releaseOrder(Map<String, String> result) {
+		// TODO Auto-generated method stub
+		
+		return map.releaseOrder(result);
+	}
+
 }

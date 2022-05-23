@@ -16,14 +16,20 @@ public interface QualityMapper {
 	// 자재 품질검사관리 조회
 	List<Map> selectMtCheckMgr();
 	
+	// 제품 품질검사관리 조회
+	List<Map> selectProdCheckMgr();
+	
 	// 자재 검사결과 조회
 	List<Map> selectMtCheck();
+	
+	// 제품 검사결과 조회
+	List<Map> selectProdCheck();
 	
 	// 자재 불량내역 조회
 	List<Map> selectMtErrList();
 	
 	// 자재 품질검사요청(modal) 검색
-	List<Map> searchpoDtlRequest(@Param("mtName") String mtName);
+	List<Map> searchpoDtlRequest(@Param("mtName") String key);
 	
 	// 자재품질결과 검색
 	List<Map> searchMtQuality(@Param("startDate") Date startDate, @Param("endDate") Date endDate,

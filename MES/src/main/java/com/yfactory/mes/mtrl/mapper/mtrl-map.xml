@@ -56,7 +56,7 @@
         		 TO_CHAR(SYSDATE,'YY-MM-DD') "납기요청일자",
          		 SUM(B.CS_QTY * PLD.PD_QTY)   "계획대비 필요수량"
 		FROM     MT M, VENDOR V, MT_LOT ML ,MT_CURQTY MC, BOM B, PLAN_DTL PLD
-		WHERE    M.VEN_CD = V.VDR_CD
+		WHERE    M.VDR_CD = V.VDR_CD
 		AND      M.MT_CD = ML.MT_CD
 		AND      ML.MT_LOT = MC.MT_LOT
 		AND      M.MT_CD = B.MT_CD
@@ -79,7 +79,7 @@
 			   vendor vd, 
 			   mt_curqty cy
 		WHERE  m.mt_cd = lot.mt_cd
-		AND    m.ven_cd = vd.vdr_cd
+		AND    m.vdr_cd = vd.vdr_cd
 		AND    lot.mt_lot = cy.mt_lot
 	</select>
 	
@@ -96,7 +96,7 @@
 			    vendor vd, 
 			    mt_curqty cy
 		WHERE   m.mt_cd = lot.mt_cd
-		AND     m.ven_cd = vd.vdr_cd
+		AND     m.vdr_cd = vd.vdr_cd
 		AND     lot.mt_lot = cy.mt_lot
 			<if test="m1 != ''">
 		AND 	m.mt_nm LIKE '%'||#{m1}||'%'
@@ -175,7 +175,7 @@
 	WHERE  po.po_cd = pdl.po_cd
 	AND    po.mt_cd = m.mt_cd
 	AND    m.mt_cd = lot.mt_cd
-	AND    m.ven_cd = vdr.vdr_cd
+	AND    m.vdr_cd = vdr.vdr_cd
 	</select>
 	
 	<select id="mtrlReqSelectSearch" resultType="map">
@@ -197,7 +197,7 @@
 	WHERE  po.po_cd = pdl.po_cd
 	AND    po.mt_cd = m.mt_cd
 	AND    m.mt_cd = lot.mt_cd
-	AND    m.ven_cd = vdr.vdr_cd
+	AND    m.vdr_cd = vdr.vdr_cd
 		<if test="poCdinput != ''">
 	AND 	po.po_cd LIKE '%'||#{poCdinput}||'%'
 		</if>

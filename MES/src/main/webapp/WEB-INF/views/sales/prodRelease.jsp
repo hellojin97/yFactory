@@ -158,10 +158,58 @@ var ordDtpList = new tui.Grid({
   });	
 
   $("#releaseBtn").on("click", function(){
-	  let prd = releaseList.getCheckedRows();
-	  for (var i = 0; i < prd.length; i++) {
-			
-		}
+      Swal.fire({
+          title: '출고등록을 완료하시겠습니까?',
+          text: "다시 되돌릴 수 없습니다. 신중하세요.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '승인',
+          cancelButtonText: '취소'
+      }).then((result) => {
+      	console.log(result);
+      	console.log(result.isConfirmed); // 승인시 FALSE / 취소시 TRUE
+          if (result.isConfirmed) {
+        	  
+        	  
+        	  
+        	  let prd = releaseList.getCheckedRows();
+        	  for (var i = 0; i < prd.length; i++) {
+        		  
+        		  /* 주문상세코드 */
+        			let ordtlCd = prd[i].주문상세코드;
+        		  /* 완제품LOT번호  */
+        		  	let prodLot = prd[i].완제품LOT번호;
+        		  	/* 출고량 */
+        		  	let wrQty = prd[i].출고량;
+        			
+        		  	$.ajax({
+        		  		url :'releaseOrder',
+        		  		method : 'POST',
+        		  		data : {"prod_lot" : prodLot, "prod_wrqty" : wrQty, "ordtl_cd" : ordtlCd},
+        		  		}).done(function(result){
+        		  			console.log(result);
+        		  		});
+        		  	
+        		};
+        	  
+              Swal.fire(
+                  '승인이 완료되었습니다.',
+                  '출고등록이 완료되었습니다.',
+                  'success'
+              );
+              window.reload;
+              
+          }else{
+          	Swal.fire(
+                      '승인이 취소되었습니다.',
+                      '섹시하시네요~!',
+                      'error'
+                  )
+          }
+      });
+	 
   })
   
 </script>

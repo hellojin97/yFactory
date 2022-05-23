@@ -47,5 +47,9 @@ public interface SalesMapper {
 	
 	//출고 완제품 modal 조회
 	List<Map> outProdModal(String key);
+	
+	
+	//출고등록
+	int releaseOrder(Map<String, String> result);
 }
 

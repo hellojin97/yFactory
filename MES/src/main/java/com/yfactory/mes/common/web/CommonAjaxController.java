@@ -30,5 +30,11 @@ public class CommonAjaxController {
 	public List<Map> mainMtrlList(){
 		return service.mainMtrlList();
 	}
+	
+	//주문제품 조회
+	@GetMapping("/userOrder")
+	public List<Map> userOrder(){
+		return service.userOrderForm();
+	}
 
 }

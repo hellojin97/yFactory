@@ -160,6 +160,7 @@ var ordDtpList = new tui.Grid({
   	//초기화 버튼
   $('#reset').on('click',function(){
 	  
+	  releaseList.clear();
 	  
 	})
 
@@ -223,6 +224,7 @@ var ordDtpList = new tui.Grid({
           			releaseList.resetData(result);
           		}
           	});
+              releaseList.removeCheckedRows(false);
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',

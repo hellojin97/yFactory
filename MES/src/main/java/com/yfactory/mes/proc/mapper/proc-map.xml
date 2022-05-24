@@ -220,6 +220,7 @@ AND M.MT_CD = LOT.MT_CD
 AND LOT.MT_LOT = QTY.MT_LOT
 AND M.MT_CD = #{mtNm}
 AND DTL.PRD_DTLCD = #{dtlCd}
+
 	</select>
 	
 	<!-- 생산지시 조회 -->
@@ -251,9 +252,7 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 		
 			AND pl.pp_dt BETWEEN TO_DATE(#{date1},'YY/MM/DD') AND TO_DATE(#{date2},'YY/MM/DD')
 		</if>
-		<!-- <if test="date1 != '' and date2 != ''">
-			AND pl.pp_dt BETWEEN TO_DATE(#{date1},'YY/MM/DD') AND TO_DATE(#{date2},'YY/MM/DD')
-		</if> -->
+
 	</select>
 	
 

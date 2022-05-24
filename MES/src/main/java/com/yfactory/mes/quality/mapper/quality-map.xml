@@ -15,9 +15,8 @@
 		AND     MP.MT_CD = MT.MT_CD
 		AND     MP.VDR_CD = VDR.VDR_CD
 	</select>
+
 	<!-- 제품 품질검사요청(modal) 조회 -->
-	
-	<!-- 자재 품질검사요청 -->
 	
 	
 	<!-- 자재검사관리 조회 -->
@@ -103,57 +102,37 @@
 	</select>
 	<!-- 자재불량내역 조회 -->
 	<select id="selectMtErrList" resultType="map">
-		SELECT	mel.po_dtlcd as "발주상세코드",
-				chk.chk_dt as "검사일자",
-				v.vdr_nm as "업체명",
-				mt.mt_nm as "자재명",
-				mel.chk_errqty as "불량량",
-				err.err_dtl as "불량내역",
-				mpd.mt_prc as "단가"
+		SELECT	MEL.PO_DTLCD AS "발주상세코드",
+				CHK.CHK_DT AS "검사일자",
+				V.VDR_NM AS "업체명",
+				MT.MT_NM AS "자재명",
+				MEL.CHK_ERRQTY AS "불량량",
+				ERR.ERR_DTL AS "불량내역",
+				MT.MT_PRC AS "단가"
 		
-		FROM 	mt_chk chk,
-				mt_podtl mpd,
-				mt_po po,
-				vendor v,
-				mt_errlist mel,
-				err_code err,
-				mt mt
+		FROM 	MT_CHK CHK,
+				VENDOR V,
+				MT_ERRLIST MEL,
+				ERR_CODE ERR,
+				MT MT
 		
-		WHERE 	mel.po_dtlcd = mpd.po_dtlcd
-		AND		mpd.po_cd = po.po_cd
-		AND 	po.vdr_cd = v.vdr_cd
-		AND 	mel.mtrl_cd = mt.mt_cd
-		AND 	mel.err_cd = err.err_cd
+		WHERE 	MEL.PO_DTLCD = CHK.PO_DTLCD
+		AND 	MEL.MTRL_CD = MT.MT_CD
+        AND 	MT.VDR_CD = V.VDR_CD
+		AND 	MEL.ERR_CD = ERR.ERR_CD
 	</select>
 	<!-- 제품불량내역 조회 -->
 	<select id="selectProdErrList" resultType="map">
-		SELECT	per.prod_lot as "제품LOT",
-				ppr.proc_cd as "공정코드",
-				pe.line_turn as "순번",
-				p.prod_nm as "제품명",
-				per.chk_errqty as "불량량",
-				pe.err_cd as "불량코드",
-				err.err_dtl as "불량내역",
-				ps.proc_st as "상태"
-		
-		FROM 	prod_err per,
-				prod_lot plo,
-				prd_insdtl pid,
-				proc_prc ppr,
-				proc_st ps,
-				proc_err pe,
-				err_code err,
-				prod p
-		
-		WHERE	per.prod_lot = plo.prod_lot
-		AND		pid.prod_cd = p.prod_cd
-		AND 	ps.proc_prcd = ppr.proc_prcd
-		AND 	ps.line_turn = ppr.line_turn
-		AND 	ps.prd_dtlcd = ppr.prd_dtlcd
-		AND 	pe.proc_prcd = ppr.proc_prcd
-		AND 	pe.line_turn = ppr.line_turn
-		AND 	pe.prd_dtlcd = ppr.prd_dtlcd
-		AND 	pe.err_cd = err.err_cd
+		SELECT 	PERR.PROD_LOT "제품 LOT 번호",
+        		PL.PROD_CD "제품코드",
+        		P.PROD_NM "제품명",
+        		PERR.CHK_ERRQTY "불량량",
+        		PERR.ERR_CD "불량코드",
+        		ERR.ERR_DTL "불량내역"
+		FROM 	PROD_ERR PERR, PROD_LOT PL, PROD P, ERR_CODE ERR
+		WHERE	PERR.PROD_LOT = PL.PROD_LOT
+		AND PL.PROD_CD = P.PROD_CD
+		AND PERR.ERR_CD = ERR.ERR_CD
 	</select>
 
 	<!-- 검색 -->
@@ -318,21 +297,13 @@
 	
 	<!-- 입력 -->
 	<!-- 자재 품질검사요청 -->
-	<insert id="requestQualityM">
-		
-	</insert>
-	<!-- 제품 품질검사요청 -->
-	<insert id="requestQualityP">
-		
+	<insert id="reqMtQuality">
+		INSERT INTO MT_CHK(PO_DTLCD, MTRL_CD, CHK_MNGR, CHK_INSP) VALUES (#{pdt}, #{mcd}, 1051, 'MTRL01')
 	</insert>
 	
 	<!-- 수정 -->
 	<!-- 자재 품질검사 -->
 	<update id="resultQualityM">
-		
-	</update>
-	<!-- 제품 품질검사 -->
-	<update id="resultQualityP">
 		
 	</update>
 </mapper>

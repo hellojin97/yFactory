@@ -4,7 +4,10 @@
 <body>
 
    <div style="padding-bottom:15px; color: ;">
+
       <h3>생산지시조회</h3>
+
+
    </div>
    
    <div class="min1">
@@ -14,6 +17,7 @@
                   	<div class="input-group">
                   		<p style="padding-right: 30px;">구분</p>
 	                    <div class="form-check">
+
 	                      <input class="form-check-input" type="radio" name="radios" id="radioA" value="전체" checked>
 	                      <label class="form-check-label" for="gridRadios1" style="padding-right: 10px;">
 	                        전체
@@ -29,28 +33,30 @@
 	                      <input class="form-check-input" type="radio" name="radios" id="radioC" value="완료">
 	                      <label class="form-check-label" for="gridRadios3" style="padding-right: 10px;">
 	                        완료
+
 	                      </label>
 	                    </div>        
                     </div>                              
                 </fieldset>
                 <form>
-                
-				
 
 
 				<!-- 납품일자 -->
 				<div class="col-md-12">
 					<div class="input-group">
 						<label for="inputText" class="col-form-label"
+
 							style="padding-right: 10px;">지시일자</label>
 						<div class="col-sm-2">
 							<input type="date" class="form-control" id="dateA">
+
 						</div>
 
 						<div style="padding: 0px 15px 0px 15px;">
 							<p>~</p>
 						</div>
 						<div class="col-sm-2" style="padding-right: 20px;">
+
 							<input type="date" class="form-control" id="dateB">
 						</div>
 
@@ -60,6 +66,7 @@
 
 						<div>
 							<button type="reset" id="btnReset" class="btn1">초기화</button>
+
 						</div>
 					</div>
 				</div>
@@ -69,12 +76,15 @@
 			<hr style="border: solid 1px gray;">
 
 			<!-- 테이블 -->
+
 			<div id="procOrderGrid"></div>
+
 
             </div>
 
 
 <script type="text/javascript">
+
 /* document.getElementById('dateA').value = new Date().toISOString().substring(0, 10);
 document.getElementById('dateB').value = new Date().toISOString().substring(0, 10);  */
 
@@ -105,10 +115,12 @@ window.onload = function (){
    
    var procOrderGrid = new tui.Grid({
        el: document.getElementById('procOrderGrid'),
+
        scrollX: false,
        scrollY: false,
        columns: [
          {
+
            header: '생산지시코드',
            name: '생산지시코드',
          },
@@ -139,6 +151,7 @@ window.onload = function (){
                    {
                        header: '비고',
                        name: '비고',
+
                      }],
                   rowHeaders: ['rowNum'],
                      pageOptions: {
@@ -146,6 +159,7 @@ window.onload = function (){
                          perPage: 5
                     }
      });
+
 
    $("#btnSearch").on("click", function() { 
 
@@ -180,6 +194,7 @@ window.onload = function (){
 	},300);
 
 /* $('#btnReset').on('click',function(){
+
 	const url = "salesOrder";
 	   $.ajax(url,{
 	      dataType : "JSON",
@@ -188,7 +203,9 @@ window.onload = function (){
 	      grid.resetData(result);
 	     console.log(result);
 	   });
+
 }) */
+
 }
   </script>
 

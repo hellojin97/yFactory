@@ -132,7 +132,7 @@
 				ProcPlModal.show();
 	 });
 	 });
-	$("#dateClear").click(function () {
+	$("#dateClear").click(function() {
 	 
 		 $('#PrdNm').val('');
 		 resultGrid.clear();

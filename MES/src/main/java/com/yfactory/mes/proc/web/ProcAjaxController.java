@@ -115,4 +115,12 @@ public class ProcAjaxController {
 	public List<Map> ProcNeedMtrlLOT(@RequestBody HashMap<String, Object> mtNm) {
 		return procService.ProcNeedMtrlLOT(mtNm);
 	}
+	
+	// 생산 지시 조회
+	@RequestMapping(value = "/procOrderSelect", method = RequestMethod.POST)
+	public List<Map> ProcOrderSelect(@RequestBody HashMap<String, Object> list) {
+		return procService.ProcOrderSelect(list);
+	}
+	
+
 }

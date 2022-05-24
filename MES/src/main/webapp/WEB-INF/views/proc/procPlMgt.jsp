@@ -300,6 +300,7 @@ $("#outBtn").on("click", function(){
 		
 			})
 		});
+		 
 		 btnPlanSelect.addEventListener("click", function() {
 				$("#HNum").val("2");
 				$("#test").load("ordermodal", function() {

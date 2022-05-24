@@ -102,12 +102,16 @@
 
 <script>
 
+
+	
+
 // 설비 목록
 $.ajax({
-	url: "",
+	url: "getEqActStatListAjax",
 	method : "GET",
 	dataType : "JSON",
 	success : function(result){
+		console.log(result);
 		eqList.resetData(result);
 	}
 });

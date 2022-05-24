@@ -62,6 +62,12 @@ public class EquipServiceImpl implements EquipService{
 		
 		return mapper.getVdrList();
 	}
+
+	@Override
+	public List<Map> getEqActStatList() {
+		
+		return mapper.getEqActStatList();
+	}
 	
 	
 	

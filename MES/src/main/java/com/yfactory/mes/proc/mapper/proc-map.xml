@@ -254,7 +254,18 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 		</if>
 
 	</select>
-	
+	<select id="ProcOrderList" resultType="map">
+	select ins.ins_cd "생산지시코드",
+	pd.prod_nm "제품명",
+	insdtl.ins_qty "생산수량",
+	insdtl.ins_dtldt
+	from PRD_INS ins, prod pd, PRD_INSDTL insdtl
+	WHERE ins.ins_cd = insdtl.ins_dtlcd
+	AND   insdtl.prod_cd = pd.prod_cd
+		<if test="date1 != '' ">
+	AND insdtl.ins_dtldt = TO_DATE(#{date1},'YY/MM/DD')
+</if>
+	</select>
 
 	
 	<insert id="ProcPlanInsert">

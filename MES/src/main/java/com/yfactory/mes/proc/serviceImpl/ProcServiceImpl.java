@@ -156,6 +156,20 @@ public class ProcServiceImpl implements ProcService{
 
 
 
+	// 생산 지시 목록
+	@Override
+	public List<Map> ProcOrderList(HashMap<String, Object> list) {
+		// TODO Auto-generated method stub
+		return map.ProcOrderList(list);
+	}
+
+
+
+	
+
+
+
+
 
 
 

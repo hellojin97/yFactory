@@ -116,7 +116,7 @@ $.ajax({
 	}
 });
 
-var eqInaList = new tui.Grid({
+var eqList = new tui.Grid({
     el: document.getElementById('eqList'),
     columns: [
     	{
@@ -196,6 +196,14 @@ var eqInaList = new tui.Grid({
       }    
   });
 	
+  eqList.on("click", function(e){
+	  let prd = resultGrid.getFocusedCell('비가동여부');
+	  if (prd.columnName == 'Y') {
+		  console.log("Y");
+	  }else if(prd.columnName == 'N'){
+		  console.log("N");
+	  }
+  })
   
 </script>
 

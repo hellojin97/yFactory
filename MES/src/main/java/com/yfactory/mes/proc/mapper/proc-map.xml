@@ -139,7 +139,7 @@
 		<if test="prdNm != ''">
 		AND pd.prod_nm = #{prdNm}
 		</if>
-		<if test="date1 != '' and date2 != ''">
+		<if test="date1 != null and date2 != null">
 			AND pl.pp_dt BETWEEN TO_DATE(#{date1},'YY/MM/DD') AND TO_DATE(#{date2},'YY/MM/DD')
 		</if>
 	</select>
@@ -204,6 +204,7 @@
 		AND LI.PROD_CD = P.PROD_CD
 		AND LI.LINE_CD = #{line}
 	</select>
+	<!-- 필요자재(LOT) 조회-->
 	<select id="ProcNeedMtrlLOT" resultType="map">
 SELECT DTL.PRD_DTLCD "지시디테일코드",
           LOT.MT_LOT "자재LOT번호", 
@@ -220,6 +221,43 @@ AND LOT.MT_LOT = QTY.MT_LOT
 AND M.MT_CD = #{mtNm}
 AND DTL.PRD_DTLCD = #{dtlCd}
 	</select>
+	
+	<!-- 생산지시 조회 -->
+	<select id="ProcOrderSelect" resultType="map">
+        SELECT ins.ins_cd "생산지시코드",
+               pd.prod_cd "제품코드",
+               pd.prod_nm "제품명",
+               insdtl.ins_qty "생산수량",
+               li.line_cd "라인코드",
+               dtl.pd_rank "지시우선순위",
+               cc.cd_nm "진행구분"
+        FROM prd_ins ins, prod pd, prd_insdtl insdtl, line li, plan_dtl dtl,comm_code cc,PRDT_PL pl
+        WHERE  insdtl.insdtl_st = cc.comm_cd
+        AND    dtl.pp_cd = ins.pp_cd
+        AND    dtl.pd_cd = ins.pd_cd
+        AND    insdtl.ins_dtlcd = ins.ins_cd
+        AND    pd.prod_cd = insdtl.prod_cd
+        AND    pd.prod_cd = li.prod_cd
+        AND    pl.pp_cd   = dtl.pp_cd
+        
+	   <if test = "state == '진행'"> 
+         AND    cc.comm_cd = 'PRST01'
+        </if>
+        <if test = "state == '완료'"> 
+      	 AND    cc.comm_cd = 'PRST02'
+        </if>
+
+		<if test="date1 != '' and date2 != ''">
+		
+			AND pl.pp_dt BETWEEN TO_DATE(#{date1},'YY/MM/DD') AND TO_DATE(#{date2},'YY/MM/DD')
+		</if>
+		<!-- <if test="date1 != '' and date2 != ''">
+			AND pl.pp_dt BETWEEN TO_DATE(#{date1},'YY/MM/DD') AND TO_DATE(#{date2},'YY/MM/DD')
+		</if> -->
+	</select>
+	
+
+	
 	<insert id="ProcPlanInsert">
 
 	</insert>

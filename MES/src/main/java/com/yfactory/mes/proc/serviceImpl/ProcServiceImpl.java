@@ -148,6 +148,20 @@ public class ProcServiceImpl implements ProcService{
 
 
 
+	@Override
+	public List<Map> ProcOrderSelect(HashMap<String, Object> list) {
+		// TODO Auto-generated method stub
+		return map.ProcOrderSelect(list);
+	}
+
+
+
+
+
+
+
+
+
 
 
 

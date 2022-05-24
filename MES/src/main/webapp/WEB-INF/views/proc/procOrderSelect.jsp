@@ -4,7 +4,7 @@
 <body>
 
    <div style="padding-bottom:15px; color: ;">
-      <h1>주문서 조회</h1>
+      <h3>생산지시조회</h3>
    </div>
    
    <div class="min1">
@@ -14,90 +14,52 @@
                   	<div class="input-group">
                   		<p style="padding-right: 30px;">구분</p>
 	                    <div class="form-check">
-	                      <input class="form-check-input" type="radio" name="radios" id="1" value="1" checked>
+	                      <input class="form-check-input" type="radio" name="radios" id="radioA" value="전체" checked>
 	                      <label class="form-check-label" for="gridRadios1" style="padding-right: 10px;">
+	                        전체
+	                      </label>
+	                    </div>
+	                    <div class="form-check">
+	                      <input class="form-check-input" type="radio" name="radios" id="radioB" value="진행">
+	                      <label class="form-check-label" for="gridRadios2" style="padding-right: 10px;">
 	                        진행
 	                      </label>
 	                    </div>
 	                    <div class="form-check">
-	                      <input class="form-check-input" type="radio" name="radios" id="2" value="2">
-	                      <label class="form-check-label" for="gridRadios2" style="padding-right: 10px;">
-	                        완료
-	                      </label>
-	                    </div>
-	                    <div class="form-check">
-	                      <input class="form-check-input" type="radio" name="radios" id="3" value="3">
+	                      <input class="form-check-input" type="radio" name="radios" id="radioC" value="완료">
 	                      <label class="form-check-label" for="gridRadios3" style="padding-right: 10px;">
-	                        전체
+	                        완료
 	                      </label>
 	                    </div>        
                     </div>                              
                 </fieldset>
                 <form>
-                <!-- 제품명 -->
-				<div class="col-md-5 " style="padding-bottom: 10px;">
-					<div class="input-group  " style="padding-bottom: 10px;">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">제품명</label> 
-							<input type="text" class="form-control" style="width: 50px" placeholder="제품명" id="pnm">
-						<a class="nav-link nav-icon search-bar-toggle" id="prodBtn" onclick="prodBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
-						</a>
-						<input type="text" id="pcd" class="form-control" readonly="readonly">
-					</div>
-				</div>
                 
-				<!-- 업체명 -->
-				<div class="col-md-5 " style="padding-bottom: 10px;">
-					<div class="input-group  " style="padding-bottom: 10px;">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">업체명</label>
-						<input type="text" class="form-control" style="width: 50px" placeholder="업체명" id="vnm">
-						<a class="nav-link nav-icon search-bar-toggle" id="venderBtn" onclick="venderBtn"> 
-							<i class="bi bi-search" style="color: #2c3e50"></i>
-						</a>
-						<input type="text" id="vcd" class="form-control" readonly="readonly">
-					</div>
-				</div>
 				
-				<!-- 주문일자 -->
-				<div class="col-md-12" style="padding-bottom: 10px;">
-					<div class="input-group">
-						<label for="inputText" class="col-form-label"
-							style="padding-right: 10px;">주문일자</label>
-						<div class="col-sm-2">
-							<input type="date" class="form-control" id="req1">
-						</div>
 
-						<div style="padding: 0px 15px 0px 15px;">
-							<p>~</p>
-						</div>
-						<div class="col-sm-2" style="padding-right: 20px;">
-							<input type="date" class="form-control" id="req2">
-						</div>
-					</div>
-				</div>
 
 				<!-- 납품일자 -->
 				<div class="col-md-12">
 					<div class="input-group">
 						<label for="inputText" class="col-form-label"
-							style="padding-right: 10px;">납품일자</label>
+							style="padding-right: 10px;">지시일자</label>
 						<div class="col-sm-2">
-							<input type="date" class="form-control" id="res1">
+							<input type="date" class="form-control" id="dateA">
 						</div>
 
 						<div style="padding: 0px 15px 0px 15px;">
 							<p>~</p>
 						</div>
 						<div class="col-sm-2" style="padding-right: 20px;">
-							<input type="date" class="form-control" id="res2">
+							<input type="date" class="form-control" id="dateB">
 						</div>
 
 						<div style="padding-right: 10px;">
-							<button type="button" id="search" class="btn1">검색</button>							
+							<button type="button" id="btnSearch" class="btn1">검색</button>							
 						</div>
 
 						<div>
-							<button type="reset" id="reset" class="btn1">초기화</button>
+							<button type="reset" id="btnReset" class="btn1">초기화</button>
 						</div>
 					</div>
 				</div>
@@ -107,76 +69,76 @@
 			<hr style="border: solid 1px gray;">
 
 			<!-- 테이블 -->
-			<div id="ordeList"></div>
-			<div id="prodModal"></div>
-			<div id="venderModal"></div>
+			<div id="procOrderGrid"></div>
+
             </div>
 
 
 <script type="text/javascript">
-//제품명 modal
-prodBtn.addEventListener("click", function(){
-	$("#prodModal").load("prodModal", function(){
-		const myModal = new bootstrap.Modal('#myModal');
-		myModal.show();
-	})
-	});
+/* document.getElementById('dateA').value = new Date().toISOString().substring(0, 10);
+document.getElementById('dateB').value = new Date().toISOString().substring(0, 10);  */
 
 //업체명 modal
-venderBtn.addEventListener("click", function(){
-		$("#venderModal").load("salesVenderModal", function(){
-			const venModal = new bootstrap.Modal('#venModal');
-			venModal.show();
-		})
-		});
+
 
 /* 주문서 전체 조회 */
 window.onload = function (){
-   const url = "salesOrder";
+		
+   const url = "procOrderSelect";
+   let date1 = '';
+	let date2 = ''; 
+   let state = ''; 
+	var data = {
+   	date1 : date1,
+   	date2 : date2,
+   	state : state
+   }
    $.ajax(url,{
       dataType : "JSON",
-      method: "GET"
+      data : JSON.stringify(data),
+      type : "POST",
+      contentType : "application/json; charset=utf-8"
    }).done(function(result){
-      grid.resetData(result);
+	   procOrderGrid.resetData(result);
      console.log(result);
    })
    
-   var grid = new tui.Grid({
-       el: document.getElementById('ordeList'),
+   var procOrderGrid = new tui.Grid({
+       el: document.getElementById('procOrderGrid'),
        scrollX: false,
        scrollY: false,
        columns: [
          {
-           header: '주문코드',
-           name: '주문코드',
+           header: '생산지시코드',
+           name: '생산지시코드',
          },
          {
-             header: '업체명',
-             name: '업체명',
+             header: '제품코드',
+             name: '제품코드',
            },
            {
-               header: '주문일자',
-               name: '주문일자',
+               header: '제품명',
+               name: '제품명',
              },
              {
-                 header: '납기일자',
-                 name: '납기일자',
+                 header: '생산수량',
+                 name: '생산수량',
                },
              {
-                 header: '제품코드',
-                 name: '완제품코드',
+                 header: '라인코드',
+                 name: '라인코드',
                },
                {
-                   header: '제품명',
-                   name: '완제품명',
+                   header: '지시우선순위',
+                   name: '지시우선순위',
                  },
                  {
-                     header: '수량',
-                     name: '주문수량',
+                     header: '진행구분',
+                     name: '진행구분',
                    },
                    {
-                       header: '진행상황',
-                       name: '진행상황',
+                       header: '비고',
+                       name: '비고',
                      }],
                   rowHeaders: ['rowNum'],
                      pageOptions: {
@@ -185,43 +147,39 @@ window.onload = function (){
                     }
      });
 
+   $("#btnSearch").on("click", function() { 
 
-/* 주문서 단건 조회 */
-$("#search").on("click", function() {   
-   var pnm = $("#pnm").val();
-   var pcd = $("#pcd").val();   
-   var vnm = $("#vnm").val();
-   var vcd = $("#vcd").val();
-   var req1 = $("#req1").val();
-   var req2 = $("#req2").val();
-   var res1 = $("#res1").val();
-   var res2 = $("#res2").val();
-   var radio = $('input[name="radios"]:checked').val();   
+		 date1 = $("#dateA").val();
+		 date2 = $("#dateB").val();
+	     state = $("input[name=radios]:checked").val();
+		   	var data = {
+		        	date1 : date1,
+		        	date2 : date2,
+		        	state : state
+		        }
+	    $.ajax({
+	        url : "procOrderSelect",
+	        data : JSON.stringify(data),
+	        dataType: 'JSON',
+	        type : 'POST',
+	        contentType : "application/json; charset=utf-8"
+	     }).done(function(result){
+	    	 procOrderGrid.resetData(result);
+	         console.log(result);
+	          
+	     });
+	    
+
+	   
+	});
    
-   $.ajax({
-      url : "searchOrderList",
-      data : {
-            pnm : pnm,
-            pcd : pcd,
-            vnm : vnm,
-            vcd : vcd,
-            req1 : req1,
-            req2 : req2,
-            res1 : res1,
-            res2 : res2,
-            key : radio
-      },
-      dataType: 'JSON',
-      contentType : "application/json; charset=utf-8"
-   }).done(function(result){
-       grid.resetData(result);
-       console.log(result);
-        
-   });
-})
 
+	setTimeout(function(){
+		
+		procOrderGrid.refreshLayout();
+	},300);
 
-$('#reset').on('click',function(){
+/* $('#btnReset').on('click',function(){
 	const url = "salesOrder";
 	   $.ajax(url,{
 	      dataType : "JSON",
@@ -230,7 +188,7 @@ $('#reset').on('click',function(){
 	      grid.resetData(result);
 	     console.log(result);
 	   });
-})
+}) */
 }
   </script>
 

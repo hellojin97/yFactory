@@ -99,7 +99,7 @@
 		
 		if(vdrCd != null){
 			 $('#myModal').modal('hide');
-			 $("#vdrCode").val(vdrCd);
+			 $("#vdr_code").val(vdrCd);
 			
 					
 			 

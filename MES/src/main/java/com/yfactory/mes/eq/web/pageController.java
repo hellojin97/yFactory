@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yfactory.mes.eq.mapper.EquipMapper;
@@ -28,6 +29,7 @@ public class pageController {
 	}
 	
 	@RequestMapping("/eqMng")
+	@ResponseBody
 	public String eqMng(EqVO vo , MultipartFile file , Model model){
 		System.out.println( vo.getImg_path() );
 		

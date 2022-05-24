@@ -39,7 +39,7 @@
 	<select id="searchEqMngList" resultType="map">
 		SELECT e.eq_cd "설비코드" , e.eq_nm "설비명" , prc.proc_cd "공정코드" , prc.proc_nm
 		"공정명", e.eq_min "최저온도" , e.eq_max "최고온도"
-		,TO_CHAR(e.eq_purdt,'yy/MM/dd') "구매일자", CASE WHEN e.eq_actst like '1'
+		,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자", CASE WHEN e.eq_actst like '1'
 		THEN 'Y' ELSE 'N' END "사용여부"
 		FROM eq e, process prc
 		WHERE e.eq_cd = prc.eq_cd

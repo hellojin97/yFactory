@@ -22,8 +22,8 @@
         
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>INDEX</span>
+            <a href="userOrderForm">
+              <i class="bi bi-circle"></i><span>(사용자) 제품 주문</span>
             </a>
           </li>
         </ul>

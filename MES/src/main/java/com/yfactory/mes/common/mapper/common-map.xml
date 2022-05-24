@@ -54,4 +54,13 @@
 	GROUP BY 	M.MT_NM
 </select>
 
+
+<select id="userOrderForm" resultType="map">
+	SELECT		PROD_CD "제품코드",
+						PROD_NM "제품명"
+						
+	FROM			PROD
+
+</select>
+
 </mapper>

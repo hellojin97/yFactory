@@ -15,4 +15,7 @@ public interface CommonService {
 	
 	//원자재 재고 간단조회
 	List<Map> mainMtrlList();
+	
+	//(사용자) 주문 
+	List<Map> userOrderForm();
 }

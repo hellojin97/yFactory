@@ -105,4 +105,14 @@ public class ProcAjaxController {
 	public List<Map> ProcLineSelect(@RequestBody HashMap<String, Object> prodNm) {
 		return procService.ProcLineSelect(prodNm);
 	}
+	// 필요자재
+	@RequestMapping(value = "/procNeedMtrl", method = RequestMethod.POST)
+	public List<Map> ProcNeedMtrl(@RequestBody HashMap<String, Object> line) {
+		return procService.ProcNeedMtrl(line);
+	}
+	// 자재 LOT 목록
+	@RequestMapping(value = "/procNeedMtrlLOT", method = RequestMethod.POST)
+	public List<Map> ProcNeedMtrlLOT(@RequestBody HashMap<String, Object> mtNm) {
+		return procService.ProcNeedMtrlLOT(mtNm);
+	}
 }

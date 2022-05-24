@@ -1,6 +1,5 @@
 package com.yfactory.mes.proc.mapper;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,4 +35,8 @@ public interface ProcMapper {
 	List<Map> procDtPlanSelect(String ppCd); //상세생산계획
 	
 	List<Map> ProcLineSelect(@RequestBody HashMap<String, Object> prodNm); // 상품 라인코드 조회
+	
+    List<Map> ProcNeedMtrl(@RequestBody HashMap<String, Object> line); // 필요 자재 조회
+    
+    List<Map> ProcNeedMtrlLOT(@RequestBody HashMap<String, Object> mtNm); //필요 자재 LOT 조회
 }

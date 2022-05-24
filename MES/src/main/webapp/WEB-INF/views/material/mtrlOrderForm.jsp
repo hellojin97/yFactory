@@ -266,6 +266,7 @@ unorder.on("dblclick",function(e) {
     $("#mtrlsave").click(function () {
 		var mtrlReqData=[];
 		var dataArrayToSend1 = [];
+		
 		$("#mtrlRequest").each(function(){
 			var len=$(this).find("td").length;
 			for(var i=0; i<len; i++ ){

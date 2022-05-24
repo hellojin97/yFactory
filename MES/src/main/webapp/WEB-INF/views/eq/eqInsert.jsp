@@ -72,14 +72,15 @@ button:hover {
 									style="padding-right: 27px;">사용여부</label>
 
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="testinput"
+									<input class="form-check-input" type="radio" name="eq_actst"
+									
 										value="USE01" checked> <label class="form-check-label"
 										for="flexRadioDefault1" style="width: 15px;">Y</label>
 
 								</div>
 								&nbsp;&nbsp;
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="testinput"
+									<input class="form-check-input" type="radio" name="eq_actst"
 										value="USE02"> <label class="form-check-label"
 										for="flexRadioDefault2">N</label>
 								</div>
@@ -94,7 +95,7 @@ button:hover {
 							<div class="input-group ">
 								<label for="inputText" class="col-form-label"
 									style="padding-right: 27px;">구분코드</label> <input type="text"
-									class="form-control" id="eq_cd" />
+									id="eq_cd" class="form-control" />
 								<button type="button" id="eqdiv">조회</button>
 
 								<input type="text" id="eq_nm" name="eq_nm" class="form-control">
@@ -180,10 +181,11 @@ button:hover {
 						</div>
 
 
-						<input type="hidden" class="form-control" id="eq_actst" value="">
-						<input type="hidden" class="form-control" id="uuid" value="">
-						<input type="hidden" class="form-control" id="img_path" name="img_path" size=10>
-						<input type="hidden" class="form-control" id="img_nm" name="img_nm" size=10>
+						<input type="hidden" class="form-control" id="eq_actst" name="eq_actst" value="">
+						<input type="hidden" class="form-control" id="uuid" name = "uuid" value="">
+						<input type="hidden" class="form-control" id="img_path" name="img_path">
+						<input type="hidden" class="form-control" id="img_nm" name="img_nm" >
+						
 
 
 
@@ -195,7 +197,7 @@ button:hover {
 
 						<div class="mb-2 ">
 							<label for="formFile" class="form-label"></label> <input
-								class="form-control" type="file" id="upldfile" name="img_nm"
+								class="form-control" type="file"  id="upldfile" name="file"
 								onchange="readURL(this)" accept="image/*" />
 						</div>
 
@@ -204,10 +206,12 @@ button:hover {
 				</div>
 
 			</form>
-		</div>
+			<!--  END OF FORM -->
+		</div> 
+		
 		<hr style="border: solid 2px gray;" />
 	</div>
-
+	<!-- END OF DIV-->
 
 
 
@@ -247,9 +251,9 @@ function readURL(input) {
             	var img = new Image();
 	        	img.src = e.target.result;
 	        	//console.log("img.src:" + img.src);
-	        	
+	        	console.log(img);
 	        	$("#img_path").val(img.src);
-	        	$("#img_nm").val(img.src);
+	        	$("#img_nm").val(imgNm);
 	        	
 	        	
         		canvas.width=img.width*0.7;
@@ -272,8 +276,8 @@ function readURL(input) {
     	}
     	
     	
-
-    	/* console.log("img_nm: "+ img_nm.value);
+			// 사진 첨부 시 현재 value값들
+    	console.log("img_nm: "+ $("#img_nm").val());
     	console.log("img_src: "+ $("#img_path").val());
     	
     	console.log("eq_mdnm: "+ eq_mdnm.value);
@@ -284,7 +288,7 @@ function readURL(input) {
     	console.log("eq_purdt: "+ eq_purdt.value); 
     	
     	console.log("eq_inster: "+ eq_inster.value); 
-    	console.log("uuid: "+ uuid.value);  */
+    	console.log("uuid: "+ uuid.value); 
     	
     	
 	}// END OF readURL(input) 
@@ -293,18 +297,14 @@ function readURL(input) {
 //UUID 생성 부 - 사용 중
 // 참고 : https://developyo.tistory.com/110
 function makeUUID(){
-	//$("#uuid").val( mkuuid );
-	
-	   // function s4() {
-	   //  return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
-	   // 	}
-	   // 	 return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + file_nm.substr(file_nm.indexOf("."), file_nm.length-1); */
-
+	// uuid 리턴
 	 	return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
-	   }
+	
+		// UUID 가 중복이 될경우도 생각을 해보고 보통은 이미지명 + UUID 로 조합하여 중복을 제거하는게 일반적
+}
 
 
-	 var vdrCode = document.getElementById("vdr_code").value;
+/* 	 var vdrCode = $("#vdr_code").val();
 	 var eqMdnm =  $("#eq_mdnm").val();
 	 var eqNm =  $("#eq_nm").val();
 	 var eqMdno =  $("#eq_mdno").val();
@@ -316,10 +316,11 @@ function makeUUID(){
 	 var eqPurdt =  $("#eq_purdt").val();
 	 var imgPath =  $("#img_path").val();
 	 var uuid = makeUUID();
-	 var imgNm =  $("#img_nm").val();
-	 var eqActst = $("input[name='testinput']:checked").val();
+	 var imgNm =  $("#img_nm").val();*/
+	// $("#eq_actst").val( $("input[name='testinput']:checked").val());  
+	
 	 
-
+	
 	 //var frmVal = $("#frm input");
 		
 		
@@ -331,74 +332,49 @@ function makeUUID(){
 			
 			// 클릭시 form  submit
 			$("#btnok").on("click" , function(e){
-				makeUUID();
+				$("#uuid").val( makeUUID() );
 				
-				console.log("구분코드: "+$("#vdr_code").val());
-				console.log("모델명: "+$("#eq_mdnm").val());
-				console.log("설비명: "+$("#eq_nm").val());
-				console.log("모델번호: "+$("#eq_mdno").val());
-				console.log("UPH: "+$("#eq_uph").val());
-				console.log("최소온도: "+$("#eq_min").val());
-				console.log("최대온도: "+$("#eq_max").val());
-				console.log("등록자: "+$("#eq_inster").val());
-				console.log("구매일자: "+$("#eq_purdt").val());
-				console.log("이미지경로: "+$("#img_path").val());
-				console.log("UUID: "+uuid);
-				console.log("이미지명: "+$("#img_nm").val());
-				console.log("사용여부: "+eqActst);
+				
+			
 
 								// 다 돌고 null 또는 공백이 없는 경우
 							//toastr.success('등록완료!');
 								//$("form").attr('action' , "eqMngPage"); 
 								//$("form").submit(); 
-
+					var form = $("#frm")[0];
+					var data = new FormData(form); // form데이터는 form전체를 아울러 file타입도 같이 넘어간다
 								
 								$.ajax({
 									url : "eqMng",
 									method : "POST",
-									data : {
-										vdr_code : vdrCode, 
-										 eq_mdnm : eqMdnm ,
-										 eq_nm : eqNm ,  
-										 eq_mdno : eqMdno,
-										 eq_actst : eqActst,
-										 eq_uph : eqUph,
-										 eq_min : eqMin,
-										 eq_max :eqMax,
-										 eq_chkcyc :eqChkcyc,
-										 eq_inster : eqInster,
-										 eq_purdt : eqPurdt,
-										 img_path :imgPath,
-										 uuid : uuid,
-										 img_nm : imgNm
-										
-									},
-									dataType : "JSON",
-									contentType : "application/json; charset=UTF-8",
+									data : data ,
+									processData: false,
+									contentType: false,
 									success : function(){
 										toastr.success('등록완료!');
-										$("form").prop('action' , "eqMngPage"); 
+										$("#frm").prop('action' , "eqMngPage"); 
 										
 										//$("form").submit();
 										
 									},
 									error : function(){
+										console.log($(".form-control"));
 										toastr.options = {
 									            closeButton: true,
 									            progressBar: true,
 									            positionClass: "toast-bottom-right",
-									            timeOut: 3000
+									            timeOut: 5000
 									        	};
 										toastr.error('빈칸을 채워주세요!');
-										console.log($(".form-control"));
+										
 									}
 									
 									
-								});
+								}); // END OF AJAX
 								
 								
 				
-			});
+			}); // END OF BUTTON CLICKED EVENT AJAX
 			
 
 						

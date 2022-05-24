@@ -93,7 +93,8 @@
 		console.log(empNm);
 		if(empCd != null){
 			 $('#myModal').modal('hide');
-			 $("#eq_inster").val(empNm);
+			 $("#eq_inster").val(empCd);
+// 			 $("#eq_inster").val(empNm); 
  
 		}
 	})

@@ -32,6 +32,11 @@ public class ajaxController {
 	 * result = Boolean.TRUE; }catch (Exception e){ log.error("에러 : " +
 	 * e.getMessage()); }finally { return result; } }
 	 */
+	
+	
+	
+	
+	
 
 	// 조회 클릭시 리스트를 가져오는 메서드
 	@GetMapping("/getEqDivList") // 전체리스트

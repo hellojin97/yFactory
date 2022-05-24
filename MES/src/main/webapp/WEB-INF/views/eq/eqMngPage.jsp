@@ -88,7 +88,7 @@
 					editor : {
 						type : 'datePicker',
 						options : {
-							format : 'yy/MM/dd'
+							format : 'yyyy-MM-dd'
 						}
 					}
 				},

@@ -81,7 +81,11 @@ public class ajaxController {
 		return mapper.getVdrList();
 	}
 	
-	
+	@GetMapping("/getEqActStatListAjax") // 설비비가동 상태및 설비 사용여부 조회
+	@ResponseBody
+	public List<Map> getEqActStatListAjax() {
+		return mapper.getEqActStatList();
+	}
 	
 
 	

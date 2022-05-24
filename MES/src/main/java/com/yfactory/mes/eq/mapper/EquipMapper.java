@@ -28,6 +28,9 @@ public interface EquipMapper {
 	
 	List<Map> getVdrList(); // 설비 등록시 업체코드 업체구분코드 업체명 조회
 	
+	List<Map> getEqActStatList(); // 설비 사용여부 및 비가동 상태를 포함판 조회
+	
+	
 	// -----------------------------------------------------------
 	
 	List<Map> eqInaAll(); // 설비 비가동 리스트(설비비가동 페치지)

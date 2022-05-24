@@ -65,12 +65,13 @@ button:hover {
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">사용여부</label>
 
 						<div class="form-check">
-					  	<input class="form-check-input" type="radio" name="eq_actst" value="1" checked>
+					  	<input class="form-check-input" type="radio"  name = "testinput" value="USE01" checked>
 					  	<label class="form-check-label" for="flexRadioDefault1" style="width: 15px;">Y</label>
+					 
 						</div>
-						&nbsp;&nbsp;
+						 	&nbsp;&nbsp;
 						<div class="form-check">
-					  	<input class="form-check-input" type="radio" name="eq_actst"  value="0" >
+					  	<input class="form-check-input" type="radio" name = "testinput" value="USE02" >
 					  	<label class="form-check-label" for="flexRadioDefault2">N</label>
 						</div>
 						
@@ -152,7 +153,7 @@ button:hover {
 					</div>	
 					
 					
-	
+			<input type="hidden" class="form-control" id="eq_actst" value="">
 			<input type="hidden" class="form-control" id="uuid" name="uuid"  size=10 >
 			<input type="hidden" class="form-control" id="img_path" name="img_path" size=10 >
 			<input type="hidden" class="form-control" id="img_nm" name="img_nm"  size=10 >
@@ -185,9 +186,10 @@ button:hover {
 
 </body>
 <script>
-console.log($("form input .form-control"));
+var inputValue = $("input[name='testinput']:checked").val(); 
+$("#eq_act").val(inputValue);
 	var $frm = $("form").serialize();
-	var frmVal = $("form input");
+	var frmVal = $("#frm input");
 	var judge = false;
 	var i;
 		reset.addEventListener("click" , function(){
@@ -200,7 +202,9 @@ console.log($("form input .form-control"));
 		$("#btnok").on("click" , function(e){
 			console.log($("#vdr_code").val());
 				for(i=0;i<frmVal.length;i++){ // 0 ~ 16
-					console.log(i);
+					//console.log(i);
+					console.log("frmVal[i].value : "+frmVal[i].value);
+					
 					
 						if(frmVal[i].value == null || frmVal[i].value == ''){
 							// null 또는 공백일 경우

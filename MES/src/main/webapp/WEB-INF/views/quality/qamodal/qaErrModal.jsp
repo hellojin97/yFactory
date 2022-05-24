@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!-- 발주상세코드 Modal  -->
-	<div id="errCodeModalModal" class="modal fade" tabindex="-1">
+	<div id="errCodeModal" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header"
@@ -21,8 +21,8 @@
 					<div class="col-md-8" style="padding-bottom: 20px;">
 						<div class="input-group">
 							<label for="inputText" class="col-form-label" style="padding-right: 10px;">불량명</label> 
-							<input type="text" class="form-control" style="width: 50px" id="mtName" placeholder="자재명">
-							<a class="nav-link nav-icon search-bar-toggle " id="mtNameSearch" onclick="mtNameSearch">
+							<input type="text" class="form-control" style="width: 50px" id="errName" placeholder="자재명">
+							<a class="nav-link nav-icon search-bar-toggle " id="errNameSearch" onclick="errNameSearch">
 								<i class="bi bi-search" style="color: #2c3e50"></i>
 							</a>
 						</div>
@@ -77,12 +77,12 @@
 	  })
 	
 	// 불량명 검색
-	$("#mtNameSearch").on("click",function(){
-		var key = $("#mtName").val();
+	$("#errNameSearch").on("click",function(){
+		var key = $("#errName").val();
 		console.log(key);
 	
 	$.ajax({
-		url : "pocdModalSearch",
+		url : "errNmModalSearch",
 		data : {
 			key : key
 		},
@@ -100,7 +100,7 @@
     	let errNm = grid.getValue(e.rowKey, '불량명')
 		
     	
-		$('#errCodeModalModal').modal('hide');
+		$('#errCodeModal').modal('hide');
 	});
 	</script>
 

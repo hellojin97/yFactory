@@ -17,6 +17,12 @@ public class QualityServiceImpl implements QualityService {
 	@Autowired QualityMapper map;
 
 	@Override
+	public List<Map> selectErrCode() {
+		// TODO Auto-generated method stub
+		return map.selectErrCode();
+	}
+
+	@Override
 	public List<Map> selectpoDtlRequest() {
 		return map.selectpoDtlRequest();
 	}
@@ -45,6 +51,10 @@ public class QualityServiceImpl implements QualityService {
 	@Override
 	public List<Map> selectMtErrList() {
 		return map.selectMtErrList();
+	}
+	
+	public List<Map> searchErrName(String key) {
+		return map.searchErrName(key);
 	}
 	
 	@Override
@@ -77,4 +87,5 @@ public class QualityServiceImpl implements QualityService {
 		// TODO Auto-generated method stub
 		return map.reqMtQuality(pdt, mcd);
 	}
+
 }

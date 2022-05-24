@@ -192,7 +192,7 @@
 	FROM   mt_po po,
 	       mt m,
 	       vendor vdr,
-	       mt_podtl pdl,
+	       mt_podtl pd
 	       mt_lot lot
 	WHERE  po.po_cd = pdl.po_cd
 	AND    po.mt_cd = m.mt_cd
@@ -202,4 +202,12 @@
 	AND 	po.po_cd LIKE '%'||#{poCdinput}||'%'
 		</if>
 	</select>
+	
+	<insert id="" statementType="CALLABLE" parameterType="com.yfactory.mes.mtrl.vo.MtPoVO">
+	{CALL INSERT_PO(#{mt_cd},
+				    #{mt_nm},
+				    #{vdr_nm},
+				    #{req_dt},
+				    #{po_qty})}
+	</insert>
 </mapper>

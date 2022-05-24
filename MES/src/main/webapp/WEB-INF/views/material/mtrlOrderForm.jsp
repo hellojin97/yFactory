@@ -193,7 +193,7 @@ unorder.on("dblclick",function(e) {
      
      let ppCd =  prodPlan.getValue(e.rowKey, '생산계획코드');
 	 let mtCd  = prodPlan.getValue(e.rowKey, '원자재코드');
-  
+	
      console.log(ppCd);
 	 console.log(mtCd);
 	 	
@@ -234,14 +234,10 @@ unorder.on("dblclick",function(e) {
         name: '업체명'
       },
       {
-    	    header: '날짜',
+    	    header: '납기요청일자',
     	    name: '납기요청일자',
     	    editor: 'datePicker'
     	  },
-      {
-          header: '현재고',
-          name: '현재고'
-        },
       {
           header: '현재고',
           name: '현재고'
@@ -264,6 +260,23 @@ unorder.on("dblclick",function(e) {
       perPage: 5
     }
   });
+  
+
+  //발주등록버튼
+    $("#mtrlsave").click(function () {
+		var mtrlReqData=[];
+		var dataArrayToSend1 = [];
+		$("#mtrlRequest").each(function(){
+			var len=$(this).find("td").length;
+			for(var i=0; i<len; i++ ){
+				mtrlReqData.push($(this).find("td").eq(i).text());
+				dataArrayToSend1.push(mtrlReqData);
+			}
+		})
+		console.log(mtrlReqData);
+		console.log(dataArrayToSend1);
+    });
+
 
 </script>
 

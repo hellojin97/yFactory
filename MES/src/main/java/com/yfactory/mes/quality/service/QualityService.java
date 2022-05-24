@@ -8,6 +8,9 @@ import com.yfactory.mes.quality.vo.MtCheckVO;
 
 public interface QualityService {
 	// 조회
+	// 불량코드(modal)
+	List<Map> selectErrCode();
+	
 	// 자재 품질검사요청(modal)
 	List<Map> selectpoDtlRequest();
 	
@@ -33,6 +36,9 @@ public interface QualityService {
 	// ------------------------------------------------
 	
 	// 검색
+	// 불량코드(modal)
+	List<Map> searchErrName(String key);
+	
 	// 자재 품질검사요청(modal)
 	List<Map> searchpoDtlRequest(String key);
 	

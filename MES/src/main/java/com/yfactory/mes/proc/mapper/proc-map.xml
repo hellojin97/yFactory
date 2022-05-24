@@ -205,11 +205,13 @@
 	<select id="ProcNeedMtrlLOT" resultType="map">
 	SELECT LOT.MT_LOT "자재LOT번호", 
           QTY.MT_QTY "현재고", 
+          M.MT_NM "제품명",
+          M.MT_CD "제품코드",
           TO_CHAR(LOT.MT_EXP, 'YYYY-MM-DD') "유통기한"
 		FROM MT_LOT LOT, MT_CURQTY QTY, MT M
 		  WHERE LOT.MT_LOT = QTY.MT_LOT
 		  AND LOT.MT_CD = M.MT_CD
-		  AND M.MT_NM LIKE '%' || #{mtNm} || '%'
+		  AND M.MT_CD = #{mtNm}
 	</select>
 	<insert id="ProcPlanInsert">
 

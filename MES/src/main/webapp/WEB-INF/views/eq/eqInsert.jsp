@@ -336,7 +336,7 @@ function makeUUID(){
 				
 				
 			
-
+//
 								// 다 돌고 null 또는 공백이 없는 경우
 							//toastr.success('등록완료!');
 								//$("form").attr('action' , "eqMngPage"); 

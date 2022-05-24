@@ -43,6 +43,8 @@ public interface MtrlService {
 	List<Map>pocdList();
 	List<Map>pocdSelectSearch(String pocd);
 	
+	//발주등록
+	int mtrlReqInsert(Map<String, String> result);
 	
 	
 }

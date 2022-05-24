@@ -193,7 +193,7 @@ unorder.on("dblclick",function(e) {
      
      let ppCd =  prodPlan.getValue(e.rowKey, '생산계획코드');
 	 let mtCd  = prodPlan.getValue(e.rowKey, '원자재코드');
-  
+	
      console.log(ppCd);
 	 console.log(mtCd);
 	 	
@@ -234,14 +234,10 @@ unorder.on("dblclick",function(e) {
         name: '업체명'
       },
       {
-    	    header: '날짜',
+    	    header: '납기요청일자',
     	    name: '납기요청일자',
     	    editor: 'datePicker'
     	  },
-      {
-          header: '현재고',
-          name: '현재고'
-        },
       {
           header: '현재고',
           name: '현재고'
@@ -258,12 +254,76 @@ unorder.on("dblclick",function(e) {
           }
         }
     ],
-    rowHeaders: ['rowNum'],
+    rowHeaders : [ 'checkbox' ],
     pageOptions: {
       useClient: true,
       perPage: 5
     }
   });
+  
+
+  //발주등록버튼
+   $("#mtrlsave").on("click", function(){
+      Swal.fire({
+          title: '등록을 완료하시겠습니까?',
+          text: "다시 되돌릴 수 없습니다. 신중하세요.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '승인',
+          cancelButtonText: '취소'
+      }).then((result) => {
+      	console.log(result);
+      	console.log(result.isConfirmed); // 승인시 FALSE / 취소시 TRUE
+          if (result.isConfirmed) {	  
+        	  let pocd = mtrlRequest.getCheckedRows();
+        	  for (var i = 0; i < pocd.length; i++) {
+        		  
+        		  /* 원자재코드 */
+        			let mtCd = pocd[i].원자재코드;
+        		  /* 원자재명  */
+        		  	let mtNm = pocd[i].원자재명;
+        		  /* 업체명 */
+        		  	let vdrNm = pocd[i].업체명;
+        		  /* 납기일자 */
+        		  	let reqDt = pocd[i].납기요청일자;
+        		  /* 발주량 */
+        			let poQty = pocd[i].발주량;
+        		  
+        		  console.log(mtCd,mtNm,vdrNm,reqDt,poQty);
+	
+       		  	$.ajax({
+        		  		url :'mtrlReqInsert',
+        		  		method : 'POST',
+        		  		data : {"mt_cd" : mtCd,
+        		  				"mt_nm" : mtNm,
+        		  				"vdr_nm" : vdrNm,
+        		  				"req_dt" : reqDt,
+        		  				"po_qty" : poQty
+        		  				},
+        		  		}).done(function(result){
+        		  			console.log(result);
+        		  		});  	
+        		};
+        	  
+              Swal.fire(
+                  '승인이 완료되었습니다.',
+                  '출고등록이 완료되었습니다.',
+                  'success'
+              );
+              window.reload;
+              
+          }else{
+          	Swal.fire(
+                      '승인이 취소되었습니다.',
+                      '섹시하시네요~!',
+                      'error'
+                  )
+          }
+      });
+	 
+  })
 
 </script>
 

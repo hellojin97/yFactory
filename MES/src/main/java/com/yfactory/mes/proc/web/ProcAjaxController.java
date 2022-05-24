@@ -121,6 +121,11 @@ public class ProcAjaxController {
 	public List<Map> ProcOrderSelect(@RequestBody HashMap<String, Object> list) {
 		return procService.ProcOrderSelect(list);
 	}
+	// 생산 지시 목록
+	@RequestMapping(value = "/procOrderList", method = RequestMethod.POST)
+	public List<Map> ProcOrderList(@RequestBody HashMap<String, Object> list) {
+		return procService.ProcOrderList(list);
+	}
 	
 
 }

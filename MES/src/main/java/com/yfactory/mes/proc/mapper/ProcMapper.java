@@ -42,4 +42,5 @@ public interface ProcMapper {
     
     List<Map> ProcOrderSelect(@RequestBody HashMap<String, Object> list); //생산 지시 조회
     
+    List<Map> ProcOrderList(@RequestBody HashMap<String, Object> list); //생산 지시 목록
 }

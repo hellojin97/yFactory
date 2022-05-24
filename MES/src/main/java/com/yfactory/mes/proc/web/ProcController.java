@@ -38,6 +38,11 @@ public class ProcController {
 
 		return "proc/procOrderSelect";
 	}
+	@GetMapping("/procManagement")
+	public String procManagement() {
+		
+		return "proc/procManagement";
+	}
 
 	// 주문서목록 모달
 	@GetMapping("/ordermodal")
@@ -61,6 +66,11 @@ public class ProcController {
 	@GetMapping("/procodermngModal")
 	public String procodermngModal() {
 		return "/proc/procmodal/procodermngModal";
+	}
+	// 생산지시목록 모달
+	@GetMapping("/procOrderListModal")
+	public String procOrderListModal() {
+		return "/proc/procmodal/procOrderListModal";
 	}
 
 }

@@ -162,6 +162,11 @@
               <i class="bi bi-circle"></i><span>생산지시조회</span>
             </a>
           </li>
+          <li>
+            <a href="procManagement">
+              <i class="bi bi-circle"></i><span>생산관리</span>
+            </a>
+          </li>
         </ul>
       </li>
       

@@ -170,7 +170,11 @@
     	                  name: '진행상황',
     	                }],
     	                rowHeaders: ['rowNum'],
-
+          	            pageOptions: {
+             	           	 useClient: true,   
+             	             perPage: 3
+             	            }
+							
     	
     	     			});
     		/*========= 주문서 조회  끝=========*/

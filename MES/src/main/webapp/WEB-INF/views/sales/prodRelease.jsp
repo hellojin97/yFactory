@@ -30,7 +30,7 @@
 	<div id="releaseList" style="padding-bottom:15px;"></div>
 	
 	<button id="releaseBtn" class="btn1">출고</button>
-	<button class="btn1">초기화</button>
+	<button id="reset" class="btn1">초기화</button>
 	
 	</div>
 		
@@ -156,7 +156,14 @@ var ordDtpList = new tui.Grid({
 			ProdModal.show();
 			}); 
   });	
+  
+  	//초기화 버튼
+  $('#reset').on('click',function(){
+	  
+	  
+	})
 
+	//출고 버튼
   $("#releaseBtn").on("click", function(){
       Swal.fire({
           title: '출고등록을 완료하시겠습니까?',
@@ -200,7 +207,22 @@ var ordDtpList = new tui.Grid({
                   'success'
               );
               window.reload;
-              
+              $.ajax({
+            		url: "ordDtpList",
+            		method : "GET",
+            		dataType : "JSON",
+            		success : function(result){
+            			ordDtpList.resetData(result);
+            		}
+            	});
+              $.ajax({
+          		url: "",
+          		method : "GET",
+          		dataType : "JSON",
+          		success : function(result){
+          			releaseList.resetData(result);
+          		}
+          	});
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',

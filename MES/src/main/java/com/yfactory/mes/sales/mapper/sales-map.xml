@@ -18,11 +18,11 @@
 					   ORD_DTL ordtl, 
 					   PROD pd, 
 					   COMM_CODE cd
-	WHERE     ord.vdr_cd = vdr.vdr_cd
-		AND      ord.ord_cd = ordtl.ord_cd
-		AND      ordtl.prod_cd = pd.prod_cd
-		AND      cd.comm_cd = ord.prog_cd
-		
+		WHERE     		ord.vdr_cd = vdr.vdr_cd
+		AND      		ord.ord_cd = ordtl.ord_cd
+		AND      		ordtl.prod_cd = pd.prod_cd
+		AND      		cd.comm_cd = ordtl.prog_cd
+		ORDER BY		ord.ord_cd DESC
 	</select>
 	
 	<!-- BOM 조회 -->
@@ -41,7 +41,7 @@
 	
 	<!-- 주문서 검색 -->
 	<select id="searchOrderList" resultType="map">
-	SELECT ord.ord_cd  "주문코드" , 
+		SELECT		   ord.ord_cd "주문코드", 
 					   TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
 					   TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
 					   ordtl.prod_cd "완제품코드" ,
@@ -55,21 +55,21 @@
 					   ORD_DTL ordtl, 
 					   PROD pd, 
 					   COMM_CODE cd
-	WHERE     ord.vdr_cd = vdr.vdr_cd
-		AND      ord.ord_cd = ordtl.ord_cd
-		AND      ordtl.prod_cd = pd.prod_cd
-		AND      cd.comm_cd = ord.prog_cd		
+		WHERE     	   ord.vdr_cd = vdr.vdr_cd
+		AND      	   ord.ord_cd = ordtl.ord_cd
+		AND      	   ordtl.prod_cd = pd.prod_cd
+		AND      	   cd.comm_cd = ordtl.prog_cd		
 		<if test="pcd != ''">
-        AND      pd.prod_cd LIKE #{pcd}
+        AND      	   pd.prod_cd LIKE #{pcd}
         </if>       
         <if test="pcd == '' and pnm != ''">
-        AND      pd.prod_nm LIKE #{pnm}
+        AND      	   pd.prod_nm LIKE #{pnm}
         </if>        
         <if test="vnm != ''">
-        AND      vdr.vdr_cd LIKE '%'||#{vcd}||'%'
+        AND      	   vdr.vdr_cd LIKE '%'||#{vcd}||'%'
         </if>
         <if test="vcd == '' and vnm != ''">
-        AND      vdr.vdr_nm LIKE '%'||#{vnm}||'%'
+        AND      	   vdr.vdr_nm LIKE '%'||#{vnm}||'%'
         </if>
         <if test="req1 != '' and req2 != ''">        
         AND      ord.req_dt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
@@ -78,13 +78,14 @@
         AND      ord.res_dt between TO_DATE(#{res1},'YYYY-MM-DD') AND TO_DATE(#{res2},'YYYY-MM-DD')
         </if>
         <if test="key == 1">
-        AND     cd_explan NOT LIKE '출고처리완료'
+        AND      cd_explan NOT LIKE '출고처리완료'
         </if>
         <if test="key == 2">
         AND      cd_explan LIKE '출고처리완료'
         </if>
         <if test="key == 3">        
         </if>
+        ORDER BY		ord.ord_cd DESC
 	</select>
 	
 	<!-- 완제품LOT조회 -->
@@ -98,6 +99,8 @@
 		FROM		prod pd, prod_lot pdlot, prod_curqty pdc
 		WHERE		pd.prod_cd = pdlot.prod_cd
 		AND     	pdlot.prod_lot = pdc.prod_lot
+		ORDER BY	pdlot.prod_fdt DESC
+		
 	</select>
 	
 	<!-- 완제품LOT검색 -->
@@ -120,6 +123,7 @@
 		<if test="fdt1 != '' and fdt2 != ''">
 		AND		    pdlot.prod_fdt between TO_DATE(#{fdt1},'YYYY-MM-DD') AND TO_DATE(#{fdt2},'YYYY-MM-DD')			
 		</if>
+		ORDER BY	pdlot.prod_fdt DESC
 	</select>
 	
 	<!-- 완제품modal리스트 -->
@@ -149,6 +153,7 @@
 		WHERE	pdlot.prod_lot = pdw.prod_lot
 		AND	    pd.prod_cd = pdlot.prod_cd
 		AND     pdw.wr_cd LIKE 'INOUT01'
+		ORDER BY pdlot.prod_fdt DESC
 	</select>
 	
 	<!-- 출고 조회 -->
@@ -163,6 +168,7 @@
 		WHERE	pdlot.prod_lot = pdw.prod_lot
 		AND	    pd.prod_cd = pdlot.prod_cd
 		AND     pdw.wr_cd LIKE 'INOUT02'
+		ORDER BY pdw.prod_rdt DESC
 	</select>
 	
 	<!-- 입고 검색 -->
@@ -186,6 +192,7 @@
 		<if test="fdt1 != '' and fdt2 != ''">
 		AND		pdlot.prod_fdt between TO_DATE(#{fdt1},'YYYY-MM-DD') AND TO_DATE(#{fdt2},'YYYY-MM-DD')			
 		</if>
+		ORDER BY pdlot.prod_fdt DESC
 	</select>
 	
 	<!-- 출고 검색 -->
@@ -209,6 +216,7 @@
 		<if test="fdt1 != '' and fdt2 != ''">
 		AND		    pdw.prod_rdt between TO_DATE(#{fdt1},'YYYY-MM-DD') AND TO_DATE(#{fdt2},'YYYY-MM-DD')			
 		</if>
+		ORDER BY pdw.prod_rdt DESC
 	</select>
 	
 	<!-- 주문 상세 조회 -->
@@ -220,14 +228,15 @@
 						TO_CHAR(ord.res_dt,'YYYY-MM-DD') AS "납기일자", 
 						pd.prod_nm AS "제품명"	
 						
-		FROM		ord_dtl ordtl, 
-						orders ord, 
+		FROM			ord_dtl ordtl, 
+						orders ord,
 						prod pd
 						
 		WHERE	ordtl.ord_cd = ord.ord_cd
 		AND		ordtl.prod_cd = pd.prod_cd
-		AND     	ord.prog_cd NOT LIKE 'PROG04'
+		AND     ord.prog_cd NOT LIKE 'PROG04'
 		AND		ordtl.prog_cd NOT LIKE 'PROG04'
+		ORDER BY		ordtl.ord_cd DESC
 	</select>
 	
 	<!-- 출고관리-완제품modal -->

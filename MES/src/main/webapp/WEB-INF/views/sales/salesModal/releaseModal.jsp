@@ -108,7 +108,6 @@
            affN = parseInt(evn[i].value);
            }
         var sum = parseInt(affN) - parseInt(bfN);
-        console.log(sum);
         if(nowN < affN) {
 			Swal.fire({
 	               icon: 'error',
@@ -117,8 +116,7 @@
 				});
 			}else{
 				res = res + sum
-         		$("#selNum").val(res);
-				console.log("수정!");
+         		$("#selNum").val(res);				
 			}
       });
 		
@@ -150,7 +148,13 @@
                 title: '등록이 취소되었습니다.',
                 text: '주문량보다 출고량이 많습니다!',
             });
-		}else{
+		}else if(ord > sel){
+			Swal.fire({
+                icon: 'error',
+                title: '등록이 취소되었습니다.',
+                text: '주문량보다 출고량이 적습니다!',
+            });
+		}else if(ord = sel){
 			
 			let checkedAry = {"주문상세코드" : orDt , "완제품코드" : pcd, "출고날짜" : sysDate};
 			let prd = prodList.getCheckedRows();

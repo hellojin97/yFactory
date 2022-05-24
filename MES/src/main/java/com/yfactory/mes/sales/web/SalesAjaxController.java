@@ -108,8 +108,6 @@ public class SalesAjaxController {
 		
 		salesService.releaseOrder(result);
 		
-		System.out.println(result);
-		
 		return "성공";
 	}
 }

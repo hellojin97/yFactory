@@ -216,7 +216,7 @@ $("#outBtn").on("click", function(){
 			 let prd = resultGrid.getCheckedRows();
 			 //console.log(prd);
  			 for (var i = 0; i < prd.length; i++) {
-				checkedAry.push((prd[i].rowKey)); // %f6y => 빼빼로
+				checkedAry.push((prd[i].rowKey)); 
 				//checkedAry.push(decodeURI(prd[i])); // %f6y => 빼빼로
 			} 
 			

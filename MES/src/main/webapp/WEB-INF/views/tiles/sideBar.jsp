@@ -134,9 +134,14 @@
               <i class="bi bi-circle"></i><span>생산계획조회</span>
             </a>
           </li>
-                    <li>
+          <li>
             <a href="procOrderMng">
               <i class="bi bi-circle"></i><span>생산지시관리</span>
+            </a>
+          </li>
+          <li>
+            <a href="procOrderSelect">
+              <i class="bi bi-circle"></i><span>생산지시조회</span>
             </a>
           </li>
         </ul>

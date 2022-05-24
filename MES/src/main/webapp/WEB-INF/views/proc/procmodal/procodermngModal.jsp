@@ -37,14 +37,14 @@
 						style="padding-right: 40px;">필요수량 : </label>
 				<input type="text" id="pdQtyText">
 				<input type="hidden" id="mtNmText">
+				<input type="hidden" id="dtlCdText">
 				</div>
 					<div id="needMtrlLOTGrid"></div>
-					<button id="dateSearch" class="btn1">확인</button>
+					<button id="btnCheck" class="btn1">확인</button>
 				</div>
 			</div>
 		</div>
 		</div>
-		
 		</div>
 		</div>
 <script>
@@ -147,8 +147,13 @@ $(function(){
 	   //필요자재클릭시 자재 LOT 목록 모달 ajax
 	     /* else if($("#modalState").val() == 2)  {  */
 	 	  let mtNm = $("#mtNmText").val();
-	 	  console.log($("#mtNmText").val());
-            var data = {mtNm : mtNm};
+	 	  let dtlCd = $("#dtlCdText").val();
+	 	  //console.log($("#mtNmText").val());
+            var data = {
+            		mtNm : mtNm,
+            		dtlCd : dtlCd
+            		}
+            
             
 		  const url1 = "procNeedMtrlLOT";
 		   $.ajax(url1,{
@@ -179,6 +184,7 @@ $(function(){
 		         {
 		             header: '사용수량',
 		             name: '사용수량',
+		             editor : "text"
 		           },
 		           {
 		               header: '유통기한',
@@ -200,6 +206,34 @@ $(function(){
 		                    }
 		     });  
 		   
+
+		    $('#btnCheck').off('click');
+		
+			$('#btnCheck').on('click',function(){
+			let checkedAry = [];
+			let rowindex = [];
+			let prd = needMtrlLOTGrid.getCheckedRows();
+			console.log(prd);
+			 for (var i = 0; i < prd.length; i++) {
+				 
+			 		//console.log(prd[i]);
+					//checkedAry.push({}); 
+					//rowindex.push((prd[i].rowKey)); 
+					needMtrlLOT.appendRow({'자재LOT번호':prd[i].자재LOT번호,
+						'사용수량':prd[i].사용수량,
+						'유통기한':prd[i].유통기한,
+						'자재명': prd[i].자재명,
+						'지시디테일코드' : prd[i].지시디테일코드
+					});
+					
+				} 
+			 $('#needMtrlModal').modal('hide');
+			});
+			
+			needMtrlLOTGrid.on('mousedown', (ev) => {
+				selectedRowKey = ev.rowKey;
+				needMtrlLOTGrid.check(selectedRowKey);
+			});
 			setTimeout(function(){
 				
 				 needMtrlLOTGrid.refreshLayout();

@@ -30,6 +30,7 @@
 	<div>
 	<h3>생산지시</h3>
 	<div id="procOrder"></div>
+	<button id="btnNeedMtrl">조회</button>
 	</div>
 	<div>
 	<h3>필요자재</h3>
@@ -49,6 +50,7 @@
 	var needMtrl
 	var needMtrlLOT
 	$(function(){
+		var dtlCd = [];
 		procDtPlan = new tui.Grid({
 		el : document.getElementById('procDtPlan'),
 		scrollX : false,
@@ -181,7 +183,15 @@
 					},
 					
 					],
-					rowHeaders : [ 'checkbox' ],
+					rowHeaders : [
+   				        {
+   				            type: 'rowNum',
+
+   				          },
+   				          {
+   				            type: 'checkbox',
+   				          }
+   				          ],
 					pageOptions : {
 						useClient : true,
 						perPage : 5
@@ -196,6 +206,7 @@
 	let workQty, bworkQty;
 	let dateRank, bdateRank;
 	let temp;
+
 	
 	procOrder.on('mousedown', (ev) => {
 	selectedRowKey = ev.rowKey;
@@ -208,6 +219,7 @@
 		//procOrder.focus(selectedRowKey, '작업일자');
 	//}
 	console.log(workDate + ' ' + workQty + ' ' + dateRank);
+	$("#btnNeedMtrl").click(function () {
 	if(workDate != null && workQty != null && dateRank != null ){
 		if(workDate != bworkDate || bworkQty != workQty || bdateRank != dateRank){
 			needMtrl.clear();
@@ -226,7 +238,9 @@
 							for (var i = 0; i < result.length; i++) {
 								result[i].소모량 = result[i].소모량 * workQty;
 								needMtrl.appendRow(result[i]);
+								dtlCd.push(result[i].생산지시상세코드);
 							}
+							console.log(result);
 
 				   })
 	        }
@@ -235,6 +249,7 @@
 			bdateRank = dateRank;
 		}
 		}
+	});
 	});
 	
 
@@ -250,6 +265,10 @@
 		});
 	
 	needMtrl.on("dblclick",function(e) {
+		 let dtlCdRow = dtlCd[e.rowKey];
+		 $("#dtlCdText").val(dtlCdRow);
+/* 		 console.log(dtlCdRow);
+		 console.log(dtlCd); */
 		 $("#modalState").val('2');
 		 let ppCd = needMtrl.getValue(e.rowKey, '자재명');
 		 let mtNm = needMtrl.getValue(e.rowKey, '자재코드');

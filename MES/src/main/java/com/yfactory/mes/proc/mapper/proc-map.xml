@@ -195,23 +195,30 @@
 		SELECT P.PROD_CD "제품코드",
         	   B.MT_CD "자재코드", 
         	   M.MT_NM "자재명",
-        	   B.CS_QTY "소모량"
-		FROM BOM B, MT M, PROD P, LINE LI
+        	   B.CS_QTY "소모량",
+               DTL.PRD_DTLCD "생산지시상세코드"
+		FROM BOM B, MT M, PROD P, LINE LI, PRD_INSDTL DTL
 		WHERE B.MT_CD = M.MT_CD
 		AND B.PROD_CD = P.PROD_CD
+        AND P.PROD_CD = DTL.PROD_CD
 		AND LI.PROD_CD = P.PROD_CD
 		AND LI.LINE_CD = #{line}
 	</select>
 	<select id="ProcNeedMtrlLOT" resultType="map">
-	SELECT LOT.MT_LOT "자재LOT번호", 
+SELECT DTL.PRD_DTLCD "지시디테일코드",
+          LOT.MT_LOT "자재LOT번호", 
           QTY.MT_QTY "현재고", 
-          M.MT_NM "제품명",
-          M.MT_CD "제품코드",
+          M.MT_NM "자재명",
+          B.MT_CD "자재코드",
           TO_CHAR(LOT.MT_EXP, 'YYYY-MM-DD') "유통기한"
-		FROM MT_LOT LOT, MT_CURQTY QTY, MT M
-		  WHERE LOT.MT_LOT = QTY.MT_LOT
-		  AND LOT.MT_CD = M.MT_CD
-		  AND M.MT_CD = #{mtNm}
+FROM PRD_INSDTL DTL, PROD P, BOM B, MT_LOT LOT, MT_CURQTY QTY, MT M 
+WHERE DTL.PROD_CD = P.PROD_CD
+AND P.PROD_CD = B.PROD_CD
+AND B.MT_CD = M.MT_CD
+AND M.MT_CD = LOT.MT_CD
+AND LOT.MT_LOT = QTY.MT_LOT
+AND M.MT_CD = #{mtNm}
+AND DTL.PRD_DTLCD = #{dtlCd}
 	</select>
 	<insert id="ProcPlanInsert">
 

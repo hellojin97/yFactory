@@ -17,6 +17,7 @@ public class ProcController {
 
 		return "proc/procPlMgt";
 	}
+	
 
 	// 생산계획조회
 	@GetMapping("/procPlSelect")
@@ -30,6 +31,12 @@ public class ProcController {
 	public String procOrderMng() {
 
 		return "proc/procOrderMng";
+	}
+	// 생산지시조회
+	@GetMapping("/procOrderSelect")
+	public String procOrderSelect() {
+
+		return "proc/procOrderSelect";
 	}
 
 	// 주문서목록 모달

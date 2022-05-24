@@ -91,9 +91,8 @@ public class ProcAjaxController {
 	//@GetMapping("/prdSelectOne")
 	// 생산미지시계획
 	@GetMapping("/NoPlanSelect")
-	public List<Map> NoPlanSelect() {
-		
-		return procService.NoPlanSelect();
+	public List<Map> NoPlanSelect(String state) {
+		return procService.NoPlanSelect(state);
 	}
 	// 상세생산계획
 	@GetMapping("/procDtPlanSelect")
@@ -102,5 +101,18 @@ public class ProcAjaxController {
 	}
 	
 	// 라인코드
-	
+	@RequestMapping(value = "/procLineSelect", method = RequestMethod.POST)
+	public List<Map> ProcLineSelect(@RequestBody HashMap<String, Object> prodNm) {
+		return procService.ProcLineSelect(prodNm);
+	}
+	// 필요자재
+	@RequestMapping(value = "/procNeedMtrl", method = RequestMethod.POST)
+	public List<Map> ProcNeedMtrl(@RequestBody HashMap<String, Object> line) {
+		return procService.ProcNeedMtrl(line);
+	}
+	// 자재 LOT 목록
+	@RequestMapping(value = "/procNeedMtrlLOT", method = RequestMethod.POST)
+	public List<Map> ProcNeedMtrlLOT(@RequestBody HashMap<String, Object> mtNm) {
+		return procService.ProcNeedMtrlLOT(mtNm);
+	}
 }

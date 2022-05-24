@@ -1,11 +1,11 @@
 package com.yfactory.mes.proc.mapper;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestBody;
 
 public interface ProcMapper {
 
@@ -30,6 +30,13 @@ public interface ProcMapper {
 
 	List<Map> ProcPlanAll(); // 생산계획전체조회
 
-	List<Map> NoPlanSelect(); //생산미지시계획
+	List<Map> NoPlanSelect(String state); //생산미지시계획
+	
 	List<Map> procDtPlanSelect(String ppCd); //상세생산계획
+	
+	List<Map> ProcLineSelect(@RequestBody HashMap<String, Object> prodNm); // 상품 라인코드 조회
+	
+    List<Map> ProcNeedMtrl(@RequestBody HashMap<String, Object> line); // 필요 자재 조회
+    
+    List<Map> ProcNeedMtrlLOT(@RequestBody HashMap<String, Object> mtNm); //필요 자재 LOT 조회
 }

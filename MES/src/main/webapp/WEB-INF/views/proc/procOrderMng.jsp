@@ -40,8 +40,9 @@
 	<div id="needMtrlLOT"></div>
 	</div>
 		
-	<div id="main"></div>
-	
+	<div id="procDtPlanDiv"></div>
+	<div id="needMtrlDiv"></div>
+	<input type="hidden" id="modalState" />
 	<script>
 	var procDtPlan
 	var procOrder
@@ -60,14 +61,11 @@
 			name : '완제품명',
 
 		}, {
-			header : '계획량',
-			name : '계획량',
-		}, {
 			header : '생산일수',
 			name : '생산일수',
 		},{
 			header : '수량',
-			name : '수량',
+			name : '계획량',
 		},{
 			header : '생산지시량',
 			name : '생산지시량',
@@ -96,13 +94,30 @@
 			}, {
 				header : '작업일자',
 				name : '작업일자',
-
+				editor : {
+	                  type : 'datePicker',
+	                  options : {
+	                     format : 'yyyy-MM-dd'
+	                  }
+				}
 			}, {
 				header : '작업수량',
 				name : '작업수량',
+				editor : {
+	                  type : 'text',
+	                  }
 			}, {
 				header : '일자별 우선순위',
 				name : '일자별 우선순위',
+				editor : {
+	                  type : 'text',
+	                  }
+			},{
+				header : '비고',
+				name : '비고',
+				editor : {
+	                  type : 'text',
+	                  }
 			},
 			
 			],
@@ -132,11 +147,7 @@
 				}, {
 					header : '소모량',
 					name : '소모량',
-				},{
-					header : '수량',
-					name : '수량',
 				},
-				
 				],
 				rowHeaders : [ 'rowNum' ],
 				pageOptions : {
@@ -178,13 +189,83 @@
 
 				});
 				
+    
+	// focusChange 변수
+	let selectedRowKey = null;
+	let workDate, bworkDate;
+	let workQty, bworkQty;
+	let dateRank, bdateRank;
+	let temp;
+	
+	procOrder.on('mousedown', (ev) => {
+	selectedRowKey = ev.rowKey;
+	lineCode = procOrder.getValue(selectedRowKey, '라인코드');
+	workDate = procOrder.getValue(selectedRowKey, '작업일자');
+	workQty = procOrder.getValue(selectedRowKey, '작업수량');
+	dateRank = procOrder.getValue(selectedRowKey, '일자별 우선순위');
+	temp = 
+	//if (lineCode != null){
+		//procOrder.focus(selectedRowKey, '작업일자');
+	//}
+	console.log(workDate + ' ' + workQty + ' ' + dateRank);
+	if(workDate != null && workQty != null && dateRank != null ){
+		if(workDate != bworkDate || bworkQty != workQty || bdateRank != dateRank){
+			needMtrl.clear();
+		//procNeedMtrl
+			let line = lineCode;
+		    var data= {line : line};
+			if(line != null){
+			//ajax 실행
+				 	  $.ajax({
+					   url  : "procNeedMtrl",
+						 data :  JSON.stringify(data), 
+					   dataType : "JSON",
+					   type : "POST",
+					   contentType : "application/json; charset = UTF-8;"
+				   }).done(function(result){
+							for (var i = 0; i < result.length; i++) {
+								result[i].소모량 = result[i].소모량 * workQty;
+								needMtrl.appendRow(result[i]);
+							}
+
+				   })
+	        }
+			bworkDate = workDate;
+			bworkQty = workQty;
+			bdateRank = dateRank;
+		}
+		}
+	});
+	
+
 	$("#btnNoPlanSelect").click(function () {
-		$("#main").load("procodermngModal", function() {
+		$("#modalState").val("1");
+		$("#procDtPlanDiv").load("procodermngModal", function() {
 
 			const procDtPlanModal = new bootstrap.Modal('#procDtPlanModal');
 			procDtPlanModal.show();
+			 
+			
  			});
 		});
+	
+	needMtrl.on("dblclick",function(e) {
+		 $("#modalState").val('2');
+		 let ppCd = needMtrl.getValue(e.rowKey, '자재명');
+		 let mtNm = needMtrl.getValue(e.rowKey, '자재코드');
+		 let pdQty = needMtrl.getValue(e.rowKey, '소모량');
+		 $("#ppCdText").val(ppCd);
+		 $("#pdQtyText").val(pdQty);
+		 $("#mtNmText").val(mtNm);
+
+			$("#needMtrlDiv").load("procodermngModal", function() {
+				const needMtrlModal = new bootstrap.Modal('#needMtrlModal');
+				needMtrlModal.show();
+
+		
+			})
+		})
+	
 	});
 			
 	</script>

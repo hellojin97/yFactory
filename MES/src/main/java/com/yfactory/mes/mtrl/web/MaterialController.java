@@ -27,17 +27,22 @@ public class MaterialController {
 		return "material/mtrlListForm";
 	}
 	
+	//입고관리,등록
+	@RequestMapping("/mtrlInsertForm")
+	public String mtrlInsertForm() {
+		return "material/mtrlInsertForm";
+	}
 	//LOT재고조회폼
 	@RequestMapping("/mtrlLotForm")
 	public String mtrlLotForm() {
 		return "material/mtrlLotForm";
 	}
-	//불량재고조회
-	@RequestMapping("/mtrlFaultyForm")
-	public String mtrlFaultyForm() {
-		return "material/mtrlFaultyForm";
-	}
 	
+	//안전재고조회
+	@RequestMapping("/mtrlSafetyForm")
+	public String mtrlSafetyForm() {
+		return "material/mtrlSafetyForm";
+	}
 	
 	/*
 	 * MODAL 이동 
@@ -57,6 +62,11 @@ public class MaterialController {
 	@RequestMapping("/pocdModal")
 	public String poCdModal() {
 		return "material/mtrlModal/pocdModal";
+	}
+	//입고예정 조회
+	@RequestMapping("/mtrlExpectModal")
+	public String mtrlExpectModal() {
+		return "material/mtrlModal/mtrlExpectModal";
 	}
 }
  

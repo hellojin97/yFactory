@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.yfactory.mes.quality.vo.MtCheckVO;
 
-
 public interface QualityMapper {
 	// 자재 품질검사요청(modal) 조회
 	List<Map> selectpoDtlRequest();
@@ -46,7 +45,8 @@ public interface QualityMapper {
 	
 	// 입력
 	// 자재 품질검사요청 입력
+	int reqMtQuality(@Param("pdt") String pdt, @Param("mcd") String mcd);
 	
 	// 수정
-	// 자재품질검사 수정
+	// 자재품질검사
 }

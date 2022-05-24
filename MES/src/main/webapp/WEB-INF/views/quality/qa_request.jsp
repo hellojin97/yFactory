@@ -20,10 +20,10 @@
 						<div class="col-md-3">
 							<label for="inputText" class="col-form-label" style="padding-right: 27px;">발주상세코드</label>
 						</div>
-							<input type="text" class="form-control" style="width: 50px" placeholder="발주상세코드를 입력해주십시오" id="pdt" readonly>
-							<a class="nav-link nav-icon search-bar-toggle" id="pdcBtn" onclick="pdcBtn">
-								<i class="bi bi-search" style="color: #2c3e50"></i>
-							</a>
+						<input type="text" class="form-control" style="width: 50px" placeholder="발주상세코드를 입력해주십시오" id="pdt" readonly>
+						<a class="nav-link nav-icon search-bar-toggle" id="pdcBtn" onclick="pdcBtn">
+							<i class="bi bi-search" style="color: #2c3e50"></i>
+						</a>
 					</div>
 				</div>
 				
@@ -92,10 +92,26 @@
 		})
 	});
 	
-	// 자재 품질검사요청 신청
+	// 품질검사요청 버튼 클릭
 	insert.addEventListener("click", function() {
-		
-	})
+		var pdt = $("#pdt").val();
+		var mcd = $("#mcd").val();
+		var mnm = $("#mnm").val();
+		$.ajax({
+			url: "reqMtQuality",
+			method: "get",
+			data: {
+				pdt: pdt,
+				mcd: mcd
+			},
+			dataType:"json",
+			contentType : "application/json; charset=utf-8"
+		}).done(function() {
+			alert(mnm + '의 품질검사 신청이 완료되었습니다.');
+		}).fail(function() {
+			alert(mnm + '의 품질검사 신청이 실패하였습니다.');
+		})
+	});
 	</script>
 </body>
 </html>

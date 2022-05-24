@@ -75,8 +75,7 @@
 			name: '불량량'
 		}, {
 			header: '불량명',
-			name: '불량명',
-			editor : "text"
+			name: '불량명'
 		}, {
 			header: '불량내역',
 			name: '불량내역'
@@ -131,8 +130,7 @@
 				name: '불량량'
 			}, {
 				header: '불량명',
-				name: '불량명',
-				editor : "text"
+				name: '불량명'
 			}, {
 				header: '불량내역',
 				name: '불량내역'
@@ -147,6 +145,7 @@
 			}
 		});
 	});
+	
 	//제품 버튼 클릭 시 실행
 	$('#prodBtn').on('click', function(){
 		$('#qaRequestMgr').empty();

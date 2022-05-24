@@ -5,45 +5,48 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yfactory.mes.quality.service.QualityService;
+import com.yfactory.mes.quality.vo.MtCheckVO;
 
 @RestController
 public class QualityAjaxController {
-	@Autowired private QualityService qaService;
+	@Autowired private QualityService qas;
 	
 	// 조회
 	// 자재 품질검사요청(modal)
 	@GetMapping("/selectpoDtlRequest")
 	public List<Map> selectpoDtlRequest() {
 		
-		return qaService.selectpoDtlRequest();
+		return qas.selectpoDtlRequest();
 	}
 	// 제품 품질검사요청(modal)
 	
 	// 자재 품질검사관리
 	@GetMapping("/selectMtCheckMgr")
 	public List<Map> selectMtCheckMgr() {
-		return qaService.selectMtCheckMgr();
+		return qas.selectMtCheckMgr();
 	}
 	
 	// 제품 품질검사관리
 	@GetMapping("/selectProdCheckMgr")
 	public List<Map> selectProdCheckMgr() {
-		return qaService.selectProdCheckMgr();
+		return qas.selectProdCheckMgr();
 	}
 	
 	// 자재 검사결과
 	@GetMapping("/selectMtCheck")
 	public List<Map> selectMtCheck() {
-		return qaService.selectMtCheck();
+		return qas.selectMtCheck();
 	}
 	
 	// 제품 검사결과
 	@GetMapping("/selectProdCheck")
 	public List<Map> selectProdCheck() {
-		return qaService.selectProdCheck();
+		return qas.selectProdCheck();
 	}
 	
 	// 자재 불량내역
@@ -56,7 +59,7 @@ public class QualityAjaxController {
 	// 자재 품질검사요청(modal)
 	@GetMapping("/pocdModalSearch")
 	public List<Map> searchpoDtlRequest(String key) {
-		return qaService.searchpoDtlRequest(key);
+		return qas.searchpoDtlRequest(key);
 	}
 	// 자재품질결과
 	
@@ -70,7 +73,10 @@ public class QualityAjaxController {
 	
 	// 입력
 	// 자재 품질검사요청
-	
+	@GetMapping("/reqMtQuality")
+	public int reqMtQuality(String pdt, String mcd) {
+		return qas.reqMtQuality(pdt, mcd);
+	}
 	// 제품 품질검사요청
 	
 	// ------------------------------------------------

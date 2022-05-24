@@ -6,8 +6,14 @@
 <head>
 <meta charset="utf-8">
 <!-- 추가 CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" ></link>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 
@@ -18,445 +24,432 @@
 }
 
 */
-
 .btnpart {
 	background-color: #555555;
 	color: white;
-} 
-
-button:hover {
- 	color: black;
- 	background-color: white;
 }
 
-
-
+button:hover {
+	color: black;
+	background-color: white;
+}
 </style>
 </head>
 <body>
-<h1>설비 등록</h1>
-<div id="in/out"></div>
+	<h1>설비 등록</h1>
+	<div id="in/out"></div>
 
-	
+
 	<div style="background-color: #e0e0e0; padding: 8px;">
-	<div class="mainTitle" style="padding: 15px;">
-	<div>
-			<button type="button" id="reset" class="button btnpart">초기화</button>
-			<button type="button" id="btnok" class="button btnpart">저장</button>
-	</div>
-	
-	<form name="frm" id="frm" enctype="multipart/form-data">
-		<div class="row">
-		<div class="col-8">
+		<div class="mainTitle" style="padding: 15px;">
+			<div>
+				<button type="button" id="reset" class="button btnpart">초기화</button>
+				<button type="button" id="btnok" class="button btnpart">저장</button>
+			</div>
+
+			<form name="frm" id="frm" method="POST" enctype="multipart/form-data">
+				<div class="row">
+
+					<div class="col-8">
+						<hr style="border: solid 2px gray;" />
+
+						<!-- 설비명 -->
+						<div class="col-md-5 " style="padding-bottom: 20px;">
+							<div class="input-group ">
+								<label for="inputText" class="col-form-label"
+									style="padding-right: 27px;">모델명*</label> <input type="text"
+									id="eq_mdnm" name="eq_mdnm" class="form-control"
+									style="width: 30px" required placeholder="설비 모델명"
+									data-name="모델명">
+
+							</div>
+						</div>
+
+						<!-- 사용여부 -->
+						<div class="col-md-5 " style="padding-bottom: 30px;">
+							<div class="input-group ">
+								<label for="inputText" class="col-form-label"
+									style="padding-right: 27px;">사용여부</label>
+
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="testinput"
+										value="USE01" checked> <label class="form-check-label"
+										for="flexRadioDefault1" style="width: 15px;">Y</label>
+
+								</div>
+								&nbsp;&nbsp;
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="testinput"
+										value="USE02"> <label class="form-check-label"
+										for="flexRadioDefault2">N</label>
+								</div>
+
+
+							</div>
+						</div>
+
+						<!-- 구분코드 -->
+						<!--  eq_cd는 함수로 알아서 생성 > 인자값을 일부러 넘기지 않음 -->
+						<div class="col-md-5 " style="padding-bottom: 20px;">
+							<div class="input-group ">
+								<label for="inputText" class="col-form-label"
+									style="padding-right: 27px;">구분코드</label> <input type="text"
+									class="form-control" id="eq_cd" />
+								<button type="button" id="eqdiv">조회</button>
+
+								<input type="text" id="eq_nm" name="eq_nm" class="form-control">
+
+							</div>
+						</div>
+						<!-- 모델번호 -->
+						<div class="col-md-5 " style="padding-bottom: 20px;">
+							<div class="input-group ">
+								<label for="inputText" class="col-form-label"
+									style="padding-right: 27px;">모델번호</label> <input type="text"
+									class="form-control" id="eq_mdno" name="eq_mdno"
+									style="width: 50px" placeholder="모델번호">
+
+							</div>
+						</div>
+
+
+						<!-- 제작업체 -->
+						<div class="col-md-5 " style="padding-bottom: 20px;">
+							<div class="input-group ">
+								<label for="inputText" class="col-form-label"
+									style="padding-right: 27px;">제작업체</label> <input type="text"
+									id="vdr_code" name="vdr_code" class="form-control"
+									style="width: 20px"> &nbsp;&nbsp; <label
+									for="inputText" class="col-form-label"
+									style="padding-right: 10px;">UPH*</label> <input type="text"
+									id="eq_uph" name="eq_uph" class="form-control" min="1"
+									max="500" style="width: 50px" data-name="UPH" required>
+
+							</div>
+						</div>
+
+						<!-- 가용온도 -->
+						<div class="col-md-5 " style="padding-bottom: 20px;">
+							<div class="input-group ">
+								<label for="inputText" class="col-form-label"
+									style="padding-right: 27px;">가용온도</label> <input type="text"
+									id="eq_min" name="eq_min" class="form-control"
+									style="width: 20px" placeholder="최소" data-name="최소">
+								&nbsp;
+								<h3>~</h3>
+								&nbsp; <input type="text" id="eq_max" name="eq_max"
+									class="form-control" style="width: 50px" placeholder="최대"
+									data-name="최대">
+								<h3>℃</h3>
+							</div>
+						</div>
+
+						<!-- 점검주기 -->
+						<div class="col-md-5 " style="padding-bottom: 20px;">
+							<div class="input-group ">
+								<label for="inputText" class="col-form-label"
+									style="padding-right: 27px;">점검주기</label> <input type="number"
+									class="form-control" id="eq_chkcyc" name="eq_chkcyc"
+									style="width: 30px" min="3" max="7" placeholder="점검주기"
+									data-name="점검주기">
+
+							</div>
+						</div>
+
+
+						<!-- 등록인 /  구매일자 -->
+						<div class="col-md-5 " style="padding-bottom: 20px;">
+							<div class="input-group ">
+								<label for="inputText" class="col-form-label"
+									style="padding-right: 27px;">등록자명</label> <input type="text"
+									class="form-control" id="eq_inster" name="eq_inster"
+									style="width: 20px"> &nbsp;
+
+							</div>
+						</div>
+
+
+						<!-- 구매일자 -->
+						<div class="col-md-5 " style="padding-bottom: 20px;">
+							<div class="input-group ">
+								<label for="inputText" class="col-form-label"
+									style="padding-right: 27px;">구매일자</label> <input type="date"
+									class="form-control" id="eq_purdt" name="eq_purdt" min="1"
+									max="500" style="width: 50px">
+							</div>
+						</div>
+
+
+						<input type="hidden" class="form-control" id="eq_actst" value="">
+						<input type="hidden" class="form-control" id="uuid" value="">
+						<input type="hidden" class="form-control" id="img_path" name="img_path" size=10>
+						<input type="hidden" class="form-control" id="img_nm" name="img_nm" size=10>
+
+
+
+
+					</div>
+					<div class="col-4">
+						<img id="prevu" src="#" onError="this.style.visibility='hidden'" />
+
+
+						<div class="mb-2 ">
+							<label for="formFile" class="form-label"></label> <input
+								class="form-control" type="file" id="upldfile" name="img_nm"
+								onchange="readURL(this)" accept="image/*" />
+						</div>
+
+					</div>
+
+				</div>
+
+			</form>
+		</div>
 		<hr style="border: solid 2px gray;" />
-		
-					<!-- 설비명 -->
-					<div class="col-md-5 " style="padding-bottom: 20px;">
-					<div class="input-group ">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">모델명*</label>
-						<input type="text" id="eq_mdnm" name="eq_mdnm" class="form-control" style="width: 30px"  required placeholder="설비 모델명" data-name="모델명">
-						
-					</div>
-					</div>	
-
-					<!-- 사용여부 -->
-					<div class="col-md-5 " style="padding-bottom: 30px;">
-					<div class="input-group ">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">사용여부</label>
-
-						<div class="form-check">
-					  	<input class="form-check-input" type="radio"  name = "testinput" value="USE01" checked>
-					  	<label class="form-check-label" for="flexRadioDefault1" style="width: 15px;">Y</label>
-					 
-						</div>
-						 	&nbsp;&nbsp;
-						<div class="form-check">
-					  	<input class="form-check-input" type="radio" name = "testinput" value="USE02" >
-					  	<label class="form-check-label" for="flexRadioDefault2">N</label>
-						</div>
-						
-						
-					</div>
-					</div>	
-					
-					<!-- 구분코드 --><!--  eq_cd는 함수로 알아서 생성 > 인자값을 일부러 넘기지 않음 -->
-					<div class="col-md-5 " style="padding-bottom: 20px;">
-					<div class="input-group ">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">구분코드</label>
-						<input type="text" class="form-control" id="eq_cd"/>
-						<button type="button" id="eqdiv" >조회</button>
-						
-						<input type="text" id="eq_nm" name="eq_nm" class="form-control" >
-						
-					</div>
-					</div>	
-					<!-- 모델번호 -->
-					<div class="col-md-5 " style="padding-bottom: 20px;">
-					<div class="input-group ">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;" >모델번호</label>
-						<input type="text" class="form-control" id="eqMdno" name="eq_mdno" style="width: 50px" placeholder="모델번호" data-name="모델번호">
-						
-					</div>
-					</div>	
-					
-					
-					<!-- 제작업체 -->
-					<div class="col-md-5 " style="padding-bottom: 20px;">
-					<div class="input-group ">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">제작업체</label>
-						<input type="text" id="vdr_code" name="vdr_code" class="form-control" style="width: 20px" >
-						&nbsp;&nbsp;
-						<label for="inputText" class="col-form-label" style="padding-right: 10px;">UPH*</label>
-						<input type="text" id="eq_uph" name="eq_uph" class="form-control" min="1" max="500" style="width: 50px" data-name="UPH" required>
-						
-					</div>
-					</div>	
-					
-					<!-- 가용온도 -->
-					<div class="col-md-5 " style="padding-bottom: 20px;">
-					<div class="input-group ">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">가용온도</label>
-						<input type="text" id="eq_min" name="eq_min" class="form-control" style="width: 20px" placeholder="최소" data-name="최소">
-						&nbsp; <h3>~</h3> &nbsp;
-						<input type="text" id="eq_max" name="eq_max" class="form-control"  style="width: 50px" placeholder="최대" data-name="최대">
-						 <h3>℃</h3>
-					</div>
-					</div>	
-					
-					<!-- 점검주기 -->
-					<div class="col-md-5 " style="padding-bottom: 20px;">
-					<div class="input-group ">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">점검주기</label>
-						<input type="number" class="form-control" id="eq_chkcyc" name="eq_chkcyc"  style="width: 30px" min="3" max="7" placeholder="점검주기" data-name="점검주기">
-						
-					</div>
-					</div>	
-					
-					
-					<!-- 등록인 /  구매일자 -->
-					<div class="col-md-5 " style="padding-bottom: 20px;">
-					<div class="input-group ">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">등록자명</label>
-						<input type="text" class="form-control" id="eq_inster" name="eq_inster"  style="width: 20px">
-						&nbsp;
-
-					</div>
-					</div>
-					
-					
-					<!-- 구매일자 -->
-					<div class="col-md-5 " style="padding-bottom: 20px;">
-					<div class="input-group ">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">구매일자</label>
-						<input type="date" class="form-control" id="eq_purdt" name="eq_purdt"  min="1" max="500" style="width: 50px">
-					</div>
-					</div>	
-					
-					
-			<input type="hidden" class="form-control" id="eq_actst" value="">
-			<input type="hidden" class="form-control" id="uuid" name="uuid"  size=10 >
-			<input type="hidden" class="form-control" id="img_path" name="img_path" size=10 >
-			<input type="hidden" class="form-control" id="img_nm" name="img_nm"  size=10 >
-			
-	
-	
-	</div>
-	<div class="col-4">
-	<img id="prevu" src="#" onError="this.style.visibility='hidden'" />
-
-	
-	<div class="mb-2 ">
- 	<label for="formFile" class="form-label"></label>
- 	<input class="form-control" type="file" id="upldfile" onchange="readURL(this)" accept="image/*" />
-	</div>
-		
 	</div>
 
-	</div>
-	
-	</form>
-	</div>
-	<hr style="border: solid 2px gray;" />
-	</div>
 
-	
-		
-	
-		<div id="modalDiv"></div>
+
+
+	<div id="modalDiv"></div>
 
 </body>
 <script>
-var inputValue = $("input[name='testinput']:checked").val(); 
-$("#eq_act").val(inputValue);
-	var $frm = $("form").serialize();
-	var frmVal = $("#frm input");
-	var judge = false;
-	var i;
-		reset.addEventListener("click" , function(){
-			$("#prevu").attr("src" , "");
-			$(".form-check-input").checked = false;
-			$(".form-control").val('');
-		});
+// 이미지 파일 썸네일 보기 구현완료
+function readURL(input) {
+    	if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.readAsDataURL(input.files[0]);
 		
-		// 클릭시 form  submit
-		$("#btnok").on("click" , function(e){
-			console.log($("#vdr_code").val());
-				for(i=0;i<frmVal.length;i++){ // 0 ~ 16
-					//console.log(i);
-					console.log("frmVal[i].value : "+frmVal[i].value);
-					
-					
-						if(frmVal[i].value == null || frmVal[i].value == ''){
-							// null 또는 공백일 경우
-							toastr.options = {
-						            closeButton: true,
-						            progressBar: true,
-						            positionClass: "toast-bottom-right",
-						            timeOut: 3000
-						        	}
-								  	toastr.error('빈칸을 채워주세요!');	
-							continue;
+        //파일이름 가져옴
+        var imgNm = input.files[0].name;
+      	var imgSrc = null;
+        
+        // 이미지 파일 명 input 에 넣기
+        img_nm.value = imgNm;
+        
+        reader.onload = function (e) {
+    	
+        	var tempImage=new Image();
+        	tempImage.src=reader.result;
+        	
+        	
+        	 // 이미지 고유 경로 input에 넣기
+        	//img_path.value=tempImage.src;
+        	
+        	//console.log("img_path: "+ img_path.value);
+        	
+        	tempImage.onload=function(){
+        		var canvas=document.createElement('canvas');
+        		var canvasContext=canvas.getContext("2d");
+        		
+        		
+            	var img = new Image();
+	        	img.src = e.target.result;
+	        	//console.log("img.src:" + img.src);
+	        	
+	        	$("#img_path").val(img.src);
+	        	$("#img_nm").val(img.src);
+	        	
+	        	
+        		canvas.width=img.width*0.7;
+        		canvas.height=img.height*0.7;
+        		
+        		canvasContext.drawImage(this,0,0,canvas.width,canvas.height);
+        		
+        		var dataURI=canvas.toDataURL("image/png");
+        		
+        		document.querySelector("#prevu").src=dataURI; // 
+        		document.querySelector("#prevu").style.visibility="visible"; // 엑박이 아닐경우 보이기 
+        		
+        		imgSrc = img.src;
+        		
+        		}
+        
+        	
+        	};
+        	
+    	}
+    	
+    	
 
-					}
+    	/* console.log("img_nm: "+ img_nm.value);
+    	console.log("img_src: "+ $("#img_path").val());
+    	
+    	console.log("eq_mdnm: "+ eq_mdnm.value);
+    	console.log("vdr_code: "+ vdr_code.value);
+    	console.log("eq_min: "+ eq_min.value); 
+    	console.log("eq_max: "+ eq_max.value); 
+    	console.log("eq_uph: "+ eq_uph.value); 
+    	console.log("eq_purdt: "+ eq_purdt.value); 
+    	
+    	console.log("eq_inster: "+ eq_inster.value); 
+    	console.log("uuid: "+ uuid.value);  */
+    	
+    	
+	}// END OF readURL(input) 
+
+
+//UUID 생성 부 - 사용 중
+// 참고 : https://developyo.tistory.com/110
+function makeUUID(){
+	//$("#uuid").val( mkuuid );
+	
+	   // function s4() {
+	   //  return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+	   // 	}
+	   // 	 return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + file_nm.substr(file_nm.indexOf("."), file_nm.length-1); */
+
+	 	return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+	   }
+
+
+	 var vdrCode = document.getElementById("vdr_code").value;
+	 var eqMdnm =  $("#eq_mdnm").val();
+	 var eqNm =  $("#eq_nm").val();
+	 var eqMdno =  $("#eq_mdno").val();
+	 var eqUph =  $("#eq_uph").val();
+	 var eqMin =  $("#eq_min").val();
+	 var eqMax =  $("#eq_max").val();
+	 var eqChkcyc =  $("#eq_chkcyc").val();
+	 var eqInster =  $("#eq_inster").val();
+	 var eqPurdt =  $("#eq_purdt").val();
+	 var imgPath =  $("#img_path").val();
+	 var uuid = makeUUID();
+	 var imgNm =  $("#img_nm").val();
+	 var eqActst = $("input[name='testinput']:checked").val();
+	 
+
+	 //var frmVal = $("#frm input");
+		
+		
+			reset.addEventListener("click" , function(){
+				$("#prevu").attr("src" , "");
+				$(".form-check-input").checked = false;
+				$(".form-control").val('');
+			});
+			
+			// 클릭시 form  submit
+			$("#btnok").on("click" , function(e){
+				makeUUID();
 				
-				}
-				if(frmVal.value != null || frmVal.val() !=''){
+				console.log("구분코드: "+$("#vdr_code").val());
+				console.log("모델명: "+$("#eq_mdnm").val());
+				console.log("설비명: "+$("#eq_nm").val());
+				console.log("모델번호: "+$("#eq_mdno").val());
+				console.log("UPH: "+$("#eq_uph").val());
+				console.log("최소온도: "+$("#eq_min").val());
+				console.log("최대온도: "+$("#eq_max").val());
+				console.log("등록자: "+$("#eq_inster").val());
+				console.log("구매일자: "+$("#eq_purdt").val());
+				console.log("이미지경로: "+$("#img_path").val());
+				console.log("UUID: "+uuid);
+				console.log("이미지명: "+$("#img_nm").val());
+				console.log("사용여부: "+eqActst);
 
-							// 다 돌고 null 또는 공백이 없는 경우
-						/* 	toastr.success('등록완료!');
-							$("form").attr('action' , "eqMngPage"); 
-							$("form").submit(); */
-							
-							
-							$.ajax({
-								url : "eqMng",
-								method : "POST",
-								data :$frm,
-								dataType : "JSON",
-								contentType : "application/json; charset=UTF-8",
-								success : function(){
-									toastr.success('등록완료!');
-									$("form").prop('action' , "eqMngPage"); 
+								// 다 돌고 null 또는 공백이 없는 경우
+							//toastr.success('등록완료!');
+								//$("form").attr('action' , "eqMngPage"); 
+								//$("form").submit(); 
+
+								
+								$.ajax({
+									url : "eqMng",
+									method : "POST",
+									data : {
+										vdr_code : vdrCode, 
+										 eq_mdnm : eqMdnm ,
+										 eq_nm : eqNm ,  
+										 eq_mdno : eqMdno,
+										 eq_actst : eqActst,
+										 eq_uph : eqUph,
+										 eq_min : eqMin,
+										 eq_max :eqMax,
+										 eq_chkcyc :eqChkcyc,
+										 eq_inster : eqInster,
+										 eq_purdt : eqPurdt,
+										 img_path :imgPath,
+										 uuid : uuid,
+										 img_nm : imgNm
+										
+									},
+									dataType : "JSON",
+									contentType : "application/json; charset=UTF-8",
+									success : function(){
+										toastr.success('등록완료!');
+										$("form").prop('action' , "eqMngPage"); 
+										
+										//$("form").submit();
+										
+									},
+									error : function(){
+										toastr.options = {
+									            closeButton: true,
+									            progressBar: true,
+									            positionClass: "toast-bottom-right",
+									            timeOut: 3000
+									        	};
+										toastr.error('빈칸을 채워주세요!');
+										console.log($(".form-control"));
+									}
 									
-									//$("form").submit();
 									
-								},
-								error : function(){
-									toastr.options = {
-								            closeButton: true,
-								            progressBar: true,
-								            positionClass: "toast-bottom-right",
-								            timeOut: 3000
-								        	};
-									toastr.error('빈칸을 채워주세요!');
-									console.log($(".form-control"));
-								}
+								});
 								
 								
-							});
-							
-							
-				}
-
-		});
-		
-		
-		
-		
-		/* $("#btnok").on("click" , function(e){
-			var $frm = $("#frm").serialize();
-			/* for(let i=0; i<=frmVal.length;i++){
-			if( frmVal[i].value== null | frmVal[i].value == '' ){
-				toastr.options = {
-	            closeButton: true,
-	            progressBar: true,
-	            positionClass: "toast-bottom-right",
-	            timeOut: 3000
-	        	}
-			  	toastr.error('빈칸을 채워주세요!');	
-			}
-		
-			} 
-			
-			
-			
-			$.ajax({
-				url : "eqMng",
-				method : "POST",
-				data :$frm,
-				dataType : "JSON",
-				contentType : "application/json; charset=UTF-8",
-				success : function(){
-					toastr.success('등록완료!');
-					$("form").attr('action' , "eqMngPage"); 
-					
-					//$("form").submit();
-					
-				},
-				error : function(){
-					toastr.options = {
-				            closeButton: true,
-				            progressBar: true,
-				            positionClass: "toast-bottom-right",
-				            timeOut: 3000
-				        	};
-					toastr.error('빈칸을 채워주세요!');
-					console.log($(".form-control"));
-				}
-				
-				
-			});
-	 */		
-			
-			
-		
-
-					
-	//}); // END OF FORM SUBMIT BUTTON
-
-			// 폼 양식 등록 > alert창 출력후 바로 등록
-			
-			
-				
-
-					
-
-			
-		 // console.log(  $("input[name='eq_actst']:checked").val()  ); // 사용여부 실시간 체크 Y or N
-
-				
-
-
-
-		// UUID 생성 부 - 사용 중
-		// 참고 : https://developyo.tistory.com/110
-		function makeUUID(){
-			
-			return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
-			
-			   // function s4() {
-			   //  return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
-			   // 	}
-			   // 	 return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4() + file_nm.substr(file_nm.indexOf("."), file_nm.length-1); */
-			} 
-
-
-
-		// 이미지 파일 썸네일 보기 구현완료
-		function readURL(input) {
-		    	if (input.files && input.files[0]) {
-		        var reader = new FileReader();
-		        reader.readAsDataURL(input.files[0]);
-				
-		        //파일이름 가져옴
-		        var imgNm = input.files[0].name;
-		      	var imgSrc = null;
-		        
-		        // 이미지 파일 명 input 에 넣기
-		        img_nm.value = imgNm;
-		        
-		        reader.onload = function (e) {
-		    	
-		        	var tempImage=new Image();
-		        	tempImage.src=reader.result;
-		        	
-		        	
-		        	 // 이미지 고유 경로 input에 넣기
-		        	//img_path.value=tempImage.src;
-		        	
-		        	//console.log("img_path: "+ img_path.value);
-		        	
-		        	tempImage.onload=function(){
-		        		var canvas=document.createElement('canvas');
-		        		var canvasContext=canvas.getContext("2d");
-		        		
-		        		
-		            	var img = new Image();
-			        	img.src = e.target.result;
-			        	//console.log("img.src:" + img.src);
-			        	
-			        	$("#img_path").val(img.src);
-			        	$("#imgNm").val(img.src);
-			        	
-			        	
-		        		canvas.width=img.width*0.7;
-		        		canvas.height=img.height*0.7;
-		        		
-		        		canvasContext.drawImage(this,0,0,canvas.width,canvas.height);
-		        		
-		        		var dataURI=canvas.toDataURL("image/png");
-		        		
-		        		document.querySelector("#prevu").src=dataURI; // 
-		        		document.querySelector("#prevu").style.visibility="visible"; // 엑박이 아닐경우 보이기 
-		        		
-		        		imgSrc = img.src;
-		        		
-		        		}
-		        
-		        	
-		        	};
-		        	
-		    	}
-		    	uuid.value = makeUUID();
-		    	
-
-		    	console.log("img_nm: "+ img_nm.value);
-		    	console.log("img_src: "+ $("#img_path").val());
-		    	
-		    	console.log("eq_mdnm: "+ eq_mdnm.value);
-		    	console.log("vdr_code: "+ vdr_code.value);
-		    	console.log("eq_min: "+ eq_min.value); 
-		    	console.log("eq_max: "+ eq_max.value); 
-		    	console.log("eq_uph: "+ eq_uph.value); 
-		    	console.log("eq_purdt: "+ eq_purdt.value); 
-		    	
-		    	console.log("eq_inster: "+ eq_inster.value); 
-		    	console.log("uuid: "+ uuid.value); 
-		    	
-		    	
-			}// END OF readURL(input) 
-			
-
-			
-			// 조회 버튼을 클릭시  > 모달 호출
-			eqdiv.addEventListener("click" , function(){
-				
-				//모달 페이지 호출 부
-				$("#modalDiv").load("eqdvmodal" , function(){
-					const myModal = new bootstrap.Modal('#myModal');
-					myModal.show();	
-					
-					
-				})
-							
-			});
-			
-			
-			$("#eq_inster").on("click" , function(){
-				//모달 페이지 호출 부
-				$("#modalDiv").load("eqInstermodal" , function(){
-					const myModal = new bootstrap.Modal('#myModal');
-					myModal.show();	
-					
-					
-				})
 				
 			});
 			
-			$("#vdr_code").on("click" , function(){
-				//모달 페이지 호출 부
-				$("#modalDiv").load("eqvdrmodal" , function(){
-					const myModal = new bootstrap.Modal('#myModal');
-					myModal.show();	
-					
-					
-				})
+
+						
+		//}); // END OF FORM SUBMIT BUTTON
+
+				// 폼 양식 등록 > alert창 출력후 바로 등록
 				
-			});
-			
+				
 	
-	
-	
+				
+			 // console.log(  $("input[name='eq_actst']:checked").val()  ); // 사용여부 실시간 체크 Y or N
+
+
+				
+				// 조회 버튼을 클릭시  > 모달 호출
+				eqdiv.addEventListener("click" , function(){
+					
+					//모달 페이지 호출 부
+					$("#modalDiv").load("eqdvmodal" , function(){
+						const myModal = new bootstrap.Modal('#myModal');
+						myModal.show();	
+						
+						
+					})
+								
+				});
+				
+				
+				$("#eq_inster").on("click" , function(){
+					//모달 페이지 호출 부
+					$("#modalDiv").load("eqInstermodal" , function(){
+						const myModal = new bootstrap.Modal('#myModal');
+						myModal.show();	
+						
+						
+					})
+					
+				});
+				
+				$("#vdr_code").on("click" , function(){
+					//모달 페이지 호출 부
+					$("#modalDiv").load("eqvdrmodal" , function(){
+						const myModal = new bootstrap.Modal('#myModal');
+						myModal.show();	
+						
+						
+					})
+					
+				});
+				
+
 
 
 	

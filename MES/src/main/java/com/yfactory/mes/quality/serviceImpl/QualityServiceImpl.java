@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.yfactory.mes.quality.mapper.QualityMapper;
 import com.yfactory.mes.quality.service.QualityService;
+import com.yfactory.mes.quality.vo.MtCheckVO;
 
 @Service
 public class QualityServiceImpl implements QualityService {
@@ -69,5 +70,11 @@ public class QualityServiceImpl implements QualityService {
 	@Override
 	public List<Map> searchProdErrList(String errDtl, String prodName) {
 		return map.searchProdErrList(errDtl, prodName);
+	}
+
+	@Override
+	public int reqMtQuality(String pdt, String mcd) {
+		// TODO Auto-generated method stub
+		return map.reqMtQuality(pdt, mcd);
 	}
 }

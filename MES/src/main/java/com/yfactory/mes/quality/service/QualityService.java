@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.yfactory.mes.quality.vo.MtCheckVO;
+
 public interface QualityService {
 	// 조회
 	// 자재 품질검사요청(modal)
@@ -50,8 +52,7 @@ public interface QualityService {
 	
 	// 입력
 	// 자재 품질검사요청
-	
-	// 제품 품질검사요청
+	int reqMtQuality(String pdt, String mcd);
 	
 	// ------------------------------------------------
 	

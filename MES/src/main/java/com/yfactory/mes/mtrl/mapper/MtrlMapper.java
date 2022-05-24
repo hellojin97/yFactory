@@ -19,7 +19,14 @@ public interface MtrlMapper {
     List<Map>listRequest();	
     //발주관리 검색
     List<Map>mtrlReqSelectSearch(@Param("poCdinput")String poCdinput);
-	
+	//발주등록
+    List<Map>mtrlReqInsert(@Param("mtCd") String mtCd,
+    					   @Param("mtNm") String mtNm,
+    					   @Param("vdrNm") String vdrNm,
+    					   @Param("reqDt") String reqDt,
+    					   @Param("poQty") String poQty);
+    
+    
 	/*LOT페이지*/
 	//LOT재고조회
 	List<Map>listMtrlLot();
@@ -42,4 +49,6 @@ public interface MtrlMapper {
 	//발주코드 검색
 	List<Map>pocdList();
 	List<Map>pocdSelectSearch(@Param("pocd")String pocd);
+	//발주등록
+	int mtrlReqInsert(Map<String, String> result);
 }

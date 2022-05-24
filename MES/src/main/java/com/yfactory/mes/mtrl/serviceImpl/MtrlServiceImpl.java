@@ -92,6 +92,12 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.mtrlReqSelectSearch(poCdinput);
 	}
 
+	@Override
+	public int mtrlReqInsert(Map<String, String> result) {
+		// TODO Auto-generated method stub
+		return map.mtrlReqInsert(result);
+	}
+
 
 
 }

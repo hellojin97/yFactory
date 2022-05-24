@@ -203,7 +203,7 @@
 		</if>
 	</select>
 	
-	<insert id="" statementType="CALLABLE" parameterType="com.yfactory.mes.mtrl.vo.MtPoVO">
+	<insert id="mtrlReqInsert" statementType="CALLABLE" parameterType="map">
 	{CALL INSERT_PO(#{mt_cd},
 				    #{mt_nm},
 				    #{vdr_nm},

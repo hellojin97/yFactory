@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yfactory.mes.mtrl.service.MtrlService;
@@ -85,8 +87,12 @@ public class MaterialAjaxController {
 		public List<Map>pocdSelectSearch(String pocd){
 			return service.pocdSelectSearch(pocd);
 		}
-
-		
+		//발주등록 
+		@PostMapping("/mtrlReqInsert")
+		public String mtrlReqInsert(@RequestParam Map<String, String> result){
+			service.mtrlReqInsert(result);	
+			return "성공";
+		}
 		
 		
 }

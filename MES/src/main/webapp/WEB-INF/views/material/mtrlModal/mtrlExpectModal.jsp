@@ -10,7 +10,7 @@
 <body>
 	<!-- 자재명모달  -->
 	<div id="myModal" class="modal fade" tabindex="-1">
-		<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header"
 					style="background-color: #2c3e50; color: white; font-size: small; padding: 10px;">

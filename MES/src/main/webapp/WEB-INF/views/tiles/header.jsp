@@ -125,7 +125,7 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" id="myBtn" onclick="myBtn" data-bs-toggle="dropdown">
+          <a class="nav-link nav-icon" id="chat" onclick="chat" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text">채팅</i>
             <span class="badge bg-success badge-number">3</span>
           </a><!-- End Messages Icon -->
@@ -265,7 +265,7 @@
 	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 	
 <script>
-myBtn.addEventListener("click", function(){
+chat.addEventListener("click", function(){
 	$("#test").load("chatForm", function(){
 		const myModal = new bootstrap.Modal('#myModal',{backdrop : false , keyboard: false});
 		myModal.show();

@@ -119,10 +119,7 @@
 				let eqPrcCol = grid.getFocusedCell('공정코드');
 					if(eqCdCol.columnName == '설비코드'){ // 설비코드 컬럼을 클릭했다면
 						$("#grid1").load("mngmodal", function(){
-							
-							 
-							 
-							 
+
 							const mngModal = new bootstrap.Modal('#myModal');
 							mngModal.show();
 							console.log("gridRowCell"+gridRowCell);

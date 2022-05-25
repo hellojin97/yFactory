@@ -66,18 +66,17 @@
 		WHERE VEN_CD = 'VEN01'
 		]]>
 	</select>
-
+	
+	<!-- 설비 데이터 및 비가동 여부 전체조회 -->
 	<select id="getEqActStatList" resultType="map">
 	SELECT			E.EQ_CD "설비코드" ,
 						E.EQ_MDNM "설비명" ,
 						PRC.PROC_CD "공정코드" ,
 						PRC.PROC_NM "공정명" ,
 						E.EQ_CHKCYC "점검주기",
-						CASE WHEN E.EQ_ACTST like 'USE-01' THEN 'Y' ELSE 'N' END "사용여부",
-						NVL2(INA.EQ_INASD, 'Y' , 'N') "비가동여부" 
+						CASE WHEN E.EQ_ACTST like 'USE-01' THEN 'Y' ELSE 'N' END "사용여부"
 	FROM 			EQ E ,
-						PROCESS PRC ,
-						EQ_INA INA
+						PROCESS PRC
 	WHERE 			E.EQ_CD = PRC.EQ_CD
 	AND 				E.EQ_CD = INA.EQ_CD
 	ORDER BY 1
@@ -99,7 +98,7 @@
 					E.EQ_CD = PRC.EQ_CD
 	AND			E.EQ_CD = INA.EQ_CD
 	<if test="#{eq_actst}='USE01'">
-	AND  E.EQ_ACTST = 'USER01'
+	AND  E.EQ_ACTST = 'USE01'
 	</if>
 	<if test="#{eq_actst}='USE02'">
 	AND  E.EQ_ACTST = 'USE02'

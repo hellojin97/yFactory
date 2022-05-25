@@ -21,6 +21,12 @@ public class pageController {
 	
 //	@Autowired
 //	private String saveDir;
+	
+	@RequestMapping("/Test")
+	public String TEST() {
+		return "eq/Test";
+	}
+	
 	 
 	@RequestMapping("/eqInsert")
 	public String eqInsert(){

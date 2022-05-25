@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body onkeyup="on_key_up()">
 
@@ -126,8 +125,11 @@
 	//미입고처리 모달
 	mtrlBtnAdd.addEventListener("click", function(){
 		$("#test").load("mtrlExpectModal", function(){
-			const myModal = new bootstrap.Modal('#myModal');
+			const myModal = new bootstrap.Modal('#myModal',{backdrop : false , keyboard: false});
 			myModal.show();
+			$('.modal-dialog').draggable({
+			    handle: ".modal-header"
+			  });
 		})
 		});
 	

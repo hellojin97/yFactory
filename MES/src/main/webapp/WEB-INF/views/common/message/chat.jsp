@@ -79,28 +79,7 @@
 	href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
 <script
 	src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
-<style type="text/css">
 
-/* 폰트 */
-@font-face {
-	font-family: 'GangwonEduPowerExtraBoldA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-.container {
-	width: 500px;
-}
-
-#list {
-	height: 300px;
-	padding: 15px;
-	overflow: auto;
-}
-</style>
 </head>
 <body>
 
@@ -130,7 +109,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2"><div id="list"></div></td>
+								<td colspan="2"><div id="list" style="height: 300px;"></div></td>
 							</tr>
 							<tr>
 								<td colspan="2"><input type="text" name="msg" id="msg"
@@ -282,6 +261,7 @@
 		$('#msg').val('');
 		$('#msg').attr('disabled', true);
 	});
+	
 
 </script>
 

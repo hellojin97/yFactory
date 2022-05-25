@@ -4,8 +4,15 @@
 	<!-- 조회 -->
 	<!-- 불량코드(modal) 조회 -->
 	<select id="selectErrCode" resultType="map">
-		SELECT	*
+		SELECT	ERR_CD "불량코드", ERR_NM "불량명"
 		FROM	ERR_CODE
+	</select>
+	
+	<!-- 불량코드(modal) 단건 -->
+	<select id="errSelectOne" resultType="map">
+		SELECT	ERR_CD "불량코드", ERR_NM "불량명"
+		FROM	ERR_CODE
+		WHERE   ERR_CD = #{errCd} 
 	</select>
 	
 	<!-- 자재 품질검사요청(modal) 조회 -->
@@ -27,14 +34,17 @@
 	
 	<!-- 자재검사관리 -->
 	<select id="selectMtCheckMgr" resultType="map">
-		SELECT 	MP.PO_CD "발주코드", MT.MT_CD "자재코드", 
+		SELECT 	MP.PO_CD "발주코드", CHK.PO_DTLCD "발주상세코드", MT.MT_CD "자재코드", 
 				MT.MT_NM "자재명", EMP.EMP_NM "담당인", MPD.PO_QTY "발주량", CC.CD_NM "상태"
+				
 		FROM 	MT_PODTL MPD, MT_PO MP, MT MT, COMM_CODE CC, MT_CHK CHK, EMPLOYEE EMP
+		
 		WHERE 	MPD.PO_CD = MP.PO_CD
 		AND 	MP.MT_CD = MT.MT_CD
 		AND 	CHK.PO_DTLCD = MPD.PO_DTLCD
 		AND		CHK.CHK_MNGR = EMP.EMP_NO
 		AND 	CHK.CHK_INSP = CC.COMM_CD
+		
 		AND 	COMM_CD = 'MTRL01'
 	</select>
 	<!-- 제품검사관리 -->
@@ -320,7 +330,7 @@
 	
 	<!-- 수정 -->
 	<!-- 자재 품질검사 -->
-	<update id="resultQualityM">
-		
+	<update statementType="CALLABLE" id="resMtQuality" parameterType="map">
+		{CALL QUALITY_RES_UPDATE (#{podtlcd}, #{mtnm}, #{passqty}, #{errqty}, #{errcd})}
 	</update>
 </mapper>

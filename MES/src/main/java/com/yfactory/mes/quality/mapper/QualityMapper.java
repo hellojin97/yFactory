@@ -12,6 +12,8 @@ public interface QualityMapper {
 	// 불량코드(modal) 조회
 	List<Map> selectErrCode();
 	
+	List<Map> errSelectOne(String errCd);
+	
 	// 자재 품질검사요청(modal) 조회
 	List<Map> selectpoDtlRequest();
 	
@@ -55,4 +57,6 @@ public interface QualityMapper {
 	
 	// 수정
 	// 자재품질검사
+	int resMtQuality(@Param("podtlcd") String podtlcd, @Param("mtnm") String mtnm, @Param("passqty") int passqty,
+					 @Param("errqty") int errqty, @Param("errcd") String errcd);
 }

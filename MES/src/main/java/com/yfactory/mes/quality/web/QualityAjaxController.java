@@ -17,12 +17,18 @@ public class QualityAjaxController {
 	@Autowired private QualityService qas;
 	
 	// 조회
+	// 불량코드(modal)
+	@GetMapping("/selectErrCode")
+	public List<Map> selectErrCode() {
+		return qas.selectErrCode();
+	}
+	
 	// 자재 품질검사요청(modal)
 	@GetMapping("/selectpoDtlRequest")
 	public List<Map> selectpoDtlRequest() {
-		
 		return qas.selectpoDtlRequest();
 	}
+
 	// 제품 품질검사요청(modal)
 	
 	// 자재 품질검사관리
@@ -56,6 +62,12 @@ public class QualityAjaxController {
 	// ------------------------------------------------
 	
 	// 검색
+	// 불량코드
+	@GetMapping("/searchErrName")
+	public List<Map> searchErrName(String key) {
+		return qas.searchErrName(key);
+	}
+	
 	// 자재 품질검사요청(modal)
 	@GetMapping("/pocdModalSearch")
 	public List<Map> searchpoDtlRequest(String key) {

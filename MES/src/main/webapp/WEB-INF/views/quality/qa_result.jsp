@@ -41,21 +41,24 @@
 			method : "GET",
 			dataType : "JSON",
 			success : function(result) {
-				defaultMt.resetData(result);
+				grid.resetData(result);
 			}
 		});
 	
-		var defaultMt = new tui.Grid({
+		var grid = new tui.Grid({
 			el : document.getElementById('qaResult'),
 			columns : [ {
-				header: '발주상세코드',
-				name: '발주상세코드'
+				header: '발주코드',
+				name: '발주코드'
 			}, {
 				header: '자재코드',
 				name: '자재코드'
 			}, {
 				header: '자재명',
 				name: '자재명'
+			}, {
+				header: '담당인',
+				name: '담당인'
 			}, {
 				header: '검사일자',
 				name: '검사일자'
@@ -105,14 +108,17 @@
 			var grid = new tui.Grid({
 				el : document.getElementById('qaResult'),
 				columns : [ {
-					header: '발주상세코드',
-					name: '발주상세코드'
+					header: '발주코드',
+					name: '발주코드'
 				}, {
 					header: '자재코드',
 					name: '자재코드'
 				}, {
 					header: '자재명',
 					name: '자재명'
+				}, {
+					header: '담당인',
+					name: '담당인'
 				}, {
 					header: '검사일자',
 					name: '검사일자'

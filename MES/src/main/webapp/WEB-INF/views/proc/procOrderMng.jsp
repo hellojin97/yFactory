@@ -22,6 +22,7 @@
 	</div>
 	<div>
 		<button id="btnNoPlanSelect" class="btn1">미지시 계획 조회</button>
+		
 	</div>
 	<div>
 	<h3>상세생산계획</h3>

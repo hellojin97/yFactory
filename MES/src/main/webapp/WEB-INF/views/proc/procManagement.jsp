@@ -55,98 +55,102 @@
 <script>
 
 // 주문 상세 리스트
-$.ajax({
-	url: "ordDtpList",
-	method : "GET",
-	dataType : "JSON",
-	success : function(result){
-		ordDtpList.resetData(result);
-	}
-});
+resultGrid = new tui.Grid({
+			el : document.getElementById('ordDtpList'),
+			scrollX : false,
+			scrollY : false,
+			columns : [ {
+				header : '생산지시코드',
+				name : '생산지시코드',
+			}, {
+				header : '제품명',
+				name : '제품명',
+			}, {
+				header : '제품코드',
+				name : '제품코드',
+			}, {
+				header : '생산수량',
+				name : '생산수량',
 
-var ordDtpList = new tui.Grid({
-    el: document.getElementById('ordDtpList'),
-    columns: [
-    	{
-            header: '주문상세코드',
-            name: '주문상세코드'
-          },
-          {
-            header: '주문코드',
-            name: '주문코드'
-          },
-          {
-            header: '완제품코드',
-            name: '완제품코드'
-          },
-          {
-            header: '제품명',
-            name: '제품명'
-          },
-          {
-              header: '주문수량',
-              name: '주문수량'
-            },
-          {
-              header: '납기일자',
-              name: '납기일자'
-            }      
-    ],
-    rowHeaders: ['rowNum'],
-    pageOptions: {
-      useClient: true,
-      perPage: 10
-    }
-  });
+			}, {
+				header : '라인코드',
+				name : '라인코드',
+			}, 
+			],
+			rowHeaders : [ 'rowNum' ],
+			pageOptions : {
+				useClient : true,
+				perPage : 5
+			}
 
-	//출고 현황 리스트
-	$.ajax({
-		url: "",
-		method : "GET",
-		dataType : "JSON",
-		success : function(result){
-			releaseList.resetData(result);
-		}
-	});
+		});
 
   var releaseList = new tui.Grid({
     el: document.getElementById('releaseList'),
     columns: [
       {
-        header: '주문상세코드',
-        name: '주문상세코드'
+        header: '진행공정코드',
+        name: '진행공정코드'
       },
       {
-        header: '완제품코드',
-        name: '완제품코드'
+        header: '공정코드',
+        name: '공정코드',
+        width: 120
+
       },
       {
-        header: '완제품LOT번호',
-        name: '완제품LOT번호'
+        header: '공정명',
+        name: '공정명'
       },
       {
-        header: '출고날짜',
-        name: '출고날짜'
+        header: '설비코드',
+        name: '설비코드'
       },
       {
-          header: '출고량',
-          name: '출고량'
-        },
-      {
-          header: '제조일자',
-          name: '제조일자'
+          header: '설비명',
+          name: '설비명'
         },
         {
-            header: '유통기한',
-            name: '유통기한'
-          }
+            header: '담당자',
+            name: '담당자'
+          },
+      {
+          header: '투입량',
+          name: '투입량',
+          editor : "text"
+        },
+        {
+            header: '불량량',
+            name: '불량량',
+            editor : "text"
+          },
+          {
+              header: '생산량',
+              name: '생산량',
+              editor : "text"
+            },
+            {
+                header: '시작시간',
+                name: '시작시간',
+                editor : "text"
+              },
+              {
+                  header: '종료시간',
+                  name: '종료시간',
+                  editor : "text"
+                },
+                {
+                    header: '상태',
+                    name: '투입량',
+                    editor : "text"
+                  },
     ],
     rowHeaders : [ 'rowNum' ]
     
   });
 	
   	//완제품 lot 모달 호출
-  ordDtpList.on("dblclick", function(e) {
+  /* ordDtpList.on("dblclick", function(e) {
 	  let ordtl = ordDtpList.getValue(e.rowKey,"주문상세코드");
 	  let ordNum = ordDtpList.getValue(e.rowKey, "주문수량");
 	  let prodCd = ordDtpList.getValue(e.rowKey, "완제품코드");
@@ -158,14 +162,10 @@ var ordDtpList = new tui.Grid({
 			const ProdModal = new bootstrap.Modal('#myModal');
 			ProdModal.show();
 			}); 
-  });	
+  });	 */
   
   	//초기화 버튼
-  $('#reset').on('click',function(){
-	  
-	  releaseList.clear();
-	  
-	})
+
 
       $("#btnProcOrderList").on("click", function(){
     	  	$("#procOrderListModalGrid").load("procOrderListModal", function() {
@@ -173,6 +173,10 @@ var ordDtpList = new tui.Grid({
     			ProcOrderListModal.show();
     			}); 
       });
+  	  $("#btnProcStart").on("click",function(){
+  		console.log(releaseList.getRowCount());
+  	  });
+  
   
 </script>
 

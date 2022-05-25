@@ -45,4 +45,7 @@ public interface ProcService {
     
     List<Map> ProcOrderList(@RequestBody HashMap<String, Object> list); //생산 지시 목록
     
+    List<Map> ProcOrderCdSelectOne(String dtlCd); //생산 지시 코드 단건 조회
+    
+    List<Map> ProcOrderLineSelectOne(String line); //생산 라인 코드 단건 조회
 }

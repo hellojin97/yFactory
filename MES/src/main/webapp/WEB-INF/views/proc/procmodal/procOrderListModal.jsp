@@ -69,7 +69,12 @@
 	             {
 	                 header: '생산수량',
 	                 name: '생산수량',
-	               }],
+	               },
+	               {
+		                 header: '생산지시일자',
+		                 name: '생산지시일자',
+		               }
+	             ],
 	                  rowHeaders: ['rowNum'],
 	                     pageOptions: {
 	                         useClient: true,
@@ -92,7 +97,7 @@
 		        contentType : "application/json; charset=utf-8"
 		     }).done(function(result){
 		    	 procOrderListGrid.resetData(result);
-		         console.log(result);
+		         //console.log(result);
 		         
 		     });
 		    
@@ -100,6 +105,48 @@
 		   
 		});
 	   
+	   procOrderListGrid.on("click",function(e){
+			let dtlCd = procOrderListGrid.getValue(e.rowKey, '생산지시코드');
+			 if(dtlCd != null){
+				  $('#ProcOrderListModal').modal('hide');
+				 
+				  $.ajax({
+						   url  : "procOrderCdSelectOne",
+						   data : {
+							   dtlCd : dtlCd
+							   },
+						   dataType : "JSON",
+						   contentType : "application/json; charset = UTF-8;"
+					   }).done(function(result){
+								resultGrid.resetData(result);
+
+								let line = result[0].라인코드
+									console.log(line);
+								 if(line != null){
+									 
+									  $.ajax({
+											   url  : "procOrderLineSelectOne",
+											   data : {line : line},
+											   dataType : "JSON",
+											   contentType : "application/json; charset = UTF-8;"
+										   }).done(function(result){
+											   		releaseList.resetData(result);
+
+										   })
+										   
+									   
+									  
+								}  
+					   })
+					
+					   //let line = resultGrid.getValue(e.rowKey, '라인코드');
+					  
+					 
+			} 
+			 
+
+			 
+	   });
 
 		setTimeout(function(){
 			

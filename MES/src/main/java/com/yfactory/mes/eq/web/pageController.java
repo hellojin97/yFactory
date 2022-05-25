@@ -127,6 +127,15 @@ public class pageController {
 			public String eqvdrmodal() {
 				return "/eq/eqmodal/eqvdrmodal";
 		}
+		
+		
+		
+		// 설비관리 페이지 - 설비코드 ~ 점검주기 데이터 조회 모달
+		@GetMapping("/eqsearchmodal")
+					public String eqsearchmodal() {
+						return "/eq/eqmodal/eqsearchmodal";
+		}
+		
 			
 	
 }

@@ -1,10 +1,12 @@
 package com.yfactory.mes.eq.serviceImpl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.yfactory.mes.eq.mapper.EquipMapper;
 import com.yfactory.mes.eq.service.EquipService;
@@ -77,6 +79,18 @@ public class EquipServiceImpl implements EquipService{
 	@Override
 	public List<Map> getEqInList() {
 		return mapper.getEqInList();
+	}
+
+	@Override
+	public List<Map> getEqChkList() {
+		
+		return mapper.getEqChkList();
+	}
+
+	@Override
+	public List<Map> getEqChkSelectList(@RequestBody HashMap<String, Object> list) {
+		
+		return mapper.getEqChkSelectList(list);
 	}
 	
 	

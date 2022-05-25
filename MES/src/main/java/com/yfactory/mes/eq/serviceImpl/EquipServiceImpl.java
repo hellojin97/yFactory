@@ -78,6 +78,11 @@ public class EquipServiceImpl implements EquipService{
 	public List<Map> getEqInList() {
 		return mapper.getEqInList();
 	}
+
+	@Override
+	public int setEqIn(Map<String, String> result) {
+		return mapper.setEqIn(result);
+	}
 	
 	
 	

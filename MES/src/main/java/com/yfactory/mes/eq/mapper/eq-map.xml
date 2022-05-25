@@ -72,15 +72,14 @@
 
 	<select id="getEqActStatList" resultType="map">
 	SELECT			E.EQ_CD "설비코드" ,
-						E.EQ_MDNM "설비명" ,
-						PRC.PROC_CD "공정코드" ,
-						PRC.PROC_NM "공정명" ,
-						E.EQ_CHKCYC "점검주기",
-						CASE WHEN E.EQ_ACTST like 'USE-01' THEN 'Y' ELSE 'N' END "사용여부"
+					E.EQ_MDNM "설비명" ,
+					PRC.PROC_CD "공정코드" ,
+					PRC.PROC_NM "공정명" ,
+					E.EQ_CHKCYC "점검주기",
+					CASE WHEN E.EQ_ACTST like 'USE01' THEN 'Y' ELSE 'N' END "사용여부"
 	FROM 			EQ E ,
-						PROCESS PRC
-	WHERE 			E.EQ_CD = PRC.EQ_CD
-	AND 				E.EQ_CD = INA.EQ_CD
+					PROCESS PRC
+	WHERE 			E.EQ_CD = PRC.EQ_CD	
 	ORDER BY 1
 	
 	</select>
@@ -116,8 +115,8 @@
 	<select id="getEqInList" resultType="map">
 		select	ei.eq_cd AS "설비코드",
 				e.eq_nm AS "설비명",
-				ei.eq_inasd AS "시작날짜",
-				ei.dis_code AS "종료날짜",
+				TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
+				TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
 				ei.eq_note AS "사유"
 		from 	eq_ina ei, eq e
 		where 	ei.eq_cd = e.eq_cd

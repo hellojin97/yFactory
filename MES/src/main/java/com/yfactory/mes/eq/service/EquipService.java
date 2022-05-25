@@ -3,6 +3,8 @@ package com.yfactory.mes.eq.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.yfactory.mes.eq.vo.EqVO;
 
 public interface EquipService {
@@ -39,6 +41,9 @@ public interface EquipService {
 	
 	// 비가동 상태 설비 조회
 	List<Map> getEqInList();
+	
+	// 비가동 설비 목록 추가
+	int setEqIn(Map<String, String> result);
 	
 	
 }

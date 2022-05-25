@@ -46,5 +46,14 @@ public interface MtrlService {
 	//발주등록
 	int mtrlReqInsert(Map<String, String> result);
 	
+	//입고조회
+	List<Map>insertList();
+	//입고 전체조회
+	List<Map>insertSearch(String m1,
+			 String m2,
+			 String req1,
+			 String req2);
 	
+	//입고예정목록
+	List<Map>expectList();
 }

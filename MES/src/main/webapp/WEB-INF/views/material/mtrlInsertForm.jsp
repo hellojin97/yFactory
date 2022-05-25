@@ -109,20 +109,21 @@
 	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
+	//원자재 모달
 	myBtn.addEventListener("click", function(){
 	$("#test").load("mtcdModal", function(){
 		const myModal = new bootstrap.Modal('#myModal');
 		myModal.show();
 	})
 	});
-
+	//업체명 모달
 	vdr.addEventListener("click", function(){
 		$("#test").load("vdrModal", function(){
 			const myModal = new bootstrap.Modal('#myModal');
 			myModal.show();
 		})
 		});
-	
+	//미입고처리 모달
 	mtrlBtnAdd.addEventListener("click", function(){
 		$("#test").load("mtrlExpectModal", function(){
 			const myModal = new bootstrap.Modal('#myModal');
@@ -147,7 +148,7 @@
 		method : "GET",
 		dataType : "JSON",
 		success : function(result) {
-			listMtrlLot.resetData(result);
+			listMtrlInsert.resetData(result);
 		}
 	});
 
@@ -155,28 +156,28 @@
 		el : document.getElementById('mtrlInsertList'),
 		columns : [ {
 			header : '원자재발주코드',
-			name : 'mt_lot'
+			name : '원자재발주코드'
 		}, {
 			header : '원자재코드',
-			name : 'mt_cd'
+			name : '원자재코드'
 		}, {
 			header : '원자재명',
-			name : 'mt_nm'
+			name : '원자재명'
 		}, {
 			header : '업체명',
-			name : 'vdr_nm'
+			name : '업체명'
 		}, {
 			header : '입고량',
-			name : 'mt_qty'
+			name : '입고량'
 		}, {
 			header : '입고일시',
-			name : 'mt_exp'
+			name : '입고일시'
 		}, {
-			header : '자재LOT번호',
-			name : 'mt_exp'
+			header : '원자재LOT번호',
+			name : '원자재LOT번호'
 		}, {
 			header : '유통기한',
-			name : 'mt_exp'
+			name : '유통기한'
 		}
 
 		],
@@ -218,7 +219,7 @@
       })
   });
 
-  // 자재명 검색
+  // 입고 검색
   $("#search").on("click", function() {
    console.log("click!")
    var mtNminput = $("#mtNminput").val();
@@ -227,7 +228,7 @@
    var req2 = $("#req2").val();
 	console.log(vdrNminput);
    $.ajax({
-      url : "lotSelectSearch",
+      url : "insertSearch",
       data : {
     	  m1 : mtNminput,
     	  m2 : vdrNminput,
@@ -238,7 +239,7 @@
       dataType: 'JSON',
       contentType : "application/json; charset=utf-8"
    }).done(function(result){
-	    listMtrlLot.resetData(result);
+	   listMtrlInsert.resetData(result);
        console.log(result);
        
    }).fail(function(result){
@@ -248,12 +249,12 @@
 
 /* 검색 결과 초기화  */
 $('#reset').on('click',function(){
-	const url = "mtrlLot";
+	const url = "mtrlInsertList";
 	   $.ajax(url,{
 	      dataType : "JSON",
 	      method: "GET"
 	   }).done(function(result){
-		   listMtrlLot.resetData(result);
+		   listMtrlInsert.resetData(result);
 	     console.log(result);
 	   });
 })

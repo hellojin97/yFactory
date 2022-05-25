@@ -19,10 +19,14 @@
 				</div>
 				<!-- 모달 내용 -->
 				<div class="modal-body">
-					<div class="col-md-8 " style="padding-bottom: 20px;">
+					<div style="padding-bottom: 20px;">
 						<h4>입고예정 목록</h4>
+						<div id="expectGrid"></div>
+						<div style="padding-right: 10px;">
+							<button class="btn1"  type="button" id="select">선택</button>
+						</div>
 					</div>
-					<div id="Grid"></div>
+					
 				</div>
 				<!-- 내용끝 -->
 				
@@ -34,38 +38,38 @@
 	<script>
 		//자재명 전체조회
 		$.ajax({
-			url : "mtcd",
+			url : "expectList",
 			method : "GET",
 			dataType : "JSON",
 			success : function(result) {
-				mtcdList.resetData(result);
+				mtrlExpectList.resetData(result);
 			}
 		});
 
-		var mtcdList = new tui.Grid({
-			el : document.getElementById('mtcdGrid'),
+		var mtrlExpectList = new tui.Grid({
+			el : document.getElementById('expectGrid'),
 			columns : [ {
 				header : '원자재발주코드',
-				name : 'mt_nm'
+				name : '원자재발주코드'
 			}, {
 				header : '원자재코드',
-				name : 'mt_cd'
+				name : '원자재코드'
 			}, {
 				header : '원자재명',
-				name : 'mt_cd'
+				name : '원자재명'
 			}, {
 				header : '업체명',
-				name : 'mt_cd'
+				name : '업체명'
 			}, {
 				header : '입고량',
-				name : 'mt_cd'
+				name : '입고량'
 			}, {
 				header : '검사일자',
-				name : 'mt_cd'
+				name : '검사일자'
 			}
 			
 			],
-			rowHeaders : [ 'rowNum' ],
+			rowHeaders : [ 'checkbox' ],
 			pageOptions : {
 				useClient : true,
 				perPage : 5
@@ -83,29 +87,13 @@
 			  //ajax 호출
 			  //grid.resetData(data)
 			  
-		      mtcdList.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
+		      mtrlExpectList.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
 		  })
-		  
-	//자재명 검색
-	$("#mtnmSearch").on("click",function(){
-		console.log("확인")
-	
-	var mtnm = $("#mtnm").val();
-		console.log(mtnm);
-	
-	$.ajax({
-		url : "mtnmSelectSearch",
-		data : {
-			mtnm : mtnm
-		},
-		dataType: 'JSON',
-		contentType : "application/json; charset=utf-8"
-	}).done(function(result){
-		mtcdList.resetData(result); 
-		 console.log(result)
-	})
-	})
-	//모달 데이터값 받아오기
+
+		  select.addEventListener("click",function(){
+			  
+		  })
+/* 	//모달 데이터값 받아오기
 	mtcdList.on("dblclick",function(e) {
       //debugger
          let mtrlNm = mtcdList.getValue(e.rowKey, 'mt_nm');
@@ -117,7 +105,7 @@
          console.log(mtrlNm);
          console.log(mtrlCd);
          }
-      );
+      ); */
 
 	</script>
 </body>

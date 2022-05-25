@@ -98,6 +98,24 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.mtrlReqInsert(result);
 	}
 
+	@Override
+	public List<Map> insertList() {
+		// TODO Auto-generated method stub
+		return map.insertList();
+	}
+
+	@Override
+	public List<Map> insertSearch(String m1, String m2, String req1, String req2) {
+		// TODO Auto-generated method stub
+		return map.insertSearch(m1, m2, req1, req2);
+	}
+
+	@Override
+	public List<Map> expectList() {
+		// TODO Auto-generated method stub
+		return map.expectList();
+	}
+
 
 
 }

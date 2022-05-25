@@ -21,6 +21,11 @@ public class QualityServiceImpl implements QualityService {
 		// TODO Auto-generated method stub
 		return map.selectErrCode();
 	}
+	
+	@Override
+	public List<Map> errSelectOne(String errCd) {
+		return map.errSelectOne(errCd);
+	}
 
 	@Override
 	public List<Map> selectpoDtlRequest() {
@@ -86,6 +91,11 @@ public class QualityServiceImpl implements QualityService {
 	public int reqMtQuality(String pdt, String mcd) {
 		// TODO Auto-generated method stub
 		return map.reqMtQuality(pdt, mcd);
+	}
+	
+	@Override
+	public int resMtQuality(String podtlcd, String mtnm, int passqty, int errqty, String errcd) {
+		return map.resMtQuality(podtlcd, mtnm, passqty, errqty, errcd);
 	}
 
 }

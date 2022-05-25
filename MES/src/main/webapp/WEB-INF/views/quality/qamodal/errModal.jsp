@@ -8,12 +8,12 @@
 </head>
 <body>
 	<!-- 발주상세코드 Modal  -->
-	<div id="errCodeModal" class="modal fade" tabindex="-1">
+	<div id="errModal" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header"
 					style="background-color: #2c3e50; color: white; font-size: small; padding: 10px;">
-					<h5 class="modal-title" style="font-size: 17px;">불량코드</h5>
+					<h5 class="modal-title" style="font-size: 17px;">불량명</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 				<!-- 모달 내용 -->
@@ -38,8 +38,8 @@
 	<script>
 	
 	// 불량코드 조회
-	 $.ajax({
-			url: "selectpoDtlRequest",
+	$.ajax({
+			url: "selectErrCode",
 			dataType: "JSON",
 			method : "GET",
 			contentType : "application/json; charset=utf-8",
@@ -68,7 +68,7 @@
 	 
 	$('body').css("overflow", "hidden");
 	  
-	  var myModal = document.getElementById('errCodeModalModal')
+	  var myModal = document.getElementById('errModal')
 
 	  myModal.addEventListener('shown.bs.modal', function () {
 		  //ajax 호출
@@ -93,16 +93,22 @@
 		})
 	});
 	
-	//모달 데이터값 받아오기
 	grid.on("dblclick",function(e) {
-	//debugger
-    	let errCd = grid.getValue(e.rowKey, '불량코드');
-    	let errNm = grid.getValue(e.rowKey, '불량명')
+		//errCd와 errNm에 불량코드와 불량명을 담는다.
+		let errCd = grid.getValue(e.rowKey, '불량코드');
+		let errNm = grid.getValue(e.rowKey, '불량명');
 		
-    	
-		$('#errCodeModal').modal('hide');
-	});
+		//errCd가 null이 아닌 경우
+		if(errCd != null){
+			// errModal을 숨긴다.
+			$('#errModal').modal('hide');
+			// err변수에 부모 그리드(defaultMt)의 포커스 셀을 불량코드에 맞춘다
+			let err = defaultMt.getFocusedCell('불량코드');
+			// defaultMt그리드에 err의 rowKey에 맞춰 불량코드와 불량명 컬럼에 각각 errCd와 errNm을 담는다.
+			defaultMt.setValue(err.rowKey, '불량코드', errCd);
+			defaultMt.setValue(err.rowKey, '불량명', errNm);
+		}
+	})
 	</script>
-
 </body>
 </html>

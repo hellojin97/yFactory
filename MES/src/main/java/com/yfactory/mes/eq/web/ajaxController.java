@@ -6,9 +6,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -100,8 +102,10 @@ public class ajaxController {
 	@GetMapping("/getEqInListAjax")
 	@ResponseBody
 	public List<Map> getEqInListAjax(){
+		System.out.println("------"+mapper.getEqInList());
 		return mapper.getEqInList();
 	}
+
 
 	//점검 전체 리스트
 	@GetMapping("/eqActListAjax")
@@ -114,6 +118,7 @@ public class ajaxController {
 	public List<Map> eqChkListAajx(@RequestBody HashMap<String, Object> list){
 		
 		return mapper.getEqChkSelectList(list);
+
 	}
 	
 

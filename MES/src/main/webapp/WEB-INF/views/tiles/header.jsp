@@ -1,6 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메인</title>
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
+
+</head>    
     
+    
+    
+    
+<body>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -107,8 +125,8 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
+          <a class="nav-link nav-icon" id="chat" onclick="chat" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text">채팅</i>
             <span class="badge bg-success badge-number">3</span>
           </a><!-- End Messages Icon -->
 
@@ -232,6 +250,30 @@
     </nav><!-- End Icons Navigation -->
 	  
   </header><!-- End Header -->
-	
+  	<div id="test"></div>
+</body>
 
- 	
+
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
+	
+<script>
+chat.addEventListener("click", function(){
+	$("#test").load("chatForm", function(){
+		const myModal = new bootstrap.Modal('#myModal',{backdrop : false , keyboard: false});
+		myModal.show();
+		$('.modal-dialog').draggable({
+		    handle: ".modal-header"
+		  });
+	})
+	});
+
+</script>
+</html> 	

@@ -140,8 +140,6 @@
 		var orDt = $("#ordTL").val();
 		var today = new Date();
 		var sysDate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
-		
-		
 		if(ord < sel) {
 			Swal.fire({
                 icon: 'error',
@@ -159,13 +157,10 @@
 			let checkedAry = {"주문상세코드" : orDt , "완제품코드" : pcd, "출고날짜" : sysDate};
 			let prd = prodList.getCheckedRows();
 			let plus;
-			
-		 	
 			for (var i = 0; i < prd.length; i++) {				
 				plus = {...checkedAry, ...prd[i]};
 				releaseList.appendRow(plus);
 			}
-      
       		$('#myModal').modal('hide');
       	}       
        });    

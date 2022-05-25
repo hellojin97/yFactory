@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -96,10 +98,15 @@ public class ajaxController {
 	@GetMapping("/getEqInListAjax")
 	@ResponseBody
 	public List<Map> getEqInListAjax(){
+		System.out.println("------"+mapper.getEqInList());
 		return mapper.getEqInList();
 	}
 
-	
+	@PostMapping("/setEqInAjax")
+	public String setEqInAjax(@RequestParam Map<String, String> result) {
+		mapper.setEqIn(result);
+		return "성공";
+	}
 	
 
 

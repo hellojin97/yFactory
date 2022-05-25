@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>발주관리</title>
+<title></title>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
 <link rel="stylesheet" type="text/css"
@@ -110,8 +110,7 @@ $.ajax({
 	url: "getEqActStatListAjax",
 	method : "GET",
 	dataType : "JSON",
-	success : function(result){
-		console.log(result);
+	success : function(result){		
 		eqList.resetData(result);
 	}
 });
@@ -142,10 +141,6 @@ var eqList = new tui.Grid({
           {
               header: '사용여부',
               name: '사용여부'
-            },
-          {
-              header: '비가동여부',
-              name: '비가동여부'
             }
     ],
     rowHeaders: ['rowNum'],
@@ -160,7 +155,7 @@ var eqList = new tui.Grid({
 		url: "getEqInListAjax",
 		method : "GET",
 		dataType : "JSON",
-		success : function(result){
+		success : function(result){			
 			eqInaList.resetData(result);
 		}
 	});
@@ -204,9 +199,10 @@ var eqList = new tui.Grid({
 	  $("#inEqCd").val(inEqCd);
 	  $("#inEqNm").val(inEqNm);
 	  
-	  if(eqc.columnName == '비가동여부'){
+	  console.log(inEqCd);
+	  if(eqc.columnName == '사용여부'){
 		  if(eqc.value == 'N'){
-		  $("#test").load("", function() {
+		  $("#test").load("eqInaModal", function() {
 				const eqInaModal = new bootstrap.Modal('#myModal');
 				eqInaModal.show();
 				});

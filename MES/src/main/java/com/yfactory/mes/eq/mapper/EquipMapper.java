@@ -3,6 +3,8 @@ package com.yfactory.mes.eq.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.yfactory.mes.eq.vo.EqVO;
 
 public interface EquipMapper {
@@ -33,6 +35,8 @@ public interface EquipMapper {
 	List<Map> getEqInActList(String key); // 설비 사용여부 및 비가동 상태를 포함판 검색
 	
 	List<Map> getEqInList(); // 비가동 상태 설비 조회
+	
+	int setEqIn(Map<String, String> result); // 비가동 설비 목록 추가
 	
 	// -----------------------------------------------------------
 	

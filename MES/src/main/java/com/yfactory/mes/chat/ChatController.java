@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ChatController {
-	@RequestMapping(value = "/chat", method = { RequestMethod.GET })
-	public String chat (HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
+	
+	@RequestMapping(value = "/chatForm", method = { RequestMethod.GET })
+	public String chatForm (HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
 		return "common/message/chat";
 	}
 }

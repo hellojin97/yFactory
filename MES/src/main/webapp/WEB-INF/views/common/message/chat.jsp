@@ -5,7 +5,63 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
+  <!-- Favicons -->
+  <link href="${pageContext.request.contextPath}/assets/img/favicon.png" rel="icon">
+  <link href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allan&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <!-- Vendor CSS Files -->
+  <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <!-- Toast UI AND Modal -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+	<script src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
+	<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+	<script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
+	<script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
+  
+  
+  
+  <!-- Template Main CSS File -->
+  <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
+  
+  <!-- END CSS -->
+   
+  <!-- 캘린더 -->	
+  <!-- 캘린더끝 -->
+	<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+	<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+   <style type="text/css">
+  
+  /* 폰트 */
+  
+  @font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+   
 .container {
 	width: 500px;
 }
@@ -106,7 +162,7 @@ $('#btnConnect').click(function() {
 function print(user, txt) {
 	let temp = '';
 	temp += '<div style="margin-bottom:3px;">';
-	temp += '[' + user + '] ';
+	temp += '[' + user + ']  >    ';
 	temp += txt;
 	temp += ' <span style="font-size:11px;color:#777;">' + new Date().toLocaleTimeString() + '</span>';
 	temp += '</div>';
@@ -175,4 +231,6 @@ $('#btnDisconnect').click(function() {
 });
 
 </script>
+
+ <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </html>

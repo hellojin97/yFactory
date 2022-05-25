@@ -68,6 +68,16 @@ public class EquipServiceImpl implements EquipService{
 		
 		return mapper.getEqActStatList();
 	}
+
+	@Override
+	public List<Map> getEqInActList(String key) {
+		return mapper.getEqInActList(key);
+	}
+
+	@Override
+	public List<Map> getEqInList() {
+		return mapper.getEqInList();
+	}
 	
 	
 	

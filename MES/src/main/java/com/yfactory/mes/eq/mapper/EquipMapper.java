@@ -30,6 +30,9 @@ public interface EquipMapper {
 	
 	List<Map> getEqActStatList(); // 설비 사용여부 및 비가동 상태를 포함판 조회
 	
+	List<Map> getEqInActList(String key); // 설비 사용여부 및 비가동 상태를 포함판 검색
+	
+	List<Map> getEqInList(); // 비가동 상태 설비 조회
 	
 	// -----------------------------------------------------------
 	
@@ -46,6 +49,7 @@ public interface EquipMapper {
 	int eqChkMng();// 설비 점검 일별 건수 조회(점검관리 페이지)
 
 	List<Map> selectEqPrc(String eqCd); // 설비코드기준 공정코드 + 공정명 조회
+	
 
 
 

@@ -87,6 +87,17 @@ public class ajaxController {
 		return mapper.getEqActStatList();
 	}
 	
+	@GetMapping("/getEqInActListAjax") // 설비 사용여부 및 비가동 상태를 포함판 검색
+	@ResponseBody
+	public List<Map> getEqInActListAjax(String key){
+		return mapper.getEqInActList(key);
+	}
+	
+	@GetMapping("/getEqInListAjax")
+	@ResponseBody
+	public List<Map> getEqInListAjax(){
+		return mapper.getEqInList();
+	}
 
 	
 	

@@ -34,5 +34,11 @@ public interface EquipService {
 	// 설비 사용여부 및 비가동 상태를 포함판 조회
 	List<Map> getEqActStatList(); 
 	
+	// 설비 사용여부 및 비가동 상태를 포함판 검색
+	List<Map> getEqInActList(String key);
+	
+	// 비가동 상태 설비 조회
+	List<Map> getEqInList();
+	
 	
 }

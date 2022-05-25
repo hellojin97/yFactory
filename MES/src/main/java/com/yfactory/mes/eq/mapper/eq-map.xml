@@ -66,8 +66,10 @@
 		WHERE VEN_CD = 'VEN01'
 		]]>
 	</select>
-	
-	<!-- 설비 데이터 및 비가동 여부 전체조회 -->
+
+	<!-- 설비 사용여부 및 비가동 상태를 포함판 조회 -->
+
+
 	<select id="getEqActStatList" resultType="map">
 	SELECT			E.EQ_CD "설비코드" ,
 						E.EQ_MDNM "설비명" ,
@@ -82,7 +84,9 @@
 	ORDER BY 1
 	
 	</select>
-<select id="getEqInActList" resultType="map">
+	
+	<!-- 설비 사용여부 및 비가동 상태를 포함판 검색 -->
+	<select id="getEqInActList" resultType="map">
 	SELECT			E.EQ_CD "설비코드" ,
 						E.EQ_MDNM "설비명" ,
 						PRC.PROC_CD "공정코드" ,
@@ -96,16 +100,27 @@
 	<where>	
 	
 					E.EQ_CD = PRC.EQ_CD
-	AND			E.EQ_CD = INA.EQ_CD
-	<if test="#{eq_actst}='USE01'">
-	AND  E.EQ_ACTST = 'USE01'
+
+	AND				E.EQ_CD = INA.EQ_CD
+	<if test="key = 'USE01'">
+	AND  E.EQ_ACTST = 'USER01'
+
 	</if>
-	<if test="#{eq_actst}='USE02'">
+	<if test="key = 'USE02'">
 	AND  E.EQ_ACTST = 'USE02'
 	</if>
 	</where>
-	ORDER BY 1
+	ORDER BY 1	
+	</select>
 	
+	<select id="getEqInList" resultType="map">
+		select	ei.eq_cd AS "설비코드",
+				e.eq_nm AS "설비명",
+				ei.eq_inasd AS "시작날짜",
+				ei.dis_code AS "종료날짜",
+				ei.eq_note AS "사유"
+		from 	eq_ina ei, eq e
+		where 	ei.eq_cd = e.eq_cd
 	</select>
 
 

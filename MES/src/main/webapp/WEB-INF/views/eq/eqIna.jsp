@@ -157,7 +157,7 @@ var eqList = new tui.Grid({
 
 	//비가동 설비 목록
 	$.ajax({
-		url: "",
+		url: "getEqInListAjax",
 		method : "GET",
 		dataType : "JSON",
 		success : function(result){
@@ -196,12 +196,21 @@ var eqList = new tui.Grid({
       }    
   });
 	
-  eqList.on("click", function(e){
-	  let prd = resultGrid.getFocusedCell('비가동여부');
-	  if (prd.columnName == 'Y') {
-		  console.log("Y");
-	  }else if(prd.columnName == 'N'){
-		  console.log("N");
+  eqList.on("dblclick", function(e){
+	  let eqc = eqList.getFocusedCell();
+	  let inEqCd = eqList.getValue(e.rowKey, '설비코드');
+	  let inEqNm = eqList.getValue(e.rowKey, '설비명');	  
+	   
+	  $("#inEqCd").val(inEqCd);
+	  $("#inEqNm").val(inEqNm);
+	  
+	  if(eqc.columnName == '비가동여부'){
+		  if(eqc.value == 'N'){
+		  $("#test").load("", function() {
+				const eqInaModal = new bootstrap.Modal('#myModal');
+				eqInaModal.show();
+				});
+		  	}
 	  }
   })
   

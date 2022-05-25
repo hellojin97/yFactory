@@ -43,7 +43,7 @@
 </body>
 <script>
 //채팅 서버 주소
-let url = "ws://localhost:80/mes/chatserver";
+let url = "ws://192.168.0.20/mes/chatserver";
    		
 // 웹 소켓
 let ws;

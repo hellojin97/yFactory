@@ -168,6 +168,7 @@ function print(user, txt) {
 	temp += '</div>';
 			
 	$('#list').append(temp);
+	document.getElementById("list").scrollTop = document.getElementById("list").scrollHeight;
 }
 		
 // 다른 client 접속		
@@ -229,6 +230,8 @@ $('#btnDisconnect').click(function() {
 	$('#msg').val('');
 	$('#msg').attr('disabled', true);
 });
+
+document.getElementById("list").scrollTop = document.getElementById("list").scrollHeight;
 
 </script>
 

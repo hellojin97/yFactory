@@ -129,17 +129,25 @@
     			method : 'GET',
     			dataType : 'JSON'
     		}).done(function(result){
+    			
+    			
     			console.log(result);
-    			for (var i = 0; i < result.length; i++) {
-    				mainOrderGrid.appendRow(result[i]);
-				}
+
+    					for (var i = 0; i < result.length; i++) {
+    						
+    								mainOrderGrid.appendRow(result[i]);
+    								
+						}
+    							
+    			
+    			
     		})
     	
     	
     	var mainOrderGrid = new tui.Grid({
     	       el: document.getElementById('mainOrderIn'),
     	       scrollX: false,
-    	       scrollY: false,
+    	       bodyHeight: 200,
     	       columns: [
     	         {
     	             header: '업체명',
@@ -170,7 +178,10 @@
     	                  name: '진행상황',
     	                }],
     	                rowHeaders: ['rowNum'],
-
+    	                pageOptions: {
+    	                    type: 'scroll', 
+    	                    perPage: 5 
+    	                  }
     	
     	     			});
     		/*========= 주문서 조회  끝=========*/
@@ -194,7 +205,7 @@
     		var mainProdGrid = new tui.Grid({
      	       el: document.getElementById('mainMtrlIn1'),
      	       scrollX: false,
-     	       scrollY: false,
+     	      bodyHeight: 200,
      	       columns: [
      	         {
      	             header: '제품명',
@@ -206,7 +217,10 @@
      	            }
      	           ],
      	            rowHeaders: ['rowNum'],
-
+     	           pageOptions: {
+	                    type: 'scroll', 
+	                    perPage: 5 
+	                  }
      	
      	     		});
     			/*========= 완제품 재고 간단 조회 끝=========*/
@@ -226,7 +240,7 @@
     		var mainMtrlGrid = new tui.Grid({
       	       el: document.getElementById('mainMtrlIn2'),
       	       scrollX: false,
-      	       scrollY: false,
+      	     bodyHeight: 200,
       	       columns: [
       	         {
       	             header: '원자재명',
@@ -238,10 +252,10 @@
       	            }
       	           ],
       	            rowHeaders: ['rowNum'],
-      	            pageOptions: {
-      	           	 useClient: true,   
-      	             perPage: 3
-      	            }
+      	          	pageOptions: {
+	                    type: 'scroll', 
+	                    perPage: 5 
+	                  }
       	
       	     		});
     			/*========= 원자재 재고 간단 조회 끝=========*/

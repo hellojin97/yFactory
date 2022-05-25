@@ -26,6 +26,8 @@ public class ChatServer {
 	@OnOpen
 	public void handleOpen(Session session) {
 		print("클라이언트 연결");
+		
+		System.out.println(session);
 		list.add(session); // 접속자 관리(****)
 	}
 	

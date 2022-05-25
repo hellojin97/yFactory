@@ -36,11 +36,16 @@ public class QualityController {
 		return "quality/qa_errlot";
 	}
 	
-	
 	// modal
 	// 발주상세코드 Modal 호출
 	@RequestMapping("/poDtlCdModal")
 	public String poDtlCdModal() {
 		return "quality/qamodal/poDtlCdModal";
+	}
+	
+	// 불량코드 Modal 호출
+	@RequestMapping("/errModal")
+	public String errModal() {
+		return "quality/qamodal/errModal";
 	}
 }

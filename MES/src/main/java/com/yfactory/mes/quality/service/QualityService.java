@@ -11,6 +11,8 @@ public interface QualityService {
 	// 불량코드(modal)
 	List<Map> selectErrCode();
 	
+	List<Map> errSelectOne(String errCd);
+	
 	// 자재 품질검사요청(modal)
 	List<Map> selectpoDtlRequest();
 	
@@ -64,6 +66,5 @@ public interface QualityService {
 	
 	// 수정
 	// 자재 품질검사
-	
-	// 제품 품질검사
+	int resMtQuality(String podtlcd, String mtnm, int passqty, int errqty, String errcd);
 }

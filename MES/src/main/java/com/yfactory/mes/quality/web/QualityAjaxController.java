@@ -23,6 +23,12 @@ public class QualityAjaxController {
 		return qas.selectErrCode();
 	}
 	
+	// 불량코드(modal) 단건
+	@GetMapping("/errSelectOne")
+	public List<Map> errSelectOne(String errCd) {
+		return qas.errSelectOne(errCd);
+	}
+	
 	// 자재 품질검사요청(modal)
 	@GetMapping("/selectpoDtlRequest")
 	public List<Map> selectpoDtlRequest() {
@@ -95,7 +101,10 @@ public class QualityAjaxController {
 	
 	// 수정
 	// 자재 품질검사
-	
+	@GetMapping("/resMtQuality")
+	public int resMtQuality(String podtlcd, String mtnm, int passqty, int errqty, String errcd) {
+		return qas.resMtQuality(podtlcd, mtnm, passqty, errqty, errcd);
+	}
 	// 제품 품질검사
 	
 }

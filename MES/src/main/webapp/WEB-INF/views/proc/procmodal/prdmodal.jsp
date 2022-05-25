@@ -117,6 +117,7 @@ $(function(){
 					   contentType : "application/json; charset = UTF-8;"
 				   }).done(function(result){
 					  		let prd = resultGrid.getFocusedCell('완제품코드');
+					  		console.log(prd);
 							 for (var i = 0; i < result.length; i++) {
 								 resultGrid.setRow(prd.rowKey,result[i]);
 							} 

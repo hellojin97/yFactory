@@ -189,33 +189,30 @@
 		}
 	});
 
+	// 메세지 전송 및 아이디
+	function print(user, txt) {
+		let temp = '';
+		temp += '<div style="margin-bottom:3px;">';
+		temp += '[' + user + ']  >    ';
+		temp += txt;
+		temp += ' <span style="font-size:11px;color:#777;">'
+				+ new Date().toLocaleTimeString() + '</span>';
+		temp += '</div>';
 
+		$('#list').append(temp);
+	}
 
+	// 다른 client 접속		
+	function print2(user) {
+		let temp = '';
+		temp += '<div style="margin-bottom:3px;">';
+		temp += "'" + user + "' 이(가) 접속했습니다.";
+		temp += ' <span style="font-size:11px;color:#777;">'
+				+ new Date().toLocaleTimeString() + '</span>';
+		temp += '</div>';
 
-// 메세지 전송 및 아이디
-function print(user, txt) {
-	let temp = '';
-	temp += '<div style="margin-bottom:3px;">';
-	temp += '[' + user + ']  >    ';
-	temp += txt;
-	temp += ' <span style="font-size:11px;color:#777;">' + new Date().toLocaleTimeString() + '</span>';
-	temp += '</div>';
-			
-	$('#list').append(temp);
-	document.getElementById("list").scrollTop = document.getElementById("list").scrollHeight;
-}
-		
-// 다른 client 접속		
-function print2(user) {
-	let temp = '';
-	temp += '<div style="margin-bottom:3px;">';
-	temp += "'" + user + "' 이(가) 접속했습니다." ;
-	temp += ' <span style="font-size:11px;color:#777;">' + new Date().toLocaleTimeString() + '</span>';
-	temp += '</div>';
-			
-	$('#list').append(temp);
-}
-
+		$('#list').append(temp);
+	}
 
 	// client 접속 종료
 	function print3(user) {
@@ -265,8 +262,6 @@ function print2(user) {
 		$('#msg').attr('disabled', true);
 	});
 	
-
-document.getElementById("list").scrollTop = document.getElementById("list").scrollHeight;
 
 </script>
 

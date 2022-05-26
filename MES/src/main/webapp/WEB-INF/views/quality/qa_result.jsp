@@ -52,25 +52,32 @@
 				name: '발주코드'
 			}, {
 				header: '자재코드',
-				name: '자재코드'
+				name: '자재코드',
+				width: '80'
 			}, {
 				header: '자재명',
-				name: '자재명'
+				name: '자재명',
+				width: '80'
 			}, {
 				header: '담당인',
-				name: '담당인'
+				name: '담당인',
+				width: '80'
 			}, {
 				header: '검사일자',
-				name: '검사일자'
+				name: '검사일자',
+				width: '90'
 			}, {
 				header: '발주량',
-				name: '발주량'
+				name: '발주량',
+				width: '80'
 			}, {
 				header: '합격량',
-				name: '합격량'
+				name: '합격량',
+				width: '80'
 			}, {
 				header: '불량량',
-				name: '불량량'
+				name: '불량량',
+				width: '80'
 			}, {
 				header: '불량코드',
 				name: '불량코드'
@@ -79,7 +86,8 @@
 				name: '불량내역'
 			}, {
 				header: '상태',
-				name: '상태'
+				name: '상태',
+				width: '80'
 			} ],
 			rowHeaders : [ 'rowNum' ],
 			pageOptions : {

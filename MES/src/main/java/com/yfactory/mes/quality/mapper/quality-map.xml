@@ -7,18 +7,11 @@
 		SELECT	ERR_CD "불량코드", ERR_NM "불량명"
 		FROM	ERR_CODE
 	</select>
-	
-	<!-- 불량코드(modal) 단건 -->
-	<select id="errSelectOne" resultType="map">
-		SELECT	ERR_CD "불량코드", ERR_NM "불량명"
-		FROM	ERR_CODE
-		WHERE   ERR_CD = #{errCd} 
-	</select>
+
 	
 	<!-- 자재 품질검사요청(modal) 조회 -->
 	<select id="selectpoDtlRequest" resultType="map">
-		SELECT 
-		        MPD.PO_DTLCD as "발주상세코드",
+		SELECT  MPD.PO_DTLCD as "발주상세코드",
 		        MT.MT_CD as "자재코드",
 		        MT.MT_NM as "자재명",
 		        VDR.VDR_NM as "업체명",
@@ -27,9 +20,9 @@
 		WHERE 	MPD.PO_CD = MP.PO_CD
 		AND     MP.MT_CD = MT.MT_CD
 		AND     MP.VDR_CD = VDR.VDR_CD
+		AND	    MPD.PO_DTLCD NOT IN (SELECT PO_DTLCD
+                                     FROM MT_CHK)
 	</select>
-
-	<!-- 제품 품질검사요청(modal) 조회 -->
 	
 	
 	<!-- 자재검사관리 -->
@@ -47,28 +40,8 @@
 		
 		AND 	COMM_CD = 'MTRL01'
 	</select>
-	<!-- 제품검사관리 -->
-	<select id="selectProdCheckMgr" resultType="map">
-		SELECT	PER.PROD_LOT AS "제품LOT", P.PROD_CD AS "제품코드", P.PROD_NM AS "제품명",
-				PC.PROC_CD AS "공정코드", PC.EQ_CD AS "설비코드", PS.PROC_QTY AS "생산량",
-				PE.ERR_CD AS "불량코드", ERR.ERR_DTL AS "불량명", PS.PROC_ST AS "상태"
-		
-		FROM	PROD_ERR PER, PROD_LOT PLO, PRD_INSDTL PID, PROC_PRC PPR, PROD P,
-				PROCESS PC, PROC_ST PS, PROC_ERR PE, ERR_CODE ERR
-		
-		WHERE	PID.PROD_CD = P.PROD_CD
-		AND 	PPR.PRD_DTLCD = PID.PRD_DTLCD
-		AND		PPR.PROC_CD = PC.PROC_CD
-		AND 	PS.PROC_PRCD = PPR.PROC_PRCD
-		AND 	PS.LINE_TURN = PPR.LINE_TURN
-		AND 	PS.PRD_DTLCD = PPR.PRD_DTLCD
-		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
-		AND 	PE.LINE_TURN = PPR.LINE_TURN
-		AND 	PE.PRD_DTLCD = PPR.PRD_DTLCD
-		AND 	PE.ERR_CD = ERR.ERR_CD
-	</select>
 	
-	<!-- 자재검사결과 -->
+	<!-- 자재검사결과 조회 -->
 	<select id="selectMtCheck" resultType="map">
 		SELECT	MP.PO_CD "발주코드", MT.MT_CD "자재코드", MT.MT_NM "자재명", CHK.CHK_MNGR "담당인",
 				TO_CHAR(CHK.CHK_DT, 'YYYY-MM-DD') "검사일자", MPD.PO_QTY "발주량", CHK.CHK_PASSQTY "합격량", MEL.CHK_ERRQTY "불량량",
@@ -120,6 +93,7 @@
 		AND 	PE.PRD_DTLCD = PPR.PRD_DTLCD
 		AND 	PE.ERR_CD = ERR.ERR_CD
 	</select>
+	
 	<!-- 자재불량내역 조회 -->
 	<select id="selectMtErrList" resultType="map">
 		SELECT	MEL.PO_DTLCD AS "발주상세코드",
@@ -141,6 +115,7 @@
         AND 	MT.VDR_CD = V.VDR_CD
 		AND 	MEL.ERR_CD = ERR.ERR_CD
 	</select>
+	
 	<!-- 제품불량내역 조회 -->
 	<select id="selectProdErrList" resultType="map">
 		SELECT 	PERR.PROD_LOT "제품 LOT 번호",
@@ -181,6 +156,7 @@
 		AND 	MT.MT_NM LIKE '%' || #{mtName} || '%'
 		</if>
 	</select>
+	
 	<!-- 자재검사결과 검색 -->
 	<select id="searchMtQuality" resultType="map">
 		SELECT  CHK.PO_DTLCD AS "발주상세코드",
@@ -216,6 +192,7 @@
 		AND 	MT.MT_NM LIKE '%' || {#mtName} || '%'
 		</if>
 	</select>
+	
 	<!-- 제품검사결과 검색 -->
 	<select id="searchProdQuality" resultType="map">
 		SELECT	PER.PROD_LOT AS "제품LOT",
@@ -255,6 +232,7 @@
 		AND		P.PROD_NM LIKE '%' || {#prodName} || '%'
 		</if>
 	</select>
+	
 	<!-- 자재불량내역 검색 -->
 	<select id="searchMtErrList" resultType="map">
 		SELECT	MEL.PO_DTLCD AS "발주상세코드",
@@ -285,6 +263,7 @@
 		AND 	MT.MT_NM LIKE '%' || {#mtName} || '%'
 		</if>
 	</select>
+	
 	<!-- 제품불량내역 검색 -->
 	<select id="searchProdErrList" resultType="map">
 		SELECT	PER.PROD_LOT AS "제품LOT",

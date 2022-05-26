@@ -12,16 +12,11 @@ public interface QualityMapper {
 	// 불량코드(modal) 조회
 	List<Map> selectErrCode();
 	
-	List<Map> errSelectOne(String errCd);
-	
 	// 자재 품질검사요청(modal) 조회
 	List<Map> selectpoDtlRequest();
 	
 	// 자재 품질검사관리 조회
 	List<Map> selectMtCheckMgr();
-	
-	// 제품 품질검사관리 조회
-	List<Map> selectProdCheckMgr();
 	
 	// 자재 검사결과 조회
 	List<Map> selectMtCheck();

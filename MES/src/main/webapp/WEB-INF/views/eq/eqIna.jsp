@@ -201,7 +201,7 @@ var eqList = new tui.Grid({
 	  
 	  console.log(inEqCd);
 	  if(eqc.columnName == '사용여부'){
-		  if(eqc.value == 'N'){
+		  if(eqc.value == 'Y'){
 		  $("#test").load("eqInaModal", function() {
 				const eqInaModal = new bootstrap.Modal('#myModal');
 				eqInaModal.show();
@@ -210,6 +210,18 @@ var eqList = new tui.Grid({
 	  }
   })
   
+  $("input[name=radios]").on("click", function(){
+	  let key = $("input[name=radios]:checked").val();
+	  $.ajax({
+		  url : "getEqInActListAjax",
+		  data : { key : key},
+		  dataType: 'JSON',
+	      contentType : "application/json; charset=utf-8"
+	  		
+	  }).done(function(result){
+		  eqList.resetData(result);
+	  })
+  })
 </script>
 
 </html>

@@ -105,7 +105,10 @@ $('#inBtn').on('click', function(){
 			}, {
 				header : '제품코드',
 				name : '완제품코드',
-			}, {
+			},{
+				header : '주문수량',
+				name : '주문수량',
+			},{
 				header : '계획량',
 				name : '계획량',
 				editor : "text"
@@ -153,7 +156,13 @@ $("#outBtn").on("click", function(){
 		}, {
 			header : '제품코드',
 			name : '완제품코드',
-		}, {
+		},{
+			header : '주문수량',
+			name : '주문수량',
+		},{
+			header : '현재고',
+			name : '현재고',
+		},{
 			header : '계획량',
 			name : '계획량',
 			editor : "text"

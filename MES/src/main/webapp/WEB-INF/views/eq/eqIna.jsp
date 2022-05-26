@@ -52,9 +52,11 @@
 	<hr style="border: solid 1px gray;">
 
 	<h4>비가동 설비 목록</h4>
+	<div>
+	<form>				
 	<div class="col-md-12" style="padding-bottom: 10px;">
 
-			<!-- 해당일자 -->					
+			<!-- 해당일자 -->	
 			<div class="input-group">
 					<label for="inputText" class="col-form-label"
 						style="padding-right: 10px;">해당일자</label>
@@ -79,8 +81,15 @@
 						<a class="nav-link nav-icon search-bar-toggle" id="prodBtn" onclick="prodBtn">
 							<i class="bi bi-search" style="color: #2c3e50"></i>
 						</a>
-						<input type="text" id="eqCd" class="form-control" readonly="readonly">
+						<input type="text" id="eqCd" class="form-control" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp;
+						
+							<button type="button" id="search" class="btn1">검색</button>							
+							&nbsp;&nbsp;
+							<button type="reset" id="reset" class="btn1">초기화</button>
+						
 					</div>
+				</div>
+				</form>
 				</div>
 	<!-- 비가동 설비 목록 -->
 	<div id="eqInaList" style="padding-bottom:15px;"></div>	
@@ -92,6 +101,8 @@
 	
 	
 <div id="test"></div>
+<div id="seachModal"></div>
+
 <input type="hidden" id="inEqCd"> 
 <input type="hidden" id="inEqNm">
 </body>
@@ -102,7 +113,35 @@
 
 <script>
 
+// 비가동 설비 검색
+$("#search").on("click", function() {
+	let req1 = $("#req1").val();
+	let req2 = $("#req2").val();
+	let eqNm = $("#eqNm").val();
+	let eqCd = $("#eqCd").val();
+	$.ajax({
+	      url : "searchEqInaAjax",
+	      data : {
+	            "req1" : req1,
+	            "req2" : req2,
+	            "eqNm" : eqNm,
+	            "eqCd" : eqCd
+	      }
+	   }).done(function(result){	       
+	       eqInaList.resetData(result);
+	   });
+})
 
+// 비가동 설비 초기화
+$('#reset').on('click',function(){
+	const url = "getEqInListAjax";
+	   $.ajax(url,{
+	      dataType : "JSON",
+	      method: "GET"
+	   }).done(function(result){
+		   eqInaList.resetData(result);	     
+	   });
+})
 	
 
 // 설비 목록
@@ -198,8 +237,7 @@ var eqList = new tui.Grid({
 	   
 	  $("#inEqCd").val(inEqCd);
 	  $("#inEqNm").val(inEqNm);
-	  
-	  console.log(inEqCd);
+	  	  
 	  if(eqc.columnName == '사용여부'){
 		  if(eqc.value == 'Y'){
 		  $("#test").load("eqInaModal", function() {
@@ -222,6 +260,13 @@ var eqList = new tui.Grid({
 		  eqList.resetData(result);
 	  })
   })
+  
+  prodBtn.addEventListener("click", function(){
+	$("#seachModal").load("seachInaModal", function(){
+		const myModal = new bootstrap.Modal('#myModal');
+		myModal.show();
+	})
+	});
 </script>
 
 </html>

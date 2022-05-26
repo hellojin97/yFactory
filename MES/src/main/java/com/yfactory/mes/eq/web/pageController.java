@@ -91,6 +91,11 @@ public class pageController {
 		
 	}
 	
+	@RequestMapping("/seachInaModal")
+	public String seachInaModal() {
+		return "eq/eqmodal/seachInaModal";
+	}
+	
 	@RequestMapping("/eqInaModal")
 	public String eqInaModal() {
 		return "eq/eqmodal/eqInaModal";

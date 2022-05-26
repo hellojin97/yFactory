@@ -151,6 +151,7 @@ var ordDtpList = new tui.Grid({
 	  $("#ordNum").val(ordNum);
 	  $("#prodCd").val(prodCd);
 	  
+	  
   	$("#test").load("releaseModal", function() {
 			const ProdModal = new bootstrap.Modal('#myModal');
 			ProdModal.show();

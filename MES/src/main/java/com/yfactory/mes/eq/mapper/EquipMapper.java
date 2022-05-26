@@ -37,8 +37,13 @@ public interface EquipMapper {
 	
 	List<Map> getEqInActList(String key); // 설비 사용여부 및 비가동 상태를 포함판 검색
 	
-	List<Map> getEqInList(); // 비가동 상태 설비 조회
+	List<Map> getEqInList(); // 비가동 설비 내역 조회
 	
+	// 비가동 설비 내역 검색
+	List<Map> searchEqIna(Map<String, String> result);
+
+	// 비가동 설비 내역 추가
+	int setEqIn(Map<String, String> result);		
 
 	List<Map> getEqChkList(); // 설비 점검 전체 리스트
 

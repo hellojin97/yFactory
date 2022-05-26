@@ -103,6 +103,7 @@
         orgin: 'cell';               
         let evn = ev.changes;
         let affN = parseInt(evn[0].value);;
+        console.log(evn);
 		nowN = prodList.getValue(evn[0].rowKey, "완제품 현재고");			
         var sum = parseInt(affN) - parseInt(bfN);
         
@@ -160,7 +161,9 @@
 				plus = {...checkedAry, ...prd[i]};
 				releaseList.appendRow(plus);
 			}
+      		$('#ordHiden').val(orDt);
       		$('#myModal').modal('hide');
+      		
       	}       
        });    
 	</script>

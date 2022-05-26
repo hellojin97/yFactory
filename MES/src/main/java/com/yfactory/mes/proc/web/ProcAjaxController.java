@@ -81,10 +81,12 @@ public class ProcAjaxController {
 		return procService.PrdSelectOne(prodCd);
 	}
 
-//	@PostMapping("/procPlanInsert")
+	// 생산계획등록
 	@PostMapping("/procPlanInsert")
-	public int ProcPlanInsert(@RequestBody HashMap<String, Object> procPI) {
-
+	public int ProcPlanInsert(@RequestParam Map<String, String> procPI) {
+				
+			System.out.println(procPI);
+		
 		return procService.ProcPlanInsert(procPI);
 	}
 	//procDtPlanSelect

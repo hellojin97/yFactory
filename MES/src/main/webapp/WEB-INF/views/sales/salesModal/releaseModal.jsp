@@ -92,7 +92,6 @@
 		
 		//출고량 더블클릭
 		prodList.on("dblclick", function(e) {
-		nowN = prodList.getValue(e.rowKey, "완제품 현재고");			
 		bfN = prodList.getValue(e.rowKey, "출고량");			
 		if (bfN == null){
 			bfN = 0;
@@ -103,21 +102,22 @@
      	prodList.on('afterChange', ev =>{
         orgin: 'cell';               
         let evn = ev.changes;
-        let affN;
-        for (var i = 0; i < evn.length; i++) {
-           affN = parseInt(evn[i].value);
-           }
+        let affN = parseInt(evn[0].value);;
+        console.log(evn);
+		nowN = prodList.getValue(evn[0].rowKey, "완제품 현재고");			
         var sum = parseInt(affN) - parseInt(bfN);
+        
         if(nowN < affN) {
 			Swal.fire({
 	               icon: 'error',
 	               title: '등록이 취소되었습니다.',
 	               text: '현재고보다 출고량이 많습니다!',
 				});
-			}else{
-				res = res + sum
-         		$("#selNum").val(res);				
-			}
+			prodList.setValue(evn[0].rowKey, "출고량", 0);
+		}else{
+			res = res + sum
+         	$("#selNum").val(res);				
+		}
       });
 		
 		  
@@ -140,8 +140,6 @@
 		var orDt = $("#ordTL").val();
 		var today = new Date();
 		var sysDate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
-		
-		
 		if(ord < sel) {
 			Swal.fire({
                 icon: 'error',
@@ -159,14 +157,13 @@
 			let checkedAry = {"주문상세코드" : orDt , "완제품코드" : pcd, "출고날짜" : sysDate};
 			let prd = prodList.getCheckedRows();
 			let plus;
-			
-		 	
 			for (var i = 0; i < prd.length; i++) {				
 				plus = {...checkedAry, ...prd[i]};
 				releaseList.appendRow(plus);
 			}
-      
+      		$('#ordHiden').val(orDt);
       		$('#myModal').modal('hide');
+      		
       	}       
        });    
 	</script>

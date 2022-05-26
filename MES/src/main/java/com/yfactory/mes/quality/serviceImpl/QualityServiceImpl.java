@@ -33,11 +33,6 @@ public class QualityServiceImpl implements QualityService {
 	}
 	
 	@Override
-	public List<Map> selectProdCheckMgr() {
-		return map.selectProdCheckMgr();
-	}
-
-	@Override
 	public List<Map> selectMtCheck() {
 		return map.selectMtCheck();
 	}
@@ -86,6 +81,11 @@ public class QualityServiceImpl implements QualityService {
 	public int reqMtQuality(String pdt, String mcd) {
 		// TODO Auto-generated method stub
 		return map.reqMtQuality(pdt, mcd);
+	}
+	
+	@Override
+	public int resMtQuality(String podtlcd, String mtnm, int passqty, int errqty, String errcd) {
+		return map.resMtQuality(podtlcd, mtnm, passqty, errqty, errcd);
 	}
 
 }

@@ -89,6 +89,17 @@ public class pageController {
 
 	}
 
+	
+	@RequestMapping("/seachInaModal")
+	public String seachInaModal() {
+		return "eq/eqmodal/seachInaModal";
+	}
+	
+	@RequestMapping("/eqInaModal")
+	public String eqInaModal() {
+		return "eq/eqmodal/eqInaModal";
+	}
+	
 	@RequestMapping("/eqRstat")
 	public String eqRstat() {
 		// 설비 페이지 - 실시간 설비 상태

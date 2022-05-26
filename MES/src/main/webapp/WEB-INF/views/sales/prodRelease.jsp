@@ -43,6 +43,7 @@
 <input type="hidden" id="ordTL"> 
 <input type="hidden" id="ordNum">
 <input type="hidden" id="prodCd">
+<input type="hidden" id="ordHiden">
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
@@ -50,6 +51,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
+	 let ord = [];
 
 // 주문 상세 리스트
 $.ajax({
@@ -147,21 +149,39 @@ var ordDtpList = new tui.Grid({
 	  let ordtl = ordDtpList.getValue(e.rowKey,"주문상세코드");
 	  let ordNum = ordDtpList.getValue(e.rowKey, "주문수량");
 	  let prodCd = ordDtpList.getValue(e.rowKey, "완제품코드");
-	  $("#ordTL").val(ordtl);
-	  $("#ordNum").val(ordNum);
-	  $("#prodCd").val(prodCd);
+	  let pushOrd = $("#ordHiden").val();
+	  let count = 0;
+	  ord.push(pushOrd);
+	  for(i=0; i<ord.length; i++){
+	  	if(ordtl == ord[i]){
+	  		count = 1;
+	  	}
+	  }
+	  if(count == 1){
+		  Swal.fire({
+              icon: 'error',
+              title: '등록이 취소되었습니다.',
+              text: '이미 등록한 주문입니다!',
+			});
+	  }else{
+	  	$("#ordTL").val(ordtl);
+	  	$("#ordNum").val(ordNum);
+	  	$("#prodCd").val(prodCd);
 	  
-  	$("#test").load("releaseModal", function() {
+  		$("#test").load("releaseModal", function() {
 			const ProdModal = new bootstrap.Modal('#myModal');
 			ProdModal.show();
-			}); 
+			});
+	  }
+	  
   });	
   
   	//초기화 버튼
   $('#reset').on('click',function(){
-	  
+	  ord = [];
+	  $('#ordHiden').val('');
 	  releaseList.clear();
-	  
+	  console.log(ord);
 	})
 
 	//출고 버튼
@@ -207,6 +227,7 @@ var ordDtpList = new tui.Grid({
                   '출고등록이 완료되었습니다.',
                   'success'
               );
+              ord = [];              
               window.reload;
               $.ajax({
             		url: "ordDtpList",

@@ -37,12 +37,6 @@ public class QualityAjaxController {
 		return qas.selectMtCheckMgr();
 	}
 	
-	// 제품 품질검사관리
-	@GetMapping("/selectProdCheckMgr")
-	public List<Map> selectProdCheckMgr() {
-		return qas.selectProdCheckMgr();
-	}
-	
 	// 자재 검사결과
 	@GetMapping("/selectMtCheck")
 	public List<Map> selectMtCheck() {
@@ -89,13 +83,14 @@ public class QualityAjaxController {
 	public int reqMtQuality(String pdt, String mcd) {
 		return qas.reqMtQuality(pdt, mcd);
 	}
-	// 제품 품질검사요청
 	
 	// ------------------------------------------------
 	
 	// 수정
 	// 자재 품질검사
-	
-	// 제품 품질검사
+	@GetMapping("/resMtQuality")
+	public int resMtQuality(String podtlcd, String mtnm, int passqty, int errqty, String errcd) {
+		return qas.resMtQuality(podtlcd, mtnm, passqty, errqty, errcd);
+	}
 	
 }

@@ -18,9 +18,6 @@ public interface QualityMapper {
 	// 자재 품질검사관리 조회
 	List<Map> selectMtCheckMgr();
 	
-	// 제품 품질검사관리 조회
-	List<Map> selectProdCheckMgr();
-	
 	// 자재 검사결과 조회
 	List<Map> selectMtCheck();
 	
@@ -55,4 +52,6 @@ public interface QualityMapper {
 	
 	// 수정
 	// 자재품질검사
+	int resMtQuality(@Param("podtlcd") String podtlcd, @Param("mtnm") String mtnm, @Param("passqty") int passqty,
+					 @Param("errqty") int errqty, @Param("errcd") String errcd);
 }

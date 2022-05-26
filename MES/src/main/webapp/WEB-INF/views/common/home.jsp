@@ -83,9 +83,6 @@
 
 
 <body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	
-
 
     <div id="mainOrder">
         <section id="inlineMode"><h2>주문 정보</h2><span><a href="orderList">&nbsp;	더보기 ></a></span></section>

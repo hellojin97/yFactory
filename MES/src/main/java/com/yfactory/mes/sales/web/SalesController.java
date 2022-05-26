@@ -1,15 +1,15 @@
 package com.yfactory.mes.sales.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.yfactory.mes.sales.service.SalesService;
+
 
 @Controller
 public class SalesController {
 
-	@Autowired private SalesService salesService;
+	
 	
 	@RequestMapping("/orderList")
 	public String  OrderList() {
@@ -19,6 +19,11 @@ public class SalesController {
 	@RequestMapping("/bomList")
 	public String BomList() {
 		return "sales/bomList";
+	}
+	
+	@RequestMapping("/bomList2")
+	public String BomList2() {
+		return "sales/bomList2";
 	}
 
 	//완제품LOT재고조회폼
@@ -55,6 +60,12 @@ public class SalesController {
 	@RequestMapping("/releaseModal")
 	public String releaseModal() {
 		return "sales/salesModal/releaseModal";
+	}
+	
+	//완제품 안전재고
+	@RequestMapping("/prodSafety")
+	public String prodSafety() {
+		return "sales/prodSafety";
 	}
 
 }

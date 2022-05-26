@@ -3,56 +3,61 @@
 <mapper namespace="com.yfactory.mes.proc.mapper.ProcMapper">
 	<!-- 주문서 전체조회 -->
 	<select id="ProcOrderSelectAll" resultType="map">
-		SELECT ordtl.ordtl_cd
-		"주문코드" ,
-		TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
-		TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
-		ordtl.prod_cd "완제품코드" ,
-		ordtl.ord_qty "주문수량",
-		vdr.vdr_nm "업체명",
-		pd.prod_nm "완제품명",
-		cd.cd_explan
-		"진행상황"
+	SELECT 
+        
+		        ord.ord_cd "주문 코드",
+				TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
+				TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
+				
+				SUM(ordtl.ord_qty) "주문수량",
+				vdr.vdr_nm "업체명",
+				cd.cd_explan
+				"진행상황"
 
-		FROM
-		ORDERS ord,
-		VENDOR vdr,
-		ORD_DTL ordtl,
-		PROD pd,
-		COMM_CODE cd
-		WHERE ord.vdr_cd = vdr.vdr_cd
-		AND ord.ord_cd = ordtl.ord_cd
-		AND
-		ordtl.prod_cd
-		= pd.prod_cd
-		AND cd.comm_cd = ord.prog_cd
+FROM
+				ORDERS ord,
+				VENDOR vdr,
+				ORD_DTL ordtl,
+				PROD pd,
+				COMM_CODE cd
+WHERE		 ord.vdr_cd = vdr.vdr_cd
+AND 			 ord.ord_cd = ordtl.ord_cd
+AND		     ordtl.prod_cd = pd.prod_cd
+AND 		     cd.comm_cd = ord.prog_cd
+AND           ord.prog_cd LIKE 'PROG01'
+GROUP BY    	ord.ord_cd, 
+			            ord.req_dt, 
+			            ord.res_dt, 
+			            vdr.vdr_nm, 
+			            cd.cd_explan
 	</select>
 	<!-- 주문서 단건조회 -->
 	<select id="OrderSelectOk" resultType="map">
-		SELECT ordtl.ordtl_cd
-		"주문코드" ,
-		TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
-		TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
-		ordtl.prod_cd "완제품코드" ,
-		ordtl.ord_qty "주문수량",
-		vdr.vdr_nm "업체명",
-		pd.prod_nm "완제품명",
-		cd.cd_explan
-		"진행상황"
+	    SELECT 			ord.ord_cd	"주문코드" ,
+								TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
+								TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
+								ordtl.prod_cd "완제품코드" ,
+								ordtl.ord_qty "주문수량",
+						        pc.prod_qty "현재고",
+								vdr.vdr_nm "업체명",
+								pd.prod_nm "완제품명",
+								cd.cd_explan	"진행상황"
 		FROM
-		ORDERS ord,
-		VENDOR vdr,
-		ORD_DTL ordtl,
-		PROD pd,
-		COMM_CODE cd
-		WHERE ord.vdr_cd = vdr.vdr_cd
-		AND ord.ord_cd = ordtl.ord_cd
-		AND
-		ordtl.prod_cd
-		= pd.prod_cd
-		AND cd.comm_cd = ord.prog_cd
-		AND
-		ordtl.ordtl_cd = #{ordCd}
+								ORDERS ord,
+								VENDOR vdr,
+								ORD_DTL ordtl,
+								PROD pd,
+								COMM_CODE cd,
+						        PROD_LOT pl,
+						        PROD_CURQTY pc
+						        
+		WHERE			 ord.vdr_cd = vdr.vdr_cd
+		AND				 ord.ord_cd = ordtl.ord_cd
+		AND				 ordtl.prod_cd = pd.prod_cd
+        AND 				 cd.comm_cd = ord.prog_cd
+        AND				 pd.prod_cd = pl.prod_cd
+        AND				 pl.prod_lot = pc.prod_lot
+		AND 			     ord.ord_cd = #{ordCd}
 	</select>
 	<!-- 제품 전체 조회 -->
 	<select id="PrdSelect" resultType="map">
@@ -258,7 +263,7 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	select ins.ins_cd "생산지시코드",
 	pd.prod_nm "제품명",
 	insdtl.ins_qty "생산수량",
-	insdtl.ins_dtldt
+	TO_CHAR(insdtl.ins_dtldt, 'YYYY-MM-DD') "생산지시일자"
 	from PRD_INS ins, prod pd, PRD_INSDTL insdtl
 	WHERE ins.ins_cd = insdtl.ins_dtlcd
 	AND   insdtl.prod_cd = pd.prod_cd
@@ -267,8 +272,33 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 </if>
 	</select>
 
+	<select id="ProcOrderCdSelectOne" resultType="map">
+	select DISTINCT ins.ins_cd "생산지시코드",
+	pd.prod_nm "제품명",
+    pd.prod_cd "제품코드",
+	insdtl.ins_qty "생산수량",
+    li.line_cd "라인코드"
+	from PRD_INS ins, prod pd, PRD_INSDTL insdtl, LINE li
+	WHERE ins.ins_cd = insdtl.ins_dtlcd
+	AND   insdtl.prod_cd = pd.prod_cd
+    AND   li.prod_cd = pd.prod_cd
+    AND   ins.ins_cd = #{dtlCd}
+	</select>
+	<select id="ProcOrderLineSelectOne" resultType="map">
+	SELECT PRC.PROC_PRCD "진행공정코드",
+	PRC.PROC_CD "공정코드",
+	 PC.PROC_NM "공정명", 
+	 PC.EQ_CD "설비코드", 
+	 EQ.EQ_NM "설비명",
+	 EMP.EMP_NM "담당자"
+	FROM PROC_PRC PRC, PROCESS PC, LINE LI, EQ EQ, EMPLOYEE EMP
+	WHERE PRC.PROC_CD = PC.PROC_CD
+	AND PRC.PROC_MGR = EMP.EMP_NO
+	AND LI.PROC_CD = PC.PROC_CD
+	AND PC.EQ_CD = EQ.EQ_CD
+	AND LI.LINE_CD = #{line}
+	</select>
+	<insert id="ProcPlanInsert" statementType="CALLABLE" parameterType="map" >
 	
-	<insert id="ProcPlanInsert">
-
 	</insert>
 </mapper>

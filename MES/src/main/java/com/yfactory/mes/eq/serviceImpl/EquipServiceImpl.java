@@ -84,6 +84,7 @@ public class EquipServiceImpl implements EquipService{
 	}
 
 	@Override
+
 	public List<Map> getEqChkList() {
 		
 		return mapper.getEqChkList();
@@ -93,6 +94,17 @@ public class EquipServiceImpl implements EquipService{
 	public List<Map> getEqChkSelectList(@RequestBody HashMap<String, Object> list) {
 		
 		return mapper.getEqChkSelectList(list);
+
+	}
+
+	@Override
+	public int setEqIn(Map<String, String> result) {
+		return mapper.setEqIn(result);
+	}
+
+	@Override
+	public List<Map> searchEqIna(Map<String, String> result) {
+		return mapper.searchEqIna(result);
 	}
 
 	@Override

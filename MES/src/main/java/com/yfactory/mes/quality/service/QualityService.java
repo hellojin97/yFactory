@@ -19,9 +19,6 @@ public interface QualityService {
 	// 자재 품질검사관리
 	List<Map> selectMtCheckMgr();
 	
-	// 제품 품질검사관리
-	List<Map> selectProdCheckMgr();
-	
 	// 자재 검사결과
 	List<Map> selectMtCheck();
 	
@@ -64,6 +61,5 @@ public interface QualityService {
 	
 	// 수정
 	// 자재 품질검사
-	
-	// 제품 품질검사
+	int resMtQuality(String podtlcd, String mtnm, int passqty, int errqty, String errcd);
 }

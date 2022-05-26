@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -99,11 +100,24 @@ public class ajaxController {
 		return mapper.getEqInActList(key);
 	}
 	
-	@GetMapping("/getEqInListAjax")
+	@PostMapping("/setEqInAjax") // 비가동 설비 내역 추가
+	public String setEqInAjax(@RequestParam Map<String, String> result){
+		mapper.setEqIn(result);
+		return "성공";
+	}
+	
+	@GetMapping("/getEqInListAjax") //비가동 설비 내역 조회
 	@ResponseBody
-	public List<Map> getEqInListAjax(){
+	public List<Map> getEqInListAjax(){		
 		return mapper.getEqInList();
 	}
+	
+	@GetMapping("/searchEqInaAjax")
+	@ResponseBody
+	public List<Map> searchEqInaAjax(@RequestParam Map<String, String> result){
+		return mapper.searchEqIna(result);
+	}
+
 
 	//점검 전체 리스트
 	@GetMapping("/eqActListAjax")
@@ -116,6 +130,7 @@ public class ajaxController {
 	public List<Map> eqChkListAajx(@RequestBody HashMap<String, Object> list){
 		
 		return mapper.getEqChkSelectList(list);
+
 	}
 	
 	//점검 일일 건수

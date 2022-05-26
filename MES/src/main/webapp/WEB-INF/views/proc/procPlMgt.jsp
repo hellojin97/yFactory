@@ -105,7 +105,10 @@ $('#inBtn').on('click', function(){
 			}, {
 				header : '제품코드',
 				name : '완제품코드',
-			}, {
+			},{
+				header : '주문수량',
+				name : '주문수량',
+			},{
 				header : '계획량',
 				name : '계획량',
 				editor : "text"
@@ -153,7 +156,13 @@ $("#outBtn").on("click", function(){
 		}, {
 			header : '제품코드',
 			name : '완제품코드',
-		}, {
+		},{
+			header : '주문수량',
+			name : '주문수량',
+		},{
+			header : '현재고',
+			name : '현재고',
+		},{
 			header : '계획량',
 			name : '계획량',
 			editor : "text"
@@ -210,20 +219,26 @@ $("#outBtn").on("click", function(){
 			 resultGrid.clear();
 		 });
 		 
+		 
+		 /* =========== 생산계획 등록 ===========*/
+		 
+		 
 		 btnDtlInsert.addEventListener("click", function() {
-			 let checkedAry = [];
-			 let ary = [];
+			 let ppNm = $('#ProcPN').val();
+			 let ppDt = $('#date').val();
+			 
 			 let prd = resultGrid.getCheckedRows();
-			 //console.log(prd);
- 			 for (var i = 0; i < prd.length; i++) {
-				checkedAry.push((prd[i].rowKey)); 
-				//checkedAry.push(decodeURI(prd[i])); // %f6y => 빼빼로
-			} 
+
+			 
+			 let result;
+			 
 			
-			//console.log(index);
+			 
+			 
+			 
+			 /* 확인 CONFIRM  */
 			  Swal.fire({
-		          title: '정말로 그렇게 하시겠습니까?',
-		          text: "다시 되돌릴 수 없습니다. 신중하세요.",
+		          title: '생산계획을 등록하시겠습니까?',
 		          icon: 'warning',
 		          showCancelButton: true,
 		          confirmButtonColor: '#3085d6',
@@ -234,34 +249,45 @@ $("#outBtn").on("click", function(){
 		      	console.log(result);
 		      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
 		          if (result.isConfirmed) {
-		              Swal.fire(
-		                  '승인이 완료되었습니다.',
-		                  '화끈하시네요~!',
-		                  'success'
-		              )
-		              let ppNm = $('#ProcPN').val();
-		              let ppDt = $('#date').val();
-		              
-		              //JSON 
-		              //승인시 계획등록 ajax
-		              var data = {
-							   ppNm : ppNm,
-							   ppDt : ppDt,
-							   array : prd,
-							   }
-		              console.log(data);
-		               $.ajax({
-					   url  : "procPlanInsert",
-					   data : JSON.stringify(data),
-					   type : "POST",
-					   dataType : "JSON",
-					   contentType : "application/json; charset = UTF-8;"
-						   
-				   }).done(function(result){
-						alert("등록완료");
-				   })
-		              //ajax 실행 후 removeRows
-		              resultGrid.removeRows(checkedAry);
+		        	  
+		        	  for (var i = 0; i < prd.length; i++) {
+		 				 result = {
+		 		 				 "ppNm" : ppNm,
+		 		 				 "ppDt" : ppDt,
+		 		 				 "ordCd" : prd[i].주문코드,
+		 		 				 "prodCd" : prd[i].완제품코드,
+		 		 				 "pdQty" : prd[i].계획량,
+		 		 				 "pdRank" : prd[i].작업우선순위,
+		 		 				 "pdDt" : prd[i].생산일수
+		  					 };
+		 				 
+			               $.ajax({
+							   url  : "procPlanInsert",
+							   data : result,
+							   method : "POST"
+										   }).done(function(result){
+												console.log(result);
+										   											})
+		 				 
+		 					}
+		        	  
+		        	  
+		        	  
+						              Swal.fire(
+						                  '생산계획이 등록되었습니다.',
+						                  'success'
+						              );
+						              
+						              //승인시 계획등록 ajax
+															              
+						              
+						              
+						              
+						              
+						              
+
+						              //ajax 실행 후 removeRows
+						              resultGrid.removeRows(checkedAry);
 
 		          }else{
 		          	Swal.fire(
@@ -272,6 +298,8 @@ $("#outBtn").on("click", function(){
 		          }
 		      }) 
 		});
+		 
+		 /* =========== 생산계획 등록 끝 ===========*/
 		 
 /* 		 ProcPN.addEventListener("dblclick", function() {
 			 $("#HNum").val("1");

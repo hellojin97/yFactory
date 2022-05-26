@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>발주관리</title>
+<title></title>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
 <link rel="stylesheet" type="text/css"
@@ -52,9 +52,11 @@
 	<hr style="border: solid 1px gray;">
 
 	<h4>비가동 설비 목록</h4>
+	<div>
+	<form>				
 	<div class="col-md-12" style="padding-bottom: 10px;">
 
-			<!-- 해당일자 -->					
+			<!-- 해당일자 -->	
 			<div class="input-group">
 					<label for="inputText" class="col-form-label"
 						style="padding-right: 10px;">해당일자</label>
@@ -79,8 +81,15 @@
 						<a class="nav-link nav-icon search-bar-toggle" id="prodBtn" onclick="prodBtn">
 							<i class="bi bi-search" style="color: #2c3e50"></i>
 						</a>
-						<input type="text" id="eqCd" class="form-control" readonly="readonly">
+						<input type="text" id="eqCd" class="form-control" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp;
+						
+							<button type="button" id="search" class="btn1">검색</button>							
+							&nbsp;&nbsp;
+							<button type="reset" id="reset" class="btn1">초기화</button>
+						
 					</div>
+				</div>
+				</form>
 				</div>
 	<!-- 비가동 설비 목록 -->
 	<div id="eqInaList" style="padding-bottom:15px;"></div>	
@@ -92,6 +101,8 @@
 	
 	
 <div id="test"></div>
+<div id="seachModal"></div>
+
 <input type="hidden" id="inEqCd"> 
 <input type="hidden" id="inEqNm">
 </body>
@@ -102,7 +113,35 @@
 
 <script>
 
+// 비가동 설비 검색
+$("#search").on("click", function() {
+	let req1 = $("#req1").val();
+	let req2 = $("#req2").val();
+	let eqNm = $("#eqNm").val();
+	let eqCd = $("#eqCd").val();
+	$.ajax({
+	      url : "searchEqInaAjax",
+	      data : {
+	            "req1" : req1,
+	            "req2" : req2,
+	            "eqNm" : eqNm,
+	            "eqCd" : eqCd
+	      }
+	   }).done(function(result){	       
+	       eqInaList.resetData(result);
+	   });
+})
 
+// 비가동 설비 초기화
+$('#reset').on('click',function(){
+	const url = "getEqInListAjax";
+	   $.ajax(url,{
+	      dataType : "JSON",
+	      method: "GET"
+	   }).done(function(result){
+		   eqInaList.resetData(result);	     
+	   });
+})
 	
 
 // 설비 목록
@@ -110,8 +149,7 @@ $.ajax({
 	url: "getEqActStatListAjax",
 	method : "GET",
 	dataType : "JSON",
-	success : function(result){
-		console.log(result);
+	success : function(result){		
 		eqList.resetData(result);
 	}
 });
@@ -142,10 +180,6 @@ var eqList = new tui.Grid({
           {
               header: '사용여부',
               name: '사용여부'
-            },
-          {
-              header: '비가동여부',
-              name: '비가동여부'
             }
     ],
     rowHeaders: ['rowNum'],
@@ -160,7 +194,7 @@ var eqList = new tui.Grid({
 		url: "getEqInListAjax",
 		method : "GET",
 		dataType : "JSON",
-		success : function(result){
+		success : function(result){			
 			eqInaList.resetData(result);
 		}
 	});
@@ -203,10 +237,10 @@ var eqList = new tui.Grid({
 	   
 	  $("#inEqCd").val(inEqCd);
 	  $("#inEqNm").val(inEqNm);
-	  
-	  if(eqc.columnName == '비가동여부'){
-		  if(eqc.value == 'N'){
-		  $("#test").load("", function() {
+	  	  
+	  if(eqc.columnName == '사용여부'){
+		  if(eqc.value == 'Y'){
+		  $("#test").load("eqInaModal", function() {
 				const eqInaModal = new bootstrap.Modal('#myModal');
 				eqInaModal.show();
 				});
@@ -214,6 +248,25 @@ var eqList = new tui.Grid({
 	  }
   })
   
+  $("input[name=radios]").on("click", function(){
+	  let key = $("input[name=radios]:checked").val();
+	  $.ajax({
+		  url : "getEqInActListAjax",
+		  data : { key : key},
+		  dataType: 'JSON',
+	      contentType : "application/json; charset=utf-8"
+	  		
+	  }).done(function(result){
+		  eqList.resetData(result);
+	  })
+  })
+  
+  prodBtn.addEventListener("click", function(){
+	$("#seachModal").load("seachInaModal", function(){
+		const myModal = new bootstrap.Modal('#myModal');
+		myModal.show();
+	})
+	});
 </script>
 
 </html>

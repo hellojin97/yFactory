@@ -35,7 +35,8 @@ public interface MtrlMapper {
 							 @Param("m2") String m2,
 							 @Param("req1") String req1,
 							 @Param("req2") String req2);
-	
+	//입고조회
+	List<Map>insertList();
 	
 	/*MODAL페이지*/
 	//자재명 전체조회
@@ -51,4 +52,12 @@ public interface MtrlMapper {
 	List<Map>pocdSelectSearch(@Param("pocd")String pocd);
 	//발주등록
 	int mtrlReqInsert(Map<String, String> result);
+	//입고 전체조회
+	List<Map>insertSearch(@Param("m1") String m1,
+			 @Param("m2") String m2,
+			 @Param("req1") String req1,
+			 @Param("req2") String req2);
+	//입고예정목록
+	List<Map>expectList();
+	
 }

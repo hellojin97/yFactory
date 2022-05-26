@@ -51,6 +51,9 @@
 				header: '발주코드',
 				name: '발주코드'
 			}, {
+				header: '발주상세코드',
+				name: '발주상세코드'
+			}, {
 				header: '자재코드',
 				name: '자재코드',
 				width: '80'
@@ -118,6 +121,9 @@
 				columns : [ {
 					header: '발주코드',
 					name: '발주코드'
+				}, {
+					header: '발주상세코드',
+					name: '발주상세코드'
 				}, {
 					header: '자재코드',
 					name: '자재코드'

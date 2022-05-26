@@ -49,7 +49,11 @@ public class QualityAjaxController {
 		return qas.selectProdCheck();
 	}
 	
-	// 자재 불량내역
+	// 자재불량내역
+	@GetMapping("/selectMtErrList")
+	public List<Map> selectMtErrList() {
+		return qas.selectMtErrList();
+	}
 	
 	// 제품 불량내역
 	

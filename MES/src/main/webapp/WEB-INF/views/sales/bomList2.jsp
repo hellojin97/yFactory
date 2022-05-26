@@ -12,10 +12,16 @@
 	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://uicdn.toast.com/tui-tree/latest/tui-tree.css"
+/>
 
+<script src="https://uicdn.toast.com/tui-tree/latest/tui-tree.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 </head>
 <body>
 

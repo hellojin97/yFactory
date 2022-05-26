@@ -179,6 +179,11 @@
               <i class="bi bi-circle"></i><span>생산관리</span>
             </a>
           </li>
+          <li>
+            <a href="procResult">
+              <i class="bi bi-circle"></i><span>공정실적조회</span>
+            </a>
+          </li>
         </ul>
       </li>
       

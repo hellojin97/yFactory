@@ -32,14 +32,7 @@
 								<input type="text" class="form-control" id="modalEqNm" disabled>								
 							</div>
 						</div>
-						
-						<div class="input-group" style="padding-bottom: 15px;">	
-							<label for="inputText" class="col-form-label" style="padding-right: 47px;">등록인 </label>
-							<div class="col-sm-2">			
-								<input type="text" class="form-control" id="modalUser" disabled>
-							</div>					
-						</div>
-						
+												
 						<div class="input-group" style="padding-bottom: 10px;">							
 							<label for="inputText" class="col-form-label" style="padding-right: 10px;">비가동 시간 </label>
 							<div class="col-sm-3" style="padding-right: 10px;">
@@ -94,26 +87,26 @@
 	$("#modalEqNm").val(men);
 	
 	$("#btnInsert").on("click", function(){
-		var ec = $("#modalEqCd").val();
-		var en = $("#modalEqNm").val();
-		var us = $("#modalUser").val();
+		var ec = $("#modalEqCd").val();		
 		var sd = $("#stDt").val();
 		var ed = $("#edDt").val();
 		var dc = $("#modalDis").val();
 		var nt = $("#Modalnote").val();
-		
-		.$ajax({
-			url : "",
+		var subSd = sd.replace('T', ' ');
+		var subEd = ed.replace('T', ' ');
+		console.log(subSd);
+		$.ajax({
+			url : "setEqInAjax",
 			method : "POST",
 			data : {
-					"ec" : ec,
-					"en" : en,
-					"us" : us,
-					"sd" : sd,
-					"ed" : ed,
-					"dc" : dc,
-					"nt" : nt				
-					}
+					"p_eq_cd" : ec,										
+					"p_eq_sd" : subSd,
+					"p_eq_ed" : subEd,
+					"p_eq_dc" : dc,
+					"p_eq_nt" : nt	
+					}					
+		}).done(function(result){
+			$('#myModal').modal('hide');
 		});
 	})
 	

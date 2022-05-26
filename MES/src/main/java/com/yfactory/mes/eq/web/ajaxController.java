@@ -1,12 +1,16 @@
 package com.yfactory.mes.eq.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -102,10 +106,19 @@ public class ajaxController {
 		return mapper.getEqInList();
 	}
 
-	@PostMapping("/setEqInAjax")
-	public String setEqInAjax(@RequestParam Map<String, String> result) {
-		mapper.setEqIn(result);
-		return "성공";
+
+	//점검 전체 리스트
+	@GetMapping("/eqActListAjax")
+	@ResponseBody
+	public List<Map> eqActListAjax(){
+		return mapper.getEqChkList();
+	}
+	// 설비구분명 + 점검시작일 + 점검종료일 기준 조회 
+	@RequestMapping(value = "/eqChkListAajx", method = RequestMethod.POST)
+	public List<Map> eqChkListAajx(@RequestBody HashMap<String, Object> list){
+		
+		return mapper.getEqChkSelectList(list);
+
 	}
 	
 

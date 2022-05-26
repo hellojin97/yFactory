@@ -165,6 +165,29 @@ public class ProcServiceImpl implements ProcService{
 
 
 
+
+	@Override
+	public List<Map> ProcOrderCdSelectOne(String dtlCd) {
+		// TODO Auto-generated method stub
+		return map.ProcOrderCdSelectOne(dtlCd);
+	}
+
+
+
+
+	@Override
+	public List<Map> ProcOrderLineSelectOne(String line) {
+		// TODO Auto-generated method stub
+		return map.ProcOrderLineSelectOne(line);
+	}
+
+
+
+
+
+
+
+
 	
 
 

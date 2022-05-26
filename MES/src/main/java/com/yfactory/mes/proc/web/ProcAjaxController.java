@@ -126,6 +126,16 @@ public class ProcAjaxController {
 	public List<Map> ProcOrderList(@RequestBody HashMap<String, Object> list) {
 		return procService.ProcOrderList(list);
 	}
+	// 생산 지시 코드 단건조회
+	@GetMapping("/procOrderCdSelectOne")
+	public List<Map> ProcOrderCdSelectOne(String dtlCd) {
+		return procService.ProcOrderCdSelectOne(dtlCd);
+	}
+	// 생산 지시 코드 단건조회
+	@GetMapping("/procOrderLineSelectOne")
+	public List<Map> ProcOrderLineSelectOne(String line) {
+		return procService.ProcOrderLineSelectOne(line);
+	}
 	
 
 }

@@ -109,7 +109,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2"><div id="list" style="height: 300px;"></div></td>
+								<td colspan="2"><div id="list" style="overflow:scroll; height: 300px; text-align:right ;"></div></td>
 							</tr>
 							<tr>
 								<td colspan="2"><input type="text" name="msg" id="msg"
@@ -189,30 +189,37 @@
 		}
 	});
 
-	// 메세지 전송 및 아이디
-	function print(user, txt) {
-		let temp = '';
-		temp += '<div style="margin-bottom:3px;">';
-		temp += '[' + user + ']  >    ';
-		temp += txt;
-		temp += ' <span style="font-size:11px;color:#777;">'
-				+ new Date().toLocaleTimeString() + '</span>';
-		temp += '</div>';
 
-		$('#list').append(temp);
-	}
+// 메세지 전송 및 아이디
+function print(user, txt) {
+	let temp = '';
+	temp += '<div style="margin-bottom:3px;">';
+	temp += '[' + user + ']  >    ';
+	temp += txt;
+	temp += ' <span style="font-size:11px;color:#777;">' + new Date().toLocaleTimeString() + '</span>';
+	temp += '</div><br>';
+			
+	$('#list').append(temp);
+	document.getElementById("list").scrollTop = document.getElementById("list").scrollHeight;
+	
+	$("#list").children().filter(":contains('2#')").css("text-align", "left");
+	$("#list").children().filter(":contains('접속')").css("text-align", "center");
+	$("#list").children().filter(":contains('입장')").css("text-align", "center");
+	$("#list").children().filter(":contains('종료')").css("text-align", "center");
+	
+}
+		
+// 다른 client 접속		
+function print2(user) {
+	let temp = '';
+	temp += '<div style="margin-bottom:3px;">';
+	temp += "'" + user + "' 이(가) 접속했습니다." ;
+	temp += ' <span style="font-size:11px;color:#777;">' + new Date().toLocaleTimeString() + '</span>';
+	temp += '</div>';
+			
+	$('#list').append(temp);
+}
 
-	// 다른 client 접속		
-	function print2(user) {
-		let temp = '';
-		temp += '<div style="margin-bottom:3px;">';
-		temp += "'" + user + "' 이(가) 접속했습니다.";
-		temp += ' <span style="font-size:11px;color:#777;">'
-				+ new Date().toLocaleTimeString() + '</span>';
-		temp += '</div>';
-
-		$('#list').append(temp);
-	}
 
 	// client 접속 종료
 	function print3(user) {
@@ -220,7 +227,7 @@
 		temp += '<div style="margin-bottom:3px;">';
 		temp += "'" + user + "' 이(가) 종료했습니다.";
 		temp += ' <span style="font-size:11px;color:#777;">'
-				+ new Date().toLocaleTimeString() + '</span>';
+				+ new Date().toLocaleTimeString() + '</span><hr>';
 		temp += '</div>';
 
 		$('#list').append(temp);

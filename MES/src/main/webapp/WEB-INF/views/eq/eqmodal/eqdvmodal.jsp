@@ -95,19 +95,7 @@
 			 $('#myModal').modal('hide');
 			 $("#eq_cd").val(eqCd);
 			 $("#eq_nm").val(eqNm);
-					
-			 /* $.ajax({
-				   url  : "eqSelectAjax",
-				   data : {eqCd : eqCd , eqNm : eqNm},
-				   dataType : "JSON",
-				   contentType : "application/json; charset = UTF-8;"
-			   }).done(function(result){
-				   console.log(result);
-				
-				 
-			   })  */
-			 
-			 
+
 		}
 	})
 	

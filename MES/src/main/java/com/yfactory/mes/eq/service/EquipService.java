@@ -1,10 +1,13 @@
 package com.yfactory.mes.eq.service;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yfactory.mes.eq.vo.EqVO;
 
@@ -47,7 +50,10 @@ public interface EquipService {
 	List<Map> getEqChkList(); 
 	
 	// 설비구분명 + 점검시작일 + 차기점검일 기준 조회
-	List<Map>getEqChkSelectList(@RequestBody HashMap<String, Object> list); 
+	List<Map>getEqChkSelectList(@RequestBody HashMap<String, Object> list);
 	
+	// 일일 점검 건수 리스트
+	List<Map> getEqDailyChkCount(@Param("chkdt1")String chkdt1 ,@Param("chkdt2")String chkdt2); 
+
 	
 }

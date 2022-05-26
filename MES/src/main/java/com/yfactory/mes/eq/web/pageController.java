@@ -15,33 +15,32 @@ import com.yfactory.mes.eq.vo.EqVO;
 @Controller
 public class pageController {
 	// 페이지 부분 정의 컨트롤러
-	
+
 	@Autowired
 	public EquipMapper mapper;
-	
+
 //	@Autowired
 //	private String saveDir;
-	
+
 	@RequestMapping("/Test")
 	public String TEST() {
 		return "eq/Test";
 	}
-	
-	 
+
 	@RequestMapping("/eqInsert")
-	public String eqInsert(){
-		// 설비 페이지  - 설비등록
+	public String eqInsert() {
+		// 설비 페이지 - 설비등록
 		return "eq/eqInsert";
-		
+
 	}
-	
+
 	@RequestMapping("/eqMng")
 	@ResponseBody
-	public String eqMng(EqVO vo , MultipartFile file , Model model){
-		System.out.println( "----------------------------------------"+vo.getImg_path() );
-		
-		mapper.insertEq(vo); 
-		
+	public String eqMng(EqVO vo, MultipartFile file, Model model) {
+		System.out.println("----------------------------------------" + vo.getImg_path());
+
+		mapper.insertEq(vo);
+
 //		if(file.isEmpty()) { // 파일이 비어있다면 TRUE
 ////			mapper.insertEq(vo); // 비어있다면 DB에 저장을 시도
 //		}else { // 비어있지 않다면
@@ -68,74 +67,75 @@ public class pageController {
 //		System.out.println("--------------------------");
 //		System.out.println(vo.getUuid());
 //		model.addAttribute("src" , vo.getUuid());
-		return "eq/eqMngPage"; // 다 처리 하고 설비관리로 가라 
+		return "eq/eqMngPage"; // 다 처리 하고 설비관리로 가라
 	}
-	
+
 	@RequestMapping("/eqMngPage")
 	public String eqMngPage() {
 		return "eq/eqMngPage";
 	}
-	
-	
+
 	@RequestMapping("/eqChkMng")
-	public String eqChkMng(){
+	public String eqChkMng() {
 		// 설비 페이지 - 점검관리
 		return "eq/eqChkMng";
-		
+
 	}
-	
+
 	@RequestMapping("/eqIna")
-	public String eqIna(){
+	public String eqIna() {
 		// 설비 페이지 - 비가동 관리
 		return "eq/eqIna";
-		
+
 	}
-	
+
 	@RequestMapping("/eqRstat")
-	public String eqRstat(){
+	public String eqRstat() {
 		// 설비 페이지 - 실시간 설비 상태
 		return "eq/eqRstat";
-		
+
 	}
+
 	// 설비 구분 모달창 출력
 	@GetMapping("/eqdvmodal")
 	public String eqmodal() {
 		return "/eq/eqmodal/eqdvmodal";
 	}
+
 	// 설비관리 페이지 - 설비명 + 설비 코드
 	@GetMapping("/mngmodal")
 	public String mngmodal() {
 		return "/eq/eqmodal/mngmodal";
 	}
-	
+
 	// 설비관리 페이지 - 공정코드 + 공정명
-		@GetMapping("/eqPrcmodal")
-		public String eqPrcmodal() {
-			return "/eq/eqmodal/eqPrcmodal";
-		}
-		
-	
-		// 설비등록 페이지 - 사원번호 + 사원명
-		@GetMapping("/eqInstermodal")
-			public String eqInstermodal() {
-				return "/eq/eqmodal/eqInstermodal";
-		}
-		
-		
-		// 설비등록 페이지 - 업체코드 + 업체구분코드(설비 / 자재(입고 , 출고) ... ) + 업체명
-		@GetMapping("/eqvdrmodal")
-			public String eqvdrmodal() {
-				return "/eq/eqmodal/eqvdrmodal";
-		}
-		
-		
-		
-		// 설비관리 페이지 - 설비코드 ~ 점검주기 데이터 조회 모달
-		@GetMapping("/eqsearchmodal")
-					public String eqsearchmodal() {
-						return "/eq/eqmodal/eqsearchmodal";
-		}
-		
-			
-	
+	@GetMapping("/eqPrcmodal")
+	public String eqPrcmodal() {
+		return "/eq/eqmodal/eqPrcmodal";
+	}
+
+	// 설비등록 페이지 - 사원번호 + 사원명
+	@GetMapping("/eqInstermodal")
+	public String eqInstermodal() {
+		return "/eq/eqmodal/eqInstermodal";
+	}
+
+	// 설비등록 페이지 - 업체코드 + 업체구분코드(설비 / 자재(입고 , 출고) ... ) + 업체명
+	@GetMapping("/eqvdrmodal")
+	public String eqvdrmodal() {
+		return "/eq/eqmodal/eqvdrmodal";
+	}
+
+	// 설비관리 페이지 - 설비코드 ~ 점검주기 데이터 조회 모달
+	@GetMapping("/eqsearchmodal")
+	public String eqsearchmodal() {
+		return "/eq/eqmodal/eqsearchmodal";
+	}
+
+	// 설비점검 페이지 - 일 점검 조회 버튼 클릭시 모달 호출
+	@GetMapping("/eqDailyChkCount")
+	public String eqDailyChkCount() {
+		return "/eq/eqmodal/eqDailyChkCount";
+	}
+
 }

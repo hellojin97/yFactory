@@ -21,11 +21,6 @@ public class QualityServiceImpl implements QualityService {
 		// TODO Auto-generated method stub
 		return map.selectErrCode();
 	}
-	
-	@Override
-	public List<Map> errSelectOne(String errCd) {
-		return map.errSelectOne(errCd);
-	}
 
 	@Override
 	public List<Map> selectpoDtlRequest() {
@@ -37,11 +32,6 @@ public class QualityServiceImpl implements QualityService {
 		return map.selectMtCheckMgr();
 	}
 	
-	@Override
-	public List<Map> selectProdCheckMgr() {
-		return map.selectProdCheckMgr();
-	}
-
 	@Override
 	public List<Map> selectMtCheck() {
 		return map.selectMtCheck();

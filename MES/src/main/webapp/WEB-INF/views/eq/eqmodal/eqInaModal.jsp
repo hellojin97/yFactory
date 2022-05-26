@@ -53,7 +53,7 @@
 						</div>
 						
 						<div class="input-group" style="padding-bottom: 10px;">	
-							<label for="inputText" class="col-form-label" style="padding-right: 64px;">사유 </label>
+							<label for="inputText" class="col-form-label" style="padding-right: 29px;">사유 </label>
 							<div class="col-sm-2">			
 								<select id="modalDis">
 									<option value="DIS01">점검</option>
@@ -99,14 +99,32 @@
 			url : "setEqInAjax",
 			method : "POST",
 			data : {
-					"p_eq_cd" : ec,										
+					"p_eq_cd" : ec,
 					"p_eq_sd" : subSd,
 					"p_eq_ed" : subEd,
 					"p_eq_dc" : dc,
-					"p_eq_nt" : nt	
+					"p_eq_nt" : nt
 					}					
 		}).done(function(result){
 			$('#myModal').modal('hide');
+			//비가동 설비 목록
+			$.ajax({
+				url: "getEqInListAjax",
+				method : "GET",
+				dataType : "JSON",
+				success : function(result){			
+					eqInaList.resetData(result);
+				}
+			});
+			// 설비 목록
+			$.ajax({
+				url: "getEqActStatListAjax",
+				method : "GET",
+				dataType : "JSON",
+				success : function(result){		
+					eqList.resetData(result);
+				}
+			});
 		});
 	})
 	

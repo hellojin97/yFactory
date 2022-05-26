@@ -94,6 +94,16 @@ public class EquipServiceImpl implements EquipService{
 		return mapper.getEqChkSelectList(list);
 
 	}
+
+	@Override
+	public int setEqIn(Map<String, String> result) {
+		return mapper.setEqIn(result);
+	}
+
+	@Override
+	public List<Map> searchEqIna(Map<String, String> result) {
+		return mapper.searchEqIna(result);
+	}
 	
 	
 	

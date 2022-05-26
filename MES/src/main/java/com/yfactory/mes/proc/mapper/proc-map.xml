@@ -144,7 +144,7 @@ GROUP BY    	ord.ord_cd,
 		<if test="prdNm != ''">
 		AND pd.prod_nm = #{prdNm}
 		</if>
-		<if test="date1 != null and date2 != null">
+		<if test="date1 != '' and date2 != ''">
 			AND pl.pp_dt BETWEEN TO_DATE(#{date1},'YY/MM/DD') AND TO_DATE(#{date2},'YY/MM/DD')
 		</if>
 	</select>
@@ -190,14 +190,14 @@ GROUP BY    	ord.ord_cd,
 	</select>
 		<!-- 상품코드 라인코드 조회 -->
 		<select id="ProcLineSelect" resultType="map">
-	  SELECT  li.line_cd "라인코드"
+	  SELECT  DISTINCT li.line_cd "라인코드"
       FROM   LINE li, PROD pd
       WHERE li.prod_cd = pd.prod_cd
       AND     pd.prod_nm = #{prodNm}
 		</select>
 	<!--  필요자재(BOM) 조회 -->
 	<select id="ProcNeedMtrl" resultType="map">
-		SELECT P.PROD_CD "제품코드",
+		SELECT DISTINCT P.PROD_CD "제품코드",
         	   B.MT_CD "자재코드", 
         	   M.MT_NM "자재명",
         	   B.CS_QTY "소모량",

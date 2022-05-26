@@ -110,13 +110,13 @@
 		}
 	})
 
-  defaultMt.on('mousedown', (ev) => {
-		selectedRowKey = ev.rowKey;
-		let a = defaultMt.getValue(selectedRowKey, '발주량');
-		let b = defaultMt.getValue(selectedRowKey, '합격량');
-		let sum = a - b;
-		defaultMt.setValue(selectedRowKey, '불량량',sum);
-		console.log(a + ' ' +  b);
+  defaultMt.on('afterChange', (ev) => {
+    orgin: 'cell'; 
+    let evn = ev.changes;
+    let a = defaultMt.getValue(evn[0].rowKey, '발주량');
+    let b = defaultMt.getValue(evn[0].rowKey, '합격량');
+    let sum = a - b;
+    defaultMt.setValue(evn[0].rowKey, '불량량', sum);
   });
 	
 	//완료 버튼 클릭시 실행

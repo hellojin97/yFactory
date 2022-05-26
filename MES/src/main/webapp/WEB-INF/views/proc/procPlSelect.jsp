@@ -72,22 +72,23 @@
 		</div>
 		<button id="dateSearch" class="btn1">검색</button>
 		<button id="dateClear" class="btn1">초기화</button>
-	</div>
+	
 
 
 
+
+</div>
 	<div id="procGrid"></div>
-	<div id="test"></div>
-
+	<div id="testGrid"></div>
 
 	<script>
-	 document.getElementById('dateA').value = new Date().toISOString().substring(0, 10);
+	 /* document.getElementById('dateA').value = new Date().toISOString().substring(0, 10);
 	 document.getElementById('dateB').value = new Date().toISOString().substring(0, 10); 
-	// * 자식그리드에서 부모그리드를 사용하려면 전역변수로 지정되어있어야한다 *
+ */	// * 자식그리드에서 부모그리드를 사용하려면 전역변수로 지정되어있어야한다 *
 	var resultGrid
 	$(function(){
 	resultGrid = new tui.Grid({
-		el : document.getElementById('test'),
+		el : document.getElementById('testGrid'),
 		scrollX : false,
 		scrollY : false,
 		columns : [ {
@@ -124,21 +125,6 @@
 	});
 
 
-	
-	 $("#PrdNm").click(function () {
-			$("#procGrid").load("procplselectmodal", function() {
-
-				const ProcPlModal = new bootstrap.Modal('#myModal');
-				ProcPlModal.show();
-	 });
-	 });
-	$("#dateClear").click(function() {
-	 
-		 $('#PrdNm').val('');
-		 resultGrid.clear();
-	 });
-	
-	
 	 //생산계획코드를 클릭했을시 ajax
 	$("#dateSearch").click(function () {
 		//$("input[name='radios']:radio").change(function () {
@@ -147,8 +133,10 @@
 		 let date1 = $("#dateA").val();
 		 let date2 = $("#dateB").val();
 		 let state = $("input[name=radios]:checked").val();
-		 //let radio = '전체';
+		// console.log(prdNm +' ');
+		 //console.log('제품명' +prdNm + 'startdate :' + date1 + 'enddate :' + date2 + 'state :' + state);
 		 if(prdNm != null){
+		 
 			 var data= {
 					 prdNm : prdNm,
 					   date1 : date1,
@@ -163,13 +151,33 @@
 				   dataType : "JSON",
 	     		   contentType : "application/json; charset = UTF-8;"
 				   }).done(function(result){
+					   console.log(result);
+					   resultGrid.resetData(result);
+/*
 						for (var i = 0; i < result.length; i++) {
-							resultGrid.appendRow(result[i]);
-						}
+							
+						} */
 			
 				   })
 		}  
 		});
+
+	 });
+	
+	 $("#PrdNm").click(function () {
+			$("#procGrid").load("procplselectmodal", function() {
+
+				const ProcPlModal = new bootstrap.Modal('#myModal');
+				ProcPlModal.show();
+	 });
+	$("#dateClear").click(function() {
+	 
+		 $('#PrdNm').val('');
+		 resultGrid.clear();
+	 });
+	
+	
+	
 		
 
 	});

@@ -134,8 +134,13 @@ public class ProcAjaxController {
 	// 생산 지시 코드 단건조회
 	@GetMapping("/procOrderLineSelectOne")
 	public List<Map> ProcOrderLineSelectOne(String line) {
+		System.out.println(procService.ProcOrderLineSelectOne(line));
 		return procService.ProcOrderLineSelectOne(line);
 	}
 	
-
+	// 생산 로직
+	@RequestMapping(value = "/procLogic", method = RequestMethod.POST)
+	public List<Map> ProcLogic(@RequestBody HashMap<String, Object> list) {
+		return procService.ProcLogic(list);
+	}
 }

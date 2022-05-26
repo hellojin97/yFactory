@@ -1,9 +1,12 @@
 package com.yfactory.mes.eq.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 import com.yfactory.mes.eq.vo.EqVO;
 
@@ -42,8 +45,13 @@ public interface EquipService {
 	// 비가동 상태 설비 조회
 	List<Map> getEqInList();
 	
-	// 비가동 설비 목록 추가
-	int setEqIn(Map<String, String> result);
+
+	// 설비 점검 전체 리스트
+	List<Map> getEqChkList(); 
+	
+	// 설비구분명 + 점검시작일 + 차기점검일 기준 조회
+	List<Map>getEqChkSelectList(@RequestBody HashMap<String, Object> list); 
+
 	
 	
 }

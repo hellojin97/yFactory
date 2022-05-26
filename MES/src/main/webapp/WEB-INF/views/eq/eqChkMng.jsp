@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,340 +14,204 @@
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <style type="text/css">
-.clickB {     
+.btnpart {
+	background-color: #555555;
+	color: white;
+}
+
+button:hover {
 	color: black;
-    text-align: center;    
-    border: solid 1px #2c3e50;
-    margin: 3px;
-    line-height: 25px;
-    padding: 0px 15px 0px 15px;
-    border-radius: 5px 5px 0px 0px;
-		    }
-
-
+	background-color: white;
+}
 </style>
 </head>
-
-
 <body>
 
-		<div id="in/out" style="padding-bottom:15px;">		
+	<div id="in/out" style="padding-bottom: 15px;">
 		<h1>설비 점검 관리</h1>
-		</div>
+	</div>
 
-		<div class="min1">
-			<div class="mainTitle">
-				<form>
-				<!-- 제품명 -->
-				<div class="col-md-5 " style="padding-bottom: 20px;">
-					<div class="dropdown">
-						<button class="btn btn-secondary dropdown-toggle" type="button"
-							id="dropdownMenuButton" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">전체</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="#"></a>
-						    <a class="dropdown-item" href="#">Another action</a>
-						    <a class="dropdown-item" href="#">Something else here</a>
-						  </div>
-					</div>
-				</div>				
 
-				<!-- 날짜 -->
-				<div class="col-md-12">
-					<div class="input-group">
+
+	<div class="min1">
+		<div class="mainTitle">
+			<!-- 구분 드롭박스 -->
+
+			
+
+				<div class="col-md " style="padding-bottom: 30px;">
+					<div class="input-group ">
 						<label for="inputText" class="col-form-label"
-							style="padding-right: 10px;">제조날짜</label>
-						<div class="col-sm-2">
-							<input type="date" id="fdt1" class="form-control">
-						</div>
-
-						<div style="padding: 0px 15px 0px 15px;">
-							<p>~</p>
-						</div>
-						<div class="col-sm-2" style="padding-right: 20px;">
-							<input type="date" id="fdt2" class="form-control">
-						</div>
-
-						<div style="padding-right: 10px;">
-							<button type="button" id="search" class="inSearch btn1">조회</button>
-						</div>
-
-						<div>
-							<button type="reset" class="btn1">초기화</button>
-						</div>
+							style="padding-right: 27px;">설비구분</label> 
+							<select id="eq_nm" name="eq_nm">
+							<option value="반죽기">반죽기</option>
+							<option value="성형기">성형기</option>
+							<option value="가열기">가열기</option>
+							<option value="1차">1차선별벨트</option>
+							<option value="초코프레스">초코코팅기</option>
+							<option value="냉각기">냉각기</option>
+							<option value="2차">2차선별벨트</option>
+							<option value="포장기">포장기</option>
+						</select>
 					</div>
 				</div>
-				</form>
+				<div class="col-md-5 " style="padding-bottom: 20px;">
+					<div class="input-group ">
+						<label for="inputText" class="col-form-label"
+							style="padding-right: 20px;">점검일자</label> <input type="date"
+							class="form-control" id="eq_chkdt1" name="eq_chkdt1"
+							style="width: 20px" >
+						<h2>&nbsp;~&nbsp;</h2>
+						<input type="date" class="form-control" id="eq_chkdt2"
+							name="eq_chkdt2" style="width: 20px" >
+
+						&nbsp;&nbsp;
+						<button type="submit" class="btn btnpart" id="searchEq">설비조회</button>
+
+
+					</div>
+				</div>
+			
+			<div align="right">
+				<span>
+					<button type="button" class="btn btnpart">초기화</button>
+					<button type="button" class="btn btnpart">일점검조회</button>
+					<button type="button" class="btn btnpart">전체조회</button>
+					<button type="button" class="btn btnpart">저장</button>
+					<button type="button" class="btn btnpart">삭제</button>
+				</span>
 			</div>
 			<hr style="border: solid 1px gray;">
-
 			<!-- 테이블 -->
-			<div class="code-html contents" style="padding-bottom: 10px;">
-				<div id="prodWrnoteList"></div>
-				<div id="test"></div>
-			</div>
-
+		<div class="code-html contents" style="padding-bottom: 10px;">
+			<div id="modalDiv"></div>
+			<div id="chkList"></div>
 		</div>
 
-	
+
+
+			<hr style="border: solid 1px gray;">
+		</div>
+		
+
+	</div>
+
+
 
 </body>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
+
 
 <script>
-	myBtn.addEventListener("click", function(){
-	$("#test").load("prodModal", function(){
-		const myModal = new bootstrap.Modal('#myModal');
-		myModal.show();
-	})
-	});
-
-	// 페이지 onload = 입고
-		$.ajax({
-			url : "prodWrnoteIn",
-			method : "GET",
-			dataType : "JSON",
-			success : function(result) {
-				listWrnIn.resetData(result);			
-			}
-		});
-		
-
-	var listWrnIn = new tui.Grid({
-		el : document.getElementById('prodWrnoteList'),
-		columns : [ {
-			header : '완제품LOT',
-			name : '완제품LOT'
-		}, {
-			header : '제품코드',
-			name : '제품코드'
-		}, {
-			header : '제품명',
-			name : '제품명'
-		}, {
-			header : '입고량',
-			name : '입고량'
-		}, {
-			header : '입고일자',
-			name : '입고일자'
-		}, {
-			header : '유통기한',
-			name : '유통기한'
-		}
-
-		],
-		rowHeaders : [ 'rowNum' ],
-		pageOptions : {
-			useClient : true,
-			perPage : 10
-		}
-	});
-
-	//입고 버튼
-	$('#inBtn').on('click', function(){
-		
-		$('#outBtn').removeClass();
-		$('#outBtn').attr("class", "clickB");
-		$('#inBtn').removeClass();
-		$('#inBtn').attr("class", "btn2");
-		$('#search').removeClass();
-		$('#search').attr("class", "inSearch btn1");
-		
-		
-		
-		$('#prodWrnoteList').empty();
-		$.ajax({
-			url : "prodWrnoteIn",
-			method : "GET",
-			dataType : "JSON",
-			success : function(result) {
-				listWrnIn.resetData(result);			
-			}
-		});
-		
-		var listWrnIn = new tui.Grid({
-				el : document.getElementById('prodWrnoteList'),
-				columns : [{
-							header : '완제품LOT',
-							name : '완제품LOT'
-						}, {
-							header : '제품코드',
-							name : '제품코드'
-						}, {
-							header : '제품명',
-							name : '제품명'
-						}, {
-							header : '입고량',
-							name : '입고량'
-						}, {
-							header : '입고일자',
-							name : '입고일자'
-						}, {
-							header : '유통기한',
-							name : '유통기한'
-						}],
+var eq_nm;
+var eq_chkdt;
+var eq_chkeddt;
+// 점검 종료일 을 오늘날짜로 기본 셋팅
+document.getElementById('eq_chkdt2').value = new Date().toISOString().substring(0, 10);
+$(function(){
+		 const url = "eqActListAjax";
+		   $.ajax(url,{
+			   dataType : "JSON",
+			   method: "GET"
+			   
+		   }).done(function(result){
+			   grid.resetData(result);
+			  console.log(result);
+		   })
+			
+		   var grid = new tui.Grid({
+		       el: document.getElementById('chkList'),
+		       scrollX: false,
+		       scrollY: false,
+		       columns: [
+		         {
+		        	sortable: true,
+		           header: '설비코드',
+		           name: '설비코드',
+		         },
+		         {
+		             header: '설비명',
+		             name: '설비명',
+		           },
+		           { 	
+		               header: '점검일자',
+		               name: '점검일자',
+		             },
+		             {
+		                 header: '차기점검일',
+		                 name: '차기점검일',
+		               },
+		             {
+		                 header: '점검주기',
+		                 name: '점검주기',
+		               }
+		               ],
+		   					rowHeaders: ['rowNum'],
+		                     pageOptions: {
+		                         useClient: true,
+		                         perPage: 15
+		                    }
+		   });
+		   
+		   
+		   
+		// 클릭시 모달 호출
+			$("#searchEq").on("click" , function(e){
+				
+				eq_nm = $("#eq_nm option:selected").val();
+					
+				eq_chkdt1 = $("#eq_chkdt1").val();
+				eq_chkdt2 = $("#eq_chkdt2").val();
+				
+				console.log(eq_nm);
+				console.log(eq_chkdt1);
+				console.log(eq_chkdt2);
+					//모달 페이지 호출 부
+					$("#modalDiv").load("eqsearchmodal" , function(){
+						const myModal = new bootstrap.Modal('#myModal');
+						myModal.show();	
 						
-				rowHeaders : [ 'rowNum' ],
-				pageOptions : {
-					useClient : true,
-					perPage : 10
-				}		
-			})
-		})
-	
-	//출고 버튼
-	$("#outBtn").on("click", function(){
-		$('#prodWrnoteList').empty();
-		$('#inBtn').removeClass();
-		$('#inBtn').attr("class", "clickB");
-		$('#outBtn').removeClass();
-		$('#outBtn').attr("class", "btn2");
-		$('#search').removeClass();
-		$('#search').attr("class", "outSearch btn1");
+						
+					})
+					
+			}); // END OF BUTTON CLICKED EVENT AJAX
+				
+				
+			/* 	var eq_nm = $("#eq_nm").val();
+				var chk_dt = $("#eq_chkdt").val();
+				var chk_eddt = $("#eq_chkeddt").val(); */
+								
+				
+				
+					/* 	$.ajax({
+								url : "eqChkListAajx",
+								method : "POST",
+								data : 
+								{	eq_nm : eq_nm , 
+									eq_chkdt : chk_dt ,
+									eq_chkeddt : chk_eddt
+								} ,
+								dataType : 'JSON',
+								contentType: "application/json; charset=UTF-8"		
+									
+									
+									
+								}).done(function(result){
+									modalGrid.resetDate(result);
+									
+								}); // END OF AJAX */
+								
+								
+				
 		
-		$.ajax({
-			url : "prodWrnoteOut",
-			method : "GET",
-			dataType : "JSON",
-			success : function(result) {				
-				listWrnOut.resetData(result);			
-			}
-		});
-		
-		var listWrnOut = new tui.Grid({
-			el : document.getElementById('prodWrnoteList'),
-			columns : [ {
-				header : '완제품LOT',
-				name : '완제품LOT'
-			}, {
-				header : '제품코드',
-				name : '제품코드'
-			}, {
-				header : '제품명',
-				name : '제품명'
-			}, {
-				header : '출고량',
-				name : '출고량'
-			}, {
-				header : '출고일자',
-				name : '출고일자'
-			}, {
-				header : '유통기한',
-				name : '유통기한'
-			}
+			
+		   
+		   
 
-			],
-			rowHeaders : [ 'rowNum' ],
-			pageOptions : {
-				useClient : true,
-				perPage : 10
-			}
-		});
-	})
 
-	
-  /* 입/출고 검색 */
-  $("#search").on("click", function() {     
-     var pnm = $("#pnm").val();
-     var pcd = $("#pcd").val();
-     var fdt1 = $("#fdt1").val();
-     var fdt2 = $("#fdt2").val();     
-     if($("#search").hasClass("inSearch btn1")){
-    	 $('#prodWrnoteList').empty();
-    	 var listWrnIn = new tui.Grid({
-    			el : document.getElementById('prodWrnoteList'),
-    			columns : [ {
-    				header : '완제품LOT',
-    				name : '완제품LOT'
-    			}, {
-    				header : '제품코드',
-    				name : '제품코드'
-    			}, {
-    				header : '제품명',
-    				name : '제품명'
-    			}, {
-    				header : '입고량',
-    				name : '입고량'
-    			}, {
-    				header : '입고일자',
-    				name : '입고일자'
-    			}, {
-    				header : '유통기한',
-    				name : '유통기한'
-    			}
+});
+ </script>
 
-    			],
-    			rowHeaders : [ 'rowNum' ],
-    			pageOptions : {
-    				useClient : true,
-    				perPage : 10
-    			}
-    		});
-		     $.ajax({
-		        url : "searchWrnIn",
-		        data : {
-		              pnm : pnm,  
-		              pcd : pcd,
-		              fdt1 : fdt1,
-		              fdt2 : fdt2              
-		        },
-		        dataType: 'JSON',
-		        contentType : "application/json; charset=utf-8"
-		     }).done(function(result){         		    	 
-		    	 listWrnIn.resetData(result);          
-		     });
-	 }
-     if($("#search").hasClass("outSearch btn1")){
-    	 $('#prodWrnoteList').empty();
-    	 var listWrnOut = new tui.Grid({
- 			el : document.getElementById('prodWrnoteList'),
- 			columns : [ {
- 				header : '완제품LOT',
- 				name : '완제품LOT'
- 			}, {
- 				header : '제품코드',
- 				name : '제품코드'
- 			}, {
- 				header : '제품명',
- 				name : '제품명'
- 			}, {
- 				header : '출고량',
- 				name : '출고량'
- 			}, {
- 				header : '출고일자',
- 				name : '출고일자'
- 			}, {
- 				header : '유통기한',
- 				name : '유통기한'
- 			}
 
- 			],
- 			rowHeaders : [ 'rowNum' ],
- 			pageOptions : {
- 				useClient : true,
- 				perPage : 10
- 			}
- 		});
-			 $.ajax({
-			        url : "searchWrnOut",
-			        data : {
-			              pnm : pnm,  
-			              pcd : pcd,
-			              fdt1 : fdt1,
-			              fdt2 : fdt2
-			        },
-			        dataType: 'JSON',
-			        contentType : "application/json; charset=utf-8"
-			     }).done(function(result){
-			    	 console.log(result);
-			    	 listWrnOut.resetData(result);          
-			     });
-     }
-  })
+
+
+</html>

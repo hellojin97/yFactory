@@ -123,4 +123,42 @@
 		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_ed}, #{p_eq_dc}, #{p_eq_nt})}
 	</insert>
 
+<select id="getEqChkList" resultType="map">
+SELECT  e.eq_cd "설비코드" ,
+           e.eq_mdnm "설비명" , 
+           e.eq_nm "설비구분" , 
+           e.EQ_CHKCYC "점검주기", 
+           TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
+           TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+           case when chk.chk_rscd = 'DIV01' then '재점검 필요' 
+           when chk.chk_rscd = 'DIV02' then '통과' 
+           END "판정",
+           chk.EQ_CHKDTL "점검내역" ,
+           case when chk.eq_chkr = 1011 then '김세명'
+           when chk.eq_chkr = 1021 then '박진영'
+           when chk.eq_chkr = 1031 then '홍석민'
+           when chk.eq_chkr = 1041 then '이웅재'
+           when chk.eq_chkr = 1051 then '김진환'
+           end  "검수자"
+FROM eq e , eq_chk chk
+WHERE e.eq_cd = chk.eq_cd
+
+</select>
+
+<!-- 설비구분명 + 점검시작일 + 차기 점검일 기준 조회  -->
+<select id="getEqChkSelectList" resultType="map">
+SELECT e.EQ_CD "설비코드" ,
+ 			e.EQ_NM "설비명" , 
+ 			TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
+ 			TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+ 			e.EQ_CHKCYC "점검주기"
+
+FROM 	EQ e , EQ_CHK chk
+WHERE e.eq_cd = chk.eq_cd
+AND 		e.eq_nm like '%'||#{eq_nm}||'%'
+AND 		chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd') 
+
+</select>
+
+
 </mapper>

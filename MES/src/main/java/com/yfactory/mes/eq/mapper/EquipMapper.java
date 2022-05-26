@@ -1,9 +1,12 @@
 package com.yfactory.mes.eq.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 import com.yfactory.mes.eq.vo.EqVO;
 
@@ -36,7 +39,13 @@ public interface EquipMapper {
 	
 	List<Map> getEqInList(); // 비가동 상태 설비 조회
 	
-	int setEqIn(Map<String, String> result); // 비가동 설비 목록 추가
+
+	List<Map> getEqChkList(); // 설비 점검 전체 리스트
+
+	List<Map> selectEqPrc(String eqCd); // 설비코드기준 공정코드 + 공정명 조회
+
+	List<Map> getEqChkSelectList(@RequestBody HashMap<String, Object> list); // 설비구분명 + 점검시작일 + 차기점검일 기준 조회
+
 	
 	// -----------------------------------------------------------
 	
@@ -52,7 +61,7 @@ public interface EquipMapper {
 
 	int eqChkMng();// 설비 점검 일별 건수 조회(점검관리 페이지)
 
-	List<Map> selectEqPrc(String eqCd); // 설비코드기준 공정코드 + 공정명 조회
+	 
 	
 
 

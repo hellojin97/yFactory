@@ -151,7 +151,7 @@ button:hover {
 								<label for="inputText" class="col-form-label"
 									style="padding-right: 27px;">점검주기</label> <input type="number"
 									class="form-control" id="eq_chkcyc" name="eq_chkcyc"
-									style="width: 30px" min="3" max="7" placeholder="점검주기"
+									style="width: 30px" min="1" max="3" placeholder="점검주기"
 									data-name="점검주기">
 
 							</div>
@@ -175,8 +175,7 @@ button:hover {
 							<div class="input-group ">
 								<label for="inputText" class="col-form-label"
 									style="padding-right: 27px;">구매일자</label> <input type="date"
-									class="form-control" id="eq_purdt" name="eq_purdt" min="1"
-									max="500" style="width: 50px">
+									class="form-control" id="eq_purdt" name="eq_purdt"  style="width: 50px">
 							</div>
 						</div>
 

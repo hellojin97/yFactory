@@ -62,8 +62,8 @@
 				header : '업체명',
 				name : '업체명'
 			}, {
-				header : '입고량',
-				name : '입고량'
+				header : '입고예정량',
+				name : '입고예정량'
 			}, {
 				header : '검사일자',
 				name : '검사일자'
@@ -104,11 +104,10 @@
         		  /* 업체명 */
         		  	let vdrNm = pocd[i].업체명;
         		  /* 입고량 */
-        		  	let mtWrqty = pocd[i].입고량;	  
+        		  	let mtWrqty = pocd[i].입고예정량;	  
         		    console.log(poCd,mtCd,mtNm,vdrNm,mtWrqty);
         		}; 
   });
-
 	</script>
 </body>
 </html>

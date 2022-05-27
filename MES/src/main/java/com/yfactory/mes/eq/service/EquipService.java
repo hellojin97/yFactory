@@ -58,12 +58,14 @@ public interface EquipService {
 	List<Map> getEqChkList(); 
 	
 	// 설비구분명 + 점검시작일 + 차기점검일 기준 조회
-	List<Map>getEqChkSelectList(@RequestBody HashMap<String, Object> list);
+	List<Map>getEqChkSelectList(HashMap<String, Object> list);
 	
 	// 일일 점검 건수 리스트
-	List<Map> getEqDailyChkCount(@Param("chkdt1")String chkdt1 ,@Param("chkdt2")String chkdt2); 
-
-
+	List<Map> getEqDailyChkCount(String chkdt1 ,String chkdt2);
 	
+	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로  
+	List<Map> eqChkResultAjax( List<HashMap<String, Object>> list);
 	
+	 // 일점검건수 - 날짜를 기즌올 해달날짜 점검 데이터 조회 > 날짜가 여러개
+	List<Map> dailyChkListAjax( List<HashMap<String, Object>> list);
 }

@@ -56,6 +56,11 @@ public interface EquipMapper {
 	
 	List<Map> getEqDailyChkCount(@Param("chkdt1")String chkdt1 ,@Param("chkdt2")String chkdt2); // 일일 점검 건수 리스트
 	
+  
+	List<Map> eqChkResultAjax(@RequestBody List<HashMap<String, Object>>list); 	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로
+	
+	List<Map> dailyChkListAjax(@RequestBody List<HashMap<String, Object>> list); // 일점검건수 - 날짜를 기즌올 해달날짜 점검 데이터 조회 > 날짜가 여러개
+	
 	// -----------------------------------------------------------
 	
 	List<Map> eqInaAll(); // 설비 비가동 리스트(설비비가동 페치지)

@@ -18,9 +18,9 @@
 				<div class="col-md-6" style="padding-bottom: 10px;">
 					<div class="input-group" style="padding-bottom: 10px;">
 						<div class="col-md-3">
-							<label for="inputText" class="col-form-label" style="padding-right: 27px;">발주상세코드</label>
+							<label for="inputText" class="col-form-label" style="padding-right: 27px;">발주 코드</label>
 						</div>
-						<input type="text" class="form-control" style="width: 50px" placeholder="발주상세코드를 입력해주십시오" id="pdt" readonly>
+						<input type="text" class="form-control" style="width: 50px" placeholder="발주코드를 입력해주십시오" id="pdt" readonly>
 						<a class="nav-link nav-icon search-bar-toggle" id="pdcBtn" onclick="pdcBtn">
 							<i class="bi bi-search" style="color: #2c3e50"></i>
 						</a>
@@ -31,9 +31,9 @@
 				<div class="col-md-6" style="padding-bottom: 10px;">
 					<div class="input-group" style="padding-bottom: 10px;">
 						<div class="col-md-3">
-							<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재코드</label>
+							<label for="inputText" class="col-form-label" style="padding-right: 27px;">발주 신청인</label>
 						</div> 
-						<input type="text" class="form-control" style="width: 50px" placeholder="자재코드를 입력해주십시오" id="mcd" readonly="readonly">
+						<input type="text" class="form-control" style="width: 50px" placeholder="신청인을 입력해주십시오" id="mcd" readonly="readonly">
 					</div>
 				</div>
 				
@@ -41,31 +41,12 @@
 				<div class="col-md-6" style="padding-bottom: 10px;">
 					<div class="input-group" style="padding-bottom: 10px;">
 						<div class="col-md-3">
-							<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재명</label>
+							<label for="inputText" class="col-form-label" style="padding-right: 27px;">발주 신청일</label>
 						</div> 
-						<input type="text" class="form-control" style="width: 50px" placeholder="자재명을 입력해주십시오" id="mnm" disabled>
+						<input type="text" class="form-control" style="width: 50px" placeholder="YYYY-MM-DD" id="mnm" disabled>
 					</div>
 				</div>
 				
-				<!-- 업체명 -->
-				<div class="col-md-6" style="padding-bottom: 10px;">
-					<div class="input-group" style="padding-bottom: 10px;">
-						<div class="col-md-3">
-							<label for="inputText" class="col-form-label" style="padding-right: 27px;">업체명</label>
-						</div> 
-						<input type="text" class="form-control" style="width: 50px" placeholder="업체명을 입력해주십시오" id="vnm" disabled>
-					</div>
-				</div>
-				
-				<!-- 발주량 -->
-				<div class="col-md-6" style="padding-bottom: 10px;">
-					<div class="input-group" style="padding-bottom: 10px;">
-						<div class="col-md-3">
-							<label for="inputText" class="col-form-label" style="padding-right: 27px;">발주량</label>
-						</div> 
-						<input type="text" class="form-control" style="width: 50px" placeholder="발주량을 입력해주십시오" id="pqty" disabled>
-					</div>
-				</div>
 				
 				<div class="col-md-5" style="padding-bottom: 10px;">
 					<div class="input-group">
@@ -101,13 +82,13 @@
 			url: "reqMtQuality",
 			method: "get",
 			data: {
-				pdt: pdt,
-				mcd: mcd
-			},
-			dataType:"json",
-			contentType : "application/json; charset=utf-8"
+				pdt: pdt
+			}
+			
+			
 		}).done(function() {
 			alert(mnm + '의 품질검사 신청이 완료되었습니다.');
+			location.href = 'qa_requestMgr';
 		}).fail(function() {
 			alert(mnm + '의 품질검사 신청이 실패하였습니다.');
 		})

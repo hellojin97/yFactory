@@ -53,20 +53,14 @@
 	var grid = new tui.Grid({
 		el: document.getElementById('poDtlCd'),
 		columns: [ {
-			header: '발주상세코드',
-			name: '발주상세코드',
+			header: '발주코드',
+			name: '발주코드',
 		}, {
-			header: '자재코드',
-			name: '자재코드',
+			header: '발주신청일',
+			name: '발주신청일',
 		}, {
-			header: '자재명',
-			name: '자재명',
-		}, {
-			header: '업체명',
-			name: '업체명',
-		}, {
-			header: '발주량',
-			name: '발주량',
+			header: '발주신청인',
+			name: '발주신청인',
 		}],
 		rowHeaders: [ 'rowNum' ],
 		pageOptions : {
@@ -107,19 +101,16 @@
 	//모달 데이터값 받아오기
 	grid.on("dblclick",function(e) {
     //debugger
-       let poDtlCd = grid.getValue(e.rowKey, '발주상세코드');
-	   let mtCd = grid.getValue(e.rowKey, '자재코드');
-       let mtName = grid.getValue(e.rowKey, '자재명');
-       let vName = grid.getValue(e.rowKey, '업체명');
-       let poQty = grid.getValue(e.rowKey, '발주량'); 
+       let poCd = grid.getValue(e.rowKey, '발주코드');
+	   let mtDt = grid.getValue(e.rowKey, '발주신청일');
+       let mtName = grid.getValue(e.rowKey, '발주신청인');
        
        
        
-       $("#pdt").val(poDtlCd);
-       $("#mcd").val(mtCd);
-       $("#mnm").val(mtName);
-       $("#vnm").val(vName);
-       $("#pqty").val(poQty);
+       $("#pdt").val(poCd);
+       $("#mcd").val(mtName);
+       $("#mnm").val(mtDt);
+       
        $('#poDtlCdModal').modal('hide');
 	});
 	</script>

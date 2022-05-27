@@ -61,14 +61,14 @@ var grid2;
 	
 
 		console.log("--1--------"+eq_nm);
-		console.log("---2-------"+eq_chkdt1);
-		console.log("----3------"+eq_chkdt2);
+		//console.log("---2-------"+eq_chkdt1);
+		//console.log("----3------"+eq_chkdt2);
 
 		var url1 = "eqChkSelectAjax";
 		var data = {
-				eq_nm : eq_nm  , 
-				eq_chkdt1  : eq_chkdt1 , 
-				eq_chkdt2 :  eq_chkdt2
+				eq_nm : eq_nm 
+				/* ,eq_chkdt1  : eq_chkdt1
+				,eq_chkdt2 :  eq_chkdt2 */
 		};
 		$.ajax(url1, {
 			method : "POST",
@@ -129,18 +129,20 @@ var grid2;
 		
 		
 		var setArr = [];
-	savbtn.addEventListener("click" , function(){
+	$("#savbtn").on("click" , function(){
 		console.log(grid2.getCheckedRows());
 		let arr = grid2.getCheckedRows();
+		console.log(arr);
 		$('#myModal').modal('hide');
-		//console.log( "checkedRows"+grid2.getCheckedRows());
+		
 		for(var i = 0; i < arr.length; i++) {
-			console.log(arr[i]);
+			
 			setArr.push(arr[i])
-			//console.log(modalGrid);
-			modalGrid.clear();
-			modalGrid.appendRows(setArr);
+			
+			
 		} 
+		modalGrid.clear();
+		modalGrid.appendRows(setArr);
 		
 	});
 

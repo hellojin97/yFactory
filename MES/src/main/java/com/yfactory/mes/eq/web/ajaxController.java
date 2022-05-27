@@ -1,6 +1,5 @@
 package com.yfactory.mes.eq.web;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,7 +124,7 @@ public class ajaxController {
 	public List<Map> eqActListAjax(){
 		return mapper.getEqChkList();
 	}
-	// 설비구분명 + 점검시작일 + 점검종료일 기준 조회 
+	// 설비구분명 + 점검시작일 + 점검종료일 기준 조회  // 참고 : https://dororongju.tistory.com/124
 	@RequestMapping(value = "/eqChkSelectAjax", method = RequestMethod.POST)
 	public List<Map> eqChkListAajx(@RequestBody HashMap<String, Object> list){
 		
@@ -139,5 +138,21 @@ public class ajaxController {
 	public List<Map> getEqDailyChkListAjax(@RequestParam("chkdt1") String chkdt1 , @RequestParam("chkdt2") String chkdt2){
 		return mapper.getEqDailyChkCount(chkdt1 , chkdt2);
 	}
-
+	
+	@RequestMapping(value="/eqChkResultAjax" , method=RequestMethod.POST)
+	public List<Map>eqChkResultAjax(@RequestBody List<HashMap<String, Object>> list){
+		System.out.println("--------------------->"+list);
+		return mapper.eqChkResultAjax(list);
+	}
+	
+	@RequestMapping(value="/dailyChkListAjax" , method=RequestMethod.POST)
+	public List<Map>dailyChkListAjax(@RequestBody List<HashMap<String, Object>> list){
+		System.out.println("--dailyChkListAjax-->"+list);
+		return mapper.dailyChkListAjax(list);
+	}
+	
+	
+	
+	
+	
 }

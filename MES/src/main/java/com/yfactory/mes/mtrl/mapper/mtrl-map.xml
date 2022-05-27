@@ -155,27 +155,33 @@
 		FROM   mt_po
 		WHERE  po_cd LIKE '%'||#{pocd}||'%'
 	</select>
+	
 	<!-- 발주관리 조회 -->
 	<select id="listRequest" resultType="map">
-	SELECT po.po_cd    "원자재발주코드",
-	       m.mt_cd    "원자재코드",
-	       m.mt_nm    "원자재명",
-	       vdr.vdr_nm   "업체명",
-	       pdl.po_qty   "발주수량",
-	       m.mt_unit  "단위",
-	       to_char(lot.mt_wdt, 'YYyy-MM-DD') "입고신청일",
-	       to_char(pdl.po_reqdt, 'YYyy-MM-DD') "납기신청일",
-	       m.mt_prc   "단가",
-	       (po_qty*mt_prc)"금액"
-	FROM   mt_po po,
-	       mt m,
-	       vendor vdr,
-	       mt_podtl pdl,
-	       mt_lot lot
-	WHERE  po.po_cd = pdl.po_cd
-	AND    po.mt_cd = m.mt_cd
-	AND    m.mt_cd = lot.mt_cd
-	AND    m.vdr_cd = vdr.vdr_cd
+   SELECT DISTINCT 
+          po.po_cd    "원자재발주코드",
+          m.mt_cd    "원자재코드",
+          m.mt_nm    "원자재명",
+          vdr.vdr_nm   "업체명",
+          pdl.po_qty   "발주수량",
+          m.mt_unit  "단위",
+          to_char(po.po_reqdt, 'YYyy-MM-DD') "입고신청일",
+          to_char(pdl.po_reqdt, 'YYyy-MM-DD') "납기신청일",
+          m.mt_prc   "단가",
+          (po_qty*mt_prc)"금액"
+          
+   FROM   mt_po po,
+          mt m,
+          vendor vdr,
+          mt_podtl pdl,
+
+   WHERE  po.po_cd = pdl.po_cd
+   AND    pdl.mt_cd = m.mt_cd
+   AND    m.vdr_cd = vdr.vdr_cd
+   AND    po.po_cd IN (select po_cd
+                                     from mt_podtl
+                                     where po_dtlcd not IN (select po_dtlcd
+                                                                      from mt_chk))
 	</select>
 	<!-- 발주검색 -->
 	<select id="mtrlReqSelectSearch" resultType="map">
@@ -185,14 +191,15 @@
 	       vdr.vdr_nm   "업체명",
 	       pdl.po_qty   "발주수량",
 	       m.mt_unit  "단위",
-	       to_char(lot.mt_wdt, 'YYyy-MM-DD') "입고신청일",
-	       to_char(pdl.po_reqdt, 'YYyy-MM-DD') "납기신청일",
+	       to_char(lot.mt_wdt, 'YYYY-MM-DD') "입고신청일",
+	       to_char(pdl.po_reqdt, 'YYYY-MM-DD') "납기신청일",
 	       m.mt_prc   "단가",
 	       (po_qty*mt_prc)"금액"
+	       
 	FROM   mt_po po,
 	       mt m,
 	       vendor vdr,
-	       mt_podtl pd
+	       mt_podtl pdl,
 	       mt_lot lot
 	WHERE  po.po_cd = pdl.po_cd
 	AND    po.mt_cd = m.mt_cd
@@ -202,15 +209,24 @@
 	AND 	po.po_cd LIKE '%'||#{poCdinput}||'%'
 		</if>
 	</select>
+	
+	
+	
 	<!-- 발주등록 -->
 	<insert id="mtrlReqInsert" statementType="CALLABLE" parameterType="map">
-	{CALL INSERT_PO(#{mt_cd},
+	{CALL INSERT_PO(
+					#{param},
+					#{mt_cd},
 				    #{mt_nm},
 				    #{vdr_nm},
 				    #{req_dt},
 				    #{po_qty})}
 	</insert>
-	<!-- 입고조회 -->
+	
+	
+	
+	
+<!-- 	 입고조회 
 	<select id="insertList" resultType="map">
 	SELECT
 	    po.po_cd "원자재발주코드",
@@ -233,7 +249,7 @@
 	AND    lot.mt_cd = m.mt_cd
 	AND    lot.mt_lot = wne.mt_lot
 	AND    wr_cd = 'INOUT01'
-	</select>
+	</select> -->
 	<!-- 입고 검색조회 -->
 	<select id="insertSearch" resultType="map">
 		SELECT
@@ -267,7 +283,7 @@
 		AND 	lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
 			</if>
 	</select>
-	<!-- 입고예정 조회 -->
+<!-- 입고조회	
 	<select id="expectList" resultType="map">
 	SELECT
 	       po.po_cd "원자재발주코드",
@@ -275,7 +291,7 @@
 	       m.mt_nm "원자재명",
 	       vdr.vdr_cd "업체명",
 	       wne.mt_wrqty "입고량",
-	       chk.chk_dt   "검사일자"
+	       TO_CHAR(chk.chk_dt, 'YYYY-MM-DD')   "검사일자"
 	    
 	FROM   mt_po po,
 	       mt m,
@@ -291,5 +307,5 @@
 	AND    m.mt_cd = chk.mtrl_cd
 	AND    wne.wr_cd = 'INOUT01'
 	AND    chk.chk_insp = 'MTRL02'
-	</select>
+	</select> -->
 </mapper>

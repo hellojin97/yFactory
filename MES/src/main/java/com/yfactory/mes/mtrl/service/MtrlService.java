@@ -48,6 +48,8 @@ public interface MtrlService {
 	
 	//입고조회
 	List<Map>insertList();
+	//입고예정버튼
+	List<Map>selectMtrlReqList(Map<String, String> result);
 	//입고 전체조회
 	List<Map>insertSearch(String m1,
 			 String m2,

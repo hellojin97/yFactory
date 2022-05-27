@@ -33,6 +33,9 @@ public interface MtrlMapper {
 							 @Param("req2") String req2);
 	//입고조회
 	List<Map>insertList();
+	//입고예정버튼
+	List<Map>selectMtrlReqList(Map<String, String> result);
+	
 	
 	/*MODAL페이지*/
 	//자재명 전체조회
@@ -54,5 +57,6 @@ public interface MtrlMapper {
 			 @Param("req2") String req2);
 	//입고예정목록
 	List<Map>expectList();
+	
 	
 }

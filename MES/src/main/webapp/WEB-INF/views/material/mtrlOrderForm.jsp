@@ -283,6 +283,8 @@ unorder.on("dblclick",function(e) {
         	  let rand_0_9 = Math.floor(Math.random()*100000000);
 
 			  	console.log(rand_0_9);
+			  	
+			  	
         	  for (var i = 0; i < pocd.length; i++) {
         		  
         		  /* 원자재코드 */
@@ -301,7 +303,7 @@ unorder.on("dblclick",function(e) {
        		  	$.ajax({
         		  		url :'mtrlReqInsert',
         		  		method : 'POST',
-        		  		async : false,
+        		  		async: false,
         		  		data : {
         		  				"param" : rand_0_9,
         		  				"mt_cd" : mtCd,
@@ -314,14 +316,7 @@ unorder.on("dblclick",function(e) {
         		  			console.log(result);
         		  		});  	
         		};
-        	  
-              Swal.fire(
-                  '승인이 완료되었습니다.',
-                  '출고등록이 완료되었습니다.',
-                  'success'
-              );
-
-              
+        	                
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',

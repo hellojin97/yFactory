@@ -274,6 +274,7 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 
 	<select id="ProcOrderCdSelectOne" resultType="map">
 	select DISTINCT ins.ins_cd "생산지시코드",
+	insdtl.prd_dtlcd "생산지시상세코드",
 	pd.prod_nm "제품명",
     pd.prod_cd "제품코드",
 	insdtl.ins_qty "생산수량",
@@ -285,7 +286,7 @@ AND DTL.PRD_DTLCD = #{dtlCd}
     AND   ins.ins_cd = #{dtlCd}
 	</select>
 	<select id="ProcOrderLineSelectOne" resultType="map">
-	SELECT PRC.PROC_PRCD "진행공정코드",
+	SELECT DISTINCT PRC.PROC_PRCD "진행공정코드",
 	PRC.PROC_CD "공정코드",
 	 PC.PROC_NM "공정명", 
 	 PC.EQ_CD "설비코드", 
@@ -298,7 +299,62 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	AND PC.EQ_CD = EQ.EQ_CD
 	AND LI.LINE_CD = #{line}
 	</select>
+	<insert id="procLogic">
+
+	</insert>
+
 	<insert id="ProcPlanInsert" statementType="CALLABLE" parameterType="map" >
 	
 	</insert>
+	
+	<select id="procResultList" resultType="map">
+		SELECT PID.INS_DTLCD AS "생산지시코드",
+	           PRC.PROC_PRCD AS "진행공정코드",
+	           PROC.PROC_NM AS "공정명",
+	           PROC.EQ_CD AS "설비코드",
+	           E.EQ_NM AS "설비명",
+	           PRC.PROC_QTY AS "투입량",
+	           PS.PROC_QTY AS "생산량",
+	           PERR.ERR_QTY AS "불량량",
+	           PERR.ERR_CD AS "불량코드",
+	           ERR.ERR_DTL AS "불량상세",
+	           TO_CHAR(PRC.PROC_STTM, 'YYYY-MM-DD') AS "공정시작시간",
+	           TO_CHAR(PRC.PROC_EDTM, 'YYYY-MM-DD') AS "공정종료시간",
+	           EMP.EMP_NM AS "담당자",
+	           TO_CHAR(PID.INS_DTLDT, 'YYYY-MM-DD') AS "생산지시일자"
+           
+		FROM   PRD_INSDTL PID, PROC_PRC PRC, PROCESS PROC, 
+		       EQ E, PROC_ST PS, PROC_ERR PERR, ERR_CODE ERR, 
+		       EMPLOYEE EMP
+          
+		WHERE  PID.PRD_DTLCD = PRC.PRD_DTLCD
+		AND    PRC.PROC_CD = PROC.PROC_CD
+		AND    PRC.PROC_MGR = EMP.EMP_NO
+		AND    PROC.EQ_CD = E.EQ_CD
+		AND    PERR.LINE_TURN = PRC.LINE_TURN
+		AND    PERR.PROC_PRCD = PRC.PROC_PRCD
+		AND    PS.PROC_PRCD = PRC.PROC_PRCD
+		AND    PS.LINE_TURN = PRC.LINE_TURN
+		AND    PERR.ERR_CD = ERR.ERR_CD
+	</select>
+	
+	<select id="procResultOrdersList" resultType="map">
+	SELECT   PID.INS_DTLCD AS "생산지시코드",
+             PD.PROD_NM AS "제품명",
+             PST.PROC_QTY AS "생산수량",
+             TO_CHAR(PID.INS_DTLDT,'YYYY-MM-DD') AS "생산지시일자"
+	FROM     PRD_INSDTL PID, PROD PD, PROC_ST PST, PROC_PRC PRC
+	WHERE    PD.PROD_CD = PID.PROD_CD
+	AND      PID.PRD_DTLCD = PRC.PRD_DTLCD
+	AND      PST.PROC_PRCD = PRC.PROC_PRCD
+	AND      PST.LINE_TURN = PRC.LINE_TURN
+	AND      PST.PROC_ST = 'PLAN02'
+	</select>
+	
+	<select id="procResultProcessList" resultType="map">
+		SELECT	proc_cd AS "공정코드",
+				eq_cd AS "설비코드",
+				proc_nm AS "공정명"
+		FROM	process
+	</select>
 </mapper>

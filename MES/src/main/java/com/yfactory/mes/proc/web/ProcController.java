@@ -78,5 +78,17 @@ public class ProcController {
 	public String procResult() {
 		return "proc/procResult";
 	}
+	
+	// 공정실적조회 - 생산지시코드 모달
+	@GetMapping("/procResultCdModal")
+	public String procResultCdModal() {
+		return "proc/procmodal/procResultCdModal";
+	}
+	
+	// 공정실적조회 - 공정명 모달
+	@GetMapping("/procResultNmModal")
+	public String procResultNmModal() {
+		return "proc/procmodal/procResultNmModal";
+	}
 
 }

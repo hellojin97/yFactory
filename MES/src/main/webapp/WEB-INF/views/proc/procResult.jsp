@@ -27,11 +27,12 @@
 	<div class="col-md-12" style="padding-bottom: 10px;">
 			
 			<!-- 생산코드 -->
-			<div class="col-md-5 " style="padding-bottom: 10px;">
+			<div class="col-md-12 " style="padding-bottom: 10px;">
 					<div class="input-group  " style="padding-bottom: 10px;">
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">생산지시코드</label> 
-						<input type="text" class="form-control" style="width: 50px" placeholder="생산지시코드" id="prdCd">
-							
+						<div class="col-sm-2">
+							<input type="text" class="form-control" placeholder="생산지시코드" id="prdCd">
+						</div>
 						<a class="nav-link nav-icon search-bar-toggle" id="procCdBtn" onclick="procCdBtn">
 							<i class="bi bi-search" style="color: #2c3e50"></i>
 						</a>											
@@ -41,15 +42,15 @@
 			<!-- 공정명 -->
 			<div class="col-md-5 " style="padding-bottom: 10px;">
 					<div class="input-group" style="padding-bottom: 10px;">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">공정명</label>
+						<label for="inputText" class="col-form-label" style="padding-right: 72px;">공정명</label>
 						
-							<input type="text" class="form-control" style="width: 50px" placeholder="공정명" id="procNm">
+							<input type="text" class="form-control" placeholder="공정명" id="procNm">
 							
-						<a class="nav-link nav-icon search-bar-toggle" id="procNmBtn" onclick="prodBtn">
+						<a class="nav-link nav-icon search-bar-toggle" id="procNmBtn" onclick="procNmBtn">
 							<i class="bi bi-search" style="color: #2c3e50"></i>
 						</a>
 						
-						<input type="text" id="eqCd" class="form-control" readonly="readonly">
+						<input type="text" id="procCd" class="form-control" readonly="readonly">
 												
 					</div>
 				</div>
@@ -58,7 +59,7 @@
 			<div class="col-md-8">
 			<div class="input-group">
 					<label for="inputText" class="col-form-label"
-						style="padding-right: 10px;">계획일자</label>
+						style="padding-right: 58px;">계획일자</label>
 					<div class="col-sm-3">
 						<input type="date" class="form-control" id="req1">
 					</div>
@@ -77,20 +78,13 @@
 				</div>
 				</div>
 			</div>
-			
 				</form>
 				</div>
 	<div id="procResultList"></div>
 	</div>
 	
-	
-		
-		
-	
-	
-	
-	
-<div id="test"></div>
+<div id="procResultCdModal"></div>
+<div id="procResultNmModal"></div>
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
@@ -98,11 +92,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
-	 let ord = [];
+	
 
 // 공정 실적 조회
 $.ajax({
-	url: "",
+	url: "procResultList",
 	method : "GET",
 	dataType : "JSON",
 	success : function(result){
@@ -118,8 +112,8 @@ var procResultList = new tui.Grid({
             name: '생산지시코드'
           },
           {
-            header: '생산코드',
-            name: '생산코드'
+            header: '진행공정코드',
+            name: '진행공정코드'
           },
           {
             header: '공정명',
@@ -138,6 +132,10 @@ var procResultList = new tui.Grid({
               name: '투입량'
             },
             {
+                header: '생산량',
+                name: '생산량'
+              },
+            {
                 header: '불량량',
                 name: '불량량'
               },
@@ -150,20 +148,20 @@ var procResultList = new tui.Grid({
                   name: '불량상세'
                 }
               ,{
-                  header: '공정종료시간',
-                  name: '공정종료시간'
+                  header: '공정시작시간',
+                  name: '공정시작시간'
                 }
               ,{
-                  header: '투입량',
-                  name: '투입량'
+                  header: '공정종료시간',
+                  name: '공정종료시간'
                 }
               ,{
                   header: '담당자',
                   name: '담당자'
                 }
               ,{
-                  header: '지시일자',
-                  name: '지시일자'
+                  header: '생산지시일자',
+                  name: '생산지시일자'
                 }
     ],
     rowHeaders: ['rowNum'],
@@ -173,7 +171,35 @@ var procResultList = new tui.Grid({
     }
   });
 
+procCdBtn.addEventListener("click", function(){
+	$("#procResultCdModal").load("procResultCdModal", function(){
+		const cdModal = new bootstrap.Modal('#cdModal');
+		cdModal.show();
+	})
+})
 	
+procNmBtn.addEventListener("click", function(){
+	$("#procResultNmModal").load("procResultNmModal", function(){
+		const nmModal = new bootstrap.Modal('#nmModal');
+		nmModal.show();
+	})
+})
+
+$("#search").on("click", function(){
+	let prdCd = $("#prdCd").val();
+	let procNm = $("#procNm").val();
+	let req1 = $("#req1").val();
+	let req2 = $("#req2").val();
+	
+	$.ajax({
+		url : "",
+		data : {
+			
+		}
+	}).done(function(result){
+		procResultList.resetData(result);
+	})
+})
 
   
 </script>

@@ -191,6 +191,30 @@ public class ProcServiceImpl implements ProcService{
 
 
 
+	@Override
+	public List<Map> procResultList() {
+		return map.procResultList();
+	}
+
+
+
+
+	@Override
+	public List<Map> procResultOrdersList() {
+		return map.procResultOrdersList();
+	}
+
+
+
+
+	@Override
+	public List<Map> procResultProcessList() {
+		return map.procResultProcessList();
+	}
+
+
+
+
 
 
 

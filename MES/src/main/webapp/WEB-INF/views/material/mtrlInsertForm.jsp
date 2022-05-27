@@ -228,7 +228,7 @@
    var vdrNminput = $("#vdrNminput").val();
    var req1 = $("#req1").val();
    var req2 = $("#req2").val();
-	console.log(vdrNminput);
+
    $.ajax({
       url : "insertSearch",
       data : {

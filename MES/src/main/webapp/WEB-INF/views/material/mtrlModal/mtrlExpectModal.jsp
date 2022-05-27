@@ -95,19 +95,19 @@
    $("#select").on("click", function(){
         	  let pocd = mtrlExpectList.getCheckedRows();
         	  for (var i = 0; i < pocd.length; i++) {  
+        		  
         		  /* 원자재발주코드 */
-      			    let poCd = pocd[i].원자재발주코드;
-        		  /* 원자재코드 */
-        			let mtCd = pocd[i].원자재코드;
-        		  /* 원자재명  */
-        		  	let mtNm = pocd[i].원자재명;
-        		  /* 업체명 */
-        		  	let vdrNm = pocd[i].업체명;
-        		  /* 입고량 */
-        		  	let mtWrqty = pocd[i].입고예정량;	  
-        		    console.log(poCd,mtCd,mtNm,vdrNm,mtWrqty);
-        		    
-        		    
+      			    let poCd = pocd[i];
+        		  console.log(poCd)
+        		    $.ajax({
+        		    	url : 'selectMtrlReqList',
+        		    	data : poCd,
+        		 		dataType : 'JSON'
+        		    }).done(function(result){
+        		    	listMtrlInsert.appendRow(result)
+        		    	console.log(result);
+        		    })
+        		   
         		}; 
         		
         		

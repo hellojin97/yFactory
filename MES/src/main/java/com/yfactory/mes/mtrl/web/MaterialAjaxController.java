@@ -110,4 +110,10 @@ public class MaterialAjaxController {
 			return service.expectList();
 		}
 		
+		//입고예정 목록 버튼
+		@GetMapping("/selectMtrlReqList")
+		public List<Map> selectMtrlReqList(@RequestParam Map<String, String> result){
+			return service.selectMtrlReqList(result);
+			
+		}
 }

@@ -165,7 +165,7 @@
           vdr.vdr_nm   "업체명",
           pdl.po_qty   "발주수량",
           m.mt_unit  "단위",
-          to_char(po.po_reqdt, 'YYyy-MM-DD') "입고신청일",
+          to_char(po.po_reqdt, 'YYyy-MM-DD') "발주신청일",
           to_char(pdl.po_reqdt, 'YYyy-MM-DD') "납기신청일",
           m.mt_prc   "단가",
           (po_qty*mt_prc)"금액"
@@ -173,7 +173,7 @@
    FROM   mt_po po,
           mt m,
           vendor vdr,
-          mt_podtl pdl,
+          mt_podtl pdl
 
    WHERE  po.po_cd = pdl.po_cd
    AND    pdl.mt_cd = m.mt_cd

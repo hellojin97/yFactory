@@ -301,6 +301,7 @@ unorder.on("dblclick",function(e) {
        		  	$.ajax({
         		  		url :'mtrlReqInsert',
         		  		method : 'POST',
+        		  		async : false,
         		  		data : {
         		  				"param" : rand_0_9,
         		  				"mt_cd" : mtCd,

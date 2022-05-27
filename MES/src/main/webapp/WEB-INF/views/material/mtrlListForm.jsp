@@ -139,8 +139,8 @@ $.ajax({
   	    name: '단위'
   	  },
 	      {
-  	    header: '입고신청일',
-  	    name: '입고신청일'
+  	    header: '발주신청일',
+  	    name: '발주신청일'
   	  },
 	      {
   	    header: '납기신청일',

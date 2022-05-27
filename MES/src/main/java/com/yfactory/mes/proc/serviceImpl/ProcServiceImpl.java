@@ -56,17 +56,11 @@ public class ProcServiceImpl implements ProcService{
 		return map.PrdSelectOne(prodCd);
 	}
 
-
+	// 생산계획 등록
 	@Override
-	public int ProcPlanInsert(HashMap<String, Object> procPI) {
+	public int ProcPlanInsert(Map<String, String> procPI) {
 		// TODO Auto-generated method stub
-		// ajax 해온 값
-		System.out.println(procPI);
-		List<Map<String, String>> list = (List<Map<String, String>>) procPI.get("array");
-		// 배열에 뽑은 값
-		System.out.println(list);
-		//return map.ProcPlanInsert(procPI);
-		return 1;
+		return map.ProcPlanInsert(procPI);
 	}
 
 
@@ -192,6 +186,30 @@ public class ProcServiceImpl implements ProcService{
 	public List<Map> ProcLogic(HashMap<String, Object> list) {
 		
 		return map.ProcLogic(list);
+	}
+
+
+
+
+	@Override
+	public List<Map> procResultList() {
+		return map.procResultList();
+	}
+
+
+
+
+	@Override
+	public List<Map> procResultOrdersList() {
+		return map.procResultOrdersList();
+	}
+
+
+
+
+	@Override
+	public List<Map> procResultProcessList() {
+		return map.procResultProcessList();
 	}
 
 

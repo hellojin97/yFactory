@@ -91,12 +91,12 @@
 						PRC.PROC_CD "공정코드" ,
 						PRC.PROC_NM "공정명" ,
 						E.EQ_CHKCYC "점검주기",
-						CASE WHEN E.EQ_ACTST like 'USE-01' THEN 'Y' ELSE 'N' END "사용여부"
+						CASE WHEN E.EQ_ACTST like 'USE01' THEN 'Y' ELSE 'N' END "사용여부"
 						 
 	FROM 			EQ E ,
-						PROCESS PRC
+					PROCESS PRC
 						
-	WHERE				E.EQ_CD = PRC.EQ_CD
+	WHERE			E.EQ_CD = PRC.EQ_CD
 	<if test="key == 1">
 	</if>
 	<if test="key == 2">
@@ -114,11 +114,36 @@
 				e.eq_nm AS "설비명",
 				TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
 				TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
-				ei.eq_note AS "사유"
-		from 	eq_ina ei, eq e
+				cm.cd_nm AS "사유"
+		from 	eq_ina ei, eq e, comm_code cm
 		where 	ei.eq_cd = e.eq_cd
+		and       cm.comm_cd = ei.dis_code
+		ORDER BY 1
 	</select>
 	
+	<!-- 비가동 설비 내역 검색 -->
+	<select id="searchEqIna" parameterType="map" resultType="map">
+		select	ei.eq_cd AS "설비코드",
+				e.eq_nm AS "설비명",
+				TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
+				TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
+				cm.cd_nm AS "사유"
+		from 	eq_ina ei, eq e, comm_code cm
+		where 	ei.eq_cd = e.eq_cd
+		and     cm.comm_cd = ei.dis_code
+		<if test="req1 != '' and req2 != ''">
+		and		ei.eq_inasd BETWEEN TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
+		</if>
+		<if test="eqCd != ''">
+		and		ei.eq_cd = #{eqCd}
+		</if>
+		<if test="eqCd == '' and eqNm != ''">
+		and		e.eq_nm = #{eqNm}
+		</if>
+		ORDER BY 1
+	</select>
+	
+	<!-- 비가동 설비 내역 추가 -->
 	<insert id="setEqIn" statementType="CALLABLE"  parameterType="map">
 		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_ed}, #{p_eq_dc}, #{p_eq_nt})}
 	</insert>
@@ -150,14 +175,22 @@ WHERE e.eq_cd = chk.eq_cd
 SELECT e.EQ_CD "설비코드" ,
  			e.EQ_NM "설비명" , 
  			TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
- 			TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+ 			TO_CHAR(to_date(chk.eq_chkdt,'yyyy-MM-dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
  			e.EQ_CHKCYC "점검주기"
 
 FROM 	EQ e , EQ_CHK chk
 WHERE e.eq_cd = chk.eq_cd
 AND 		e.eq_nm like '%'||#{eq_nm}||'%'
 AND 		chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd') 
+</select>
 
+<!--  일 점검 건수 조회-->
+<select id="getEqDailyChkCount" resultType="map">
+SELECT 		DISTINCT TO_CHAR(eq_chkdt,'yyyy-MM-dd') "점검일자" , 
+				count(eq_chkdt) "건수" 
+FROM 		eq_chk
+WHERE		eq_chkdt BETWEEN #{chkdt1} AND #{chkdt2}
+GROUP BY eq_chkdt
 </select>
 
 

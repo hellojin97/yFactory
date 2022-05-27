@@ -13,7 +13,7 @@
 	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-<style type="text/css">
+<style>
 .btnpart {
 	background-color: #555555;
 	color: white;
@@ -23,6 +23,8 @@ button:hover {
 	color: black;
 	background-color: white;
 }
+
+
 </style>
 </head>
 <body>
@@ -75,8 +77,7 @@ button:hover {
 			<div align="right">
 				<span>
 					<button type="button" class="btn btnpart">초기화</button>
-					<button type="button" class="btn btnpart">일점검조회</button>
-					<button type="button" class="btn btnpart">전체조회</button>
+					<button type="button" class="btn btnpart" id="dailyChk">일점검조회</button>
 					<button type="button" class="btn btnpart">저장</button>
 					<button type="button" class="btn btnpart">삭제</button>
 				</span>
@@ -84,8 +85,13 @@ button:hover {
 			<hr style="border: solid 1px gray;">
 			<!-- 테이블 -->
 		<div class="code-html contents" style="padding-bottom: 10px;">
+		
+			<div id="grid"></div>
+		
 			<div id="modalDiv"></div>
-			<div id="chkList"></div>
+			<div id="modalDiv2"></div>
+			
+			
 		</div>
 
 
@@ -106,46 +112,93 @@ var eq_nm;
 var eq_chkdt;
 var eq_chkeddt;
 // 점검 종료일 을 오늘날짜로 기본 셋팅
+document.getElementById('eq_chkdt1').value = new Date().toISOString().substring(0, 10);
 document.getElementById('eq_chkdt2').value = new Date().toISOString().substring(0, 10);
+var modalGrid;
 $(function(){
+
 		 const url = "eqActListAjax";
 		   $.ajax(url,{
 			   dataType : "JSON",
 			   method: "GET"
 			   
 		   }).done(function(result){
-			   grid.resetData(result);
+			   modalGrid.resetData(result);
 			  console.log(result);
-		   })
+		   });
 			
-		   var grid = new tui.Grid({
-		       el: document.getElementById('chkList'),
+		   	 	modalGrid  = new tui.Grid({
+		       el: document.getElementById('grid'),
 		       scrollX: false,
 		       scrollY: false,
 		       columns: [
+		    	  
 		         {
-		        	sortable: true,
+		        	sortable: false,
 		           header: '설비코드',
 		           name: '설비코드',
+		           align: 'center'
 		         },
 		         {
 		             header: '설비명',
 		             name: '설비명',
-		           },
-		           { 	
+		             align: 'center'
+		          },
+		          { 	
 		               header: '점검일자',
 		               name: '점검일자',
-		             },
-		             {
-		                 header: '차기점검일',
-		                 name: '차기점검일',
-		               },
-		             {
+		               align: 'center'
+		           },
+		           {
 		                 header: '점검주기',
 		                 name: '점검주기',
-		               }
+		                 align: 'center'
+		           },
+		               
+		           {
+		                 header: '차기점검일',
+		                 name: '차기점검일',
+		                 align: 'center'
+		           },
+		           {
+		                 header: '점검내역',
+		                 name: '점검내역',
+		                 align: 'center',
+		                 editor : 'text'
+		       		},
+		           {
+			                 header: '결과',
+			                 name: '결과',
+			                 align: 'center',
+			                 editor: {
+			                     type: 'select',
+			                     options: {
+			                       listItems: [
+			                         {
+			                           text: '재점검필요',
+			                           value: 'DIV01'
+			                         },
+			                         {
+			                           text: '통과',
+			                           value: 'DIV02'
+			                         }
+			                    ]
+			                 }
+			            }
+			             
+			       },
+			       
+			       {
+				                 header: '검수자',
+				                 name: '검수자',
+				                 align: 'center'
+				   },    
+			          
+			          
 		               ],
-		   					rowHeaders: ['rowNum'],
+		               		
+		               rowHeaders: [ { type: 'checkbox' },{ type: 'rowNum' }],
+		   					
 		                     pageOptions: {
 		                         useClient: true,
 		                         perPage: 15
@@ -155,8 +208,8 @@ $(function(){
 		   
 		   
 		// 클릭시 모달 호출
-			$("#searchEq").on("click" , function(e){
-				
+			$("#searchEq").on("click" , function(){
+				modalGrid.clear();
 				eq_nm = $("#eq_nm option:selected").val();
 					
 				eq_chkdt1 = $("#eq_chkdt1").val();
@@ -171,44 +224,27 @@ $(function(){
 						myModal.show();	
 						
 						
-					})
+					});
+					
 					
 			}); // END OF BUTTON CLICKED EVENT AJAX
 				
+
+			// 일점검조회 버튼 클릭시 모달 호출
+			$("#dailyChk").on("click" , function(e){
+				modalGrid.clear();
+				$("#modalDiv2").load("eqDailyChkCount" , function(){
+					const myModal = new bootstrap.Modal('#myModal');
+				myModal.show();	
 				
-			/* 	var eq_nm = $("#eq_nm").val();
-				var chk_dt = $("#eq_chkdt").val();
-				var chk_eddt = $("#eq_chkeddt").val(); */
-								
 				
-				
-					/* 	$.ajax({
-								url : "eqChkListAajx",
-								method : "POST",
-								data : 
-								{	eq_nm : eq_nm , 
-									eq_chkdt : chk_dt ,
-									eq_chkeddt : chk_eddt
-								} ,
-								dataType : 'JSON',
-								contentType: "application/json; charset=UTF-8"		
-									
-									
-									
-								}).done(function(result){
-									modalGrid.resetDate(result);
-									
-								}); // END OF AJAX */
-								
-								
-				
-		
+					});
 			
-		   
-		   
+			});
+			
+		
+});						
 
-
-});
  </script>
 
 

@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.yfactory.mes.eq.vo.EqVO;
@@ -37,8 +39,13 @@ public interface EquipMapper {
 	
 	List<Map> getEqInActList(String key); // 설비 사용여부 및 비가동 상태를 포함판 검색
 	
-	List<Map> getEqInList(); // 비가동 상태 설비 조회
+	List<Map> getEqInList(); // 비가동 설비 내역 조회
 	
+	// 비가동 설비 내역 검색
+	List<Map> searchEqIna(Map<String, String> result);
+
+	// 비가동 설비 내역 추가
+	int setEqIn(Map<String, String> result);		
 
 	List<Map> getEqChkList(); // 설비 점검 전체 리스트
 
@@ -46,6 +53,8 @@ public interface EquipMapper {
 
 	List<Map> getEqChkSelectList(@RequestBody HashMap<String, Object> list); // 설비구분명 + 점검시작일 + 차기점검일 기준 조회
 
+	
+	List<Map> getEqDailyChkCount(@Param("chkdt1")String chkdt1 ,@Param("chkdt2")String chkdt2); // 일일 점검 건수 리스트
 	
 	// -----------------------------------------------------------
 	
@@ -60,6 +69,8 @@ public interface EquipMapper {
 	int eqChkDel(); // 설비 점검 삭제(점검관리 페이지)
 
 	int eqChkMng();// 설비 점검 일별 건수 조회(점검관리 페이지)
+
+	
 
 	 
 	

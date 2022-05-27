@@ -52,8 +52,20 @@
           </li>        
           
           <li>
+            <a href="bomList2">
+              <i class="bi bi-circle"></i><span>트리 실험</span>
+            </a>
+          </li>
+          
+          <li>
           	<a href="prodLotForm">
-          	  <i class="bi bi-circle"></i><span>완제품LOT조회</span>
+          	  <i class="bi bi-circle"></i><span>완제품 LOT 조회</span>
+          	</a>
+          </li>
+          
+          <li>
+          	<a href="prodSafety">
+          	  <i class="bi bi-circle"></i><span>완제품 안전재고 조회</span>
           	</a>
           </li>
           
@@ -165,6 +177,11 @@
           <li>
             <a href="procManagement">
               <i class="bi bi-circle"></i><span>생산관리</span>
+            </a>
+          </li>
+          <li>
+            <a href="procResult">
+              <i class="bi bi-circle"></i><span>공정실적조회</span>
             </a>
           </li>
         </ul>

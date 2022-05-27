@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yfactory.mes.eq.mapper.EquipMapper;
 import com.yfactory.mes.eq.service.EquipService;
@@ -93,6 +95,22 @@ public class EquipServiceImpl implements EquipService{
 		
 		return mapper.getEqChkSelectList(list);
 
+	}
+
+	@Override
+	public int setEqIn(Map<String, String> result) {
+		return mapper.setEqIn(result);
+	}
+
+	@Override
+	public List<Map> searchEqIna(Map<String, String> result) {
+		return mapper.searchEqIna(result);
+	}
+
+	@Override
+	public List<Map> getEqDailyChkCount(@Param("chkdt1")String chkdt1 ,@Param("chkdt2")String chkdt2) {
+		
+		return mapper.getEqDailyChkCount(chkdt1, chkdt2);
 	}
 	
 	

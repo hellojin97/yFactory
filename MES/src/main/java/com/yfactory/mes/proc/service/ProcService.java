@@ -13,7 +13,7 @@ public interface ProcService {
 
 	List<Map> OrderSelectOk(String ordCd); // 주문서 조회 (주문코드O)
 
-	int ProcPlanInsert(HashMap<String, Object> procPI); // 계획 등록
+	int ProcPlanInsert(Map<String, String> procPI); // 계획 등록
 
 	List<Map> PrdSelect(); // 제품 목록 조회
 
@@ -50,4 +50,10 @@ public interface ProcService {
     List<Map> ProcOrderLineSelectOne(String line); //생산 라인 코드 단건 조회
     
     List<Map> ProcLogic(@RequestBody HashMap<String, Object> list); //생산 로직
+    
+    List<Map> procResultList(); //공정 실적 조회
+    
+    List<Map> procResultOrdersList(); // 공정 실적 - 생산 지시 조회
+    
+    List<Map> procResultProcessList(); // 공정 실적 - 공정 모달 조회
 }

@@ -81,10 +81,12 @@ public class ProcAjaxController {
 		return procService.PrdSelectOne(prodCd);
 	}
 
-//	@PostMapping("/procPlanInsert")
+	// 생산계획등록
 	@PostMapping("/procPlanInsert")
-	public int ProcPlanInsert(@RequestBody HashMap<String, Object> procPI) {
-
+	public int ProcPlanInsert(@RequestParam Map<String, String> procPI) {
+				
+			System.out.println(procPI);
+		
 		return procService.ProcPlanInsert(procPI);
 	}
 	//procDtPlanSelect
@@ -142,5 +144,23 @@ public class ProcAjaxController {
 	@RequestMapping(value = "/procLogic", method = RequestMethod.POST)
 	public List<Map> ProcLogic(@RequestBody HashMap<String, Object> list) {
 		return procService.ProcLogic(list);
+	}
+	
+	// 공정 실적 조회
+	@GetMapping("/procResultList")
+	public List<Map> procResultList(){
+		return procService.procResultList();
+	}
+	
+	// 공정 실적 조회 - 생산 지시 모달 조회
+	@GetMapping("/procResultOrdersList")
+	public List<Map> procResultOrdersList(){
+		return procService.procResultOrdersList();
+	}
+	
+	// 공정 실적 조회 - 공정 모달 조회
+	@GetMapping("/procResultProcessList")
+	public List<Map> procResultProcessList(){		
+		return procService.procResultProcessList();
 	}
 }

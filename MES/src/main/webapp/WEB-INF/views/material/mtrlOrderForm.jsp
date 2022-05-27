@@ -278,6 +278,13 @@ unorder.on("dblclick",function(e) {
       	console.log(result.isConfirmed); // 승인시 FALSE / 취소시 TRUE
           if (result.isConfirmed) {	  
         	  let pocd = mtrlRequest.getCheckedRows();
+        	  
+			  /* 구분변수 */        	  
+        	  let rand_0_9 = Math.floor(Math.random()*100000000);
+
+			  	console.log(rand_0_9);
+			  	
+			  	
         	  for (var i = 0; i < pocd.length; i++) {
         		  
         		  /* 원자재코드 */
@@ -291,12 +298,15 @@ unorder.on("dblclick",function(e) {
         		  /* 발주량 */
         			let poQty = pocd[i].발주량;
         		  
-        		  console.log(mtCd,mtNm,vdrNm,reqDt,poQty);
+        		  console.log(mtCd,mtNm,vdrNm,reqDt,poQty,rand_0_9);
 	
        		  	$.ajax({
         		  		url :'mtrlReqInsert',
         		  		method : 'POST',
-        		  		data : {"mt_cd" : mtCd,
+        		  		async: false,
+        		  		data : {
+        		  				"param" : rand_0_9,
+        		  				"mt_cd" : mtCd,
         		  				"mt_nm" : mtNm,
         		  				"vdr_nm" : vdrNm,
         		  				"req_dt" : reqDt,
@@ -306,14 +316,7 @@ unorder.on("dblclick",function(e) {
         		  			console.log(result);
         		  		});  	
         		};
-        	  
-              Swal.fire(
-                  '승인이 완료되었습니다.',
-                  '출고등록이 완료되었습니다.',
-                  'success'
-              );
-              window.reload;
-              
+        	                
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',

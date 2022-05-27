@@ -190,8 +190,6 @@
 	});
 
 
-
-
 // 메세지 전송 및 아이디
 function print(user, txt) {
 	let temp = '';
@@ -271,8 +269,6 @@ function print2(user) {
 		$('#msg').attr('disabled', true);
 	});
 	
-
-document.getElementById("list").scrollTop = document.getElementById("list").scrollHeight;
 
 </script>
 

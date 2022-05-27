@@ -30,7 +30,7 @@ public class QualityController {
 		return "quality/qa_result";
 	}
 	
-	// 불량 LOT 관리
+	// 불량내역관리
 	@RequestMapping("/qa_errlot")
 	public String qa_errlot() {
 		return "quality/qa_errlot";

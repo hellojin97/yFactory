@@ -9,8 +9,8 @@
 </head>
 <body>
 	<!-- 자재명모달  -->
-	<div id="myModal" class="modal fade" tabindex="-1">
-		<div class="modal-dialog" role="document">
+	<div id="myModal" class="modal fade" tabindex="-1" >
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header"
 					style="background-color: #2c3e50; color: white; font-size: small; padding: 10px;">
@@ -23,7 +23,7 @@
 						<h4>입고예정 목록</h4>
 						<div id="expectGrid"></div>
 						<div style="padding-right: 10px;">
-							<button class="btn1"  type="button" id="select">선택</button>
+							<button class="btn1"  type="button" id="select"style="float: left; padding:0px 20px 0px 20px;">선택</button>
 						</div>
 					</div>
 					
@@ -48,6 +48,7 @@
 
 		var mtrlExpectList = new tui.Grid({
 			el : document.getElementById('expectGrid'),
+ 	       bodyWidth: 600,
 			columns : [ {
 				header : '원자재발주코드',
 				name : '원자재발주코드'
@@ -61,8 +62,8 @@
 				header : '업체명',
 				name : '업체명'
 			}, {
-				header : '입고량',
-				name : '입고량'
+				header : '입고예정량',
+				name : '입고예정량'
 			}, {
 				header : '검사일자',
 				name : '검사일자'
@@ -103,11 +104,10 @@
         		  /* 업체명 */
         		  	let vdrNm = pocd[i].업체명;
         		  /* 입고량 */
-        		  	let mtWrqty = pocd[i].입고량;	  
+        		  	let mtWrqty = pocd[i].입고예정량;	  
         		    console.log(poCd,mtCd,mtNm,vdrNm,mtWrqty);
         		}; 
   });
-
 	</script>
 </body>
 </html>

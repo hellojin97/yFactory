@@ -88,21 +88,25 @@ $(function(){
 		       scrollY: false,
 		       columns: [
 		    	 {
-			           header: '주문상세코드',
-			           name: '주문코드',
+			           header: '주문 코드',
+			           name: '주문 코드',
 			      },
 		         {
-		           header: '주문일자',
+		           header: '주문 일자',
 		           name: '주문일자',
 		         },
 		         {
-		             header: '업체명',
-		             name: '업체명',
+		             header: '납기일자',
+		             name: '납기일자',
 		           },
 		           {
-		               header: '납기일자',
-		               name: '납기일자',
+		               header: '업체명',
+		               name: '업체명',
 		             },
+		             {
+			               header: '총 수량',
+			               name: '주문수량',
+			          },
 		             ],
 		   					rowHeaders: ['rowNum'],
 		                     pageOptions: {
@@ -244,7 +248,7 @@ $(function(){
 	
 	grid.on("dblclick",function(e) {
 		//debugger
-		let ordCd = grid.getValue(e.rowKey, '주문코드');
+		let ordCd = grid.getValue(e.rowKey, '주문 코드');
 		 if(ordCd != null){
 			  $('#myModal').modal('hide');
 			 

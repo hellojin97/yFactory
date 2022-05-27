@@ -60,9 +60,14 @@ resultGrid = new tui.Grid({
 			scrollX : false,
 			scrollY : false,
 			columns : [ {
+				header : '생산지시상세코드',
+				name : '생산지시상세코드',
+			}, 
+			 {
 				header : '생산지시코드',
 				name : '생산지시코드',
-			}, {
+			},
+			 {
 				header : '제품명',
 				name : '제품명',
 			}, {
@@ -173,6 +178,7 @@ resultGrid = new tui.Grid({
     			ProcOrderListModal.show();
     			}); 
       });
+  		
   	  $("#btnProcStart").on("click",function(){
   		
   		//var curDate = new Date();
@@ -181,18 +187,19 @@ resultGrid = new tui.Grid({
   		let insQty = resultGrid.getValue(0,"생산수량");
   		//공정행 갯수
   		let procRow = releaseList.getRowCount();
+  		for (var i = 0; i < procRow; i++) {
+  	  		releaseList.setValue(i,"투입량",insQty);
+		}
+	  		releaseList.setValue(0,"시작시간",dpTime());
   		
-  		releaseList.setValue(0,"시작시간",dpTime());
-  		releaseList.setValue(0,"투입량",insQty);
-  		
-  		console.log(insQty);
-  		console.log(procRow);
+  		//console.log(insQty);
+  		//console.log(procRow);
   		 var data= {
   				insQty : insQty,
   				procRow : procRow,
   				startTime : dpTime()
   				 };
-  		timer = setInterval( function () {
+  			
   			console.log(insQty);
 	    $.ajax({
 			   url  : "procLogic",
@@ -205,11 +212,10 @@ resultGrid = new tui.Grid({
 						 procOrder.appendRow(result[i]);
 					} */ 
 					console.log(result);
-					console.log(result.sum);
 					//releaseList.setValue(0,"생산량",result.sum)
 		   }) 
-		   
-  		}, 1000);
+		/*    timer = setInterval( function () {
+  		}, 1000); */
   	  });
   	  
   	  

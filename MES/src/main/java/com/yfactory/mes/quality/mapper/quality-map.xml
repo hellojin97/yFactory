@@ -11,34 +11,39 @@
 	
 	<!-- 자재 품질검사요청(modal) 조회 -->
 	<select id="selectpoDtlRequest" resultType="map">
-		SELECT  MPD.PO_DTLCD as "발주상세코드",
-		        MT.MT_CD as "자재코드",
-		        MT.MT_NM as "자재명",
-		        VDR.VDR_NM as "업체명",
-		        MPD.PO_QTY as "발주량"
-		FROM 	MT_PODTL MPD, MT MT, VENDOR VDR, MT_PO MP
-		WHERE 	MPD.PO_CD = MP.PO_CD
-		AND     MP.MT_CD = MT.MT_CD
-		AND     MP.VDR_CD = VDR.VDR_CD
-		AND	    MPD.PO_DTLCD NOT IN (SELECT PO_DTLCD
-                                     FROM MT_CHK)
+SELECT  		MP.PO_CD "발주코드", 
+        			MP.PO_REQDT "발주신청일", 
+        			E.EMP_NM "발주신청인"
+FROM    		MT_PO MP, EMPLOYEE E, MT_CHK MK
+WHERE  		 MP.EMP_NO = E.EMP_NO
+AND    		 mk.po_cd(+) = mp.po_cd
+AND     		mk.po_cd IS NULL
 	</select>
 	
 	
 	<!-- 자재검사관리 -->
 	<select id="selectMtCheckMgr" resultType="map">
-		SELECT 	MP.PO_CD "발주코드", CHK.PO_DTLCD "발주상세코드", MT.MT_CD "자재코드", 
-				MT.MT_NM "자재명", EMP.EMP_NM "담당인", MPD.PO_QTY "발주량", CC.CD_NM "상태"
-				
-		FROM 	MT_PODTL MPD, MT_PO MP, MT MT, COMM_CODE CC, MT_CHK CHK, EMPLOYEE EMP
-		
-		WHERE 	MPD.PO_CD = MP.PO_CD
-		AND 	MP.MT_CD = MT.MT_CD
-		AND 	CHK.PO_DTLCD = MPD.PO_DTLCD
-		AND		CHK.CHK_MNGR = EMP.EMP_NO
-		AND 	CHK.CHK_INSP = CC.COMM_CD
-		
-		AND 	COMM_CD = 'MTRL01'
+SELECT MCD.PO_CD "발주코드",
+       MPD.PO_DTLCD "발주상세코드",
+       MCD.CHK_CD "품질검사코드", 
+       MCD.MT_CD "자재코드", 
+       M.MT_NM "자재명",
+       E.EMP_NM "담당인",
+       MPD.PO_QTY "발주량", 
+       CC.CD_NM "상태"
+FROM   MT_CHK_DTL MCD, 
+       MT_CHK MC,
+       EMPLOYEE E,
+       MT M, 
+       MT_PODTL MPD, 
+       COMM_CODE CC
+WHERE MCD.MT_CD = M.MT_CD
+AND MCD.CHK_DTL_INSP = CC.COMM_CD
+AND MCD.PO_CD = MPD.PO_CD
+AND M.MT_CD = MPD.MT_CD
+AND MC.CHK_MNGR = E.EMP_NO
+AND CC.CD_NM = 'MTRL01'
+
 	</select>
 	
 	<!-- 자재검사결과 조회 -->
@@ -310,7 +315,7 @@
 	<!-- 입력 -->
 	<!-- 자재 품질검사요청 -->
 	<insert statementType="CALLABLE" id="reqMtQuality" parameterType="map">
-		{CALL QUALITY_REQ_INSERT (#{pdt}, #{mcd})}
+		{CALL QUAL_MT_INSERT (#{pdt})}
 	</insert>
 	
 	<!-- 수정 -->

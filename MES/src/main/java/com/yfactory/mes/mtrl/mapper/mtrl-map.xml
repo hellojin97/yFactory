@@ -214,13 +214,7 @@
 	
 	<!-- 발주등록 -->
 	<insert id="mtrlReqInsert" statementType="CALLABLE" parameterType="map">
-	{CALL INSERT_PO(
-					#{param},
-					#{mt_cd},
-				    #{mt_nm},
-				    #{vdr_nm},
-				    #{req_dt},
-				    #{po_qty})}
+	{CALL INSERT_PO(#{param},	#{mt_cd},    #{mt_nm},    #{vdr_nm},    #{req_dt},    #{po_qty})}
 	</insert>
 	
 	

@@ -1,311 +1,303 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.mtrl.mapper.MtrlMapper">
+
+<!-- 발주등록페이지 -->
 	<!-- 미지시 생산조회 -->
-	<select id="selectPl" resultType="map">
-		SELECT    pl.pp_cd "pp_cd",
-	       		  pl.pp_nm "pp_nm",
-	              TO_CHAR(pl.pp_dt,'yyyy-mm-dd') "pp_dt",
-	              sum(dt.pd_qty) "pd_qty"
-		FROM      plan_dtl dt, prdt_pl pl
-		WHERE     dt.pp_cd = pl.pp_cd
-		AND       LOWER(pl.pp_prog) = 'plan01'
-		group by  pl.pp_cd, pl.pp_nm, pl.pp_dt
-	</select>
-	
+		<select id="selectPl" resultType="map">
+			SELECT    pl.pp_cd "pp_cd",
+		       		  pl.pp_nm "pp_nm",
+		              TO_CHAR(pl.pp_dt,'yyyy-mm-dd') "pp_dt",
+		              sum(dt.pd_qty) "pd_qty"
+			FROM      plan_dtl dt, prdt_pl pl
+			WHERE     dt.pp_cd = pl.pp_cd
+			AND       LOWER(pl.pp_prog) = 'plan01'
+			group by  pl.pp_cd, pl.pp_nm, pl.pp_dt
+		</select>
 	<!-- 생산계획별 자재재고 -->
-	<select id="mtrlPlanList" resultType="map">
-		SELECT 
-			    PL.PP_CD       "생산계획코드",
-	            P.PROD_CD    "완제품코드",
-	            P.PROD_NM    "완제품명",
-	            TO_CHAR(PL.PP_DT,'YYyy-MM-DD')     "계획일자",
-	            M.MT_CD      "원자재코드",
-	            M.MT_NM      "원자재명",
-	            CASE
-	                  COUNT (DISTINCT  CASE
-	                        WHEN      MC.MT_QTY - ( B.CS_QTY * PLD.PD_QTY )  > 0 THEN '부족'
-	                        ELSE NULL    
-	                    END) 
-	                    when 0 then '부족'
-	            END AS "구분"
-		            
-		FROM        PROD P, 
-		            PLAN_DTL PLD, 
-		            PRDT_PL PL,
-		            BOM B,
-		            MT M,
-		            MT_CURQTY MC,
-		            MT_LOT ML
-		WHERE       PL.PP_CD = PLD.PP_CD
-		AND         P.PROD_CD = B.PROD_CD
-		AND         M.MT_CD = B.MT_CD
-		AND         M.MT_CD = ML.MT_CD
-		AND         ML.MT_LOT = MC.MT_LOT
-		AND         PL.PP_CD = #{ppCd}
-		GROUP BY PL.PP_CD, P.PROD_CD, P.PROD_NM, PL.PP_DT  , M.MT_CD, M.MT_NM 
-		ORDER BY    6 ASC
-	</select>
-	
+		<select id="mtrlPlanList" resultType="map">
+			SELECT 
+				    PL.PP_CD       "생산계획코드",
+		            P.PROD_CD    "완제품코드",
+		            P.PROD_NM    "완제품명",
+		            TO_CHAR(PL.PP_DT,'YYyy-MM-DD')     "계획일자",
+		            M.MT_CD      "원자재코드",
+		            M.MT_NM      "원자재명",
+		            CASE
+		                  COUNT (DISTINCT  CASE
+		                        WHEN      MC.MT_QTY - ( B.CS_QTY * PLD.PD_QTY )  > 0 THEN '부족'
+		                        ELSE NULL    
+		                    END) 
+		                    when 0 then '부족'
+		            END AS "구분"
+			            
+			FROM        PROD P, 
+			            PLAN_DTL PLD, 
+			            PRDT_PL PL,
+			            BOM B,
+			            MT M,
+			            MT_CURQTY MC,
+			            MT_LOT ML
+			WHERE       PL.PP_CD = PLD.PP_CD
+			AND         P.PROD_CD = B.PROD_CD
+			AND         M.MT_CD = B.MT_CD
+			AND         M.MT_CD = ML.MT_CD
+			AND         ML.MT_LOT = MC.MT_LOT
+			AND         PL.PP_CD = #{ppCd}
+			GROUP BY PL.PP_CD, P.PROD_CD, P.PROD_NM, PL.PP_DT  , M.MT_CD, M.MT_NM 
+			ORDER BY    6 ASC
+		</select>
 	<!-- 발주요청서 등록 조회 -->
-	<select id="mtrlOrderList" resultType="map">
-		SELECT   M.MT_CD  "원자재코드",
-         		 M.MT_NM  "원자재명",
-        		 V.VDR_NM    "업체명",
-        		 MC.MT_QTY   "현재고",
-        		 TO_CHAR(SYSDATE,'YYyy-MM-DD') "납기요청일자",
-         		 SUM(B.CS_QTY * PLD.PD_QTY)   "계획대비 필요수량"
-		FROM     MT M, VENDOR V, MT_LOT ML ,MT_CURQTY MC, BOM B, PLAN_DTL PLD
-		WHERE    M.VDR_CD = V.VDR_CD
-		AND      M.MT_CD = ML.MT_CD
-		AND      ML.MT_LOT = MC.MT_LOT
-		AND      M.MT_CD = B.MT_CD
-		AND      B.PROD_CD = PLD.PROD_CD
-		AND      PLD.PP_CD = #{ppCd}
-		AND      M.MT_CD = #{mtCd}
-		GROUP BY  M.MT_CD, SYSDATE ,M.MT_NM, V.VDR_NM, MC.MT_QTY
-	</select>
+		<select id="mtrlOrderList" resultType="map">
+			SELECT   M.MT_CD  "원자재코드",
+	         		 M.MT_NM  "원자재명",
+	        		 V.VDR_NM    "업체명",
+	        		 MC.MT_QTY   "현재고",
+	        		 TO_CHAR(SYSDATE,'YYyy-MM-DD') "납기요청일자",
+	         		 SUM(B.CS_QTY * PLD.PD_QTY)   "계획대비 필요수량"
+			FROM     MT M, VENDOR V, MT_LOT ML ,MT_CURQTY MC, BOM B, PLAN_DTL PLD
+			WHERE    M.VDR_CD = V.VDR_CD
+			AND      M.MT_CD = ML.MT_CD
+			AND      ML.MT_LOT = MC.MT_LOT
+			AND      M.MT_CD = B.MT_CD
+			AND      B.PROD_CD = PLD.PROD_CD
+			AND      PLD.PP_CD = #{ppCd}
+			AND      M.MT_CD = #{mtCd}
+			GROUP BY  M.MT_CD, SYSDATE ,M.MT_NM, V.VDR_NM, MC.MT_QTY
+		</select>
+	<!-- 발주관리 조회 -->
+		<select id="listRequest" resultType="map">
+		   SELECT DISTINCT 
+		          po.po_cd    "원자재발주코드",
+		          m.mt_cd    "원자재코드",
+		          m.mt_nm    "원자재명",
+		          vdr.vdr_nm   "업체명",
+		          pdl.po_qty   "발주수량",
+		          m.mt_unit  "단위",
+		          to_char(po.po_reqdt, 'YYyy-MM-DD') "발주신청일",
+		          to_char(pdl.po_reqdt, 'YYyy-MM-DD') "납기신청일",
+		          m.mt_prc   "단가",
+		          (po_qty*mt_prc)"금액"
+		          
+		   FROM   mt_po po,
+		          mt m,
+		          vendor vdr,
+		          mt_podtl pdl
+		
+		   WHERE  po.po_cd = pdl.po_cd
+		   AND    pdl.mt_cd = m.mt_cd
+		   AND    m.vdr_cd = vdr.vdr_cd
+		   AND    po.po_cd IN (select po_cd
+		                                     from mt_podtl
+		                                     where po_dtlcd not IN (select po_dtlcd
+		                                                                      from mt_chk))
+		</select>
+	<!-- 발주검색 -->
+		<select id="mtrlReqSelectSearch" resultType="map">
+			SELECT po.po_cd    "원자재발주코드",
+			       m.mt_cd    "원자재코드",
+			       m.mt_nm    "원자재명",
+			       vdr.vdr_nm   "업체명",
+			       pdl.po_qty   "발주수량",
+			       m.mt_unit  "단위",
+			       to_char(lot.mt_wdt, 'YYYY-MM-DD') "입고신청일",
+			       to_char(pdl.po_reqdt, 'YYYY-MM-DD') "납기신청일",
+			       m.mt_prc   "단가",
+			       (po_qty*mt_prc)"금액"
+			       
+			FROM   mt_po po,
+			       mt m,
+			       vendor vdr,
+			       mt_podtl pdl,
+			       mt_lot lot
+			WHERE  po.po_cd = pdl.po_cd
+			AND    po.mt_cd = m.mt_cd
+			AND    m.mt_cd = lot.mt_cd
+			AND    m.vdr_cd = vdr.vdr_cd
+				<if test="poCdinput != ''">
+			AND 	po.po_cd LIKE '%'||#{poCdinput}||'%'
+				</if>
+		</select>
+	<!-- 발주등록 -->
+		<insert id="mtrlReqInsert" statementType="CALLABLE" parameterType="map">
+			{CALL INSERT_PO(#{param},#{mt_cd},#{mt_nm},#{vdr_nm},#{req_dt},#{po_qty})}
+		</insert>
+<!-- END 발주페이지 -->
+
+
+<!-- 입고페이지 -->	
+	<!-- 입고조회 -->
+		<select id="insertList" resultType="map">
+			SELECT
+			    po.po_cd "원자재발주코드",
+			    m.mt_cd "원자재코드",
+			    m.mt_nm "원자재명",
+			    vdr.vdr_cd "업체명",
+			    wne.mt_wrqty "입고량",
+			    TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
+			    lot.mt_lot "원자재LOT번호",
+			    TO_CHAR(lot.mt_exp, 'YYYY-MM-DD') "유통기한"
+			    
+			FROM mt_po po,
+			     mt m,
+			     vendor vdr,
+			     mt_wrnote wne,
+			     mt_lot lot
+			
+			WHERE  po.mt_cd = m.mt_cd
+			AND    m.vdr_cd = vdr.vdr_cd
+			AND    lot.mt_cd = m.mt_cd
+			AND    lot.mt_lot = wne.mt_lot
+			AND    wr_cd = 'INOUT01'
+		</select>
+	<!-- 입고 검색조회 -->
+		<select id="insertSearch" resultType="map">
+			SELECT
+			       po.po_cd "원자재발주코드",
+			       m.mt_cd "원자재코드",
+			       m.mt_nm "원자재명",
+			       vdr.vdr_cd "업체명",
+			       wne.mt_wrqty "입고량",
+			       TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
+			       lot.mt_lot "원자재LOT번호",
+			       TO_CHAR(lot.mt_exp, 'YYYY-MM-DD') "유통기한"
+			    
+			FROM   mt_po po,
+			       mt m,
+			       vendor vdr,
+			       mt_wrnote wne,
+			       mt_lot lot
+			
+			WHERE  po.mt_cd = m.mt_cd
+			AND    m.vdr_cd = vdr.vdr_cd
+			AND    lot.mt_cd = m.mt_cd
+			AND    lot.mt_lot = wne.mt_lot
+			AND    wr_cd = 'INOUT01'
+				<if test="m1 != ''">
+			AND 	m.mt_nm LIKE '%'||#{m1}||'%'
+				</if>
+				<if test="m2 != ''">
+			AND 	vd.vdr_nm LIKE '%'||#{m2}||'%'
+				</if>
+				<if test="req1 != '' and req2 != ''">
+			AND 	lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
+				</if>
+		</select>
+	<!-- 입고예정조회 MODAL -->	
+		<select id="expectList" resultType="map">
+		    SELECT 
+			        MTD.PO_CD   "원자재발주코드",
+			        MTD.MT_CD   "원자재코드",
+			        M.MT_NM     "원자재명",
+			        V.VDR_NM    "업체명",
+			        BIM.B_IN_QTY "입고예정량",
+			        TO_CHAR(MTD.CHK_DT ,'YYYY-MM-DD') "검사일자"
+			        
+			FROM
+			        MT_CHK_DTL MTD,
+			        MT M,
+			        VENDOR V,
+			        BEFOR_IN_MT BIM
+			        
+			WHERE   MTD.MT_CD = M.MT_CD
+			AND     M.VDR_CD = V.VDR_CD
+			AND     MTD.CHK_CD = BIM.CHK_CD
+			AND     MTD.CHK_DTL_INSP = 'MTRL02'
+		</select> 
+<!-- END 입고페이지 -->	
+
 	
+<!-- LOT페이지 -->	
 	<!-- 자재lot재고조회 -->
-	<select id="listMtrlLot" resultType="map">
-		SELECT lot.mt_lot "mt_lot",
-			   lot.mt_cd "mt_cd",
-			   m.mt_nm "mt_nm", 
-			   vd.vdr_nm "vdr_nm", 
-			   cy.mt_qty "mt_qty", 
-			   TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
-		FROM   mt_lot lot, 
-			   mt m,  
-			   vendor vd, 
-			   mt_curqty cy
-		WHERE  m.mt_cd = lot.mt_cd
-		AND    m.vdr_cd = vd.vdr_cd
-		AND    lot.mt_lot = cy.mt_lot
-	</select>
+		<select id="listMtrlLot" resultType="map">
+			SELECT lot.mt_lot "mt_lot",
+				   lot.mt_cd "mt_cd",
+				   m.mt_nm "mt_nm", 
+				   vd.vdr_nm "vdr_nm", 
+				   cy.mt_qty "mt_qty", 
+				   TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
+			FROM   mt_lot lot, 
+				   mt m,  
+				   vendor vd, 
+				   mt_curqty cy
+			WHERE  m.mt_cd = lot.mt_cd
+			AND    m.vdr_cd = vd.vdr_cd
+			AND    lot.mt_lot = cy.mt_lot
+		</select>
 	
 	<!-- LOT 검색조회 -->
-	<select id="lotSelectSearch" resultType="map">
-		SELECT  lot.mt_lot "mt_lot",
-			    lot.mt_cd "mt_cd",
-			    m.mt_nm "mt_nm", 
-			    vd.vdr_nm "vdr_nm", 
-			    cy.mt_qty "mt_qty", 
-			    TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
-		FROM    mt_lot lot, 
-			    mt m,  
-			    vendor vd, 
-			    mt_curqty cy
-		WHERE   m.mt_cd = lot.mt_cd
-		AND     m.vdr_cd = vd.vdr_cd
-		AND     lot.mt_lot = cy.mt_lot
-			<if test="m1 != ''">
-		AND 	m.mt_nm LIKE '%'||#{m1}||'%'
-			</if>
-			<if test="m2 != ''">
-		AND 	vd.vdr_nm LIKE '%'||#{m2}||'%'
-			</if>
-			<if test="req1 != '' and req2 != ''">
-		AND 	lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
-			</if>
-	</select>
+		<select id="lotSelectSearch" resultType="map">
+			SELECT  lot.mt_lot "mt_lot",
+				    lot.mt_cd "mt_cd",
+				    m.mt_nm "mt_nm", 
+				    vd.vdr_nm "vdr_nm", 
+				    cy.mt_qty "mt_qty", 
+				    TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
+			FROM    mt_lot lot, 
+				    mt m,  
+				    vendor vd, 
+				    mt_curqty cy
+			WHERE   m.mt_cd = lot.mt_cd
+			AND     m.vdr_cd = vd.vdr_cd
+			AND     lot.mt_lot = cy.mt_lot
+				<if test="m1 != ''">
+			AND 	m.mt_nm LIKE '%'||#{m1}||'%'
+				</if>
+				<if test="m2 != ''">
+			AND 	vd.vdr_nm LIKE '%'||#{m2}||'%'
+				</if>
+				<if test="req1 != '' and req2 != ''">
+			AND 	lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
+				</if>
+		</select>	
+<!-- END LOT페이지 -->		
 	
+<!-- 공통 페이지 -->	
 	<!-- 자재 코드,이름 전체조회 -->
-	<select id="mtcdList" resultType="map">
-		SELECT mt_nm "mt_nm", 
-			   mt_cd "mt_cd"
-		FROM   mt
-	</select>
+		<select id="mtcdList" resultType="map">
+			SELECT mt_nm "mt_nm", 
+				   mt_cd "mt_cd"
+			FROM   mt
+		</select>
 	
 	<!-- 자재명 단건조회 -->
-	<select id="mtnmSelectSearch" resultType="map">
-		SELECT mt_nm "mt_nm", 
-			   mt_cd "mt_cd"
-		FROM   mt
-		WHERE  mt_nm LIKE '%'||#{mtnm}||'%'
-	</select>
+		<select id="mtnmSelectSearch" resultType="map">
+			SELECT mt_nm "mt_nm", 
+				   mt_cd "mt_cd"
+			FROM   mt
+			WHERE  mt_nm LIKE '%'||#{mtnm}||'%'
+		</select>
 	
 	<!-- 업체명 조회 -->
-	<select id="vendorList" resultType="map">
-		SELECT cd.cd_nm "cd_nm",
-      		   vd.vdr_nm "vdr_nm", 
-       		   vd.vdr_cd "vdr_cd"
-		FROM   vendor vd, COMM_CODE cd
-		WHERE  vd.ven_cd = cd.comm_cd
-	</select>
+		<select id="vendorList" resultType="map">
+			SELECT cd.cd_nm "cd_nm",
+	      		   vd.vdr_nm "vdr_nm", 
+	       		   vd.vdr_cd "vdr_cd"
+			FROM   vendor vd, COMM_CODE cd
+			WHERE  vd.ven_cd = cd.comm_cd
+		</select>
 	
 	<!-- 업체명 단건조회 -->
-	<select id="vdrnmSelectSearch" resultType="map">
-		SELECT cd.cd_nm "cd_nm",
-      		   vd.vdr_nm "vdr_nm", 
-       		   vd.vdr_cd "vdr_cd"
-        FROM   vendor vd, COMM_CODE cd
-        WHERE  vd.ven_cd = cd.comm_cd
-        AND    vd.vdr_nm LIKE '%'||#{vdrnm}||'%'		   
-	</select>
-	
+		<select id="vdrnmSelectSearch" resultType="map">
+			SELECT cd.cd_nm "cd_nm",
+	      		   vd.vdr_nm "vdr_nm", 
+	       		   vd.vdr_cd "vdr_cd"
+	        FROM   vendor vd, COMM_CODE cd
+	        WHERE  vd.ven_cd = cd.comm_cd
+	        AND    vd.vdr_nm LIKE '%'||#{vdrnm}||'%'		   
+		</select>
+		
 	<!-- 발주코드 전체조회 -->
-	<select id="pocdList" resultType="map">
-		SELECT po_cd "발주코드" 
-		FROM   mt_po
-	</select>
+		<select id="pocdList" resultType="map">
+			SELECT po_cd "발주코드" 
+			FROM   mt_po
+		</select>
 	
 	<!-- 발주코드 단건조회 -->
-	<select id="pocdSelectSearch" resultType="map">
-		SELECT po_cd "발주코드"
-		FROM   mt_po
-		WHERE  po_cd LIKE '%'||#{pocd}||'%'
-	</select>
-	
-	<!-- 발주관리 조회 -->
-	<select id="listRequest" resultType="map">
-   SELECT DISTINCT 
-          po.po_cd    "원자재발주코드",
-          m.mt_cd    "원자재코드",
-          m.mt_nm    "원자재명",
-          vdr.vdr_nm   "업체명",
-          pdl.po_qty   "발주수량",
-          m.mt_unit  "단위",
-          to_char(po.po_reqdt, 'YYyy-MM-DD') "발주신청일",
-          to_char(pdl.po_reqdt, 'YYyy-MM-DD') "납기신청일",
-          m.mt_prc   "단가",
-          (po_qty*mt_prc)"금액"
-          
-   FROM   mt_po po,
-          mt m,
-          vendor vdr,
-          mt_podtl pdl
-
-   WHERE  po.po_cd = pdl.po_cd
-   AND    pdl.mt_cd = m.mt_cd
-   AND    m.vdr_cd = vdr.vdr_cd
-   AND    po.po_cd IN (select po_cd
-                                     from mt_podtl
-                                     where po_dtlcd not IN (select po_dtlcd
-                                                                      from mt_chk))
-	</select>
-	<!-- 발주검색 -->
-	<select id="mtrlReqSelectSearch" resultType="map">
-	SELECT po.po_cd    "원자재발주코드",
-	       m.mt_cd    "원자재코드",
-	       m.mt_nm    "원자재명",
-	       vdr.vdr_nm   "업체명",
-	       pdl.po_qty   "발주수량",
-	       m.mt_unit  "단위",
-	       to_char(lot.mt_wdt, 'YYYY-MM-DD') "입고신청일",
-	       to_char(pdl.po_reqdt, 'YYYY-MM-DD') "납기신청일",
-	       m.mt_prc   "단가",
-	       (po_qty*mt_prc)"금액"
-	       
-	FROM   mt_po po,
-	       mt m,
-	       vendor vdr,
-	       mt_podtl pdl,
-	       mt_lot lot
-	WHERE  po.po_cd = pdl.po_cd
-	AND    po.mt_cd = m.mt_cd
-	AND    m.mt_cd = lot.mt_cd
-	AND    m.vdr_cd = vdr.vdr_cd
-		<if test="poCdinput != ''">
-	AND 	po.po_cd LIKE '%'||#{poCdinput}||'%'
-		</if>
-	</select>
-	
-	
-	
-	<!-- 발주등록 -->
-	<insert id="mtrlReqInsert" statementType="CALLABLE" parameterType="map">
-	{CALL INSERT_PO(
-					#{param},
-					#{mt_cd},
-				    #{mt_nm},
-				    #{vdr_nm},
-				    #{req_dt},
-				    #{po_qty})}
-	</insert>
-	
-	
-	
-	
-<!-- 	 입고조회 
-	<select id="insertList" resultType="map">
-	SELECT
-	    po.po_cd "원자재발주코드",
-	    m.mt_cd "원자재코드",
-	    m.mt_nm "원자재명",
-	    vdr.vdr_cd "업체명",
-	    wne.mt_wrqty "입고량",
-	    TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
-	    lot.mt_lot "원자재LOT번호",
-	    TO_CHAR(lot.mt_exp, 'YYYY-MM-DD') "유통기한"
-	    
-	FROM mt_po po,
-	     mt m,
-	     vendor vdr,
-	     mt_wrnote wne,
-	     mt_lot lot
-	
-	WHERE  po.mt_cd = m.mt_cd
-	AND    m.vdr_cd = vdr.vdr_cd
-	AND    lot.mt_cd = m.mt_cd
-	AND    lot.mt_lot = wne.mt_lot
-	AND    wr_cd = 'INOUT01'
-	</select> -->
-	<!-- 입고 검색조회 -->
-	<select id="insertSearch" resultType="map">
-		SELECT
-		       po.po_cd "원자재발주코드",
-		       m.mt_cd "원자재코드",
-		       m.mt_nm "원자재명",
-		       vdr.vdr_cd "업체명",
-		       wne.mt_wrqty "입고량",
-		       TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
-		       lot.mt_lot "원자재LOT번호",
-		       TO_CHAR(lot.mt_exp, 'YYYY-MM-DD') "유통기한"
-		    
-		FROM   mt_po po,
-		       mt m,
-		       vendor vdr,
-		       mt_wrnote wne,
-		       mt_lot lot
-		
-		WHERE  po.mt_cd = m.mt_cd
-		AND    m.vdr_cd = vdr.vdr_cd
-		AND    lot.mt_cd = m.mt_cd
-		AND    lot.mt_lot = wne.mt_lot
-		AND    wr_cd = 'INOUT01'
-			<if test="m1 != ''">
-		AND 	m.mt_nm LIKE '%'||#{m1}||'%'
-			</if>
-			<if test="m2 != ''">
-		AND 	vd.vdr_nm LIKE '%'||#{m2}||'%'
-			</if>
-			<if test="req1 != '' and req2 != ''">
-		AND 	lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
-			</if>
-	</select>
-<!-- 입고조회	
-	<select id="expectList" resultType="map">
-	SELECT
-	       po.po_cd "원자재발주코드",
-	       m.mt_cd "원자재코드",
-	       m.mt_nm "원자재명",
-	       vdr.vdr_cd "업체명",
-	       wne.mt_wrqty "입고량",
-	       TO_CHAR(chk.chk_dt, 'YYYY-MM-DD')   "검사일자"
-	    
-	FROM   mt_po po,
-	       mt m,
-	       vendor vdr,
-	       mt_wrnote wne,
-	       mt_lot lot,
-	       mt_chk chk
-	     
-	WHERE  po.mt_cd = m.mt_cd
-	AND    m.vdr_cd = vdr.vdr_cd
-	AND    lot.mt_cd = m.mt_cd
-	AND    lot.mt_lot = wne.mt_lot
-	AND    m.mt_cd = chk.mtrl_cd
-	AND    wne.wr_cd = 'INOUT01'
-	AND    chk.chk_insp = 'MTRL02'
-	</select> -->
+		<select id="pocdSelectSearch" resultType="map">
+			SELECT po_cd "발주코드"
+			FROM   mt_po
+			WHERE  po_cd LIKE '%'||#{pocd}||'%'
+		</select>	
+<!-- END 공통 페이지 -->	
 </mapper>

@@ -106,7 +106,11 @@
         		  /* 입고량 */
         		  	let mtWrqty = pocd[i].입고예정량;	  
         		    console.log(poCd,mtCd,mtNm,vdrNm,mtWrqty);
+        		    
+        		    
         		}; 
+        		
+        		
   });
 	</script>
 </body>

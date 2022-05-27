@@ -8,7 +8,18 @@
 
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script> --%>
 	 <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<style type="text/css">
 
+#savbtn{
+align:right;
+background-color: #555555;
+color: white;
+			}
+#savbtn:hover {
+	color: black;
+	background-color: white;
+}
+</style>
 
 </head>
 <body>
@@ -20,19 +31,20 @@
 			<div class="modal-dialog modal-lg modal-dialog-scrollable">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">설비 구분</h5>
+						<h5 class="modal-title">설비 조회</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 					</div>
 
 					<div class="modal-body">
-					<form id="frm" name="frm" method="post">
+					
 						<div id="grid2">
 					
+					
+						
 						</div>
-						<button  type="button" id="sav">등록</button>
-						</form>
+						
 						<div class="modal-footer">
-							
+							<button  type="button" id="savbtn" class="btn-sav">등록</button>
 						</div>
 					</div>
 				</div>
@@ -44,26 +56,20 @@
 </body>
 
 <script>
-/* 
-var eq_nm = $("#eq_nm").val();
-var eq_chkdt = $("#eq_chkdt").val();
-var eq_chkeddt = $("#eq_chkeddt").val();
-console.log($("#eq_nm").val());
-console.log( $("#eq_chkdt").val());
-console.log($("#eq_chkeddt").val()); */
-	$(function() {
-		
+var grid2;
+
+	
+
 		console.log("--1--------"+eq_nm);
 		console.log("---2-------"+eq_chkdt1);
 		console.log("----3------"+eq_chkdt2);
-		
-		
-		var url1 = "eqChkListAajx";
+
+		var url1 = "eqChkSelectAjax";
 		var data = {
 				eq_nm : eq_nm  , 
 				eq_chkdt1  : eq_chkdt1 , 
 				eq_chkdt2 :  eq_chkdt2
-		}
+		};
 		$.ajax(url1, {
 			method : "POST",
 			data : JSON.stringify(data),
@@ -72,11 +78,11 @@ console.log($("#eq_chkeddt").val()); */
 		}).done(function(rs) {
 			grid2.resetData(rs);
 			console.log(rs);
-		})
+		});
 
-		const grid2 = new tui.Grid({
+		grid2 = new tui.Grid({
 			el : document.getElementById('grid2'),
-			rowHeaders: [{type: 'rowNum'},{type: 'checkbox'}],
+			rowHeaders: [{type: 'checkbox'},{type: 'rowNum'}],
 			scrollX : false,
 			scrollY : false,
 			columns : [
@@ -95,20 +101,21 @@ console.log($("#eq_chkeddt").val()); */
 				header : '점검일자',
 				name : '점검일자'
 			},
+			
+
+			
+			{
+				header : '점검주기',
+				name : '점검주기'
+			},
+
 
 			{
 				header : '차기점검일',
 				name : '차기점검일'
-			},
-
-		
-			{
-				header : '점검주기',
-				name : '점검주기'
 			}
-
 			],
-			rowHeaders : [ 'rowNum' ],
+			
 			pageOptions : {
 				useClient : true,
 				perPage : 5
@@ -117,16 +124,27 @@ console.log($("#eq_chkeddt").val()); */
 
 		setTimeout(function() {
 			grid2.refreshLayout();
-		}, 300)
+		}, 300);
 		
-	$("#sav").on("click" , function(e){
-			
-	})
-	
-
-	
-	
+		
+		
+		var setArr = [];
+	savbtn.addEventListener("click" , function(){
+		console.log(grid2.getCheckedRows());
+		let arr = grid2.getCheckedRows();
+		$('#myModal').modal('hide');
+		//console.log( "checkedRows"+grid2.getCheckedRows());
+		for(var i = 0; i < arr.length; i++) {
+			console.log(arr[i]);
+			setArr.push(arr[i])
+			//console.log(modalGrid);
+			modalGrid.clear();
+			modalGrid.appendRows(setArr);
+		} 
+		
 	});
+
+
 </script>
 
 </html>

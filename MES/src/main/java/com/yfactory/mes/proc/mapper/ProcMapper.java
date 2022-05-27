@@ -13,7 +13,7 @@ public interface ProcMapper {
 
 	List<Map> OrderSelectOk(String ordCd); // 주문서 조회 (주문코드O)
 
-	int ProcPlanInsert(HashMap<String, Object> procPI); // 계획 등록
+	int ProcPlanInsert(Map<String, String> procPI); // 계획 등록
 
 	List<Map> PrdSelect(); // 제품 목록 조회
 
@@ -47,4 +47,6 @@ public interface ProcMapper {
     List<Map> ProcOrderCdSelectOne(String dtlCd); //생산 지시 코드 단건 조회
     
     List<Map> ProcOrderLineSelectOne(String line); //생산 라인 코드 단건 조회
+    
+    List<Map> ProcLogic(@RequestBody HashMap<String, Object> list); //생산 로직 
 }

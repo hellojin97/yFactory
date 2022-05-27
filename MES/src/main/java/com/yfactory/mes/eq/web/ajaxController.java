@@ -1,5 +1,6 @@
 package com.yfactory.mes.eq.web;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,13 +126,18 @@ public class ajaxController {
 		return mapper.getEqChkList();
 	}
 	// 설비구분명 + 점검시작일 + 점검종료일 기준 조회 
-	@RequestMapping(value = "/eqChkListAajx", method = RequestMethod.POST)
+	@RequestMapping(value = "/eqChkSelectAjax", method = RequestMethod.POST)
 	public List<Map> eqChkListAajx(@RequestBody HashMap<String, Object> list){
 		
 		return mapper.getEqChkSelectList(list);
 
 	}
 	
-
+	//점검 일일 건수
+	@RequestMapping("/getEqDailyChkListAjax")
+	@ResponseBody
+	public List<Map> getEqDailyChkListAjax(@RequestParam("chkdt1") String chkdt1 , @RequestParam("chkdt2") String chkdt2){
+		return mapper.getEqDailyChkCount(chkdt1 , chkdt2);
+	}
 
 }

@@ -72,5 +72,11 @@ public class ProcController {
 	public String procOrderListModal() {
 		return "/proc/procmodal/procOrderListModal";
 	}
+	
+	// 공정실적조회
+	@GetMapping("/procResult")
+	public String procResult() {
+		return "proc/procResult";
+	}
 
 }

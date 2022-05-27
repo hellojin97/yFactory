@@ -1,8 +1,12 @@
 package com.yfactory.mes.proc.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,17 +56,11 @@ public class ProcServiceImpl implements ProcService{
 		return map.PrdSelectOne(prodCd);
 	}
 
-
+	// 생산계획 등록
 	@Override
-	public int ProcPlanInsert(HashMap<String, Object> procPI) {
+	public int ProcPlanInsert(Map<String, String> procPI) {
 		// TODO Auto-generated method stub
-		// ajax 해온 값
-		System.out.println(procPI);
-		List<Map<String, String>> list = (List<Map<String, String>>) procPI.get("array");
-		// 배열에 뽑은 값
-		System.out.println(list);
-		//return map.ProcPlanInsert(procPI);
-		return 1;
+		return map.ProcPlanInsert(procPI);
 	}
 
 
@@ -179,6 +177,15 @@ public class ProcServiceImpl implements ProcService{
 	public List<Map> ProcOrderLineSelectOne(String line) {
 		// TODO Auto-generated method stub
 		return map.ProcOrderLineSelectOne(line);
+	}
+
+
+
+	
+	@Override
+	public List<Map> ProcLogic(HashMap<String, Object> list) {
+		
+		return map.ProcLogic(list);
 	}
 
 

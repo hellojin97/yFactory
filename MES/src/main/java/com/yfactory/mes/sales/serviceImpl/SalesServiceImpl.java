@@ -95,4 +95,10 @@ public class SalesServiceImpl implements SalesService {
 		return map.releaseOrder(result);
 	}
 
+	@Override
+	public List<Map> ordtlModalList(String key) {
+		
+		return map.ordtlModalList(key);
+	}
+
 }

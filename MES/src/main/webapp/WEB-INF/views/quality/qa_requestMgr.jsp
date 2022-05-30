@@ -52,13 +52,15 @@
 		el : document.getElementById('qaRequestMgr'),
 		columns : [ {
 			header: '발주코드',
-			name: '발주코드'
+			name: '발주코드',
+			width:'130'
 		}, {
 			header: '발주상세코드',
 			name: '발주상세코드'
 		}, {
 			header: '품질검사코드',
-			name: '품질검사코드'
+			name: '품질검사코드',
+			width:'130'
 		},{
 			header: '자재코드',
 			name: '자재코드'

@@ -67,7 +67,7 @@
       </select>
    <!-- 발주관리 조회 -->
       <select id="listRequest" resultType="map">
-         SELECT DISTINCT 
+             SELECT DISTINCT 
                 po.po_cd    "원자재발주코드",
                 m.mt_cd    "원자재코드",
                 m.mt_nm    "원자재명",
@@ -89,7 +89,7 @@
          AND    m.vdr_cd = vdr.vdr_cd
          AND    po.po_cd IN (select po_cd
                                            from mt_podtl
-                                           where po_dtlcd not IN (select po_dtlcd
+                                           where po_cd not IN (select po_cd
                                                                             from mt_chk))
       </select>
    <!-- 발주검색 -->

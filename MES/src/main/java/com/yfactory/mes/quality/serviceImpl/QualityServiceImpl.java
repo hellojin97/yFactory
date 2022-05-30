@@ -1,6 +1,7 @@
 package com.yfactory.mes.quality.serviceImpl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,6 @@ public class QualityServiceImpl implements QualityService {
 
 	@Override
 	public List<Map> selectErrCode() {
-		// TODO Auto-generated method stub
 		return map.selectErrCode();
 	}
 
@@ -39,7 +39,6 @@ public class QualityServiceImpl implements QualityService {
 	
 	@Override
 	public List<Map> selectProdCheck() {
-		// TODO Auto-generated method stub
 		return map.selectProdCheck();
 	}
 
@@ -58,34 +57,13 @@ public class QualityServiceImpl implements QualityService {
 	}
 
 	@Override
-	public List<Map> searchMtQuality(Date startDate, Date endDate, String mtName) {
-		return map.searchMtQuality(startDate, endDate, mtName);
-	}
-
-	@Override
-	public List<Map> searchProdQuality(String prodName) {
-		return map.searchProdQuality(prodName);
-	}
-
-	@Override
-	public List<Map> searchMtErrList(String errDtl, String mtName) {
-		return map.searchMtErrList(errDtl, mtName);
-	}
-
-	@Override
-	public List<Map> searchProdErrList(String errDtl, String prodName) {
-		return map.searchProdErrList(errDtl, prodName);
-	}
-
-	@Override
 	public int reqMtQuality(String pdt, String mcd) {
-		// TODO Auto-generated method stub
 		return map.reqMtQuality(pdt, mcd);
 	}
 	
 	@Override
-	public int resMtQuality(String podtlcd, String mtnm, int passqty, int errqty, String errcd) {
-		return map.resMtQuality(podtlcd, mtnm, passqty, errqty, errcd);
+	public int resMtQuality(Map<String, Object> list) {
+		return map.resMtQuality(list);
 	}
 
 }

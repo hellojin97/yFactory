@@ -34,6 +34,14 @@ public class MaterialAjaxController {
 		public List<Map> mtrlOrderList(String ppCd, String mtCd){
 			return service.mtrlOrderList(ppCd, mtCd);
 		}
+		
+		
+		// 입고등록
+		@PostMapping("/insertMtrlIn")
+		public int insertMtrlIn(@RequestParam Map<String, String> MtrlIn) {
+				System.out.println(MtrlIn);
+			return service.insertMtrlIn(MtrlIn);
+		}
 	
 		//LOT재고조회
 		@GetMapping("/mtrlLot")

@@ -46,6 +46,9 @@ public interface MtrlService {
 	//발주등록
 	int mtrlReqInsert(Map<String, String> result);
 	
+	//입고등록
+	int insertMtrlIn(Map<String,String> mtrlIn);
+	
 	//입고조회
 	List<Map>insertList();
 	//입고예정버튼

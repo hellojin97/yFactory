@@ -206,10 +206,10 @@
 			AND     MTD.CHK_CD = BIM.CHK_CD
 			AND     MTD.CHK_DTL_INSP = 'MTRL02'
 		</select> 
-	<!-- 입고등록 
+	<!-- 입고등록 -->
 		<insert id="mtrlWearInsert" statementType="CALLABLE" parameterType="map">
 			{CALL INSERT_PO(#{입고량},#{현재고},#{입고신청일},#{원자재LOT},#{유통기한})}
-		</insert>-->
+		</insert>
 	
 	
 <!-- END 입고페이지 -->	

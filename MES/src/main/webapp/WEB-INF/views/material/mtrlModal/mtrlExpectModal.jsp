@@ -106,7 +106,9 @@
         		    	for (var i = 0; i < result.length; i++) {
         		    		listMtrlInsert.appendRow(result[i]);
 						}
+        		    	
         		    	$('#myModal').modal('hide')
+        		    	
         		    	console.log(result);
         		    })
         		   

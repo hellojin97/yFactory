@@ -264,6 +264,7 @@ $("#outBtn").on("click", function(){
 			               $.ajax({
 							   url  : "procPlanInsert",
 							   data : result,
+							   async : false,
 							   method : "POST"
 										   }).done(function(result){
 												console.log(result);
@@ -273,52 +274,28 @@ $("#outBtn").on("click", function(){
 		        	  
 		        	  
 		        	  
-						              Swal.fire(
-						                  '생산계획이 등록되었습니다.',
-						                  'success'
-						              );
-						              
-						              //승인시 계획등록 ajax
-															              
-						              
-						              
-						              
-						              
-						              
+						        	  swal.fire({
+						        		    title: "성공적으로 계획이 등록되었습니다!",
+						        		    text: "생산계획조회 페이지로 이동합니다.",
+						        		    type: "success"
+						        		}).then(function() {
+						        		    window.location = "procPlSelect";
+						        		});
 
-						              //ajax 실행 후 removeRows
-						              resultGrid.removeRows(checkedAry);
-
-		          }else{
+		          			}else{
 		          	Swal.fire(
 		                      '승인이 취소되었습니다.',
 		                      '섹시하시네요~!',
 		                      'error'
 		                  )
-		          }
+		          			}
 		      }) 
 		});
 		 
-		 /* =========== 생산계획 등록 끝 ===========*/
+	
 		 
-/* 		 ProcPN.addEventListener("dblclick", function() {
-			 $("#HNum").val("1");
-			 
-			$("#test").load("ordermodal", function() {
-
-					const ProcModal = new bootstrap.Modal('#ProcModal');
-					ProcModal.show();
-			
-				}) 
-				/* 	
-				$("#test").load("ordermodal", function() {
-
-					const myModal = new bootstrap.Modal('#myModal');
-					myModal.show();
-			
-				})
-				
-		 }); */
+		 
+		 	
 		btnModal.addEventListener("click", function() {
 			$("#HNum").val("1");
 			$("#test").load("ordermodal", function() {
@@ -344,9 +321,50 @@ $("#outBtn").on("click", function(){
 		btnDelete.addEventListener("click", function() {
 			resultGrid.removeCheckedRows(false);
 		});
+		
+		/* 생산계획 취소 ===================== */
 		btnPlanCancel.addEventListener("click", function() {
-			resultGrid.removeCheckedRows(false);
-		});
+			let prd = resultGrid.getCheckedRows();
+			console.log(prd);
+			
+			  Swal.fire({
+		          title: '생산계획을 취소하시겠습니까?',
+		          icon: 'warning',
+		          showCancelButton: true,
+		          confirmButtonColor: '#3085d6',
+		          cancelButtonColor: '#d33',
+		          confirmButtonText: '승인',
+		          cancelButtonText: '취소'
+		          
+		      }).then((result) => {
+		          if (result.isConfirmed) {
+		        	  	for (var i = 0; i < prd.length; i++) {
+							$.ajax({
+								url : 'procCancelPl',
+								data : prd[i],
+								method : 'post',
+								async : false
+							}).done(function(data){
+								console.log('성공');
+							});
+						}	
+		        	  
+		        	  	/* alert 성공처리 */
+		        	  	 swal.fire({
+			        		    title: "성공적으로 계획이 취소되었습니다!",
+			        		    text: "새로고침합니다.",
+			        		    type: "success"
+			        		}).then(function() {
+			        		   	location.reload();
+			        		});
+		        	  
+		        	  
+		        	  }
+		      })
+		      });
+			
+			
+		
 
 		// var resultGrid
 		window.onload = function() {

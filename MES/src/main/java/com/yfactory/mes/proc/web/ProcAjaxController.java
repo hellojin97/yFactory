@@ -163,4 +163,14 @@ public class ProcAjaxController {
 	public List<Map> procResultProcessList(){		
 		return procService.procResultProcessList();
 	}
+	
+	
+	@PostMapping("/procCancelPl")
+	public int procCancelPl(@RequestParam Map<String, String> Cancel) {
+	
+			System.out.println(Cancel);
+		return procService.procCancelPl(Cancel);
+	}
+	
+	
 }

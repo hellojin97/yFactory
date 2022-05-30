@@ -215,6 +215,15 @@ public class ProcServiceImpl implements ProcService{
 
 
 
+	@Override
+	public int procCancelPl(Map<String, String> cancel) {
+		// TODO Auto-generated method stub
+		return map.procCancelPl(cancel);
+	}
+
+
+
+
 
 
 

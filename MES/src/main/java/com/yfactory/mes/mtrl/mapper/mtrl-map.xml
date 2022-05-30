@@ -127,7 +127,7 @@
 <!-- 입고페이지 -->	
 	<!-- 입고조회 -->
 		<select id="selectMtrlReqList" resultType="map">
-			           SELECT 
+		    SELECT 
 			        MTD.PO_CD   "원자재발주코드",
 			        MTD.MT_CD   "원자재코드",
 			        M.MT_NM     "원자재명",
@@ -135,7 +135,7 @@
 			        BIM.B_IN_QTY "입고량",
                     TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
                     lot.mt_lot "원자재LOT번호",   
-			        TO_CHAR(lot.mt_exp ,'YYYY-MM-DD') "유통기한"
+			        TO_CHAR(SYSDATE+31 ,'YYYY-MM-DD') "유통기한"
 			        
 			FROM
 			        MT_CHK_DTL MTD,
@@ -153,32 +153,33 @@
 		</select>
 	<!-- 입고 검색조회 -->
 		<select id="insertSearch" resultType="map">
-			SELECT
-			       po.po_cd "원자재발주코드",
-			       m.mt_cd "원자재코드",
-			       m.mt_nm "원자재명",
-			       vdr.vdr_cd "업체명",
-			       wne.mt_wrqty "입고량",
-			       TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
-			       lot.mt_lot "원자재LOT번호",
-			       TO_CHAR(lot.mt_exp, 'YYYY-MM-DD') "유통기한"
-			    
-			FROM   mt_po po,
-			       mt m,
-			       vendor vdr,
-			       mt_wrnote wne,
-			       mt_lot lot
-			
-			WHERE  po.mt_cd = m.mt_cd
-			AND    m.vdr_cd = vdr.vdr_cd
-			AND    lot.mt_cd = m.mt_cd
-			AND    lot.mt_lot = wne.mt_lot
-			AND    wr_cd = 'INOUT01'
+			SELECT 
+			        MTD.PO_CD   "원자재발주코드",
+			        MTD.MT_CD   "원자재코드",
+			        M.MT_NM     "원자재명",
+			        V.VDR_NM    "업체명",
+			        BIM.B_IN_QTY "입고량",
+                    TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
+                    lot.mt_lot "원자재LOT번호",   
+			        TO_CHAR(SYSDATE+31 ,'YYYY-MM-DD') "유통기한"
+			        
+			FROM
+			        MT_CHK_DTL MTD,
+			        MT M,
+			        VENDOR V,
+			        BEFOR_IN_MT BIM,
+                    MT_LOT lot
+			        
+			WHERE   MTD.MT_CD = M.MT_CD
+			AND     M.VDR_CD = V.VDR_CD
+			AND     MTD.CHK_CD = BIM.CHK_CD
+            AND     lot.mt_cd = m.mt_cd
+			AND     MTD.CHK_DTL_INSP = 'MTRL02'
 				<if test="m1 != ''">
 			AND 	m.mt_nm LIKE '%'||#{m1}||'%'
 				</if>
 				<if test="m2 != ''">
-			AND 	vd.vdr_nm LIKE '%'||#{m2}||'%'
+			AND 	v.vdr_nm LIKE '%'||#{m2}||'%'
 				</if>
 				<if test="req1 != '' and req2 != ''">
 			AND 	lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
@@ -205,6 +206,12 @@
 			AND     MTD.CHK_CD = BIM.CHK_CD
 			AND     MTD.CHK_DTL_INSP = 'MTRL02'
 		</select> 
+	<!-- 입고등록 -->
+		<insert id="mtrlWearInsert" statementType="CALLABLE" parameterType="map">
+			{CALL INSERT_PO(#{입고량},#{현재고},#{입고신청일},#{원자재LOT},#{유통기한})}
+		</insert>
+	
+	
 <!-- END 입고페이지 -->	
 
 <!-- LOT페이지 -->   

@@ -146,7 +146,7 @@
 
 	//입고관리 전체조회
 	$.ajax({
-		url : "mtrlInsertList",
+		url : "",
 		method : "GET",
 		dataType : "JSON",
 		success : function(result) {
@@ -183,10 +183,10 @@
 		}
 
 		],
-		rowHeaders : [ 'rowNum' ],
+		rowHeaders : [ 'checkbox' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 10
+			perPage : 5
 		}
 	});
 

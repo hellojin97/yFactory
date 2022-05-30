@@ -124,6 +124,11 @@ public class EquipServiceImpl implements EquipService{
 		
 		return mapper.dailyChkListAjax(list);
 	}
+
+	@Override
+	public int updateIna(Map<String, String> result) {
+		return mapper.updateIna(result);
+	}
 	
 	
 	

@@ -127,15 +127,15 @@
 <!-- 입고페이지 -->	
 	<!-- 입고조회 -->
 		<select id="selectMtrlReqList" resultType="map">
-		    SELECT 
+		   		    SELECT 
 			        MTD.PO_CD   "원자재발주코드",
 			        MTD.MT_CD   "원자재코드",
 			        M.MT_NM     "원자재명",
 			        V.VDR_NM    "업체명",
 			        BIM.B_IN_QTY "입고량",
-                    TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
-                    lot.mt_lot "원자재LOT번호",   
-			        TO_CHAR(SYSDATE+31 ,'YYYY-MM-DD') "유통기한"
+                    TO_CHAR(MTD.CHK_DT, 'YYYY-MM-DD') "입고일시",
+                    BIM.mt_lot "원자재LOT번호",   
+			        TO_CHAR(MTD.CHK_DT+31 ,'YYYY-MM-DD') "유통기한"
 			        
 			FROM
 			        MT_CHK_DTL MTD,
@@ -199,16 +199,19 @@
 			        MT_CHK_DTL MTD,
 			        MT M,
 			        VENDOR V,
-			        BEFOR_IN_MT BIM
+			        BEFOR_IN_MT BIM,
+			        MT_PO MP
 			        
 			WHERE   MTD.MT_CD = M.MT_CD
 			AND     M.VDR_CD = V.VDR_CD
 			AND     MTD.CHK_CD = BIM.CHK_CD
 			AND     MTD.CHK_DTL_INSP = 'MTRL02'
+			AND     mtd.po_cd = mp.po_cd
+            AND     mp.po_par NOT LIKE '입고완료'
 		</select> 
 	<!-- 입고등록 -->
-		<insert id="mtrlWearInsert" statementType="CALLABLE" parameterType="map">
-			{CALL INSERT_PO(#{입고량},#{현재고},#{입고신청일},#{원자재LOT},#{유통기한})}
+		<insert id="insertMtrlIn" statementType="CALLABLE" parameterType="map">
+			{CALL INSERT_MTRL_IN (#{원자재발주코드}, #{원자재코드},#{입고량},#{입고일시}, #{원자재LOT번호}, #{유통기한})}
 		</insert>
 	
 	

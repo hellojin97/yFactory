@@ -122,6 +122,12 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.selectMtrlReqList(result);
 	}
 
+	@Override
+	public int insertMtrlIn(Map<String, String> mtrlIn) {
+		// TODO Auto-generated method stub
+		return map.insertMtrlIn(mtrlIn);
+	}
+
 
 
 }

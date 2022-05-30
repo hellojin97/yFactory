@@ -246,8 +246,8 @@
 						
 		WHERE	ordtl.ord_cd = ord.ord_cd
 		AND		ordtl.prod_cd = pd.prod_cd
-		AND     ord.prog_cd NOT LIKE 'PROG04'
-		AND		ordtl.prog_cd NOT LIKE 'PROG04'
+		AND     ordtl.prog_cd NOT LIKE 'ORDTL02'
+		AND     ordtl.prog_cd NOT LIKE 'PROG04'
 		ORDER BY		ordtl.ord_cd DESC
 	</select>
 	

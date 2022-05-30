@@ -118,7 +118,7 @@
 		from 	eq_ina ei, eq e, comm_code cm
 		where 	ei.eq_cd = e.eq_cd
 		and       cm.comm_cd = ei.dis_code
-		ORDER BY 1
+		ORDER BY 3
 	</select>
 	
 	<!-- 비가동 설비 내역 검색 -->
@@ -140,12 +140,12 @@
 		<if test="eqCd == '' and eqNm != ''">
 		and		e.eq_nm = #{eqNm}
 		</if>
-		ORDER BY 1
+		ORDER BY 3
 	</select>
 	
 	<!-- 비가동 설비 내역 추가 -->
 	<insert id="setEqIn" statementType="CALLABLE"  parameterType="map">
-		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_ed}, #{p_eq_dc}, #{p_eq_nt})}
+		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_dc}, #{p_eq_nt})}
 	</insert>
 
 <select id="getEqChkList" resultType="map">
@@ -238,5 +238,11 @@ AND 		chk.eq_chkdt IN
 
 </select>
 
+<!-- 비가동 설비 가동 시작 -->
+<update id="" parameterType="String">
+	update eq_ina
+	set eq_inaed = SYSTIMESTAMP
+	where eq_actcd LIKE
+</update>
 
 </mapper>

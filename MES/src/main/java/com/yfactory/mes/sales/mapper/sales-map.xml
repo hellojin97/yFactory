@@ -4,13 +4,11 @@
 
 	<!-- 주문서 조회 -->
 	<select id="selectOrderList" resultType="map">
-		SELECT ord.ord_cd  "주문코드" , 
+		SELECT                  ord.ord_cd  "주문코드" , 
 					   TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
-					   TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
-					   ordtl.prod_cd "완제품코드" ,
-					   ordtl.ord_qty "주문수량",
-					   vdr.vdr_nm "업체명",
-					   pd.prod_nm "완제품명",
+					   TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",					   
+					   sum(ordtl.ord_qty) "주문수량",
+					   vdr.vdr_nm "업체명",					   
 					   cd.cd_explan "진행상황"
 		FROM 
 					   ORDERS ord, 
@@ -19,10 +17,14 @@
 					   PROD pd, 
 					   COMM_CODE cd
 		WHERE     		ord.vdr_cd = vdr.vdr_cd
-		AND      		ord.ord_cd = ordtl.ord_cd
-		AND      		ordtl.prod_cd = pd.prod_cd
-		AND      		cd.comm_cd = ordtl.prog_cd
-		ORDER BY		ord.ord_cd DESC
+		AND      		ord.ord_cd = ordtl.ord_cd		
+		AND      		cd.comm_cd = ord.prog_cd
+		group by        ord.ord_cd, 
+					   ord.req_dt,
+					   ord.res_dt,					   					   
+					   vdr.vdr_nm,
+					   cd.cd_explan
+        ORDER BY		ord.ord_cd DESC
 	</select>
 	
 	<!-- BOM 조회 -->
@@ -41,13 +43,11 @@
 	
 	<!-- 주문서 검색 -->
 	<select id="searchOrderList" resultType="map">
-		SELECT		   ord.ord_cd "주문코드", 
+		SELECT                  ord.ord_cd  "주문코드" , 
 					   TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
-					   TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
-					   ordtl.prod_cd "완제품코드" ,
-					   ordtl.ord_qty "주문수량",
-					   vdr.vdr_nm "업체명",
-					   pd.prod_nm "완제품명",
+					   TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",					   
+					   sum(ordtl.ord_qty) "주문수량",
+					   vdr.vdr_nm "업체명",					   
 					   cd.cd_explan "진행상황"
 		FROM 
 					   ORDERS ord, 
@@ -55,16 +55,9 @@
 					   ORD_DTL ordtl, 
 					   PROD pd, 
 					   COMM_CODE cd
-		WHERE     	   ord.vdr_cd = vdr.vdr_cd
-		AND      	   ord.ord_cd = ordtl.ord_cd
-		AND      	   ordtl.prod_cd = pd.prod_cd
-		AND      	   cd.comm_cd = ordtl.prog_cd		
-		<if test="pcd != ''">
-        AND      	   pd.prod_cd LIKE #{pcd}
-        </if>       
-        <if test="pcd == '' and pnm != ''">
-        AND      	   pd.prod_nm LIKE #{pnm}
-        </if>        
+		WHERE     		ord.vdr_cd = vdr.vdr_cd
+		AND      		ord.ord_cd = ordtl.ord_cd		
+		AND      		cd.comm_cd = ord.prog_cd
         <if test="vnm != ''">
         AND      	   vdr.vdr_cd LIKE '%'||#{vcd}||'%'
         </if>
@@ -85,7 +78,26 @@
         </if>
         <if test="key == 3">        
         </if>
+		GROUP BY        ord.ord_cd, 
+					   ord.req_dt,
+					   ord.res_dt,					   					   
+					   vdr.vdr_nm,
+					   cd.cd_explan
+        
         ORDER BY		ord.ord_cd DESC
+	</select>
+	
+	<!-- 주문서 상세 조회 -->
+	<select id="ordtlModalList" resultType="map">
+		select  ordtl.ordtl_cd "주문상세코드",
+		        pd.prod_nm "제품명", 
+		        ord_qty "주문량",
+		        cd.cd_explan "진행상황"
+		from    ord_dtl ordtl, orders ord, prod pd, comm_code cd
+		where   ordtl.ord_cd = ord.ord_cd
+		and     pd.prod_cd = ordtl.prod_cd
+		and     cd.comm_cd = ordtl.prog_cd
+		and		ordtl.ord_cd = #{key}
 	</select>
 	
 	<!-- 완제품LOT조회 -->

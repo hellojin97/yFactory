@@ -50,5 +50,8 @@ public interface SalesService {
 	
 	//출고등록
 	int releaseOrder(Map<String, String> result);
+	
+	//주문서 조회 - 주문 상세 조회 그리드
+	List<Map> ordtlModalList(String key);
 
 }

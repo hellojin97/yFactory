@@ -91,7 +91,7 @@ public class EquipServiceImpl implements EquipService{
 	}
 
 	@Override
-	public List<Map> getEqChkSelectList(@RequestBody HashMap<String, Object> list) {
+	public List<Map> getEqChkSelectList( HashMap<String, Object> list) {
 		
 		return mapper.getEqChkSelectList(list);
 
@@ -108,9 +108,21 @@ public class EquipServiceImpl implements EquipService{
 	}
 
 	@Override
-	public List<Map> getEqDailyChkCount(@Param("chkdt1")String chkdt1 ,@Param("chkdt2")String chkdt2) {
+	public List<Map> getEqDailyChkCount(String chkdt1 ,String chkdt2) {
 		
 		return mapper.getEqDailyChkCount(chkdt1, chkdt2);
+	}
+
+	@Override
+	public List<Map> eqChkResultAjax(List<HashMap<String, Object>> list) {
+		
+		return mapper.eqChkResultAjax(list);
+	}
+
+	@Override
+	public List<Map> dailyChkListAjax(List<HashMap<String, Object>> list) {
+		
+		return mapper.dailyChkListAjax(list);
 	}
 	
 	

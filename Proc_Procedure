@@ -1,0 +1,70 @@
+--작성자 : 김현진
+--작성일자 : 2022.05.28
+
+--계획 등록 프로시저
+CREATE OR REPLACE PROCEDURE PROC_PL_INSERT(
+                                            f_pp_nm VARCHAR2,
+                                            f_pp_dt VARCHAR2,
+                                            f_ord_cd varchar2,
+                                            f_prod_cd varchar2,
+                                            f_pd_qty NUMBER,
+                                            f_pd_rank NUMBER,
+                                            f_pd_dt   NUMBER
+                                           )
+IS
+    v_pp_cd prdt_pl.pp_cd%TYPE;
+BEGIN
+        SELECT  PP_cd
+        INTO    v_pp_cd
+        FROM    prdt_pl
+        WHERE   ord_cd = f_ord_cd;
+        
+        
+        IF(v_pp_cd IS NULL) THEN
+        
+            v_pp_cd := GET_PL;
+                
+            INSERT INTO PRDT_PL VALUES (
+                                        v_pp_cd,
+                                        f_ord_cd,
+                                        f_pp_nm,
+                                        TO_DATE(f_pp_dt,'YYYY-MM-DD'),
+                                        'PLAN01'
+                                        );
+                                        
+            INSERT INTO PLAN_DTL VALUES (
+                                        GET_PLDTL,
+                                        v_pp_cd,
+                                        f_prod_cd,
+                                        f_pd_qty,
+                                        f_pd_rank,
+                                        f_pd_dt
+                                         );
+        ELSE
+            INSERT INTO PLAN_DTL VALUES (
+                                        GET_PLDTL,
+                                        v_pp_cd,
+                                        f_prod_cd,
+                                        f_pd_qty,
+                                        f_pd_rank,
+                                        f_pd_dt
+                                         );
+        END IF;
+        
+        
+END PROC_PL_INSERT;
+/
+
+
+
+--계획 취소 프로시저
+CREATE OR REPLACE PROCEDURE PROC_CANCEL_PL (
+                                            f_pp_cd VARCHAR2
+                                            )
+                                            
+IS
+BEGIN
+        DELETE FROM PRDT_PL WHERE PP_CD = f_pp_cd;
+        DELETE FROM PLAN_DTL WHERE PP_CD = f_pp_cd;
+END PROC_CANCEL_PL;
+/

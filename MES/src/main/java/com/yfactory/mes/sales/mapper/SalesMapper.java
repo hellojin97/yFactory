@@ -48,6 +48,9 @@ public interface SalesMapper {
 	//출고 완제품 modal 조회
 	List<Map> outProdModal(String key);
 	
+	//주문서 조회 - 주문 상세 조회 그리드
+	List<Map> ordtlModalList(String key);	
+	
 	
 	//출고등록
 	int releaseOrder(Map<String, String> result);

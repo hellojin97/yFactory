@@ -116,6 +116,12 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.expectList();
 	}
 
+	@Override
+	public List<Map> selectMtrlReqList(Map<String, String> result) {
+		// TODO Auto-generated method stub
+		return map.selectMtrlReqList(result);
+	}
+
 
 
 }

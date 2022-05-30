@@ -218,15 +218,15 @@
    <!-- 자재lot재고조회 -->
       <select id="listMtrlLot" resultType="map">
          SELECT lot.mt_lot "mt_lot",
-               lot.mt_cd "mt_cd",
-               m.mt_nm "mt_nm", 
-               vd.vdr_nm "vdr_nm", 
-               cy.mt_qty "mt_qty", 
-               TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
+                lot.mt_cd "mt_cd",
+                m.mt_nm "mt_nm", 
+                vd.vdr_nm "vdr_nm", 
+                cy.mt_qty "mt_qty", 
+                TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
          FROM   mt_lot lot, 
-               mt m,  
-               vendor vd, 
-               mt_curqty cy
+                mt m,  
+                vendor vd, 
+                mt_curqty cy
          WHERE  m.mt_cd = lot.mt_cd
          AND    m.vdr_cd = vd.vdr_cd
          AND    lot.mt_lot = cy.mt_lot

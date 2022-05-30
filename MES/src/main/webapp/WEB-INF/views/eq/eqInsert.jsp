@@ -81,8 +81,8 @@ button:hover {
 								&nbsp;&nbsp;
 								<div class="form-check">
 									<input class="form-check-input" type="radio" name="eq_actst"
-										value="USE02"> <label class="form-check-label"
-										for="flexRadioDefault2">N</label>
+										value="USE02" checked> <label class="form-check-label"
+										for="flexRadioDefault2" >N</label>
 								</div>
 
 

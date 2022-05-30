@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -109,5 +110,12 @@ public class SalesAjaxController {
 		salesService.releaseOrder(result);
 		
 		return "성공";
+	}
+	
+	//주문서 조회 - 주문 상세 조회 그리드
+	@RequestMapping("/ordtlModalList")
+	public List<Map> ordtlModalList(@RequestParam("key") String key) {
+		
+		return salesService.ordtlModalList(key);
 	}
 }

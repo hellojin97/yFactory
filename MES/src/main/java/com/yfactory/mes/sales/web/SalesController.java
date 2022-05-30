@@ -67,5 +67,11 @@ public class SalesController {
 	public String prodSafety() {
 		return "sales/prodSafety";
 	}
+	
+	//주문서 조회 - 주문서 상세 조회
+	@RequestMapping("/ordtlModal")
+	public String ordtlModal() {
+		return "sales/salesModal/ordtlModal";
+	}
 
 }

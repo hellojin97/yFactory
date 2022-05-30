@@ -23,7 +23,9 @@ AND     		mk.po_cd IS NULL
 	
 	<!-- 자재검사관리 -->
 	<select id="selectMtCheckMgr" resultType="map">
-SELECT MCD.PO_CD "발주코드",
+SELECT
+		 DISTINCT
+		MCD.PO_CD "발주코드",
        MPD.PO_DTLCD "발주상세코드",
        MCD.CHK_CD "품질검사코드", 
        MCD.MT_CD "자재코드", 
@@ -42,7 +44,8 @@ AND MCD.CHK_DTL_INSP = CC.COMM_CD
 AND MCD.PO_CD = MPD.PO_CD
 AND M.MT_CD = MPD.MT_CD
 AND MC.CHK_MNGR = E.EMP_NO
-AND CC.CD_NM = 'MTRL01'
+AND MCD.CHK_DTL_INSP = 'MTRL01'
+ORDER BY 1
 
 	</select>
 	

@@ -175,5 +175,4 @@ public class ProcAjaxController {
 		return procService.procCancelPl(Cancel);
 	}
 	
-	
 }

@@ -74,6 +74,8 @@ public interface EquipMapper {
 	int eqChkDel(); // 설비 점검 삭제(점검관리 페이지)
 
 	int eqChkMng();// 설비 점검 일별 건수 조회(점검관리 페이지)
+	
+	int updateIna(Map<String, String> result); // 비가동 설비 재가동
 
 	
 

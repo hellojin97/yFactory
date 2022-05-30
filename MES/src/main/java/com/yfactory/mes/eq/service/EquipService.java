@@ -68,4 +68,7 @@ public interface EquipService {
 	
 	 // 일점검건수 - 날짜를 기즌올 해달날짜 점검 데이터 조회 > 날짜가 여러개
 	List<Map> dailyChkListAjax( List<HashMap<String, Object>> list);
+	
+	// 비가동 설비 재가동
+	int updateIna(Map<String, String> result);
 }

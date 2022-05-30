@@ -90,21 +90,23 @@
 			  
 		      mtrlExpectList.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
 		  })
-		  //입고예정등록버튼
-  //발주등록버튼
+  //입고예정등록버튼
    $("#select").on("click", function(){
         	  let pocd = mtrlExpectList.getCheckedRows();
         	  for (var i = 0; i < pocd.length; i++) {  
         		  
-        		  /* 원자재발주코드 */
+        		  /* 입고예정리스트 */
       			    let poCd = pocd[i];
         		  console.log(poCd)
         		    $.ajax({
         		    	url : 'selectMtrlReqList',
         		    	data : poCd,
-        		 		dataType : 'JSON'
+        		 		dataType : 'JSON',
         		    }).done(function(result){
-        		    	listMtrlInsert.appendRow(result)
+        		    	for (var i = 0; i < result.length; i++) {
+        		    		listMtrlInsert.appendRow(result[i]);
+						}
+        		    	$('#myModal').modal('hide')
         		    	console.log(result);
         		    })
         		   

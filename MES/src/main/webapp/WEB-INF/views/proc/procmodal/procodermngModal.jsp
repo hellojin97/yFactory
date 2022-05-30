@@ -77,12 +77,12 @@ $(function(){
 	           name: '계획명',
 	         },
 	         {
-	             header: '생산계획상세코드',
-	             name: '생산계획상세코드',
+	             header: '계획등록일자',
+	             name: '계획등록일자',
 	           },
 	           {
-	               header: '완제품',
-	               name: '완제품명',
+	               header: '상태',
+	               name: '상태',
 	             },
 	             ],
 	   					rowHeaders: ['rowNum'],
@@ -95,45 +95,48 @@ $(function(){
 		NoPlanSelectGrid.on("dblclick",function(e) {
 			
 			//debugger
-			let ppCd = NoPlanSelectGrid.getValue(e.rowKey, '생산계획상세코드');
-			let prodNm = NoPlanSelectGrid.getValue(e.rowKey, '완제품명');
-		    var data= {prodNm : prodNm};
+			let ppCd = NoPlanSelectGrid.getValue(e.rowKey, '생산계획코드');
+			
+		    var data= {"ppCd" : ppCd};
 			if(ppCd != null){
 				 
 			
 			//ajax 실행
 				 	  $.ajax({
 					   url  : "procDtPlanSelect",
-						 data : {
-						   ppCd : ppCd
-						   }, 
-					   dataType : "JSON",
-					   contentType : "application/json; charset = UTF-8;"
+						 data : data,
+					   	method    : 'GET',
+					   	dataType : 'JSON'
 				   }).done(function(result){
-					   //procDtPlan.appendRow(result);
-					   //console.log(result)
+					   		console.log(result);
+				   
 							for (var i = 0; i < result.length; i++) {
 								procDtPlan.appendRow(result[i]);
-							}
-			
-				   })
-				   //라인코드 넣는 ajax
+								
+								   //라인코드 넣는 ajax
 
-				    $.ajax({
-					   url  : "procLineSelect",
-					   data :  JSON.stringify(data), 
-					   dataType : "JSON",
-					   type : "POST",
-					   contentType : "application/json; charset = UTF-8;"
-				   }).done(function(result){
-							 for (var i = 0; i < result.length; i++) {
-								 procOrder.appendRow(result[i]);
-								 $('#procDtPlanModal').modal('hide')
-							} 
-					   
-
+							    $.ajax({
+								   url  : "procLineSelect",
+								   data :  {"prodNm" : result[i].완제품명}, 
+								   dataType : "JSON",
+								   type : "GET"
+							   }).done(function(data){
+										 for (var i = 0; i < data.length; i++) {
+											 procOrder.appendRow(data[i]);
+										} 
+							   }) 
+								
+							};
+							
+							
+							
+							
+							$('#procDtPlanModal').modal('hide');
+				   });
 			
-				   }) 
+			
+			
+
 				   
 			}
 			})

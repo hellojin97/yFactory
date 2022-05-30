@@ -111,19 +111,8 @@ public class ProcServiceImpl implements ProcService{
 
 
 
-	@Override
-	public List<Map> procDtPlanSelect(String ppCd) {
-		// TODO Auto-generated method stub
-		return map.procDtPlanSelect(ppCd);
-	}
 
 
-
-
-	@Override
-	public List<Map> ProcLineSelect(HashMap<String, Object> prodNm) {
-		return map.ProcLineSelect(prodNm);
-	}
 
 
 
@@ -219,6 +208,24 @@ public class ProcServiceImpl implements ProcService{
 	public int procCancelPl(Map<String, String> cancel) {
 		// TODO Auto-generated method stub
 		return map.procCancelPl(cancel);
+	}
+
+
+
+
+	@Override
+	public List<Map> procDtPlanSelect(Map<String, String> ppCd) {
+		// TODO Auto-generated method stub
+		return map.procDtPlanSelect(ppCd);
+	}
+
+
+
+
+	@Override
+	public List<Map> ProcLineSelect(Map<String, String> prodNm) {
+		// TODO Auto-generated method stub
+		return map.ProcLineSelect(prodNm);
 	}
 
 

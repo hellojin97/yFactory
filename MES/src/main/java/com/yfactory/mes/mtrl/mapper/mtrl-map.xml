@@ -261,6 +261,55 @@
             </if>
       </select>   
 <!-- END LOT페이지 -->      
+
+<!-- 원자재 조회페이지 -->
+	<!-- 원자재조회 -->
+		<select id="mtrlStorageList" resultType="map">
+			SELECT 
+			       LOT.MT_CD  "원자재코드",
+			       M.MT_NM    "원자재명",
+			       V.VDR_CD   "업체명",
+			       SUM(C.MT_QTY)   "수량",
+			       M.MT_SFQTY "안전재고"
+			       
+			FROM   MT_LOT LOT,
+			       MT M,
+			       VENDOR V,
+			       MT_CURQTY C
+			
+			WHERE  M.MT_CD = LOT.MT_CD
+			AND    M.VDR_CD = V.VDR_CD
+			AND    LOT.MT_LOT = C.MT_LOT
+			GROUP BY LOT.MT_CD, M.MT_NM, V.VDR_CD, M.MT_SFQTY
+		</select>
+	<!-- 원자재 검색 -->
+		<select id="mtrlStorageSearch" resultType="map">
+			SELECT 
+			       LOT.MT_CD  "원자재코드",
+			       M.MT_NM    "원자재명",
+			       V.VDR_CD   "업체명",
+			       SUM(C.MT_QTY)   "수량",
+			       M.MT_SFQTY "안전재고"
+			       
+			FROM   MT_LOT LOT,
+			       MT M,
+			       VENDOR V,
+			       MT_CURQTY C
+			
+			WHERE  M.MT_CD = LOT.MT_CD
+			AND    M.VDR_CD = V.VDR_CD
+			AND    LOT.MT_LOT = C.MT_LOT
+			
+			<if test="m1 != ''">
+	        	AND    m.mt_nm LIKE '%'||#{m1}||'%'
+	        </if>
+	        <if test="m2 != ''">
+	            AND    v.vdr_nm LIKE '%'||#{m2}||'%'
+	        </if>
+	        GROUP BY LOT.MT_CD, M.MT_NM, V.VDR_CD, M.MT_SFQTY
+		</select>
+		
+<!-- END 원자재 조회페이지 -->		
    
 <!-- 공통 페이지 -->   
    <!-- 자재 코드,이름 전체조회 -->

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LOT재고조회</title>
+<title>재고조회</title>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
@@ -17,7 +17,7 @@
 </head>
 <body onkeyup="on_key_up()">
 
-		<h1>안전재고 관리</h1>
+		<h1>원자재 재고조회</h1>
 <form>
 		<div style="background-color: #e9ecef; padding: 8px;">
 			<div class="mainTitle" style="padding: 15px;">
@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				<!-- 업체명 -->
-				<div class="col-md-6 " style="padding-bottom: 10px;">
+				<div class="col-md-6 " style="padding:0px 20px 10px 0px">
 					<div class="input-group  " style="padding-bottom: 10px;">
 						<label for="inputText" class="col-form-label"style="padding-right: 27px;">업체명</label> 
 						<input type="text" class="form-control" style="width: 50px" id="vdrNminput" placeholder="업체명">
@@ -58,7 +58,7 @@
 
 			<!-- 테이블 -->
 			<div class="code-html contents" style="padding-bottom: 10px;">
-				<div id="mtrlLotorder"></div>
+				<div id="mtrlStorageGrid"></div>
 				<div id="test"></div>
 			</div>
 
@@ -103,38 +103,34 @@
 	
 	
 
-	//LOT 전체조회
+	//원자재 전체조회
 	$.ajax({
-		url : "mtrlLot",
+		url : "mtrlStorageList",
 		method : "GET",
 		dataType : "JSON",
 		success : function(result) {
-			listMtrlLot.resetData(result);
+			mtrlStorageTable.resetData(result);
 		}
 	});
 
-	var listMtrlLot = new tui.Grid({
-		el : document.getElementById('mtrlLotorder'),
+	var mtrlStorageTable = new tui.Grid({
+		el : document.getElementById('mtrlStorageGrid'),
 		columns : [ {
-			header : '자제LOT번호',
-			name : 'mt_lot'
+			header : '원자재코드',
+			name : '원자재코드'
 		}, {
-			header : '자재코드',
-			name : 'mt_cd'
-		}, {
-			header : '자재명',
-			name : 'mt_nm'
+			header : '원자재명',
+			name : '원자재명'
 		}, {
 			header : '업체명',
-			name : 'vdr_nm'
+			name : '업체명'
 		}, {
 			header : '수량',
-			name : 'mt_qty'
+			name : '수량'
 		}, {
-			header : '유통기한',
-			name : 'mt_exp'
+			header : '안전재고',
+			name : '안전재고'
 		}
-
 		],
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
@@ -174,27 +170,22 @@
       })
   });
 
-  // 자재명 검색
+  // 원자재 검색
   $("#search").on("click", function() {
    console.log("click!")
    var mtNminput = $("#mtNminput").val();
    var vdrNminput = $("#vdrNminput").val();
-   var req1 = $("#req1").val();
-   var req2 = $("#req2").val();
-	console.log(vdrNminput);
    $.ajax({
-      url : "lotSelectSearch",
+      url : "mtrlStorageSearch",
       data : {
     	  m1 : mtNminput,
     	  m2 : vdrNminput,
-            req1 : req1,
-            req2 : req2
       },
       method : 'get',
       dataType: 'JSON',
       contentType : "application/json; charset=utf-8"
    }).done(function(result){
-	    listMtrlLot.resetData(result);
+	   mtrlStorageTable.resetData(result);
        console.log(result);
        
    }).fail(function(result){
@@ -204,12 +195,12 @@
 
 /* 검색 결과 초기화  */
 $('#reset').on('click',function(){
-	const url = "mtrlLot";
+	const url = "mtrlStorageList";
 	   $.ajax(url,{
 	      dataType : "JSON",
 	      method: "GET"
 	   }).done(function(result){
-		   listMtrlLot.resetData(result);
+		   mtrlStorageTable.resetData(result);
 	     console.log(result);
 	   });
 })

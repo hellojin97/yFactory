@@ -128,6 +128,18 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.insertMtrlIn(mtrlIn);
 	}
 
+	@Override
+	public List<Map> mtrlStorageList() {
+		// TODO Auto-generated method stub
+		return map.mtrlStorageList();
+	}
+
+	@Override
+	public List<Map> mtrlStorageSearch(String m1, String m2) {
+		// TODO Auto-generated method stub
+		return map.mtrlStorageSearch(m1, m2);
+	}
+
 
 
 }

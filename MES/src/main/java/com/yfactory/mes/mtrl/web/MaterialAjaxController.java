@@ -34,15 +34,10 @@ public class MaterialAjaxController {
 		public List<Map> mtrlOrderList(String ppCd, String mtCd){
 			return service.mtrlOrderList(ppCd, mtCd);
 		}
+		/* END 발주관리등록 */
 		
 		
-		// 입고등록
-		@PostMapping("/insertMtrlIn")
-		public int insertMtrlIn(@RequestParam Map<String, String> MtrlIn) {
-				System.out.println(MtrlIn);
-			return service.insertMtrlIn(MtrlIn);
-		}
-	
+		/* LOT페이지 */
 		//LOT재고조회
 		@GetMapping("/mtrlLot")
 		public List<Map> mtrlLot() {
@@ -53,6 +48,8 @@ public class MaterialAjaxController {
 		public List<Map> lotSelectSearch(String m1, String m2,String req1,String req2){
 			return service.lotSelectSearch(m1, m2, req1, req2);
 		}
+		/* END LOT페이지 */
+		
 		
 		//발주관리 조회
 		@GetMapping("/mtrlRequestList")
@@ -121,7 +118,26 @@ public class MaterialAjaxController {
 		//입고예정 목록 버튼
 		@GetMapping("/selectMtrlReqList")
 		public List<Map> selectMtrlReqList(@RequestParam Map<String, String> result){
-			return service.selectMtrlReqList(result);
-			
+			return service.selectMtrlReqList(result);	
 		}
+		
+		// 입고등록
+		@PostMapping("/insertMtrlIn")
+		public int insertMtrlIn(@RequestParam Map<String, String> MtrlIn) {
+				System.out.println(MtrlIn);
+			return service.insertMtrlIn(MtrlIn);
+		}
+		
+		//원자재 재고조회
+		@GetMapping("/mtrlStorageList")
+		public List<Map> mtrlStorageList() {
+			return service.mtrlStorageList();
+		}
+		
+		//원자재 재고검색
+		@GetMapping("/mtrlStorageSearch")
+		public List<Map> mtrlStorageSearch(String m1, String m2){
+			return service.mtrlStorageSearch(m1, m2);
+		}
+		
 }

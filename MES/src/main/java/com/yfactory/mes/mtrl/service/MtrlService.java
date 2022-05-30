@@ -61,4 +61,10 @@ public interface MtrlService {
 	
 	//입고예정목록
 	List<Map>expectList();
+	
+	//원자제 조회
+	List<Map>mtrlStorageList();
+	//원자재 검색
+	List<Map>mtrlStorageSearch(String m1,
+							   String m2);
 }

@@ -61,5 +61,9 @@ public interface MtrlMapper {
 	//입고예정목록
 	List<Map>expectList();
 	
-	
+	//원자제 조회
+	List<Map>mtrlStorageList();
+	//원자재 검색
+	List<Map>mtrlStorageSearch(@Param("m1") String m1,
+			 @Param("m2") String m2);
 }

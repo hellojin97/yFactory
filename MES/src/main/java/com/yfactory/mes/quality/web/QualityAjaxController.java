@@ -6,11 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yfactory.mes.quality.service.QualityService;
-import com.yfactory.mes.quality.vo.MtCheckVO;
 
 @RestController
 public class QualityAjaxController {
@@ -55,8 +54,6 @@ public class QualityAjaxController {
 		return qas.selectMtErrList();
 	}
 	
-	// 제품 불량내역
-	
 	// ------------------------------------------------
 	
 	// 검색
@@ -71,19 +68,12 @@ public class QualityAjaxController {
 	public List<Map> searchpoDtlRequest(String key) {
 		return qas.searchpoDtlRequest(key);
 	}
-	// 자재품질결과
-	
-	// 제품품질결과
-	
-	// 자재불량내역
-	
-	// 제품불량내역
-	
+
 	// ------------------------------------------------
 	
 	// 입력
 	// 자재 품질검사요청
-	@GetMapping("/reqMtQuality")
+	@PostMapping("/reqMtQuality")
 	public int reqMtQuality(String pdt, String mcd) {
 		return qas.reqMtQuality(pdt, mcd);
 	}
@@ -92,9 +82,9 @@ public class QualityAjaxController {
 	
 	// 수정
 	// 자재 품질검사
-	@GetMapping("/resMtQuality")
-	public int resMtQuality(String podtlcd, String mtnm, int passqty, int errqty, String errcd) {
-		return qas.resMtQuality(podtlcd, mtnm, passqty, errqty, errcd);
+	@PostMapping("/resMtQuality")
+	public int resMtQuality(@RequestParam Map<String, Object> list) {
+		return qas.resMtQuality(list);
 	}
 	
 }

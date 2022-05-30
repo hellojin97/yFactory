@@ -23,30 +23,29 @@ AND     		mk.po_cd IS NULL
 	
 	<!-- 자재검사관리 -->
 	<select id="selectMtCheckMgr" resultType="map">
-SELECT
-		 DISTINCT
-		MCD.PO_CD "발주코드",
-       MPD.PO_DTLCD "발주상세코드",
-       MCD.CHK_CD "품질검사코드", 
-       MCD.MT_CD "자재코드", 
-       M.MT_NM "자재명",
-       E.EMP_NM "담당인",
-       MPD.PO_QTY "발주량", 
-       CC.CD_NM "상태"
-FROM   MT_CHK_DTL MCD, 
-       MT_CHK MC,
-       EMPLOYEE E,
-       MT M, 
-       MT_PODTL MPD, 
-       COMM_CODE CC
-WHERE MCD.MT_CD = M.MT_CD
-AND MCD.CHK_DTL_INSP = CC.COMM_CD
-AND MCD.PO_CD = MPD.PO_CD
-AND M.MT_CD = MPD.MT_CD
-AND MC.CHK_MNGR = E.EMP_NO
-AND MCD.CHK_DTL_INSP = 'MTRL01'
-ORDER BY 1
-
+		SELECT
+				 DISTINCT
+				MCD.PO_CD "발주코드",
+		       MPD.PO_DTLCD "발주상세코드",
+		       MCD.CHK_CD "품질검사코드", 
+		       MCD.MT_CD "자재코드", 
+		       M.MT_NM "자재명",
+		       E.EMP_NM "담당인",
+		       MPD.PO_QTY "발주량", 
+		       CC.CD_NM "상태"
+		FROM   MT_CHK_DTL MCD, 
+		       MT_CHK MC,
+		       EMPLOYEE E,
+		       MT M, 
+		       MT_PODTL MPD, 
+		       COMM_CODE CC
+		WHERE MCD.MT_CD = M.MT_CD
+		AND MCD.CHK_DTL_INSP = CC.COMM_CD
+		AND MCD.PO_CD = MPD.PO_CD
+		AND M.MT_CD = MPD.MT_CD
+		AND MC.CHK_MNGR = E.EMP_NO
+		AND MCD.CHK_DTL_INSP = 'MTRL01'
+		ORDER BY 1
 	</select>
 	
 	<!-- 자재검사결과 조회 -->
@@ -129,20 +128,6 @@ ORDER BY 1
 		AND 	MEL.ERR_CD = ERR.ERR_CD
         ORDER BY 1
 	</select>
-	
-	<!-- 제품불량내역 조회 -->
-	<select id="selectProdErrList" resultType="map">
-		SELECT 	PERR.PROD_LOT "제품LOT",
-        		PL.PROD_CD "제품코드",
-        		P.PROD_NM "제품명",
-        		PERR.CHK_ERRQTY "불량량",
-        		PERR.ERR_CD "불량코드",
-        		ERR.ERR_DTL "불량내역"
-		FROM 	PROD_ERR PERR, PROD_LOT PL, PROD P, ERR_CODE ERR
-		WHERE	PERR.PROD_LOT = PL.PROD_LOT
-		AND 	PL.PROD_CD = P.PROD_CD
-		AND 	PERR.ERR_CD = ERR.ERR_CD
-	</select>
 
 	<!-- 검색 -->
 	<!-- 불량코드(modal) 검색 -->
@@ -170,151 +155,7 @@ ORDER BY 1
 		AND 	MT.MT_NM LIKE '%' || #{mtName} || '%'
 		</if>
 	</select>
-	
-	<!-- 자재검사결과 검색 -->
-	<select id="searchMtQuality" resultType="map">
-		SELECT  CHK.PO_DTLCD AS "발주상세코드",
-		        CHK.CHK_DT AS "검사일자",
-		        V.VDR_NM AS "업체명",
-		        MT.MT_NM AS "자재명",
-		        MT.MT_UNIT AS "관리단위",
-		        MPD.PO_QTY AS "발주량",
-		        CHK.CHK_PASSQTY AS "합격량",
-		        MEL.CHK_ERRQTY AS "불량량",
-		        MEL.ERR_CD AS "불량코드",
-		        ERR.ERR_DTL AS "불량내역",
-		        CHK.CHK_INSP AS "상태"
-		
-		FROM 	MT_CHK CHK,
-				MT_PO PO,
-				MT MT,
-				MT_PODTL MPD,
-				MT_ERRLIST MEL,
-				ERR_CODE ERR,
-		        VENDOR V
-		
-		WHERE	CHK.PO_DTLCD = MPD.PO_DTLCD
-		AND 	CHK.MTRL_CD = MT.MT_CD
-		AND 	MPD.PO_CD = PO.PO_CD
-		AND 	PO.VDR_CD = V.VDR_CD
-		AND		MEL.PO_DTLCD = MPD.PO_DTLCD
-		AND		MEL.ERR_CD = ERR.ERR_CD
-		<if test="startDate != null and endDate !=null">
-		AND		CHK.CHK_DT BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
-		</if>
-		<if test="mtName != null and mtName = ''">
-		AND 	MT.MT_NM LIKE '%' || {#mtName} || '%'
-		</if>
-	</select>
-	
-	<!-- 제품검사결과 검색 -->
-	<select id="searchProdQuality" resultType="map">
-		SELECT	PER.PROD_LOT AS "제품LOT",
-				PID.PROD_CD AS "제품코드",
-				PPR.PROC_CD AS "공정코드",
-				PC.EQ_CD AS "설비코드",
-				P.PROD_NM AS "제품명",
-				PS.PROC_QTY AS "생산량",
-				PS.PROC_PASSQTY AS "합격량",
-				PE.ERR_QTY AS "불량량",
-				PE.ERR_CD AS "불량코드",
-				ERR.ERR_DTL AS "불량내역",
-				PS.PROC_ST AS "상태"
-		
-		FROM 	PROD_ERR PER,
-				PROD_LOT PLO,
-				PRD_INSDTL PID,
-				PROC_PRC PPR,
-				PROCESS PC,
-				PROD P,
-				PROC_ST PS,
-				PROC_ERR PE,
-				ERR_CODE ERR
-		
-		WHERE 	PER.PROD_LOT = PLO.PROD_LOT
-		AND 	PPR.PRD_DTLCD = PID.PRD_DTLCD
-		AND 	PPR.PROC_CD = PC.PROC_CD
-		AND 	PID.PROD_CD = P.PROD_CD
-		AND 	PS.PROC_PRCD = PPR.PROC_PRCD
-		AND 	PS.LINE_TURN = PPR.LINE_TURN
-		AND 	PS.PRD_DTLCD = PPR.PRD_DTLCD
-		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
-		AND 	PE.LINE_TURN = PPR.LINE_TURN
-		AND 	PE.PRD_DTLCD = PPR.PRD_DTLCD
-		AND 	PE.ERR_CD = ERR.ERR_CD
-		<if test="prodName != null">
-		AND		P.PROD_NM LIKE '%' || {#prodName} || '%'
-		</if>
-	</select>
-	
-	<!-- 자재불량내역 검색 -->
-	<select id="searchMtErrList" resultType="map">
-		SELECT	MEL.PO_DTLCD AS "발주상세코드",
-				CHK.CHK_DT AS "검사일자",
-				V.VDR_NM AS "업체명",
-				MT.MT_NM AS "자재명",
-				MEL.CHK_ERRQTY AS "불량량",
-				ERR.ERR_DTL AS "불량내역",
-				MPD.MT_PRC AS "단가"
-		
-		FROM 	MT_CHK CHK,
-				MT_PODTL MPD,
-				MT_PO PO,
-				VENDOR V,
-				MT_ERRLIST MEL,
-				ERR_CODE ERR,
-				MT MT
-		
-		WHERE 	MEL.PO_DTLCD = MPD.PO_DTLCD
-		AND		MPD.PO_CD = PO.PO_CD
-		AND 	PO.VDR_CD = V.VDR_CD
-		AND 	MEL.MTRL_CD = MT.MT_CD
-		AND 	MEL.ERR_CD = ERR.ERR_CD
-		<if test="errDtl != null errDtl = ''">
-		AND		ERR.ERR_DTL LIKE '%' || {#errDtl} || '%'
-		</if>
-		<if test="mtName != nul mtName = ''">
-		AND 	MT.MT_NM LIKE '%' || {#mtName} || '%'
-		</if>
-	</select>
-	
-	<!-- 제품불량내역 검색 -->
-	<select id="searchProdErrList" resultType="map">
-		SELECT	PER.PROD_LOT AS "제품LOT",
-				PPR.PROC_CD AS "공정코드",
-				PE.LINE_TURN AS "순번",
-				P.PROD_NM AS "제품명",
-				PER.CHK_ERRQTY AS "불량량",
-				PE.ERR_CD AS "불량코드",
-				ERR.ERR_DTL AS "불량내역",
-				PS.PROC_ST AS "상태"
-		
-		FROM 	PROD_ERR PER,
-				PROD_LOT PLO,
-				PRD_INSDTL PID,
-				PROC_PRC PPR,
-				PROC_ST PS,
-				PROC_ERR PE,
-				ERR_CODE ERR,
-				PROD P
-		
-		WHERE	PER.PROD_LOT = PLO.PROD_LOT
-		AND		PID.PROD_CD = P.PROD_CD
-		AND 	PS.PROC_PRCD = PPR.PROC_PRCD
-		AND 	PS.LINE_TURN = PPR.LINE_TURN
-		AND 	PS.PRD_DTLCD = PPR.PRD_DTLCD
-		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
-		AND 	PE.LINE_TURN = PPR.LINE_TURN
-		AND 	PE.PRD_DTLCD = PPR.PRD_DTLCD
-		AND 	PE.ERR_CD = ERR.ERR_CD
-		<if test="errDtl != null and errDtl = ''">
-		AND		ERR.ERR_DTL LIKE '%' || {#errDtl} || '%'
-		</if>
-		<if test="prodName != null and prodName = ''">
-		AND 	P.PROD_NM LIKE '%' || {#prodName} || '%'
-		</if>
-	</select>
-	
+
 	<!-- 입력 -->
 	<!-- 자재 품질검사요청 -->
 	<insert statementType="CALLABLE" id="reqMtQuality" parameterType="map">
@@ -324,6 +165,6 @@ ORDER BY 1
 	<!-- 수정 -->
 	<!-- 자재 품질검사 -->
 	<update statementType="CALLABLE" id="resMtQuality" parameterType="map">
-		{CALL QUALITY_RES_UPDATE (#{podtlcd}, #{mtnm}, #{passqty}, #{errqty}, #{errcd})}
+		{CALL QUALITY_RES_UPDATE (#{chkcd}, #{mtnm}, #{passqty}, #{errqty}, #{errcd})}
 	</update>
 </mapper>

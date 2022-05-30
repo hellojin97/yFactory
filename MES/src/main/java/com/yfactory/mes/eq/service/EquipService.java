@@ -64,8 +64,19 @@ public interface EquipService {
 	List<Map> getEqDailyChkCount(String chkdt1 ,String chkdt2);
 	
 	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로  
-	List<Map> eqChkResultAjax( List<HashMap<String, Object>> list);
+	//List<Map> eqChkResultAjax( List<HashMap<String, Object>> list);
+	
+	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로
+	int eqChkResultAjax(List<HashMap<String, Object>>list); 	
+	
 	
 	 // 일점검건수 - 날짜를 기즌올 해달날짜 점검 데이터 조회 > 날짜가 여러개
 	List<Map> dailyChkListAjax( List<HashMap<String, Object>> list);
+	
+	// 점검관리 페이지 - 점검 내역 DB 삭제
+	int eqChkDelAjax(List<HashMap<String, Object>>list);
+	
+	// 설비관리 페이지 설비수정 버튼 기능부
+	int eqMngUpdateAjax(List<HashMap<String, Object>>list); 
+	
 }

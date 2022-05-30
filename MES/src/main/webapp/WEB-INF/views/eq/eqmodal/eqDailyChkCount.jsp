@@ -17,7 +17,6 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	
 <style type="text/css">
-<style type="text/css">
 #search {
 	background-color: #555555;
 	color: white;
@@ -60,28 +59,25 @@ button:hover {
 							<button type="button" id="search" class="btn btnpart">조회</button>
 							
 							
-						<div id="grid2">
+						<div id="grid2"></div>
 						
-						</div>
+						
 						<div align="right">
-							<button type="button" id="dailySavBtn" class="btn btnpart">등록</button>
+							<button type="button" id="dailyCountSav" class="btn btnpart">등록</button>
 							<button type="button" id="cancel" class="btn btnpart">취소</button>
 						</div>
 						<div class="modal-footer"></div>
-						
-						
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
 </body>
 
 <script>
 document.getElementById('chkdt2').value = new Date().toISOString().substring(0, 10);
-	$(function() {
+$(function() {
 		const grid2 = new tui.Grid({
 			el : document.getElementById('grid2'),
 			scrollX : false,
@@ -119,7 +115,7 @@ document.getElementById('chkdt2').value = new Date().toISOString().substring(0, 
 			var chkdt2 = $("#chkdt2").val();
 			
 			var data = {chkdt1 : chkdt1 , chkdt2 : chkdt2};
-			console.log(data);
+			//console.log(data);
 			const url = "getEqDailyChkListAjax";
 			$.ajax(url, {
 				method : "GET",
@@ -143,49 +139,53 @@ document.getElementById('chkdt2').value = new Date().toISOString().substring(0, 
 					grid2.resetData(rs);	
 				}
 				
-					console.log(rs);		
+					//console.log(rs);		
 				
 			});
 		});// END OF SEARCH BUTTON SYNTAX
 		
 		$("#cancel").on("click" , function(){
-			// 초기화 버튼 클릭시 
+			// 취소 버튼 클릭시 
 			$('#myModal').modal('hide');
 		});
 		
-		$("#dailySavBtn").on("click" , function(){
+		$("#dailyCountSav").on("click" , function(){
+			
 			var chkdRows = grid2.getCheckedRows();
 			var data2 = {};
 			var setArr2 = [];
 			//console.log(grid2.getValue(grid2.getCheckedRows() , '점검일자'));
 			for (var i = 0; i < chkdRows.length; i++) {
-				//console.log("chkdArr.점검일자"+chkdArr[i].점검일자);
-				data2 = {
-						점검일자 : chkdRows[i].점검일자
-						};
+				
+				data2 = {eq_chkdt : chkdRows[i].점검일자	};
 				setArr2.push(data2);			
-				//console.log([i]+"번째 점검일자 : "+setArr2[i].chkdt); // console에 찍히는 값 확인
+			
 			}; // END OF FOR SYNTAX
 			
+			console.log(setArr2);
 			
-			console.log(JSON.stringify(setArr2));
 			
 			$.ajax({
 				url : "dailyChkListAjax",
-				mothod: "POST",
+				method: "POST",
 				traditional: true,
-				data : {list : setArr2},
+				data : JSON.stringify(setArr2),
 				dataType : "JSON",
 				contentType:"application/json; charset=UTF-8"
 				
 			}).done(function(rs){
 				console.log(rs);
+				
+				modalGrid.resetData(rs);
 			}); // END OF AJAX SYNTAX 
+			
+			$("#myModal").modal('hide');
+			
 			
 		});// END OF dailySavBtn SYNTAX
 		
 
-	}); // END OF TOTAL SYNTAX
+}); // END OF TOTAL SYNTAX
 </script>
 
 </html>

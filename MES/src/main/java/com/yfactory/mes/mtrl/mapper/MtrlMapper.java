@@ -22,6 +22,9 @@ public interface MtrlMapper {
 
     //발주등록
   	int mtrlReqInsert(Map<String, String> result);
+  	
+  	//입고등록
+  	int insertMtrlIn(Map<String,String> mtrlIn);
     
 	/*LOT페이지*/
 	//LOT재고조회

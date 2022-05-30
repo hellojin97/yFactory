@@ -304,9 +304,13 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	</insert>
 
 	<insert id="ProcPlanInsert" statementType="CALLABLE" parameterType="map" >
-	
+		{CALL PROC_PL_INSERT (#{ppNm}, #{ppDt}, #{ordCd}, #{prodCd},#{pdQty}, #{pdRank}, #{pdDt})}
 	</insert>
 	
+	<insert id="procCancelPl" statementType="CALLABLE" parameterType="map">
+		{CALL PROC_CANCEL_PL(#{주문코드})}
+	</insert>
+	 
 	<select id="procResultList" resultType="map">
 		SELECT PID.INS_DTLCD AS "생산지시코드",
 	           PRC.PROC_PRCD AS "진행공정코드",

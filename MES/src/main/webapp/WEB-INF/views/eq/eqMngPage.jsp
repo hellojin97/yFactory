@@ -192,8 +192,8 @@
 						eq_actst : chkRows[i].사용여부 
 				};
 				updRowArr.push(data);
-			}
-			  
+			};
+			  console.log(updRowArr);
 		        Swal.fire({
 		            title: '정말 수정 하시겠습니까?',
 		            icon: 'warning',
@@ -211,7 +211,7 @@
 			            	   url : "eqMngUpdateAjax",
 			            	   method: "POST",
 			            	   traditional : true,
-			            	   data : data,
+			            	   data : JSON.stringify(updRowArr),
 			            	   dataType : "JSON",
 			            	   contentType : "application/json; charset=utf-8"
 			            	   

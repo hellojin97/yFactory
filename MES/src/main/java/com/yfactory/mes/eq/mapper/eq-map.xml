@@ -261,7 +261,17 @@ WHERE EQ_CD IN
 
 
 <update id="eqMngUpdateAjax" parameterType="com.yfactory.mes.eq.vo.EqVO" statementType="CALLABLE" >
-{CALL eq_update()}
+<foreach collection="list" item="item">
+{CALL eq_update(#{item.eq_cdj},
+						  #{item.eq_nm},
+						  #{item.proc_cd},
+						  #{item.proc_nm},
+						  #{item.eq_min},
+						  #{item.eq_max},
+						  #{item.eq_purdt},
+						  #{item.eq_actst}
+						  )}
+</foreach>
 </update>
 
 

@@ -80,17 +80,16 @@
 		var mnm = $("#mnm").val();
 		$.ajax({
 			url: "reqMtQuality",
-			method: "get",
 			data: {
 				pdt: pdt
 			}
 			
 			
 		}).done(function() {
-			alert(mnm + '의 품질검사 신청이 완료되었습니다.');
+			alert(pdt + '의 품질검사 신청이 완료되었습니다.');
 			location.href = 'qa_requestMgr';
 		}).fail(function() {
-			alert(mnm + '의 품질검사 신청이 실패하였습니다.');
+			alert(pdt + '의 품질검사 신청이 실패하였습니다.');
 		})
 	});
 	</script>

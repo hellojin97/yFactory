@@ -29,6 +29,9 @@ public interface QualityService {
 	// 자재 불량내역
 	List<Map> selectMtErrList();
 	
+	// 제품 불량내역
+	List<Map> selectProdErrList();
+
 	// ------------------------------------------------
 	
 	// 검색
@@ -42,11 +45,12 @@ public interface QualityService {
 	
 	// 입력
 	// 자재 품질검사요청
-	int reqMtQuality(String pdt, String mcd);
+	int reqMtQuality(String pdt);
 	
 	// ------------------------------------------------
 	
 	// 수정
 	// 자재 품질검사
 	int resMtQuality(Map<String, Object> list);
+
 }

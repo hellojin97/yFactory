@@ -122,32 +122,32 @@ resultGrid = new tui.Grid({
       {
           header: '투입량',
           name: '투입량',
-          editor : "text"
+
         },
         {
             header: '불량량',
             name: '불량량',
-            editor : "text"
+
           },
           {
               header: '생산량',
               name: '생산량',
-              editor : "text"
+
             },
             {
-                header: '시작시간',
-                name: '시작시간',
-                editor : "text"
+                header: '작업시작시간',
+                name: '작업시작시간',
+
               },
               {
-                  header: '종료시간',
-                  name: '종료시간',
-                  editor : "text"
+                  header: '작업종료시간',
+                  name: '작업종료시간',
+
                 },
                 {
                     header: '상태',
                     name: '상태',
-                    editor : "text"
+
                   },
     ],
     rowHeaders : [ 'rowNum' ]
@@ -183,7 +183,7 @@ resultGrid = new tui.Grid({
   		
   		//var curDate = new Date();
   		//let startTime = curDate.getHours() + ":" + curDate.getMinutes() + ":" + curDate.getSeconds();
-  		
+		  		
   		let insQty = resultGrid.getValue(0,"생산수량");
   		//공정행 갯수
   		let procRow = releaseList.getRowCount();

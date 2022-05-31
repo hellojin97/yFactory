@@ -230,7 +230,8 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	
 	<!-- 생산지시 조회 -->
 	<select id="ProcOrderSelect" resultType="map">
-        SELECT ins.ins_cd "생산지시코드",
+        SELECT DISTINCT
+        	   ins.ins_cd "생산지시코드",
                pd.prod_cd "제품코드",
                pd.prod_nm "제품명",
                insdtl.ins_qty "생산수량",
@@ -286,17 +287,29 @@ AND DTL.PRD_DTLCD = #{dtlCd}
     AND   ins.ins_cd = #{dtlCd}
 	</select>
 	<select id="ProcOrderLineSelectOne" resultType="map">
-	SELECT DISTINCT PRC.PROC_PRCD "진행공정코드",
-	PRC.PROC_CD "공정코드",
+	SELECT DISTINCT 
+     PRC.PROC_PRCD "진행공정코드",
+	 PRC.PROC_CD "공정코드",
 	 PC.PROC_NM "공정명", 
 	 PC.EQ_CD "설비코드", 
 	 EQ.EQ_NM "설비명",
-	 EMP.EMP_NM "담당자"
-	FROM PROC_PRC PRC, PROCESS PC, LINE LI, EQ EQ, EMPLOYEE EMP
+	 EMP.EMP_NM "담당자",
+     PRC.PROC_QTY "투입량",
+     ERR.ERR_QTY "불량량",
+     ST.PROC_QTY "생산량",
+     TO_CHAR(PRC.PROC_STTM, 'HH24:MI:SS') "작업시작시간",
+     TO_CHAR(PRC.PROC_EDTM, 'HH24:MI:SS') "작업종료시간",
+     CM.CD_NM "상태"
+	FROM PROC_PRC PRC, PROCESS PC, LINE LI, EQ EQ, EMPLOYEE EMP, PROC_ERR ERR, PROC_ST ST, COMM_CODE CM
 	WHERE PRC.PROC_CD = PC.PROC_CD
 	AND PRC.PROC_MGR = EMP.EMP_NO
 	AND LI.PROC_CD = PC.PROC_CD
 	AND PC.EQ_CD = EQ.EQ_CD
+    AND PRC.LINE_TURN = ERR.LINE_TURN
+    AND ST.LINE_TURN = PRC.LINE_TURN
+    AND PRC.PROC_PRCD = ERR.PROC_PRCD
+    AND ST.PROC_PRCD = PRC.PROC_PRCD
+    AND cm.comm_cd = ST.PROC_ST
 	AND LI.LINE_CD = #{line}
 	</select>
 	<insert id="procLogic">

@@ -52,11 +52,16 @@
 		el : document.getElementById('qaRequestMgr'),
 		columns : [ {
 			header: '발주코드',
-			name: '발주코드'
+			name: '발주코드',
+			width:'130'
 		}, {
 			header: '발주상세코드',
 			name: '발주상세코드'
 		}, {
+			header: '품질검사코드',
+			name: '품질검사코드',
+			width:'130'
+		},{
 			header: '자재코드',
 			name: '자재코드'
 		}, {
@@ -110,49 +115,63 @@
 		}
 	})
 
-  defaultMt.on('mousedown', (ev) => {
-		selectedRowKey = ev.rowKey;
-		let a = defaultMt.getValue(selectedRowKey, '발주량');
-		let b = defaultMt.getValue(selectedRowKey, '합격량');
-		let sum = a - b;
-		defaultMt.setValue(selectedRowKey, '불량량',sum);
-		console.log(a + ' ' +  b);
+  defaultMt.on('afterChange', (ev) => {
+    orgin: 'cell'; 
+    let evn = ev.changes;
+    let a = defaultMt.getValue(evn[0].rowKey, '발주량');
+    let b = defaultMt.getValue(evn[0].rowKey, '합격량');
+    let sum = a - b;
+    defaultMt.setValue(evn[0].rowKey, '불량량', sum);
   });
 	
 	//완료 버튼 클릭시 실행
 	update.addEventListener("click", function() {
-		let checkedAry = [];
-		let art = [];
+		
+		
 		let checkList = defaultMt.getCheckedRows();
+		
 		for (var i = 0; i < checkList.length; i++) {
-			checkedAry.push(checkList[i]);
-		}
-		console.log(checkedAry);
-		var podtlcd = checkedAry[0].발주상세코드;
-		var mtnm = checkedAry[0].자재명;
-		var passqty = checkedAry[0].합격량;
-		var errqty = checkedAry[0].불량량;
-		var errcd = checkedAry[0].불량코드;
+		
+		
+		
+		
+		var chkcd = checkList[i].품질검사코드;
+		var mtnm = checkList[i].자재명;
+		var passqty = checkList[i].합격량;
+		var errqty = checkList[i].불량량;
+		var errcd = checkList[i].불량코드;
 		
 		$.ajax({
-			url:"resMtQuality",
-			method:"GET",
+			url: 'resMtQuality',
+			method: 'post',
+			dataType : 'JSON',
+			async : false,
 			data : {
-				podtlcd : podtlcd,
-				mtnm : mtnm,
-				passqty : passqty,
-				errqty : errqty,
-				errcd : errcd
-			},
-			dataType : "JSON",
-			contentType : "application/json; charset=utf-8"
+				"chkcd" : chkcd,
+				"mtnm" : mtnm,
+				"passqty" : passqty,
+				"errqty" : errqty,
+				"errcd" : errcd
+			}
 		}).done(function(result) {
-			alert("품질검사가 완료되었습니다.");
-			defaultMt.removeCheckedRows(false);
-		}).fail(function() {
-			alert("품질검사 중 오류가 발생하엿습니다.");
+			
+		}).fail(function(RESULT) {
+			console.log(result);
 		})
-	})
+		
+	}
+		
+		 $("#alertSuccess").click(function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Alert가 실행되었습니다.',
+                text: '이곳은 내용이 나타나는 곳입니다.',
+            }).then(function(){
+            	location.reload();
+            })
+		
+		});
+	});	 
 	</script>
 </body>
 </html>

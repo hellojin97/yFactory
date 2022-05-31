@@ -60,9 +60,14 @@ resultGrid = new tui.Grid({
 			scrollX : false,
 			scrollY : false,
 			columns : [ {
+				header : '생산지시상세코드',
+				name : '생산지시상세코드',
+			}, 
+			 {
 				header : '생산지시코드',
 				name : '생산지시코드',
-			}, {
+			},
+			 {
 				header : '제품명',
 				name : '제품명',
 			}, {
@@ -141,7 +146,7 @@ resultGrid = new tui.Grid({
                 },
                 {
                     header: '상태',
-                    name: '투입량',
+                    name: '상태',
                     editor : "text"
                   },
     ],
@@ -173,10 +178,66 @@ resultGrid = new tui.Grid({
     			ProcOrderListModal.show();
     			}); 
       });
+  		
   	  $("#btnProcStart").on("click",function(){
-  		console.log(releaseList.getRowCount());
+  		
+  		//var curDate = new Date();
+  		//let startTime = curDate.getHours() + ":" + curDate.getMinutes() + ":" + curDate.getSeconds();
+  		
+  		let insQty = resultGrid.getValue(0,"생산수량");
+  		//공정행 갯수
+  		let procRow = releaseList.getRowCount();
+  		for (var i = 0; i < procRow; i++) {
+  	  		releaseList.setValue(i,"투입량",insQty);
+		}
+	  		releaseList.setValue(0,"시작시간",dpTime());
+  		
+  		//console.log(insQty);
+  		//console.log(procRow);
+  		 var data= {
+  				insQty : insQty,
+  				procRow : procRow,
+  				startTime : dpTime()
+  				 };
+  			
+  			console.log(insQty);
+	    $.ajax({
+			   url  : "procLogic",
+			   data :  JSON.stringify(data), 
+			   dataType : "JSON",
+			   type : "POST",
+			   contentType : "application/json; charset = UTF-8;"
+		   }).done(function(result){
+					 /* for (var i = 0; i < result.length; i++) {
+						 procOrder.appendRow(result[i]);
+					} */ 
+					console.log(result);
+					//releaseList.setValue(0,"생산량",result.sum)
+		   }) 
+		/*    timer = setInterval( function () {
+  		}, 1000); */
   	  });
-  
+  	  
+  	  
+	//시간계산
+  	    function dpTime(){
+  	       var now = new Date();
+  	        hours = now.getHours();
+  	        minutes = now.getMinutes();
+  	        seconds = now.getSeconds();
+  	 
+
+  	        if (hours < 10){
+  	            hours = "0" + hours;
+  	        }
+  	        if (minutes < 10){
+  	            minutes = "0" + minutes;
+  	        }
+  	        if (seconds < 10){
+  	            seconds = "0" + seconds;
+  	        }
+  	        return startTime = hours + ':' + minutes + ':' + seconds;
+	}
   
 </script>
 

@@ -126,6 +126,7 @@ public class EquipServiceImpl implements EquipService{
 	}
 
 	@Override
+
 	public int eqChkDelAjax(List<HashMap<String, Object>> list) {
 	
 		return mapper.eqChkDelAjax(list);
@@ -135,6 +136,10 @@ public class EquipServiceImpl implements EquipService{
 	public int eqMngUpdateAjax(List<HashMap<String, Object>> list) {
 		
 		return mapper.eqMngUpdateAjax(list);
+
+	public int updateIna(Map<String, String> result) {
+		return mapper.updateIna(result);
+
 	}
 	
 	

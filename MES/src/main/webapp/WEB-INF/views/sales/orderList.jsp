@@ -47,18 +47,7 @@
                     </div>                              
                 </fieldset>
                 <form>
-                <!-- 제품명 -->
-				<div class="col-md-5 " style="padding-bottom: 10px;">
-					<div class="input-group  " style="padding-bottom: 10px;">
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">제품명</label> 
-							<input type="text" class="form-control" style="width: 50px" placeholder="제품명" id="pnm">
-						<a class="nav-link nav-icon search-bar-toggle" id="prodBtn" onclick="prodBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
-						</a>
-						<input type="text" id="pcd" class="form-control" readonly="readonly">
-					</div>
-				</div>
-                
+                                
 				<!-- 업체명 -->
 				<div class="col-md-5 " style="padding-bottom: 10px;">
 					<div class="input-group  " style="padding-bottom: 10px;">
@@ -123,17 +112,12 @@
 			<div id="ordeList"></div>
 			<div id="prodModal"></div>
 			<div id="venderModal"></div>
+			<div id="ordtlList"></div>
             </div>
-
+<input type="hidden" id="hdOrdtlCd">
 
 <script type="text/javascript">
-//제품명 modal
-prodBtn.addEventListener("click", function(){
-	$("#prodModal").load("prodModal", function(){
-		const myModal = new bootstrap.Modal('#myModal');
-		myModal.show();
-	})
-	});
+
 
 //업체명 modal
 venderBtn.addEventListener("click", function(){
@@ -174,15 +158,7 @@ window.onload = function (){
              {
                  header: '납기일자',
                  name: '납기일자',
-               },
-             {
-                 header: '제품코드',
-                 name: '완제품코드',
-               },
-               {
-                   header: '제품명',
-                   name: '완제품명',
-                 },
+               },             
                  {
                      header: '수량',
                      name: '주문수량',
@@ -201,8 +177,7 @@ window.onload = function (){
 
 /* 주문서 단건 조회 */
 $("#search").on("click", function() {   
-   var pnm = $("#pnm").val();
-   var pcd = $("#pcd").val();   
+   
    var vnm = $("#vnm").val();
    var vcd = $("#vcd").val();
    var req1 = $("#req1").val();
@@ -214,8 +189,6 @@ $("#search").on("click", function() {
    $.ajax({
       url : "searchOrderList",
       data : {
-            pnm : pnm,
-            pcd : pcd,
             vnm : vnm,
             vcd : vcd,
             req1 : req1,
@@ -228,7 +201,6 @@ $("#search").on("click", function() {
       contentType : "application/json; charset=utf-8"
    }).done(function(result){
        grid.resetData(result);
-       console.log(result);
         
    });
 })
@@ -241,10 +213,21 @@ $('#reset').on('click',function(){
 	      method: "GET"
 	   }).done(function(result){
 	      grid.resetData(result);
-	     console.log(result);
 	   });
 })
+grid.on("dblclick", function(e){
+	let odClick = grid.getFocusedCell();
+	let odc = grid.getValue(e.rowKey, "주문코드");
+	$("#hdOrdtlCd").val(odc);
+	if(odClick.columnName == "주문코드"){
+		$("#ordtlList").load("ordtlModal", function() {
+			const ordtlModal = new bootstrap.Modal('#ordtlModal');
+			ordtlModal.show();
+			});
+	}
+});
 }
+
   </script>
 
 </body>

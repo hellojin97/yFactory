@@ -118,28 +118,30 @@
 	
 	<!-- 비가동 설비 내역 -->
 	<select id="getEqInList" resultType="map">
-		select	ei.eq_cd AS "설비코드",
-				e.eq_nm AS "설비명",
-				TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
-				TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
-				cm.cd_nm AS "사유"
-		from 	eq_ina ei, eq e, comm_code cm
-		where 	ei.eq_cd = e.eq_cd
-		and       cm.comm_cd = ei.dis_code
-		ORDER BY 1
+		select	    ei.eq_actcd AS "설비가동코드",
+	                ei.eq_cd AS "설비코드",
+					e.eq_nm AS "설비명",
+					TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
+					TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
+					cm.cd_nm AS "사유"
+		from 		eq_ina ei, eq e, comm_code cm
+		where 		ei.eq_cd = e.eq_cd
+		and       	cm.comm_cd = ei.dis_code
+		ORDER BY 4 DESC
 	</select>
 	
 	
 	<!-- 비가동 설비 내역 검색 -->
 	<select id="searchEqIna" parameterType="map" resultType="map">
-		select	ei.eq_cd AS "설비코드",
-				e.eq_nm AS "설비명",
-				TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
-				TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
-				cm.cd_nm AS "사유"
-		from 	eq_ina ei, eq e, comm_code cm
-		where 	ei.eq_cd = e.eq_cd
-		and     cm.comm_cd = ei.dis_code
+		select	    ei.eq_actcd AS "설비가동코드",
+	                ei.eq_cd AS "설비코드",
+					e.eq_nm AS "설비명",
+					TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
+					TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
+					cm.cd_nm AS "사유"
+		from 		eq_ina ei, eq e, comm_code cm
+		where 		ei.eq_cd = e.eq_cd
+		and       	cm.comm_cd = ei.dis_code
 		<if test="req1 != '' and req2 != ''">
 		and		ei.eq_inasd BETWEEN TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
 		</if>
@@ -149,12 +151,12 @@
 		<if test="eqCd == '' and eqNm != ''">
 		and		e.eq_nm = #{eqNm}
 		</if>
-		ORDER BY 1
+		ORDER BY 4 DESC
 	</select>
 	
 	<!-- 비가동 설비 내역 추가 -->
 	<insert id="setEqIn" statementType="CALLABLE"  parameterType="map">
-		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_ed}, #{p_eq_dc}, #{p_eq_nt})}
+		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_dc}, #{p_eq_nt})}
 	</insert>
 
 
@@ -249,6 +251,10 @@ ORDER BY chk.eq_chkdt
 
 </select>
 
+<!-- 비가동 설비 가동 시작 -->
+<update id="updateIna" parameterType="Map">
+	{CALL eq_ina_update (#{p_actcd}, #{p_eq_cd})}
+</update>
 
 <delete id="eqChkDelAjax" parameterType="map">
 DELETE FROM EQ_CHK

@@ -116,6 +116,30 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.expectList();
 	}
 
+	@Override
+	public List<Map> selectMtrlReqList(Map<String, String> result) {
+		// TODO Auto-generated method stub
+		return map.selectMtrlReqList(result);
+	}
+
+	@Override
+	public int insertMtrlIn(Map<String, String> mtrlIn) {
+		// TODO Auto-generated method stub
+		return map.insertMtrlIn(mtrlIn);
+	}
+
+	@Override
+	public List<Map> mtrlStorageList() {
+		// TODO Auto-generated method stub
+		return map.mtrlStorageList();
+	}
+
+	@Override
+	public List<Map> mtrlStorageSearch(String m1, String m2) {
+		// TODO Auto-generated method stub
+		return map.mtrlStorageSearch(m1, m2);
+	}
+
 
 
 }

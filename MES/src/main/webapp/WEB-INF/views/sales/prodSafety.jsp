@@ -35,28 +35,24 @@
 				</div>				
 
 				<!-- 날짜 -->
-				<div class="col-md-12">
-					<div class="input-group">
-						<label for="inputText" class="col-form-label"
-							style="padding-right: 10px;">제조날짜</label>
-						<div class="col-sm-2">
-							<input type="date" id="fdt1" class="form-control">
+				<div class="col-md-6">
+					<div class="input-group">						
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">안전수량</label>
+						<div class="col-sm-4" style="padding-right: 10px;">
+						<input type="text" id="safe" class="form-control" placeholder="안전수량">
 						</div>
-
-						<div style="padding: 0px 15px 0px 15px;">
-							<p>~</p>
-						</div>
-						<div class="col-sm-2" style="padding-right: 20px;">
-							<input type="date" id="fdt2" class="form-control">
-						</div>
-
 						<div style="padding-right: 10px;">
 							<button type="button" id="search" class="btn1">조회</button>
 						</div>
 
+						<div style="padding-right: 10px;">
+							<button type="button" id="safeSave" class="btn1">저장</button>
+						</div>
+						
 						<div>
 							<button type="reset" class="btn1">초기화</button>
 						</div>
+						
 					</div>
 				</div>
 				</form>
@@ -72,7 +68,8 @@
 		</div>
 
 	
-
+<input type="hidden" id="fdt1">
+<input type="hidden" id="fdt2">
 </body>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
@@ -106,23 +103,20 @@
 	var listProdLot = new tui.Grid({
 		el : document.getElementById('prodLotorder'),
 		columns : [ {
-			header : '완제품LOT',
-			name : '완제품LOT'
-		}, {
 			header : '제품코드',
 			name : '제품코드'
 		}, {
 			header : '제품명',
 			name : '제품명'
 		}, {
+			header : '단위',
+			name : '단위'
+		}, {
 			header : '완제품수량',
 			name : '완제품수량'
 		}, {
-			header : '제조일자',
-			name : '제조일자'
-		}, {
-			header : '유통기한',
-			name : '유통기한'
+			header : '안전수량',
+			name : '안전수량'
 		}
 
 		],
@@ -135,7 +129,7 @@
 	
 
 	
-  /* 주문서 단건 조회 */
+  /* 단건 조회 */
   $("#search").on("click", function() {     
      var pnm = $("#pnm").val();
      var pcd = $("#pcd").val();
@@ -158,6 +152,37 @@
      });
   })
   
+  /* 안전수량 저장 */
+  $("#safeSave").on("click", function(){	  
+	  var pcd = $("#pcd").val();
+	  var safe = $("#safe").val();	  
+	  if(safe == '' || pcd == ''){
+		  Swal.fire({
+              icon: 'error',
+              title: '저장이 취소되었습니다.',
+              text: '제품 코드와 안전 수량을 입력해주세요!',
+			});
+	  }else	{
+		  $.ajax({
+			  url : "",
+			  method : "POST",
+			  data : { pcd : pcd,
+				       safe : safe
+				     }
+		  }).done(function(result){
+			  
+		  })
+	  }
+  })
+  
+  listProdLot.on("click", function(e){
+	  var pcd = listProdLot.getValue(e.rowKey, "제품코드");
+	  var pnm = listProdLot.getValue(e.rowKey, "제품명");
+	  var safe = listProdLot.getValue(e.rowKey, "안전수량");
+	  $("#pcd").val(pcd);
+	  $("#pnm").val(pnm);
+	  $("#safe").val(safe);
+  })
 
  </script>
 

@@ -117,6 +117,13 @@ public class ajaxController {
 	public List<Map> searchEqInaAjax(@RequestParam Map<String, String> result){
 		return mapper.searchEqIna(result);
 	}
+	
+	@PostMapping("/updateIna") // 비가동 설비 재가동
+	public int updateIna(@RequestParam Map<String, String> result) {
+		System.out.println("11111111111111"+result);
+		System.out.println(mapper.updateIna(result));
+		return mapper.updateIna(result);
+	}
 
 
 	//점검 전체 리스트

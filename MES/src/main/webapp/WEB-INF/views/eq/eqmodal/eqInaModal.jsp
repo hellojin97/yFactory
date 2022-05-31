@@ -43,13 +43,13 @@
 								<p>시작</p>
 							</div>
 							
-							<div class="col-sm-3" style="padding-right: 10px;">
+							<!-- <div class="col-sm-3" style="padding-right: 10px;">
 								<input type="datetime-local" class="form-control" id="edDt">
 							</div>
 							
 							<div style="padding: 5px 15px 0px 0px;">
 								<p>종료</p>
-							</div>				
+							</div> -->				
 						</div>
 						
 						<div class="input-group" style="padding-bottom: 10px;">	
@@ -89,11 +89,11 @@
 	$("#btnInsert").on("click", function(){
 		var ec = $("#modalEqCd").val();		
 		var sd = $("#stDt").val();
-		var ed = $("#edDt").val();
+		//var ed = $("#edDt").val();
 		var dc = $("#modalDis").val();
 		var nt = $("#Modalnote").val();
 		var subSd = sd.replace('T', ' ');
-		var subEd = ed.replace('T', ' ');
+		//var subEd = ed.replace('T', ' ');
 		console.log(subSd);
 		$.ajax({
 			url : "setEqInAjax",
@@ -101,7 +101,7 @@
 			data : {
 					"p_eq_cd" : ec,
 					"p_eq_sd" : subSd,
-					"p_eq_ed" : subEd,
+					//"p_eq_ed" : subEd,
 					"p_eq_dc" : dc,
 					"p_eq_nt" : nt
 					}					

@@ -48,7 +48,7 @@
 	
 	<!-- 자재검사결과 조회 -->
 	<select id="selectMtCheck" resultType="map">
-		SELECT	MCD.PO_CD "발주코드", MCD.CHK_CD "품질검사코드", MCD.MT_CD "자재코드", 
+		SELECT	DISTINCT MCD.PO_CD "발주코드", MCD.CHK_CD "품질검사코드", MCD.MT_CD "자재코드", 
 		        M.MT_NM "자재명", E.EMP_NM "담당인", TO_CHAR(MCD.CHK_DT,'YYYY-MM-DD') "검사일", MPD.PO_QTY "발주량", 
 		        MCD.CHK_PASS "합격량", MEL.CHK_ERRQTY "불량량", MEL.ERR_CD "불량코드", 
 		        ERR.ERR_DTL "불량사유", MCD.CHK_DTL_INSP "상태"
@@ -60,7 +60,7 @@
 		        ERR_CODE ERR, 
 		        MT_CHK CHK
 		WHERE 	MEL.CHK_CD = MCD.CHK_CD
-		AND 	MEL.ERR_CD = ERR.ERR_CD
+		AND 	MEL.ERR_CD = ERR.ERR_CD(+)
 		AND 	MCD.MT_CD = M.MT_CD
 		AND 	MCD.PO_CD = CHK.PO_CD
 		AND 	CHK.PO_CD = MPD.PO_CD

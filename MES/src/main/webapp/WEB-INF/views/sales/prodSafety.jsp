@@ -164,14 +164,21 @@
 			});
 	  }else	{
 		  $.ajax({
-			  url : "",
+			  url : "updateSafe",
 			  method : "POST",
 			  data : { pcd : pcd,
 				       safe : safe
 				     }
 		  }).done(function(result){
-			  
-		  })
+		  });
+		  Swal.fire(
+                  '승인이 완료되었습니다.',
+                  '출고등록이 완료되었습니다.',
+                  'success'
+              ).then(function(){
+            	  location.reload(true);	  
+          	  });
+		  
 	  }
   })
   

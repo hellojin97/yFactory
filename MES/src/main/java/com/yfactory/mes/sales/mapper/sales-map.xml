@@ -29,9 +29,7 @@
 	
 	<!-- BOM 조회 -->
 	<select id="selectBomList" resultType="map">
-	SELECT 		b.prod_cd "완제품코드",
-				   		pd.prod_nm "완제품명", 
-				 		b.mt_cd "원자재 코드", 
+	SELECT 		 		b.mt_cd "원자재 코드", 
 				  		m.mt_nm "원자재명", 
 				 		b.cs_qty "소요량"
 	FROM 		    bom b,
@@ -39,6 +37,7 @@
 			            mt m
 	WHERE 		b.prod_cd = pd.prod_cd
 	AND 			b.mt_cd = m.mt_cd
+	AND			b.prod_cd = #{key}
 	</select>
 	
 	<!-- 주문서 검색 -->
@@ -274,5 +273,11 @@
 		{CALL RELEASE_ORDER (#{prod_lot},#{prod_wrqty},#{ordtl_cd})}
 		
 	</insert>
+	
+	<update id="updateSafe" parameterType="map">
+		UPDATE 	prod
+		SET		prod_sfqty = #{safe}
+		WHERE	prod_cd LIKE #{pcd}
+	</update>
 	
 </mapper>

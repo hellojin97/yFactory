@@ -49,13 +49,7 @@
             <a href="bomList">
               <i class="bi bi-circle"></i><span>BOM 관리</span>
             </a>
-          </li>        
-          
-          <li>
-            <a href="bomList2">
-              <i class="bi bi-circle"></i><span>트리 실험</span>
-            </a>
-          </li>
+          </li>                  
           
           <li>
           	<a href="prodLotForm">

@@ -80,7 +80,10 @@
 				<div id="mtrlLotorder"></div>
 				<div id="test"></div>
 			</div>
-			<button type="button" id="grid">테스트</button>
+			<div>
+				<button  class="btn1" id="excel">Excel</button>
+				<button class="btn1" id="mtrlcancel">발주서인쇄</button>
+			</div>
 		</div>
 </form>
 	
@@ -232,12 +235,12 @@ $('#reset').on('click',function(){
 	     console.log(result);
 	   });
 })
-
-$('#grid').on('click',function(){
+//excel호출
+$('#excel').on('click',function(){
 	const options = {
 			  includeHiddenColumns: true,
 			  onlySelected: true,
-			  fileName: 'myExport',
+			  fileName: '원자재LOT관리',
 			};
 	listMtrlLot.export('xlsx');
 })

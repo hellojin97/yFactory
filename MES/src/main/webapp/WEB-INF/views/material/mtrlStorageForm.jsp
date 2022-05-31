@@ -66,7 +66,10 @@
 				<div id="mtrlStorageGrid"></div>
 				<div id="test"></div>
 			</div>
-
+			<div>
+				<button  class="btn1" id="excel">Excel</button>
+				<button class="btn1" id="mtrlcancel">발주서인쇄</button>
+			</div>
 		</div>
 	</form>
 
@@ -184,7 +187,7 @@ $('#reset').on('click',function(){
 	     console.log(result);
 	   });
 })
-
+//그리드 색상변경
 function mtrlColor(){
 	$("#mtrlStorageGrid").find(".tui-grid-body-area tbody tr").each(function(){
 		var data1 =parseInt($(this).find("[data-column-name = '수량']").find("div").text());
@@ -196,6 +199,15 @@ function mtrlColor(){
 	    } 
 	});
 }
+//excel호출  
+$('#excel').on('click',function(){
+	const options = {
+		includeHiddenColumns: true,
+		onlySelected: true,
+		fileName: '원자재LOT관리',
+		};
+	listMtrlLot.export('xlsx');
+})
 
  </script>
 </html>

@@ -16,59 +16,126 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
+<div style="padding-bottom:15px; color: ;">
+		<h1>설비 비가동 관리</h1>
+	</div>
+	<div class="min1">
+	
+	
+	<h4>완제품 선택</h4>
+	
+     <!-- 완제품 목록 -->         
+	<div id="prodGrid"></div>
+	
+	<hr style="border: solid 1px gray;">
 
-		<div class="mainTitle" style="padding-bottom: 15px; color:;">
-			<h1>BOM 조회</h1>
-		</div>
+	<h4>BOM</h4>
+	<div>
+	<form>				
+	<div class="col-md-12" style="padding-bottom: 10px;">
 
-
-
-		<div id="grid"></div>
+			
+			<!-- 인풋 태그 -->
+			<div class="col-md-6" style="padding-bottom: 10px;">
+					<div class="input-group  " style="padding-bottom: 10px;">
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">완제품</label>
+						<div class="col-sm-3"> 
+						<input type="text" class="form-control" id="pnm" disabled>
+						</div>
+						<div class="col-sm-3">						
+						<input type="text" id="pcd" class="form-control" disabled>&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>						
+					</div>
+				</div>
+	</div>
+				</form>
+				</div>
+	<!-- BOM 목록 -->
+	<div id="bomGrid"></div>
+	</div>
+	
+		
+		
 
 
 	<script type="text/javascript">
-	window.onload = function(){
-		   const url = "bomListAjax";
-		   $.ajax(url,{
-			   dataType : "JSON",
-			   method: "GET"
-		   }).done(function(result){
-			   grid.resetData(result);
-			  console.log(result);
-		   })
 			
-		   var grid = new tui.Grid({
-		       el: document.getElementById('grid'),
+		   
+	$.ajax({
+		url : "prodModalList",
+		method : "GET",
+		dataType : "JSON",
+		success : function(result) {
+			prodGrid.resetData(result);
+		}
+	});
+	
+	var prodGrid = new tui.Grid({
+		       el: document.getElementById('prodGrid'),
 		       scrollX: false,
 		       scrollY: false,
-		       columns: [
-		         {
-		           header: '완제품명',
-		           name: '완제품명',
-		         },
-		         {
-		             header: '완제품코드',
-		             name: '완제품코드',
-		           },
+		       columns: [		         
 		           {
-		               header: '원자재명',
-		               name: '원자재명',
+		               header: '제품명',
+		               name: '제품명',
 		             },
 		             {
-		                 header: '원자재 코드',
-		                 name: '원자재 코드',
-		               },
-		             {
-		                 header: '소요량',
-		                 name: '소요량',
+		                 header: '제품코드',
+		                 name: '제품코드',
 		               }],
-		   					rowHeaders: ['rowNum'],
-		                     pageOptions: {
-		                         useClient: true,
-		                         perPage: 15
-		                    }
+		   					rowHeaders: ['rowNum']
 		     });
+	
+	
+	$.ajax({
+		url : "",
+		method : "GET",
+		dataType : "JSON",
+		success : function(result) {
+			bomGrid.resetData(result);
 		}
+	});
+	
+	var bomGrid = new tui.Grid({
+	       el: document.getElementById('bomGrid'),
+	       scrollX: false,
+	       scrollY: false,
+	       columns: [		         
+	           {
+	               header: '원자재명',
+	               name: '원자재명',
+	             },
+	             {
+	                 header: '원자재 코드',
+	                 name: '원자재 코드',
+	               },
+	             {
+	                 header: '소요량',
+	                 name: '소요량',
+	               }],
+	   					rowHeaders: ['rowNum'],
+	                     pageOptions: {
+	                         useClient: true,
+	                         perPage: 15
+	                    }
+	     });
+	
+	prodGrid.on("click", function(e){
+		var key = prodGrid.getValue(e.rowKey, "제품코드");
+		var pnm = prodGrid.getValue(e.rowKey, "제품명");
+		$("#pcd").val(key);
+		$("#pnm").val(pnm);
+		
+		$.ajax({
+			   url : "bomListAjax",
+			   data : { "key" : key }
+		   }).done(function(result){
+			   bomGrid.resetData(result);
+		   })
+			
+		   
+	})   
+		
   </script>
 
 </body>

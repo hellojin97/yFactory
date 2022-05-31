@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,8 +38,8 @@ public class SalesAjaxController {
 
 
 	@GetMapping("/bomListAjax")
-	public List<Map> BomList(){
-		return salesService.selectBomList();
+	public List<Map> BomList(String key){
+		return salesService.selectBomList(key);
 	}
 	
 	//완제품조회 - 완제품LOT 조회
@@ -109,5 +110,19 @@ public class SalesAjaxController {
 		salesService.releaseOrder(result);
 		
 		return "성공";
+	}
+	
+	//주문서 조회 - 주문 상세 조회 그리드
+	@RequestMapping("/ordtlModalList")
+	public List<Map> ordtlModalList(@RequestParam("key") String key) {
+		
+		return salesService.ordtlModalList(key);
+	}
+	
+	//완제품 안전재고 수정
+	@RequestMapping("/updateSafe")
+	public String updateSafe(@RequestParam Map<String, String> result) {
+		salesService.updateSafe(result);
+		return "";
 	}
 }

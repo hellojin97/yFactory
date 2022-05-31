@@ -107,6 +107,7 @@
 	   
 	   procOrderListGrid.on("click",function(e){
 			let dtlCd = procOrderListGrid.getValue(e.rowKey, '생산지시코드');
+			console.log(dtlCd);
 			 if(dtlCd != null){
 				  $('#ProcOrderListModal').modal('hide');
 				 
@@ -119,7 +120,7 @@
 						   contentType : "application/json; charset = UTF-8;"
 					   }).done(function(result){
 								resultGrid.resetData(result);
-
+								console.log(result);
 								let line = result[0].라인코드
 									console.log(line);
 								 if(line != null){

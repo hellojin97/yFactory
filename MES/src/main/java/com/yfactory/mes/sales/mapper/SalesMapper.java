@@ -10,7 +10,7 @@ public interface SalesMapper {
 	List<Map> selectOrderList();
 
 	//BOM 조회
-	List<Map> selectBomList();
+	List<Map> selectBomList(String key);
 
 	//주문서 검색
 	List<Map> searchOrderList(@Param("pnm") String pnm, @Param("vnm") String vnm,
@@ -48,8 +48,13 @@ public interface SalesMapper {
 	//출고 완제품 modal 조회
 	List<Map> outProdModal(String key);
 	
+	//주문서 조회 - 주문 상세 조회 그리드
+	List<Map> ordtlModalList(String key);	
 	
 	//출고등록
 	int releaseOrder(Map<String, String> result);
+	
+	//완제품 안전 재고 수정
+	int updateSafe(Map<String, String> result);
 }
 

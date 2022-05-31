@@ -228,8 +228,8 @@ var ordDtpList = new tui.Grid({
                   'success'
               );
               ord = [];              
-              window.reload;
-              $.ajax({
+              location.reload(true);
+              /*$.ajax({
             		url: "ordDtpList",
             		method : "GET",
             		dataType : "JSON",
@@ -245,7 +245,7 @@ var ordDtpList = new tui.Grid({
           			releaseList.resetData(result);
           		}
           	});
-              releaseList.removeCheckedRows(false);
+              releaseList.removeCheckedRows(false);*/
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',

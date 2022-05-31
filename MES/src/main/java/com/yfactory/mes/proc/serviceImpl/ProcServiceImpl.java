@@ -1,8 +1,12 @@
 package com.yfactory.mes.proc.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,19 +111,8 @@ public class ProcServiceImpl implements ProcService{
 
 
 
-	@Override
-	public List<Map> procDtPlanSelect(String ppCd) {
-		// TODO Auto-generated method stub
-		return map.procDtPlanSelect(ppCd);
-	}
 
 
-
-
-	@Override
-	public List<Map> ProcLineSelect(HashMap<String, Object> prodNm) {
-		return map.ProcLineSelect(prodNm);
-	}
 
 
 
@@ -173,6 +166,66 @@ public class ProcServiceImpl implements ProcService{
 	public List<Map> ProcOrderLineSelectOne(String line) {
 		// TODO Auto-generated method stub
 		return map.ProcOrderLineSelectOne(line);
+	}
+
+
+
+	
+	@Override
+	public List<Map> ProcLogic(HashMap<String, Object> list) {
+		
+		return map.ProcLogic(list);
+	}
+
+
+
+
+	@Override
+	public List<Map> procResultList() {
+		return map.procResultList();
+	}
+
+
+
+
+	@Override
+	public List<Map> procResultOrdersList() {
+		return map.procResultOrdersList();
+	}
+
+
+
+
+	@Override
+	public List<Map> procResultProcessList() {
+		return map.procResultProcessList();
+	}
+
+
+
+
+	@Override
+	public int procCancelPl(Map<String, String> cancel) {
+		// TODO Auto-generated method stub
+		return map.procCancelPl(cancel);
+	}
+
+
+
+
+	@Override
+	public List<Map> procDtPlanSelect(Map<String, String> ppCd) {
+		// TODO Auto-generated method stub
+		return map.procDtPlanSelect(ppCd);
+	}
+
+
+
+
+	@Override
+	public List<Map> ProcLineSelect(Map<String, String> prodNm) {
+		// TODO Auto-generated method stub
+		return map.ProcLineSelect(prodNm);
 	}
 
 

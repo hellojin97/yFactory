@@ -19,13 +19,12 @@ public interface MtrlMapper {
     List<Map>listRequest();	
     //발주관리 검색
     List<Map>mtrlReqSelectSearch(@Param("poCdinput")String poCdinput);
-	//발주등록
-    List<Map>mtrlReqInsert(@Param("mtCd") String mtCd,
-    					   @Param("mtNm") String mtNm,
-    					   @Param("vdrNm") String vdrNm,
-    					   @Param("reqDt") String reqDt,
-    					   @Param("poQty") String poQty);
-    
+
+    //발주등록
+  	int mtrlReqInsert(Map<String, String> result);
+  	
+  	//입고등록
+  	int insertMtrlIn(Map<String,String> mtrlIn);
     
 	/*LOT페이지*/
 	//LOT재고조회
@@ -37,6 +36,9 @@ public interface MtrlMapper {
 							 @Param("req2") String req2);
 	//입고조회
 	List<Map>insertList();
+	//입고예정버튼
+	List<Map>selectMtrlReqList(Map<String, String> result);
+	
 	
 	/*MODAL페이지*/
 	//자재명 전체조회
@@ -50,8 +52,7 @@ public interface MtrlMapper {
 	//발주코드 검색
 	List<Map>pocdList();
 	List<Map>pocdSelectSearch(@Param("pocd")String pocd);
-	//발주등록
-	int mtrlReqInsert(Map<String, String> result);
+	
 	//입고 전체조회
 	List<Map>insertSearch(@Param("m1") String m1,
 			 @Param("m2") String m2,
@@ -60,4 +61,9 @@ public interface MtrlMapper {
 	//입고예정목록
 	List<Map>expectList();
 	
+	//원자제 조회
+	List<Map>mtrlStorageList();
+	//원자재 검색
+	List<Map>mtrlStorageSearch(@Param("m1") String m1,
+			 @Param("m2") String m2);
 }

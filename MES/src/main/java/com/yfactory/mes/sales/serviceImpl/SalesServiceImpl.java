@@ -22,9 +22,9 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public List<Map> selectBomList() {
+	public List<Map> selectBomList(String key) {
 		// TODO Auto-generated method stub
-		return map.selectBomList();
+		return map.selectBomList(key);
 	}
 
 	@Override
@@ -93,6 +93,17 @@ public class SalesServiceImpl implements SalesService {
 		// TODO Auto-generated method stub
 		
 		return map.releaseOrder(result);
+	}
+
+	@Override
+	public List<Map> ordtlModalList(String key) {
+		
+		return map.ordtlModalList(key);
+	}
+
+	@Override
+	public int updateSafe(Map<String, String> result) {
+		return map.updateSafe(result);
 	}
 
 }

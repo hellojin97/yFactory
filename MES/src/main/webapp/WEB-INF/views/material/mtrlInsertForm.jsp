@@ -75,7 +75,7 @@
 			<hr style="border: solid 1px gray;">
 			<div>
 				<div style="display: inline-block; float: right;" >
-					<button class="btn1"  type="button" id="search">저장</button>
+					<button class="btn1"  type="button" id="btnSav">저장</button>
 				</div>
 	
 				<div style="display: inline-block; float: right;">
@@ -146,7 +146,7 @@
 
 	//입고관리 전체조회
 	$.ajax({
-		url : "mtrlInsertList",
+		url : "",
 		method : "GET",
 		dataType : "JSON",
 		success : function(result) {
@@ -183,14 +183,19 @@
 		}
 
 		],
-		rowHeaders : [ 'rowNum' ],
+		rowHeaders : [ 'checkbox' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 10
+			perPage : 5
 		}
 	});
 
   $("#btnSav").click(function () {
+	  
+	  let mtrl = listMtrlInsert.getCheckedRows();
+	  
+	  
+	  
       Swal.fire({
           title: '정말로 그렇게 하시겠습니까?',
           text: "다시 되돌릴 수 없습니다. 신중하세요.",
@@ -201,16 +206,30 @@
           confirmButtonText: '승인',
           cancelButtonText: '취소'
       }).then((result) => {
-      	console.log(result);
-      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
-      	$("#mtCdinput").val(result);
+    	 
+			
+		
           if (result.isConfirmed) {
+        	  for (var i = 0; i < mtrl.length; i++) {
+        	  $.ajax({
+        		  url : 'insertMtrlIn',
+        		  method : 'POST',
+        		  data : mtrl[i],
+        		  async : false,
+        		  dataType : 'JSON'
+        	  }).done(function(result){
+        		  console.log(result);
+        	  })
+          }  
+        	  
+        	  
               Swal.fire(
                   '승인이 완료되었습니다.',
                   '화끈하시네요~!',
                   'success'
-              )
-              $('#myModal').modal('hide')
+              ).then(function(){
+            	  location.reload();
+              })
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',
@@ -228,7 +247,7 @@
    var vdrNminput = $("#vdrNminput").val();
    var req1 = $("#req1").val();
    var req2 = $("#req2").val();
-	console.log(vdrNminput);
+
    $.ajax({
       url : "insertSearch",
       data : {

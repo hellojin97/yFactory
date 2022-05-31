@@ -73,10 +73,15 @@ public interface EquipService {
 	 // 일점검건수 - 날짜를 기즌올 해달날짜 점검 데이터 조회 > 날짜가 여러개
 	List<Map> dailyChkListAjax( List<HashMap<String, Object>> list);
 	
+
 	// 점검관리 페이지 - 점검 내역 DB 삭제
 	int eqChkDelAjax(List<HashMap<String, Object>>list);
 	
 	// 설비관리 페이지 설비수정 버튼 기능부
 	int eqMngUpdateAjax(List<HashMap<String, Object>>list); 
 	
+
+	// 비가동 설비 재가동
+	int updateIna(Map<String, String> result);
+
 }

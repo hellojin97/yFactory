@@ -20,7 +20,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Allan&display=swap" rel="stylesheet">
 
   <!-- CSS -->
@@ -44,7 +44,8 @@
   <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
   <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
   <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
-  
+  <!-- 엑셀 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
   
   
   <!-- Template Main CSS File -->

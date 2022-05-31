@@ -150,23 +150,16 @@ GROUP BY    	ord.ord_cd,
 	</select>
 		<!-- 생산 미지시계획 조회 -->
 	<select id="NoPlanSelect" resultType="map">
-       SELECT
-       dtl.pp_cd "생산계획코드",
-        pl.pp_nm "계획명",
-        dtl.pd_cd "생산계획상세코드",
-      pd.prod_nm "완제품명",
-      pd.prod_cd "완제품코드",
-      dtl.pd_qty "계획량",
-        dtl.pd_rank "작업우선순위",
-      dtl.pd_dt "생산일수",
-        ins.ins_st "상태"
-
-      FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd, PRD_INS ins
-      WHERE pl.pp_cd = dtl.pp_cd
-      AND dtl.prod_cd = pd.prod_cd
-      AND ins.pd_cd = dtl.pd_cd
-      AND ins.pp_cd = dtl.pp_cd
-      AND ins.ins_st = 'PRDT01'
+ 	SELECT 
+			       DISTINCT
+			       PL.PP_CD "생산계획코드",
+			       PL.PP_NM "계획명",
+			       TO_CHAR(PL.PP_DT,'YYYY-MM-DD') "계획등록일자",
+			       CM.CD_NM "상태"
+FROM
+       				PRDT_PL PL, COMM_CODE CM
+WHERE 		pl.pp_prog = cm.comm_cd
+AND  			pl.pp_prog = 'PLAN01'
 
 		<!-- 상세 생산계획 조회  -->
 	</select>
@@ -186,7 +179,7 @@ GROUP BY    	ord.ord_cd,
 		WHERE pl.pp_cd = dtl.pp_cd
 		AND pl.ord_cd = ord.ord_cd
 		AND dtl.prod_cd = pd.prod_cd
-		AND dtl.pd_cd = #{ppCd}
+		AND dtl.pp_cd = #{ppCd}
 	</select>
 		<!-- 상품코드 라인코드 조회 -->
 		<select id="ProcLineSelect" resultType="map">
@@ -317,9 +310,13 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	</insert>
 
 	<insert id="ProcPlanInsert" statementType="CALLABLE" parameterType="map" >
-	
+		{CALL PROC_PL_INSERT (#{ppNm}, #{ppDt}, #{ordCd}, #{prodCd},#{pdQty}, #{pdRank}, #{pdDt})}
 	</insert>
 	
+	<insert id="procCancelPl" statementType="CALLABLE" parameterType="map">
+		{CALL PROC_CANCEL_PL(#{주문코드})}
+	</insert>
+	 
 	<select id="procResultList" resultType="map">
 		SELECT PID.INS_DTLCD AS "생산지시코드",
 	           PRC.PROC_PRCD AS "진행공정코드",

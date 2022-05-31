@@ -80,7 +80,7 @@
 				<div id="mtrlLotorder"></div>
 				<div id="test"></div>
 			</div>
-
+			<button type="button" id="grid">테스트</button>
 		</div>
 </form>
 	
@@ -231,6 +231,15 @@ $('#reset').on('click',function(){
 		   listMtrlLot.resetData(result);
 	     console.log(result);
 	   });
+})
+
+$('#grid').on('click',function(){
+	const options = {
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: 'myExport',
+			};
+	listMtrlLot.export('xlsx');
 })
  </script>
 </html>

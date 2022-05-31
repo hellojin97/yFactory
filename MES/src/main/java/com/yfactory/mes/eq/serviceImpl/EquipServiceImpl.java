@@ -114,7 +114,7 @@ public class EquipServiceImpl implements EquipService{
 	}
 
 	@Override
-	public List<Map> eqChkResultAjax(List<HashMap<String, Object>> list) {
+	public int eqChkResultAjax(List<HashMap<String, Object>> list) {
 		
 		return mapper.eqChkResultAjax(list);
 	}
@@ -123,6 +123,23 @@ public class EquipServiceImpl implements EquipService{
 	public List<Map> dailyChkListAjax(List<HashMap<String, Object>> list) {
 		
 		return mapper.dailyChkListAjax(list);
+	}
+
+	@Override
+
+	public int eqChkDelAjax(List<HashMap<String, Object>> list) {
+	
+		return mapper.eqChkDelAjax(list);
+	}
+
+	@Override
+	public int eqMngUpdateAjax(List<HashMap<String, Object>> list) {
+		
+		return mapper.eqMngUpdateAjax(list);
+	}
+	public int updateIna(Map<String, String> result) {
+		return mapper.updateIna(result);
+
 	}
 	
 	

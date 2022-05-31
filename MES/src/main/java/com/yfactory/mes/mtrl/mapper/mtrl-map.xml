@@ -127,15 +127,15 @@
 <!-- 입고페이지 -->	
 	<!-- 입고조회 -->
 		<select id="selectMtrlReqList" resultType="map">
-			           SELECT 
+		   		    SELECT 
 			        MTD.PO_CD   "원자재발주코드",
 			        MTD.MT_CD   "원자재코드",
 			        M.MT_NM     "원자재명",
 			        V.VDR_NM    "업체명",
 			        BIM.B_IN_QTY "입고량",
-                    TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
-                    lot.mt_lot "원자재LOT번호",   
-			        TO_CHAR(lot.mt_exp ,'YYYY-MM-DD') "유통기한"
+                    TO_CHAR(MTD.CHK_DT, 'YYYY-MM-DD') "입고일시",
+                    BIM.mt_lot "원자재LOT번호",   
+			        TO_CHAR(MTD.CHK_DT+31 ,'YYYY-MM-DD') "유통기한"
 			        
 			FROM
 			        MT_CHK_DTL MTD,
@@ -153,32 +153,33 @@
 		</select>
 	<!-- 입고 검색조회 -->
 		<select id="insertSearch" resultType="map">
-			SELECT
-			       po.po_cd "원자재발주코드",
-			       m.mt_cd "원자재코드",
-			       m.mt_nm "원자재명",
-			       vdr.vdr_cd "업체명",
-			       wne.mt_wrqty "입고량",
-			       TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
-			       lot.mt_lot "원자재LOT번호",
-			       TO_CHAR(lot.mt_exp, 'YYYY-MM-DD') "유통기한"
-			    
-			FROM   mt_po po,
-			       mt m,
-			       vendor vdr,
-			       mt_wrnote wne,
-			       mt_lot lot
-			
-			WHERE  po.mt_cd = m.mt_cd
-			AND    m.vdr_cd = vdr.vdr_cd
-			AND    lot.mt_cd = m.mt_cd
-			AND    lot.mt_lot = wne.mt_lot
-			AND    wr_cd = 'INOUT01'
+			SELECT 
+			        MTD.PO_CD   "원자재발주코드",
+			        MTD.MT_CD   "원자재코드",
+			        M.MT_NM     "원자재명",
+			        V.VDR_NM    "업체명",
+			        BIM.B_IN_QTY "입고량",
+                    TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
+                    lot.mt_lot "원자재LOT번호",   
+			        TO_CHAR(SYSDATE+31 ,'YYYY-MM-DD') "유통기한"
+			        
+			FROM
+			        MT_CHK_DTL MTD,
+			        MT M,
+			        VENDOR V,
+			        BEFOR_IN_MT BIM,
+                    MT_LOT lot
+			        
+			WHERE   MTD.MT_CD = M.MT_CD
+			AND     M.VDR_CD = V.VDR_CD
+			AND     MTD.CHK_CD = BIM.CHK_CD
+            AND     lot.mt_cd = m.mt_cd
+			AND     MTD.CHK_DTL_INSP = 'MTRL02'
 				<if test="m1 != ''">
 			AND 	m.mt_nm LIKE '%'||#{m1}||'%'
 				</if>
 				<if test="m2 != ''">
-			AND 	vd.vdr_nm LIKE '%'||#{m2}||'%'
+			AND 	v.vdr_nm LIKE '%'||#{m2}||'%'
 				</if>
 				<if test="req1 != '' and req2 != ''">
 			AND 	lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
@@ -198,28 +199,37 @@
 			        MT_CHK_DTL MTD,
 			        MT M,
 			        VENDOR V,
-			        BEFOR_IN_MT BIM
+			        BEFOR_IN_MT BIM,
+			        MT_PO MP
 			        
 			WHERE   MTD.MT_CD = M.MT_CD
 			AND     M.VDR_CD = V.VDR_CD
 			AND     MTD.CHK_CD = BIM.CHK_CD
 			AND     MTD.CHK_DTL_INSP = 'MTRL02'
+			AND     mtd.po_cd = mp.po_cd
+            AND     mp.po_par NOT LIKE '입고완료'
 		</select> 
+	<!-- 입고등록 -->
+		<insert id="insertMtrlIn" statementType="CALLABLE" parameterType="map">
+			{CALL INSERT_MTRL_IN (#{원자재발주코드}, #{원자재코드},#{입고량},#{입고일시}, #{원자재LOT번호}, #{유통기한})}
+		</insert>
+	
+	
 <!-- END 입고페이지 -->	
 
 <!-- LOT페이지 -->   
    <!-- 자재lot재고조회 -->
       <select id="listMtrlLot" resultType="map">
          SELECT lot.mt_lot "mt_lot",
-               lot.mt_cd "mt_cd",
-               m.mt_nm "mt_nm", 
-               vd.vdr_nm "vdr_nm", 
-               cy.mt_qty "mt_qty", 
-               TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
+                lot.mt_cd "mt_cd",
+                m.mt_nm "mt_nm", 
+                vd.vdr_nm "vdr_nm", 
+                cy.mt_qty "mt_qty", 
+                TO_CHAR(lot.mt_exp,'YYYY-MM-DD') "mt_exp"
          FROM   mt_lot lot, 
-               mt m,  
-               vendor vd, 
-               mt_curqty cy
+                mt m,  
+                vendor vd, 
+                mt_curqty cy
          WHERE  m.mt_cd = lot.mt_cd
          AND    m.vdr_cd = vd.vdr_cd
          AND    lot.mt_lot = cy.mt_lot
@@ -251,6 +261,55 @@
             </if>
       </select>   
 <!-- END LOT페이지 -->      
+
+<!-- 원자재 조회페이지 -->
+	<!-- 원자재조회 -->
+		<select id="mtrlStorageList" resultType="map">
+			SELECT 
+			       LOT.MT_CD  "원자재코드",
+			       M.MT_NM    "원자재명",
+			       V.VDR_CD   "업체명",
+			       SUM(C.MT_QTY)   "수량",
+			       M.MT_SFQTY "안전재고"
+			       
+			FROM   MT_LOT LOT,
+			       MT M,
+			       VENDOR V,
+			       MT_CURQTY C
+			
+			WHERE  M.MT_CD = LOT.MT_CD
+			AND    M.VDR_CD = V.VDR_CD
+			AND    LOT.MT_LOT = C.MT_LOT
+			GROUP BY LOT.MT_CD, M.MT_NM, V.VDR_CD, M.MT_SFQTY
+		</select>
+	<!-- 원자재 검색 -->
+		<select id="mtrlStorageSearch" resultType="map">
+			SELECT 
+			       LOT.MT_CD  "원자재코드",
+			       M.MT_NM    "원자재명",
+			       V.VDR_CD   "업체명",
+			       SUM(C.MT_QTY)   "수량",
+			       M.MT_SFQTY "안전재고"
+			       
+			FROM   MT_LOT LOT,
+			       MT M,
+			       VENDOR V,
+			       MT_CURQTY C
+			
+			WHERE  M.MT_CD = LOT.MT_CD
+			AND    M.VDR_CD = V.VDR_CD
+			AND    LOT.MT_LOT = C.MT_LOT
+			
+			<if test="m1 != ''">
+	        	AND    m.mt_nm LIKE '%'||#{m1}||'%'
+	        </if>
+	        <if test="m2 != ''">
+	            AND    v.vdr_nm LIKE '%'||#{m2}||'%'
+	        </if>
+	        GROUP BY LOT.MT_CD, M.MT_NM, V.VDR_CD, M.MT_SFQTY
+		</select>
+		
+<!-- END 원자재 조회페이지 -->		
    
 <!-- 공통 페이지 -->   
    <!-- 자재 코드,이름 전체조회 -->

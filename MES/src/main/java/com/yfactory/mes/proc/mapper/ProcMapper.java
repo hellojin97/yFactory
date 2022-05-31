@@ -14,6 +14,8 @@ public interface ProcMapper {
 	List<Map> OrderSelectOk(String ordCd); // 주문서 조회 (주문코드O)
 
 	int ProcPlanInsert(Map<String, String> procPI); // 계획 등록
+	
+	int procCancelPl(Map<String, String> cancel); // 계획 취소
 
 	List<Map> PrdSelect(); // 제품 목록 조회
 
@@ -32,9 +34,9 @@ public interface ProcMapper {
 
 	List<Map> NoPlanSelect(String state); //생산미지시계획
 	
-	List<Map> procDtPlanSelect(String ppCd); //상세생산계획
+	List<Map> procDtPlanSelect(Map<String,String> ppCd); //상세생산계획
 	
-	List<Map> ProcLineSelect(@RequestBody HashMap<String, Object> prodNm); // 상품 라인코드 조회
+	List<Map> ProcLineSelect(Map<String,String> prodNm); // 상품 라인코드 조회
 	
     List<Map> ProcNeedMtrl(@RequestBody HashMap<String, Object> line); // 필요 자재 조회
     

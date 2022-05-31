@@ -98,13 +98,16 @@ public class ProcAjaxController {
 	}
 	// 상세생산계획
 	@GetMapping("/procDtPlanSelect")
-	public List<Map> procDtPlanSelect(String ppCd) {
+	public List<Map> procDtPlanSelect(@RequestParam Map<String,String> ppCd) {
+		
+			System.out.println(ppCd);
 		return procService.procDtPlanSelect(ppCd);
 	}
 	
 	// 라인코드
-	@RequestMapping(value = "/procLineSelect", method = RequestMethod.POST)
-	public List<Map> ProcLineSelect(@RequestBody HashMap<String, Object> prodNm) {
+	@GetMapping("/procLineSelect")
+	public List<Map> procLineSelect(@RequestParam Map<String,String> prodNm){
+		System.out.println(prodNm);
 		return procService.ProcLineSelect(prodNm);
 	}
 	// 필요자재
@@ -163,4 +166,13 @@ public class ProcAjaxController {
 	public List<Map> procResultProcessList(){		
 		return procService.procResultProcessList();
 	}
+	
+	
+	@PostMapping("/procCancelPl")
+	public int procCancelPl(@RequestParam Map<String, String> Cancel) {
+	
+			System.out.println(Cancel);
+		return procService.procCancelPl(Cancel);
+	}
+	
 }

@@ -22,6 +22,9 @@ public interface MtrlMapper {
 
     //발주등록
   	int mtrlReqInsert(Map<String, String> result);
+  	
+  	//입고등록
+  	int insertMtrlIn(Map<String,String> mtrlIn);
     
 	/*LOT페이지*/
 	//LOT재고조회
@@ -58,5 +61,9 @@ public interface MtrlMapper {
 	//입고예정목록
 	List<Map>expectList();
 	
-	
+	//원자제 조회
+	List<Map>mtrlStorageList();
+	//원자재 검색
+	List<Map>mtrlStorageSearch(@Param("m1") String m1,
+			 @Param("m2") String m2);
 }

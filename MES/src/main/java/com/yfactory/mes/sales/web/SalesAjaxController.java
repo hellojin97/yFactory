@@ -38,8 +38,8 @@ public class SalesAjaxController {
 
 
 	@GetMapping("/bomListAjax")
-	public List<Map> BomList(){
-		return salesService.selectBomList();
+	public List<Map> BomList(String key){
+		return salesService.selectBomList(key);
 	}
 	
 	//완제품조회 - 완제품LOT 조회
@@ -117,5 +117,12 @@ public class SalesAjaxController {
 	public List<Map> ordtlModalList(@RequestParam("key") String key) {
 		
 		return salesService.ordtlModalList(key);
+	}
+	
+	//완제품 안전재고 수정
+	@RequestMapping("/updateSafe")
+	public String updateSafe(@RequestParam Map<String, String> result) {
+		salesService.updateSafe(result);
+		return "";
 	}
 }

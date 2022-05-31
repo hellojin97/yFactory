@@ -49,13 +49,7 @@
             <a href="bomList">
               <i class="bi bi-circle"></i><span>BOM 관리</span>
             </a>
-          </li>        
-          
-          <li>
-            <a href="bomList2">
-              <i class="bi bi-circle"></i><span>트리 실험</span>
-            </a>
-          </li>
+          </li>                  
           
           <li>
           	<a href="prodLotForm">
@@ -113,13 +107,7 @@
           
           <li>
             <a href="">
-              <i class="bi bi-circle"></i><span>원자재 출고관리</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="">
-              <i class="bi bi-circle"></i><span>원자재 입/출고조회</span>
+              <i class="bi bi-circle"></i><span>원자재 입고조회</span>
             </a>
           </li>
           
@@ -130,7 +118,7 @@
           </li>
           
           <li>
-            <a href="mtrlLotForm">
+            <a href="mtrlStorageForm">
               <i class="bi bi-circle"></i><span>원자재 재고조회</span>
             </a>
           </li>         

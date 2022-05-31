@@ -46,6 +46,9 @@ public interface MtrlService {
 	//발주등록
 	int mtrlReqInsert(Map<String, String> result);
 	
+	//입고등록
+	int insertMtrlIn(Map<String,String> mtrlIn);
+	
 	//입고조회
 	List<Map>insertList();
 	//입고예정버튼
@@ -58,4 +61,10 @@ public interface MtrlService {
 	
 	//입고예정목록
 	List<Map>expectList();
+	
+	//원자제 조회
+	List<Map>mtrlStorageList();
+	//원자재 검색
+	List<Map>mtrlStorageSearch(String m1,
+							   String m2);
 }

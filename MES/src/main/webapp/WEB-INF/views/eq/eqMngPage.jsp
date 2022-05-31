@@ -17,8 +17,26 @@
 	href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
 
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
+
+<style>
+.inSearch {
+	background-color: #555555;
+	color: white;
+	font-family: "Audiowide", sans-serif;
+
+}
+
+.inSearch:hover {
+	color: black;
+	background-color: white;
+}
+
+
+
+</style>
 
 </head>
 <body>
@@ -26,18 +44,19 @@
 	<div id="in/out"></div>
 	<div style="background-color: #e0e0e0; padding: 8px;">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
-			<h4>설비 데이터</h4>
+			<h3>설비 데이터</h3>
+			<div style="padding-right: 10px;" align="right">
+			<button type="button" id="eqUpd" class="inSearch">설비 수정</button>
+			</div>
 			<hr style="border: solid 1px gray;">
-
+			
 		</div>
 
 
 
 		<div id="grid"></div>
 		<div id="grid1"></div>
-		<div style="padding-right: 10px;" align="right">
-			<button type="button" id="eqUpd" class="inSearch btn1">설비 수정</button>
-		</div>
+		
 
 	</div>
 	<script type="text/javascript">
@@ -66,7 +85,6 @@
 				}, {
 					header : '설비명',
 					name : '설비명',
-					editor : "text"
 				}, {
 					header : '공정코드',
 					name : '공정코드',
@@ -96,9 +114,23 @@
 				{
 					header : '사용여부',
 					name : '사용여부',
-					editor : "text"
+					 editor: {
+	                     type: 'select',
+	                     options: {
+	                       listItems: [
+	                         {
+	                           text: 'Y',
+	                           value: 'USE01'
+	                         },
+	                         {
+	                           text: 'N',
+	                           value: 'USE02'
+	                         }
+	                    ]
+	                 }
+	            }
 				}, ],
-				rowHeaders : [ 'rowNum' ],
+				 rowHeaders: [ { type: 'checkbox' },{ type: 'rowNum' }],
 				pageOptions : {
 					useClient : true,
 					perPage : 10
@@ -142,14 +174,33 @@
 		
 		
 		  $("#eqUpd").click(function () {
+			  
+			var chkRows = grid.getCheckedRows();
+			var updRowArr = [];
+			var data = {};
+			console.log(chkRows);
+			console.log(JSON.stringify(chkRows));
+			for (var i = 0; i < chkRows.length; i++) {
+				data = {
+						eq_cd : chkRows[i].설비코드 , 
+						eq_nm : chkRows[i].설비명 ,
+						proc_cd : chkRows[i].공정코드 ,
+						proc_nm : chkRows[i].공정명 ,
+						eq_min : chkRows[i].최저온도 ,
+						eq_max : chkRows[i].최고온도 ,
+						eq_purdt : chkRows[i].구매일자 ,
+						eq_actst : chkRows[i].사용여부 
+				};
+				updRowArr.push(data);
+			}
+			  
 		        Swal.fire({
-		            title: '정말로 그렇게 하시겠습니까?',
-		            text: "다시 되돌릴 수 없습니다. 신중하세요.",
+		            title: '정말 수정 하시겠습니까?',
 		            icon: 'warning',
 		            showCancelButton: true,
 		            confirmButtonColor: '#3085d6',
 		            cancelButtonColor: '#d33',
-		            confirmButtonText: '승인',
+		            confirmButtonText: '수정',
 		            cancelButtonText: '취소'
 		        }).then((result) => {
 		        	console.log(result);
@@ -157,8 +208,10 @@
 		            if (result.isConfirmed) {
 		            	
 		            	 $.ajax({
-			            	   url : "eqMngUpdate",
-			            	   data : {},
+			            	   url : "eqMngUpdateAjax",
+			            	   method: "POST",
+			            	   traditional : true,
+			            	   data : data,
 			            	   dataType : "JSON",
 			            	   contentType : "application/json; charset=utf-8"
 			            	   
@@ -167,19 +220,14 @@
 			            	   toastr.success('수정완료!');
 			            	   Swal.fire(
 					                    '수정이 완료되었습니다.',
-					                    '화끈하시네요~!',
+					                    '',
 					                    'success'
 					                		);
-			               });
-		            	
-		                
-		                 
-		              
-		                
+			               }); 
 		            }else{
 		            	Swal.fire(
 		                        '수정이 취소되었습니다.',
-		                        '섹시하시네요~!',
+		                        '',
 		                        'error'
 		                    )
 		            }

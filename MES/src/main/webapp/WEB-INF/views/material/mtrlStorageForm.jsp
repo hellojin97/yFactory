@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LOT재고조회</title>
+<title>재고조회</title>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
@@ -17,34 +17,39 @@
 </head>
 <body onkeyup="on_key_up()">
 
-		<h1>안전재고 관리</h1>
-<form>
+	<h1>원자재 재고조회</h1>
+	<form>
 		<div style="background-color: #e9ecef; padding: 8px;">
 			<div class="mainTitle" style="padding: 15px;">
 				<!-- 자재명 -->
-				
+
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
-					
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재명</label> 
-						<input type="text" class="form-control" style="width: 50px" id="mtNminput" placeholder="자재명">
-						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn"> 
-							<i class="bi bi-search"style="color: #2c3e50"></i>
-						</a> 
-						<input type="text" class="form-control" id="mtCdinput" readonly="readonly">
+
+						<label for="inputText" class="col-form-label"
+							style="padding-right: 27px;">자재명</label> <input type="text"
+							class="form-control" style="width: 50px" id="mtNminput"
+							placeholder="자재명"> <a
+							class="nav-link nav-icon search-bar-toggle " id="myBtn"
+							onclick="myBtn"> <i class="bi bi-search"
+							style="color: #2c3e50"></i>
+						</a> <input type="text" class="form-control" id="mtCdinput"
+							readonly="readonly">
 					</div>
 				</div>
 				<!-- 업체명 -->
-				<div class="col-md-6 " style="padding-bottom: 10px;">
+				<div class="col-md-6 " style="padding: 0px 20px 10px 0px">
 					<div class="input-group  " style="padding-bottom: 10px;">
-						<label for="inputText" class="col-form-label"style="padding-right: 27px;">업체명</label> 
-						<input type="text" class="form-control" style="width: 50px" id="vdrNminput" placeholder="업체명">
-						<a class="nav-link nav-icon search-bar-toggle "id="vdr" onclick="vdr"> 
-							<i class="bi bi-search" style="color: #2c3e50"></i>
-						</a> 
-						<input type="text" class="form-control" id="vdrCdinput" readonly="readonly">
+						<label for="inputText" class="col-form-label"
+							style="padding-right: 27px;">업체명</label> <input type="text"
+							class="form-control" style="width: 50px" id="vdrNminput"
+							placeholder="업체명"> <a
+							class="nav-link nav-icon search-bar-toggle " id="vdr"
+							onclick="vdr"> <i class="bi bi-search" style="color: #2c3e50"></i>
+						</a> <input type="text" class="form-control" id="vdrCdinput"
+							readonly="readonly">
 						<div style="padding-right: 10px;">
-							<button class="btn1"  type="button" id="search">조회</button>
+							<button class="btn1" type="button" id="search">조회</button>
 						</div>
 						<div>
 							<button class="btn1" type="reset" id="reset">초기화</button>
@@ -58,13 +63,13 @@
 
 			<!-- 테이블 -->
 			<div class="code-html contents" style="padding-bottom: 10px;">
-				<div id="mtrlLotorder"></div>
+				<div id="mtrlStorageGrid"></div>
 				<div id="test"></div>
 			</div>
 
 		</div>
-</form>
-	
+	</form>
+
 
 </body>
 <script type="text/javascript"
@@ -103,38 +108,40 @@
 	
 	
 
-	//LOT 전체조회
+	//원자재 전체조회
 	$.ajax({
-		url : "mtrlLot",
+		url : "mtrlStorageList",
 		method : "GET",
 		dataType : "JSON",
 		success : function(result) {
-			listMtrlLot.resetData(result);
+			mtrlStorageTable.resetData(result);
+			setTimeout(mtrlColor, 10);
+			
 		}
 	});
 
-	var listMtrlLot = new tui.Grid({
-		el : document.getElementById('mtrlLotorder'),
+	var mtrlStorageTable = new tui.Grid({
+		el : document.getElementById('mtrlStorageGrid'),
 		columns : [ {
-			header : '자제LOT번호',
-			name : 'mt_lot'
+			header : '원자재코드',
+			name : '원자재코드',
+			align: 'center',
 		}, {
-			header : '자재코드',
-			name : 'mt_cd'
-		}, {
-			header : '자재명',
-			name : 'mt_nm'
+			header : '원자재명',
+			name : '원자재명'
 		}, {
 			header : '업체명',
-			name : 'vdr_nm'
+			name : '업체명'
 		}, {
 			header : '수량',
-			name : 'mt_qty'
+			name : '수량',
+			align: 'right',
+		    
 		}, {
-			header : '유통기한',
-			name : 'mt_exp'
+			header : '안전재고',
+			name : '안전재고',
+			align: 'right',
 		}
-
 		],
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
@@ -143,58 +150,22 @@
 		}
 	});
 
-  $("#btnSav").click(function () {
-      Swal.fire({
-          title: '정말로 그렇게 하시겠습니까?',
-          text: "다시 되돌릴 수 없습니다. 신중하세요.",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: '승인',
-          cancelButtonText: '취소'
-      }).then((result) => {
-      	console.log(result);
-      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
-      	$("#mtCdinput").val(result);
-          if (result.isConfirmed) {
-              Swal.fire(
-                  '승인이 완료되었습니다.',
-                  '화끈하시네요~!',
-                  'success'
-              )
-              $('#myModal').modal('hide')
-          }else{
-          	Swal.fire(
-                      '승인이 취소되었습니다.',
-                      '섹시하시네요~!',
-                      'error'
-                  )
-          }
-      })
-  });
-
-  // 자재명 검색
+  // 원자재 검색
   $("#search").on("click", function() {
    console.log("click!")
    var mtNminput = $("#mtNminput").val();
    var vdrNminput = $("#vdrNminput").val();
-   var req1 = $("#req1").val();
-   var req2 = $("#req2").val();
-	console.log(vdrNminput);
    $.ajax({
-      url : "lotSelectSearch",
+      url : "mtrlStorageSearch",
       data : {
     	  m1 : mtNminput,
     	  m2 : vdrNminput,
-            req1 : req1,
-            req2 : req2
       },
       method : 'get',
       dataType: 'JSON',
       contentType : "application/json; charset=utf-8"
    }).done(function(result){
-	    listMtrlLot.resetData(result);
+	   mtrlStorageTable.resetData(result);
        console.log(result);
        
    }).fail(function(result){
@@ -204,14 +175,27 @@
 
 /* 검색 결과 초기화  */
 $('#reset').on('click',function(){
-	const url = "mtrlLot";
+	const url = "mtrlStorageList";
 	   $.ajax(url,{
 	      dataType : "JSON",
 	      method: "GET"
 	   }).done(function(result){
-		   listMtrlLot.resetData(result);
+		   mtrlStorageTable.resetData(result);
 	     console.log(result);
 	   });
 })
+
+function mtrlColor(){
+	$("#mtrlStorageGrid").find(".tui-grid-body-area tbody tr").each(function(){
+		var data1 =parseInt($(this).find("[data-column-name = '수량']").find("div").text());
+		var data2 =parseInt($(this).find("[data-column-name = '안전재고']").find("div").text());
+		console.log(data1);
+		console.log(data2);
+	    if(data1 < data2){
+	    	$(this).find("[data-column-name = '수량']").css("background-color", "pink");
+	    } 
+	});
+}
+
  </script>
 </html>

@@ -29,7 +29,8 @@
 	
 	<!-- BOM 조회 -->
 	<select id="selectBomList" resultType="map">
-	SELECT 		 		b.mt_cd "원자재 코드", 
+	SELECT 		 		b.bom_cd "BOM 코드",
+						b.mt_cd "원자재 코드", 
 				  		m.mt_nm "원자재명", 
 				 		b.cs_qty "소요량"
 	FROM 		    bom b,
@@ -39,6 +40,14 @@
 	AND 			b.mt_cd = m.mt_cd
 	AND			b.prod_cd = #{key}
 	</select>
+	
+	<!-- BOM 수정 -->
+	<update id="updateBom" parameterType="map">
+	UPDATE 	BOM
+	SET 	CS_QTY = #{mNum}
+	WHERE 	BOM_CD LIKE #{bom}
+	AND 	MT_CD LIKE #{mcd}
+	</update>
 	
 	<!-- 주문서 검색 -->
 	<select id="searchOrderList" resultType="map">

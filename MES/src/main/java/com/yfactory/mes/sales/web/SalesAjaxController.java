@@ -36,10 +36,17 @@ public class SalesAjaxController {
 		return salesService.searchOrderList(pnm, vnm, pcd, vcd, req1, req2, res1, res2, key);
 	}
 
-
+	//BOM조회
 	@GetMapping("/bomListAjax")
 	public List<Map> BomList(String key){
 		return salesService.selectBomList(key);
+	}
+	
+	//BOM수정
+	@RequestMapping("/updateBom")
+	public String updateBom(@RequestParam Map<String,String> result){
+			salesService.updateBom(result);
+		return "";
 	}
 	
 	//완제품조회 - 완제품LOT 조회

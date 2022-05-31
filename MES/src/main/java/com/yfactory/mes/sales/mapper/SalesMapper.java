@@ -56,5 +56,8 @@ public interface SalesMapper {
 	
 	//완제품 안전 재고 수정
 	int updateSafe(Map<String, String> result);
+	
+	//BOM 수정
+	int updateBom(Map<String, String> result);
 }
 

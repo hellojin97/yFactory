@@ -233,7 +233,7 @@ $('#excel').on('click',function(){
 			  onlySelected: true,
 			  fileName: '주문서조회',
 			};
-	ordeList.export('xlsx');
+	ordeList.export('xlsx', options);
 })
 }
 

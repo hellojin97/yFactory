@@ -36,8 +36,8 @@
 
 			
 			<!-- 인풋 태그 -->
-			<div class="col-md-6" style="padding-bottom: 10px;">
-					<div class="input-group  " style="padding-bottom: 10px;">
+			<div class="col-md-6">
+					<div class="input-group">
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">완제품</label>
 						<div class="col-sm-3" style="padding-right: 27px;"> 
 						<input type="text" class="form-control" id="pnm" disabled>
@@ -52,6 +52,10 @@
 				</div>
 	<!-- BOM 목록 -->
 	<div id="bomGrid"></div>
+	<br>
+	<div>
+		<button type="button" class="btn1" id="excel">Excel</button>
+	</div>
 	</div>
 	<input type="hidden" id="num">
 		
@@ -194,6 +198,16 @@
         }
        })        
 	});
+	
+	//excel호출
+	$('#excel').on('click',function(){
+		const options = {
+				  includeHiddenColumns: true,
+				  onlySelected: true,
+				  fileName: 'BOM조회',
+				};
+		prodGrid.export('xlsx', options);
+	})
 		
   </script>
 

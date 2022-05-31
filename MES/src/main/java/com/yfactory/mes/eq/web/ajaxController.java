@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -147,15 +148,46 @@ public class ajaxController {
 	}
 	
 	@RequestMapping(value="/eqChkResultAjax" , method=RequestMethod.POST)
-	public List<Map>eqChkResultAjax(@RequestBody List<HashMap<String, Object>> list){
+	public int eqChkResultAjax(@RequestBody List<HashMap<String, Object>> list){
+		
 		System.out.println("--------------------->"+list);
-		return mapper.eqChkResultAjax(list);
+		int result = mapper.eqChkResultAjax(list);
+		if(result > 0) {
+			return 1;
+		}else {
+			return 0;
+		}
+		
 	}
-	
-	@RequestMapping(value="/dailyChkListAjax" , method=RequestMethod.POST)
+	// 일점검건수 등록버튼 기능부
+	@RequestMapping(value="/dailyChkListAjax" ,method=RequestMethod.POST)
 	public List<Map>dailyChkListAjax(@RequestBody List<HashMap<String, Object>> list){
 		System.out.println("--dailyChkListAjax-->"+list);
 		return mapper.dailyChkListAjax(list);
+	}
+	// 점검관리 페이지 삭제 버튼 기능부
+	@RequestMapping(value="/eqChkDelAjax" , method=RequestMethod.DELETE)
+	public int eqChkDelAjax(@RequestBody List<HashMap<String, Object>> list){
+		
+		System.out.println("--------------------->"+list);
+		int result = mapper.eqChkDelAjax(list);
+		if(result > 0) {
+			return 1;
+		}else{
+			return 0;
+		}
+		
+	}
+	// 설비 관리 
+	@RequestMapping("/eqMngUpdateAjax")
+	public int eqMngUpdateAjax(@RequestBody List<HashMap<String, Object>> list) {
+		int result  = mapper.eqMngUpdateAjax(list);
+		if(result > 0) {
+			return 1;
+		}else {
+			return 0;
+		}
+		 
 	}
 	
 	

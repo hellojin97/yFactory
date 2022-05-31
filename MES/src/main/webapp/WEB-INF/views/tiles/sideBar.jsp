@@ -59,7 +59,7 @@
           
           <li>
           	<a href="prodSafety">
-          	  <i class="bi bi-circle"></i><span>완제품 안전재고 조회</span>
+          	  <i class="bi bi-circle"></i><span>완제품 안전재고 관리</span>
           	</a>
           </li>
           

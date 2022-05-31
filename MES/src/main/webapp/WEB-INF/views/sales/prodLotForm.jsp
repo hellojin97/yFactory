@@ -66,6 +66,9 @@
 			<!-- 테이블 -->
 			<div class="code-html contents" style="padding-bottom: 10px;">
 				<div id="prodLotorder"></div>
+			<div>
+				<button type="button" class="btn1" id="excel">Excel</button>
+			</div>	
 				<div id="test"></div>
 			</div>
 
@@ -157,6 +160,16 @@
           
      });
   })
+  
+  //excel호출
+$('#excel').on('click',function(){
+	const options = {
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: '주문서조회',
+			};
+	listProdLot.export('xlsx', options);
+})
   
 
  </script>

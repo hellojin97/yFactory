@@ -16,4 +16,7 @@ public interface CommonMapper {
 		
 	//(사용자) 주문 
 		List<Map> userOrderForm();
+		
+	//(사용자) 주문등록
+		int userOrderInsert(Map<String, String> parameter);
 }

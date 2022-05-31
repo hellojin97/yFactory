@@ -68,7 +68,7 @@
 
 		</div>
 	<div>
-		<button  class="btn1" id="mtrlsave">Excel</button>
+		<button  class="btn1" id="excel">Excel</button>
 		<button class="btn1" id="mtrlcancel">발주서인쇄</button>
 	</div>
 	</div>

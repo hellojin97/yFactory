@@ -67,7 +67,7 @@
 				<div id="test"></div>
 			</div>
 			<div>
-				<button  class="btn1" id="excel">Excel</button>
+				<button type="button" class="btn1" id="excel">Excel</button>
 				<button class="btn1" id="mtrlcancel">발주서인쇄</button>
 			</div>
 		</div>
@@ -204,9 +204,9 @@ $('#excel').on('click',function(){
 	const options = {
 		includeHiddenColumns: true,
 		onlySelected: true,
-		fileName: '원자재LOT관리',
+		fileName: '원자재 재고조회',
 		};
-	listMtrlLot.export('xlsx');
+	mtrlStorageTable.export('xlsx',options);
 })
 
  </script>

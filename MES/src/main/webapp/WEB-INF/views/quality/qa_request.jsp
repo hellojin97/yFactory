@@ -80,7 +80,6 @@
 		var mnm = $("#mnm").val();
 		$.ajax({
 			url: "reqMtQuality",
-			method: "get",
 			data: {
 				pdt: pdt
 			}

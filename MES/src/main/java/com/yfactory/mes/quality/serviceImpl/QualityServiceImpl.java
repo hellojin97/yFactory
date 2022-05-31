@@ -47,6 +47,11 @@ public class QualityServiceImpl implements QualityService {
 		return map.selectMtErrList();
 	}
 	
+	@Override
+	public List<Map> selectProdErrList() {
+		return map.selectProdErrList();
+	}
+	
 	public List<Map> searchErrName(String key) {
 		return map.searchErrName(key);
 	}
@@ -57,8 +62,8 @@ public class QualityServiceImpl implements QualityService {
 	}
 
 	@Override
-	public int reqMtQuality(String pdt, String mcd) {
-		return map.reqMtQuality(pdt, mcd);
+	public int reqMtQuality(String pdt) {
+		return map.reqMtQuality(pdt);
 	}
 	
 	@Override

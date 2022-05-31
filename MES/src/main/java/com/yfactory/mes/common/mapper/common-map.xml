@@ -63,4 +63,9 @@
 
 </select>
 
+
+<insert id="userOrderInsert" parameterType="map" statementType="CALLABLE">
+	{CALL USER_ORDER_INSERT (#{venCd}, #{curDt}, #{reqDt}, #{prodCd}, #{prodNm}, #{qty})}
+</insert>
+
 </mapper>

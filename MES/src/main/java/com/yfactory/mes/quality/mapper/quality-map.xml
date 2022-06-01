@@ -24,7 +24,6 @@
 	<!-- 자재검사관리 -->
 	<select id="selectMtCheckMgr" resultType="map">
 		SELECT DISTINCT MCD.PO_CD "발주코드",
-		       MPD.PO_DTLCD "발주상세코드",
 		       MCD.CHK_CD "품질검사코드", 
 		       MCD.MT_CD "자재코드", 
 		       M.MT_NM "자재명",
@@ -106,6 +105,7 @@
 		AND 	PE.LINE_TURN = PPR.LINE_TURN
 		AND 	PE.PRD_DTLCD = PPR.PRD_DTLCD
 		AND 	PE.ERR_CD = ERR.ERR_CD
+		ORDER BY 1
 	</select>
 	
 	<!-- 자재불량내역 조회 -->
@@ -118,10 +118,11 @@
 		FROM	MT_CHK_DTL MCD, MT M, EMPLOYEE E, VENDOR V, MT_ERRLIST MEL, ERR_CODE ERR, MT_CHK CHK
 		WHERE	MEL.CHK_CD = MCD.CHK_CD 
 		AND 	MEL.MT_CD = M.MT_CD
-		AND 	MEL.ERR_CD = ERR.ERR_CD
+		AND 	MEL.ERR_CD = ERR.ERR_CD(+)
 		AND 	M.VDR_CD = V.VDR_CD
 		AND 	CHK.CHK_MNGR = E.EMP_NO
 		AND 	MCD.CHK_DTL_INSP = 'MTRL02'
+		ORDER BY 5
 	</select>
 	
 
@@ -157,7 +158,7 @@
 	<insert statementType="CALLABLE" id="reqMtQuality" parameterType="map">
 		{CALL QUAL_MT_INSERT (#{pdt})}
 	</insert>
-	
+
 	<!-- 수정 -->
 	<!-- 자재 품질검사 -->
 	<update statementType="CALLABLE" id="resMtQuality" parameterType="map">

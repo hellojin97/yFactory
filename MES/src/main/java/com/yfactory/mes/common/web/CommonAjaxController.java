@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yfactory.mes.common.service.CommonService;
@@ -35,6 +37,12 @@ public class CommonAjaxController {
 	@GetMapping("/userOrder")
 	public List<Map> userOrder(){
 		return service.userOrderForm();
+	}
+	
+	// 주문등록 
+	@PostMapping("/userOrderInsert")
+	public int userOrderInsert(@RequestParam Map<String, String> parameter) {
+		return service.userOrderInsert(parameter);
 	}
 
 }

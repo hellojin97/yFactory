@@ -108,8 +108,6 @@
          $("#vnm").val(vdrNm);
          $("#vcd").val(vdrCd);
          $('#venModal').modal('hide');
-         console.log(mtrlNm);
-         console.log(mtrlCd);
          }
       ); 
 		  

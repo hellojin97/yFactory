@@ -11,8 +11,6 @@
    href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
 <link rel="stylesheet" type="text/css"
    href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 
@@ -113,6 +111,9 @@
 			<div id="prodModal"></div>
 			<div id="venderModal"></div>
 			<div id="ordtlList"></div>
+			<div>
+				<button type="button" class="btn1" id="excel">Excel</button>
+			</div>
             </div>
 <input type="hidden" id="hdOrdtlCd">
 
@@ -134,11 +135,10 @@ window.onload = function (){
       dataType : "JSON",
       method: "GET"
    }).done(function(result){
-      grid.resetData(result);
-     console.log(result);
+	   ordeList.resetData(result);
    })
    
-   var grid = new tui.Grid({
+   var ordeList = new tui.Grid({
        el: document.getElementById('ordeList'),
        scrollX: false,
        scrollY: false,
@@ -200,7 +200,7 @@ $("#search").on("click", function() {
       dataType: 'JSON',
       contentType : "application/json; charset=utf-8"
    }).done(function(result){
-       grid.resetData(result);
+	   ordeList.resetData(result);
         
    });
 })
@@ -212,12 +212,12 @@ $('#reset').on('click',function(){
 	      dataType : "JSON",
 	      method: "GET"
 	   }).done(function(result){
-	      grid.resetData(result);
+		   ordeList.resetData(result);
 	   });
 })
-grid.on("dblclick", function(e){
-	let odClick = grid.getFocusedCell();
-	let odc = grid.getValue(e.rowKey, "주문코드");
+ordeList.on("dblclick", function(e){
+	let odClick = ordeList.getFocusedCell();
+	let odc = ordeList.getValue(e.rowKey, "주문코드");
 	$("#hdOrdtlCd").val(odc);
 	if(odClick.columnName == "주문코드"){
 		$("#ordtlList").load("ordtlModal", function() {
@@ -226,16 +226,19 @@ grid.on("dblclick", function(e){
 			});
 	}
 });
+//excel호출
+$('#excel').on('click',function(){
+	const options = {
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: '주문서조회',
+			};
+	ordeList.export('xlsx', options);
+})
 }
 
   </script>
 
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
-
-
 
 </html>

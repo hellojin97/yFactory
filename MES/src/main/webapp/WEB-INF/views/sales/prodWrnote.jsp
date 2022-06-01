@@ -89,6 +89,9 @@
 				<div id="prodWrnoteList"></div>
 				<div id="test"></div>
 			</div>
+			<div>
+				<button type="button" class="btn1" id="excel">Excel</button>
+			</div>
 
 		</div>
 
@@ -152,6 +155,8 @@
 			perPage : 10
 		}
 	});
+	
+	var listWrnOut = null;
 
 	//입고 버튼
 	$('#inBtn').on('click', function(){
@@ -224,7 +229,7 @@
 			}
 		});
 		
-		var listWrnOut = new tui.Grid({
+		 listWrnOut = new tui.Grid({
 			el : document.getElementById('prodWrnoteList'),
 			columns : [ {
 				header : '완제품LOT',
@@ -309,7 +314,7 @@
 	 }
      if($("#search").hasClass("outSearch btn1")){
     	 $('#prodWrnoteList').empty();
-    	 var listWrnOut = new tui.Grid({
+    	 listWrnOut = new tui.Grid({
  			el : document.getElementById('prodWrnoteList'),
  			columns : [ {
  				header : '완제품LOT',
@@ -354,6 +359,26 @@
 			     });
      }
   })
+  
+  //excel호출
+$('#excel').on('click',function(){
+	if($("#search").hasClass("inSearch btn1")){
+	const options = {
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: '입고조회',
+			};
+	listWrnIn.export('xlsx', options);
+	}else if($("#search").hasClass("outSearch btn1")){
+		const options = {
+				  includeHiddenColumns: true,
+				  onlySelected: true,
+				  fileName: '출고조회',
+				};
+		listWrnOut.export('xlsx', options);
+	}
+})
+
   
   /* 출고 검색
   $(".outSearch").on("click", function() {     

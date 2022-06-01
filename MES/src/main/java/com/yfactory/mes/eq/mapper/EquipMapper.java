@@ -57,9 +57,14 @@ public interface EquipMapper {
 	List<Map> getEqDailyChkCount(@Param("chkdt1")String chkdt1 ,@Param("chkdt2")String chkdt2); // 일일 점검 건수 리스트
 	
   
-	List<Map> eqChkResultAjax(@RequestBody List<HashMap<String, Object>>list); 	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로
+	//<Map> eqChkResultAjax(@RequestBody List<HashMap<String, Object>>list); 	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로
+	int eqChkResultAjax(@RequestBody List<HashMap<String, Object>>list); 	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로
 	
 	List<Map> dailyChkListAjax(@RequestBody List<HashMap<String, Object>> list); // 일점검건수 - 날짜를 기즌올 해달날짜 점검 데이터 조회 > 날짜가 여러개
+	
+	int eqChkDelAjax(@RequestBody List<HashMap<String, Object>>list); // 점검관리 메인 페이지 항목 데이터 삭제 기능
+	
+	int eqMngUpdateAjax(@RequestBody List<HashMap<String, Object>>list); // 설비관리 페이지 설비수정 버튼 기능부
 	
 	// -----------------------------------------------------------
 	
@@ -74,6 +79,8 @@ public interface EquipMapper {
 	int eqChkDel(); // 설비 점검 삭제(점검관리 페이지)
 
 	int eqChkMng();// 설비 점검 일별 건수 조회(점검관리 페이지)
+	
+	int updateIna(Map<String, String> result); // 비가동 설비 재가동
 
 	
 

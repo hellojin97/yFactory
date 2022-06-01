@@ -38,4 +38,10 @@ public class CommonServiceImpl implements CommonService {
 		// TODO Auto-generated method stub
 		return map.userOrderForm();
 	}
+
+	@Override
+	public int userOrderInsert(Map<String, String> parameter) {
+		// TODO Auto-generated method stub
+		return map.userOrderInsert(parameter);
+	}
 }

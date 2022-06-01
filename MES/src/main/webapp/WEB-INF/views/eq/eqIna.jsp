@@ -201,8 +201,11 @@ var eqList = new tui.Grid({
 	
   var eqInaList = new tui.Grid({
     el: document.getElementById('eqInaList'),
-    columns: [
+    columns: [    	
       {
+        header: '설비가동코드',
+        name: '설비가동코드'
+      },{
         header: '설비코드',
         name: '설비코드'
       },
@@ -267,6 +270,50 @@ var eqList = new tui.Grid({
 		myModal.show();
 	})
 	});
+  
+  eqInaList.on("dblclick", function(e){
+	  let prd = eqInaList.getFocusedCell();	  
+		if (prd.columnName == '종료날짜') {
+			if (prd.value == null) {
+				Swal.fire({
+			          title: '설비를 다시 가동하시겠습니까?',
+			          icon: 'warning',
+			          showCancelButton: true,
+			          confirmButtonColor: '#3085d6',
+			          cancelButtonColor: '#d33',
+			          confirmButtonText: '승인',
+			          cancelButtonText: '취소'
+			      }).then((result) => {			      	
+			          if (result.isConfirmed) {
+							let actcd = eqInaList.getValue(e.rowKey, "설비가동코드");
+							let eqCd = eqInaList.getValue(e.rowKey, "설비코드")
+							$.ajax({
+								url : "updateIna",
+								method : "POST",
+								data : { "p_actcd" : actcd,
+										 "p_eq_cd" : eqCd}								
+							}).done(function(result){
+			        	          	  swal.fire({
+							        		    title: "설비가 재가동되었습니다!",
+							        		    text: "페이지를 새로고침 합니다.",
+							        		    type: "success"
+							        		}).then(function() {
+							        		    window.location = "eqIna";
+							        		});
+								
+							})
+			          		}else{
+			          				Swal.fire(
+			                      '승인이 취소되었습니다.',
+			                      '섹시하시네요~!',
+			                      'error'
+			                  )
+			          			}
+			      })
+				};
+			}
+		
+  })
 </script>
 
 </html>

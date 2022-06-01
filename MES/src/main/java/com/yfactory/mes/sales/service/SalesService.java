@@ -10,7 +10,7 @@ public interface SalesService {
 	//주문서 조회
 	List<Map> selectOrderList();
 
-	List<Map> selectBomList();
+	List<Map> selectBomList(String key);
 
 	//주문서 검색
 	List<Map> searchOrderList(String pnm, String vnm,
@@ -53,5 +53,11 @@ public interface SalesService {
 	
 	//주문서 조회 - 주문 상세 조회 그리드
 	List<Map> ordtlModalList(String key);
+	
+	//완제품 안전 재고 수정
+	int updateSafe(Map<String, String> result);
+	
+	//BOM 수정
+	int updateBom(Map<String, String> result);
 
 }

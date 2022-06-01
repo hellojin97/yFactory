@@ -49,23 +49,23 @@ button:hover {
 		<div class="mainTitle">
 			<!-- 구분 드롭박스 -->
 
-			
-
 				<div class="col-md " style="padding-bottom: 30px;">
 					<div class="input-group ">
 						<label for="inputText" class="col-form-label"
 							style="padding-right: 27px;">설비구분</label> 
 							<select id="eq_nm" name="eq_nm">
-							<option value="반죽기">반죽기</option>
-							<option value="성형기">성형기</option>
-							<option value="가열기">가열기</option>
-							<option value="1차">1차선별벨트</option>
-							<option value="초코프레스">초코코팅기</option>
-							<option value="냉각기">냉각기</option>
-							<option value="2차">2차선별벨트</option>
-							<option value="포장기">포장기</option>
-						</select>
+							<option value="반죽">반죽기</option>
+							<option value="성형">성형기</option>
+							<option value="가열">가열기</option>
+							<option value="1차선별">1차선별벨트</option>
+							<option value="초코프레">초코코팅기</option>
+							<option value="냉각">냉각기</option>
+							<option value="2차선별">2차선별벨트</option>
+							<option value="포장">포장기</option>
+						</select>&nbsp;&nbsp;&nbsp;
+						<button type="submit" class="btn btnpart" id="noChksearch">해당 비점검 조회</button>
 					</div>
+					
 				</div>
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
@@ -77,8 +77,8 @@ button:hover {
 						<input type="date" class="form-control" id="eq_chkdt2"
 							name="eq_chkdt2" style="width: 20px" >
  					-->
-						&nbsp;&nbsp;
-						<button type="submit" class="btn btnpart" id="searchEq">점검비등록조회</button>
+						
+						
 					</div>
 				</div>
 			
@@ -88,7 +88,7 @@ button:hover {
 					<button type="button" class="btn btnpart" id="ListAll">전체조회</button>
 					<button type="button" class="btn btnpart" id="dailyChk">일점검조회</button>
 					<button type="button" class="btn btnpart" id="savbtnMain">저장</button>
-					<button type="button" class="btn btnpart">삭제</button>
+					<button type="button" class="btn btnpart" id="delDailyChk">삭제</button>
 				</span>
 			</div>
 			<hr style="border: solid 1px gray;">
@@ -146,7 +146,7 @@ $(function(){
 		   	 	modalGrid  = new tui.Grid({
 		       el: document.getElementById('grid'),
 		       scrollX: false,
-		       scrollY: false,
+		       scrollY: true,
 		       columns: [
 		    	  
 		         {
@@ -217,15 +217,16 @@ $(function(){
 		   					
 		                     pageOptions: {
 		                         useClient: true,
-		                         perPage: 15
+		                         perPage: 10
 		                    }
 		   });
 		   
 		   
 		   
 		// 클릭시 모달 호출
-			$("#searchEq").on("click" , function(){
+			$("#noChksearch").on("click" , function(){
 				modalGrid.clear();
+				
 				eq_nm = $("#eq_nm option:selected").val();
 					
 				//eq_chkdt1 = $("#eq_chkdt1").val();
@@ -249,9 +250,10 @@ $(function(){
 			// 일점검조회 버튼 클릭시 모달 호출
 			$("#dailyChk").on("click" , function(e){
 				modalGrid.clear();
+				
 				$("#modalDiv2").load("eqDailyChkCount" , function(){
 					const myModal = new bootstrap.Modal('#myModal');
-				myModal.show();	
+					myModal.show();	
 				
 				
 					});
@@ -271,10 +273,11 @@ $(function(){
 				var data = {};
 				for (var i = 0; i < chkRows.length; i++) {
 					console.log(chkRows[i].설비코드);
+					console.log(chkRows[i]);
 					//console.log(modalGrid.getValue(modalGrid.getCheckedRowKeys(),'설비코드'));
 					data = {
 						설비코드 : chkRows[i].설비코드,
-						점검일자 : chkRows[i].점검일자,
+						점검주기 : chkRows[i].점검주기,
 						점검내역 : chkRows[i].점검내역,
 						결과 : chkRows[i].결과,
 						검수자 : parseInt(1041)
@@ -292,21 +295,94 @@ $(function(){
 						dataType: "JSON",
 						contentType : "application/json; charset=UTF-8",
 						success : function(res){
-							if(res.result){	toastr.success('등록성공!');	}
+								toastr.success('등록이 완료되었습니다!');
+								modalGrid.clear();
+								
+								
 							},
-						error : function(){toastr.error('등록실패!');}
-					})// END OF AJAX 
-			
-		 
-				
+						error : function(){toastr.error('등록이 실패했어요!');}
+					
+					}).done(function(){
+						location.reload(); // 현재 화면 새로고침
+					
+					})	// END OF AJAX 
+
 				
 			}); // END OF MAIN SAVBTN SYNTAX
 			
 			
+			// 점검 삭제 버튼
+			$("#delDailyChk").on("click" , function(){
+					
+				var chkDelRows = modalGrid.getCheckedRows();
+				var delRowArr = [];
+				var data = {};
+				for (var i = 0; i < chkDelRows.length; i++) {
+					console.log(chkDelRows[i].설비코드);
+					console.log(chkDelRows[i]);
+					//console.log(modalGrid.getValue(modalGrid.getCheckedRowKeys(),'설비코드'));
+					data = {
+						eq_cd : chkDelRows[i].설비코드
+						};
+				
+					delRowArr.push(data);
+				};
+					console.log(delRowArr);
+					 Swal.fire({
+				          title: '정말 삭제 하시겠습니까?',
+				          text: "다시 되돌릴 수 없습니다. 신중하세요.",
+				          icon: 'warning',
+				          showCancelButton: true,
+				          confirmButtonColor: '#3085d6',
+				          cancelButtonColor: '#d33',
+				          confirmButtonText: '삭제',
+				          cancelButtonText: '취소'
+				      }).then((result) => {
+				      	console.log(result);
+				      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
+				      	 if (result.isConfirmed) {
+				      		 Swal.fire(
+					                  '승인이 완료되었습니다.',
+					                  '',
+					                  'success'
+					              );
+				      		$.ajax({
+								url : "eqChkDelAjax",
+								method:"DELETE",
+								traditional: true,
+								data : JSON.stringify(delRowArr),
+								async : false,
+								dataType: "JSON",
+								contentType : "application/json; charset=UTF-8",
+								success : function(res){
+										toastr.success('삭제 성공!');
+									},
+								error : function(){toastr.error('삭제 실패!');}
+				      		});  // END OF AJAX	
+				      		
+				      		setTimeout(function(){
+				      			location.reload();	
+				      		},500);
+				      		
+				      	 }
+				      	 else{
+				           	Swal.fire(
+				                      '삭제가 취소되었습니다.',
+				                      '',
+				                      'error'
+				                  );
+				      	 }
+				      });
+				
+		
 			
 		
-});						
+		});	// END OF DELCHKLIST SYNTAX  	
 
+	
+		
+		
+});// END OF TOTAL DOM LOADED
  </script>
 
 

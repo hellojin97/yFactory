@@ -231,6 +231,18 @@ public class ProcServiceImpl implements ProcService{
 
 
 
+	@Override
+	public int ProcStopLogic(List<HashMap<String, Object>> list) {
+		// TODO Auto-generated method stub
+		for(HashMap<String, Object>mapper : list) {
+			map.ProcStopLogic(mapper);
+		}
+		return 1;
+	}
+
+
+
+
 
 
 

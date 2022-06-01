@@ -243,23 +243,25 @@ resultGrid = new tui.Grid({
 	    console.log('긴급중지');
   		let idx = releaseList.getRowCount();
   		let eqArr = [];
+  		var data = {};
+
   		for (var i = 0; i < idx; i++) {
-			eqArr.push(releaseList.getRow(i).설비코드)
+		  		  data= {
+		  				eqCd : releaseList.getRow(i).설비코드
+	   				 };
+		  		eqArr.push(data);
 		}
   		console.log(eqArr);
-  		/*  		 var data= {
-   				lineTurn : lineTurn,
-   				procPrcd : procPrcd
-   				 };
+
    		$.ajax({
-			   url  : "procStartLogic",
-			   data :  JSON.stringify(data), 
+			   url  : "procStopLogic",
+			   data :  JSON.stringify(eqArr), 
 			   dataType : "JSON",
 			   type : "POST",
 			   contentType : "application/json; charset = UTF-8;"
 		   }).done(function(result){
-				console.log('생산시작');
-		   })  */
+				console.log('생산중지');
+		   })  
 	});
   	
   

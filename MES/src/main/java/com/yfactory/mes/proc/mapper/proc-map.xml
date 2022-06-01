@@ -374,4 +374,8 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 				proc_nm AS "공정명"
 		FROM	process
 	</select>
+	<insert id="ProcStopLogic" statementType="CALLABLE" parameterType="map">
+			{CALL PROC_STOP(#{eqCd})}
+		
+	</insert>
 </mapper>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface ProcMapper {
 
@@ -57,4 +58,6 @@ public interface ProcMapper {
     List<Map> procResultOrdersList(); // 공정 실적 - 생산 지시 조회
     
     List<Map> procResultProcessList(); // 공정 실적 - 공정 모달 조회
+    
+    int ProcStopLogic(HashMap<String, Object> list); // 긴급 중지 로직 
 }

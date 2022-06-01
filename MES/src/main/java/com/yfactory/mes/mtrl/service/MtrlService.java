@@ -28,7 +28,11 @@ public interface MtrlService {
 			 String m2,
 			 String req1,
 			 String req2);
-	
+	/* 안전재고페이지 */
+	//안전재고 전체조회
+	List<Map>mtrlSafetyList();
+	//안전재고 단건조회
+	List<Map>mtrlSafetySearch(String m1);
 	
 	/*MODAL페이지*/
 	//자재명 조회

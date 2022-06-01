@@ -314,6 +314,7 @@ unorder.on("dblclick",function(e) {
         		  				},
         		  		}).done(function(result){
         		  			console.log(result);
+        		  			location.reload();
         		  		});  	
         		};
         	                

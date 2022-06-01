@@ -95,7 +95,12 @@ resultGrid = new tui.Grid({
     columns: [
       {
         header: '진행공정코드',
-        name: '진행공정코드'
+        name: '진행공정코드',
+      },
+      {
+        header: '순번',
+        name: '순번',
+        width: 20
       },
       {
         header: '공정코드',
@@ -124,11 +129,17 @@ resultGrid = new tui.Grid({
           name: '투입량',
 
         },
-        {
-            header: '불량량',
-            name: '불량량',
 
-          },
+          {
+              header: '합격량',
+              name: '합격량',
+
+            },
+            {
+                header: '불량량',
+                name: '불량량',
+
+              },
           {
               header: '생산량',
               name: '생산량',
@@ -180,64 +191,77 @@ resultGrid = new tui.Grid({
       });
   		
   	  $("#btnProcStart").on("click",function(){
-  		
-  		//var curDate = new Date();
-  		//let startTime = curDate.getHours() + ":" + curDate.getMinutes() + ":" + curDate.getSeconds();
-		  		
-  		let insQty = resultGrid.getValue(0,"생산수량");
-  		//공정행 갯수
-  		let procRow = releaseList.getRowCount();
-  		for (var i = 0; i < procRow; i++) {
-  	  		releaseList.setValue(i,"투입량",insQty);
-		}
-	  		releaseList.setValue(0,"시작시간",dpTime());
-  		
-  		//console.log(insQty);
-  		//console.log(procRow);
+  		let lineTurn = releaseList.getValue(0,"순번");
+  		let procPrcd = releaseList.getValue(0,"진행공정코드");
+  		let num = releaseList.getRowCount();
+  		let state = releaseList.getValue(num-1, "상태");
+  		let line  = resultGrid.getValue(0, "라인코드");
+  		console.log(line);
   		 var data= {
-  				insQty : insQty,
-  				procRow : procRow,
-  				startTime : dpTime()
-  				 };
-  			
-  			console.log(insQty);
-	    $.ajax({
-			   url  : "procLogic",
+   				lineTurn : lineTurn,
+   				procPrcd : procPrcd
+   				 };
+  		$.ajax({
+			   url  : "procStartLogic",
 			   data :  JSON.stringify(data), 
 			   dataType : "JSON",
 			   type : "POST",
 			   contentType : "application/json; charset = UTF-8;"
 		   }).done(function(result){
-					 /* for (var i = 0; i < result.length; i++) {
-						 procOrder.appendRow(result[i]);
-					} */ 
-					console.log(result);
-					//releaseList.setValue(0,"생산량",result.sum)
+				console.log('생산시작');
 		   }) 
-		/*    timer = setInterval( function () {
-  		}, 1000); */
-  	  });
-  	  
-  	  
-	//시간계산
-  	    function dpTime(){
-  	       var now = new Date();
-  	        hours = now.getHours();
-  	        minutes = now.getMinutes();
-  	        seconds = now.getSeconds();
-  	 
 
-  	        if (hours < 10){
-  	            hours = "0" + hours;
-  	        }
-  	        if (minutes < 10){
-  	            minutes = "0" + minutes;
-  	        }
-  	        if (seconds < 10){
-  	            seconds = "0" + seconds;
-  	        }
-  	        return startTime = hours + ':' + minutes + ':' + seconds;
-	}
+  		
+  		 
+  		var interval = setInterval(function() {
+  		  if (state != '완료') {
+  			$.ajax({
+				   url  : "procOrderLineSelectOne",
+				   data : {line : line},
+				   dataType : "JSON",
+				   contentType : "application/json; charset = UTF-8;"
+			   }).done(function(result){
+				   		releaseList.resetData(result);
+
+			   })
+  		    
+  			  
+  			  
+  			state = releaseList.getValue(num-1, "상태");
+  		  } else {
+  		    console.log("stopped")
+  		    clearInterval(interval) 
+  		    // 밖에서 선언한 interval을 안에서 중지시킬 수 있음
+  		  }
+  		}, 500)
+  		
+
+	    
+  		
+  	  }); 
+  	$("#btnProcStop").on("click",function(){
+	    console.log('긴급중지');
+  		let idx = releaseList.getRowCount();
+  		let eqArr = [];
+  		for (var i = 0; i < idx; i++) {
+			eqArr.push(releaseList.getRow(i).설비코드)
+		}
+  		console.log(eqArr);
+  		/*  		 var data= {
+   				lineTurn : lineTurn,
+   				procPrcd : procPrcd
+   				 };
+   		$.ajax({
+			   url  : "procStartLogic",
+			   data :  JSON.stringify(data), 
+			   dataType : "JSON",
+			   type : "POST",
+			   contentType : "application/json; charset = UTF-8;"
+		   }).done(function(result){
+				console.log('생산시작');
+		   })  */
+	});
+  	
   
 </script>
 

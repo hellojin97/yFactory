@@ -172,9 +172,9 @@ public class ProcServiceImpl implements ProcService{
 
 	
 	@Override
-	public List<Map> ProcLogic(HashMap<String, Object> list) {
+	public int ProcStartLogic(HashMap<String, Object> list) {
 		
-		return map.ProcLogic(list);
+		return map.ProcStartLogic(list);
 	}
 
 

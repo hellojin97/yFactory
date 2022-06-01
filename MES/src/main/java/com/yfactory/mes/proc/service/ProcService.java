@@ -51,7 +51,7 @@ public interface ProcService {
     
     List<Map> ProcOrderLineSelectOne(String line); //생산 라인 코드 단건 조회
     
-    List<Map> ProcLogic(@RequestBody HashMap<String, Object> list); //생산 로직
+    int ProcStartLogic(@RequestBody HashMap<String, Object> list); //생산 로직
     
     List<Map> procResultList(); //공정 실적 조회
     

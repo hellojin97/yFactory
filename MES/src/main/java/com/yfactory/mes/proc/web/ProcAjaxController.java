@@ -144,9 +144,9 @@ public class ProcAjaxController {
 	}
 	
 	// 생산 로직
-	@RequestMapping(value = "/procLogic", method = RequestMethod.POST)
-	public List<Map> ProcLogic(@RequestBody HashMap<String, Object> list) {
-		return procService.ProcLogic(list);
+	@RequestMapping(value = "/procStartLogic", method = RequestMethod.POST)
+	public int ProcStartLogic(@RequestBody HashMap<String, Object> list) {
+		return procService.ProcStartLogic(list);
 	}
 	
 	// 공정 실적 조회
@@ -174,5 +174,6 @@ public class ProcAjaxController {
 			System.out.println(Cancel);
 		return procService.procCancelPl(Cancel);
 	}
+	
 	
 }

@@ -128,6 +128,17 @@ public class MaterialAjaxController {
 			return service.insertMtrlIn(MtrlIn);
 		}
 		
+		//안전재고 전체조회
+		@GetMapping("/mtrlSafetyList")
+		public List<Map> mtrlSafetyList() {
+			return service.mtrlSafetyList();
+		}
+		//안전재고 단건조회
+		@GetMapping("/mtrlSafetySearch")
+		public List<Map>mtrlSafetySearch(String m1){
+			return service.mtrlSafetySearch(m1);
+		}
+		
 		//원자재 재고조회
 		@GetMapping("/mtrlStorageList")
 		public List<Map> mtrlStorageList() {
@@ -139,5 +150,6 @@ public class MaterialAjaxController {
 		public List<Map> mtrlStorageSearch(String m1, String m2){
 			return service.mtrlStorageSearch(m1, m2);
 		}
+
 		
 }

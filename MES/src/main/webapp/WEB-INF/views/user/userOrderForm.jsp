@@ -172,8 +172,6 @@ window.onload = function (){
 	          confirmButtonText: '승인',
 	          cancelButtonText: '취소'
 	      }).then((result) => {
-	      	console.log(result);
-	      	console.log(result.isConfirmed); // 승인시 FALSE / 취소시 TRUE
 	          if (result.isConfirmed) {
 	        	  
 	        	  
@@ -187,29 +185,39 @@ window.onload = function (){
 	        		  	let prodNm = prd[i].제품명;
 	        		  	/* 수량  */
 	        		  	let qty = prd[i].주문수량;
-	        		  
-	        		  
-	        		  	
-	        		  	
-	        			
-/* 	        		  	$.ajax({
-	        		  		url :'releaseOrder',
-	        		  		method : 'POST',
-	        		  		data : {"prod_lot" : prodLot, "prod_wrqty" : wrQty, "ordtl_cd" : ordtlCd},
-	        		  		}).done(function(result){
-	        		  			console.log(result);
-	        		  		}); */
-	        		  	
-	        		};
+	        		  let param = {
+	        				  		"venCd" : venCd,
+	        				  		"curDt" : curDt,
+	        				  		"reqDt" : reqDt,
+	        				  		"prodCd" : prodCd,
+	        				  		"prodNm" : prodNm,
+	        				  		"qty" : qty
+	        				  		};
+	        		  $.ajax({
+	        			  	
+	        			  		url: 'userOrderInsert',
+	        			  		method : 'POST',
+	        			  		data : param,
+	        			  		async : false
+	        				  }).done(function(result){
+										console.log('성공');	        					  
+	        					  })
+
+	          }
 	        	  
 	              Swal.fire(
-	                  '승인이 완료되었습니다.',
-	                  '출고등록이 완료되었습니다.',
+	                  '주문완료',
+	                  '메인 페이지로 이동합니다.',
 	                  'success'
-	              );
-	              
-	          }
-	      });
+	              ).then(function(){
+	            	  
+						location.href = 'home.do';	            	  
+	            	  
+	            	  });
+	          }})
+	          
+	          
+	         
 	      
 	   	} else {
 	   		alert('업체명 또는 납품일자가 비어있습니다.');
@@ -219,12 +227,14 @@ window.onload = function (){
 	   		}
 	   	}
 		 
-	  })
+	  }) // end of then
+	}  // end of if
+/* } // end of function */
+</script>
 
 
 
-}
-  </script>
+
 
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>

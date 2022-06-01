@@ -21,7 +21,9 @@
 			
 			<!-- grid 테이블 출력 div -->
 			<div id="qaResult"></div>
-			
+			<div>
+				<button type="button" class="btn1" id="excel">Excel</button>
+			</div>
 		</div>
 	</div>
 	
@@ -49,10 +51,12 @@
 			el : document.getElementById('qaResult'),
 			columns : [ {
 				header: '발주코드',
-				name: '발주코드'
+				name: '발주코드',
+				width:'115'
 			}, {
-				header: '발주상세코드',
-				name: '발주상세코드'
+				header: '품질검사코드',
+				name: '품질검사코드',
+				width:'110'
 			}, {
 				header: '자재코드',
 				name: '자재코드',
@@ -66,27 +70,29 @@
 				name: '담당인',
 				width: '80'
 			}, {
-				header: '검사일자',
-				name: '검사일자',
+				header: '검사일',
+				name: '검사일',
 				width: '90'
 			}, {
 				header: '발주량',
 				name: '발주량',
-				width: '80'
+				width: '60'
 			}, {
 				header: '합격량',
 				name: '합격량',
-				width: '80'
+				width: '60'
 			}, {
 				header: '불량량',
 				name: '불량량',
-				width: '80'
+				width: '60'
 			}, {
 				header: '불량코드',
-				name: '불량코드'
+				name: '불량코드',
+				width:'90'
 			}, {
-				header: '불량내역',
-				name: '불량내역'
+				header: '불량사유',
+				name: '불량사유',
+				width:'180'
 			}, {
 				header: '상태',
 				name: '상태',
@@ -120,40 +126,52 @@
 				el : document.getElementById('qaResult'),
 				columns : [ {
 					header: '발주코드',
-					name: '발주코드'
+					name: '발주코드',
+					width:'115'
 				}, {
-					header: '발주상세코드',
-					name: '발주상세코드'
+					header: '품질검사코드',
+					name: '품질검사코드',
+					width:'110'
 				}, {
 					header: '자재코드',
-					name: '자재코드'
+					name: '자재코드',
+					width: '80'
 				}, {
 					header: '자재명',
-					name: '자재명'
+					name: '자재명',
+					width: '80'
 				}, {
 					header: '담당인',
-					name: '담당인'
+					name: '담당인',
+					width: '80'
 				}, {
-					header: '검사일자',
-					name: '검사일자'
+					header: '검사일',
+					name: '검사일',
+					width: '90'
 				}, {
 					header: '발주량',
-					name: '발주량'
+					name: '발주량',
+					width: '60'
 				}, {
 					header: '합격량',
-					name: '합격량'
+					name: '합격량',
+					width: '60'
 				}, {
 					header: '불량량',
-					name: '불량량'
+					name: '불량량',
+					width: '60'
 				}, {
 					header: '불량코드',
-					name: '불량코드'
+					name: '불량코드',
+					width:'90'
 				}, {
-					header: '불량내역',
-					name: '불량내역'
+					header: '불량사유',
+					name: '불량사유',
+					width:'180'
 				}, {
 					header: '상태',
-					name: '상태'
+					name: '상태',
+					width: '80'
 				} ],
 				rowHeaders : [ 'rowNum' ],
 				pageOptions : {
@@ -223,6 +241,16 @@
 				}
 			});
 		});
+		
+		//excel호출
+		$('#excel').on('click',function(){
+			const options = {
+					  includeHiddenColumns: true,
+					  onlySelected: true,
+					  fileName: '불량내역',
+					};
+			grid.export('xlsx', options);
+		})
 	</script>
 </body>
 </html>

@@ -55,9 +55,6 @@
 			name: '발주코드',
 			width:'130'
 		}, {
-			header: '발주상세코드',
-			name: '발주상세코드'
-		}, {
 			header: '품질검사코드',
 			name: '품질검사코드',
 			width:'130'
@@ -131,10 +128,7 @@
 		let checkList = defaultMt.getCheckedRows();
 		
 		for (var i = 0; i < checkList.length; i++) {
-		
-		
-		
-		
+
 		var chkcd = checkList[i].품질검사코드;
 		var mtnm = checkList[i].자재명;
 		var passqty = checkList[i].합격량;
@@ -154,8 +148,8 @@
 				"errcd" : errcd
 			}
 		}).done(function(result) {
-			
-		}).fail(function(RESULT) {
+			defaultMt.removeCheckedRows(false);
+		}).fail(function(result) {
 			console.log(result);
 		})
 		

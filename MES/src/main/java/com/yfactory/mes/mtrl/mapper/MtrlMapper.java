@@ -34,6 +34,12 @@ public interface MtrlMapper {
 							 @Param("m2") String m2,
 							 @Param("req1") String req1,
 							 @Param("req2") String req2);
+	/* 안전재고페이지 */
+	//안전재고 전체조회
+	List<Map>mtrlSafetyList();
+	//안전재고 단건조회
+	List<Map>mtrlSafetySearch(@Param("m1") String m1);
+	
 	//입고조회
 	List<Map>insertList();
 	//입고예정버튼

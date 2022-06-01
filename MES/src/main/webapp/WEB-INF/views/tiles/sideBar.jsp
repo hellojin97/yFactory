@@ -59,7 +59,7 @@
           
           <li>
           	<a href="prodSafety">
-          	  <i class="bi bi-circle"></i><span>완제품 안전재고 조회</span>
+          	  <i class="bi bi-circle"></i><span>완제품 안전재고 관리</span>
           	</a>
           </li>
           
@@ -308,7 +308,7 @@
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="loginForm.do">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Login</span>
         </a>

@@ -106,4 +106,9 @@ public class SalesServiceImpl implements SalesService {
 		return map.updateSafe(result);
 	}
 
+	@Override
+	public int updateBom(Map<String, String> result) {
+		return map.updateBom(result);
+	}
+
 }

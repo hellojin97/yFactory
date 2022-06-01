@@ -27,8 +27,6 @@ public class QualityAjaxController {
 	public List<Map> selectpoDtlRequest() {
 		return qas.selectpoDtlRequest();
 	}
-
-	// 제품 품질검사요청(modal)
 	
 	// 자재 품질검사관리
 	@GetMapping("/selectMtCheckMgr")
@@ -54,6 +52,12 @@ public class QualityAjaxController {
 		return qas.selectMtErrList();
 	}
 	
+	//제품불량내역
+	@GetMapping("/selectProdErrList")
+	public List<Map> selectProdErrList() {
+		return qas.selectProdErrList();
+	}
+	
 	// ------------------------------------------------
 	
 	// 검색
@@ -73,9 +77,9 @@ public class QualityAjaxController {
 	
 	// 입력
 	// 자재 품질검사요청
-	@PostMapping("/reqMtQuality")
-	public int reqMtQuality(String pdt, String mcd) {
-		return qas.reqMtQuality(pdt, mcd);
+	@GetMapping("/reqMtQuality")
+	public int reqMtQuality(String pdt) {
+		return qas.reqMtQuality(pdt);
 	}
 	
 	// ------------------------------------------------

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.yfactory.mes.common.mapper.CommonMapper;
 import com.yfactory.mes.common.service.CommonService;
+import com.yfactory.mes.common.vo.EmployeeVO;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -43,5 +44,10 @@ public class CommonServiceImpl implements CommonService {
 	public int userOrderInsert(Map<String, String> parameter) {
 		// TODO Auto-generated method stub
 		return map.userOrderInsert(parameter);
+	}
+
+	@Override
+	public EmployeeVO userLogin(EmployeeVO empVO) {
+		return map.userLogin(empVO);
 	}
 }

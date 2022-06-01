@@ -100,10 +100,9 @@
 		AND 	PID.PROD_CD = P.PROD_CD
 		AND 	PS.PROC_PRCD = PPR.PROC_PRCD
 		AND 	PS.LINE_TURN = PPR.LINE_TURN
-		AND 	PS.PRD_DTLCD = PPR.PRD_DTLCD
 		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
 		AND 	PE.LINE_TURN = PPR.LINE_TURN
-		AND 	PE.PRD_DTLCD = PPR.PRD_DTLCD
+		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
 		AND 	PE.ERR_CD = ERR.ERR_CD
 		ORDER BY 1
 	</select>
@@ -124,7 +123,19 @@
 		AND 	MCD.CHK_DTL_INSP = 'MTRL02'
 		ORDER BY 5
 	</select>
-	
+	<!-- 제품불량내역 조회 -->
+	<select id="selectProdErrList" resultType="map">
+		SELECT	PL.PROD_LOT "제품LOT",
+				P.PROD_CD "제품코드",
+				P.PROD_NM "제품명",
+				PER.CHK_ERRQTY "불량량",
+				PER.ERR_CD "불량코드",
+				ERR.ERR_DTL "불량사유"
+		FROM	PROD_ERR PER, PROD P, ERR_CODE ERR, PROD_LOT PL
+		WHERE	PER.ERR_CD = ERR.ERR_CD
+		AND		P.PROD_CD = PL.PROD_CD
+		AND		PER.PROD_LOT = PL.PROD_LOT
+	</select>
 
 	<!-- 검색 -->
 	<!-- 불량코드(modal) 검색 -->

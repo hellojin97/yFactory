@@ -21,9 +21,12 @@
 			
 			<!-- grid 테이블 출력 div -->
 			<div id="errLotList"></div>
-			
+			<div>
+				<button type="button" class="btn1" id="excel">Excel</button>
+			</div>
 		</div>
 	</div>
+	
 	
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
@@ -33,7 +36,7 @@
 		src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
-		
+
 	<script>
 	// 페이지 onload
 	$.ajax({
@@ -217,6 +220,16 @@
 			}
 		});
 	});
+	
+	//excel호출
+	$('#excel').on('click',function(){
+		const options = {
+				  includeHiddenColumns: true,
+				  onlySelected: true,
+				  fileName: '불량내역',
+				};
+		grid.export('xlsx', options);
+	})
 	</script>
 </body>
 </html>

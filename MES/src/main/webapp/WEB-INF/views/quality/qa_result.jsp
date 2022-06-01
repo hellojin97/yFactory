@@ -21,7 +21,9 @@
 			
 			<!-- grid 테이블 출력 div -->
 			<div id="qaResult"></div>
-			
+			<div>
+				<button type="button" class="btn1" id="excel">Excel</button>
+			</div>
 		</div>
 	</div>
 	
@@ -239,6 +241,16 @@
 				}
 			});
 		});
+		
+		//excel호출
+		$('#excel').on('click',function(){
+			const options = {
+					  includeHiddenColumns: true,
+					  onlySelected: true,
+					  fileName: '불량내역',
+					};
+			grid.export('xlsx', options);
+		})
 	</script>
 </body>
 </html>

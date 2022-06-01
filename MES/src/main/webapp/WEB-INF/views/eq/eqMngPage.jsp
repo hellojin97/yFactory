@@ -18,6 +18,19 @@
 
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+
+<!-- 추가 CDN -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
 
@@ -82,12 +95,15 @@
 				columns : [ {
 					header : '설비코드',
 					name : '설비코드',
+					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '설비명',
 					name : '설비명',
+					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정코드',
 					name : '공정코드',
+					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정명',
 					name : '공정명',
@@ -108,7 +124,8 @@
 						options : {
 							format : 'yyyy-MM-dd'
 						}
-					}
+					},
+					filter: { type: 'date', showApplyBtn: true, showClearBtn: true }
 				},
 
 				{
@@ -149,7 +166,7 @@
 				
 				let eqCdCol = grid.getFocusedCell('설비코드');
 				let eqPrcCol = grid.getFocusedCell('공정코드');
-					if(eqCdCol.columnName == '설비코드'){ // 설비코드 컬럼을 클릭했다면
+				/* 	if(eqCdCol.columnName == '설비코드'){ // 설비코드 컬럼을 클릭했다면
 						$("#grid1").load("mngmodal", function(){
 
 							const mngModal = new bootstrap.Modal('#myModal');
@@ -160,13 +177,14 @@
 						
 							});
 					}
-					else if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
-						$("#grid1").load("eqPrcmodal", function(){
-							const mngModal = new bootstrap.Modal('#myModal');
-							mngModal.show();
+					else  */
+						if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
+							$("#grid1").load("eqPrcmodal", function(){
+									const mngModal = new bootstrap.Modal('#myModal');
+									mngModal.show();
 							
 							});
-					}
+					};
 				
 				
 			});
@@ -183,7 +201,7 @@
 			for (var i = 0; i < chkRows.length; i++) {
 				data = {
 						eq_cd : chkRows[i].설비코드 , 
-						eq_nm : chkRows[i].설비명 ,
+						/* eq_nm : chkRows[i].설비명 , */
 						proc_cd : chkRows[i].공정코드 ,
 						proc_nm : chkRows[i].공정명 ,
 						eq_min : chkRows[i].최저온도 ,

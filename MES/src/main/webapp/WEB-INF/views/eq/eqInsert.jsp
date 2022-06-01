@@ -60,7 +60,7 @@ button:hover {
 									style="padding-right: 27px;">모델명*</label> <input type="text"
 									id="eq_mdnm" name="eq_mdnm" class="form-control"
 									style="width: 30px" required placeholder="설비 모델명"
-									data-name="모델명">
+									data-name="모델명" onkeypress="addKeyword(event)">
 
 							</div>
 						</div>
@@ -95,10 +95,10 @@ button:hover {
 							<div class="input-group ">
 								<label for="inputText" class="col-form-label"
 									style="padding-right: 27px;">구분코드</label> <input type="text"
-									id="eq_cd" class="form-control" />
+									id="eq_divCd" name="eq_nm" class="form-control" />
 								<button type="button" id="eqdiv">조회</button>
 
-								<input type="text" id="eq_nm" name="eq_nm" class="form-control">
+								<input type="text" id="eq_divNm" class="form-control">
 
 							</div>
 						</div>
@@ -218,6 +218,91 @@ button:hover {
 
 </body>
 <script>
+	// 모델명 일정키워드 서치후 모델번호 input에 자동 키워드 생성 
+	function addKeyword(ev){
+		var inputVal = $("#eq_mdnm").val();
+		
+		if(ev.keyCode == 13){ // 엔터키가 입력된경우
+			if(inputVal.includes('누드')){
+				if(inputVal.includes('태진')){
+					if(inputVal.includes('반죽')){
+						$("#eq_mdno").val('TJNDMX');	
+					}else if(inputVal.includes('성형')){
+						$("#eq_mdno").val('TJNDTRM');	
+					}else if(inputVal.includes('냉각')){
+						$("#eq_mdno").val('TJNDFRZ');	
+					}else if(inputVal.includes('포장')){
+						$("#eq_mdno").val('TJNDBX');	
+					}
+					
+				}
+				else if(inputVal.includes('금영')){
+					if(inputVal.includes('반죽')){
+						$("#eq_mdno").val('GYNDMX');	
+					}else if(inputVal.includes('성형')){
+						$("#eq_mdno").val('GYNDTRM');	
+					}else if(inputVal.includes('냉각')){
+						$("#eq_mdno").val('GYNDFRZ');	
+					}else if(inputVal.includes('포장')){
+						$("#eq_mdno").val('GYNDBX');	
+					}
+				}
+				
+			}
+			else if(inputVal.includes('아몬드')){
+						if(inputVal.includes('태진')){
+							if(inputVal.includes('반죽')){
+								$("#eq_mdno").val('TJALMMX');	
+							}else if(inputVal.includes('성형')){
+								$("#eq_mdno").val('TJALMTRM');	
+							}else if(inputVal.includes('냉각')){
+								$("#eq_mdno").val('TJALMFRZ');	
+							}else if(inputVal.includes('포장')){
+								$("#eq_mdno").val('TJALMBX');	
+							}
+					
+				}
+				else if(inputVal.includes('금영')){
+							if(inputVal.includes('반죽')){
+									$("#eq_mdno").val('GYALMMX');	
+								}else if(inputVal.includes('성형')){
+									$("#eq_mdno").val('GYALMTRM');	
+								}else if(inputVal.includes('냉각')){
+									$("#eq_mdno").val('GYALMFRZ');	
+								}else if(inputVal.includes('포장')){
+									$("#eq_mdno").val('GYALMBX');	
+								}
+					}
+				
+			}
+			else{
+				if(inputVal.includes('태진')){
+					if(inputVal.includes('반죽')){
+						$("#eq_mdno").val('TJORIMX');
+					}else if(inputVal.includes('성형')){
+						$("#eq_mdno").val('TJORITRM');
+					}else if(inputVal.includes('냉각')){
+						$("#eq_mdno").val('TJORIFRZ');
+					}else if(inputVal.includes('포장')){
+						$("#eq_mdno").val('TJORIBX');
+					}
+
+				}else if(inputVal.includes('금영')){
+					if(inputVal.includes('반죽')){
+						$("#eq_mdno").val('GYORIMX');
+					}else if(inputVal.includes('성형')){
+						$("#eq_mdno").val('GYORITRM');
+					}else if(inputVal.includes('냉각')){
+						$("#eq_mdno").val('GYORIFRZ');
+					}else if(inputVal.includes('포장')){
+						$("#eq_mdno").val('GYORIBX');
+					}
+				}
+			}
+		}
+	};
+
+
 // 이미지 파일 썸네일 보기 구현완료
 function readURL(input) {
     	if (input.files && input.files[0]) {

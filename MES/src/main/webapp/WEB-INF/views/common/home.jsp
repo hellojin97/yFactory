@@ -257,6 +257,14 @@
       	
       	     		});
     			/*========= 원자재 재고 간단 조회 끝=========*/
+	if('${message}' != ''){
+		alert('${message}');
+		location.href ='loginForm.do';
+		
+	} 
+    			
+    			
+    			
     }  
     </script>
 </body>

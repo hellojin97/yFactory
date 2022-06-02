@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>메인</title>
-
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
 <link rel="stylesheet" type="text/css"
@@ -129,6 +129,12 @@
             <i class="bi bi-chat-left-text">채팅</i>
             <span class="badge bg-success badge-number">3</span>
           </a><!-- End Messages Icon -->
+          
+          <c:if test="${not empty loginUser }">
+          	<div id="logOut">
+          		1111
+          	</div>
+          </c:if>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">

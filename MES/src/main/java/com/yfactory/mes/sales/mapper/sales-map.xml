@@ -59,8 +59,7 @@
 		FROM 
 					   ORDERS ord, 
 					   VENDOR vdr, 
-					   ORD_DTL ordtl, 
-					   PROD pd, 
+					   ORD_DTL ordtl,
 					   COMM_CODE cd
 		WHERE     		ord.vdr_cd = vdr.vdr_cd
 		AND      		ord.ord_cd = ordtl.ord_cd		

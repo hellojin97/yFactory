@@ -56,7 +56,7 @@ GROUP BY    	ord.ord_cd,
 		AND				 ordtl.prod_cd = pd.prod_cd
         AND 				 cd.comm_cd = ord.prog_cd
         AND				 pd.prod_cd = pl.prod_cd
-        AND				 pl.prod_lot = pc.prod_lot
+        AND				 pl.prod_lot = pc.prod_lot(+)
 		AND 			     ord.ord_cd = #{ordCd}
 	</select>
 	<!-- 제품 전체 조회 -->
@@ -109,7 +109,7 @@ GROUP BY    	ord.ord_cd,
 		dtl.pd_rank "작업우선순위"
 		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord
 		WHERE pl.pp_cd = dtl.pp_cd
-		AND pl.ord_cd = ord.ord_cd
+		AND pl.ord_cd = ord.ord_cd(+)
 		AND dtl.prod_cd = pd.prod_cd
 		AND dtl.pp_cd = #{ppCd}
 	</select>
@@ -128,7 +128,7 @@ GROUP BY    	ord.ord_cd,
         
 		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord 
 		WHERE pl.pp_cd = dtl.pp_cd
-		AND pl.ord_cd = ord.ord_cd
+		AND pl.ord_cd = ord.ord_cd(+)
 		AND dtl.prod_cd = pd.prod_cd
 		
 
@@ -321,7 +321,7 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	</insert>
 	
 	<insert id="procCancelPl" statementType="CALLABLE" parameterType="map">
-		{CALL PROC_CANCEL_PL(#{주문코드})}
+		{CALL PROC_CANCEL_PL(#{생산계획코드})}
 	</insert>
 	 
 	<select id="procResultList" resultType="map">

@@ -31,7 +31,7 @@ public interface EquipService {
 	List<Map> searchPrcList();
 	
 	// 설비코드기준 공정코드 + 공정명 조회
-	List<Map> selectEqPrc(String eqCd); 
+	List<Map> selectEqPrc(String prcCd); 
 	
 	 // 설비 등록시 사원번호 + 사원명 조회
 	List<Map> searchEmp();

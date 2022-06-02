@@ -106,7 +106,7 @@
           </li>
           
           <li>
-            <a href="">
+            <a href="mtrlInsertListForm">
               <i class="bi bi-circle"></i><span>원자재 입고조회</span>
             </a>
           </li>

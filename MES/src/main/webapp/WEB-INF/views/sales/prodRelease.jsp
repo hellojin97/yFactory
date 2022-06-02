@@ -215,6 +215,7 @@ var ordDtpList = new tui.Grid({
         		  	$.ajax({
         		  		url :'releaseOrder',
         		  		method : 'POST',
+        		  		async : false,
         		  		data : {"prod_lot" : prodLot, "prod_wrqty" : wrQty, "ordtl_cd" : ordtlCd},
         		  		}).done(function(result){
         		  			console.log(result);

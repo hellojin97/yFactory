@@ -66,6 +66,8 @@ public interface EquipMapper {
 	
 	int eqMngUpdateAjax( HashMap<String, Object>list); // 설비관리 페이지 설비수정 버튼 기능부
 	
+	List<Map>getEqTemp(); // 설비 가용온도 리스트 조회
+	
 	// -----------------------------------------------------------
 	
 	List<Map> eqInaAll(); // 설비 비가동 리스트(설비비가동 페치지)

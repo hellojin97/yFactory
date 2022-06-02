@@ -139,7 +139,8 @@ $(function(){
 		
 	});
 	$("#resetList").on("click" ,function(){
-		modalGrid.clear();
+		modalGrid.clear(); // 모달 데이터 초기화
+		location.reload(); // 페이지 새로고침
 	});
 	
 		 	

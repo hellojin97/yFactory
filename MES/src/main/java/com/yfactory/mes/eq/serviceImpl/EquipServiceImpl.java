@@ -144,6 +144,12 @@ public class EquipServiceImpl implements EquipService{
 		return mapper.updateIna(result);
 
 	}
+
+	@Override
+	public List<Map> getEqTemp() {
+		
+		return mapper.getEqTemp();
+	}
 	
 	
 	

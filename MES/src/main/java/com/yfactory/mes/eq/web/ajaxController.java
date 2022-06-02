@@ -192,6 +192,11 @@ public class ajaxController {
 	}
 	
 	
+	// 설비 가용온도 리스트 
+		@RequestMapping("/getEqTemp")
+		public List<Map> getEqTemp() {
+			 return mapper.getEqTemp(); 
+		}
 	
 	
 	

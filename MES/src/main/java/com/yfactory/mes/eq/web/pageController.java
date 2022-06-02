@@ -148,5 +148,18 @@ public class pageController {
 	public String eqDailyChkCount() {
 		return "/eq/eqmodal/eqDailyChkCount";
 	}
+	
+	@GetMapping("/popupTest")
+	public String popupTest() {
+		return "/eq/Test";
+	}
+	
+	@GetMapping("/popup")
+	public String popup() {
+		return "/eq/popup";
+	}
+	
+	
 
+	
 }

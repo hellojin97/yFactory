@@ -39,14 +39,21 @@
 	background-color: #555555;
 	color: white;
 	font-family: "Audiowide", sans-serif;
-
+	font-size:25px;
+	padding: 10px 20px;
+	border-radius: 4px;
 }
 
 .inSearch:hover {
 	color: black;
 	background-color: white;
+	 border:2px solid green;
 }
-
+h3{
+ /* color:ghostwhite;
+ border: 15px solid #e0e0e0; */
+ 
+}
 
 
 </style>
@@ -57,8 +64,8 @@
 	<div id="in/out"></div>
 	<div style="background-color: #e0e0e0; padding: 8px;">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
-			<h3>설비 데이터</h3>
-			<div style="padding-right: 10px;" align="right">
+			<!-- <h3>설비 데이터</h3> -->
+			<div style="padding-bottom: 10px;" align="right">
 			<button type="button" id="eqUpd" class="inSearch">설비 수정</button>
 			</div>
 			<hr style="border: solid 1px gray;">
@@ -97,6 +104,10 @@
 					name : '설비코드',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
+					header : '설비구분',
+					name : '설비구분',
+					filter: { type: 'select', showApplyBtn: true, showClearBtn: true }
+				},{
 					header : '설비명',
 					name : '설비명',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
@@ -125,12 +136,18 @@
 							format : 'yyyy-MM-dd'
 						}
 					},
-					filter: { type: 'date', showApplyBtn: true, showClearBtn: true }
+					filter: { type: 'date', 
+								showApplyBtn: true, 
+								showClearBtn: true,
+								operator:'OR',
+								
+								}
 				},
 
 				{
 					header : '사용여부',
 					name : '사용여부',
+					filter: { type: 'select', showApplyBtn: true, showClearBtn: true },
 					 editor: {
 	                     type: 'select',
 	                     options: {

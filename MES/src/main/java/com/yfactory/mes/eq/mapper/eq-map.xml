@@ -5,15 +5,24 @@
 	<!-- 모달창에 설비 코드와 설비명 출력 쿼리 -->
 	<select id="searchEq" resultType="map">
 
-		SELECT EQ_CD "설비코드" , EQ_MDNM "설비명"
+		SELECT EQ_CD "구분코드" , 
+					CASE WHEN LOWER(EQ_NM) LIKE 'yafs01' THEN '반죽기'
+                             WHEN LOWER(EQ_NM) LIKE 'yafs02' THEN '성형기'
+                             WHEN LOWER(EQ_NM) LIKE 'yafs03' THEN '냉각기'
+                             WHEN LOWER(EQ_NM) LIKE 'yafs04' THEN '포장기'
+                             END "구분명"
 		FROM EQ 
 
 	</select>
 
 
-	<!-- 모달창에서 클릭한 데이터(설비코드)를 기반으로 코드와 이름을 가지고 오는 쿼리 -->
+	<!-- 모달창에서 클릭한 데이터(설비코드)를 기반으로 코드와 이름을 가지고 오는 쿼리 (현재 사용X) -->
 	<select id="selectEq" resultType="map">
-		SELECT EQ_CD "설비코드" , EQ_MDNM "설비명"
+		SELECT EQ_CD "설비코드",CASE WHEN LOWER(EQ_NM) LIKE 'yafs01' THEN '반죽기'
+                             WHEN LOWER(EQ_NM) LIKE 'yafs02' THEN '성형기'
+                             WHEN LOWER(EQ_NM) LIKE 'yafs03' THEN '냉각기'
+                             WHEN LOWER(EQ_NM) LIKE 'yafs04' THEN '포장기'
+                             END "설비구분" , EQ_MDNM "설비명"
 		FROM EQ 
 		WHERE EQ_CD = #{eqCd}
 
@@ -40,7 +49,13 @@
 	
 	<!-- 설비관리페이지 전체 리스트 -->
 	<select id="searchEqMngList" resultType="map">
-	SELECT e.eq_cd "설비코드" , e.eq_mdnm "설비명" , prc.proc_cd "공정코드" , 
+	SELECT e.eq_cd "설비코드" , 
+				case when lower(eq_nm) like 'yafs01' then '반죽기'
+                	    when lower(eq_nm) like 'yafs02' then '성형기'
+                        when lower(eq_nm) like 'yafs03' then '냉각기'
+                        when lower(eq_nm) like 'yafs04' then '포장기'
+                        end "설비구분",
+                e.eq_mdnm "설비명" , prc.proc_cd "공정코드" , 
 				prc.proc_nm	"공정명", e.eq_min "최저온도" , e.eq_max "최고온도"
       			,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자",
       			CASE WHEN e.eq_actst like 'USE01'
@@ -138,7 +153,7 @@
 	<select id="searchEqIna" parameterType="map" resultType="map">
 		select	    ei.eq_actcd AS "설비가동코드",
 	                ei.eq_cd AS "설비코드",
-					e.eq_nm AS "설비명",
+					e.eq_mdnm AS "설비명",
 					TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
 					TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
 					cm.cd_nm AS "사유"
@@ -152,7 +167,7 @@
 		and		ei.eq_cd = #{eqCd}
 		</if>
 		<if test="eqCd == '' and eqNm != ''">
-		and		e.eq_nm = #{eqNm}
+		and		e.eq_mdnm = #{eqNm}
 		</if>
 		ORDER BY 4 DESC
 	</select>
@@ -275,6 +290,13 @@ WHERE EQ_CD IN
 						  #{eq_actst}
 						  )}
 </update>
+
+<select id="getEqTemp" resultType="map">
+SELECT E.EQ_CD "설비코드",EQ_UPH "초당생산량" , E.EQ_MIN "최소온도" , E.EQ_MAX "최대온도" , PRC.PROC_NM "공정명", LN.LINE_CD "라인코드"
+FROM EQ E , PROCESS PRC ,LINE LN
+WHERE E.EQ_CD = PRC.EQ_CD
+AND PRC.PROC_CD = LN.PROC_CD
+</select>
 
 
 

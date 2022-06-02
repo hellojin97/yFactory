@@ -129,12 +129,12 @@
             <i class="bi bi-chat-left-text">채팅</i>
             <span class="badge bg-success badge-number">3</span>
           </a><!-- End Messages Icon -->
-          
           <c:if test="${not empty loginUser }">
           	<div id="logOut">
-          		1111
+          		<a href="userLogOut">로그아웃</a>
           	</div>
           </c:if>
+          
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
@@ -281,5 +281,10 @@ chat.addEventListener("click", function(){
 	})
 	});
 
+if('${message}' != ''){
+	alert('${message}');
+	location.href ='home.do';
+	
+}
 </script>
 </html> 	

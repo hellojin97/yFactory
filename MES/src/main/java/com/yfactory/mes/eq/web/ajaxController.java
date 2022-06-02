@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yfactory.mes.eq.mapper.EquipMapper;
+import com.yfactory.mes.eq.service.EquipService;
 
 @RestController
 public class ajaxController {
@@ -23,7 +24,7 @@ public class ajaxController {
 
 	// 매퍼 연결
 	@Autowired
-	public EquipMapper mapper;
+	public EquipService mapper;
 
 	// 이미지 등록 구현 시도
 	/*
@@ -70,10 +71,10 @@ public class ajaxController {
 		return mapper.searchPrcList();
 	}
 
-	@GetMapping("/eqPrcSelctAjax") // 단건 조회
+	@GetMapping("/eqPrcSelectAjax") // 단건 조회
 	@ResponseBody
-	public List<Map> eqPrcSelctAjax(String eqCd) {
-		return mapper.selectEqPrc(eqCd);
+	public List<Map> eqPrcSelctAjax(String prcCd) {
+		return mapper.selectEqPrc(prcCd);
 	}
 	
 	@GetMapping("/getEmpListAjax") // 사원코드 사원명 조회

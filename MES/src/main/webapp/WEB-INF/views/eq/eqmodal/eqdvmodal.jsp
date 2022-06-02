@@ -61,13 +61,13 @@
 			columns : [
 
 			{
-				header : '설비코드',
-				name : '설비코드'
+				header : '구분코드',
+				name : '구분코드'
 			},
 
 			{
-				header : '설비명',
-				name : '설비명'
+				header : '구분명',
+				name : '구분명'
 			}
 
 			],
@@ -84,8 +84,8 @@
 		
 		grid2.on("click",function(e) {
 		//debugger
-		let eqCd = grid2.getValue(e.rowKey, '설비코드');
-		let eqNm = grid2.getValue(e.rowKey , '설비명');
+		let eqCd = grid2.getValue(e.rowKey, '구분코드');
+		let eqNm = grid2.getValue(e.rowKey , '구분명');
 		/* $("input[name='eqCdinp']").value=eqCd;
 		$("input[name='eqNminp']").value=eqNm; */
 		
@@ -93,8 +93,8 @@
 		console.log(eqNm);
 		if(eqCd != null){
 			 $('#myModal').modal('hide');
-			 $("#eq_cd").val(eqCd);
-			 $("#eq_nm").val(eqNm);
+			 $("#eq_divCd").val(eqCd);
+			 $("#eq_divNm").val(eqNm);
 
 		}
 	})

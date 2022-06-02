@@ -59,8 +59,7 @@
 		FROM 
 					   ORDERS ord, 
 					   VENDOR vdr, 
-					   ORD_DTL ordtl, 
-					   PROD pd, 
+					   ORD_DTL ordtl,
 					   COMM_CODE cd
 		WHERE     		ord.vdr_cd = vdr.vdr_cd
 		AND      		ord.ord_cd = ordtl.ord_cd		
@@ -120,7 +119,7 @@
 		FROM		prod pd, prod_lot pdlot, prod_curqty pdc
 		WHERE		pd.prod_cd = pdlot.prod_cd
 		AND     	pdlot.prod_lot = pdc.prod_lot
-		ORDER BY	pdlot.prod_fdt DESC		
+		ORDER BY	pdlot.prod_fdt DESC;    
 	</select>
 	
 	<!-- 완제품LOT검색 -->
@@ -161,6 +160,52 @@
 					prod_cd AS "제품코드"
 		FROM   		prod
 		WHERE		prod_nm LIKE '%'||#{key}||'%'
+	</select>
+	
+	<!-- 완제품 안전 재고 -->
+	<select id="prodSafetyList" resultType="map">
+	 SELECT      	pdlot.prod_cd AS "제품코드",
+               		pd.prod_nm AS "제품명",
+                    pd.prod_sfqty AS "안전수량",
+                    pd.prod_unit AS "단위",
+	                CASE WHEN sum(pdc.prod_qty) is null THEN 0
+                    ELSE sum(pdc.prod_qty)
+	                END  AS "완제품수량"
+           
+      FROM      	prod pd, prod_lot pdlot, prod_curqty pdc
+      WHERE      	pd.prod_cd = pdlot.prod_cd
+      AND        	pdlot.prod_lot = pdc.prod_lot(+)
+      GROUP BY      pdlot.prod_cd,
+                    pd.prod_nm,
+                    pd.prod_sfqty,
+                    pd.prod_unit
+      ORDER BY      1
+	</select>
+	
+	<!-- 완제품 안전 재고 검색 -->
+	<select id="searchProdSafety" resultType="map">
+		SELECT      pdlot.prod_cd AS "제품코드",
+               		pd.prod_nm AS "제품명",
+                    pd.prod_sfqty AS "안전수량",
+                    pd.prod_unit AS "단위",
+	                CASE WHEN sum(pdc.prod_qty) is null THEN 0
+                    ELSE sum(pdc.prod_qty)
+	                END  AS "완제품수량"
+           
+      FROM      	prod pd, prod_lot pdlot, prod_curqty pdc
+      WHERE      	pd.prod_cd = pdlot.prod_cd
+      AND        	pdlot.prod_lot = pdc.prod_lot(+)
+		<if test="pcd != ''">
+		AND			pdlot.prod_cd LIKE #{pcd}
+		</if>
+		<if test="pcd == '' and pnm != ''">
+		AND		    pd.prod_nm LIKE #{pnm}
+		</if>
+		GROUP BY    pdlot.prod_cd,
+                    pd.prod_nm,
+                    pd.prod_sfqty,
+                    pd.prod_unit
+      ORDER BY      1
 	</select>
 	
 	<!-- 입고 조회 -->

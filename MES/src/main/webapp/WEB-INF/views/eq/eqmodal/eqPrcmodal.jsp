@@ -87,25 +87,27 @@
 		let prcCd = grid2.getValue(e.rowKey, '공정코드');
 		let prcNm = grid2.getValue(e.rowKey , '공정명');
 		let eqCd = grid.getValue(e.rowKey, '설비코드');
-		//console.log(prcCd);
+		console.log(prcCd);
 		
-		if(prcCd != null){
-			 $('#myModal').modal('hide'); 
+		
+
 			
-			 console.log(grid);
+			 //console.log(grid);
 			
 
 			$.ajax({
-				   url  : "eqPrcSelctAjax",
+				   url  : "eqPrcSelectAjax",
 				   data : {
-					   eqCd : eqCd
+					   prcCd : prcCd
 					   },
 				   dataType : "JSON",
 				   contentType : "application/json; charset = UTF-8;",
 				   success : function(data){
-					  	    console.log(data);  
+						 $('#myModal').modal('hide'); 
+					  	    console.log(data[0]);  
 				   			// 지역변수로 선언되어 있어서 모달내부에서 부모페이지의 div를 인식을 못하고 setValue 함수를 사용하지 못하였습니다
-				   			// 부모페이지(eqMngPage)의 grid 변수를 전역변수로 선언하여 해당 페이지에 잔존 및 인식하도록 수정 완료 
+				   			// 부모페이지(eqMngPage)의 grid 변수를 전역변수로 선언하여 해당 페이지에 잔존 및 인식하도록 수정 완료
+				   			//console.log(data[0].공정코드);
 				   			grid.setValue(rowKey , '공정코드' , data[0].공정코드);
 				   			grid.setValue(rowKey , '공정명' , data[0].공정명); 
 				   			}
@@ -114,7 +116,7 @@
 			}); // END OF AJAX
 
 			
-		} // END OF IF SYNTAX
+	
 	
 		
 	}); // END OF DUBBLE CLICK EVENT

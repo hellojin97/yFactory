@@ -5,16 +5,16 @@
 	<!-- 모달창에 설비 코드와 설비명 출력 쿼리 -->
 	<select id="searchEq" resultType="map">
 
-		SELECT EQ_CD "설비코드" , EQ_NM "설비명"
-		FROM EQ "eq"
+		SELECT EQ_CD "설비코드" , EQ_MDNM "설비명"
+		FROM EQ 
 
 	</select>
 
 
 	<!-- 모달창에서 클릭한 데이터(설비코드)를 기반으로 코드와 이름을 가지고 오는 쿼리 -->
 	<select id="selectEq" resultType="map">
-		SELECT EQ_CD "설비코드" , EQ_NM "설비명"
-		FROM EQ "eq"
+		SELECT EQ_CD "설비코드" , EQ_MDNM "설비명"
+		FROM EQ 
 		WHERE EQ_CD = #{eqCd}
 
 	</select>
@@ -32,7 +32,7 @@
 	<insert id="insertEq" statementType="CALLABLE"
 		parameterType="com.yfactory.mes.eq.vo.EqVO">
 		{CALL eq_insert(#{vdr_code},#{eq_nm}, #{eq_min}, #{eq_max}, #{eq_chkcyc},
-		#{eq_mdno},#{eq_purdt}, #{eq_actst},#{eq_uph}, #{eq_inster}, #{uuid},
+		#{eq_mdno},#{eq_purdt}, REPLACE(#{eq_actst}, ',' ,''),#{eq_uph}, #{eq_inster}, #{uuid},
 		#{eq_mdnm}, #{img_nm}, #{img_path})
 		}
 	</insert>
@@ -40,19 +40,22 @@
 	
 	<!-- 설비관리페이지 전체 리스트 -->
 	<select id="searchEqMngList" resultType="map">
-		SELECT e.eq_cd "설비코드" , e.eq_nm "설비명" , prc.proc_cd "공정코드" , prc.proc_nm
-		"공정명", e.eq_min "최저온도" , e.eq_max "최고온도"
-		,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자", CASE WHEN e.eq_actst like 'USE01'
-		THEN 'Y' ELSE 'N' END "사용여부"
-		FROM eq e, process prc
-		WHERE e.eq_cd = prc.eq_cd
+	SELECT e.eq_cd "설비코드" , e.eq_mdnm "설비명" , prc.proc_cd "공정코드" , 
+				prc.proc_nm	"공정명", e.eq_min "최저온도" , e.eq_max "최고온도"
+      			,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자",
+      			CASE WHEN e.eq_actst like 'USE01'
+				THEN 'Y' ELSE 'N' END "사용여부"
+      FROM eq e, process prc
+      WHERE e.eq_cd = prc.eq_cd(+)
+      ORDER BY 1
 	</select>
 
 
-	<!-- 공정코드 공정명 전체조회 -->
+	<!-- 공정코드 공정명 설비가 지정되지 않은 리스트 조회 -->
 	<select id="searchPrcList" resultType="map">
 		SELECT proc_cd "공정코드" , proc_nm "공정명"
 		FROM process
+		WHERE EQ_CD IS NULL
 	</select>
 	
 	
@@ -60,7 +63,7 @@
 	<select id="selectEqPrc" resultType="map">
 		SELECT proc_cd "공정코드" ,proc_nm "공정명"
 		FROM process
-		WHERE eq_cd = #{eqCd}
+		WHERE proc_cd = #{prcCd}
 	</select>
 
 
@@ -120,7 +123,7 @@
 	<select id="getEqInList" resultType="map">
 		select	    ei.eq_actcd AS "설비가동코드",
 	                ei.eq_cd AS "설비코드",
-					e.eq_nm AS "설비명",
+					e.eq_mdnm AS "설비명",
 					TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
 					TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
 					cm.cd_nm AS "사유"
@@ -266,8 +269,11 @@ WHERE EQ_CD IN
 </delete>
 
 
-<update id="eqMngUpdateAjax" parameterType="com.yfactory.mes.eq.vo.EqVO" statementType="CALLABLE" >
-{CALL eq_update()}
+<update id="eqMngUpdateAjax" parameterType="map" statementType="CALLABLE" >
+
+{CALL eq_update(#{eq_cd},#{proc_cd},#{proc_nm},#{eq_min},#{eq_max},#{eq_purdt},
+						  #{eq_actst}
+						  )}
 </update>
 
 

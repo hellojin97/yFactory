@@ -9,11 +9,11 @@
 <div class="blank" >a</div>
 <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-	
+   
     <ul class="sidebar-nav" id="sidebar-nav">
 
 
-	<!-- ================ 공통코드관리 ================ -->
+   <!-- ================ 공통코드관리 ================ -->
       <li class="nav-item">
       
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -27,11 +27,11 @@
             </a>
           </li>
         </ul>
-	
+   
       </li><!-- End Components Nav -->
 
 
-	 <!-- ================ 영업관리 ================ -->
+    <!-- ================ 영업관리 ================ -->
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>영업관리</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -52,33 +52,33 @@
           </li>                  
           
           <li>
-          	<a href="prodLotForm">
-          	  <i class="bi bi-circle"></i><span>완제품 LOT 조회</span>
-          	</a>
+             <a href="prodLotForm">
+               <i class="bi bi-circle"></i><span>완제품 LOT 조회</span>
+             </a>
           </li>
           
           <li>
-          	<a href="prodSafety">
-          	  <i class="bi bi-circle"></i><span>완제품 안전재고 관리</span>
-          	</a>
+             <a href="prodSafety">
+               <i class="bi bi-circle"></i><span>완제품 안전재고 관리</span>
+             </a>
           </li>
           
           <li>
-          	<a href="prodWrnote">
-          	  <i class="bi bi-circle"></i><span>입/출고 조회</span>
-          	</a>
+             <a href="prodWrnote">
+               <i class="bi bi-circle"></i><span>입/출고 조회</span>
+             </a>
           </li>
           
           <li>
-          	<a href="prodRelease">
-          	  <i class="bi bi-circle"></i><span>출고 관리</span>
-          	</a>
+             <a href="prodRelease">
+               <i class="bi bi-circle"></i><span>출고 관리</span>
+             </a>
           </li>
         </ul>
         
       </li><!-- End Forms Nav -->
 
-	 <!-- ================ 자재관리 ================ -->	
+    <!-- ================ 자재관리 ================ -->   
       <li class="nav-item">
       
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -131,9 +131,9 @@
           
         </ul>
       </li>
-      <!-- ================ END자재관리 ================ -->	
+      <!-- ================ END자재관리 ================ -->   
 
-	 <!-- ================ 생산관리 ================ -->	
+    <!-- ================ 생산관리 ================ -->   
       <li class="nav-item">
       
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -175,7 +175,7 @@
         </ul>
       </li>
       
-      <!-- ================ 품질관리 ================ -->	
+      <!-- ================ 품질관리 ================ -->   
       <li class="nav-item">
       
         <a class="nav-link collapsed" data-bs-target="#rows-nav" data-bs-toggle="collapse" href="#">
@@ -207,7 +207,7 @@
         </ul>
       </li>
       
-      <!-- ================ 설비관리 ================ -->	
+      <!-- ================ 설비관리 ================ -->   
       <li class="nav-item">
       
         <a class="nav-link collapsed" data-bs-target="#labels-nav" data-bs-toggle="collapse" href="#">
@@ -248,7 +248,7 @@
       
       
       
-	 <!-- ================ 토스트 UI  ================ -->
+    <!-- ================ 토스트 UI  ================ -->
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Toast UI 참조</span><i class="bi bi-chevron-down ms-auto"></i>

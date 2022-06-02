@@ -1,6 +1,7 @@
 package com.yfactory.mes.eq.serviceImpl;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,9 +51,9 @@ public class EquipServiceImpl implements EquipService{
 	}
 
 	@Override
-	public List<Map> selectEqPrc(String eqCd) {
+	public List<Map> selectEqPrc(String prcCd) {
 		
-		return mapper.selectEqPrc(eqCd);
+		return mapper.selectEqPrc(prcCd);
 	}
 
 	@Override
@@ -134,8 +135,10 @@ public class EquipServiceImpl implements EquipService{
 
 	@Override
 	public int eqMngUpdateAjax(List<HashMap<String, Object>> list) {
-		
-		return mapper.eqMngUpdateAjax(list);
+		for (HashMap<String, Object> map : list) {
+			mapper.eqMngUpdateAjax(map);
+		}
+		return 1;
 	}
 	public int updateIna(Map<String, String> result) {
 		return mapper.updateIna(result);

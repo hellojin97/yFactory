@@ -32,6 +32,8 @@ public interface ProcMapper {
 	List<Map> PrdSelectOne(String prodCd);
 
 	List<Map> ProcPlanAll(); // 생산계획전체조회
+	
+	int prdInsInsert(Map<String, Object> prdIns);
 
 	List<Map> NoPlanSelect(String state); //생산미지시계획
 	

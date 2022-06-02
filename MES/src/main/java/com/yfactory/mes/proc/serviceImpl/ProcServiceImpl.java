@@ -71,6 +71,11 @@ public class ProcServiceImpl implements ProcService{
 		// TODO Auto-generated method stub
 		return map.ProcPlanAll();
 	}
+	
+	@Override
+	public int prdInsInsert(Map<String, Object> prdIns) {
+		return map.prdInsInsert(prdIns);
+	}
 
 
 

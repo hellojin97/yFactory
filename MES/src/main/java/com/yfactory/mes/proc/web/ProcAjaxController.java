@@ -88,6 +88,14 @@ public class ProcAjaxController {
 		
 		return procService.ProcPlanInsert(procPI);
 	}
+	
+	// 생산지시등록
+	@PostMapping("/prdInsInsert")
+	public int prdInsInsert(@RequestParam Map<String, Object> prdIns) {
+		System.out.println(prdIns);
+		return procService.prdInsInsert(prdIns);
+	}
+	
 	//procDtPlanSelect
 	//@GetMapping("/prdSelectOne")
 	// 생산미지시계획

@@ -166,6 +166,7 @@ AND  			pl.pp_prog = 'PLAN01'
 		<select id="procDtPlanSelect" resultType="map">
         SELECT
 	    dtl.pp_cd "생산계획코드",
+	    dtl.pd_cd "생산계획상세코드",
         pl.pp_nm "계획명",
         dtl.pd_cd "생산계획상세코드",
 		pd.prod_nm "완제품명",
@@ -323,7 +324,11 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	<insert id="procCancelPl" statementType="CALLABLE" parameterType="map">
 		{CALL PROC_CANCEL_PL(#{생산계획코드})}
 	</insert>
-	 
+	
+	<insert id="prdInsInsert" statementType="CALLABLE" parameterType="map">
+		{CALL INSERT_PRD_INS(#{ppCd}, #{pdCd}, #{insQty}, #{dtlDt}, #{rank}, #{note})}
+	</insert>
+	
 	<select id="procResultList" resultType="map">
 		SELECT PID.INS_DTLCD AS "생산지시코드",
 	           PRC.PROC_PRCD AS "진행공정코드",

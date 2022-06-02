@@ -15,122 +15,121 @@
 			<hr style="border: solid 1px gray;">
 		</div>
 		<div id="chart-area" align="center"></div>
+		
 		<hr style="border: solid 2px gray;" />
-		<div id="chart-area2"></div>
+		
+		<div id="chart-UphArea" align="center">
+		 <jsp:include page="uph.jsp" flush="false"/>
+		</div>
 	</div>
 	
-	<script>	
+<script>	
 	$(function(){
-	  const el = document.getElementById('chart-area');
-      const data = {
-        categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-        series: [
-          {
-            name: 'EQ220525001', // 반죽기
-            data: [10, 100, 50, 40, 70, 55, 33, 70, 90, 110],
-          },
-          {
-            name: 'EQ220525002', // 성형기
-            data: [60, 40, 10, 33, 70, 90, 100, 17, 40, 80],
-          },
-          {
-            name: 'EQ220525003', // 가열기
-            data: [10, 100, 50, 40, 70, 55, 33, 70, 90, 110],
-          },
-          
-          {
-           name: 'EQ220525005', // 초코프레스
-           data: [30, 60, 10, 99, 100, 60, 99, 13, 60, 80],
-          }, 
-          {
-            name: 'EQ220525006', // 냉각기
-            data: [40, 40, 30, 99, 70, 60, 100, 17, 40, 80],
-          },  
-        ],
-      };
-      const options = {
-        chart: { title: '실시간 설비 온도', width: 1000, height: 300 },
-        xAxis: {
-          title: '온도',
-        },
-        yAxis: {
-          title: '시간',
-        },
-        tooltip: {
-          formatter: (value) => `${value}°C`,
-        },
-        legend: {
-          align: 'bottom',
-        },
-        series: {
-          shift: true,
-        },
-        
-      };
+	    function getTime(){ // 현재시간 데이터 가져오기
+	    	  var now = new Date();
+	    	  var hours = now.getHours();
+	    	  var minutes = now.getMinutes();
+	    	  var seconds = now.getSeconds();
+	    	  
+	    	  return hours+':'+minutes+':'+seconds;
+	    	  
+	      };
+		
+	    /*   function firstTemp(){  	
+	    	  return setInterval( (Math.floor(Math.random() * (110-30) )+30) , 2000);	};
+	      function secTemp(){
+	    	  return setInterval( (Math.floor( Math.random() * (110-40) )+40) , 2000); };
+	    	   */
+		const el = document.getElementById('chart-area');
+	      const data = {
+	        categories: ['0','0','0','0','0','0','0','0','0','0'],
+	        series: [
+	          {
+	            name: 'A',
+	          	data: [0,0,0,0,0,0,0,0,0,0],
+	          
+	          },
+	          {
+	            name: 'B',
+	        	data: [0,0,0,0,0,0,0,0,0,0],
+	          
+	           
+	          },
+	        
+	        ],
+	      };
+	      const options = {
+	        chart: { title: 'RealTime Temperature', width: 1000, height: 300 },
+	        xAxis: {
+	          title: 'CurrentTime',
+	       
+	        },
+	        yAxis: {
+	          title: 'Temperature',
+	          scale: {
+	              min: 88,
+	              max: 98,
+	              stepSize: 3,
+	            },
+	        },
+	        
+	        legend: {
+	          align: 'top',
+	        },
+	        series: { 
+	        	shift: true,
+	        	
+	        	spline:true,
+	        	
+	        },
+	  
+	      };
 
-      const chart = toastui.Chart.lineChart({ el, data, options });
+	      
+	  
+	      
+	      const chart = toastui.Chart.lineChart({ el, data, options });
 
-      let index = 11;
-      const intervalId = setInterval(() => {
-        const random = Math.round(Math.random() * 100);
-        const random2 = Math.round(Math.random() * 100);
-        chart.addData([random, random2], index.toString());
-        index += 1;
-        if (index === 50) {
-          clearInterval(intervalId);
-        }
-      }, 1500);
-      
-      
-      
-      
-      // ------------------------------------------------
-		/* const el2 = document.getElementById('chart-area2');
-      const data2 = {
-        categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-        series: [
-          {
-            name: 'C',
-            data: [10, 100, 50, 40, 70, 55, 33, 70, 90, 110],
-          },
-          {
-            name: 'D',
-            data: [60, 40, 10, 33, 70, 90, 100, 17, 40, 80],
-          },
-        ],
-      };
-      const options2 = {
-        chart: { title: '실시간 설비 생산량', width: 1000, height: 500 },
-        xAxis: {
-          title: 'Month',
-        },
-        yAxis: {
-          title: 'Amount',
-        },
-        tooltip: {
-          formatter: (value) => `${value}°C`,
-        },
-        legend: {
-          align: 'bottom',
-        },
-        series: {
-          shift: true,
-        },
-      };
+	      let index = 1;
+	     const intervalId = setInterval(() => {
+	        const firstData = Math.floor(Math.random() * 100 );
+	        
+	        if(firstData == 0){
+	        	firstData + 80;
+	        }
+	        console.log("firstData:"+firstData);
+	        //const secData = Math.round(Math.random() * 100);
+	        const secData = Math.floor(Math.random() * 100);
+	        if(secData == 0){
+	        	secData + 90;
+	        }
+	        console.log("secData:"+secData);
+	       
+	        chart.addData([firstData, secData], getTime()); // 각 데이터의 Y값(온도)을 업데이트 , 하단X값의 업데이트 되는 항목들
+	       
+	        index += 1;
+	       
+	        if (index === 50) {
+	          clearInterval(intervalId);
+	        }
+	      }, 1500); 
+	     
+	     
+	     //---------------▲실시간 설비 온도▲----------------//
+	     
+	   
 
-      const chart2 = toastui.Chart.lineChart({ el2, data2, options2 });
-
-      let index2 = 11;
-      const intervalId2 = setInterval(() => {
-        const random3 = Math.round(Math.random() * 100);
-        const random4 = Math.round(Math.random() * 100);
-        chart2.addData([random3, random4], index2.toString());
-        index2 += 1;
-        if (index2 === 30) {
-          clearInterval(intervalId2);
-        }
-      }, 1500);
-       */
+   //    $.ajax({
+    //	  url : "get",
+    	//  method : "POST",
+    	  //data : ,
+    	  // dataType : "JSON",
+    	  //contentType : "application/json; charset=utf-8"
+      //}).done(function(rs){
+    	  
+      //});
+  
+      
 	});
 	</script>
 	

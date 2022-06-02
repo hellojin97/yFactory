@@ -49,22 +49,22 @@ public interface EquipMapper {
 
 	List<Map> getEqChkList(); // 설비 점검 전체 리스트
 
-	List<Map> selectEqPrc(String eqCd); // 설비코드기준 공정코드 + 공정명 조회
+	List<Map> selectEqPrc(String prcCd); // 공정코드 + 공정명 조회
 
-	List<Map> getEqChkSelectList(@RequestBody HashMap<String, Object> list); // 설비구분명 + 점검시작일 + 차기점검일 기준 조회
+	List<Map> getEqChkSelectList( HashMap<String, Object> list); // 설비구분명 + 점검시작일 + 차기점검일 기준 조회
 
 	
 	List<Map> getEqDailyChkCount(@Param("chkdt1")String chkdt1 ,@Param("chkdt2")String chkdt2); // 일일 점검 건수 리스트
 	
   
 	//<Map> eqChkResultAjax(@RequestBody List<HashMap<String, Object>>list); 	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로
-	int eqChkResultAjax(@RequestBody List<HashMap<String, Object>>list); 	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로
+	int eqChkResultAjax( List<HashMap<String, Object>>list); 	// 점검관리 페이지 - 등록 버튼 클릭시 그리드에 남아있는 데이터들을 DB로
 	
-	List<Map> dailyChkListAjax(@RequestBody List<HashMap<String, Object>> list); // 일점검건수 - 날짜를 기즌올 해달날짜 점검 데이터 조회 > 날짜가 여러개
+	List<Map> dailyChkListAjax( List<HashMap<String, Object>> list); // 일점검건수 - 날짜를 기즌올 해달날짜 점검 데이터 조회 > 날짜가 여러개
 	
-	int eqChkDelAjax(@RequestBody List<HashMap<String, Object>>list); // 점검관리 메인 페이지 항목 데이터 삭제 기능
+	int eqChkDelAjax( List<HashMap<String, Object>>list); // 점검관리 메인 페이지 항목 데이터 삭제 기능
 	
-	int eqMngUpdateAjax(@RequestBody List<HashMap<String, Object>>list); // 설비관리 페이지 설비수정 버튼 기능부
+	int eqMngUpdateAjax( HashMap<String, Object>list); // 설비관리 페이지 설비수정 버튼 기능부
 	
 	// -----------------------------------------------------------
 	

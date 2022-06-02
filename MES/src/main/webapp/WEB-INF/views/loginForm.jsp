@@ -11,6 +11,7 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <!-- Favicons -->
   <link href="${pageContext.request.contextPath}/assets/img/favicon.png" rel="icon">
   <link href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -54,34 +55,34 @@
               <div class="card mb-3">
 
                 <div class="card-body">
-				<div class="">
-                    <h5 class="loginTitle">YAFS</h5>
+				<div style="text-align: center;">
+                    <a href="home.do"><span class="loginTitle">YAFS</span>
+                    </a>
                     <p class="loginSubTitle">Yedam Automize Factory System</p>
                   </div>
-                  
-                  <form class="row g-3 needs-validation" novalidate>
-
+                  <form action="userLogin" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">이메일</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <input type="text" name="emp_email" class="form-control" id="id" required>
                         <div class="invalid-feedback">이메일을 입력해주세요.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">비밀번호</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <input type="password" name="pw" class="form-control" id="pw" required>
                       <div class="invalid-feedback">비밀번호를 입력해주세요!</div>
                     </div>
 
                     
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit" style="background-color:#ff8000; border-color:#ff8000;">로그인</button>
+                      <button id="loginBtn" class="btn btn-primary w-100" type="submit" style="background-color:#ff8000; border-color:#ff8000;">로그인</button>
                     </div>                    
-                  </form>
+                  
 
+				</form>            
                 </div>
               </div>
 
@@ -110,7 +111,14 @@
 
   <!-- Template Main JS File -->
   <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<script>
+if('${message}' != ''){
+	alert('${message}');
+	location.href ='loginForm.do';
+	
+}
 
+</script>
 </body>
 
 </html>

@@ -172,9 +172,9 @@ public class ProcServiceImpl implements ProcService{
 
 	
 	@Override
-	public List<Map> ProcLogic(HashMap<String, Object> list) {
+	public int ProcStartLogic(HashMap<String, Object> list) {
 		
-		return map.ProcLogic(list);
+		return map.ProcStartLogic(list);
 	}
 
 
@@ -226,6 +226,18 @@ public class ProcServiceImpl implements ProcService{
 	public List<Map> ProcLineSelect(Map<String, String> prodNm) {
 		// TODO Auto-generated method stub
 		return map.ProcLineSelect(prodNm);
+	}
+
+
+
+
+	@Override
+	public int ProcStopLogic(List<HashMap<String, Object>> list) {
+		// TODO Auto-generated method stub
+		for(HashMap<String, Object>mapper : list) {
+			map.ProcStopLogic(mapper);
+		}
+		return 1;
 	}
 
 

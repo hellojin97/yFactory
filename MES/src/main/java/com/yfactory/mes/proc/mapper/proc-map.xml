@@ -56,7 +56,7 @@ GROUP BY    	ord.ord_cd,
 		AND				 ordtl.prod_cd = pd.prod_cd
         AND 				 cd.comm_cd = ord.prog_cd
         AND				 pd.prod_cd = pl.prod_cd
-        AND				 pl.prod_lot = pc.prod_lot
+        AND				 pl.prod_lot = pc.prod_lot(+)
 		AND 			     ord.ord_cd = #{ordCd}
 	</select>
 	<!-- 제품 전체 조회 -->
@@ -109,7 +109,7 @@ GROUP BY    	ord.ord_cd,
 		dtl.pd_rank "작업우선순위"
 		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord
 		WHERE pl.pp_cd = dtl.pp_cd
-		AND pl.ord_cd = ord.ord_cd
+		AND pl.ord_cd = ord.ord_cd(+)
 		AND dtl.prod_cd = pd.prod_cd
 		AND dtl.pp_cd = #{ppCd}
 	</select>
@@ -128,7 +128,7 @@ GROUP BY    	ord.ord_cd,
         
 		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord 
 		WHERE pl.pp_cd = dtl.pp_cd
-		AND pl.ord_cd = ord.ord_cd
+		AND pl.ord_cd = ord.ord_cd(+)
 		AND dtl.prod_cd = pd.prod_cd
 		
 
@@ -282,12 +282,14 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	<select id="ProcOrderLineSelectOne" resultType="map">
 	SELECT DISTINCT 
      PRC.PROC_PRCD "진행공정코드",
+     PRC.LINE_TURN "순번",
 	 PRC.PROC_CD "공정코드",
 	 PC.PROC_NM "공정명", 
 	 PC.EQ_CD "설비코드", 
 	 EQ.EQ_NM "설비명",
 	 EMP.EMP_NM "담당자",
      PRC.PROC_QTY "투입량",
+     ST.PROC_PASSQTY "합격량",
      ERR.ERR_QTY "불량량",
      ST.PROC_QTY "생산량",
      TO_CHAR(PRC.PROC_STTM, 'HH24:MI:SS') "작업시작시간",
@@ -304,17 +306,22 @@ AND DTL.PRD_DTLCD = #{dtlCd}
     AND ST.PROC_PRCD = PRC.PROC_PRCD
     AND cm.comm_cd = ST.PROC_ST
 	AND LI.LINE_CD = #{line}
+	ORDER BY 1
 	</select>
-	<insert id="procLogic">
+	<update id="ProcStartLogic" statementType="CALLABLE" parameterType="map">
 
-	</insert>
+         UPDATE PROC_ST SET PROC_ST = 'PLAN01' 
+         WHERE LINE_TURN = #{lineTurn} AND PROC_PRCD = #{procPrcd} AND PROC_ST = 'PLAN00'
+         
+		
+	</update>
 
 	<insert id="ProcPlanInsert" statementType="CALLABLE" parameterType="map" >
 		{CALL PROC_PL_INSERT (#{ppNm}, #{ppDt}, #{ordCd}, #{prodCd},#{pdQty}, #{pdRank}, #{pdDt})}
 	</insert>
 	
 	<insert id="procCancelPl" statementType="CALLABLE" parameterType="map">
-		{CALL PROC_CANCEL_PL(#{주문코드})}
+		{CALL PROC_CANCEL_PL(#{생산계획코드})}
 	</insert>
 	 
 	<select id="procResultList" resultType="map">
@@ -367,4 +374,8 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 				proc_nm AS "공정명"
 		FROM	process
 	</select>
+	<insert id="ProcStopLogic" statementType="CALLABLE" parameterType="map">
+			{CALL PROC_STOP(#{eqCd})}
+		
+	</insert>
 </mapper>

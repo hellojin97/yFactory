@@ -5,16 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>재고조회</title>
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-
-
 </head>
+
 <body onkeyup="on_key_up()">
 
 	<h1>원자재 재고조회</h1>
@@ -75,14 +67,6 @@
 
 
 </body>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 	myBtn.addEventListener("click", function(){

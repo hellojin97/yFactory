@@ -99,35 +99,45 @@ public class MaterialAjaxController {
 			service.mtrlReqInsert(result);	
 			return "성공";
 		}
-		//입고조회
+		
+		
+		//입고 등록조회
 		@GetMapping("/mtrlInsertList")
 		public List<Map> mtrlInsertList(){
 			return service.insertList();
 		}
-		//입고 전체검색
+		//입고등록 전체검색
 		@GetMapping("/insertSearch")
 		public List<Map> insertSearch(String m1, String m2,String req1,String req2){
 			return service.insertSearch(m1, m2, req1, req2);
-		}
-		
+		}		
 		//입고예정 목록
 		@GetMapping("/expectList")
 		public List<Map>expectList(){
 			return service.expectList();
-		}
-		
+		}		
 		//입고예정 목록 버튼
 		@GetMapping("/selectMtrlReqList")
 		public List<Map> selectMtrlReqList(@RequestParam Map<String, String> result){
 			return service.selectMtrlReqList(result);	
-		}
-		
+		}		
 		// 입고등록
 		@PostMapping("/insertMtrlIn")
 		public int insertMtrlIn(@RequestParam Map<String, String> MtrlIn) {
 				System.out.println(MtrlIn);
 			return service.insertMtrlIn(MtrlIn);
 		}
+		//입고 전체조회
+		@GetMapping("/mtrlInList")
+		public List<Map>mtrlInList(){
+			return service.mtrlInList();
+		}
+		//입고 단건조회
+		@GetMapping("/mtrlInSearch")
+		public List<Map>mtrlInSearch(String m1, String m2,String req1,String req2){
+			return service.mtrlInSearch(m1, m2, req1, req2);
+		}
+		
 		
 		//안전재고 전체조회
 		@GetMapping("/mtrlSafetyList")

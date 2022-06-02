@@ -43,11 +43,18 @@ public interface MtrlMapper {
 	int mtrlUpdateSafe(Map<String, String> result);
 	
 	/*입고페이지*/
-	//입고조회
+	//입고등록조회
 	List<Map>insertList();
 	//입고예정버튼
 	List<Map>selectMtrlReqList(Map<String, String> result);
-	
+	//입고전체조회
+    List<Map>mtrlInList();
+    //입고단건조회
+    //입고단건조회
+    List<Map>mtrlInSearch(@Param("m1") String m1,
+			 @Param("m2") String m2,
+			 @Param("req1") String req1,
+			 @Param("req2") String req2);
 	
 	/*MODAL페이지*/
 	//자재명 전체조회

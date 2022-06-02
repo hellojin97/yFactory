@@ -4,14 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-</head>
+<title>원자재 안전재고 관리</title>
+
 <body>
 	<div style="padding-bottom: 15px; color:;">
 		<h1>원자재 안전재고 관리</h1>
@@ -67,18 +61,13 @@
 			<div id="mtrlSafetyTable"></div>
 			<div id="test"></div>
 		</div>
-
+		<div>
+			<button  class="btn1" id="excel">Excel</button>
+			<button class="btn1" id="mtrlcancel">발주서인쇄</button>
+		</div>
 	</div>
 
 </body>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
     //원자재명 모달
@@ -105,7 +94,6 @@
 			setTimeout(listColor, 10);
 		}
 	});
-
 	var mtrlSafetyGrid = new tui.Grid({
 		el : document.getElementById('mtrlSafetyTable'),
 		columns : [ {
@@ -209,7 +197,7 @@
 	           })
 	  }
   });
-  
+//테이블 클릭시 데이터값 호출  
   mtrlSafetyGrid.on("dblclick", function(e){
 	  var mnm = mtrlSafetyGrid.getValue(e.rowKey, "원자재명");
 	  var mcd = mtrlSafetyGrid.getValue(e.rowKey, "원자재코드");
@@ -219,6 +207,16 @@
 	  $("#safe").val(safe);
   });  
   
+//excel호출
+  $('#excel').on('click',function(){
+  	const options = {
+  			  includeHiddenColumns: true,
+  			  onlySelected: true,
+  			  fileName: '원자재안전재고조회',
+  			};
+  	mtrlSafetyGrid.export('xlsx', options);
+  })
+// 부족분 색상변경  
   function listColor(){
 	$("#mtrlSafetyTable").find(".tui-grid-body-area tbody tr").each(function(){
 		var data1 =parseInt($(this).find("[data-column-name = '현재고']").find("div").text());

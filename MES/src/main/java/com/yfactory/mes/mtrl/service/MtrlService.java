@@ -54,18 +54,25 @@ public interface MtrlService {
 	//입고등록
 	int insertMtrlIn(Map<String,String> mtrlIn);
 	
-	//입고조회
+	//입고등록조회
 	List<Map>insertList();
 	//입고예정버튼
 	List<Map>selectMtrlReqList(Map<String, String> result);
-	//입고 전체조회
+	//입고등록전체조회
 	List<Map>insertSearch(String m1,
 			 String m2,
 			 String req1,
 			 String req2);
-	
 	//입고예정목록
 	List<Map>expectList();
+	//입고전체조회
+    List<Map>mtrlInList();
+    //입고단건조회
+    List<Map>mtrlInSearch(String m1,
+			 String m2,
+			 String req1,
+			 String req2);
+	
 	
 	//원자제 조회
 	List<Map>mtrlStorageList();

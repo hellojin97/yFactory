@@ -158,6 +158,18 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.mtrlUpdateSafe(result);
 	}
 
+	@Override
+	public List<Map> mtrlInList() {
+		// TODO Auto-generated method stub
+		return map.mtrlInList();
+	}
+
+	@Override
+	public List<Map> mtrlInSearch(String m1, String m2, String req1, String req2) {
+		// TODO Auto-generated method stub
+		return map.mtrlInSearch(m1, m2, req1, req2);
+	}
+
 
 
 }

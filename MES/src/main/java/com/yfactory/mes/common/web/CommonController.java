@@ -29,14 +29,16 @@ public class CommonController {
 	      EmployeeVO loginUser = service.userLogin(empVO);
 	      System.out.println(loginUser);
 	      
-	      String result = "common/home";
+	      String result;
 	      
 	      if (loginUser != null) {
 	         session.setAttribute("loginUser", loginUser);
+	         result = "common/home";
 	         return result;
 	         //redirect:common/home
 	      } else {
 	    	 mo.addAttribute("message", "로그인을 실해하였습니다. 다시 시도하세요.");
+	    	 result = "loginForm";
 	    	 return result;
 	      }
 	     

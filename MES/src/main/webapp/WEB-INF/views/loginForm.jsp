@@ -55,8 +55,9 @@
               <div class="card mb-3">
 
                 <div class="card-body">
-				<div class="">
-                    <h5 class="loginTitle">YAFS</h5>
+				<div style="text-align: center;">
+                    <a href="home.do"><span class="loginTitle">YAFS</span>
+                    </a>
                     <p class="loginSubTitle">Yedam Automize Factory System</p>
                   </div>
                   <form action="userLogin" class="row g-3 needs-validation" novalidate>
@@ -111,7 +112,11 @@
   <!-- Template Main JS File -->
   <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <script>
-
+if('${message}' != ''){
+	alert('${message}');
+	location.href ='loginForm.do';
+	
+}
 
 </script>
 </body>

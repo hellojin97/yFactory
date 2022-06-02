@@ -109,18 +109,22 @@
 	
 	<!-- 완제품LOT조회 -->
 	<select id="selectProdLotList" resultType="map">
-		SELECT		pdlot.prod_lot AS "완제품LOT",
-					pdlot.prod_cd AS "제품코드",
-					pd.prod_nm AS "제품명",
-					pdc.prod_qty AS "완제품수량",
-        			TO_CHAR(pdlot.prod_fdt,'YYYY-MM-DD') AS "제조일자",
-        			TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한",
-        			pd.prod_sfqty AS "안전수량",
-        			pd.prod_unit AS "단위"
-		FROM		prod pd, prod_lot pdlot, prod_curqty pdc
-		WHERE		pd.prod_cd = pdlot.prod_cd
-		AND     	pdlot.prod_lot = pdc.prod_lot
-		ORDER BY	pdlot.prod_fdt DESC		
+	SELECT      	pdlot.prod_lot AS "완제품LOT",
+               		pdlot.prod_cd AS "제품코드",
+               		pd.prod_nm AS "제품명",
+               
+	                 TO_CHAR(pdlot.prod_fdt,'YYYY-MM-DD') AS "제조일자",
+	                 TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한",
+	                 pd.prod_sfqty AS "안전수량",
+	                 pd.prod_unit AS "단위",
+	                 case when pdc.prod_qty  is null then 0
+	                 else pdc.prod_qty
+	                 end as "완제품수량"
+                 
+      FROM      	prod pd, prod_lot pdlot, prod_curqty pdc
+      WHERE      	pd.prod_cd = pdlot.prod_cd
+      AND        	pdlot.prod_lot = pdc.prod_lot(+)
+      ORDER BY   	pdlot.prod_fdt DESC      
 	</select>
 	
 	<!-- 완제품LOT검색 -->

@@ -24,4 +24,7 @@ public interface CommonMapper {
 	
 	//로그인
 		EmployeeVO userLogin(EmployeeVO empVO);
+		
+	//부서명
+		String userDept(int num);
 }

@@ -50,4 +50,9 @@ public class CommonServiceImpl implements CommonService {
 	public EmployeeVO userLogin(EmployeeVO empVO) {
 		return map.userLogin(empVO);
 	}
+
+	@Override
+	public String userDept(int num) {
+		return map.userDept(num);
+	}
 }

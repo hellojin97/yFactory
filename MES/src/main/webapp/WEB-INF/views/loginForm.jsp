@@ -34,6 +34,7 @@
   <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
   
   <!-- END CSS -->
+  
 	
 	
    
@@ -60,7 +61,7 @@
                     </a>
                     <p class="loginSubTitle">Yedam Automize Factory System</p>
                   </div>
-                  <form action="userLogin" class="row g-3 needs-validation" novalidate>
+                  <form action="userLogin" method="post" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">이메일</label>
                       <div class="input-group has-validation">

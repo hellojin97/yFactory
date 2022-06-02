@@ -31,6 +31,8 @@ public class CommonController {
 	      
 	      if (loginUser != null) {
 	         session.setAttribute("loginUser", loginUser);
+	         int empNo = loginUser.getDept_no();
+	         session.setAttribute("userDept", service.userDept(empNo));
 	         result = "common/home";
 	         return result;
 	         //redirect:common/home

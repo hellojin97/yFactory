@@ -76,4 +76,11 @@
 	AND     pw like #{pw}
 </select>
 
+<!-- 부서명 -->
+<select id="userDept" resultType="String">
+	SELECT 	dept_nm
+	FROM	dept
+	WHERE   dept_no like #{num}
+</select>
+
 </mapper>

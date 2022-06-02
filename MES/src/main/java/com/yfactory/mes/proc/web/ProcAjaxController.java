@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yfactory.mes.proc.service.ProcService;
@@ -144,9 +143,9 @@ public class ProcAjaxController {
 	}
 	
 	// 생산 로직
-	@RequestMapping(value = "/procLogic", method = RequestMethod.POST)
-	public List<Map> ProcLogic(@RequestBody HashMap<String, Object> list) {
-		return procService.ProcLogic(list);
+	@RequestMapping(value = "/procStartLogic", method = RequestMethod.POST)
+	public int ProcStartLogic(@RequestBody HashMap<String, Object> list) {
+		return procService.ProcStartLogic(list);
 	}
 	
 	// 공정 실적 조회
@@ -174,5 +173,18 @@ public class ProcAjaxController {
 			System.out.println(Cancel);
 		return procService.procCancelPl(Cancel);
 	}
+	
+	@PostMapping("/procStopLogic")
+	public int ProcStopLogic(@RequestBody List<HashMap<String, Object>> list) {
+		System.out.println(list);
+		int result = procService.ProcStopLogic(list);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
 	
 }

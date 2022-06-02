@@ -142,7 +142,7 @@
 		  Swal.fire({
               icon: 'error',
               title: '저장이 취소되었습니다.',
-              text: '제품코드를 입력해주세요!',
+              text: '원자재명을 입력해주세요!',
 			});
 
 	  }else	{
@@ -166,7 +166,7 @@
   $("#safeSave").on("click", function(){	  
 	  var mtNminput = $("#mtNminput").val();
 	  var safe = $("#safe").val();	  
-	  if(safe == '' || pcd == ''){
+	  if(safe == '' || mtNminput == ''){
 		  Swal.fire({
               icon: 'error',
               title: '저장이 취소되었습니다.',
@@ -223,8 +223,6 @@
 	$("#mtrlSafetyTable").find(".tui-grid-body-area tbody tr").each(function(){
 		var data1 =parseInt($(this).find("[data-column-name = '현재고']").find("div").text());
 		var data2 =parseInt($(this).find("[data-column-name = '안전재고']").find("div").text());
-		console.log(data1);
-		console.log(data2);
 	    if(data1 < data2){
 	    	$(this).find("[data-column-name = '현재고']").css("background-color", "pink");
 	    } 

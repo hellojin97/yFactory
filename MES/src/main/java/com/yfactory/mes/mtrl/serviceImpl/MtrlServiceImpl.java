@@ -152,6 +152,12 @@ public class MtrlServiceImpl implements MtrlService {
 		return map.mtrlSafetySearch(m1);
 	}
 
+	@Override
+	public int mtrlUpdateSafe(Map<String, String> result) {
+		// TODO Auto-generated method stub
+		return map.mtrlUpdateSafe(result);
+	}
+
 
 
 }

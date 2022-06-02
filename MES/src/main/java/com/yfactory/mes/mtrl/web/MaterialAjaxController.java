@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -137,6 +138,13 @@ public class MaterialAjaxController {
 		@GetMapping("/mtrlSafetySearch")
 		public List<Map>mtrlSafetySearch(String m1){
 			return service.mtrlSafetySearch(m1);
+		}
+		
+		//안전재고 수정
+		@RequestMapping("/mtrlUpdateSafe")
+		public String mtrlUpdateSafe(@RequestParam Map<String, String> result) {
+			service.mtrlUpdateSafe(result);
+			return "";
 		}
 		
 		//원자재 재고조회

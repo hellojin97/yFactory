@@ -39,7 +39,10 @@ public interface MtrlMapper {
 	List<Map>mtrlSafetyList();
 	//안전재고 단건조회
 	List<Map>mtrlSafetySearch(@Param("m1") String m1);
+	//안전재고 수정
+	int mtrlUpdateSafe(Map<String, String> result);
 	
+	/*입고페이지*/
 	//입고조회
 	List<Map>insertList();
 	//입고예정버튼

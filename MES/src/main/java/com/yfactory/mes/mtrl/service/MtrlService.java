@@ -33,7 +33,8 @@ public interface MtrlService {
 	List<Map>mtrlSafetyList();
 	//안전재고 단건조회
 	List<Map>mtrlSafetySearch(String m1);
-	
+	//안전재고 수정
+	int mtrlUpdateSafe(Map<String, String> result);
 	/*MODAL페이지*/
 	//자재명 조회
 	List<Map>mtcdList();
@@ -71,4 +72,5 @@ public interface MtrlService {
 	//원자재 검색
 	List<Map>mtrlStorageSearch(String m1,
 							   String m2);
+	
 }

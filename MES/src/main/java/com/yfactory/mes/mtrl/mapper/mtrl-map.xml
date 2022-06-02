@@ -343,14 +343,20 @@
 		WHERE  m.mt_cd = lot.mt_cd
 		AND    lot.mt_lot = c.mt_lot
 		AND    m.mt_nm LIKE '%'||#{m1}||'%'
-	</select>   
+	</select>  
+	
+	<update id="mtrlUpdateSafe" parameterType="map">
+		UPDATE mt
+		SET    mt_sfqty = #{safe}
+		WHERE  mt_nm    = #{mtNm}
+	</update> 
 	
 <!-- 공통 페이지 -->   
    <!-- 자재 코드,이름 전체조회 -->
       <select id="mtcdList" resultType="map">
          SELECT mt_nm "mt_nm", 
                mt_cd "mt_cd"
-         FROM   mt
+         FROM   mt 
       </select>
    
    <!-- 자재명 단건조회 -->

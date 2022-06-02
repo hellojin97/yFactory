@@ -3,11 +3,9 @@ package com.yfactory.mes.sales.web;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -124,6 +122,18 @@ public class SalesAjaxController {
 	public List<Map> ordtlModalList(@RequestParam("key") String key) {
 		
 		return salesService.ordtlModalList(key);
+	}
+	
+	//완제품 안전재고 조회
+	@RequestMapping("/prodSafetyList")
+	public List<Map> prodSafetyList(){
+		return salesService.prodSafetyList();
+	}
+	
+	//완제품 안전재고 검색
+	@RequestMapping("/searchProdSafety")
+	public List<Map> searchProdSafety(@RequestParam Map<String, String> result){
+		return salesService.searchProdSafety(result);
 	}
 	
 	//완제품 안전재고 수정

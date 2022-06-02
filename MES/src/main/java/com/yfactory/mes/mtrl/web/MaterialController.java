@@ -27,11 +27,17 @@ public class MaterialController {
 		return "material/mtrlListForm";
 	}
 	
-	//입고관리,등록
+	//입고관리,등록폼
 	@RequestMapping("/mtrlInsertForm")
 	public String mtrlInsertForm() {
 		return "material/mtrlInsertForm";
 	}
+	//입고조회폼
+	@RequestMapping("/mtrlInsertListForm")
+	public String mtrlInsertListForm() {
+		return "material/mtrlInsertListForm";
+	}
+	
 	//LOT재고조회폼
 	@RequestMapping("/mtrlLotForm")
 	public String mtrlLotForm() {

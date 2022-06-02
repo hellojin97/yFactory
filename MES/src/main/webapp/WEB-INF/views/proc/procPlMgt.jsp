@@ -97,6 +97,10 @@ $('#inBtn').on('click', function(){
 			scrollX : false,
 			scrollY : false,
 			columns : [ {
+				header : '생산계획코드',
+				name : '생산계획코드'
+				
+			},{
 				header : '주문코드',
 				name : '주문코드',
 			}, {

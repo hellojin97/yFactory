@@ -121,10 +121,13 @@
             <span class="badge bg-success badge-number">3</span>
           </a><!-- End Messages Icon -->
 
+        </li><!-- End Messages Nav -->
+
 
           
           <c:if test="${not empty loginUser }">
         <li class="nav-item dropdown">
+
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">${loginUser.emp_nm }</span>
@@ -187,6 +190,7 @@
   </header><!-- End Header -->
      <div id="test"></div>
 </body>
+
 
 <script>
 chat.addEventListener("click", function(){

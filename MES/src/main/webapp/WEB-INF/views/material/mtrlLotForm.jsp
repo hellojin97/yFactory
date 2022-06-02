@@ -122,22 +122,34 @@
 		el : document.getElementById('mtrlLotorder'),
 		columns : [ {
 			header : '자제LOT번호',
-			name : 'mt_lot'
+			name : 'mt_lot',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '자재코드',
-			name : 'mt_cd'
+			name : 'mt_cd',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '자재명',
-			name : 'mt_nm'
+			name : 'mt_nm',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '업체명',
-			name : 'vdr_nm'
+			name : 'vdr_nm',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '수량',
-			name : 'mt_qty'
+			name : 'mt_qty',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '유통기한',
-			name : 'mt_exp'
+			name : 'mt_exp',
+		    sortable: true,
+		    sortingType: 'asc'
 		}
 
 		],

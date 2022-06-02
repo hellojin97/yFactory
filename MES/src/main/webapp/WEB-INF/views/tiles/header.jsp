@@ -6,18 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>메인</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
 </head>    
-    
-    
-    
-    
+  
 <body>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -193,19 +184,21 @@
 
           </ul><!-- End Messages Dropdown Items -->
 
+
         </li><!-- End Messages Nav -->
 
-        <li class="nav-item dropdown pe-3">
-
+          
+          <c:if test="${not empty loginUser }">
+        <li class="nav-item dropdown">
+         
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">${loginUser.emp_nm }</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+            <li class="dropdown-header">              
+              <span>${userDept}</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -242,7 +235,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="userLogOut">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -250,26 +243,15 @@
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
-
+      </c:if>
       </ul>
       
     </nav><!-- End Icons Navigation -->
-	  
+     
   </header><!-- End Header -->
-  	<div id="test"></div>
+     <div id="test"></div>
 </body>
 
-
-
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
-	
 <script>
 chat.addEventListener("click", function(){
 	$("#test").load("chatForm", function(){
@@ -284,7 +266,6 @@ chat.addEventListener("click", function(){
 if('${message}' != ''){
 	alert('${message}');
 	location.href ='home.do';
-	
 }
 </script>
-</html> 	
+</html>    

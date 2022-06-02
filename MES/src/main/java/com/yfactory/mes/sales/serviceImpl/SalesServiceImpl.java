@@ -111,4 +111,14 @@ public class SalesServiceImpl implements SalesService {
 		return map.updateBom(result);
 	}
 
+	@Override
+	public List<Map> prodSafetyList() {
+		return map.prodSafetyList();
+	}
+
+	@Override
+	public List<Map> searchProdSafety(Map<String, String> result) {
+		return map.searchProdSafety(result);
+	}
+
 }

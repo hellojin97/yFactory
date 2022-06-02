@@ -33,6 +33,8 @@ public interface ProcService {
 
 	List<Map> ProcPlanAll(); // 생산계획전체조회
 	
+	int prdInsInsert(Map<String, Object> prdIns);
+	
 	List<Map> NoPlanSelect(String state); //생산미지시계획
 	
 	List<Map> procDtPlanSelect(Map<String,String> ppCd); //상세생산계획

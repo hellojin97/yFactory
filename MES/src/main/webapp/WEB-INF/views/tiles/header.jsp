@@ -7,8 +7,6 @@
 <meta charset="UTF-8">
 <title>메인</title>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    
 </head>    
   
 <body>
@@ -125,10 +123,10 @@
 
         </li><!-- End Messages Nav -->
 
+
           
           <c:if test="${not empty loginUser }">
         <li class="nav-item dropdown">
-			
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">

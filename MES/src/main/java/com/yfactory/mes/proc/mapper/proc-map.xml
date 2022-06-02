@@ -375,7 +375,12 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 		FROM	process
 	</select>
 	<insert id="ProcStopLogic" statementType="CALLABLE" parameterType="map">
-			{CALL PROC_STOP(#{eqCd})}
+			{CALL PROC_STOP(#{eqCd},#{lineTurn},#{procPrcd})}
 		
 	</insert>
+	
+		<update id="ProcRestartLogic" statementType="CALLABLE" parameterType="map">
+			{CALL PROC_RESTART(#{eqCd},#{lineTurn},#{procPrcd})}
+		
+	</update>
 </mapper>

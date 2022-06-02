@@ -185,6 +185,17 @@ public class ProcAjaxController {
 			return 0;
 		}
 	}
+	@PostMapping("/procRestartLogic")
+	public int ProcRestartLogic(@RequestBody List<HashMap<String, Object>> list) {
+		
+		int result = procService.ProcRestartLogic(list);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 	
 	
 }

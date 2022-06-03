@@ -5,9 +5,12 @@
 	<!-- 모달창에 설비 코드와 설비명 출력 쿼리 -->
 	<select id="searchEq" resultType="map">
 
-		SELECT E.EQ_CD "구분코드" , COMM.CD_NM "구분명"
-		FROM EQ E , COMM_CODE COMM
+
+		SELECT DISTINCT E.EQ_NM "구분코드" , COMM.CD_NM "구분명"
+		FROM EQ E ,COMM_CODE COMM
 		WHERE E.EQ_NM = COMM.COMM_CD
+        ORDER BY 1
+
 
 	</select>
 

@@ -5,9 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>UPH PAGE</title>
+<style>
+
+
+</style>
+
+
 </head>
 <body>
-
+<div align="center">
+				<span>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR001" checked>
+					<label>LINE01</label>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR002">
+					<label>LINE02</label>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR003">
+					<label>LINE03</label>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR004">
+					<label>LINE04</label>
+				</span>
+		</div>
 
 
 <script>

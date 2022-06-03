@@ -142,8 +142,10 @@ button:hover {
 								<label for="inputText" class="col-form-label"
 									style="padding-right: 27px;">점검주기</label> <input type="number"
 									class="form-control" id="eq_chkcyc" name="eq_chkcyc"
-									style="width: 30px" min="3" max="7" placeholder="점검주기"
+									style="width: 30px" min="3" max="7" placeholder="일수기준"
 									data-name="점검주기">
+									 <label for="inputText" class="col-form-label"
+									style="padding-right: 27px; font-size:19px;">일</label>
 
 							</div>
 						</div>

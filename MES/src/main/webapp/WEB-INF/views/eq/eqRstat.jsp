@@ -38,7 +38,13 @@ font-weight : bold;
 input:checked + label {
   color: red;
 }
-
+button{
+	margin:25px;
+	padding:15px 20px;
+	background-color:#555555;
+	color:white;
+	border-radius: 8px;
+ }
 
 </style>
 
@@ -52,9 +58,11 @@ input:checked + label {
 			<h4>설비 실시간 온도</h4>
 			<hr style="border: solid 1px gray;">
 		</div>
-		
-		
-		
+		<div align="right">
+		<span>
+					<button type="button" id="refresh">새로고침</button>
+		</span>
+		</div>
 		<div id="chart-area" align="center"></div>
 		
 		<div align="center">
@@ -68,6 +76,7 @@ input:checked + label {
 					<input type="radio" name="chk_line" class="line-control" value="L-PPR004">
 					<label>LINE04</label>
 				</span>
+				
 		</div>
 		
 		<hr style="border: solid 2px gray;" />
@@ -156,8 +165,13 @@ var lineCd;
 	        },
 	  
 	      };
+	      
+	      $("#refresh").on("click" , function(){
+	    	  	location.reload();
+	      });
 		
 	      $(".line-control").on("click" , function(ev){
+	    	  
 		    	lineCd = $("input[name='chk_line']:checked").val();
 		    	console.log(lineCd);
 		    	//console.log(ev.target.previousSibling.previousSibling.innerText);

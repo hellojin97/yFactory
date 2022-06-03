@@ -6,19 +6,6 @@
 <meta charset="UTF-8">
 <title>발주관리</title>
 
-<style type="text/css">
-.clickB {     
-	color: black;
-    text-align: center;
-    
-    border: solid 1px #2c3e50;
-    margin: 3px;
-    line-height: 25px;
-    padding: 0px 15px 0px 15px;
-    border-radius: 5px 5px 0px 0px;
-		    }
-</style>
-
 </head>
 <body>
 	<div style="padding-bottom: 70px; ">
@@ -27,7 +14,7 @@
 	</div>
 
 	<div class="min2" >
-		<button type="button" class="clickB" id="btnMg">등록</button>
+		<button type="button" class="btn3" id="btnMg">등록</button>
 		<button type="button" class="btn2" id="btnIn">관리</button>
 	</div>
 	<div class="min1" >

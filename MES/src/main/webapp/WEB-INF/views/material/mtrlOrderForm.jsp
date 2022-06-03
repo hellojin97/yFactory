@@ -6,45 +6,37 @@
 <meta charset="UTF-8">
 <title>발주관리</title>
 
-<style type="text/css">
-.clickB {     
-	color: black;
-    text-align: center;
-    
-    border: solid 1px #2c3e50;
-    margin: 3px;
-    line-height: 25px;
-    padding: 0px 15px 0px 15px;
-    border-radius: 5px 5px 0px 0px;
-		    }
-</style>
-
 </head>
 <body>
 	<div style="padding-bottom: 70px; ">
-	<div class="mainTitle" style="padding-bottom:15px;">
-		<h1>발주 관리/등록</h1>
-	</div>
-
-	<div class="min2" >
-		<button  class="btn2" id="btnMg">등록</button>
-		<button class="clickB" id="btnIn">관리</button>
-	</div>
-	<div class="min1" >
-	<h4>미지시 생산계획조회</h4>
-	<div id="unorder" ></div>
-	<input type="hidden" id="ppCd">
-	
-	<h4>생산계획별 자재 재고</h4>
-	<div id="prodPlan"></div>
-	
-	<h4>발주요청서 등록</h4>
-	<div id="mtrlRequest"></div>
-	<div>
-		<button  class="btn1" id="mtrlsave">저장</button>
-		<button class="btn1" id="mtrlcancel">취소</button>
-	</div>
-	</div>
+		<div class="mainTitle" style="padding-bottom:15px;">
+			<h1>발주 관리/등록</h1>
+		</div>
+		<div class="min2" >
+			<button  class="btn2" id="btnMg">등록</button>
+			<button class="btn3" id="btnIn">관리</button>
+		</div>
+		<div class="min1" >
+		<div>
+			<h4>미지시 생산계획조회</h4>
+			<div id="unorder" style="padding-bottom: 4px;"></div>
+			<input type="hidden" id="ppCd">
+			<button type="button" class="btn1" id="select1">선택</button>
+		</div>
+		<div style="padding-top : 30px;">
+			<h4>생산계획별 자재 재고</h4>
+			<div id="prodPlan" style="padding-bottom: 4px;"></div>
+			<button  class="btn1" id="select2">선택</button>
+		</div>
+			<div style="padding-top : 30px;">
+				<h4>발주요청서 등록</h4>
+				<div id="mtrlRequest" style="padding-bottom: 4px;"></div>
+				<div>
+					<button  class="btn1" id="mtrlsave">저장</button>
+					<button class="btn1" id="mtrlcancel">취소</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 
@@ -83,6 +75,7 @@ $.ajax({
 
 var unorder = new tui.Grid({
     el: document.getElementById('unorder'),
+    bodyHeight:200,
     columns: [
       {
         header: '생산계획코드',
@@ -102,41 +95,42 @@ var unorder = new tui.Grid({
       }
       
     ],
-    rowHeaders: ['rowNum'],
+    rowHeaders : [ 'checkbox' ],
     pageOptions: {
       useClient: true,
-      perPage: 3
+      type:'scroll',
+      perPage: 5
+      
     }
   });
 //생산계획코드 불러오기
-unorder.on("dblclick",function(e) {
-//debugger
-   let ppCd1 = unorder.getValue(e.rowKey, 'PP_CD');
-   console.log(ppCd1);
+$("#select1").on("click",function(e) {
+   let ppcd= unorder.getCheckedRows();
+   for (var i = 0; i < ppcd.length; i++) {
+	   let ppCd = ppcd[i];
+   console.log(ppCd);
    $.ajax({
 		url: "mtrlPlan",
-		data : {ppCd : ppCd1},
+		data : {ppCd : ppcd[i].PP_CD},
 		method : "GET",
 		dataType : "JSON",
 		contentType : "application/json; charset=utf-8"
 	  	}).done(function(result){
-
 	  		for (var i = 0; i < result.length; i++) {
-				if(result[i].구분 != null){
-	  				
-					prodPlan.appendRow(result[i]);	
-				} 		
-			}
-	  		console.log(result)
+	  			 /* 원자재코드 */
+    		  prodPlan.appendRow(result[i]);
+    		  console.log(result);
+	  		}
 	  	 }).fail(function(result){
 	  	    console.log(result);
 	     });
    }
+}
 );
   //생산계획별 자재재고 토스트
   var prodPlan = new tui.Grid({
     el: document.getElementById('prodPlan'),
-    
+    bodyHeight:200,
     columns: [
       {
         header: '원자재코드',
@@ -162,10 +156,11 @@ unorder.on("dblclick",function(e) {
 
 
     ],
-    rowHeaders: ['rowNum'],
+    rowHeaders : [ 'checkbox' ],
     pageOptions: {
       useClient: true,
-      
+      type:'scroll',
+      perPage: 5
       
     }
   });
@@ -202,7 +197,7 @@ unorder.on("dblclick",function(e) {
   //발주서 요청 조회
   var mtrlRequest = new tui.Grid({
     el: document.getElementById('mtrlRequest'),
-    
+    bodyHeight:200,
     columns: [
       {
         header: '원자재코드',
@@ -240,7 +235,7 @@ unorder.on("dblclick",function(e) {
     rowHeaders : [ 'checkbox' ],
     pageOptions: {
       useClient: true,
-      
+      type:'scroll',
       perPage: 5
     }
   });

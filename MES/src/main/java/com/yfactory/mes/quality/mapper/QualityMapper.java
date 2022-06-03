@@ -24,6 +24,9 @@ public interface QualityMapper {
 	// 자재 불량내역 조회
 	List<Map> selectMtErrList();
 	
+	// 제품 불량내역 조회
+	List<Map> selectProdErrList();
+	
 	// 불량코드(modal) 검색
 	List<Map> searchErrName(@Param("errName") String key);
 	
@@ -32,7 +35,7 @@ public interface QualityMapper {
 	
 	// 입력
 	// 자재 품질검사요청
-	int reqMtQuality(@Param("pdt") String pdt, @Param("mcd") String mcd);
+	int reqMtQuality(@Param("pdt") String pdt);
 	
 	// 수정
 	// 자재품질검사

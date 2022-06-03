@@ -63,4 +63,24 @@
 
 </select>
 
+
+<insert id="userOrderInsert" parameterType="map" statementType="CALLABLE">
+	{CALL USER_ORDER_INSERT (#{venCd}, #{curDt}, #{reqDt}, #{prodCd}, #{prodNm}, #{qty})}
+</insert>
+
+<!-- 로그인 -->
+<select id="userLogin" parameterType="com.yfactory.mes.common.vo.EmployeeVO" resultType="com.yfactory.mes.common.vo.EmployeeVO">
+	SELECT 	*
+	FROM	employee
+	WHERE   emp_email like #{emp_email}
+	AND     pw like #{pw}
+</select>
+
+<!-- 부서명 -->
+<select id="userDept" resultType="String">
+	SELECT 	dept_nm
+	FROM	dept
+	WHERE   dept_no like #{num}
+</select>
+
 </mapper>

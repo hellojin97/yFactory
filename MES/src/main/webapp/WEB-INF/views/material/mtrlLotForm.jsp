@@ -5,15 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>LOT재고조회</title>
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body onkeyup="on_key_up()">
 
@@ -80,20 +71,15 @@
 				<div id="mtrlLotorder"></div>
 				<div id="test"></div>
 			</div>
-			<button type="button" id="grid">테스트</button>
+			<div>
+				<button  class="btn1" id="excel">Excel</button>
+				<button class="btn1" id="mtrlcancel">발주서인쇄</button>
+			</div>
 		</div>
 </form>
 	
 
 </body>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 	myBtn.addEventListener("click", function(){
@@ -136,22 +122,34 @@
 		el : document.getElementById('mtrlLotorder'),
 		columns : [ {
 			header : '자제LOT번호',
-			name : 'mt_lot'
+			name : 'mt_lot',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '자재코드',
-			name : 'mt_cd'
+			name : 'mt_cd',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '자재명',
-			name : 'mt_nm'
+			name : 'mt_nm',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '업체명',
-			name : 'vdr_nm'
+			name : 'vdr_nm',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '수량',
-			name : 'mt_qty'
+			name : 'mt_qty',
+		    sortable: true,
+		    sortingType: 'asc'
 		}, {
 			header : '유통기한',
-			name : 'mt_exp'
+			name : 'mt_exp',
+		    sortable: true,
+		    sortingType: 'asc'
 		}
 
 		],
@@ -232,14 +230,14 @@ $('#reset').on('click',function(){
 	     console.log(result);
 	   });
 })
-
-$('#grid').on('click',function(){
+//excel호출
+$('#excel').on('click',function(){
 	const options = {
 			  includeHiddenColumns: true,
 			  onlySelected: true,
-			  fileName: 'myExport',
+			  fileName: '원자재LOT관리',
 			};
-	listMtrlLot.export('xlsx');
+	listMtrlLot.export('xlsx', options);
 })
  </script>
 </html>

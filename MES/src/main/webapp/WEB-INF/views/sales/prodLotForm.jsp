@@ -5,14 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 		<div style="padding-bottom:15px; color: ;">
@@ -66,6 +59,9 @@
 			<!-- 테이블 -->
 			<div class="code-html contents" style="padding-bottom: 10px;">
 				<div id="prodLotorder"></div>
+			<div>
+				<button type="button" class="btn1" id="excel">Excel</button>
+			</div>	
 				<div id="test"></div>
 			</div>
 
@@ -74,14 +70,6 @@
 	
 
 </body>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 	myBtn.addEventListener("click", function(){
@@ -157,6 +145,16 @@
           
      });
   })
+  
+  //excel호출
+$('#excel').on('click',function(){
+	const options = {
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: '주문서조회',
+			};
+	listProdLot.export('xlsx', options);
+})
   
 
  </script>

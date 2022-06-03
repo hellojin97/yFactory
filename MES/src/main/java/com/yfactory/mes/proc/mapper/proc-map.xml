@@ -33,31 +33,42 @@ GROUP BY    	ord.ord_cd,
 	</select>
 	<!-- 주문서 단건조회 -->
 	<select id="OrderSelectOk" resultType="map">
-	    SELECT 			ord.ord_cd	"주문코드" ,
+	   SELECT 			            ordtl.ordtl_cd "주문상세코드" ,
 								TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
 								TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
-								ordtl.prod_cd "완제품코드" ,
+								ordtl.prod_cd "완제품코드",
 								ordtl.ord_qty "주문수량",
-						        pc.prod_qty "현재고",
 								vdr.vdr_nm "업체명",
 								pd.prod_nm "완제품명",
-								cd.cd_explan	"진행상황"
+								cd.cd_explan	"진행상황",
+                                sum(pc.prod_qty) "현재고"
 		FROM
-								ORDERS ord,
-								VENDOR vdr,
-								ORD_DTL ordtl,
-								PROD pd,
-								COMM_CODE cd,
-						        PROD_LOT pl,
-						        PROD_CURQTY pc
-						        
+		                        ORDERS ord,
+		                        VENDOR vdr,
+		                        ORD_DTL ordtl,
+		                        PROD pd,
+		                        COMM_CODE cd,
+		                        PROD_LOT pl,
+		                        PROD_CURQTY pc
+		
 		WHERE			 ord.vdr_cd = vdr.vdr_cd
 		AND				 ord.ord_cd = ordtl.ord_cd
 		AND				 ordtl.prod_cd = pd.prod_cd
-        AND 				 cd.comm_cd = ord.prog_cd
-        AND				 pd.prod_cd = pl.prod_cd
-        AND				 pl.prod_lot = pc.prod_lot
-		AND 			     ord.ord_cd = #{ordCd}
+		AND 			 cd.comm_cd = ord.prog_cd
+		AND				 pd.prod_cd = pl.prod_cd
+		AND				 pl.prod_lot = pc.prod_lot
+		AND 			 ord.ord_cd = #{ordCd}
+		
+		group by ordtl.ordtl_cd,
+		             ord.req_dt,
+		             ord.res_dt,
+		             ordtl.prod_cd,
+		             ordtl.ord_qty,
+		             vdr.vdr_nm ,
+		             pd.prod_nm,
+		             cd.cd_explan
+		HAVING sum(pc.prod_qty) &lt; ordtl.ord_qty
+				
 	</select>
 	<!-- 제품 전체 조회 -->
 	<select id="PrdSelect" resultType="map">
@@ -109,7 +120,7 @@ GROUP BY    	ord.ord_cd,
 		dtl.pd_rank "작업우선순위"
 		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord
 		WHERE pl.pp_cd = dtl.pp_cd
-		AND pl.ord_cd = ord.ord_cd
+		AND pl.ord_cd = ord.ord_cd(+)
 		AND dtl.prod_cd = pd.prod_cd
 		AND dtl.pp_cd = #{ppCd}
 	</select>
@@ -128,7 +139,7 @@ GROUP BY    	ord.ord_cd,
         
 		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord 
 		WHERE pl.pp_cd = dtl.pp_cd
-		AND pl.ord_cd = ord.ord_cd
+		AND pl.ord_cd = ord.ord_cd(+)
 		AND dtl.prod_cd = pd.prod_cd
 		
 
@@ -164,22 +175,21 @@ AND  			pl.pp_prog = 'PLAN01'
 		<!-- 상세 생산계획 조회  -->
 	</select>
 		<select id="procDtPlanSelect" resultType="map">
-        SELECT
-	    dtl.pp_cd "생산계획코드",
-        pl.pp_nm "계획명",
-        dtl.pd_cd "생산계획상세코드",
-		pd.prod_nm "완제품명",
-		pd.prod_cd "완제품코드",
-		dtl.pd_qty "계획량",
+SELECT
+       dtl.pp_cd "생산계획코드",
+       dtl.pd_cd "생산계획상세코드",
+      pd.prod_nm "완제품명",
+      dtl.pd_qty "계획량",
+
         dtl.pd_rank "작업우선순위",
-		dtl.pd_dt "생산일수"
+      dtl.pd_dt "생산일수"
         
 
-		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord 
-		WHERE pl.pp_cd = dtl.pp_cd
-		AND pl.ord_cd = ord.ord_cd
-		AND dtl.prod_cd = pd.prod_cd
-		AND dtl.pp_cd = #{ppCd}
+      FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd
+      WHERE pl.pp_cd = dtl.pp_cd
+      AND dtl.prod_cd = pd.prod_cd
+      AND dtl.pp_cd = #{ppCd}
+
 	</select>
 		<!-- 상품코드 라인코드 조회 -->
 		<select id="ProcLineSelect" resultType="map">
@@ -193,31 +203,27 @@ AND  			pl.pp_prog = 'PLAN01'
 		SELECT DISTINCT P.PROD_CD "제품코드",
         	   B.MT_CD "자재코드", 
         	   M.MT_NM "자재명",
-        	   B.CS_QTY "소모량",
-               DTL.PRD_DTLCD "생산지시상세코드"
-		FROM BOM B, MT M, PROD P, LINE LI, PRD_INSDTL DTL
+        	   B.CS_QTY "소모량"
+		FROM BOM B, MT M, PROD P, LINE LI
 		WHERE B.MT_CD = M.MT_CD
 		AND B.PROD_CD = P.PROD_CD
-        AND P.PROD_CD = DTL.PROD_CD
 		AND LI.PROD_CD = P.PROD_CD
 		AND LI.LINE_CD = #{line}
 	</select>
 	<!-- 필요자재(LOT) 조회-->
 	<select id="ProcNeedMtrlLOT" resultType="map">
-SELECT DTL.PRD_DTLCD "지시디테일코드",
-          LOT.MT_LOT "자재LOT번호", 
-          QTY.MT_QTY "현재고", 
-          M.MT_NM "자재명",
-          B.MT_CD "자재코드",
-          TO_CHAR(LOT.MT_EXP, 'YYYY-MM-DD') "유통기한"
-FROM PRD_INSDTL DTL, PROD P, BOM B, MT_LOT LOT, MT_CURQTY QTY, MT M 
-WHERE DTL.PROD_CD = P.PROD_CD
-AND P.PROD_CD = B.PROD_CD
-AND B.MT_CD = M.MT_CD
-AND M.MT_CD = LOT.MT_CD
-AND LOT.MT_LOT = QTY.MT_LOT
-AND M.MT_CD = #{mtNm}
-AND DTL.PRD_DTLCD = #{dtlCd}
+		SELECT DISTINCT 
+				  LOT.MT_LOT "자재LOT번호", 
+		          QTY.MT_QTY "현재고", 
+		          M.MT_NM "자재명",
+		          B.MT_CD "자재코드",
+		          TO_CHAR(LOT.MT_EXP, 'YYYY-MM-DD') "유통기한"
+		FROM PROD P, BOM B, MT_LOT LOT, MT_CURQTY QTY, MT M 
+		WHERE P.PROD_CD = B.PROD_CD
+		AND B.MT_CD = M.MT_CD
+		AND M.MT_CD = LOT.MT_CD
+		AND LOT.MT_LOT = QTY.MT_LOT
+		AND M.MT_CD = #{mtNm}
 
 	</select>
 	
@@ -282,12 +288,14 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	<select id="ProcOrderLineSelectOne" resultType="map">
 	SELECT DISTINCT 
      PRC.PROC_PRCD "진행공정코드",
+     PRC.LINE_TURN "순번",
 	 PRC.PROC_CD "공정코드",
 	 PC.PROC_NM "공정명", 
 	 PC.EQ_CD "설비코드", 
 	 EQ.EQ_NM "설비명",
 	 EMP.EMP_NM "담당자",
      PRC.PROC_QTY "투입량",
+     ST.PROC_PASSQTY "합격량",
      ERR.ERR_QTY "불량량",
      ST.PROC_QTY "생산량",
      TO_CHAR(PRC.PROC_STTM, 'HH24:MI:SS') "작업시작시간",
@@ -304,19 +312,28 @@ AND DTL.PRD_DTLCD = #{dtlCd}
     AND ST.PROC_PRCD = PRC.PROC_PRCD
     AND cm.comm_cd = ST.PROC_ST
 	AND LI.LINE_CD = #{line}
+	ORDER BY 1
 	</select>
-	<insert id="procLogic">
+	<update id="ProcStartLogic" statementType="CALLABLE" parameterType="map">
 
-	</insert>
+         UPDATE PROC_ST SET PROC_ST = 'PLAN01' 
+         WHERE LINE_TURN = #{lineTurn} AND PROC_PRCD = #{procPrcd} AND PROC_ST = 'PLAN00'
+         
+		
+	</update>
 
 	<insert id="ProcPlanInsert" statementType="CALLABLE" parameterType="map" >
 		{CALL PROC_PL_INSERT (#{ppNm}, #{ppDt}, #{ordCd}, #{prodCd},#{pdQty}, #{pdRank}, #{pdDt})}
 	</insert>
 	
 	<insert id="procCancelPl" statementType="CALLABLE" parameterType="map">
-		{CALL PROC_CANCEL_PL(#{주문코드})}
+		{CALL PROC_CANCEL_PL(#{생산계획코드})}
 	</insert>
-	 
+	
+	<insert id="prdInsInsert" statementType="CALLABLE" parameterType="map">
+		{CALL INSERT_PRD_INS(#{ppCd}, #{pdCd}, #{insQty}, #{dtlDt}, #{rank}, #{note})}
+	</insert>
+	
 	<select id="procResultList" resultType="map">
 		SELECT PID.INS_DTLCD AS "생산지시코드",
 	           PRC.PROC_PRCD AS "진행공정코드",
@@ -367,4 +384,54 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 				proc_nm AS "공정명"
 		FROM	process
 	</select>
+	<insert id="ProcStopLogic" statementType="CALLABLE" parameterType="map">
+			{CALL PROC_STOP(#{eqCd},#{lineTurn},#{procPrcd})}
+		
+	</insert>
+	
+		<update id="ProcRestartLogic" statementType="CALLABLE" parameterType="map">
+			{CALL PROC_RESTART(#{eqCd},#{lineTurn},#{procPrcd})}
+		
+	</update>
+	
+	<select id="searchProcResult" resultType="map">
+		SELECT PID.INS_DTLCD AS "생산지시코드",
+	           PRC.PROC_PRCD AS "진행공정코드",
+	           PROC.PROC_NM AS "공정명",
+	           PROC.EQ_CD AS "설비코드",
+	           E.EQ_NM AS "설비명",
+	           PRC.PROC_QTY AS "투입량",
+	           PS.PROC_QTY AS "생산량",
+	           PERR.ERR_QTY AS "불량량",
+	           PERR.ERR_CD AS "불량코드",
+	           ERR.ERR_DTL AS "불량상세",
+	           TO_CHAR(PRC.PROC_STTM, 'YYYY-MM-DD') AS "공정시작시간",
+	           TO_CHAR(PRC.PROC_EDTM, 'YYYY-MM-DD') AS "공정종료시간",
+	           EMP.EMP_NM AS "담당자",
+	           TO_CHAR(PID.INS_DTLDT, 'YYYY-MM-DD') AS "생산지시일자"
+           
+		FROM   PRD_INSDTL PID, PROC_PRC PRC, PROCESS PROC, 
+		       EQ E, PROC_ST PS, PROC_ERR PERR, ERR_CODE ERR, 
+		       EMPLOYEE EMP
+          
+		WHERE  PID.PRD_DTLCD = PRC.PRD_DTLCD
+		AND    PRC.PROC_CD = PROC.PROC_CD
+		AND    PRC.PROC_MGR = EMP.EMP_NO
+		AND    PROC.EQ_CD = E.EQ_CD
+		AND    PERR.LINE_TURN = PRC.LINE_TURN
+		AND    PERR.PROC_PRCD = PRC.PROC_PRCD
+		AND    PS.PROC_PRCD = PRC.PROC_PRCD
+		AND    PS.LINE_TURN = PRC.LINE_TURN
+		AND    PERR.ERR_CD = ERR.ERR_CD
+		<if test="prdCd != ''">
+		AND    PID.INS_DTLCD LIKE #{prdCd}
+		</if>
+		<if test="procNm != ''">
+        AND    PROC.PROC_NM LIKE #{procNm}
+        </if>
+        <if test="req1 != '' and req2 != ''">
+        AND    PID.INS_DTLDT BETWEEN TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
+        </if>
+	</select>
+	
 </mapper>

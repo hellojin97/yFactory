@@ -5,14 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <style type="text/css">
 .clickB {     
 	color: black;
@@ -89,20 +82,15 @@
 				<div id="prodWrnoteList"></div>
 				<div id="test"></div>
 			</div>
+			<div>
+				<button type="button" class="btn1" id="excel">Excel</button>
+			</div>
 
 		</div>
 
 	
 
 </body>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 	myBtn.addEventListener("click", function(){
@@ -152,6 +140,8 @@
 			perPage : 10
 		}
 	});
+	
+	var listWrnOut = null;
 
 	//입고 버튼
 	$('#inBtn').on('click', function(){
@@ -224,7 +214,7 @@
 			}
 		});
 		
-		var listWrnOut = new tui.Grid({
+		 listWrnOut = new tui.Grid({
 			el : document.getElementById('prodWrnoteList'),
 			columns : [ {
 				header : '완제품LOT',
@@ -309,7 +299,7 @@
 	 }
      if($("#search").hasClass("outSearch btn1")){
     	 $('#prodWrnoteList').empty();
-    	 var listWrnOut = new tui.Grid({
+    	 listWrnOut = new tui.Grid({
  			el : document.getElementById('prodWrnoteList'),
  			columns : [ {
  				header : '완제품LOT',
@@ -355,26 +345,25 @@
      }
   })
   
-  /* 출고 검색
-  $(".outSearch").on("click", function() {     
-     var pnm = $("#pnm").val();
-     var pcd = $("#pcd").val();
-     var fdt1 = $("#fdt1").val();
-     var fdt2 = $("#fdt2").val();     
-     $.ajax({
-        url : "searchWrnOut",
-        data : {
-              pnm : pnm,  
-              pcd : pcd,
-              fdt1 : fdt1,
-              fdt2 : fdt2
-        },
-        dataType: 'JSON',
-        contentType : "application/json; charset=utf-8"
-     }).done(function(result){         
-    	 listWrnOut.resetData(result);          
-     });
-  })*/
+  //excel호출
+$('#excel').on('click',function(){
+	if($("#search").hasClass("inSearch btn1")){
+	const options = {
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: '입고조회',
+			};
+	listWrnIn.export('xlsx', options);
+	}else if($("#search").hasClass("outSearch btn1")){
+		const options = {
+				  includeHiddenColumns: true,
+				  onlySelected: true,
+				  fileName: '출고조회',
+				};
+		listWrnOut.export('xlsx', options);
+	}
+})
+
   
 
  </script>

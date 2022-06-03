@@ -151,6 +151,11 @@ public class EquipServiceImpl implements EquipService{
 		return mapper.getEqTemp(lineCd);
 	}
 
+	@Override
+	public List<Map> eqModalSelect() {
+		return mapper.eqModalSelect();
+	}
+
 
 	
 	

@@ -97,6 +97,10 @@ $('#inBtn').on('click', function(){
 			scrollX : false,
 			scrollY : false,
 			columns : [ {
+				header : '생산계획코드',
+				name : '생산계획코드'
+				
+			},{
 				header : '주문코드',
 				name : '주문코드',
 			}, {
@@ -254,7 +258,7 @@ $("#outBtn").on("click", function(){
 		 				 result = {
 		 		 				 "ppNm" : ppNm,
 		 		 				 "ppDt" : ppDt,
-		 		 				 "ordCd" : prd[i].주문코드,
+		 		 				 "ordCd" : prd[i].주문상세코드,
 		 		 				 "prodCd" : prd[i].완제품코드,
 		 		 				 "pdQty" : prd[i].계획량,
 		 		 				 "pdRank" : prd[i].작업우선순위,

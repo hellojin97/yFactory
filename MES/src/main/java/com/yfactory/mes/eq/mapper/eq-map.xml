@@ -98,15 +98,18 @@
 
 
 	<select id="getEqActStatList" resultType="map">
-	SELECT			E.EQ_CD "설비코드" ,
-					E.EQ_MDNM "설비명" ,
+	SELECT			E.EQ_CD "설비코드",
+					CD.CD_NM "구분명",
+					E.EQ_MDNM "설비명",
 					PRC.PROC_CD "공정코드" ,
 					PRC.PROC_NM "공정명" ,
 					E.EQ_CHKCYC "점검주기",
 					CASE WHEN E.EQ_ACTST like 'USE01' THEN 'Y' ELSE 'N' END "사용여부"
 	FROM 			EQ E ,
-					PROCESS PRC
-	WHERE 			E.EQ_CD = PRC.EQ_CD	
+					PROCESS PRC,
+                    COMM_CODE CD
+	WHERE 			E.EQ_CD = PRC.EQ_CD
+    AND             E.EQ_NM = CD.COMM_CD
 	ORDER BY 1
 	
 	</select>
@@ -114,17 +117,18 @@
 	
 	<!-- 설비 사용여부 및 비가동 상태를 포함판 검색 -->
 	<select id="getEqInActList" resultType="map">
-	SELECT			E.EQ_CD "설비코드" ,
-						E.EQ_MDNM "설비명" ,
-						PRC.PROC_CD "공정코드" ,
-						PRC.PROC_NM "공정명" ,
-						E.EQ_CHKCYC "점검주기",
-						CASE WHEN E.EQ_ACTST like 'USE01' THEN 'Y' ELSE 'N' END "사용여부"
-						 
+	SELECT			E.EQ_CD "설비코드",
+					CD.CD_NM "구분명",
+					E.EQ_MDNM "설비명",
+					PRC.PROC_CD "공정코드" ,
+					PRC.PROC_NM "공정명" ,
+					E.EQ_CHKCYC "점검주기",
+					CASE WHEN E.EQ_ACTST like 'USE01' THEN 'Y' ELSE 'N' END "사용여부"
 	FROM 			EQ E ,
-					PROCESS PRC
-						
-	WHERE			E.EQ_CD = PRC.EQ_CD
+					PROCESS PRC,
+                    COMM_CODE CD
+	WHERE 			E.EQ_CD = PRC.EQ_CD
+    AND             E.EQ_NM = CD.COMM_CD
 	<if test="key == 1">
 	</if>
 	<if test="key == 2">
@@ -141,14 +145,19 @@
 	<select id="getEqInList" resultType="map">
 		select	    ei.eq_actcd AS "설비가동코드",
 	                ei.eq_cd AS "설비코드",
+	                cm2.cd_nm "구분명",
 					e.eq_mdnm AS "설비명",
 					TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
 					TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
 					cm.cd_nm AS "사유"
-		from 		eq_ina ei, eq e, comm_code cm
+		from 		eq_ina ei, 
+                        eq e, 
+                        comm_code cm,
+                        comm_code cm2
 		where 		ei.eq_cd = e.eq_cd
 		and       	cm.comm_cd = ei.dis_code
-		ORDER BY 4 DESC
+        and           cm2.comm_cd = e.eq_nm
+		ORDER BY ei.eq_inasd DESC
 	</select>
 	
 	
@@ -156,13 +165,18 @@
 	<select id="searchEqIna" parameterType="map" resultType="map">
 		select	    ei.eq_actcd AS "설비가동코드",
 	                ei.eq_cd AS "설비코드",
+	                cm2.cd_nm "구분명",
 					e.eq_mdnm AS "설비명",
 					TO_CHAR(ei.eq_inasd, 'yyyy-MM-dd hh24:mi') AS "시작날짜",
 					TO_CHAR(ei.eq_inaed, 'yyyy-MM-dd hh24:mi') AS "종료날짜",
 					cm.cd_nm AS "사유"
-		from 		eq_ina ei, eq e, comm_code cm
+		from 		eq_ina ei, 
+                        eq e, 
+                        comm_code cm,
+                        comm_code cm2
 		where 		ei.eq_cd = e.eq_cd
 		and       	cm.comm_cd = ei.dis_code
+        and           cm2.comm_cd = e.eq_nm
 		<if test="req1 != '' and req2 != ''">
 		and		ei.eq_inasd BETWEEN TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
 		</if>
@@ -172,7 +186,7 @@
 		<if test="eqCd == '' and eqNm != ''">
 		and		e.eq_mdnm = #{eqNm}
 		</if>
-		ORDER BY 4 DESC
+		ORDER BY ei.eq_inasd DESC
 	</select>
 	
 	<!-- 비가동 설비 내역 추가 -->
@@ -308,6 +322,14 @@ FROM EQ E , PROCESS PRC ,LINE LN
 WHERE E.EQ_CD = PRC.EQ_CD
 AND PRC.PROC_CD = LN.PROC_CD
 AND line_cd = #{lineCd}
+</select>
+
+<select id="eqModalSelect" resultType="map">
+	SELECT 	e.eq_cd as "설비코드", 
+         	c.cd_nm as "구분명",
+         	e.eq_mdnm as "설비명"
+	FROM    eq e, comm_code c
+	WHERE   e.eq_nm = c.comm_cd
 </select>
 
 

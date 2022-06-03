@@ -5,25 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 	
 	
-<!-- 추가 CDN Alert-->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 	<div style="padding-bottom:15px; color: ;">
@@ -117,10 +101,6 @@
 <input type="hidden" id="inEqCd"> 
 <input type="hidden" id="inEqNm">
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 
@@ -167,12 +147,16 @@ $.ajax({
 
 var eqList = new tui.Grid({
     el: document.getElementById('eqList'),
+    scrollX: false,
+    bodyHeight: 200,
     columns: [
     	{
             header: '설비코드',
             name: '설비코드'
-          },
-          {
+          },{
+              header: '구분명',
+              name: '구분명'
+          },{
             header: '설비명',
             name: '설비명'
           },
@@ -195,9 +179,9 @@ var eqList = new tui.Grid({
     ],
     rowHeaders: ['rowNum'],
     pageOptions: {
-      useClient: true,
-      perPage: 5
-    }
+        type: 'scroll', 
+        perPage: 5 
+      }
   });
 
 	//비가동 설비 목록
@@ -219,8 +203,10 @@ var eqList = new tui.Grid({
       },{
         header: '설비코드',
         name: '설비코드'
-      },
-      {
+      },{
+          header: '구분명',
+          name: '구분명'
+      },{
         header: '설비명',
         name: '설비명'
       },
@@ -279,8 +265,8 @@ var eqList = new tui.Grid({
   
   prodBtn.addEventListener("click", function(){
 	$("#seachModal").load("seachInaModal", function(){
-		const myModal = new bootstrap.Modal('#myModal');
-		myModal.show();
+		const searchModal = new bootstrap.Modal('#searchModal');
+		searchModal.show();
 	})
 	});
   

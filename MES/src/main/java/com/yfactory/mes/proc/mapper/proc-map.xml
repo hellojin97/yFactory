@@ -164,19 +164,21 @@ AND  			pl.pp_prog = 'PLAN01'
 		<!-- 상세 생산계획 조회  -->
 	</select>
 		<select id="procDtPlanSelect" resultType="map">
-        SELECT
-	    dtl.pp_cd "생산계획코드",
-	    dtl.pd_cd "생산계획상세코드",
-		pd.prod_nm "완제품명",
-		dtl.pd_qty "계획량",
+SELECT
+       dtl.pp_cd "생산계획코드",
+       dtl.pd_cd "생산계획상세코드",
+      pd.prod_nm "완제품명",
+      dtl.pd_qty "계획량",
+
         dtl.pd_rank "작업우선순위",
-		dtl.pd_dt "생산일수"
+      dtl.pd_dt "생산일수"
         
 
-		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd
-		WHERE pl.pp_cd = dtl.pp_cd
-		AND dtl.prod_cd = pd.prod_cd
-		AND dtl.pp_cd = #{ppCd}
+      FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd
+      WHERE pl.pp_cd = dtl.pp_cd
+      AND dtl.prod_cd = pd.prod_cd
+      AND dtl.pp_cd = #{ppCd}
+
 	</select>
 		<!-- 상품코드 라인코드 조회 -->
 		<select id="ProcLineSelect" resultType="map">

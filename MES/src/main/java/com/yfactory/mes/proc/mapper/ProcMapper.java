@@ -65,5 +65,8 @@ public interface ProcMapper {
     
     int ProcRestartLogic(HashMap<String, Object> list); // 재시작 로직
     
+    List<Map> procProcessCtlSelect(); // 공정 관리 조회
+    
+    List<Map> procProcessCheckList(); // 공정 체크박스 목록 조회
     List<Map> searchProcResult(Map<String, String> result); // 공정 실적 조회 - 단건 조회
 }

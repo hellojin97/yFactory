@@ -155,20 +155,7 @@ resultGrid = new tui.Grid({
     
   });
 	
-  	//완제품 lot 모달 호출
-  /* ordDtpList.on("dblclick", function(e) {
-	  let ordtl = ordDtpList.getValue(e.rowKey,"주문상세코드");
-	  let ordNum = ordDtpList.getValue(e.rowKey, "주문수량");
-	  let prodCd = ordDtpList.getValue(e.rowKey, "완제품코드");
-	  $("#ordTL").val(ordtl);
-	  $("#ordNum").val(ordNum);
-	  $("#prodCd").val(prodCd);
-	  
-  	$("#test").load("releaseModal", function() {
-			const ProdModal = new bootstrap.Modal('#myModal');
-			ProdModal.show();
-			}); 
-  });	 */
+
   
   	//초기화 버튼
 
@@ -279,6 +266,8 @@ resultGrid = new tui.Grid({
 	});
   	
   
+  	
+  	
 </script>
 
 </html>

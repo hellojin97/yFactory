@@ -8,6 +8,17 @@
 
 <title>YAFS EQUIPMENT MANAGE PAGE</title>
 
+<!-- 알람창 자체가 희미하게 떠서 자체적으로 페이지에 추가 했습니다 -->
+<!-- toastr.CSS -->
+   <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
+<!-- toastr.JS -->
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 
@@ -219,6 +230,9 @@ h3{
 		        }).then((result) => {
 		        	console.log(result);
 		        	console.log(result.isConfirmed); // 승인시 FALSE / 취소시 TRUE
+		        	if(chkRows.length >=1){ // 체크된 행이 존재하면 실행하세요 ~
+		        		
+		        	
 		            if (result.isConfirmed) {
 		            	
 		            	 $.ajax({
@@ -244,7 +258,11 @@ h3{
 		                        '',
 		                        'error'
 		                    )
-		            }
+		            	}
+		        	}
+		        	else{
+		        		toastr.error('체크된 행이 없습니다! 확인해주세요');
+		        	}
 		        })
 		    });
 		

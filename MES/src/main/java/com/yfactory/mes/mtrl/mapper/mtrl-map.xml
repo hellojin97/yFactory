@@ -82,7 +82,7 @@ SELECT
             M.MT_NM "원자재명",
             M.MT_CD "원자재코드",
             TO_CHAR(SYSDATE,'YYYY-MM-DD') "납기요청일자",
-            
+            V.VDR_NM "업체명",
             
             SUM(PDTL.PD_QTY- (SELECT SUM(PCQTY.PROD_QTY)
             FROM    PROD_CURQTY PCQTY, PROD_LOT PLOT
@@ -107,10 +107,12 @@ SELECT
 FROM   		PRDT_PL PL,
             PLAN_DTL PDTL,
             BOM B,
-            MT M
+            MT M,
+            VENDOR V
 WHERE 		PL.PP_CD = PDTL.PP_CD
 AND    		PDTL.PROD_CD = B.PROD_CD
 AND    		B.MT_CD = M.MT_CD
+AND			V.VDR_CD = M.VDR_CD
 AND    		PDTL.PP_CD  = #{ppCd}
 AND    		M.MT_CD = #{mtCd}
 GROUP BY 	PL.PP_CD,
@@ -118,7 +120,8 @@ GROUP BY 	PL.PP_CD,
             B.CS_QTY,
             M.MT_NM,
             SYSDATE,
-            M.MT_CD
+            M.MT_CD,
+            V.VDR_NM
 order by 4
 		</select>
 	<!-- 발주관리 조회 -->

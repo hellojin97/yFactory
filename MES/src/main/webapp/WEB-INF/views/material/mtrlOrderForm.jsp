@@ -139,7 +139,7 @@ unorder.on("dblclick",function(e) {
   //생산계획별 자재재고 토스트
   var prodPlan = new tui.Grid({
     el: document.getElementById('prodPlan'),
-    bodyHeight : 100,
+    
     columns: [
       {
         header: '원자재코드',
@@ -168,8 +168,8 @@ unorder.on("dblclick",function(e) {
     rowHeaders: ['rowNum'],
     pageOptions: {
       useClient: true,
-      type : 'scroll',
-      perPage: 4
+      
+      
     }
   });
   
@@ -205,7 +205,7 @@ unorder.on("dblclick",function(e) {
   //발주서 요청 조회
   var mtrlRequest = new tui.Grid({
     el: document.getElementById('mtrlRequest'),
-    bodyHeight : 200,
+    
     columns: [
       {
         header: '원자재코드',
@@ -243,7 +243,7 @@ unorder.on("dblclick",function(e) {
     rowHeaders : [ 'checkbox' ],
     pageOptions: {
       useClient: true,
-      type : 'scroll',
+      
       perPage: 5
     }
   });

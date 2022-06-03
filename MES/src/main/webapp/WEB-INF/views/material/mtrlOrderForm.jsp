@@ -105,28 +105,27 @@ var unorder = new tui.Grid({
   });
 //생산계획코드 불러오기
 $("#select1").on("click",function(e) {
-//debugger
-   let ppCd1 = unorder.getValue(e.rowKey, 'PP_CD');
-   console.log(ppCd1);
+   let ppcd= unorder.getCheckedRows();
+   for (var i = 0; i < ppcd.length; i++) {
+	   let ppCd = ppcd[i];
+   console.log(ppCd);
    $.ajax({
 		url: "mtrlPlan",
-		data : {ppCd : ppCd1},
+		data : {ppCd : ppcd[i].PP_CD},
 		method : "GET",
 		dataType : "JSON",
 		contentType : "application/json; charset=utf-8"
 	  	}).done(function(result){
-
 	  		for (var i = 0; i < result.length; i++) {
-				if(result[i].구분 != null){
-	  				
-					prodPlan.appendRow(result[i]);	
-				} 		
-			}
-	  		console.log(result)
+	  			 /* 원자재코드 */
+    		  prodPlan.appendRow(result[i]);
+    		  console.log(result);
+	  		}
 	  	 }).fail(function(result){
 	  	    console.log(result);
 	     });
    }
+}
 );
   //생산계획별 자재재고 토스트
   var prodPlan = new tui.Grid({

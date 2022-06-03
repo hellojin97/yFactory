@@ -102,8 +102,7 @@
   //입고예정등록버튼
    $("#select").on("click", function(){
         	  let pocd = mtrlExpectList.getCheckedRows();
-        	  for (var i = 0; i < pocd.length; i++) {  
-        		  
+        	  for (var i = 0; i < pocd.length; i++) {          		  
         		  /* 입고예정리스트 */
       			    let poCd = pocd[i];
         		  console.log(poCd)

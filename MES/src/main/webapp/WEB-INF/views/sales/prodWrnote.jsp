@@ -5,14 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <style type="text/css">
 .clickB {     
 	color: black;
@@ -98,14 +91,6 @@
 	
 
 </body>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 	myBtn.addEventListener("click", function(){
@@ -379,27 +364,6 @@ $('#excel').on('click',function(){
 	}
 })
 
-  
-  /* 출고 검색
-  $(".outSearch").on("click", function() {     
-     var pnm = $("#pnm").val();
-     var pcd = $("#pcd").val();
-     var fdt1 = $("#fdt1").val();
-     var fdt2 = $("#fdt2").val();     
-     $.ajax({
-        url : "searchWrnOut",
-        data : {
-              pnm : pnm,  
-              pcd : pcd,
-              fdt1 : fdt1,
-              fdt2 : fdt2
-        },
-        dataType: 'JSON',
-        contentType : "application/json; charset=utf-8"
-     }).done(function(result){         
-    	 listWrnOut.resetData(result);          
-     });
-  })*/
   
 
  </script>

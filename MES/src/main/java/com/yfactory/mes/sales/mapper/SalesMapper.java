@@ -49,7 +49,13 @@ public interface SalesMapper {
 	List<Map> outProdModal(String key);
 	
 	//주문서 조회 - 주문 상세 조회 그리드
-	List<Map> ordtlModalList(String key);	
+	List<Map> ordtlModalList(String key);
+	
+	//완제품 안전 재고 조회
+	List<Map> prodSafetyList();
+	
+	//완제품 안전 재고 검색
+	List<Map> searchProdSafety(Map<String, String> result);
 	
 	//출고등록
 	int releaseOrder(Map<String, String> result);

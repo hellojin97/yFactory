@@ -83,5 +83,7 @@ public interface EquipService {
 
 	// 비가동 설비 재가동
 	int updateIna(Map<String, String> result);
+	
+	List<Map>getEqTemp(String lineCd); // 설비 가용온도 리스트 조회
 
 }

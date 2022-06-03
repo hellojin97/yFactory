@@ -62,4 +62,6 @@ public interface ProcMapper {
     List<Map> procResultProcessList(); // 공정 실적 - 공정 모달 조회
     
     int ProcStopLogic(HashMap<String, Object> list); // 긴급 중지 로직 
+    
+    int ProcRestartLogic(HashMap<String, Object> list); // 재시작 로직
 }

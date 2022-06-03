@@ -5,14 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 		<div style="padding-bottom:15px; color: ;">
@@ -67,18 +59,7 @@
 
 		</div>
 
-	
-<input type="hidden" id="fdt1">
-<input type="hidden" id="fdt2">
 </body>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 	myBtn.addEventListener("click", function(){
@@ -92,7 +73,7 @@
 
 	//LOT 전체조회
 	$.ajax({
-		url : "prodLot",
+		url : "prodSafetyList",
 		method : "GET",
 		dataType : "JSON",
 		success : function(result) {
@@ -134,15 +115,12 @@
   $("#search").on("click", function() {     
      var pnm = $("#pnm").val();
      var pcd = $("#pcd").val();
-     var fdt1 = $("#fdt1").val();
-     var fdt2 = $("#fdt2").val();     
+          
      $.ajax({
-        url : "searchProdLot",
+        url : "searchProdSafety",
         data : {
               pnm : pnm,  
-              pcd : pcd,
-              fdt1 : fdt1,
-              fdt2 : fdt2              
+              pcd : pcd,                           
         },
         dataType: 'JSON',
         contentType : "application/json; charset=utf-8"

@@ -6,13 +6,7 @@
 <meta charset="UTF-8">
 <title>발주관리</title>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 	<div style="padding-bottom:15px; color: ;">
@@ -47,10 +41,6 @@
 <input type="hidden" id="ordNum">
 <input type="hidden" id="prodCd">
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 
@@ -196,7 +186,6 @@ resultGrid = new tui.Grid({
   		let num = releaseList.getRowCount();
   		let state = releaseList.getValue(num-1, "상태");
   		let line  = resultGrid.getValue(0, "라인코드");
-  		console.log(line);
   		 var data= {
    				lineTurn : lineTurn,
    				procPrcd : procPrcd
@@ -208,7 +197,6 @@ resultGrid = new tui.Grid({
 			   type : "POST",
 			   contentType : "application/json; charset = UTF-8;"
 		   }).done(function(result){
-				console.log('생산시작');
 		   }) 
 
   		
@@ -240,18 +228,19 @@ resultGrid = new tui.Grid({
   		
   	  }); 
   	$("#btnProcStop").on("click",function(){
-	    console.log('긴급중지');
   		let idx = releaseList.getRowCount();
   		let eqArr = [];
   		var data = {};
-
   		for (var i = 0; i < idx; i++) {
+  				  if(releaseList.getValue(i, '작업종료시간') == null && releaseList.getValue(i, '상태') == '진행'){	
 		  		  data= {
-		  				eqCd : releaseList.getRow(i).설비코드
+		  				eqCd : releaseList.getRow(i).설비코드,
+		  				procPrcd : releaseList.getRow(i).진행공정코드,
+		  				lineTurn : releaseList.getRow(i).순번
 	   				 };
-		  		eqArr.push(data);
+		  		eqArr.push(data);	
+  				  }
 		}
-  		console.log(eqArr);
 
    		$.ajax({
 			   url  : "procStopLogic",
@@ -260,8 +249,33 @@ resultGrid = new tui.Grid({
 			   type : "POST",
 			   contentType : "application/json; charset = UTF-8;"
 		   }).done(function(result){
-				console.log('생산중지');
 		   })  
+		   
+	});
+  	$("#btnProcRestart").on("click",function(){
+  		let idx = releaseList.getRowCount();
+  		let eqArr = [];
+  		var data = {};
+  		for (var i = 0; i < idx; i++) {
+  				  if(releaseList.getValue(i, '작업종료시간') == null && releaseList.getValue(i, '상태') == '정지'){	
+		  		  data= {
+		  				eqCd : releaseList.getRow(i).설비코드,
+		  				procPrcd : releaseList.getRow(i).진행공정코드,
+		  				lineTurn : releaseList.getRow(i).순번
+	   				 };
+		  		eqArr.push(data);	
+  				  }
+		}
+
+   		$.ajax({
+			   url  : "procRestartLogic",
+			   data :  JSON.stringify(eqArr), 
+			   dataType : "JSON",
+			   type : "POST",
+			   contentType : "application/json; charset = UTF-8;"
+		   }).done(function(result){
+		   })  
+		   
 	});
   	
   

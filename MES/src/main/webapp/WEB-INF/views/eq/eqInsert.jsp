@@ -6,14 +6,6 @@
 <head>
 <meta charset="utf-8">
 <!-- 추가 CDN -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 
@@ -59,8 +51,7 @@ button:hover {
 								<label for="inputText" class="col-form-label"
 									style="padding-right: 27px;">모델명*</label> <input type="text"
 									id="eq_mdnm" name="eq_mdnm" class="form-control"
-									style="width: 30px" required placeholder="설비 모델명"
-									data-name="모델명" onkeypress="addKeyword(event)">
+									style="width: 30px" data-name="모델명" title="업체명+제품명+설비구분 ex)태진빼빼로반죽기" onkeypress="addKeyword(event)" required autofocus>
 
 							</div>
 						</div>
@@ -151,7 +142,7 @@ button:hover {
 								<label for="inputText" class="col-form-label"
 									style="padding-right: 27px;">점검주기</label> <input type="number"
 									class="form-control" id="eq_chkcyc" name="eq_chkcyc"
-									style="width: 30px" min="1" max="3" placeholder="점검주기"
+									style="width: 30px" min="3" max="7" placeholder="점검주기"
 									data-name="점검주기">
 
 							</div>
@@ -222,82 +213,149 @@ button:hover {
 	function addKeyword(ev){
 		var inputVal = $("#eq_mdnm").val();
 		
-		if(ev.keyCode == 13){ // 엔터키가 입력된경우
+		if(ev.keyCode === 13){ // 엔터키가 입력된경우
 			if(inputVal.includes('누드')){
 				if(inputVal.includes('태진')){
 					if(inputVal.includes('반죽')){
-						$("#eq_mdno").val('TJNDMX');	
+						// 태진누드반죽 키워드 타이핑시
+						$("#eq_mdno").val('TJNDMX');
 					}else if(inputVal.includes('성형')){
+						// 태진누드성형 키워드 타이핑시
 						$("#eq_mdno").val('TJNDTRM');	
 					}else if(inputVal.includes('냉각')){
+						// 태진누드냉각 키워드 타이핑시
 						$("#eq_mdno").val('TJNDFRZ');	
 					}else if(inputVal.includes('포장')){
+						// 태진누드포장 키워드 타이핑시
 						$("#eq_mdno").val('TJNDBX');	
 					}
 					
 				}
 				else if(inputVal.includes('금영')){
 					if(inputVal.includes('반죽')){
+						// 금영누드반죽 키워드 타이핑시
 						$("#eq_mdno").val('GYNDMX');	
 					}else if(inputVal.includes('성형')){
+						// 금영누드성형 키워드 타이핑시
 						$("#eq_mdno").val('GYNDTRM');	
 					}else if(inputVal.includes('냉각')){
+						// 금영누드냉각 키워드 타이핑시
 						$("#eq_mdno").val('GYNDFRZ');	
 					}else if(inputVal.includes('포장')){
+						// 금영누드포장 키워드 타이핑시
 						$("#eq_mdno").val('GYNDBX');	
 					}
-				}
+				} else{
+					if(inputVal.includes('반죽')){
+						// 누드반죽 키워드 타이핑시
+						$("#eq_mdno").val('NDMX');	
+					}else if(inputVal.includes('성형')){
+						// 누드성형 키워드 타이핑시
+						$("#eq_mdno").val('NDTRM');	
+					}else if(inputVal.includes('냉각')){
+						// 누드냉각 키워드 타이핑시
+						$("#eq_mdno").val('NDFRZ');	
+					}else if(inputVal.includes('포장')){
+						// 누드포장 키워드 타이핑시
+						$("#eq_mdno").val('NDBX');	
+					}
+				} 
 				
 			}
 			else if(inputVal.includes('아몬드')){
 						if(inputVal.includes('태진')){
 							if(inputVal.includes('반죽')){
+								// 태진아몬드반죽 타이핑시
 								$("#eq_mdno").val('TJALMMX');	
 							}else if(inputVal.includes('성형')){
+								// 태진아몬드성형 타이핑시
 								$("#eq_mdno").val('TJALMTRM');	
 							}else if(inputVal.includes('냉각')){
+								// 태진아몬드냉각 타이핑시
 								$("#eq_mdno").val('TJALMFRZ');	
 							}else if(inputVal.includes('포장')){
+								// 태진아몬드포장 타이핑시
 								$("#eq_mdno").val('TJALMBX');	
 							}
 					
-				}
-				else if(inputVal.includes('금영')){
+					}
+					else if(inputVal.includes('금영')){
 							if(inputVal.includes('반죽')){
+								// 금영아몬드반죽 타이핑시
 									$("#eq_mdno").val('GYALMMX');	
 								}else if(inputVal.includes('성형')){
+									// 금영아몬드성형 타이핑시
 									$("#eq_mdno").val('GYALMTRM');	
 								}else if(inputVal.includes('냉각')){
+									// 금영아몬드냉각 타이핑시
 									$("#eq_mdno").val('GYALMFRZ');	
 								}else if(inputVal.includes('포장')){
+									// 금영아몬드포장 타이핑시
 									$("#eq_mdno").val('GYALMBX');	
 								}
-					}
+					} else{
+						if(inputVal.includes('반죽')){
+							// 아몬드반죽 타이핑시
+								$("#eq_mdno").val('ALMMX');	
+							}else if(inputVal.includes('성형')){
+								// 아몬드성형 타이핑시
+								$("#eq_mdno").val('ALMTRM');	
+							}else if(inputVal.includes('냉각')){
+								// 아몬드냉각 타이핑시
+								$("#eq_mdno").val('ALMFRZ');	
+							}else if(inputVal.includes('포장')){
+								// 아몬드포장 타이핑시
+								$("#eq_mdno").val('ALMBX');	
+							}
+					} 
 				
 			}
 			else{
 				if(inputVal.includes('태진')){
 					if(inputVal.includes('반죽')){
+						// 태진빼빼로반죽 타이핑시
 						$("#eq_mdno").val('TJORIMX');
 					}else if(inputVal.includes('성형')){
+						// 태진빼빼로성형 타이핑시
 						$("#eq_mdno").val('TJORITRM');
 					}else if(inputVal.includes('냉각')){
+						// 태진빼빼로냉각 타이핑시
 						$("#eq_mdno").val('TJORIFRZ');
 					}else if(inputVal.includes('포장')){
+						// 태진빼빼로포장 타이핑시
 						$("#eq_mdno").val('TJORIBX');
 					}
 
 				}else if(inputVal.includes('금영')){
 					if(inputVal.includes('반죽')){
+						// 금영빼빼로반죽 타이핑시
 						$("#eq_mdno").val('GYORIMX');
 					}else if(inputVal.includes('성형')){
+						// 금영빼빼로성형 타이핑시
 						$("#eq_mdno").val('GYORITRM');
 					}else if(inputVal.includes('냉각')){
+						// 금영빼빼로냉각 타이핑시
 						$("#eq_mdno").val('GYORIFRZ');
 					}else if(inputVal.includes('포장')){
+						// 금영빼빼로포장 타이핑시
 						$("#eq_mdno").val('GYORIBX');
 					}
-				}
+				} else{
+					if(inputVal.includes('반죽')){
+						// 빼빼로반죽 타이핑시
+						$("#eq_mdno").val('ORIMX');
+					}else if(inputVal.includes('성형')){
+						// 빼빼로성형 타이핑시
+						$("#eq_mdno").val('ORITRM');
+					}else if(inputVal.includes('냉각')){
+						// 빼빼로냉각 타이핑시
+						$("#eq_mdno").val('ORIFRZ');
+					}else if(inputVal.includes('포장')){
+						// 빼빼로포장 타이핑시
+						$("#eq_mdno").val('ORIBX');
+					}
+					
+				} 
 			}
 		}
 	};

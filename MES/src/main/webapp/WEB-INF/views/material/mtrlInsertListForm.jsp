@@ -4,67 +4,81 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>재고조회</title>
+<title>입고조회</title>
 </head>
 
 <body onkeyup="on_key_up()">
 
-	<h1>원자재 재고조회</h1>
-	<form>
+		<h1>원자재 입고조회</h1>
+<form>
 		<div style="background-color: #e9ecef; padding: 8px;">
 			<div class="mainTitle" style="padding: 15px;">
 				<!-- 자재명 -->
-
+				
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
-
-						<label for="inputText" class="col-form-label"
-							style="padding-right: 27px;">자재명</label> <input type="text"
-							class="form-control" style="width: 50px" id="mtNminput"
-							placeholder="자재명"> <a
-							class="nav-link nav-icon search-bar-toggle " id="myBtn"
-							onclick="myBtn"> <i class="bi bi-search"
-							style="color: #2c3e50"></i>
-						</a> <input type="text" class="form-control" id="mtCdinput"
-							readonly="readonly">
+					
+						<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재명</label> 
+						<input type="text" class="form-control" style="width: 50px" id="mtNminput" placeholder="자재명">
+						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn"> 
+							<i class="bi bi-search"style="color: #2c3e50"></i>
+						</a> 
+						<input type="text" class="form-control" id="mtCdinput" readonly="readonly">
 					</div>
 				</div>
 				<!-- 업체명 -->
-				<div class="col-md-6 " style="padding: 0px 20px 10px 0px">
+				<div class="col-md-5 " style="padding-bottom: 10px;">
 					<div class="input-group  " style="padding-bottom: 10px;">
+						<label for="inputText" class="col-form-label"style="padding-right: 27px;">업체명</label> 
+						<input type="text" class="form-control" style="width: 50px" id="vdrNminput" placeholder="업체명">
+						<a class="nav-link nav-icon search-bar-toggle "id="vdr" onclick="vdr"> 
+							<i class="bi bi-search" style="color: #2c3e50"></i>
+						</a> 
+						<input type="text" class="form-control" id="vdrCdinput" readonly="readonly">
+					</div>
+				</div>
+
+				<!-- 날짜 -->
+				<div class="col-md-12">
+					<div class="input-group">
 						<label for="inputText" class="col-form-label"
-							style="padding-right: 27px;">업체명</label> <input type="text"
-							class="form-control" style="width: 50px" id="vdrNminput"
-							placeholder="업체명"> <a
-							class="nav-link nav-icon search-bar-toggle " id="vdr"
-							onclick="vdr"> <i class="bi bi-search" style="color: #2c3e50"></i>
-						</a> <input type="text" class="form-control" id="vdrCdinput"
-							readonly="readonly">
-						<div style="padding-right: 10px;">
-							<button class="btn1" type="button" id="search">조회</button>
+							style="padding-right: 10px;">입고날짜</label>
+						<div class="col-sm-2">
+							<input type="date" id="req1" class="form-control">
 						</div>
+
+						<div style="padding: 0px 22px 0px 22px;">
+							<p>~</p>
+						</div>
+						<div class="col-sm-2" style="padding-right: 20px;">
+							<input type="date" id="req2" class="form-control">
+						</div>
+
+						<div style="padding-right: 10px;">
+							<button class="btn1"  type="button" id="search">조회</button>
+						</div>
+
 						<div>
 							<button class="btn1" type="reset" id="reset">초기화</button>
 						</div>
 					</div>
 				</div>
 
-
 			</div>
 			<hr style="border: solid 1px gray;">
 
 			<!-- 테이블 -->
 			<div class="code-html contents" style="padding-bottom: 10px;">
-				<div id="mtrlStorageGrid"></div>
+				<div id="mtrlInTable"></div>
 				<div id="test"></div>
 			</div>
 			<div>
-				<button type="button" class="btn1" id="excel">Excel</button>
+				<button  class="btn1" id="excel">Excel</button>
 				<button class="btn1" id="mtrlcancel">발주서인쇄</button>
 			</div>
 		</div>
-	</form>
-
+</form>
+	
 
 </body>
 
@@ -95,24 +109,24 @@
 	
 	
 
-	//원자재 전체조회
+	//입고 전체조회
 	$.ajax({
-		url : "mtrlStorageList",
+		url : "mtrlInList",
 		method : "GET",
 		dataType : "JSON",
 		success : function(result) {
-			mtrlStorageTable.resetData(result);
-			setTimeout(mtrlColor, 10);
-			
+			mtrlInGrid.resetData(result);
 		}
 	});
 
-	var mtrlStorageTable = new tui.Grid({
-		el : document.getElementById('mtrlStorageGrid'),
+	var mtrlInGrid = new tui.Grid({
+		el : document.getElementById('mtrlInTable'),
 		columns : [ {
+			header : '원자재발주코드',
+			name : '원자재발주코드'
+		}, {
 			header : '원자재코드',
-			name : '원자재코드',
-			align: 'center',
+			name : '원자재코드'
 		}, {
 			header : '원자재명',
 			name : '원자재명'
@@ -120,15 +134,19 @@
 			header : '업체명',
 			name : '업체명'
 		}, {
-			header : '수량',
-			name : '수량',
-			align: 'right',
-		    
+			header : '입고량',
+			name : '입고량'
 		}, {
-			header : '안전재고',
-			name : '안전재고',
-			align: 'right',
+			header : '입고일시',
+			name : '입고일시'
+		}, {
+			header : '원자재LOT번호',
+			name : '원자재LOT번호'
+		}, {
+			header : '유통기한',
+			name : '유통기한'
 		}
+
 		],
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
@@ -137,22 +155,26 @@
 		}
 	});
 
-  // 원자재 검색
+  // 자재명 검색
   $("#search").on("click", function() {
    console.log("click!")
    var mtNminput = $("#mtNminput").val();
    var vdrNminput = $("#vdrNminput").val();
+   var req1 = $("#req1").val();
+   var req2 = $("#req2").val();
    $.ajax({
-      url : "mtrlStorageSearch",
+      url : "mtrlInSearch",
       data : {
     	  m1 : mtNminput,
     	  m2 : vdrNminput,
+            req1 : req1,
+            req2 : req2
       },
       method : 'get',
       dataType: 'JSON',
       contentType : "application/json; charset=utf-8"
    }).done(function(result){
-	   mtrlStorageTable.resetData(result);
+	   mtrlInGrid.resetData(result);
        console.log(result);
        
    }).fail(function(result){
@@ -162,36 +184,23 @@
 
 /* 검색 결과 초기화  */
 $('#reset').on('click',function(){
-	const url = "mtrlStorageList";
+	const url = "mtrlLot";
 	   $.ajax(url,{
 	      dataType : "JSON",
 	      method: "GET"
 	   }).done(function(result){
-		   mtrlStorageTable.resetData(result);
+		   mtrlInGrid.resetData(result);
 	     console.log(result);
 	   });
 })
-//그리드 색상변경
-function mtrlColor(){
-	$("#mtrlStorageGrid").find(".tui-grid-body-area tbody tr").each(function(){
-		var data1 =parseInt($(this).find("[data-column-name = '수량']").find("div").text());
-		var data2 =parseInt($(this).find("[data-column-name = '안전재고']").find("div").text());
-		console.log(data1);
-		console.log(data2);
-	    if(data1 < data2){
-	    	$(this).find("[data-column-name = '수량']").css("background-color", "pink");
-	    } 
-	});
-}
-//excel호출  
+//excel호출
 $('#excel').on('click',function(){
 	const options = {
-		includeHiddenColumns: true,
-		onlySelected: true,
-		fileName: '원자재 재고조회',
-		};
-	mtrlStorageTable.export('xlsx',options);
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: '원자재입고조회',
+			};
+	mtrlInGrid.export('xlsx', options);
 })
-
  </script>
 </html>

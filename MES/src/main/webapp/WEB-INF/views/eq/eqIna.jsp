@@ -5,14 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+	
+	
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 	<div style="padding-bottom:15px; color: ;">
@@ -106,10 +101,6 @@
 <input type="hidden" id="inEqCd"> 
 <input type="hidden" id="inEqNm">
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 
@@ -247,7 +238,9 @@ var eqList = new tui.Grid({
 				const eqInaModal = new bootstrap.Modal('#myModal');
 				eqInaModal.show();
 				});
-		  	}
+		  }else{
+			  toastr.warning('비가동중인 설비입니다!');
+		  }
 	  }
   })
   
@@ -305,7 +298,7 @@ var eqList = new tui.Grid({
 			          		}else{
 			          				Swal.fire(
 			                      '승인이 취소되었습니다.',
-			                      '섹시하시네요~!',
+			                      '',
 			                      'error'
 			                  )
 			          			}

@@ -25,5 +25,8 @@ public interface CommonService {
 	int userOrderInsert(Map<String, String> parameter);
 	
 	//로그인
-		EmployeeVO userLogin(EmployeeVO empVO);
+	EmployeeVO userLogin(EmployeeVO empVO);
+	
+	//부서명
+	String userDept(int num);		
 }

@@ -235,12 +235,11 @@ AND chk.chk_rscd = comm2.comm_cd
 <!-- 설비구분명 기준 점검미지정 설비 조회 (점검테이블에 존재하지 않는 설비들)  -->
 <select id="getEqChkSelectList" resultType="map">
 SELECT  	E.EQ_CD "설비코드" ,
- 				COMM.CD_NM "설비명" , 
+ 				E.EQ_MDNM "설비명" , 
  				E.EQ_CHKCYC "점검주기"
-FROM 		EQ E , COMM_CODE COMM
+FROM 		EQ E
 WHERE 		E.eq_cd not in (select eq_cd from eq_chk)
 AND     		E.eq_nm  LIKE '%'||#{eq_nm}||'%'
-AND			E.EQ_NM = COMM.COMM_CD
 <!-- AND 		chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd') --> 
 </select>
 
@@ -313,7 +312,6 @@ WHERE EQ_CD IN
 
 
 <update id="eqMngUpdateAjax" parameterType="map" statementType="CALLABLE" >
-
 {CALL eq_update(#{eq_cd},#{proc_cd},#{proc_nm},#{eq_min},#{eq_max},#{eq_purdt},
 						  #{eq_actst}
 						  )}

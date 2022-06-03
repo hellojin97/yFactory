@@ -171,7 +171,8 @@ var lineCd;
 	      });
 		
 	      $(".line-control").on("click" , function(ev){
-	    	  
+	    	  	chart.destroy();
+	    	  	
 		    	lineCd = $("input[name='chk_line']:checked").val();
 		    	console.log(lineCd);
 		    	//console.log(ev.target.previousSibling.previousSibling.innerText);

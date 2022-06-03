@@ -174,6 +174,12 @@ public class ProcAjaxController {
 		return procService.procResultProcessList();
 	}
 	
+	// 공정 실적 조회 - 단건 조회
+	@PostMapping("/searchProcResult")
+	public List<Map> searchProcResult(@RequestParam Map<String, String> result){
+		return procService.searchProcResult(result);
+	}
+	
 	
 	@PostMapping("/procCancelPl")
 	public int procCancelPl(@RequestParam Map<String, String> Cancel) {

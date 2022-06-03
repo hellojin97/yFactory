@@ -78,12 +78,15 @@ public interface EquipService {
 	int eqChkDelAjax(List<HashMap<String, Object>>list);
 	
 	// 설비관리 페이지 설비수정 버튼 기능부
-	int eqMngUpdateAjax(List<HashMap<String, Object>>list); 
+	int eqMngUpdateAjax(List<HashMap<String, Object>>list); 	
 	
-
 	// 비가동 설비 재가동
 	int updateIna(Map<String, String> result);
 	
 	List<Map>getEqTemp(String lineCd); // 설비 가용온도 리스트 조회
+	
+	List<Map>eqModalSelect(); //비가동 설비 내역 - 설비 modal 조회
+	
+	
 
 }

@@ -260,6 +260,14 @@ public class ProcServiceImpl implements ProcService{
 
 
 
+	@Override
+	public List<Map> searchProcResult(Map<String, String> result) {
+		return map.searchProcResult(result);
+	}
+
+
+
+
 
 
 

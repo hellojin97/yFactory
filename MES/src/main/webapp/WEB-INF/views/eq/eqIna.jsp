@@ -147,12 +147,16 @@ $.ajax({
 
 var eqList = new tui.Grid({
     el: document.getElementById('eqList'),
+    scrollX: false,
+    bodyHeight: 200,
     columns: [
     	{
             header: '설비코드',
             name: '설비코드'
-          },
-          {
+          },{
+              header: '구분명',
+              name: '구분명'
+          },{
             header: '설비명',
             name: '설비명'
           },
@@ -175,9 +179,9 @@ var eqList = new tui.Grid({
     ],
     rowHeaders: ['rowNum'],
     pageOptions: {
-      useClient: true,
-      perPage: 5
-    }
+        type: 'scroll', 
+        perPage: 5 
+      }
   });
 
 	//비가동 설비 목록
@@ -199,8 +203,10 @@ var eqList = new tui.Grid({
       },{
         header: '설비코드',
         name: '설비코드'
-      },
-      {
+      },{
+          header: '구분명',
+          name: '구분명'
+      },{
         header: '설비명',
         name: '설비명'
       },
@@ -259,8 +265,8 @@ var eqList = new tui.Grid({
   
   prodBtn.addEventListener("click", function(){
 	$("#seachModal").load("seachInaModal", function(){
-		const myModal = new bootstrap.Modal('#myModal');
-		myModal.show();
+		const searchModal = new bootstrap.Modal('#searchModal');
+		searchModal.show();
 	})
 	});
   

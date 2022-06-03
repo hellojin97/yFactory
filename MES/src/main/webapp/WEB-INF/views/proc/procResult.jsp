@@ -181,10 +181,13 @@ $("#search").on("click", function(){
 	let req2 = $("#req2").val();
 	
 	$.ajax({
-		url : "",
-		data : {
-			
-		}
+		url : "searchProcResult",
+		data : { prdCd : prdCd,
+			     procNm : procNm,
+			     req1 : req1,
+			     req2 : req2
+		},
+		method : "POST"
 	}).done(function(result){
 		procResultList.resetData(result);
 	})

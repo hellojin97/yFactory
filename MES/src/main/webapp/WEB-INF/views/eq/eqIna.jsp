@@ -46,7 +46,7 @@
 	
 	<hr style="border: solid 1px gray;">
 
-	<h4>비가동 설비 목록</h4>
+	<h4>비가동 설비 내역</h4>
 	<div>
 	<form>				
 	<div class="col-md-12" style="padding-bottom: 10px;">

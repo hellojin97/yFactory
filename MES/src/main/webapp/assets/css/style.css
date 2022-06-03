@@ -12,6 +12,8 @@
   scroll-behavior: smooth;
 }
 
+
+
 body {
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
@@ -253,6 +255,18 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0px 15px 0px 15px;
   border-radius: 5px 5px 0px 0px;
 }
+
+.btn3 
+	  {     
+	color: black;
+    text-align: center;
+    background: white;
+    border: solid 1px #2c3e50;
+    margin: 3px;
+    line-height: 25px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px 5px 0px 0px;
+		    }
 
 /* Card */
 .card {

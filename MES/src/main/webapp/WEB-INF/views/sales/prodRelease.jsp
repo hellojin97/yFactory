@@ -219,24 +219,7 @@ var ordDtpList = new tui.Grid({
                   'success'
               );
               ord = [];              
-              location.reload(true);
-              /*$.ajax({
-            		url: "ordDtpList",
-            		method : "GET",
-            		dataType : "JSON",
-            		success : function(result){
-            			ordDtpList.resetData(result);
-            		}
-            	});
-              $.ajax({
-          		url: "",
-          		method : "GET",
-          		dataType : "JSON",
-          		success : function(result){
-          			releaseList.resetData(result);
-          		}
-          	});
-              releaseList.removeCheckedRows(false);*/
+              location.reload(true);              
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',

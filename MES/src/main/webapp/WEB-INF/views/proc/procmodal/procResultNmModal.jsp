@@ -18,17 +18,7 @@
 				</div>
 				<!-- 모달 내용 -->
 				<div class="modal-body">
-					<div class="col-md-8 " style="padding-bottom: 20px;">
-						<div class="input-group ">
-							<label for="inputText" class="col-form-label" style="padding-right: 10px;">공정명</label> 
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="nm">
-							</div>							
-							<a class="nav-link nav-icon search-bar-toggle " id="vdrnmSearch" onclick="vdrnmSearch"> 
-								<i class="bi bi-search" style="color: #2c3e50"></i>
-							</a>
-						</div>
-					</div>
+					
 					<div id="processList"></div>
 				</div>
 				<!-- 내용끝 -->

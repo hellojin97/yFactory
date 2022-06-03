@@ -38,7 +38,7 @@
 
 <script>
 	$(function() {
-		const url = "getEqDivList";
+		const url = "searchEq";
 		$.ajax(url, {
 			dataType : "JSON",
 		}).done(function(rs) {

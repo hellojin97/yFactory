@@ -268,7 +268,7 @@ SELECT
 	WHERE ins.ins_cd = insdtl.ins_dtlcd
 	AND   insdtl.prod_cd = pd.prod_cd
     AND   cm.comm_cd = ins.ins_st
-    AND   cm.cd_nm ='미지시'
+    AND   cm.cd_nm ='진행전'
 	<if test="date1 != '' ">
 	AND insdtl.ins_dtldt = TO_DATE(#{date1},'YY/MM/DD')
 	</if>

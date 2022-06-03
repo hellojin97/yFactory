@@ -143,12 +143,12 @@ h3{
 	                     options: {
 	                       listItems: [
 	                         {
-	                           text: 'Y',
-	                           value: 'USE01'
+	                           text: '사용가능',
+	                           value: '사용가능'
 	                         },
 	                         {
-	                           text: 'N',
-	                           value: 'USE02'
+	                           text: '사용불가',
+	                           value: '사용불가'
 	                         }
 	                    ]
 	                 }
@@ -197,28 +197,42 @@ h3{
 			});
 		
 		
-		
+			// 설비 수정 버튼
 		  $("#eqUpd").click(function () {
 			  
 			var chkRows = grid.getCheckedRows();
 			var updRowArr = [];
 			var data = {};
+			var temp1;
+		
 			console.log(chkRows);
 			console.log(JSON.stringify(chkRows));
+			
+			
 			for (var i = 0; i < chkRows.length; i++) {
+				if(chkRows[i].사용여부 == '사용가능'){ // 사용가능 이 선택되어있다면
+					temp1 = 'USE01';
+				}else{ // 사용불가 가 선택되어 있다면
+					temp1 = 'USE02';
+				}
+				console.log(temp1);
 				data = {
 						eq_cd : chkRows[i].설비코드 , 
-						/* eq_nm : chkRows[i].설비명 , */
+						// eq_nm : chkRows[i].설비명 ,
 						proc_cd : chkRows[i].공정코드 ,
 						proc_nm : chkRows[i].공정명 ,
 						eq_min : chkRows[i].최저온도 ,
 						eq_max : chkRows[i].최고온도 ,
 						eq_purdt : chkRows[i].구매일자 ,
-						eq_actst : chkRows[i].사용여부 
+						eq_actst : temp1
+
 				};
+				
 				updRowArr.push(data);
+				
 			};
-			  console.log(updRowArr);
+			 
+			 
 		        Swal.fire({
 		            title: '정말 수정 하시겠습니까?',
 		            icon: 'warning',
@@ -251,7 +265,7 @@ h3{
 					                    '',
 					                    'success'
 					                		);
-			               }); 
+			               });  
 		            }else{
 		            	Swal.fire(
 		                        '수정이 취소되었습니다.',
@@ -264,7 +278,7 @@ h3{
 		        		toastr.error('체크된 행이 없습니다! 확인해주세요');
 		        	}
 		        })
-		    });
+		    }); 
 		
 		
 		}	

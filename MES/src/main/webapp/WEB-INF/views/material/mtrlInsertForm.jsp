@@ -71,7 +71,7 @@
 				</div>
 	
 				<div style="display: inline-block; float: right;">
-					<button class="btn1" type="reset" id="reset">삭제</button>
+					<button class="btn1" type="reset" id="delete">삭제</button>
 				</div>
 				
 				<div style="display: inline-block; float: right;">
@@ -108,9 +108,15 @@
 		});
 	//미입고처리 모달
 	mtrlBtnAdd.addEventListener("click", function(){
+		//만약 그리드 내에 
+		
+		
+		
 		$("#test").load("mtrlExpectModal", function(){
 			const myModal = new bootstrap.Modal('#myModal',{backdrop : false , keyboard: false});
 			myModal.show();
+			test1 = listMtrlInsert.getData();
+			
 			$('.modal-dialog').draggable({
 			    handle: ".modal-header"
 			  });
@@ -265,5 +271,14 @@ $('#reset').on('click',function(){
 	     console.log(result);
 	   });
 })
+
+/* 행삭제 */
+$('#delete').on('click', function(e){
+	let value = listMtrlInsert.getCheckedRows(e);
+	console.log(value);
+	listMtrlInsert.removeRow(value);
+})//end of 행삭제
+
+
  </script>
 </html>

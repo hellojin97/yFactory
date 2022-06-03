@@ -278,9 +278,9 @@ order by 4
 			       m.mt_nm "원자재명",
 			       v.vdr_nm "업체명",
 			       c.mt_qty "입고량",
-			       lot.mt_wdt "입고일시",
+			       TO_CHAR(lot.mt_wdt, 'YYYY-MM-DD') "입고일시",
 			       lot.mt_lot "원자재LOT번호",
-			       lot.mt_exp "유통기한"
+			       TO_CHAR(lot.mt_exp, 'YYYY-MM-DD') "유통기한"
 			       
 			FROM   mt_po po,
 			       mt_podtl pdl,
@@ -428,20 +428,23 @@ order by 4
 <!-- 안전재고 페이지 -->	
 	<!-- 안전재고 전체조회 -->
 	<select id="mtrlSafetyList" resultType="map">
-	SELECT m.mt_cd "원자재코드",
-		       m.mt_nm "원자재명",
-		       m.mt_unit "단위",
-		       CASE WHEN c.mt_qty IS NULL THEN 0
-               ELSE C.MT_QTY 
-               END AS "현재고",
-		       m.mt_sfqty "안전재고"
-		       
-		FROM   mt m,
-		       mt_lot lot,
-		       mt_curqty c
-		
-		WHERE  m.mt_cd = lot.mt_cd
-		AND    lot.mt_lot = c.mt_lot(+)
+
+		SELECT m.mt_cd "원자재코드", 
+		            m.mt_nm "원자재명", 
+		            m.mt_unit "단위", 
+		            NVL( SUM(c.mt_qty), 0) "현재고",
+		            m.mt_sfqty "안전재고" 
+		FROM mt m, 
+		          mt_lot lot, 
+		          mt_curqty c 
+		WHERE m.mt_cd = lot.mt_cd 
+		AND lot.mt_lot = c.mt_loT
+		GROUP BY  m.mt_cd,
+		                 m.mt_nm,
+		                  m.mt_sfqty,
+		                  m.mt_unit
+		ORDER BY 1
+
 	</select>   
 	
 	<!-- 안전재고 단건조회 -->

@@ -5,14 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-   href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-   href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 
@@ -237,10 +229,6 @@ window.onload = function (){
 
 
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 
 

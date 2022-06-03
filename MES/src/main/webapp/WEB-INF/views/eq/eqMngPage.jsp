@@ -7,31 +7,10 @@
 
 
 <title>YAFS EQUIPMENT MANAGE PAGE</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
-
-<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
-
-<!-- 추가 CDN -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
 
 
 <style>
@@ -278,14 +257,6 @@ h3{
 
 
 </body>
-<%-- <script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script> --%>
 
 
 

@@ -33,15 +33,15 @@ GROUP BY    	ord.ord_cd,
 	</select>
 	<!-- 주문서 단건조회 -->
 	<select id="OrderSelectOk" resultType="map">
-	    SELECT 			            ordtl.ordtl_cd "주문상세코드" ,
-										TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
-										TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
-										ordtl.prod_cd "완제품코드",
-										ordtl.ord_qty "주문수량",
-										vdr.vdr_nm "업체명",
-										pd.prod_nm "완제품명",
-										cd.cd_explan	"진행상황",
-		                                sum(pc.prod_qty) "현재고"
+	   SELECT 			            ordtl.ordtl_cd "주문상세코드" ,
+								TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
+								TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
+								ordtl.prod_cd "완제품코드",
+								ordtl.ord_qty "주문수량",
+								vdr.vdr_nm "업체명",
+								pd.prod_nm "완제품명",
+								cd.cd_explan	"진행상황",
+                                sum(pc.prod_qty) "현재고"
 		FROM
 		                        ORDERS ord,
 		                        VENDOR vdr,
@@ -54,23 +54,21 @@ GROUP BY    	ord.ord_cd,
 		WHERE			 ord.vdr_cd = vdr.vdr_cd
 		AND				 ord.ord_cd = ordtl.ord_cd
 		AND				 ordtl.prod_cd = pd.prod_cd
-		AND 				 cd.comm_cd = ord.prog_cd
+		AND 			 cd.comm_cd = ord.prog_cd
 		AND				 pd.prod_cd = pl.prod_cd
 		AND				 pl.prod_lot = pc.prod_lot
-
-		AND 			     ord.ord_cd = #{ordCd}
+		AND 			 ord.ord_cd = #{ordCd}
 		
 		group by ordtl.ordtl_cd,
-             ord.req_dt,
-             ord.res_dt,
-             ordtl.prod_cd,
-             ordtl.ord_qty,
-             vdr.vdr_nm ,
-             pd.prod_nm,
-             cd.cd_explan
-        
-		having sum(pc.prod_qty) &lt; ordtl.ord_qty
-		
+		             ord.req_dt,
+		             ord.res_dt,
+		             ordtl.prod_cd,
+		             ordtl.ord_qty,
+		             vdr.vdr_nm ,
+		             pd.prod_nm,
+		             cd.cd_explan
+		HAVING sum(pc.prod_qty) &lt; ordtl.ord_qty
+				
 	</select>
 	<!-- 제품 전체 조회 -->
 	<select id="PrdSelect" resultType="map">

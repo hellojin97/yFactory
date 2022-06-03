@@ -255,6 +255,24 @@ public class ProcServiceImpl implements ProcService{
 
 
 
+	@Override
+	public List<Map> procProcessCtlSelect() {
+		// TODO Auto-generated method stub
+		return map.procProcessCtlSelect();
+	}
+
+
+
+
+	@Override
+	public List<Map> procProcessCheckList() {
+		// TODO Auto-generated method stub
+		return map.procProcessCheckList();
+	}
+
+
+
+
 
 
 

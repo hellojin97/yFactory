@@ -165,7 +165,18 @@ public class ProcAjaxController {
 	public List<Map> procResultProcessList(){		
 		return procService.procResultProcessList();
 	}
-	
+	// 공정 관리 조회
+	@GetMapping("/procProcessCtlSelect")
+	public List<Map> procProcessCtlSelect(){
+		System.out.println(procService.procProcessCtlSelect());
+		return procService.procProcessCtlSelect();
+	}
+	// 공정 체크박스 목록
+	@GetMapping("/procProcessCheckList")
+	public List<Map> procProcessCheckList(){
+		
+		return procService.procProcessCheckList();
+	}
 	
 	@PostMapping("/procCancelPl")
 	public int procCancelPl(@RequestParam Map<String, String> Cancel) {

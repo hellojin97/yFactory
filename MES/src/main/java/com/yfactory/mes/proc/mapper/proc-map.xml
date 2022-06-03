@@ -14,50 +14,61 @@
 				cd.cd_explan
 				"진행상황"
 
-FROM
+	FROM
 				ORDERS ord,
 				VENDOR vdr,
 				ORD_DTL ordtl,
 				PROD pd,
 				COMM_CODE cd
-WHERE		 ord.vdr_cd = vdr.vdr_cd
-AND 			 ord.ord_cd = ordtl.ord_cd
-AND		     ordtl.prod_cd = pd.prod_cd
-AND 		     cd.comm_cd = ord.prog_cd
-AND           ord.prog_cd LIKE 'PROG01'
-GROUP BY    	ord.ord_cd, 
+	WHERE		 ord.vdr_cd = vdr.vdr_cd
+	AND 			 ord.ord_cd = ordtl.ord_cd
+	AND		     ordtl.prod_cd = pd.prod_cd
+	AND 		     cd.comm_cd = ord.prog_cd
+	AND           ord.prog_cd LIKE 'PROG01'
+	GROUP BY    	ord.ord_cd, 
 			            ord.req_dt, 
 			            ord.res_dt, 
 			            vdr.vdr_nm, 
 			            cd.cd_explan
 	</select>
-	<!-- 주문서 단건조회 -->
+		<!-- 주문서 단건조회 -->
 	<select id="OrderSelectOk" resultType="map">
-	    SELECT 			ord.ord_cd	"주문코드" ,
+	   SELECT 			            ord.ord_cd "주문코드" ,
 								TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
 								TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
-								ordtl.prod_cd "완제품코드" ,
+								ordtl.prod_cd "완제품코드",
 								ordtl.ord_qty "주문수량",
-						        pc.prod_qty "현재고",
 								vdr.vdr_nm "업체명",
 								pd.prod_nm "완제품명",
-								cd.cd_explan	"진행상황"
+								cd.cd_explan	"진행상황",
+                                sum(pc.prod_qty) "현재고"
 		FROM
-								ORDERS ord,
-								VENDOR vdr,
-								ORD_DTL ordtl,
-								PROD pd,
-								COMM_CODE cd,
-						        PROD_LOT pl,
-						        PROD_CURQTY pc
-						        
+		                        ORDERS ord,
+		                        VENDOR vdr,
+		                        ORD_DTL ordtl,
+		                        PROD pd,
+		                        COMM_CODE cd,
+		                        PROD_LOT pl,
+		                        PROD_CURQTY pc
+		
 		WHERE			 ord.vdr_cd = vdr.vdr_cd
 		AND				 ord.ord_cd = ordtl.ord_cd
 		AND				 ordtl.prod_cd = pd.prod_cd
-        AND 				 cd.comm_cd = ord.prog_cd
-        AND				 pd.prod_cd = pl.prod_cd
-        AND				 pl.prod_lot = pc.prod_lot(+)
-		AND 			     ord.ord_cd = #{ordCd}
+		AND 			 cd.comm_cd = ord.prog_cd
+		AND				 pd.prod_cd = pl.prod_cd
+		AND				 pl.prod_lot = pc.prod_lot
+		AND 			 ord.ord_cd = #{ordCd}
+		
+		group by ord.ord_cd,
+		             ord.req_dt,
+		             ord.res_dt,
+		             ordtl.prod_cd,
+		             ordtl.ord_qty,
+		             vdr.vdr_nm ,
+		             pd.prod_nm,
+		             cd.cd_explan
+		HAVING sum(pc.prod_qty) &lt; ordtl.ord_qty
+				
 	</select>
 	<!-- 제품 전체 조회 -->
 	<select id="PrdSelect" resultType="map">
@@ -160,26 +171,23 @@ FROM
        				PRDT_PL PL, COMM_CODE CM
 WHERE 		pl.pp_prog = cm.comm_cd
 AND  			pl.pp_prog = 'PLAN01'
-
-		<!-- 상세 생산계획 조회  -->
-	</select>
+</select>
+<!-- 상세 생산계획 조회  -->
 		<select id="procDtPlanSelect" resultType="map">
-        SELECT
-	    dtl.pp_cd "생산계획코드",
-        pl.pp_nm "계획명",
-        dtl.pd_cd "생산계획상세코드",
-		pd.prod_nm "완제품명",
-		pd.prod_cd "완제품코드",
-		dtl.pd_qty "계획량",
+	SELECT
+       dtl.pp_cd "생산계획코드",
+       dtl.pd_cd "생산계획상세코드",
+      pd.prod_nm "완제품명",
+      dtl.pd_qty "계획량",
         dtl.pd_rank "작업우선순위",
-		dtl.pd_dt "생산일수"
+      dtl.pd_dt "생산일수"
         
 
-		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord 
-		WHERE pl.pp_cd = dtl.pp_cd
-		AND pl.ord_cd = ord.ord_cd
-		AND dtl.prod_cd = pd.prod_cd
-		AND dtl.pp_cd = #{ppCd}
+      FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd
+      WHERE pl.pp_cd = dtl.pp_cd
+      AND dtl.prod_cd = pd.prod_cd
+      AND dtl.pp_cd = #{ppCd}
+
 	</select>
 		<!-- 상품코드 라인코드 조회 -->
 		<select id="ProcLineSelect" resultType="map">
@@ -189,35 +197,31 @@ AND  			pl.pp_prog = 'PLAN01'
       AND     pd.prod_nm = #{prodNm}
 		</select>
 	<!--  필요자재(BOM) 조회 -->
-	<select id="ProcNeedMtrl" resultType="map">
+<select id="ProcNeedMtrl" resultType="map">
 		SELECT DISTINCT P.PROD_CD "제품코드",
         	   B.MT_CD "자재코드", 
         	   M.MT_NM "자재명",
-        	   B.CS_QTY "소모량",
-               DTL.PRD_DTLCD "생산지시상세코드"
-		FROM BOM B, MT M, PROD P, LINE LI, PRD_INSDTL DTL
+        	   B.CS_QTY "소모량"
+		FROM BOM B, MT M, PROD P, LINE LI
 		WHERE B.MT_CD = M.MT_CD
 		AND B.PROD_CD = P.PROD_CD
-        AND P.PROD_CD = DTL.PROD_CD
 		AND LI.PROD_CD = P.PROD_CD
 		AND LI.LINE_CD = #{line}
 	</select>
-	<!-- 필요자재(LOT) 조회-->
+		<!-- 필요자재(LOT) 조회-->
 	<select id="ProcNeedMtrlLOT" resultType="map">
-SELECT DTL.PRD_DTLCD "지시디테일코드",
-          LOT.MT_LOT "자재LOT번호", 
-          QTY.MT_QTY "현재고", 
-          M.MT_NM "자재명",
-          B.MT_CD "자재코드",
-          TO_CHAR(LOT.MT_EXP, 'YYYY-MM-DD') "유통기한"
-FROM PRD_INSDTL DTL, PROD P, BOM B, MT_LOT LOT, MT_CURQTY QTY, MT M 
-WHERE DTL.PROD_CD = P.PROD_CD
-AND P.PROD_CD = B.PROD_CD
-AND B.MT_CD = M.MT_CD
-AND M.MT_CD = LOT.MT_CD
-AND LOT.MT_LOT = QTY.MT_LOT
-AND M.MT_CD = #{mtNm}
-AND DTL.PRD_DTLCD = #{dtlCd}
+		SELECT DISTINCT 
+				  LOT.MT_LOT "자재LOT번호", 
+		          QTY.MT_QTY "현재고", 
+		          M.MT_NM "자재명",
+		          B.MT_CD "자재코드",
+		          TO_CHAR(LOT.MT_EXP, 'YYYY-MM-DD') "유통기한"
+		FROM PROD P, BOM B, MT_LOT LOT, MT_CURQTY QTY, MT M 
+		WHERE P.PROD_CD = B.PROD_CD
+		AND B.MT_CD = M.MT_CD
+		AND M.MT_CD = LOT.MT_CD
+		AND LOT.MT_LOT = QTY.MT_LOT
+		AND M.MT_CD = #{mtNm}
 
 	</select>
 	
@@ -257,13 +261,16 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 	select ins.ins_cd "생산지시코드",
 	pd.prod_nm "제품명",
 	insdtl.ins_qty "생산수량",
-	TO_CHAR(insdtl.ins_dtldt, 'YYYY-MM-DD') "생산지시일자"
-	from PRD_INS ins, prod pd, PRD_INSDTL insdtl
+	TO_CHAR(insdtl.ins_dtldt, 'YYYY-MM-DD') "생산지시일자",
+    cm.cd_nm
+	from PRD_INS ins, prod pd, PRD_INSDTL insdtl, COMM_CODE CM
 	WHERE ins.ins_cd = insdtl.ins_dtlcd
 	AND   insdtl.prod_cd = pd.prod_cd
-		<if test="date1 != '' ">
+    AND   cm.comm_cd = ins.ins_st
+    AND   cm.cd_nm ='미지시'
+	<if test="date1 != '' ">
 	AND insdtl.ins_dtldt = TO_DATE(#{date1},'YY/MM/DD')
-</if>
+	</if>
 	</select>
 
 	<select id="ProcOrderCdSelectOne" resultType="map">
@@ -383,4 +390,25 @@ AND DTL.PRD_DTLCD = #{dtlCd}
 			{CALL PROC_RESTART(#{eqCd},#{lineTurn},#{procPrcd})}
 		
 	</update>
+	
+	<!-- 공정 관리 조회-->
+	<select id="procProcessCtlSelect" resultType="map">
+		SELECT PC.PROC_CD 공정코드,
+		       CM.CD_NM 공정구분,
+		       PC.PROC_NM 공정명,
+		       EQ.EQ_CD   설비코드,
+		       EQ.EQ_NM   설비명,
+		       EQ.EQ_MDNM 모델명,
+		       EMP.EMP_NM 담당자
+	      FROM PROCESS PC, EQ EQ, EMPLOYEE EMP,COMM_CODE CM 
+		 WHERE PC.EQ_CD = EQ.EQ_CD
+		   AND EQ.EQ_INSTER = EMP.EMP_NO
+		   AND CM.COMM_CD = PC.PROC_CLS
+	</select>
+	
+	<!-- 공정 체크박스 목록-->
+	<select id="procProcessCheckList" resultType="map">
+    select CD_NM from comm_code
+    WHERE  HCOMM_CD = 'PROC'
+	</select>
 </mapper>

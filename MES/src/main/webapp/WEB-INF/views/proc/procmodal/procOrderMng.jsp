@@ -221,14 +221,9 @@
 	//}
 	console.log(workDate + ' ' + workQty + ' ' + dateRank);
 	$("#btnNeedMtrl").click(function () {
-		let rowCount = procOrder.getRowCount();
 	if(workDate != null && workQty != null && dateRank != null ){
 		if(workDate != bworkDate || bworkQty != workQty || bdateRank != dateRank){
 			needMtrl.clear();
-			
-			for (var i = 0; i < rowCount; i++) {
-				
-			
 		//procNeedMtrl
 			let line = lineCode;
 		    var data= {line : line};
@@ -255,7 +250,6 @@
 			bdateRank = dateRank;
 		}
 		}
-	}
 	});
 	});
 	

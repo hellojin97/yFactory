@@ -62,4 +62,8 @@ public interface ProcMapper {
     int ProcStopLogic(HashMap<String, Object> list); // 긴급 중지 로직 
     
     int ProcRestartLogic(HashMap<String, Object> list); // 재시작 로직
+    
+    List<Map> procProcessCtlSelect(); // 공정 관리 조회
+    
+    List<Map> procProcessCheckList(); // 공정 체크박스 목록 조회
 }

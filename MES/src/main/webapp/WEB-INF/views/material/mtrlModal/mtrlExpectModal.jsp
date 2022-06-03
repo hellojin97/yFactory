@@ -44,14 +44,18 @@
 			method : "GET",
 			dataType : "JSON",
 			success : function(result) {
-				console.log(test1);
 				if(test1 == ''){
 						mtrlExpectList.resetData(result);
 						console.log(3);
 					
 				} else {
-						for (var i = 1; i < test1.length; i++) {
-							console.log(test1);
+						for (var i = 0; i < test1.length; i++) {
+							console.log(test1[i].원자재코드);
+							for (var i = 0; i < result.length; i++) {
+								if(test1[i].원자재코드 != result[i].원자재코드){
+									mtrlExpectList.appendRow(result[i]);
+								}
+							}	// end of for문 (result)
 						} // end of for문 (test)
 				} // end of if
 			}

@@ -71,7 +71,7 @@
 				</div>
 	
 				<div style="display: inline-block; float: right;">
-					<button class="btn1" type="reset" id="reset">삭제</button>
+					<button class="btn1" type="reset" id="delete">삭제</button>
 				</div>
 				
 				<div style="display: inline-block; float: right;">
@@ -271,5 +271,14 @@ $('#reset').on('click',function(){
 	     console.log(result);
 	   });
 })
+
+/* 행삭제 */
+$('#delete').on('click', function(e){
+	let value = listMtrlInsert.getCheckedRows(e);
+	console.log(value);
+	listMtrlInsert.removeRow(value);
+})//end of 행삭제
+
+
  </script>
 </html>

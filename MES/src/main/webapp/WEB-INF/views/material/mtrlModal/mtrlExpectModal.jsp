@@ -36,13 +36,24 @@
 	<!-- 모달끝 -->
 
 	<script>
+	
+		var test1 = null;
 		//자재명 전체조회
 		$.ajax({
 			url : "expectList",
 			method : "GET",
 			dataType : "JSON",
 			success : function(result) {
-				mtrlExpectList.resetData(result);
+				console.log(test1);
+				if(test1 == ''){
+						mtrlExpectList.resetData(result);
+						console.log(3);
+					
+				} else {
+						for (var i = 1; i < test1.length; i++) {
+							console.log(test1);
+						} // end of for문 (test)
+				} // end of if
 			}
 		});
 

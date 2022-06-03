@@ -10,9 +10,6 @@
   <title>YFactory</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-<!-- JQUERY timePicker -->
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
   
 <!-- JQUERY -->
    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -61,13 +58,14 @@
 <!-- Date Picker -->   
    <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
    <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
-<!-- js -->
-   <!-- Toast UI AND Modal -->
-      <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-      <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-      <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-      <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
-<!-- END js -->  
+<!-- JQUERY timePicker -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<!-- Toast UI AND Modal -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <style type="text/css"> 
   /* 폰트 */ 

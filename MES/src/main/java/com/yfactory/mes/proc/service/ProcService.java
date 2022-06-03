@@ -64,4 +64,6 @@ public interface ProcService {
     int ProcStopLogic(List<HashMap<String, Object>> list); // 긴급 중지 로직 
     
     int ProcRestartLogic(List<HashMap<String, Object>> list); // 재시작 로직
+    
+    List<Map> searchProcResult(Map<String, String> result); // 공정 실적 조회 - 단건 조회
 }

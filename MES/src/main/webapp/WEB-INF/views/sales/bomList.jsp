@@ -99,8 +99,8 @@
 	
 	var bomGrid = new tui.Grid({
 	       el: document.getElementById('bomGrid'),
-	       scrollX: false,
-	       scrollY: false,
+	       scrollX: false,	       
+	       bodyHeight: 200,
 	       columns: [		         
 	    	   		{
 	                 header: 'BOM 코드',

@@ -66,6 +66,10 @@ public interface EquipMapper {
 	
 	int eqMngUpdateAjax( HashMap<String, Object>list); // 설비관리 페이지 설비수정 버튼 기능부
 	
+	List<Map>getEqTemp(String lineCd); // 설비 가용온도 리스트 조회
+	
+	List<Map>eqModalSelect(); //비가동 설비 내역 - 설비 modal 조회
+	
 	// -----------------------------------------------------------
 	
 	List<Map> eqInaAll(); // 설비 비가동 리스트(설비비가동 페치지)
@@ -83,7 +87,6 @@ public interface EquipMapper {
 	int updateIna(Map<String, String> result); // 비가동 설비 재가동
 
 	
-
 	 
 	
 

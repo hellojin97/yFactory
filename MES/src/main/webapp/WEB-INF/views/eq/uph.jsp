@@ -5,13 +5,38 @@
 <head>
 <meta charset="UTF-8">
 <title>UPH PAGE</title>
+<style>
+
+
+</style>
+
+
 </head>
 <body>
-
+<div align="center">
+				<span>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR001" checked>
+					<label>LINE01</label>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR002">
+					<label>LINE02</label>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR003">
+					<label>LINE03</label>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR004">
+					<label>LINE04</label>
+				</span>
+		</div>
 
 
 <script>
 $(function(){
+	var uphOne;
+	var uphTwo;
+	var uphThre;
+	var uphFour;
+	
+	
+	
+	
     function getTime(){ // 현재시간 데이터 가져오기
     	  var now = new Date();
     	  var hours = now.getHours();
@@ -29,19 +54,19 @@ $(function(){
     	  
 	const el = document.getElementById('chart-UphArea');
       const data = {
-        categories: ['0','0','0','0','0','0','0','0','0','0'],
+        categories: ['0','0','0','0','0','0','0','0','0','0','0','0','0','0'],
         series: [
-          {
+        /*   {
             name: 'A',
-          	data: [0,0,0,0,0,0,0,0,0,0],
+          	data: [0],
           
           },
           {
             name: 'B',
-        	data: [0,0,0,0,0,0,0,0,0,0],
+        	data: [0],
           
            
-          },
+          }, */
         ],
       };
       const options = {
@@ -54,9 +79,9 @@ $(function(){
         yAxis: {
           title: 'Production Volume',
           scale: {
-              min: 3,
-              max: 20,
-              stepSize: 3,
+              min: 0,
+              max: 500,
+              stepSize: 100,
             },
         },
       
@@ -71,25 +96,65 @@ $(function(){
       };
 
       
-  
+      $.ajax({
+    	  url : "getEqTemp",
+    	  method:"GET",
+    	  contentType:"application/json; charset=utf-8"
+      }).done(function(res){
+    	  //console.log(res);
+    	for (var i = 0; i < res.length; i++) {
+			//console.log(res[i].설비코드);
+			uphOne = res[0].초당생산량;
+			
+			uphTwo = res[1].초당생산량;
+			
+			uphThre = res[2].초당생산량;
+
+			uphFour = res[3].초당생산량; 
+			chart.addSeries(
+					  {
+					    name: res[i].설비코드,
+						data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					  },
+					  { chartType: 'line' }
+					);
+		
+			
+		}
+      })
       
       const chart = toastui.Chart.lineChart({ el, data, options });
 
       let index = 1;
      const intervalId = setInterval(() => {
-        const firstData = Math.floor(Math.random() * (20-3) )+3;
-        //console.log("firstData:"+firstData);
-        
-        const secData = Math.round(Math.random() * (20-3))+3;
-        //console.log("secData:"+secData);
+    	 // DB에서 생산되는 누적 수량만 가져와야합니다
+       var firstData = Math.round(   Math.random() * (uphOne / 3600)  );
+	   var secData = Math.round(    Math.random() * (uphTwo / 3600)   );
+	   var thirdData = Math.round(  Math.random() * (uphThre / 3600)  );
+	   var fourthData = Math.floor(	Math.random() * (uphFour / 3600 ) )
        
-        chart.addData([firstData, secData], getTime()); // 각 데이터의 Y값(온도)을 업데이트 , 하단X값의 업데이트 되는 항목들
+	    if(firstData == 0){
+	    	firstData = 3;
+	    }
+	    if(secData == 0){
+	    	secData = 3;
+	    }
+	    if(thirdData == 0){
+	    	thirdData = 3;
+	    }
+	    if(fourthData == 0){
+	    	fourthData = 3;
+	    }
+	    
+	    
+	    
+        chart.addData([firstData, secData , thirdData ,fourthData], getTime()); // 각 데이터의 Y값(온도)을 업데이트 , 하단X값의 업데이트 되는 항목들
        
         index += 1;
        
-        if (index === 50) {
+       /*  if (index === 100) {
           clearInterval(intervalId);
-        }
+        } */
       }, 1500); 
 
 });

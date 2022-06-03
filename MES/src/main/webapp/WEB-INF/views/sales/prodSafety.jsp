@@ -5,14 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 		<div style="padding-bottom:15px; color: ;">
@@ -68,14 +60,6 @@
 		</div>
 
 </body>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 	myBtn.addEventListener("click", function(){
@@ -121,7 +105,7 @@
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 10
+			perPage : 1
 		}
 	});
 	
@@ -210,8 +194,14 @@
 		var data2 =parseInt($(this).find("[data-column-name = '안전수량']").find("div").text());
 	    if(data1 < data2){
 	    	$(this).find("[data-column-name = '완제품수량']").css("background-color", "pink");
+	    }else{
+	    	$(this).find("[data-column-name = '완제품수량']").css("background-color", "#f4f4f4");
 	    } 
 	});
+	
+	listProdLot.on("afterPageMove", function(e){		
+		setTimeout(listColor, 10);
+	})
 }
 
  </script>

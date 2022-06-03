@@ -88,6 +88,14 @@ public class ProcAjaxController {
 		
 		return procService.ProcPlanInsert(procPI);
 	}
+	
+	// 생산지시등록
+	@PostMapping("/prdInsInsert")
+	public int prdInsInsert(@RequestParam Map<String, Object> prdIns) {
+		System.out.println(prdIns);
+		return procService.prdInsInsert(prdIns);
+	}
+	
 	//procDtPlanSelect
 	//@GetMapping("/prdSelectOne")
 	// 생산미지시계획
@@ -177,6 +185,13 @@ public class ProcAjaxController {
 		
 		return procService.procProcessCheckList();
 	}
+	
+	// 공정 실적 조회 - 단건 조회
+	@PostMapping("/searchProcResult")
+	public List<Map> searchProcResult(@RequestParam Map<String, String> result){
+		return procService.searchProcResult(result);
+	}
+	
 	
 	@PostMapping("/procCancelPl")
 	public int procCancelPl(@RequestParam Map<String, String> Cancel) {

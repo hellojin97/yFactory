@@ -43,8 +43,6 @@ public class ajaxController {
 	
 	
 	
-	
-	
 
 	// 조회 클릭시 리스트를 가져오는 메서드
 	@GetMapping("/getEqDivList") // 전체리스트
@@ -121,8 +119,6 @@ public class ajaxController {
 	
 	@PostMapping("/updateIna") // 비가동 설비 재가동
 	public int updateIna(@RequestParam Map<String, String> result) {
-		System.out.println("11111111111111"+result);
-		System.out.println(mapper.updateIna(result));
 		return mapper.updateIna(result);
 	}
 
@@ -192,6 +188,17 @@ public class ajaxController {
 	}
 	
 	
+	// 설비 가용온도 리스트 
+		@RequestMapping("/getEqTemp")
+		public List<Map> getEqTemp(String lineCd) {
+			 return mapper.getEqTemp(lineCd); 
+		}
+		
+	// 비가동 설비 내역 - 설비 modal 조회
+		@RequestMapping("/eqModalSelect")
+		public List<Map> eqModalSelect() {
+			return mapper.eqModalSelect();
+		}
 	
 	
 	

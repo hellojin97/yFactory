@@ -144,6 +144,19 @@ public class EquipServiceImpl implements EquipService{
 		return mapper.updateIna(result);
 
 	}
+
+	@Override
+	public List<Map> getEqTemp(String lineCd) {
+		
+		return mapper.getEqTemp(lineCd);
+	}
+
+	@Override
+	public List<Map> eqModalSelect() {
+		return mapper.eqModalSelect();
+	}
+
+
 	
 	
 	

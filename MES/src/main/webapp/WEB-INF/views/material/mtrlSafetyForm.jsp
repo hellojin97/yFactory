@@ -98,7 +98,9 @@
 		el : document.getElementById('mtrlSafetyTable'),
 		columns : [ {
 			header : '원자재코드',
-			name : '원자재코드'
+			name : '원자재코드',
+	        sortable: true,
+	        sortingType: 'asc'
 		}, {
 			header : '원자재명',
 			name : '원자재명'

@@ -106,7 +106,7 @@
           </li>
           
           <li>
-            <a href="">
+            <a href="mtrlInsertListForm">
               <i class="bi bi-circle"></i><span>원자재 입고조회</span>
             </a>
           </li>
@@ -244,6 +244,11 @@
           <li>
             <a href="eqRstat">
               <i class="bi bi-circle"></i><span>실시간 설비 상태</span>
+            </a>
+          </li>
+           <li>
+            <a href="popupTest">
+              <i class="bi bi-circle"></i><span>팝업테스트</span>
             </a>
           </li>
           

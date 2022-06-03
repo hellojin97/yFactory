@@ -16,7 +16,7 @@
 
 
 		<!-- Modal HTML -->
-		<div id="myModal" class="modal fade" tabindex="-1">
+		<div id="searchModal" class="modal fade" tabindex="-1">
 			<div class="modal-dialog modal-lg modal-dialog-scrollable">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -38,12 +38,11 @@
 
 <script>
 	$(function() {
-		const url = "getEqDivList";
+		const url = "eqModalSelect";
 		$.ajax(url, {
 			dataType : "JSON",
 		}).done(function(rs) {
 			grid2.resetData(rs);
-			console.log(rs);
 		})
 
 		const grid2 = new tui.Grid({
@@ -55,9 +54,10 @@
 			{
 				header : '설비코드',
 				name : '설비코드'
-			},
-
-			{
+			},{
+				header : '구분명',
+				name : '구분명'
+			},{
 				header : '설비명',
 				name : '설비명'
 			}
@@ -78,12 +78,10 @@
 		//debugger
 		let eqCd = grid2.getValue(e.rowKey, '설비코드');
 		let eqNm = grid2.getValue(e.rowKey , '설비명');
-		
-		
 		console.log(eqCd);
 		console.log(eqNm);
 		if(eqCd != null){
-			 $('#myModal').modal('hide');
+			 $('#searchModal').modal('hide');
 			 $("#eqCd").val(eqCd);
 			 $("#eqNm").val(eqNm);
 		}

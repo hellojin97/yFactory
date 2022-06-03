@@ -113,6 +113,8 @@
 			header : '원자재코드',
 			name : '원자재코드',
 			align: 'center',
+	        sortable: true,
+	        sortingType: 'asc'
 		}, {
 			header : '원자재명',
 			name : '원자재명'
@@ -133,7 +135,7 @@
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 10
+			perPage : 4
 		}
 	});
 

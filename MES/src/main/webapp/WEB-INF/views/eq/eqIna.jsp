@@ -5,14 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+	
+	
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 	<div style="padding-bottom:15px; color: ;">
@@ -106,10 +101,6 @@
 <input type="hidden" id="inEqCd"> 
 <input type="hidden" id="inEqNm">
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 <script>
 
@@ -156,12 +147,16 @@ $.ajax({
 
 var eqList = new tui.Grid({
     el: document.getElementById('eqList'),
+    scrollX: false,
+    bodyHeight: 200,
     columns: [
     	{
             header: '설비코드',
             name: '설비코드'
-          },
-          {
+          },{
+              header: '구분명',
+              name: '구분명'
+          },{
             header: '설비명',
             name: '설비명'
           },
@@ -184,9 +179,9 @@ var eqList = new tui.Grid({
     ],
     rowHeaders: ['rowNum'],
     pageOptions: {
-      useClient: true,
-      perPage: 5
-    }
+        type: 'scroll', 
+        perPage: 5 
+      }
   });
 
 	//비가동 설비 목록
@@ -208,8 +203,10 @@ var eqList = new tui.Grid({
       },{
         header: '설비코드',
         name: '설비코드'
-      },
-      {
+      },{
+          header: '구분명',
+          name: '구분명'
+      },{
         header: '설비명',
         name: '설비명'
       },
@@ -247,7 +244,9 @@ var eqList = new tui.Grid({
 				const eqInaModal = new bootstrap.Modal('#myModal');
 				eqInaModal.show();
 				});
-		  	}
+		  }else{
+			  toastr.warning('비가동중인 설비입니다!');
+		  }
 	  }
   })
   
@@ -266,8 +265,8 @@ var eqList = new tui.Grid({
   
   prodBtn.addEventListener("click", function(){
 	$("#seachModal").load("seachInaModal", function(){
-		const myModal = new bootstrap.Modal('#myModal');
-		myModal.show();
+		const searchModal = new bootstrap.Modal('#searchModal');
+		searchModal.show();
 	})
 	});
   
@@ -305,7 +304,7 @@ var eqList = new tui.Grid({
 			          		}else{
 			          				Swal.fire(
 			                      '승인이 취소되었습니다.',
-			                      '섹시하시네요~!',
+			                      '',
 			                      'error'
 			                  )
 			          			}

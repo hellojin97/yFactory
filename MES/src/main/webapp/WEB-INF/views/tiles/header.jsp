@@ -15,7 +15,6 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="home.do" class="logo d-flex align-items-center">
-
         <span class="d-none d-lg-block title" style=" color:#fad145 ; cursive;    font-family: 'GangwonEduPowerExtraBoldA'; font-style: italic;">YAFS</span>
         <span style="font-size: 11px; color:#ff8000; padding: 8px 0px 0px 7px ">Yedam Automize Factory System</span>
       </a>

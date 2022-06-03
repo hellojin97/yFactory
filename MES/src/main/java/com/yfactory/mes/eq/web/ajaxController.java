@@ -119,8 +119,6 @@ public class ajaxController {
 	
 	@PostMapping("/updateIna") // 비가동 설비 재가동
 	public int updateIna(@RequestParam Map<String, String> result) {
-		System.out.println("11111111111111"+result);
-		System.out.println(mapper.updateIna(result));
 		return mapper.updateIna(result);
 	}
 
@@ -194,6 +192,12 @@ public class ajaxController {
 		@RequestMapping("/getEqTemp")
 		public List<Map> getEqTemp(String lineCd) {
 			 return mapper.getEqTemp(lineCd); 
+		}
+		
+	// 비가동 설비 내역 - 설비 modal 조회
+		@RequestMapping("/eqModalSelect")
+		public List<Map> eqModalSelect() {
+			return mapper.eqModalSelect();
 		}
 	
 	

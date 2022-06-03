@@ -148,8 +148,8 @@ $("#outBtn").on("click", function(){
 		scrollX : false,
 		scrollY : false,
 		columns : [ {
-			header : '주문상세코드',
-			name : '주문상세코드',
+			header : '주문코드',
+			name : '주문코드',
 		}, {
 			header : '제품명',
 			name : '완제품명',

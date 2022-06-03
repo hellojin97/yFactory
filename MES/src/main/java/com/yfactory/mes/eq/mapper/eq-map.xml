@@ -5,26 +5,18 @@
 	<!-- 모달창에 설비 코드와 설비명 출력 쿼리 -->
 	<select id="searchEq" resultType="map">
 
-		SELECT EQ_CD "구분코드" , 
-					CASE WHEN LOWER(EQ_NM) LIKE 'yafs01' THEN '반죽기'
-                             WHEN LOWER(EQ_NM) LIKE 'yafs02' THEN '성형기'
-                             WHEN LOWER(EQ_NM) LIKE 'yafs03' THEN '냉각기'
-                             WHEN LOWER(EQ_NM) LIKE 'yafs04' THEN '포장기'
-                             END "구분명"
-		FROM EQ 
+		SELECT E.EQ_CD "구분코드" , COMM.CD_NM "구분명"
+		FROM EQ E , COMM_CODE COMM
+		WHERE E.EQ_NM = COMM.COMM_CD
 
 	</select>
 
 
 	<!-- 모달창에서 클릭한 데이터(설비코드)를 기반으로 코드와 이름을 가지고 오는 쿼리 (현재 사용X) -->
 	<select id="selectEq" resultType="map">
-		SELECT EQ_CD "설비코드",CASE WHEN LOWER(EQ_NM) LIKE 'yafs01' THEN '반죽기'
-                             WHEN LOWER(EQ_NM) LIKE 'yafs02' THEN '성형기'
-                             WHEN LOWER(EQ_NM) LIKE 'yafs03' THEN '냉각기'
-                             WHEN LOWER(EQ_NM) LIKE 'yafs04' THEN '포장기'
-                             END "설비구분" , EQ_MDNM "설비명"
-		FROM EQ 
-		WHERE EQ_CD = #{eqCd}
+		SELECT e.EQ_CD "설비코드", comm.COMM.CD_NM "설비구분" , e.EQ_MDNM "설비명"
+		FROM EQ e , COMM_CODE comm
+		WHERE e.EQ_CD = #{eqCd}
 
 	</select>
 	
@@ -49,7 +41,7 @@
 	
 	<!-- 설비관리페이지 전체 리스트 -->
 	<select id="searchEqMngList" resultType="map">
-	SELECT e.eq_cd "설비코드" , 
+	<!-- SELECT e.eq_cd "설비코드" , 
 				case when lower(eq_nm) like 'yafs01' then '반죽기'
                 	    when lower(eq_nm) like 'yafs02' then '성형기'
                         when lower(eq_nm) like 'yafs03' then '냉각기'
@@ -62,6 +54,17 @@
 				THEN 'Y' ELSE 'N' END "사용여부"
       FROM eq e, process prc
       WHERE e.eq_cd = prc.eq_cd(+)
+      ORDER BY 1 -->
+      SELECT e.eq_cd "설비코드" , 
+				COMM.CD_NM "설비구분",
+                e.eq_mdnm "설비명" , prc.proc_cd "공정코드" , 
+				prc.proc_nm	"공정명", e.eq_min "최저온도" , e.eq_max "최고온도"
+      			,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자",
+      			comm2.cd_nm "사용여부"
+      FROM eq e, process prc , COMM_CODE COMM , COMM_CODE COMM2
+      WHERE e.eq_cd = prc.eq_cd(+)
+      AND e.eq_nm = comm.comm_cd
+      AND e.eq_actst = comm2.comm_cd
       ORDER BY 1
 	</select>
 
@@ -179,7 +182,7 @@
 
 
 <select id="getEqChkList" resultType="map">
-SELECT  e.eq_cd "설비코드" ,
+<!-- SELECT  e.eq_cd "설비코드" ,
            e.eq_mdnm "설비명" , 
            e.eq_nm "설비구분" , 
            e.EQ_CHKCYC "점검주기", 
@@ -196,19 +199,31 @@ SELECT  e.eq_cd "설비코드" ,
            when chk.eq_chkr = 1051 then '김진환'
            end  "검수자"
 FROM eq e , eq_chk chk
+WHERE e.eq_cd = chk.eq_cd -->
+ SELECT e.eq_cd "설비코드" , e.eq_mdnm "설비명"  , comm.cd_nm "설비구분",
+            e.EQ_CHKCYC "점검주기", TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자", 
+            TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일", 
+            comm2.CD_NM "판정",
+            chk.EQ_CHKDTL "점검내역" , 
+            emp.emp_nm "검수자" 
+FROM eq e , eq_chk chk  , EMPLOYEE emp , 
+            COMM_CODE comm , COMM_CODE comm2
 WHERE e.eq_cd = chk.eq_cd
-
+AND e.eq_inster = emp.emp_no
+AND e.eq_nm = comm.comm_cd
+AND chk.chk_rscd = comm2.comm_cd
 </select>
 
 
 <!-- 설비구분명 기준 점검미지정 설비 조회 (점검테이블에 존재하지 않는 설비들)  -->
 <select id="getEqChkSelectList" resultType="map">
-SELECT  	DISTINCT EQ_CD "설비코드" ,
- 				EQ_NM "설비명" , 
- 				EQ_CHKCYC "점검주기"
-FROM 		EQ
-WHERE 		eq_cd not in (select eq_cd from eq_chk)
-AND     		eq_nm  LIKE '%'||#{eq_nm}||'%'
+SELECT  	E.EQ_CD "설비코드" ,
+ 				COMM.CD_NM "설비명" , 
+ 				E.EQ_CHKCYC "점검주기"
+FROM 		EQ E , COMM_CODE COMM
+WHERE 		E.eq_cd not in (select eq_cd from eq_chk)
+AND     		E.eq_nm  LIKE '%'||#{eq_nm}||'%'
+AND			E.EQ_NM = COMM.COMM_CD
 <!-- AND 		chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd') --> 
 </select>
 
@@ -243,24 +258,20 @@ TO_DATE( sysdate,'yy/MM/dd'),
 
 <select id="dailyChkListAjax" resultType="map">
 SELECT  e.eq_cd "설비코드" ,
-           e.eq_mdnm "설비명" , 
-           e.eq_nm "설비구분" , 
+          	 e.eq_mdnm "설비명" , 
+            comm.cd_nm "설비구분" , 
            e.EQ_CHKCYC "점검주기", 
            TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
            TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
-           case when chk.chk_rscd = 'DIV01' then '재점검 필요' 
-           when chk.chk_rscd = 'DIV02' then '통과' 
-           END "판정",
+           comm2.CD_NM "판정",
            chk.EQ_CHKDTL "점검내역" ,
-           case 
-           when chk.eq_chkr = 1011 then '김세명'
-           when chk.eq_chkr = 1021 then '박진영'
-           when chk.eq_chkr = 1031 then '홍석민'
-           when chk.eq_chkr = 1041 then '이웅재'
-           when chk.eq_chkr = 1051 then '김진환'
-           end  "검수자"
-FROM 	eq e , eq_chk chk
+          emp.emp_nm  "검수자"
+FROM 	eq e , eq_chk chk , EMPLOYEE emp , 
+            COMM_CODE comm , COMM_CODE comm2
 WHERE e.eq_cd = chk.eq_cd
+AND e.eq_inster = emp.emp_no
+AND e.eq_nm = comm.comm_cd
+AND chk.chk_rscd = comm2.comm_cd
 AND 		chk.eq_chkdt IN 
 <foreach collection="list" item="item" open="(" separator=", "  close=")">
 		#{item.eq_chkdt}

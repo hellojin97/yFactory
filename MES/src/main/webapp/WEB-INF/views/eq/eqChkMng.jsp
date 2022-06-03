@@ -54,14 +54,10 @@ button:hover {
 						<label for="inputText" class="col-form-label"
 							style="padding-right: 27px;">설비구분</label> 
 							<select id="eq_nm" name="eq_nm">
-							<option value="반죽">반죽기</option>
-							<option value="성형">성형기</option>
-							<option value="가열">가열기</option>
-							<option value="1차선별">1차선별벨트</option>
-							<option value="초코프레">초코코팅기</option>
-							<option value="냉각">냉각기</option>
-							<option value="2차선별">2차선별벨트</option>
-							<option value="포장">포장기</option>
+							<option value="YAFS01">반죽기</option>
+							<option value="YAFS02">성형기</option>
+							<option value="YAFS03">냉각기</option>
+							<option value="YAFS04">포장기</option>
 						</select>&nbsp;&nbsp;&nbsp;
 						<button type="submit" class="btn btnpart" id="noChksearch">해당 비점검 조회</button>
 					</div>
@@ -132,6 +128,9 @@ $(function(){
 			   method: "GET"
 			   
 		   }).done(function(result){
+			   if(result.length ==0){
+				   toastr.error('LIST NOT EXIST');
+			   }
 			   modalGrid.resetData(result);
 			  console.log(result);
 		   });
@@ -233,7 +232,7 @@ $(function(){
 				//eq_chkdt1 = $("#eq_chkdt1").val();
 				//eq_chkdt2 = $("#eq_chkdt2").val();
 				
-				console.log(eq_nm);
+				console.log("eq_nm:"+eq_nm);
 				//console.log(eq_chkdt1);
 				//console.log(eq_chkdt2);
 					//모달 페이지 호출 부

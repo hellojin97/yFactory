@@ -119,7 +119,7 @@
 		FROM		prod pd, prod_lot pdlot, prod_curqty pdc
 		WHERE		pd.prod_cd = pdlot.prod_cd
 		AND     	pdlot.prod_lot = pdc.prod_lot
-		ORDER BY	pdlot.prod_fdt DESC;    
+		ORDER BY	pdlot.prod_fdt DESC    
 	</select>
 	
 	<!-- 완제품LOT검색 -->

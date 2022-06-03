@@ -429,22 +429,20 @@ order by 4
 	<!-- 안전재고 전체조회 -->
 	<select id="mtrlSafetyList" resultType="map">
 
-		SELECT m.mt_cd "원자재코드", 
-		            m.mt_nm "원자재명", 
-		            m.mt_unit "단위", 
-		            NVL( SUM(c.mt_qty), 0) "현재고",
-		            m.mt_sfqty "안전재고" 
-		FROM mt m, 
-		          mt_lot lot, 
-		          mt_curqty c 
-		WHERE m.mt_cd = lot.mt_cd 
-		AND lot.mt_lot = c.mt_loT
-		GROUP BY  m.mt_cd,
-		                 m.mt_nm,
-		                  m.mt_sfqty,
-		                  m.mt_unit
-		ORDER BY 1
-
+	SELECT m.mt_cd "원자재코드",
+		       m.mt_nm "원자재명",
+		       m.mt_unit "단위",
+		       CASE WHEN c.mt_qty IS NULL THEN 0
+               ELSE C.MT_QTY 
+               END AS "현재고",
+		       m.mt_sfqty "안전재고"
+		       
+		FROM   mt m,
+		       mt_lot lot,
+		       mt_curqty c
+		
+		WHERE  m.mt_cd = lot.mt_cd
+		AND    lot.mt_lot = c.mt_lot(+)
 	</select>   
 	
 	<!-- 안전재고 단건조회 -->

@@ -108,9 +108,15 @@
 		});
 	//미입고처리 모달
 	mtrlBtnAdd.addEventListener("click", function(){
+		//만약 그리드 내에 
+		
+		
+		
 		$("#test").load("mtrlExpectModal", function(){
 			const myModal = new bootstrap.Modal('#myModal',{backdrop : false , keyboard: false});
 			myModal.show();
+			test1 = listMtrlInsert.getData();
+			
 			$('.modal-dialog').draggable({
 			    handle: ".modal-header"
 			  });

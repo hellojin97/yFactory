@@ -33,7 +33,7 @@ GROUP BY    	ord.ord_cd,
 	</select>
 	<!-- 주문서 단건조회 -->
 	<select id="OrderSelectOk" resultType="map">
-	   SELECT 			            ordtl.ordtl_cd "주문상세코드" ,
+	   SELECT 			            ord.ord_cd "주문코드" ,
 								TO_CHAR(ord.req_dt,'YYYY-MM-DD') "주문일자",
 								TO_CHAR(ord.res_dt,'YYYY-MM-DD') "납기일자",
 								ordtl.prod_cd "완제품코드",
@@ -59,7 +59,7 @@ GROUP BY    	ord.ord_cd,
 		AND				 pl.prod_lot = pc.prod_lot
 		AND 			 ord.ord_cd = #{ordCd}
 		
-		group by ordtl.ordtl_cd,
+		group by ord.ord_cd,
 		             ord.req_dt,
 		             ord.res_dt,
 		             ordtl.prod_cd,

@@ -64,10 +64,6 @@
 				name: '검사일',
 				width: '80'
 			}, {
-				header: '불량량',
-				name: '불량량',
-				width: '60'
-			}, {
 				header: '불량코드',
 				name: '불량코드',
 				width: '80'
@@ -79,6 +75,10 @@
 				header: '납품업체명',
 				name: '납품업체명',
 				width: '140'
+			}, {
+				header: '불량량',
+				name: '불량량',
+				width: '60'
 			}, {
 				header: '단가',
 				name: '단가',

@@ -220,6 +220,8 @@
 		//procOrder.focus(selectedRowKey, '작업일자');
 	//}
 	console.log(workDate + ' ' + workQty + ' ' + dateRank);
+	
+	
 	$("#btnNeedMtrl").click(function () {
 	if(workDate != null && workQty != null && dateRank != null ){
 		if(workDate != bworkDate || bworkQty != workQty || bdateRank != dateRank){

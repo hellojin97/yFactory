@@ -20,9 +20,9 @@
    <link href="${pageContext.request.contextPath}/assets/img/favicon.png" rel="icon">
    <link href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 <!-- Google Fonts -->
-   <link href="https://fonts.gstatic.com" rel="preconnect">
-   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">  
-   <link rel="preconnect" href="https://fonts.googleapis.com">
+ 	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <!-- Vendor CSS Files -->
    <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
    <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -66,15 +66,18 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
-
 <style type="text/css"> 
   /* 폰트 */ 
-  @font-face {
-    font-family: 'GangwonEduPowerExtraBoldA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+
+	@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-} 
+}
+ 	.font_fm{
+ 		font-family: GongGothicLight;
+ 	}
    #header {
       width: 100%;
       height: 50px;
@@ -100,9 +103,9 @@
 </head>
 <!-- 타일즈 -->
 <body>
-   <div id="header"><tiles:insertAttribute name="header" /></div>
-   <div id="menu"><tiles:insertAttribute name="menu" /></div>
-   <div id="body"><div class="container"><tiles:insertAttribute name="body" /></div></div>
+   <div id="header" class="font_fm"><tiles:insertAttribute name="header" /></div>
+   <div id="menu" class="font_fm"><tiles:insertAttribute name="menu" /></div>
+   <div id="body" class="font_fm"><div class="container"><tiles:insertAttribute name="body" /></div></div>
    <!-- Vendor JS Files -->
       <script src="${pageContext.request.contextPath}/assets/vendor/apexcharts/apexcharts.min.js"></script>
       <script src="${pageContext.request.contextPath}/assets/vendor/chart.js/chart.min.js"></script>

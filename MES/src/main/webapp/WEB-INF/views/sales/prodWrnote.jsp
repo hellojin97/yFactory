@@ -378,28 +378,6 @@ $('#excel').on('click',function(){
 		listWrnOut.export('xlsx', options);
 	}
 })
-
-  
-  /* 출고 검색
-  $(".outSearch").on("click", function() {     
-     var pnm = $("#pnm").val();
-     var pcd = $("#pcd").val();
-     var fdt1 = $("#fdt1").val();
-     var fdt2 = $("#fdt2").val();     
-     $.ajax({
-        url : "searchWrnOut",
-        data : {
-              pnm : pnm,  
-              pcd : pcd,
-              fdt1 : fdt1,
-              fdt2 : fdt2
-        },
-        dataType: 'JSON',
-        contentType : "application/json; charset=utf-8"
-     }).done(function(result){         
-    	 listWrnOut.resetData(result);          
-     });
-  })*/
   
 
  </script>

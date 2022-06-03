@@ -172,6 +172,11 @@
               <i class="bi bi-circle"></i><span>공정실적조회</span>
             </a>
           </li>
+          <li>
+            <a href="procProcessCtl">
+              <i class="bi bi-circle"></i><span>공정관리</span>
+            </a>
+          </li>
         </ul>
       </li>
       

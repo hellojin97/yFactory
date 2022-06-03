@@ -105,7 +105,7 @@
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 10
+			perPage : 1
 		}
 	});
 	
@@ -194,8 +194,14 @@
 		var data2 =parseInt($(this).find("[data-column-name = '안전수량']").find("div").text());
 	    if(data1 < data2){
 	    	$(this).find("[data-column-name = '완제품수량']").css("background-color", "pink");
+	    }else{
+	    	$(this).find("[data-column-name = '완제품수량']").css("background-color", "#f4f4f4");
 	    } 
 	});
+	
+	listProdLot.on("afterPageMove", function(e){		
+		setTimeout(listColor, 10);
+	})
 }
 
  </script>

@@ -1,7 +1,11 @@
 package com.yfactory.mes.proc.web;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.yfactory.mes.proc.service.ProcService;
@@ -42,6 +46,11 @@ public class ProcController {
 	public String procManagement() {
 		
 		return "proc/procManagement";
+	}
+	@GetMapping("/procProcessCtl")
+	public String procProcessCtl() {
+		
+		return "proc/procProcessCtl";
 	}
 
 	// 주문서목록 모달
@@ -90,5 +99,7 @@ public class ProcController {
 	public String procResultNmModal() {
 		return "proc/procmodal/procResultNmModal";
 	}
+	
+
 
 }

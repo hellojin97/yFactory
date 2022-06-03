@@ -42,7 +42,7 @@
 		AND M.MT_CD = MPD.MT_CD
 		AND MC.CHK_MNGR = E.EMP_NO
 		AND MCD.CHK_DTL_INSP = 'MTRL01'
-		ORDER BY 1
+		ORDER BY 2
 	</select>
 	
 	<!-- 자재검사결과 조회 -->
@@ -50,14 +50,15 @@
 		SELECT	DISTINCT MCD.PO_CD "발주코드", MCD.CHK_CD "품질검사코드", MCD.MT_CD "자재코드", 
 		        M.MT_NM "자재명", E.EMP_NM "담당인", TO_CHAR(MCD.CHK_DT,'YYYY-MM-DD') "검사일", MPD.PO_QTY "발주량", 
 		        MCD.CHK_PASS "합격량", MEL.CHK_ERRQTY "불량량", MEL.ERR_CD "불량코드", 
-		        ERR.ERR_DTL "불량사유", MCD.CHK_DTL_INSP "상태"
+		        ERR.ERR_DTL "불량사유", CC.CD_NM"상태"
 		FROM 	MT_CHK_DTL MCD, 
 		        MT M, 
 		        EMPLOYEE E,
 		        MT_PODTL MPD, 
 		        MT_ERRLIST MEL, 
 		        ERR_CODE ERR, 
-		        MT_CHK CHK
+		        MT_CHK CHK,
+		        COMM_CODE CC
 		WHERE 	MEL.CHK_CD = MCD.CHK_CD
 		AND 	MEL.ERR_CD = ERR.ERR_CD(+)
 		AND 	MCD.MT_CD = M.MT_CD
@@ -66,8 +67,9 @@
 		AND 	CHK.CHK_MNGR = E.EMP_NO
 		AND 	MCD.MT_CD = MPD.MT_CD
 		AND 	MCD.PO_CD = MPD.PO_CD
+		AND		MCD.CHK_DTL_INSP = CC.COMM_CD
 		AND		MCD.CHK_DTL_INSP = 'MTRL02'
-		ORDER BY 6
+		ORDER BY 2
 	</select>
 	
 	<!-- 제품검사결과 조회 -->
@@ -82,7 +84,7 @@
 				PE.ERR_QTY AS "불량량",
 				PE.ERR_CD AS "불량코드",
 				ERR.ERR_DTL AS "불량내역",
-				PS.PROC_ST AS "상태"
+				CC.CD_NM AS "상태"
 		
 		FROM 	PROD_ERR PER,
 				PROD_LOT PLO,
@@ -92,7 +94,8 @@
 				PROD P,
 				PROC_ST PS,
 				PROC_ERR PE,
-				ERR_CODE ERR
+				ERR_CODE ERR,
+				COMM_CODE CC
 		
 		WHERE 	PER.PROD_LOT = PLO.PROD_LOT
 		AND 	PPR.PRD_DTLCD = PID.PRD_DTLCD
@@ -100,6 +103,7 @@
 		AND 	PID.PROD_CD = P.PROD_CD
 		AND 	PS.PROC_PRCD = PPR.PROC_PRCD
 		AND 	PS.LINE_TURN = PPR.LINE_TURN
+		AND		PS.PROC_ST = CC.COMM_CD
 		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
 		AND 	PE.LINE_TURN = PPR.LINE_TURN
 		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
@@ -121,7 +125,8 @@
 		AND 	M.VDR_CD = V.VDR_CD
 		AND 	CHK.CHK_MNGR = E.EMP_NO
 		AND 	MCD.CHK_DTL_INSP = 'MTRL02'
-		ORDER BY 5
+		AND 	MEL.ERR_CD IS NOT NULL
+		ORDER BY 1
 	</select>
 	<!-- 제품불량내역 조회 -->
 	<select id="selectProdErrList" resultType="map">
@@ -135,6 +140,8 @@
 		WHERE	PER.ERR_CD = ERR.ERR_CD
 		AND		P.PROD_CD = PL.PROD_CD
 		AND		PER.PROD_LOT = PL.PROD_LOT
+		AND 	PERL.ERR_CD IS NOT NULL
+		ORDER BY 1
 	</select>
 
 	<!-- 검색 -->

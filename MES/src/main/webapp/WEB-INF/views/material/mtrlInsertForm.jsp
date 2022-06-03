@@ -8,32 +8,37 @@
 </head>
 <body onkeyup="on_key_up()">
 
-		<h1>원자재 입고관리</h1>
-<form>
+	<h1>원자재 입고관리</h1>
+	<form>
 		<div style="background-color: #e9ecef; padding: 8px;">
 			<div class="mainTitle" style="padding: 15px;">
 				<!-- 자재명 -->
-				
+
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
-					
-						<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재명</label> 
-						<input type="text" class="form-control" style="width: 50px" id="mtNminput" placeholder="자재명">
-						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn"> 
-							<i class="bi bi-search"style="color: #2c3e50"></i>
-						</a> 
-						<input type="text" class="form-control" id="mtCdinput" readonly="readonly">
+
+						<label for="inputText" class="col-form-label"
+							style="padding-right: 27px;">자재명</label> <input type="text"
+							class="form-control" style="width: 50px" id="mtNminput"
+							placeholder="자재명"> <a
+							class="nav-link nav-icon search-bar-toggle " id="myBtn"
+							onclick="myBtn"> <i class="bi bi-search"
+							style="color: #2c3e50"></i>
+						</a> <input type="text" class="form-control" id="mtCdinput"
+							readonly="readonly">
 					</div>
 				</div>
 				<!-- 업체명 -->
 				<div class="col-md-5 " style="padding-bottom: 10px;">
 					<div class="input-group  " style="padding-bottom: 10px;">
-						<label for="inputText" class="col-form-label"style="padding-right: 27px;">업체명</label> 
-						<input type="text" class="form-control" style="width: 50px" id="vdrNminput" placeholder="업체명">
-						<a class="nav-link nav-icon search-bar-toggle "id="vdr" onclick="vdr"> 
-							<i class="bi bi-search" style="color: #2c3e50"></i>
-						</a> 
-						<input type="text" class="form-control" id="vdrCdinput" readonly="readonly">
+						<label for="inputText" class="col-form-label"
+							style="padding-right: 27px;">업체명</label> <input type="text"
+							class="form-control" style="width: 50px" id="vdrNminput"
+							placeholder="업체명"> <a
+							class="nav-link nav-icon search-bar-toggle " id="vdr"
+							onclick="vdr"> <i class="bi bi-search" style="color: #2c3e50"></i>
+						</a> <input type="text" class="form-control" id="vdrCdinput"
+							readonly="readonly">
 					</div>
 				</div>
 
@@ -54,7 +59,7 @@
 						</div>
 
 						<div style="padding-right: 10px;">
-							<button class="btn1"  type="button" id="search">조회</button>
+							<button class="btn1" type="button" id="search">조회</button>
 						</div>
 
 						<div>
@@ -66,19 +71,19 @@
 			</div>
 			<hr style="border: solid 1px gray;">
 			<div>
-				<div style="display: inline-block; float: right;" >
-					<button class="btn1"  type="button" id="btnSav">저장</button>
-				</div>
-	
 				<div style="display: inline-block; float: right;">
-					<button class="btn1" type="reset" id="reset">삭제</button>
+					<button class="btn1" type="button" id="btnSav">저장</button>
 				</div>
-				
+
+				<div style="display: inline-block; float: right;">
+					<button class="btn1" type="button" id="delete">삭제</button>
+				</div>
+
 				<div style="display: inline-block; float: right;">
 					<button class="btn1" type="reset" id="mtrlBtnAdd">추가</button>
 				</div>
 			</div>
-			
+
 			<!-- 테이블 -->
 			<div class="code-html contents" style="padding-bottom: 10px;">
 				<div id="mtrlInsertList"></div>
@@ -86,8 +91,8 @@
 			</div>
 
 		</div>
-</form>
-	
+	</form>
+
 
 </body>
 
@@ -108,9 +113,15 @@
 		});
 	//미입고처리 모달
 	mtrlBtnAdd.addEventListener("click", function(){
+		//만약 그리드 내에 
+		
+		
+		
 		$("#test").load("mtrlExpectModal", function(){
 			const myModal = new bootstrap.Modal('#myModal',{backdrop : false , keyboard: false});
 			myModal.show();
+			test1 = listMtrlInsert.getData();
+			
 			$('.modal-dialog').draggable({
 			    handle: ".modal-header"
 			  });
@@ -176,12 +187,8 @@
 		}
 	});
 
-  $("#btnSav").click(function () {
-	  
+  $("#btnSav").click(function () {	  
 	  let mtrl = listMtrlInsert.getCheckedRows();
-	  
-	  
-	  
       Swal.fire({
           title: '정말로 그렇게 하시겠습니까?',
           text: "다시 되돌릴 수 없습니다. 신중하세요.",
@@ -191,10 +198,7 @@
           cancelButtonColor: '#d33',
           confirmButtonText: '승인',
           cancelButtonText: '취소'
-      }).then((result) => {
-    	 
-			
-		
+      }).then((result) => {	
           if (result.isConfirmed) {
         	  for (var i = 0; i < mtrl.length; i++) {
         	  $.ajax({
@@ -206,9 +210,7 @@
         	  }).done(function(result){
         		  console.log(result);
         	  })
-          }  
-        	  
-        	  
+          }        	  
               Swal.fire(
                   '승인이 완료되었습니다.',
                   '화끈하시네요~!',
@@ -265,5 +267,14 @@ $('#reset').on('click',function(){
 	     console.log(result);
 	   });
 })
+
+/* 행삭제 */
+ $('#delete').on('click', function(e){
+	let value = listMtrlInsert.getCheckedRows(e);
+	console.log(value);
+	listMtrlInsert.removeCheckedRows();
+})//end of 행삭제 
+
+
  </script>
 </html>

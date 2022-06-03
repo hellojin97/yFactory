@@ -182,6 +182,16 @@ $.ajax({
 	     console.log(result);
 	   });
 })
+
+//excel호출
+$('#excel').on('click',function(){
+	const options = {
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: '원자재발주조회',
+			};
+	mtrlReqList.export('xlsx', options);
+})
 	
 </script>
 

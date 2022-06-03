@@ -125,19 +125,9 @@ unorder.on("dblclick",function(e) {
 				if(result[i].구분 != null){
 	  				
 					prodPlan.appendRow(result[i]);	
-				} else {
-					swal.fire(
-							'필요자재 계산 결과, \n발주가 필요하지 않습니다.',
-		                     '새로고침합니다.',
-		                     'error'
-							
-					).then(function(){
-						location.reload();
-					}) // end of swal
-				}			
+				} 		
 			}
 	  		console.log(result)
-
 	  	 }).fail(function(result){
 	  	    console.log(result);
 	     });

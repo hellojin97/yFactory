@@ -13,6 +13,8 @@
 <!-- JQUERY -->
    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+<!-- 엑셀 -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>  
 <!-- Favicons -->
    <link href="${pageContext.request.contextPath}/assets/img/favicon.png" rel="icon">
    <link href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -49,8 +51,6 @@
       <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
       <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
       <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
-   <!-- 엑셀 -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>  
 <!-- END js -->  
 
 <style type="text/css"> 
@@ -91,7 +91,6 @@
    <div id="body"><div class="container"><tiles:insertAttribute name="body" /></div></div>
    <!-- Vendor JS Files -->
       <script src="${pageContext.request.contextPath}/assets/vendor/apexcharts/apexcharts.min.js"></script>
-      <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
       <script src="${pageContext.request.contextPath}/assets/vendor/chart.js/chart.min.js"></script>
       <script src="${pageContext.request.contextPath}/assets/vendor/echarts/echarts.min.js"></script>
       <script src="${pageContext.request.contextPath}/assets/vendor/quill/quill.min.js"></script>
@@ -100,6 +99,6 @@
       <script src="${pageContext.request.contextPath}/assets/vendor/php-email-form/validate.js"></script>
    <!-- Template Main JS File -->
       <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

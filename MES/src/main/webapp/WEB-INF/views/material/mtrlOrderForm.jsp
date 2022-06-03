@@ -6,13 +6,6 @@
 <meta charset="UTF-8">
 <title>발주관리</title>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/toast/css/tui-grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-pagination.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/toast/css/tui-chart.css" />
-
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <style type="text/css">
 .clickB {     
 	color: black;
@@ -57,12 +50,6 @@
 
 </body>
 
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
-
 <script>
 
 //발주 관리
@@ -84,7 +71,12 @@ $.ajax({
 	method : "GET",
 	dataType : "JSON",
 	success : function(result){
-		unorder.resetData(result);
+		
+		for (var i = 0; i < result.length; i++) {
+			if(result[i].PD_QTY != null){
+				unorder.appendRow(result[i]);
+			}
+		}
 		
 	}
 });
@@ -94,19 +86,19 @@ var unorder = new tui.Grid({
     columns: [
       {
         header: '생산계획코드',
-        name: 'pp_cd'
+        name: 'PP_CD'
       },
       {
         header: '생산계획명',
-        name: 'pp_nm'
+        name: 'PP_NM'
       },
       {
         header: '계획등록일자',
-        name: 'pp_dt'
+        name: 'PP_DT'
       },
       {
         header: '총 수량',
-        name: 'pd_qty'
+        name: 'PD_QTY'
       }
       
     ],
@@ -119,7 +111,7 @@ var unorder = new tui.Grid({
 //생산계획코드 불러오기
 unorder.on("dblclick",function(e) {
 //debugger
-   let ppCd1 = unorder.getValue(e.rowKey, 'pp_cd');
+   let ppCd1 = unorder.getValue(e.rowKey, 'PP_CD');
    console.log(ppCd1);
    $.ajax({
 		url: "mtrlPlan",
@@ -132,9 +124,16 @@ unorder.on("dblclick",function(e) {
 	  		for (var i = 0; i < result.length; i++) {
 				if(result[i].구분 != null){
 	  				
-					prodPlan.appendRow(result[i]);
-					
-					
+					prodPlan.appendRow(result[i]);	
+				} else {
+					swal.fire(
+							'필요자재 계산 결과, \n발주가 필요하지 않습니다.',
+		                     '새로고침합니다.',
+		                     'error'
+							
+					).then(function(){
+						location.reload();
+					}) // end of swal
 				}			
 			}
 	  		console.log(result)
@@ -147,22 +146,15 @@ unorder.on("dblclick",function(e) {
   //생산계획별 자재재고 토스트
   var prodPlan = new tui.Grid({
     el: document.getElementById('prodPlan'),
+    
     columns: [
       {
-        header: '완제품코드',
-        name: '완제품코드'
-      },
-      {
-        header: '완제품명',
-        name: '완제품명'
+        header: '원자재코드',
+        name: '원자재코드'
       },
       {
         header: '계획일자',
         name: '계획일자'
-      },
-      {
-        header: '원자재코드',
-        name: '원자재코드'
       },
       {
           header: '원자재명',
@@ -183,21 +175,22 @@ unorder.on("dblclick",function(e) {
     rowHeaders: ['rowNum'],
     pageOptions: {
       useClient: true,
-      perPage: 3
+      
+      
     }
   });
   
 //생산계획코드,자재코드 불러오기
   prodPlan.on("dblclick",function(e) {
-  //debugger
-     
-     let ppCd =  prodPlan.getValue(e.rowKey, '생산계획코드');
-	 let mtCd  = prodPlan.getValue(e.rowKey, '원자재코드');
+	 let ppCd = prodPlan.getValue(e.rowKey, '생산계획코드');
+	 let mtCd =	prodPlan.getValue(e.rowKey, '원자재코드');
+     let row = prodPlan.getRow(e);
+		console.log(e.rowKey);
+		prodPlan.removeRow(e.rowKey);
 	
-     console.log(ppCd);
-	 console.log(mtCd);
-	 	
-	 	// AJAX 발주등록 DATA 요청
+	
+	 
+ 	 	// AJAX 발주등록 DATA 요청
 	 	$.ajax({
 	 		url : 'mtrlOrderList',
 	 		method : 'GET',
@@ -211,15 +204,15 @@ unorder.on("dblclick",function(e) {
 				}
 	 			
 	 			
-	 	})
+	 	}) 
 	 	
 	 
      }
-  )
+  ) // end of [prodPlan Event]
   //발주서 요청 조회
   var mtrlRequest = new tui.Grid({
     el: document.getElementById('mtrlRequest'),
-        
+    
     columns: [
       {
         header: '원자재코드',
@@ -257,6 +250,7 @@ unorder.on("dblclick",function(e) {
     rowHeaders : [ 'checkbox' ],
     pageOptions: {
       useClient: true,
+      
       perPage: 5
     }
   });
@@ -327,7 +321,12 @@ unorder.on("dblclick",function(e) {
           }
       });
 	 
-  })
+  		}) //end of event
+  		
+  		
+  		/* 클릭시 row 삭제 */
+  		
+  		
 
 </script>
 

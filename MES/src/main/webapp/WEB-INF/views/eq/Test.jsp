@@ -4,14 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
 <title>Insert title here</title>
+
+<style type="text/css">
+button {
+size : 30px;
+}
+
+</style>
+
+
 </head>
 <body>
 
 <div class="timepicker"></div>
-
+<input type="button" value="팝업테스트" onclick="goPopUp()">
 
 </body>
 <script >
@@ -26,6 +34,11 @@ $('.timepicker').timepicker({
     dropdown: true,
     scrollbar: true
 });
+
+function goPopUp(){
+	window.open("popup", "a", "left=100, top=50");
+}
+
 
 
 </script>

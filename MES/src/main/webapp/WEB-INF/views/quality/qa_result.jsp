@@ -26,15 +26,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/assets/toast/js/tui-pagination.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/assets/toast/js/tui-grid.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 
 	<script>
 		// 페이지 onload

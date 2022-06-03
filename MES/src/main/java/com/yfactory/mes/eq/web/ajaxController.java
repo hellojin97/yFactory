@@ -43,8 +43,6 @@ public class ajaxController {
 	
 	
 	
-	
-	
 
 	// 조회 클릭시 리스트를 가져오는 메서드
 	@GetMapping("/getEqDivList") // 전체리스트
@@ -192,6 +190,11 @@ public class ajaxController {
 	}
 	
 	
+	// 설비 가용온도 리스트 
+		@RequestMapping("/getEqTemp")
+		public List<Map> getEqTemp(String lineCd) {
+			 return mapper.getEqTemp(lineCd); 
+		}
 	
 	
 	

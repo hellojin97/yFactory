@@ -34,6 +34,7 @@
   <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
   
   <!-- END CSS -->
+  
 	
 	
    
@@ -55,11 +56,12 @@
               <div class="card mb-3">
 
                 <div class="card-body">
-				<div class="">
-                    <h5 class="loginTitle">YAFS</h5>
+				<div style="text-align: center;">
+                    <a href="home.do"><span class="loginTitle">YAFS</span>
+                    </a>
                     <p class="loginSubTitle">Yedam Automize Factory System</p>
                   </div>
-                  <form action="userLogin" class="row g-3 needs-validation" novalidate>
+                  <form action="userLogin" method="post" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">이메일</label>
                       <div class="input-group has-validation">
@@ -111,7 +113,11 @@
   <!-- Template Main JS File -->
   <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 <script>
-
+if('${message}' != ''){
+	alert('${message}');
+	location.href ='loginForm.do';
+	
+}
 
 </script>
 </body>

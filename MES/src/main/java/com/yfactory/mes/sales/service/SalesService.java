@@ -48,11 +48,17 @@ public interface SalesService {
 	//출고 완제품 modal 조회
 	List<Map> outProdModal(String key);
 	
-	//출고등록
-	int releaseOrder(Map<String, String> result);
-	
 	//주문서 조회 - 주문 상세 조회 그리드
 	List<Map> ordtlModalList(String key);
+	
+	//완제품 안전 재고 조회
+	List<Map> prodSafetyList();
+	
+	//완제품 안전 재고 검색
+	List<Map> searchProdSafety(Map<String, String> result);
+	
+	//출고등록
+	int releaseOrder(Map<String, String> result);
 	
 	//완제품 안전 재고 수정
 	int updateSafe(Map<String, String> result);

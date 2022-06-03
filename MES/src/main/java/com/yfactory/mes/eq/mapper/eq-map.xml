@@ -296,6 +296,7 @@ SELECT E.EQ_CD "설비코드",EQ_UPH "초당생산량" , E.EQ_MIN "최소온도"
 FROM EQ E , PROCESS PRC ,LINE LN
 WHERE E.EQ_CD = PRC.EQ_CD
 AND PRC.PROC_CD = LN.PROC_CD
+AND line_cd = #{lineCd}
 </select>
 
 

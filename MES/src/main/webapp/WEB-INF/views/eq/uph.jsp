@@ -15,7 +15,7 @@ $(function(){
 	var uphOne;
 	var uphTwo;
 	var uphThre;
-	//var uphFour;
+	var uphFour;
 	
 	
 	
@@ -62,9 +62,9 @@ $(function(){
         yAxis: {
           title: 'Production Volume',
           scale: {
-              min: 3,
-              max: 10,
-              stepSize: 3,
+              min: 0,
+              max: 500,
+              stepSize: 100,
             },
         },
       
@@ -92,9 +92,8 @@ $(function(){
 			uphTwo = res[1].초당생산량;
 			
 			uphThre = res[2].초당생산량;
-		
-			/* 
-			uphFour = res[3].초당생산량; */
+
+			uphFour = res[3].초당생산량; 
 			chart.addSeries(
 					  {
 					    name: res[i].설비코드,
@@ -112,10 +111,10 @@ $(function(){
       let index = 1;
      const intervalId = setInterval(() => {
     	 // DB에서 생산되는 누적 수량만 가져와야합니다
-    	 var firstData = Math.round(   Math.random() * (uphOne / 3600)  );
-	     var secData = Math.round(    Math.random() * (uphTwo / 3600)   );
-	     var thirdData = Math.round(  Math.random() * (uphThre / 3600)  );
-	    //	var fourthData = Math.floor((Math.random() * (uphFour - 10)) + 10);
+       var firstData = Math.round(   Math.random() * (uphOne / 3600)  );
+	   var secData = Math.round(    Math.random() * (uphTwo / 3600)   );
+	   var thirdData = Math.round(  Math.random() * (uphThre / 3600)  );
+	   var fourthData = Math.floor(	Math.random() * (uphFour / 3600 ) )
        
 	    if(firstData == 0){
 	    	firstData = 3;
@@ -126,10 +125,13 @@ $(function(){
 	    if(thirdData == 0){
 	    	thirdData = 3;
 	    }
+	    if(fourthData == 0){
+	    	fourthData = 3;
+	    }
 	    
 	    
 	    
-        chart.addData([firstData, secData , thirdData], getTime()); // 각 데이터의 Y값(온도)을 업데이트 , 하단X값의 업데이트 되는 항목들
+        chart.addData([firstData, secData , thirdData ,fourthData], getTime()); // 각 데이터의 Y값(온도)을 업데이트 , 하단X값의 업데이트 되는 항목들
        
         index += 1;
        

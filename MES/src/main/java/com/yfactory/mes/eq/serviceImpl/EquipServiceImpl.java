@@ -146,10 +146,12 @@ public class EquipServiceImpl implements EquipService{
 	}
 
 	@Override
-	public List<Map> getEqTemp() {
+	public List<Map> getEqTemp(String lineCd) {
 		
-		return mapper.getEqTemp();
+		return mapper.getEqTemp(lineCd);
 	}
+
+
 	
 	
 	

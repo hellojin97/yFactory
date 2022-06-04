@@ -55,4 +55,10 @@ public class CommonServiceImpl implements CommonService {
 	public String userDept(int num) {
 		return map.userDept(num);
 	}
+
+	@Override
+	public String userProfile(int num) {
+		// TODO Auto-generated method stub
+		return map.userProfile(num);
+	}
 }

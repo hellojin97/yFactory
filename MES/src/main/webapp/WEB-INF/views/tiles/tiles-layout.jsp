@@ -75,7 +75,7 @@
     font-weight: normal;
     font-style: normal;
 }
- 	.font_fm{
+ 	.font_fm, h1,h2, h3, h4, h5, p{
  		font-family: GongGothicLight;
  	}
    #header {

@@ -27,4 +27,6 @@ public interface CommonMapper {
 		
 	//부서명
 		String userDept(int num);
+	//프로필사진
+		String userProfile(int num);
 }

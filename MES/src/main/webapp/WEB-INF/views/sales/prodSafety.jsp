@@ -86,19 +86,23 @@
 		el : document.getElementById('prodLotorder'),
 		columns : [ {
 			header : '제품코드',
-			name : '제품코드'
+			name : '제품코드',
+			align: 'center'
 		}, {
 			header : '제품명',
 			name : '제품명'
 		}, {
 			header : '단위',
-			name : '단위'
+			name : '단위',
+			align: 'center'
 		}, {
 			header : '완제품수량',
-			name : '완제품수량'
+			name : '완제품수량',
+			align: 'right'
 		}, {
 			header : '안전수량',
-			name : '안전수량'
+			name : '안전수량',
+			align: 'right'
 		}
 
 		],

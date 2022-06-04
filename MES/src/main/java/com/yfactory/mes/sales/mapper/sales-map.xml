@@ -31,8 +31,9 @@
 	SELECT 		 		b.bom_cd "BOM 코드",
 						b.mt_cd "원자재 코드", 
 				  		m.mt_nm "원자재명", 
-				 		b.cs_qty "소요량"
-	FROM 		    bom b,
+				 		b.cs_qty "소요량",
+				 		m.mt_unit "단위"
+	FROM 		    	bom b,
 			            prod pd, 
 			            mt m
 	WHERE 		b.prod_cd = pd.prod_cd

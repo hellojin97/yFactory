@@ -54,19 +54,23 @@ $.ajax({
 });
 
 var ordDtpList = new tui.Grid({
+	
     el: document.getElementById('ordDtpList'),
     columns: [
     	{
             header: '주문상세코드',
-            name: '주문상세코드'
+            name: '주문상세코드',
+			align: 'center'
           },
           {
             header: '주문코드',
-            name: '주문코드'
+            name: '주문코드',
+			align: 'center'
           },
           {
             header: '완제품코드',
-            name: '완제품코드'
+            name: '완제품코드',
+			align: 'center'
           },
           {
             header: '제품명',
@@ -74,17 +78,19 @@ var ordDtpList = new tui.Grid({
           },
           {
               header: '주문수량',
-              name: '주문수량'
+              name: '주문수량',
+  			align: 'right'
             },
           {
               header: '납기일자',
-              name: '납기일자'
+              name: '납기일자',
+  			align: 'center'
             }      
     ],
     rowHeaders: ['rowNum'],
     pageOptions: {
       useClient: true,
-      perPage: 10
+      perPage: 8
     }
   });
 
@@ -103,31 +109,38 @@ var ordDtpList = new tui.Grid({
     columns: [
       {
         header: '주문상세코드',
-        name: '주문상세코드'
+        name: '주문상세코드',
+		align: 'center'
       },
       {
         header: '완제품코드',
-        name: '완제품코드'
+        name: '완제품코드',
+		align: 'center'
       },
       {
         header: '완제품LOT번호',
-        name: '완제품LOT번호'
-      },
-      {
-        header: '출고날짜',
-        name: '출고날짜'
+        name: '완제품LOT번호',
+		align: 'center'
       },
       {
           header: '출고량',
-          name: '출고량'
+          name: '출고량',
+			align: 'right'
         },
+        {
+            header: '출고날짜',
+            name: '출고날짜',
+    		align: 'center'
+          },
       {
           header: '제조일자',
-          name: '제조일자'
+          name: '제조일자',
+			align: 'center'
         },
         {
             header: '유통기한',
-            name: '유통기한'
+            name: '유통기한',
+			align: 'center'
           }
     ],
     rowHeaders : [ 'checkbox' ]

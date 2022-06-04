@@ -95,22 +95,27 @@
 		el : document.getElementById('prodLotorder'),
 		columns : [ {
 			header : '완제품LOT',
-			name : '완제품LOT'
+			name : '완제품LOT',
+			align: 'center'
 		}, {
 			header : '제품코드',
-			name : '제품코드'
+			name : '제품코드',
+			align: 'center'
 		}, {
 			header : '제품명',
 			name : '제품명'
 		}, {
 			header : '완제품수량',
-			name : '완제품수량'
+			name : '완제품수량',
+			align: 'right'
 		}, {
 			header : '제조일자',
-			name : '제조일자'
+			name : '제조일자',
+			align: 'center'
 		}, {
 			header : '유통기한',
-			name : '유통기한'
+			name : '유통기한',
+			align: 'center'
 		}
 
 		],

@@ -86,7 +86,7 @@
 <select id="userProfile" resultType="String">
 	SELECT IMG_PATH
 	FROM   IMG_ATTATCH
-	WHERE  UUID = #{num}
+	WHERE  UUID = TO_CHAR(#{num},'9999')
 </select>
 
 </mapper>

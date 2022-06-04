@@ -83,4 +83,10 @@
 	WHERE   dept_no like #{num}
 </select>
 
+<select id="userProfile" resultType="String">
+	SELECT IMG_PATH
+	FROM   IMG_ATTATCH
+	WHERE  UUID = #{num}
+</select>
+
 </mapper>

@@ -244,7 +244,7 @@ resultGrid = new tui.Grid({
   		let eqArr = [];
   		var data = {};
   		for (var i = 0; i < idx; i++) {
-  				  if(releaseList.getValue(i, '작업종료시간') == null && releaseList.getValue(i, '상태') == '정지'){	
+  				  if(releaseList.getValue(i, '작업종료시간') == null && releaseList.getValue(i, '상태') == '긴급정지'){	
 		  		  data= {
 		  				eqCd : releaseList.getRow(i).설비코드,
 		  				procPrcd : releaseList.getRow(i).진행공정코드,

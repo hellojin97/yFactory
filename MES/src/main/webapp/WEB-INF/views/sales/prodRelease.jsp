@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>발주관리</title>
-
-
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 	<div style="padding-bottom:15px; color: ;">
@@ -242,7 +245,17 @@ var ordDtpList = new tui.Grid({
           }
       });
 	 
-  })
+  });
+  	
+//마우스 커서 올리면
+  ordDtpList.on('mouseover', function(e){
+  	var tt = e.targetType;
+  		if(tt == 'cell'){			
+  			$('#ordDtpList').attr("class", "smMouseOver");
+  		}else{
+  			$('#ordDtpList').removeClass();					
+  		}
+  });
   
 </script>
 

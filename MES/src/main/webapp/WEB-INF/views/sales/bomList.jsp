@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 <div style="padding-bottom:15px; color: ;">
@@ -206,9 +209,28 @@
 				  onlySelected: true,
 				  fileName: 'BOM조회',
 				};
-		prodGrid.export('xlsx', options);
-	})
-		
+		bomGrid.export('xlsx', options);
+	});
+	
+	//마우스 커서 올리면
+	prodGrid.on('mouseover', function(e){
+		var tt = e.targetType;
+			if(tt == 'cell' ){			
+				$('#prodGrid').attr("class", "smMouseOver");
+			}else{
+				$('#prodGrid').removeClass();
+			}
+	});
+	
+	bomGrid.on('mouseover', function(e){
+		var cn = e.columnName;
+		var tt = e.targetType;
+			if(cn == '소요량' && tt == 'cell'){			
+				$('#bomGrid').attr("class", "smMouseOver");
+			}else{
+				$('#bomGrid').removeClass();
+			}
+	});
   </script>
 
 </body>

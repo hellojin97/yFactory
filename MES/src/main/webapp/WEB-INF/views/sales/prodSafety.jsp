@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 		<div style="padding-bottom:15px; color: ;">
@@ -207,6 +212,16 @@
 		setTimeout(listColor, 10);
 	})
 }
+  
+//마우스 커서 올리면
+  listProdLot.on('mouseover', function(e){
+  	var tt = e.targetType;
+  		if(tt == 'cell' ){	
+  			$('#prodLotorder').attr("class", "smMouseOver");
+  		}else{
+  			$('#prodLotorder').removeClass();					
+  		}
+  });
 
  </script>
 

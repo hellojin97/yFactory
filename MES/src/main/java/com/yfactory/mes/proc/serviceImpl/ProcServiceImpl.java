@@ -282,6 +282,15 @@ public class ProcServiceImpl implements ProcService{
 
 
 
+@Override
+public List<Map> procLineAjax() {
+	// TODO Auto-generated method stub
+	return map.procLineAjax();
+}
+
+
+
+
 
 
 

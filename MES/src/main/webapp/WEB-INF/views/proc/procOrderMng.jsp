@@ -18,10 +18,10 @@
 </head>
 <body>
 	<div class="mainTitle">
-		<h3>생산지시관리</h3>
+		<h1>생산지시관리</h1>
 	</div>
 	<div>
-		<button id="btnNoPlanSelect" class="btn1">미지시 계획 조회</button>
+		<button id="btnNoPlanSelect" class="btn1" style="margin-bottom: 1em;">미지시 계획 조회</button>
 		
 	</div>
 	<div>
@@ -31,14 +31,14 @@
 	<div>
 	<h3>생산지시</h3>
 	<div id="procOrder"></div>
-	<button id="btnNeedMtrl">조회</button>
+	<button id="btnNeedMtrl" class="btn-warning btn-block" style="margin-bottom: 1em;">조회</button>
 	</div>
 	<div>
 	<h3>필요자재</h3>
 	<div id="needMtrl"></div>
 	</div>
 	<div>
-	<h3>필요자재LOT</h3>
+	<h3 style="margin-top: 1em;">필요자재LOT</h3>
 	<div id="needMtrlLOT"></div>
 	</div>
 		
@@ -50,7 +50,13 @@
 	var procOrder
 	var needMtrl
 	var needMtrlLOT
+
 	$(function(){
+		
+		
+		
+		
+		
 		var dtlCd = [];
 		procDtPlan = new tui.Grid({
 		el : document.getElementById('procDtPlan'),
@@ -115,13 +121,7 @@
 				editor : {
 	                  type : 'text',
 	                  }
-			},{
-				header : '비고',
-				name : '비고',
-				editor : {
-	                  type : 'text',
-	                  }
-			},
+			}
 			
 			],
 			rowHeaders : [ 'rowNum' ],
@@ -133,14 +133,13 @@
 		});
 		
 		
+		
+		
 			needMtrl = new tui.Grid({
 				el : document.getElementById('needMtrl'),
 				scrollX : false,
-				scrollY : false,
-				columns : [ {
-					header : '제품코드',
-					name : '제품코드',
-				}, {
+				bodyHeight : 200,
+				columns : [  {
 					header : '자재코드',
 					name : '자재코드',
 
@@ -155,6 +154,7 @@
 				rowHeaders : [ 'rowNum' ],
 				pageOptions : {
 					useClient : true,
+					type : 'scroll',
 					perPage : 5
 				}
 
@@ -178,11 +178,7 @@
 					}, {
 						header : '유통기한',
 						name : '유통기한',
-					},{
-						header : '지시디테일코드',
-						name : '지시디테일코드',
 					},
-					
 					],
 					rowHeaders : [
    				        {
@@ -200,6 +196,8 @@
 
 				});
 				
+				
+				
     
 	// focusChange 변수
 	let selectedRowKey = null;
@@ -215,6 +213,13 @@
 	workDate = procOrder.getValue(selectedRowKey, '작업일자');
 	workQty = procOrder.getValue(selectedRowKey, '작업수량');
 	dateRank = procOrder.getValue(selectedRowKey, '일자별 우선순위');
+	if(workQty != null){
+	procDtPlan.setValue(ev.rowKey,'생산지시량', workQty);
+	let Qty = procDtPlan.getValue(ev.rowKey, '계획량');
+	procDtPlan.setValue(ev.rowKey,'잔량', workQty-Qty);
+		
+	}
+	
 	temp = 
 	//if (lineCode != null){
 		//procOrder.focus(selectedRowKey, '작업일자');
@@ -293,6 +298,9 @@
 		})
 	
 	});
+	
+
+	
 			
 	</script>
 

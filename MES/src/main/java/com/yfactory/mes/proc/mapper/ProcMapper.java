@@ -69,4 +69,6 @@ public interface ProcMapper {
     
     List<Map> procProcessCheckList(); // 공정 체크박스 목록 조회
     List<Map> searchProcResult(Map<String, String> result); // 공정 실적 조회 - 단건 조회
+    
+    List<Map> procLineAjax(); // 공정흐름도
 }

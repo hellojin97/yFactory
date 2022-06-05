@@ -71,7 +71,11 @@ public interface ProcMapper {
     
     List<Map> searchProcResult(Map<String, String> result); // 공정 실적 조회 - 단건 조회
     
+
     List<Map> ProcNoUseEqSelect(String eqCd); // 미사용 설비 목록 조회
     
     List<Map> ProcCdNmSelect(String cdNm); // 공정 관리 선택 조회
+
+    List<Map> procLineAjax(); // 공정흐름도
+
 }

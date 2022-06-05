@@ -295,6 +295,11 @@ public List<Map> ProcNoUseEqSelect(String eqCd) {
 public List<Map> ProcCdNmSelect(String cdNm) {
 	// TODO Auto-generated method stub
 	return map.ProcCdNmSelect(cdNm);
+@Override
+public List<Map> procLineAjax() {
+	// TODO Auto-generated method stub
+	return map.procLineAjax();
+
 }
 
 

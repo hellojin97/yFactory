@@ -3,7 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -81,21 +85,31 @@
 		  
 	//자재명 검색
 	$("#prodSearch").on("click",function(){
+		pdSearch();
+	});
+		  
+	$("#prod").on("keydown", function(e){
+		if(e.keyCode == 13){
+			pdSearch();			
+		}
+	})
+		  
+	function pdSearch(){
 		var key = $("#prod").val();
 		console.log(key);
 	
-	$.ajax({
-		url : "prodModalSearch",
-		data : {
-			key : key
-		},
-		dataType: 'JSON',
-		contentType : "application/json; charset=utf-8"
-	}).done(function(result){
-		prodList.resetData(result);
-		
-	})
-	})
+		$.ajax({
+			url : "prodModalSearch",
+			data : {
+				key : key
+			},
+			dataType: 'JSON',
+			contentType : "application/json; charset=utf-8"
+		}).done(function(result){
+			prodList.resetData(result);			
+		});
+	}
+		  
 	//모달 데이터값 받아오기
 	prodList.on("dblclick",function(e) {
     //debugger
@@ -109,7 +123,17 @@
        $('#myModal').modal('hide');       
        }
     );
-
+		  
+		//마우스 커서 올리면
+		  prodList.on('mouseover', function(e){		  	
+		  	var tt = e.targetType;
+		  		if(tt == 'cell'){			
+		  			$('#prodGrid').attr("class", "smMouseOver");
+		  		}else{
+		  			$('#prodGrid').removeClass();
+		  		}
+		  });
+		
 	</script>
 </body>
 </html>

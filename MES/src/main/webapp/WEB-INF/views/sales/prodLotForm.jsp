@@ -5,10 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
-		<div style="padding-bottom:15px; color: ;">
+		<div style="padding-bottom:15px;">
 		<h1>완제품 LOT재고조회</h1>
 		</div>
 
@@ -159,8 +158,7 @@ $('#excel').on('click',function(){
 			  fileName: '주문서조회',
 			};
 	listProdLot.export('xlsx', options);
-})
-  
+});
 
  </script>
 

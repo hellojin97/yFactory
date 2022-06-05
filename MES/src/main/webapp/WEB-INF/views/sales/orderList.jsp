@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 
@@ -233,8 +238,20 @@ $('#excel').on('click',function(){
 			};
 	ordeList.export('xlsx', options);
 })
-}
 
+
+//마우스 커서 올리면
+ordeList.on('mouseover', function(e){
+	var cn = e.columnName;
+	var tt = e.targetType;
+		if(cn == '주문코드' && tt == 'cell' ){			
+			$('#ordeList').attr("class", "smMouseOver");
+		}else{
+			$('#ordeList').removeClass();					
+		}
+});
+
+}
   </script>
 
 </body>

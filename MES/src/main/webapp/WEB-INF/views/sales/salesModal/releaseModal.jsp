@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 <!-- 완제품명모달  -->
@@ -165,7 +170,18 @@
       		$('#myModal').modal('hide');
       		
       	}       
-       });    
+       });
+		  
+		//마우스 커서 올리면
+		  prodList.on('mouseover', function(e){
+		  	var cn = e.columnName;
+		  	var tt = e.targetType;
+		  		if(cn == '출고량' && tt == 'cell' ){			
+		  			$('#prodGrid').attr("class", "smMouseOver");
+		  		}else{
+		  			$('#prodGrid').removeClass();					
+		  		}
+		  });
 	</script>
 </body>
 </html>

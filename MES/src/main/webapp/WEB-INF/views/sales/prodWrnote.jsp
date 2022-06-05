@@ -116,25 +116,31 @@
 		columns : [ {
 			header : '완제품LOT',
 			name : '완제품LOT',
+			className : 'fontClass',
 			align: 'center'
 		}, {
 			header : '제품코드',
 			name : '제품코드',
+			className : 'fontClass',
 			align: 'center'
 		}, {
 			header : '제품명',
+			className : 'fontClass',
 			name : '제품명'
 		}, {
 			header : '입고량',
+			className : 'fontClass',
 			name : '입고량',
 			align: 'right'
 		}, {
 			header : '입고일자',
 			name : '입고일자',
+			className : 'fontClass',
 			align: 'center'
 		}, {
 			header : '유통기한',
 			name : '유통기한',
+			className : 'fontClass',
 			align: 'center'
 		}
 

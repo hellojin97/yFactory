@@ -71,4 +71,6 @@ public interface ProcMapper {
     List<Map> searchProcResult(Map<String, String> result); // 공정 실적 조회 - 단건 조회
     
     List<Map> procLineAjax(); // 공정흐름도
+    
+    List<Map> procLineEditAjax(String lineCd); // 제품 라인별 공정정보
 }

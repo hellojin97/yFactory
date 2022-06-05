@@ -145,30 +145,36 @@ window.onload = function (){
          {
            header: '주문코드',
            name: '주문코드',
+           className : 'fontClass',
            align: 'center'
          },
          {
              header: '업체명',
              name: '업체명',
+             className : 'fontClass',
            },
            {
                header: '주문일자',
                name: '주문일자',
+               className : 'fontClass',
                align: 'center'
              },
              {
                  header: '납기일자',
                  name: '납기일자',
+                 className : 'fontClass',
                  align: 'center'
                },             
                  {
                      header: '주문수량',
                      name: '주문수량',
+                     className : 'fontClass',
                      align: 'right'
                    },
                    {
                        header: '진행상황',
                        name: '진행상황',
+                       className : 'fontClass',
                      }],
                   rowHeaders: ['rowNum'],
                      pageOptions: {

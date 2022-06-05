@@ -65,22 +65,28 @@
 		columns : [ {
 			header : '생산계획코드',
 			name : '생산계획코드',
+			className : 'fontClass',
 		}, {
 			header : '제품명',
 			name : '완제품명',
+			className : 'fontClass',
 
 		}, {
 			header : '생산일수',
 			name : '생산일수',
+			className : 'fontClass',
 		},{
 			header : '수량',
 			name : '계획량',
+			className : 'fontClass',
 		},{
 			header : '생산지시량',
 			name : '생산지시량',
+			className : 'fontClass',
 		},{
 			header : '잔량',
 			name : '잔량',
+			className : 'fontClass',
 		},
 		
 		],
@@ -100,9 +106,11 @@
 			columns : [ {
 				header : '라인코드',
 				name : '라인코드',
+				className : 'fontClass',
 			}, {
 				header : '작업일자',
 				name : '작업일자',
+				className : 'fontClass',
 				editor : {
 	                  type : 'datePicker',
 	                  options : {
@@ -112,6 +120,7 @@
 			}, {
 				header : '작업수량',
 				name : '작업수량',
+				className : 'fontClass',
 				editor : {
 	                  type : 'text',
 	                  }
@@ -142,13 +151,16 @@
 				columns : [  {
 					header : '자재코드',
 					name : '자재코드',
+					className : 'fontClass',
 
 				}, {
 					header : '자재명',
 					name : '자재명',
+					className : 'fontClass',
 				}, {
 					header : '소모량',
 					name : '소모량',
+					className : 'fontClass',
 				},
 				],
 				rowHeaders : [ 'rowNum' ],
@@ -168,16 +180,20 @@
 					columns : [ {
 						header : '자재명',
 						name : '자재명',
+						className : 'fontClass',
 					}, {
 						header : '자재LOT번호',
 						name : '자재LOT번호',
+						className : 'fontClass',
 
 					}, {
 						header : '사용수량',
 						name : '사용수량',
+						className : 'fontClass',
 					}, {
 						header : '유통기한',
 						name : '유통기한',
+						className : 'fontClass',
 					},
 					],
 					rowHeaders : [

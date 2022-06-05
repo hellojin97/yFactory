@@ -90,43 +90,53 @@ $.ajax({
 	    columns: [
 	      {
 	        header: '원자재발주코드',
-	        name: '원자재발주코드'
+	        name: '원자재발주코드',
+	        className : 'fontClass',
 	      },
 	      {
 	        header: '원자재코드',
-	        name: '원자재코드'
+	        name: '원자재코드',
+	        className : 'fontClass',
 	      },
 	      {
 	        header: '원자재명',
-	        name: '원자재명'
+	        name: '원자재명',
+	        className : 'fontClass',
 	      },
 	      {
 	        header: '업체명',
-	        name: '업체명'
+	        name: '업체명',
+	        className : 'fontClass',
 	      },
 	      {
 	    header: '발주수량',
-	    name: '발주수량'
+	    name: '발주수량',
+	    className : 'fontClass',
 	  },
 	      {
   	    header: '단위',
-  	    name: '단위'
+  	    name: '단위',
+  	  className : 'fontClass',
   	  },
 	      {
   	    header: '발주신청일',
-  	    name: '발주신청일'
+  	    name: '발주신청일',
+  	  className : 'fontClass',
   	  },
 	      {
   	    header: '납기신청일',
-  	    name: '납기신청일'
+  	    name: '납기신청일',
+  	  className : 'fontClass',
   	  },
 	      {
   	    header: '단가',
-  	    name: '단가'
+  	    name: '단가',
+  	  className : 'fontClass',
   	  },
 	      {
   	    header: '금액',
-  	    name: '금액'
+  	    name: '금액',
+  	  className : 'fontClass',
   	  },
 	    ],
 	    rowHeaders: ['rowNum'],

@@ -123,31 +123,37 @@
 		columns : [ {
 			header : '자제LOT번호',
 			name : 'mt_lot',
+			className : 'fontClass',
 		    sortable: true,
 		    sortingType: 'asc'
 		}, {
 			header : '자재코드',
 			name : 'mt_cd',
+			className : 'fontClass',
 		    sortable: true,
 		    sortingType: 'asc'
 		}, {
 			header : '자재명',
 			name : 'mt_nm',
+			className : 'fontClass',
 		    sortable: true,
 		    sortingType: 'asc'
 		}, {
 			header : '업체명',
 			name : 'vdr_nm',
+			className : 'fontClass',
 		    sortable: true,
 		    sortingType: 'asc'
 		}, {
 			header : '수량',
 			name : 'mt_qty',
+			className : 'fontClass',
 		    sortable: true,
 		    sortingType: 'asc'
 		}, {
 			header : '유통기한',
 			name : 'mt_exp',
+			className : 'fontClass',
 		    sortable: true,
 		    sortingType: 'asc'
 		}

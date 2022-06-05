@@ -99,20 +99,25 @@
 		columns : [ {
 			header : '원자재코드',
 			name : '원자재코드',
+			className : 'fontClass',
 	        sortable: true,
 	        sortingType: 'asc'
 		}, {
 			header : '원자재명',
-			name : '원자재명'
+			name : '원자재명',
+			className : 'fontClass',
 		}, {
 			header : '단위',
-			name : '단위'
+			name : '단위',
+			className : 'fontClass',
 		}, {
 			header : '현재고',
-			name : '현재고'
+			name : '현재고',
+			className : 'fontClass',
 		}, {
 			header : '안전재고',
-			name : '안전재고'
+			name : '안전재고',
+			className : 'fontClass',
 		}
 
 		],

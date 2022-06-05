@@ -152,29 +152,36 @@ var eqList = new tui.Grid({
     columns: [
     	{
             header: '설비코드',
-            name: '설비코드'
+            name: '설비코드',
+            className : 'fontClass',
           },{
               header: '구분명',
-              name: '구분명'
+              name: '구분명',
+              className : 'fontClass',
           },{
             header: '설비명',
-            name: '설비명'
+            name: '설비명',
+            className : 'fontClass',
           },
           {
             header: '공정코드',
-            name: '공정코드'
+            name: '공정코드',
+            className : 'fontClass',
           },
           {
             header: '공정명',
-            name: '공정명'
+            name: '공정명',
+            className : 'fontClass',
           },
           {
               header: '점검주기',
-              name: '점검주기'
+              name: '점검주기',
+              className : 'fontClass',
             },
           {
               header: '사용여부',
-              name: '사용여부'
+              name: '사용여부',
+              className : 'fontClass',
             }
     ],
     rowHeaders: ['rowNum'],
@@ -199,28 +206,35 @@ var eqList = new tui.Grid({
     columns: [    	
       {
         header: '설비가동코드',
-        name: '설비가동코드'
+        name: '설비가동코드',
+        className : 'fontClass',
       },{
         header: '설비코드',
-        name: '설비코드'
+        name: '설비코드',
+        className : 'fontClass',
       },{
           header: '구분명',
-          name: '구분명'
+          name: '구분명',
+          className : 'fontClass',
       },{
         header: '설비명',
-        name: '설비명'
+        name: '설비명',
+        className : 'fontClass',
       },
       {
         header: '사유',
-        name: '사유'
+        name: '사유',
+        className : 'fontClass',
       },
       {
         header: '시작날짜',
-        name: '시작날짜'
+        name: '시작날짜',
+        className : 'fontClass',
       },
       {
           header: '종료날짜',
-          name: '종료날짜'
+          name: '종료날짜',
+          className : 'fontClass',
         }
     ],
     rowHeaders : [ 'rowNum' ],

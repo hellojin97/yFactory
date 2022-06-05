@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -226,6 +227,12 @@ public class ProcAjaxController {
 	@GetMapping("/procLineAjax")
 	public List<Map> procLineAjax(){
 		return procService.procLineAjax();
+	}
+	
+	@GetMapping("/procLineEdit")
+	public List<Map> procLineEdit(@RequestParam Map<String,String> lineCd){
+			String lineCdStr = lineCd.get("lineCd");
+		return procService.procLineEditAjax(lineCdStr);
 	}
 	
 }

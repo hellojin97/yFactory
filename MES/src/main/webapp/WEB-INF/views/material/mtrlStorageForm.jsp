@@ -112,23 +112,28 @@
 		columns : [ {
 			header : '원자재코드',
 			name : '원자재코드',
+			className : 'fontClass',
 			align: 'center',
 	        sortable: true,
 	        sortingType: 'asc'
 		}, {
 			header : '원자재명',
-			name : '원자재명'
+			name : '원자재명',
+			className : 'fontClass',
 		}, {
 			header : '업체명',
-			name : '업체명'
+			name : '업체명',
+			className : 'fontClass',
 		}, {
 			header : '수량',
 			name : '수량',
+			className : 'fontClass',
 			align: 'right',
 		    
 		}, {
 			header : '안전재고',
 			name : '안전재고',
+			className : 'fontClass',
 			align: 'right',
 		}
 		],

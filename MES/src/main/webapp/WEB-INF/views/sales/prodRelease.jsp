@@ -63,30 +63,37 @@ var ordDtpList = new tui.Grid({
     	{
             header: '주문상세코드',
             name: '주문상세코드',
+            className : 'fontClass',
 			align: 'center'
           },
           {
             header: '주문코드',
             name: '주문코드',
+            className : 'fontClass',
 			align: 'center'
           },
           {
             header: '완제품코드',
             name: '완제품코드',
+            className : 'fontClass',
 			align: 'center'
           },
           {
             header: '제품명',
+            className : 'fontClass',
             name: '제품명'
+            
           },
           {
               header: '주문수량',
+              className : 'fontClass',
               name: '주문수량',
   			align: 'right'
             },
           {
               header: '납기일자',
               name: '납기일자',
+              className : 'fontClass',
   			align: 'center'
             }      
     ],
@@ -113,36 +120,43 @@ var ordDtpList = new tui.Grid({
       {
         header: '주문상세코드',
         name: '주문상세코드',
+        className : 'fontClass',
 		align: 'center'
       },
       {
         header: '완제품코드',
         name: '완제품코드',
+        className : 'fontClass',
 		align: 'center'
       },
       {
         header: '완제품LOT번호',
         name: '완제품LOT번호',
+        className : 'fontClass',
 		align: 'center'
       },
       {
           header: '출고량',
           name: '출고량',
+          className : 'fontClass',
 			align: 'right'
         },
         {
             header: '출고날짜',
             name: '출고날짜',
+            className : 'fontClass',
     		align: 'center'
           },
       {
           header: '제조일자',
           name: '제조일자',
+          className : 'fontClass',
 			align: 'center'
         },
         {
             header: '유통기한',
             name: '유통기한',
+            className : 'fontClass',
 			align: 'center'
           }
     ],

@@ -148,38 +148,45 @@ $(function(){
 		        	sortable: false,
 		           header: '설비코드',
 		           name: '설비코드',
+		           className : 'fontClass',
 		           align: 'center'
 		         },
 		         {
 		             header: '설비명',
 		             name: '설비명',
+		             className : 'fontClass',
 		             align: 'center'
 		          },
 		          { 	
 		               header: '점검일자',
 		               name: '점검일자',
+		               className : 'fontClass',
 		               align: 'center'
 		           },
 		           {
 		                 header: '점검주기',
 		                 name: '점검주기',
+		                 className : 'fontClass',
 		                 align: 'center'
 		           },
 		               
 		           {
 		                 header: '차기점검일',
 		                 name: '차기점검일',
+		                 className : 'fontClass',
 		                 align: 'center'
 		           },
 		           {
 		                 header: '점검내역',
 		                 name: '점검내역',
+		                 className : 'fontClass',
 		                 align: 'center',
 		                 editor : 'text'
 		       		},
 		           {
 			                 header: '결과',
 			                 name: '결과',
+			                 className : 'fontClass',
 			                 align: 'center',
 			                 editor: {
 			                     type: 'select',
@@ -202,6 +209,7 @@ $(function(){
 			       {
 				                 header: '검수자',
 				                 name: '검수자',
+				                 className : 'fontClass',
 				                 align: 'center'
 				   },    
 			          

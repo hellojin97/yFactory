@@ -92,21 +92,26 @@
 		columns : [ {
 			header : '제품코드',
 			name : '제품코드',
+			className : 'fontClass',
 			align: 'center'
 		}, {
 			header : '제품명',
-			name : '제품명'
+			name : '제품명',
+			className : 'fontClass',
 		}, {
 			header : '단위',
 			name : '단위',
+			className : 'fontClass',
 			align: 'center'
 		}, {
 			header : '완제품수량',
 			name : '완제품수량',
+			className : 'fontClass',
 			align: 'right'
 		}, {
 			header : '안전수량',
 			name : '안전수량',
+			className : 'fontClass',
 			align: 'right'
 		}
 

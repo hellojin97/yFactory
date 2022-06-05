@@ -92,34 +92,42 @@ h3{
 				columns : [ {
 					header : '설비코드',
 					name : '설비코드',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '설비구분',
 					name : '설비구분',
+					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true }
 				},{
 					header : '설비명',
 					name : '설비명',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정코드',
 					name : '공정코드',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정명',
 					name : '공정명',
+					className : 'fontClass',
 					editor : "text"
 				}, {
 					header : '최저온도',
 					name : '최저온도',
+					className : 'fontClass',
 					editor : "text"
 				}, {
 					header : '최고온도',
 					name : '최고온도',
+					className : 'fontClass',
 					editor : "text"
 				}, {
 					header : '구매일자',
 					name : '구매일자',
+					className : 'fontClass',
 					editor : {
 						type : 'datePicker',
 						options : {
@@ -137,6 +145,7 @@ h3{
 				{
 					header : '사용여부',
 					name : '사용여부',
+					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true },
 					 editor: {
 	                     type: 'select',

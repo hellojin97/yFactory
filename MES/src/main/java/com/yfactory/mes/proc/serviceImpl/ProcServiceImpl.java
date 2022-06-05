@@ -305,6 +305,15 @@ public List<Map> procLineAjax() {
 
 
 
+@Override
+public List<Map> procLineEditAjax(String lineCd) {
+	// TODO Auto-generated method stub
+	return map.procLineEditAjax(lineCd);
+}
+
+
+
+
 
 
 

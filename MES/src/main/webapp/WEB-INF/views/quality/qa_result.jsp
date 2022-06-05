@@ -43,50 +43,62 @@
 			columns : [ {
 				header: '발주코드',
 				name: '발주코드',
+				className : 'fontClass',
 				width:'115'
 			}, {
 				header: '품질검사코드',
 				name: '품질검사코드',
+				className : 'fontClass',
 				width:'110'
 			}, {
 				header: '자재코드',
 				name: '자재코드',
+				className : 'fontClass',
 				width: '80'
 			}, {
 				header: '자재명',
 				name: '자재명',
+				className : 'fontClass',
 				width: '80'
 			}, {
 				header: '담당인',
 				name: '담당인',
+				className : 'fontClass',
 				width: '80'
 			}, {
 				header: '검사일',
 				name: '검사일',
+				className : 'fontClass',
 				width: '90'
 			}, {
 				header: '발주량',
 				name: '발주량',
+				className : 'fontClass',
 				width: '60'
 			}, {
 				header: '합격량',
 				name: '합격량',
+				className : 'fontClass',
 				width: '60'
 			}, {
 				header: '불량량',
 				name: '불량량',
+				className : 'fontClass',
 				width: '60'
 			}, {
 				header: '불량코드',
 				name: '불량코드',
+				className : 'fontClass',
 				width:'90'
 			}, {
 				header: '불량사유',
 				name: '불량사유',
+				className : 'fontClass',
 				width:'180'
 			}, {
 				header: '상태',
 				name: '상태',
+				className : 'fontClass',
 				width: '80'
 			} ],
 			rowHeaders : [ 'rowNum' ],
@@ -118,50 +130,62 @@
 				columns : [ {
 					header: '발주코드',
 					name: '발주코드',
+					className : 'fontClass',
 					width:'115'
 				}, {
 					header: '품질검사코드',
 					name: '품질검사코드',
+					className : 'fontClass',
 					width:'110'
 				}, {
 					header: '자재코드',
 					name: '자재코드',
+					className : 'fontClass',
 					width: '80'
 				}, {
 					header: '자재명',
 					name: '자재명',
+					className : 'fontClass',
 					width: '80'
 				}, {
 					header: '담당인',
 					name: '담당인',
+					className : 'fontClass',
 					width: '80'
 				}, {
 					header: '검사일',
 					name: '검사일',
+					className : 'fontClass',
 					width: '90'
 				}, {
 					header: '발주량',
 					name: '발주량',
+					className : 'fontClass',
 					width: '60'
 				}, {
 					header: '합격량',
 					name: '합격량',
+					className : 'fontClass',
 					width: '60'
 				}, {
 					header: '불량량',
 					name: '불량량',
+					className : 'fontClass',
 					width: '60'
 				}, {
 					header: '불량코드',
 					name: '불량코드',
+					className : 'fontClass',
 					width:'90'
 				}, {
 					header: '불량사유',
 					name: '불량사유',
+					className : 'fontClass',
 					width:'180'
 				}, {
 					header: '상태',
 					name: '상태',
+					className : 'fontClass',
 					width: '80'
 				} ],
 				rowHeaders : [ 'rowNum' ],
@@ -193,36 +217,47 @@
 				el : document.getElementById('qaResult'),
 				columns : [ {
 					header : '제품LOT',
+					className : 'fontClass',
 					name : '제품LOT'
 				}, {
 					header : '제품코드',
+					className : 'fontClass',
 					name : '제품코드'
 				}, {
 					header : '제품명',
+					className : 'fontClass',
 					name : '제품명'
 				}, {
 					header : '공정코드',
+					className : 'fontClass',
 					name : '공정코드'
 				}, {
 					header : '설비코드',
+					className : 'fontClass',
 					name : '설비코드'
 				}, {
 					header : '생산량',
+					className : 'fontClass',
 					name : '생산량'
 				}, {
 					header : '합격량',
+					className : 'fontClass',
 					name : '합격량'
 				}, {
 					header : '불량량',
+					className : 'fontClass',
 					name : '불량량'
 				}, {
 					header : '불량코드',
+					className : 'fontClass',
 					name : '불량코드'
 				}, {
 					header : '불량명',
+					className : 'fontClass',
 					name : '불량명'
 				}, {
 					header : '상태',
+					className : 'fontClass',
 					name : '상태'
 				} ],
 				rowHeaders : [ 'rowNum' ],

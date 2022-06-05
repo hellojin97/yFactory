@@ -46,46 +46,57 @@
 			{
 				header: '품질검사코드',
 				name: '품질검사코드',
+				className : 'fontClass',
 				width: '100'
 			}, {
 				header: '자재코드',
 				name: '자재코드',
+				className : 'fontClass',
 				width: '60'
 			}, {
 				header: '자재명',
 				name: '자재명',
+				className : 'fontClass',
 				width: '60'
 			}, {
 				header:'담당인',
 				name: '담당인',
+				className : 'fontClass',
 				width: '60'
 			}, {
 				header: '검사일',
 				name: '검사일',
+				className : 'fontClass',
 				width: '80'
 			}, {
 				header: '불량코드',
 				name: '불량코드',
+				className : 'fontClass',
 				width: '80'
 			}, {
 				header: '불량사유',
 				name: '불량사유',
+				className : 'fontClass',
 				width: '170'
 			}, {
 				header: '납품업체명',
 				name: '납품업체명',
+				className : 'fontClass',
 				width: '140'
 			}, {
 				header: '불량량',
 				name: '불량량',
+				className : 'fontClass',
 				width: '60'
 			}, {
 				header: '단가',
 				name: '단가',
+				className : 'fontClass',
 				width: '80'
 			}, {
 				header: '청구금액',
 				name:  '청구금액',
+				className : 'fontClass',
 				width: '80'
 			} ],
 		rowHeaders : [ 'rowNum' ],

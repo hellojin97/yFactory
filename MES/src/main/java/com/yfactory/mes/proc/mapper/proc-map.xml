@@ -507,5 +507,19 @@ SELECT
 					PROD P
 		WHERE P.PROD_CD = L.PROD_CD
 		GROUP BY L.LINE_CD, P.PROD_CD, P.PROD_NM
+		ORDER BY 1
+	</select>
+	
+	<select id="procLineEditAjax" resultType="map">
+		SELECT P.PROC_CD "공정코드",
+       		   P.PROC_NM "공정명",
+       		   E.EQ_CD   "설비코드",
+       		   E.EQ_MDNM   "설비명"
+		FROM   PROCESS P,
+       		   EQ E,
+       		   LINE L
+		WHERE  P.EQ_CD = E.EQ_CD
+		AND    L.PROC_CD = P.PROC_CD
+		AND    L.LINE_CD = #{lineCd}
 	</select>
 </mapper>

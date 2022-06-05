@@ -83,10 +83,12 @@
 					columns : [ {
 						header : '공정코드',
 						name : '공정코드',
+						className : 'fontClass',
 					}, 
 					{
 						header : '공정구분',
 						name : '공정구분',
+          	className : 'fontClass',
 						  editor: {
                               type: 'select',
                               options: {
@@ -94,11 +96,13 @@
                           }
 						  },
 						  validation: { required: true }
-
 					},
 					{
 						header : '공정명',
 						name : '공정명',
+						className : 'fontClass',
+
+
 						editor : {
 			                  type : 'text',
 			                  },
@@ -107,16 +111,21 @@
 					{
 						header : '설비코드',
 						name : '설비코드',
-						  validation: { required: true }
-					}, 
-					{
+						className : 'fontClass',
+					}, {
 						header : '설비명',
 						name : '설비명',
-					},
-					{
+						className : 'fontClass',
+					},{
 						header : '모델명',
 						name : '모델명',
-					},
+						className : 'fontClass',
+					},{
+						header : '담당자',
+						name : '담당자',
+						className : 'fontClass',
+						  validation: { required: true }
+					}, 
 					{
 						header : '관리자',
 						name : '관리자',

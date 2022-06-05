@@ -100,8 +100,6 @@ procLineEdit = new tui.Grid({
 	.fail(function(error){
 		console.log(error);
 	}); // end of fail
- 	
-	
 	
 } // end of window.onload
 </script>

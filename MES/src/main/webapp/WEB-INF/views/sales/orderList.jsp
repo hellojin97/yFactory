@@ -140,6 +140,7 @@ window.onload = function (){
          {
            header: '주문코드',
            name: '주문코드',
+           align: 'center'
          },
          {
              header: '업체명',
@@ -148,14 +149,17 @@ window.onload = function (){
            {
                header: '주문일자',
                name: '주문일자',
+               align: 'center'
              },
              {
                  header: '납기일자',
                  name: '납기일자',
+                 align: 'center'
                },             
                  {
-                     header: '수량',
+                     header: '주문수량',
                      name: '주문수량',
+                     align: 'right'
                    },
                    {
                        header: '진행상황',

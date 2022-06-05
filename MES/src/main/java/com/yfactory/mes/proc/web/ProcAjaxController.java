@@ -223,5 +223,9 @@ public class ProcAjaxController {
 		}
 	}
 	
+	@GetMapping("/procLineAjax")
+	public List<Map> procLineAjax(){
+		return procService.procLineAjax();
+	}
 	
 }

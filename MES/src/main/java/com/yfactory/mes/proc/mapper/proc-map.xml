@@ -456,4 +456,14 @@ SELECT
         </if>
 	</select>
 	
+	<!-- 제품공정흐름도 '제품라인정보' -->
+	<select id="procLineAjax" resultType="map">
+		SELECT 		L.LINE_CD "라인코드",
+       				P.PROD_CD "제품코드",
+       				P.PROD_NM "제품명"
+		FROM 		LINE L, 
+					PROD P
+		WHERE P.PROD_CD = L.PROD_CD
+		GROUP BY L.LINE_CD, P.PROD_CD, P.PROD_NM
+	</select>
 </mapper>

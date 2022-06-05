@@ -53,6 +53,7 @@ public class ProcController {
 		return "proc/procProcessCtl";
 	}
 
+
 	// 주문서목록 모달
 	@GetMapping("/ordermodal")
 	public String ordermodal() {
@@ -100,6 +101,10 @@ public class ProcController {
 		return "proc/procmodal/procResultNmModal";
 	}
 	
-
+	// 미사용 설비 목록 모달
+		@GetMapping("/procNoUseEqSelectModal")
+		public String procNoUseEqSelectModal() {
+			return "proc/procmodal/procNoUseEqSelectModal";
+		}
 
 }

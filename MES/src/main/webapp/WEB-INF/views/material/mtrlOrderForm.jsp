@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,37 +8,37 @@
 
 </head>
 <body>
-	<div style="padding-bottom: 70px; ">
-		<div class="mainTitle" style="padding-bottom:15px;">
+	<div style="padding-bottom: 70px;">
+		<div class="mainTitle" style="padding-bottom: 15px;">
 			<h1>발주 관리/등록</h1>
 		</div>
-		<div class="min2" >
-			<button  class="btn2" id="btnMg">등록</button>
+		<div class="min2">
+			<button class="btn2" id="btnMg">등록</button>
 			<button class="btn3" id="btnIn">관리</button>
 		</div>
-		<div class="min1" >
-		<div>
-			<h4>미지시 생산계획조회</h4>
-			<div id="unorder" style="padding-bottom: 4px;"></div>
-			<input type="hidden" id="ppCd">
-			<button type="button" class="btn1" id="select1">선택</button>
-		</div>
-		<div style="padding-top : 30px;">
-			<h4>생산계획별 자재 재고</h4>
-			<div id="prodPlan" style="padding-bottom: 4px;"></div>
-			<button  class="btn1" id="select2">선택</button>
-		</div>
-			<div style="padding-top : 30px;">
+		<div class="min1">
+			<div>
+				<h4>미지시 생산계획조회</h4>
+				<div id="unorder" style="padding-bottom: 4px;"></div>
+				<input type="hidden" id="ppCd">
+				<button type="button" class="btn1" id="select1">선택</button>
+			</div>
+			<div style="padding-top: 30px;">
+				<h4>생산계획별 자재 재고</h4>
+				<div id="prodPlan" style="padding-bottom: 4px;"></div>
+				<button class="btn1" id="select2">선택</button>
+			</div>
+			<div style="padding-top: 30px;">
 				<h4>발주요청서 등록</h4>
 				<div id="mtrlRequest" style="padding-bottom: 4px;"></div>
 				<div>
-					<button  class="btn1" id="mtrlsave">저장</button>
+					<button class="btn1" id="mtrlsave">저장</button>
 					<button class="btn1" id="mtrlcancel">취소</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 
 </body>
 
@@ -293,10 +293,15 @@ $("#select2").on("click",function(e) {
         		  				},
         		  		}).done(function(result){
         		  			console.log(result);
-        		  			location.reload();
+
         		  		});  	
         		};
-        	                
+          	  Swal.fire(
+                      '승인이 완료되었습니다.',
+                      '화끈하시네요~!',
+                      'success'
+                  ) 
+		
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',
@@ -304,14 +309,10 @@ $("#select2").on("click",function(e) {
                       'error'
                   )
           }
+			location.reload();
       });
-	 
+      
   		}) //end of event
-  		
-  		
-  		/* 클릭시 row 삭제 */
-  		
-  		
 
 </script>
 

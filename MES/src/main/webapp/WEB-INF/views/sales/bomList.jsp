@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 <div style="padding-bottom:15px; color: ;">
@@ -79,6 +82,7 @@
 		             {
 		                 header: '제품코드',
 		                 name: '제품코드',
+		                 align: 'center'
 		               }],
 		   					rowHeaders: ['rowNum'],
 		   					pageOptions: {
@@ -105,13 +109,19 @@
 	    	   		{
 	                 header: 'BOM 코드',
 	                 name: 'BOM 코드',
+	                 align: 'center'
 	               },{
 	                 header: '원자재 코드',
 	                 name: '원자재 코드',
+	                 align: 'center'
 	               },{
 	               header: '원자재명',
 	               name: '원자재명',
-	             },
+	             },{
+		               header: '단위',
+		               name: '단위',
+		               align: 'center'
+		             },
 	             {
 	                 header: '소요량',
 	                 name: '소요량',
@@ -199,9 +209,28 @@
 				  onlySelected: true,
 				  fileName: 'BOM조회',
 				};
-		prodGrid.export('xlsx', options);
-	})
-		
+		bomGrid.export('xlsx', options);
+	});
+	
+	//마우스 커서 올리면
+	prodGrid.on('mouseover', function(e){
+		var tt = e.targetType;
+			if(tt == 'cell' ){			
+				$('#prodGrid').attr("class", "smMouseOver");
+			}else{
+				$('#prodGrid').removeClass();
+			}
+	});
+	
+	bomGrid.on('mouseover', function(e){
+		var cn = e.columnName;
+		var tt = e.targetType;
+			if(cn == '소요량' && tt == 'cell'){			
+				$('#bomGrid').attr("class", "smMouseOver");
+			}else{
+				$('#bomGrid').removeClass();
+			}
+	});
   </script>
 
 </body>

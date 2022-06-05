@@ -66,9 +66,9 @@ var grid2;
 
 		var url1 = "eqChkSelectAjax";
 		var data = {
-				eq_nm : eq_nm 
-				/* ,eq_chkdt1  : eq_chkdt1
-				,eq_chkdt2 :  eq_chkdt2 */
+				eq_nm : eq_nm
+			//	,eq_chkdt1  : eq_chkdt1
+			//	,eq_chkdt2 :  eq_chkdt2
 		};
 		$.ajax(url1, {
 			method : "POST",
@@ -84,7 +84,7 @@ var grid2;
 			el : document.getElementById('grid2'),
 			rowHeaders: [{type: 'checkbox'},{type: 'rowNum'}],
 			scrollX : false,
-			scrollY : false,
+			bodyHeight: 200,
 			columns : [
 
 			{
@@ -113,11 +113,21 @@ var grid2;
 			{
 				header : '차기점검일',
 				name : '차기점검일'
-			}
+			}, 
+			{
+				header : '점검내역',
+				name : '점검내역'
+			}, 
+			{
+                header: '결과',
+                name: '결과',
+                align: 'center'
+      		},
 			],
 			
 			pageOptions : {
-				useClient : true,
+				 type: 'scroll', 
+				//useClient : true,
 				perPage : 5
 			}
 		});

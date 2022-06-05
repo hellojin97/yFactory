@@ -44,20 +44,34 @@ button:hover {
 		<div class="mainTitle">
 			<!-- 구분 드롭박스 -->
 
-				<div class="col-md " style="padding-bottom: 30px;">
+				<div class="col-md " style="padding-bottom: 15px;">
 					<div class="input-group ">
 						<label for="inputText" class="col-form-label"
 							style="padding-right: 27px;">설비구분</label> 
 							<select id="eq_nm" name="eq_nm">
+							<option value="">전체</option>
 							<option value="YAFS01">반죽기</option>
 							<option value="YAFS02">성형기</option>
 							<option value="YAFS03">냉각기</option>
 							<option value="YAFS04">포장기</option>
 						</select>&nbsp;&nbsp;&nbsp;
-						<button type="submit" class="btn btnpart" id="noChksearch">해당 비점검 조회</button>
+					<button type="submit" class="btn btnpart" id="noChksearch">점검 조회</button>	
+						
 					</div>
-					
-				</div>
+					</div>
+					<!-- <div class="col-md " style="padding-bottom: 15px;">
+					<div class="input-group ">
+					<label for="inputText" class="col-form-label"
+							style="padding-right: 24px;">점검 날짜</label> 
+					<input type="date" id="eq_chkdt1" name="eq_chkdt1">&nbsp;&nbsp; ~ &nbsp;&nbsp; 
+					<input type="date" id="eq_chkdt2" name="eq_chkdt2">&nbsp;&nbsp;  -->
+							
+					<!-- <button type="submit" class="btn btnpart" id="noChksearch">점검 조회</button> -->
+							
+						
+					<!-- </div>
+					</div> -->
+				
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
 						<!-- <label for="inputText" class="col-form-label"
@@ -76,7 +90,7 @@ button:hover {
 			<div align="right">
 				<span>
 					<button type="button" class="btn btnpart" id="resetList">초기화</button>
-					<button type="button" class="btn btnpart" id="ListAll">전체조회</button>
+					<button type="button" class="btn btnpart" id="ListAll">내역조회</button>
 					<button type="button" class="btn btnpart" id="dailyChk">일점검조회</button>
 					<button type="button" class="btn btnpart" id="savbtnMain">저장</button>
 					<button type="button" class="btn btnpart" id="delDailyChk">삭제</button>
@@ -111,10 +125,19 @@ button:hover {
 var eq_nm;
 var eq_chkdt;
 var eq_chkeddt;
+var eq_chkdt1;
+var eq_chkdt2;
 // 점검 종료일 을 오늘날짜로 기본 셋팅
 //document.getElementById('eq_chkdt1').value = new Date().toISOString().substring(0, 10);
 //document.getElementById('eq_chkdt2').value = new Date().toISOString().substring(0, 10);
 var modalGrid;
+
+var now = new Date();	// 현재 날짜 및 시간
+//console.log("현재 : ", now);
+//var aweekAgo = new Date(now.setDate(now.getDate() - 7)).toISOString().substring(0, 10);// 일주일전 
+//document.getElementById('eq_chkdt1').value = new Date(now.setDate(now.getDate() - 7)).toISOString().substring(0, 10);
+//document.getElementById('eq_chkdt2').value = new Date().toISOString().substring(0, 10);
+//console.log("aweekAgo:"+aweekAgo);
 $(function(){
 	$("#ListAll").on("click" ,function(){
 		const url = "eqActListAjax";
@@ -141,7 +164,7 @@ $(function(){
 		   	 	modalGrid  = new tui.Grid({
 		       el: document.getElementById('grid'),
 		       scrollX: false,
-		       scrollY: true,
+		       scrollY: false,
 		       columns: [
 		    	  
 		         {
@@ -186,12 +209,12 @@ $(function(){
 			                     options: {
 			                       listItems: [
 			                         {
-			                           text: '재점검필요',
-			                           value: 'DIV01'
+			                           text: '재점검 필요',
+			                           value: '재점검 필요'
 			                         },
 			                         {
 			                           text: '통과',
-			                           value: 'DIV02'
+			                           value: '통과'
 			                         }
 			                    ]
 			                 }
@@ -211,6 +234,7 @@ $(function(){
 		               rowHeaders: [ { type: 'checkbox' },{ type: 'rowNum' }],
 		   					
 		                     pageOptions: {
+		                    	 
 		                         useClient: true,
 		                         perPage: 10
 		                    }
@@ -223,11 +247,15 @@ $(function(){
 				modalGrid.clear();
 				
 				eq_nm = $("#eq_nm option:selected").val();
-					
+				eq_chkdt1=$("#eq_chkdt1").val(); 	
+				eq_chkdt2=$("#eq_chkdt2").val(); 	
 				//eq_chkdt1 = $("#eq_chkdt1").val();
 				//eq_chkdt2 = $("#eq_chkdt2").val();
 				
 				console.log("eq_nm:"+eq_nm);
+				console.log("eq_chkdt1:"+eq_chkdt1);
+				console.log("eq_chkdt2:"+eq_chkdt2);
+				
 				//console.log(eq_chkdt1);
 				//console.log(eq_chkdt2);
 					//모달 페이지 호출 부
@@ -242,7 +270,7 @@ $(function(){
 			}); // END OF BUTTON CLICKED EVENT AJAX
 				
 
-			// 일점검조회 버튼 클릭시 모달 호출
+			// 설비조회 버튼 클릭시 모달 호출
 			$("#dailyChk").on("click" , function(e){
 				modalGrid.clear();
 				

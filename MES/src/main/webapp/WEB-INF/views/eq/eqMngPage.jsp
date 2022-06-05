@@ -25,7 +25,7 @@
 
 
 <style>
-.inSearch {
+/* .inSearch {
 	background-color: #555555;
 	color: white;
 	font-family: "Audiowide", sans-serif;
@@ -38,27 +38,50 @@
 	color: black;
 	background-color: white;
 	 border:2px solid green;
-}
+} */
 h3{
  /* color:ghostwhite;
  border: 15px solid #e0e0e0; */
  
 }
+.clickB {     
+	color: black;
+    text-align: center;
+    
+    border: solid 1px #2c3e50;
+    margin: 3px;
+    line-height: 25px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px 5px 0px 0px;
+		  }
 
-
+button:hover {
+	color: black;
+	background-color: white;
+}
 </style>
 
 </head>
 <body>
-	<h1>설비 관리</h1>
-	<div id="in/out"></div>
-	<div style="background-color: #e0e0e0; padding: 8px;">
+	
+	<!-- <div id="in/out"></div> -->
+	<div style="padding-bottom: 70px; ">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
+			<h1>설비 관리</h1>
+					
 			<!-- <h3>설비 데이터</h3> -->
-			<div style="padding-bottom: 10px;" align="right">
-			<button type="button" id="eqUpd" class="inSearch">설비 수정</button>
+			
+			<div class="min2">
+			
+				<button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button>
 			</div>
-			<hr style="border: solid 1px gray;">
+			<div class="min1" >
+			
+			
+			<div style="background-color: #e9ecef; padding: 8px;">
+			<!-- <hr style="border: solid 1px gray;"> -->
+			<div class="mainTitle" style="padding: 15px;">
+
 			
 		</div>
 
@@ -66,8 +89,9 @@ h3{
 
 		<div id="grid"></div>
 		<div id="grid1"></div>
-		
-
+	</div>
+	</div>
+	</div>
 	</div>
 	<script type="text/javascript">
 	// 지역변수로 윈도우에 선언이되있으니까 자식에서 못쳐가지고오는거죠~ 
@@ -224,6 +248,7 @@ h3{
 				}else{ // 사용불가 가 선택되어 있다면
 					temp1 = 'USE02';
 				}
+				
 				console.log(temp1);
 				data = {
 						eq_cd : chkRows[i].설비코드 , 

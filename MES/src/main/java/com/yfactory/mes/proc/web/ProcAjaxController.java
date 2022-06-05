@@ -185,6 +185,18 @@ public class ProcAjaxController {
 		
 		return procService.procProcessCheckList();
 	}
+	// 공정 관리 선택 조회
+	@GetMapping("/procCdNmSelect")
+	public List<Map> procCdNmSelect(String cdNm){
+		
+		return procService.ProcCdNmSelect(cdNm);
+	}
+	// 미사용 설비 목록 조회
+	@GetMapping("/procNoUseEqSelect")
+	public List<Map> ProcNoUseEqSelect(String eqCd){
+		
+		return procService.ProcNoUseEqSelect(eqCd);
+	}
 	
 	// 공정 실적 조회 - 단건 조회
 	@PostMapping("/searchProcResult")

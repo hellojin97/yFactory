@@ -14,13 +14,7 @@
 				<div class="modal-body">
 					<div id="prdGrid"></div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Cancel</button>
-					<button type="button" id="btnSav" class="btn btn-primary">Save
-						changes</button>
-					<!-- 사용시 필히 onclick 이용 onclick="location.href='/board'"  -->
-				</div>
+
 
 			</div>
 		</div>
@@ -64,35 +58,7 @@ $(function(){
 
 
   
-  $("#btnSav").click(function () {
-      Swal.fire({
-          title: '정말로 그렇게 하시겠습니까?',
-          text: "다시 되돌릴 수 없습니다. 신중하세요.",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: '승인',
-          cancelButtonText: '취소'
-      }).then((result) => {
-      	console.log(result);
-      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
-          if (result.isConfirmed) {
-              Swal.fire(
-                  '승인이 완료되었습니다.',
-                  '화끈하시네요~!',
-                  'success'
-              )
-              $('#prdModal').modal('hide')
-          }else{
-          	Swal.fire(
-                      '승인이 취소되었습니다.',
-                      '섹시하시네요~!',
-                      'error'
-                  )
-          }
-      })
-  });
+
 
   
   setTimeout(function(){

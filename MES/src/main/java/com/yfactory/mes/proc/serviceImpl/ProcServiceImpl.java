@@ -283,9 +283,23 @@ public class ProcServiceImpl implements ProcService{
 
 
 @Override
+public List<Map> ProcNoUseEqSelect(String eqCd) {
+	// TODO Auto-generated method stub
+	return map.ProcNoUseEqSelect(eqCd);
+}
+
+
+
+
+@Override
+public List<Map> ProcCdNmSelect(String cdNm) {
+	// TODO Auto-generated method stub
+	return map.ProcCdNmSelect(cdNm);
+@Override
 public List<Map> procLineAjax() {
 	// TODO Auto-generated method stub
 	return map.procLineAjax();
+
 }
 
 

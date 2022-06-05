@@ -166,34 +166,34 @@ $("#select1").on("click",function(e) {
   });
   
 //생산계획코드,자재코드 불러오기
-  prodPlan.on("dblclick",function(e) {
-	 let ppCd = prodPlan.getValue(e.rowKey, '생산계획코드');
-	 let mtCd =	prodPlan.getValue(e.rowKey, '원자재코드');
-     let row = prodPlan.getRow(e);
-		console.log(e.rowKey);
-		prodPlan.removeRow(e.rowKey);
-	
-	
-	 
- 	 	// AJAX 발주등록 DATA 요청
-	 	$.ajax({
-	 		url : 'mtrlOrderList',
-	 		method : 'GET',
-	 		data : { ppCd : ppCd, mtCd : mtCd },
-	 		dataType : 'JSON',
-	 		contentType : 'application/json; charset=utf-8'
-	 	}).done(function (result){
-	 			console.log(result);
-	 			for (var i = 0; i < result.length; i++) {
-	 				mtrlRequest.appendRow(result[i]);
-				}
-	 			
-	 			
-	 	}) 
-	 	
-	 
-     }
-  ) // end of [prodPlan Event]
+$("#select2").on("click",function(e) {
+   let ppcd= prodPlan.getCheckedRows();
+   prodPlan.removeCheckedRows();
+   for (var i = 0; i < ppcd.length; i++) {
+	   let ppCd = ppcd[i];
+   console.log(ppCd);
+   
+   $.ajax({
+		url: "mtrlOrderList",
+		data : {ppCd : ppcd[i].생산계획코드,
+			    mtCd : ppcd[i].원자재코드
+				},
+		method : "GET",
+		dataType : "JSON",
+		contentType : "application/json; charset=utf-8"
+	  	}).done(function(result){
+	  		for (var i = 0; i < result.length; i++) {
+	  			 /* 원자재코드 */
+    		  mtrlRequest.appendRow(result[i]);
+    		  console.log(result);
+	  		}
+	  	 }).fail(function(result){
+	  	    console.log(result);
+	     });
+   }
+}
+); 
+ // end of [prodPlan Event]
   //발주서 요청 조회
   var mtrlRequest = new tui.Grid({
     el: document.getElementById('mtrlRequest'),

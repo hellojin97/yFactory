@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="min1">
-		<div class="mainTitle" style="padding: 20px;">
+		<div class="row" style="padding: 20px;">
 			<form>
 				<!-- 자재명 -->
 				<div class="col-md-5 " style="padding-bottom: 20px;">
@@ -30,7 +30,7 @@
 				</div>
 
 				<!-- 안전재고 -->
-				<div class="col-md-6">
+				<div class="col-md-8">
 					<div class="input-group">
 						<label for="inputText" class="col-form-label"
 							style="padding-right: 27px;">안전수량</label>

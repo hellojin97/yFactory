@@ -232,10 +232,12 @@ button:hover {
 		
 			// 설비 수정 버튼
 		  $("#eqUpd").click(function () {
-			  
+			 
 			var chkRows = grid.getCheckedRows();
 			var updRowArr = [];
+			var updRowArr2 = [];
 			var data = {};
+			var data2 = {};
 			var temp1;
 		
 			console.log(chkRows);
@@ -266,6 +268,11 @@ button:hover {
 				
 			};
 			 
+			/*  if(confirm('TEST입니다') ==  true){
+				 alert('성공');
+			 }; */
+			
+			
 			 
 		        Swal.fire({
 		            title: '정말 수정 하시겠습니까?',
@@ -285,21 +292,77 @@ button:hover {
 		            	
 		            	 $.ajax({
 			            	   url : "eqMngUpdateAjax",
+			            	   
 			            	   method: "POST",
 			            	   traditional : true,
 			            	   data : JSON.stringify(updRowArr),
 			            	   dataType : "JSON",
-			            	   contentType : "application/json; charset=utf-8"
+			            	   contentType : "application/json; charset=utf-8",
+			            	   success : function(){
+			            		   
+			            		   
+			            	   }
 			            	   
 			            	   
-			               }).done(function(){
+			               }).done(function(data){
 			            	   toastr.success('수정완료!');
 			            	   Swal.fire(
 					                    '수정이 완료되었습니다.',
 					                    '',
 					                    'success'
 					                		);
-			               });  
+			            	   console.log(data);
+			            	  /*  for (var i = 0; i < chkRows.length; i++) {
+								data2 = {
+										p_eq_cd : chkRows[i].설비코드,
+										p_eq_sd :  systimestamp,
+										
+								
+								};
+							}; */
+			            /* 	   // 비가동 테이블 등록
+			            	   $.ajax({
+			           			url : "setEqInAjax",
+			           			method : "POST",
+			           			data : {
+			           					"p_eq_cd" : ec,
+			           					"p_eq_sd" : systimestamp,
+			           					//"p_eq_ed" : subEd,
+			           					"p_eq_dc" : dc,
+			           					"p_eq_nt" : nt
+			           					};					
+			           		}).done(function(result){
+			           			
+			           			}); */
+			            	   
+			            	   
+			            	   
+			            	 /*   if(confirm('비가동페이지로 이동합니다') ==  true){
+			            		   document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
+			      			 }; */
+			      			 for (var i = 0; i < chkRows.length; i++) {
+								if(chkRows[i].사용여부.valueOf()=='사용불가' ){
+									 Swal.fire({
+						 		            title: '비가동 관리페이지로 접속합니다',
+						 		            icon: 'question',
+						 		            showCancelButton: true,
+						 		            confirmButtonColor: '#3085d6',
+						 		            cancelButtonColor: '#d33',
+						 		            confirmButtonText: '확인',
+						 		            cancelButtonText: '취소'
+						 		        }).then((result) => {
+						 		        	console.log(result);
+						 		        	console.log(result.isConfirmed); // 승인시 FALSE / 취소시 TRUE
+						 		        	  if (result.isConfirmed) {
+						 		        		 document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
+						 		        	  }
+						      			 
+						               });
+									
+								}
+							}
+			      			  
+			      			 });
 		            }else{
 		            	Swal.fire(
 		                        '수정이 취소되었습니다.',

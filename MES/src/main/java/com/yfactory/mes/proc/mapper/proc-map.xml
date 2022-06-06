@@ -334,7 +334,7 @@ SELECT
 	</insert>
 	
 	<insert id="prdInsInsert" statementType="CALLABLE" parameterType="map">
-		{CALL INSERT_PRD_INS(#{ppCd}, #{pdCd}, #{insQty}, #{dtlDt}, #{rank}, #{note})}
+		{CALL INSERT_PRD_INS(#{ppCd}, #{pdNm}, #{dtlDt}, #{insQty}, #{rank}, #{note}, #{mLot}, #{useQty}, #{procQty}, #{line})}
 	</insert>
 	
 	<select id="procResultList" resultType="map">

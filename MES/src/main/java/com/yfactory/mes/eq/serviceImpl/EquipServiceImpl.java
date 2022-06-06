@@ -156,6 +156,18 @@ public class EquipServiceImpl implements EquipService{
 		return mapper.eqModalSelect();
 	}
 
+	@Override
+	public String getEqDetailDataAjax(String eqDtlCd) {
+		
+		return mapper.getEqDetailDataAjax(eqDtlCd);
+	}
+
+	@Override
+	public String getEqImgAjax(String eqDtlCd) {
+	
+		return mapper.getEqImgAjax(eqDtlCd);
+	}
+
 
 	
 	

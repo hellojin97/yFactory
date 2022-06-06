@@ -73,7 +73,7 @@ button:hover {
 			
 			<div class="min2">
 			
-				<button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button>
+				<!-- <button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button> -->
 			</div>
 			<div class="min1" >
 			
@@ -99,6 +99,7 @@ button:hover {
 	var grid;
 	var rowKey;
 	var gridRowCell;
+	var eqDtlCd;
 		window.onload = function() {
 			const url = "getEqMngList";
 			$.ajax(url, {
@@ -137,7 +138,7 @@ button:hover {
 					header : '공정명',
 					name : '공정명',
 					className : 'fontClass',
-					editor : "text"
+					
 				}, {
 					header : '최저온도',
 					name : '최저온도',
@@ -148,7 +149,8 @@ button:hover {
 					name : '최고온도',
 					className : 'fontClass',
 					editor : "text"
-				}, {
+				}, 
+				/* {
 					header : '구매일자',
 					name : '구매일자',
 					className : 'fontClass',
@@ -164,9 +166,9 @@ button:hover {
 								operator:'OR',
 								
 								}
-				},
+				}, */
 
-				{
+				/* {
 					header : '사용여부',
 					name : '사용여부',
 					className : 'fontClass',
@@ -186,7 +188,8 @@ button:hover {
 	                    ]
 	                 }
 	            }
-				}, ],
+				}, */
+				],
 				 rowHeaders: [ { type: 'checkbox' },{ type: 'rowNum' }],
 				pageOptions : {
 					useClient : true,
@@ -206,6 +209,7 @@ button:hover {
 				
 				let eqCdCol = grid.getFocusedCell('설비코드');
 				let eqPrcCol = grid.getFocusedCell('공정코드');
+				eqDtlCd = grid.getValue(e.rowKey, '설비코드');
 				/* 	if(eqCdCol.columnName == '설비코드'){ // 설비코드 컬럼을 클릭했다면
 						$("#grid1").load("mngmodal", function(){
 
@@ -218,13 +222,23 @@ button:hover {
 							});
 					}
 					else  */
-						if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
+						/* if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
 							$("#grid1").load("eqPrcmodal", function(){
 									const mngModal = new bootstrap.Modal('#myModal');
 									mngModal.show();
 							
 							});
-					};
+					}; */
+					
+					if(eqCdCol.columnName == '설비코드'){
+						$("#grid1").load("eqDetailmodal", function(){
+							
+							const mngModal = new bootstrap.Modal('#myModal');
+							console.log(eqDtlCd);
+							mngModal.show();
+						});
+					}
+					
 				
 				
 			});

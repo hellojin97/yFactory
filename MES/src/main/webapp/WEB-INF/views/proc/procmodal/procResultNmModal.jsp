@@ -44,15 +44,18 @@
 	columns: [
 	  {
 	    header: '공정명',
-	    name: '공정명'
+	    name: '공정명',
+	    align: 'center'
 	  },
 	  {
 	    header: '공정코드',
-	    name: '공정코드'
+	    name: '공정코드',
+	    align: 'center'
 	  },
 	  {
 	    header: '설비코드',
-	    name: '설비코드'
+	    name: '설비코드',
+	    align: 'center'
 	  }
 	],
 	rowHeaders : [ 'rowNum' ],

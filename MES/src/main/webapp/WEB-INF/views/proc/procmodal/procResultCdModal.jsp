@@ -61,7 +61,8 @@
 	columns: [
 	  {
 	    header: '생산지시코드',
-	    name: '생산지시코드'
+	    name: '생산지시코드',
+	    align: 'center'
 	  },
 	  {
 	    header: '제품명',
@@ -69,11 +70,13 @@
 	  },
 	  {
 	    header: '생산수량',
-	    name: '생산수량'
+	    name: '생산수량',
+	    align: 'right'
 	  },
 	  {
 	    header: '생산지시일자',
-	    name: '생산지시일자'
+	    name: '생산지시일자',
+	    align: 'center'
 	  }
 	],
 	rowHeaders : [ 'rowNum' ]

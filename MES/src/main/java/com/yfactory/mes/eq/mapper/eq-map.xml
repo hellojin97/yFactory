@@ -223,7 +223,7 @@
 FROM eq e , eq_chk chk
 WHERE e.eq_cd = chk.eq_cd -->
 
- SELECT e.eq_cd "설비코드" , e.eq_mdnm "설비명"  , comm.cd_nm "설비구분",
+<!--  SELECT e.eq_cd "설비코드" , e.eq_mdnm "설비명"  , comm.cd_nm "설비구분",
             e.EQ_CHKCYC "점검주기", TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자", 
             TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
             chk.EQ_CHKDTL "점검내역",  
@@ -234,9 +234,22 @@ FROM eq e , eq_chk chk  , EMPLOYEE emp ,
 WHERE e.eq_cd = chk.eq_cd
 AND e.eq_inster = emp.emp_no
 AND e.eq_nm = comm.comm_cd
-AND chk.chk_rscd = comm2.comm_cd
+AND chk.chk_rscd = comm2.comm_cd -->
 <!-- AND chk.chk_rscd LIKE 'DIV02' -->
-
+SELECT DISTINCT E.eq_cd "설비코드", 
+        chk.eq_cd "점검설비코드",
+        TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
+        E.EQ_MDNM "설비명" , 
+ 		E.EQ_CHKCYC "점검주기",
+        TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일"
+        ,chk.EQ_CHKDTL "점검내역"
+        ,comm.cd_nm "결과"
+        ,emp.emp_nm "검수자"
+FROM   EQ E, EQ_CHK CHK , EMPLOYEE EMP
+, COMM_CODE COMM
+WHERE  E.EQ_CD =  CHK.EQ_CD
+AND CHK.CHK_RSCD = COMM.COMM_CD
+AND CHK.EQ_CHKR = EMP.EMP_NO
 </select>
 
 
@@ -253,7 +266,7 @@ WHERE		CHK.chk_rscd = comm.comm_cd
 AND			E.eq_cd = CHK.eq_cd	 -->	
 <!-- E.eq_cd not in (select eq_cd from eq_chk) -->
 <!-- AND -->
-SELECT E.EQ_CD "설비코드" ,
+<!-- SELECT E.EQ_CD "설비코드" ,
 	   E.EQ_MDNM "설비명" , 
 	   TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
 	   E.EQ_CHKCYC "점검주기",
@@ -262,9 +275,23 @@ SELECT E.EQ_CD "설비코드" ,
        COMM.CD_NM "결과"
 FROM   EQ E, EQ_CHK CHK , COMM_CODE COMM
 WHERE  E.EQ_CD =  CHK.EQ_CD(+)
-AND    CHK.CHK_RSCD = COMM.COMM_CD(+)		
+AND    CHK.CHK_RSCD = COMM.COMM_CD(+)	
+AND 	E.EQ_ACTST = 'USE02' -->
+<!-- 비가동 종료시점이 NULL로 되어있는 설비들 조회 (없다면 아무것도 뿌려지지 않는다) -->
+SELECT DISTINCT E.EQ_CD "설비코드" , 
+            E.EQ_MDNM "설비명" ,
+            E.EQ_CHKCYC "점검주기" ,
+            TO_CHAR(TRUNC(EQ_CHKDT), 'yyyy-MM-dd') "점검일자",
+            TO_CHAR(TO_DATE(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+            CHK.EQ_CHKDTL "점검내역",
+            COMM.CD_NM "결과"
+FROM EQ E , EQ_INA INA , EQ_CHK chk, comm_code comm
+WHERE E.EQ_CD = INA.EQ_CD
+AND E.EQ_CD = CHK.EQ_CD
+AND CHK.CHK_RSCD = COMM.COMM_CD
+AND INA.EQ_INAED IS NULL 
 <if test="eq_nm != null and eq_nm != ''">
-AND    E.eq_nm LIKE #{eq_nm}
+AND    E.eq_mdnm LIKE #{eq_nm}
 </if>
 
 <!-- <if test="#{eq_chkdt1} !=null and #{eq_chkdt2} !=null">
@@ -272,21 +299,17 @@ AND chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chk
 </if>
  -->
  <!-- AND 		chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd') -->
-ORDER BY E.EQ_CD 
+ORDER BY E.EQ_CD
 </select>
 
 
 <!--  일 점검 건수 조회-->
 <select id="getEqDailyChkCount" resultType="map">
+
 SELECT TO_CHAR(TRUNC(EQ_CHKDT), 'yyyy-MM-dd') "점검일자", COUNT(TRUNC(EQ_CHKDT)) "건수"
 FROM 		eq_chk
 WHERE		
-<if test="#{chkdt1} == null">
-eq_chkdt BETWEEN #{chkdt2} AND #{chkdt2}
-</if>
-<if test="#{chkdt1} != null">
-eq_chkdt BETWEEN #{chkdt1} AND #{chkdt2}
-</if>
+TO_DATE(eq_chkdt , 'yy/MM/dd') BETWEEN #{chkdt1} AND #{chkdt2}
 GROUP BY TRUNC(EQ_CHKDT)
 </select>
 

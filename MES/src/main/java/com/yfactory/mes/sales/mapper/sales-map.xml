@@ -231,7 +231,8 @@
         		pd.prod_nm AS "제품명",
         		pdw.prod_wrqty AS "출고량",
         		TO_CHAR(pdw.prod_rdt,'YYYY-MM-DD') AS "출고일자",
-        		TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한"
+        		TO_CHAR(pdlot.prod_exp,'YYYY-MM-DD') AS "유통기한",
+        		pdw.prod_note AS "비고"
 		FROM	prod pd, prod_lot pdlot, prod_wrnote pdw
 		WHERE	pdlot.prod_lot = pdw.prod_lot
 		AND	    pd.prod_cd = pdlot.prod_cd

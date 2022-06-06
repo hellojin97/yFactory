@@ -22,7 +22,7 @@
 				<!-- 구분 -->				
 				<fieldset class="col-md-5" style="padding-bottom: 10px;">				
                   	<div class="input-group">
-                  		<p style="padding-right: 30px;">구분</p>
+                  		<p style="padding-right: 30px;">진행상황 구분</p>
 	                    <div class="form-check">
 	                      <input class="form-check-input" type="radio" name="radios" id="1" value="1" checked>
 	                      <label class="form-check-label" for="gridRadios1" style="padding-right: 10px;">

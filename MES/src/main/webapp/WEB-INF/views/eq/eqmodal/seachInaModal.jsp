@@ -53,10 +53,12 @@
 
 			{
 				header : '설비코드',
-				name : '설비코드'
+				name : '설비코드',
+				align: 'center'
 			},{
 				header : '구분명',
-				name : '구분명'
+				name : '구분명',
+				align: 'center'
 			},{
 				header : '설비명',
 				name : '설비명'

@@ -117,8 +117,8 @@
 				className : 'fontClass',
 				width:'180'
 			}, {
-				header: '상태',
-				name: '상태',
+				header: '비고',
+				name: '비고',
 				align: 'center',
 				className : 'fontClass',
 				width: '80'
@@ -221,8 +221,8 @@
 					className : 'fontClass',
 					width:'180'
 				}, {
-					header: '상태',
-					name: '상태',
+					header: '비고',
+					name: '비고',
 					align: 'center',
 					className : 'fontClass',
 					width: '80'
@@ -256,33 +256,33 @@
 			var grid = new tui.Grid({
 				el : document.getElementById('qaResult'),
 				columns : [ {
-					header : '제품LOT',
+					header : 'LOG',
 					align: 'center',
 					className : 'fontClass',
-					name : '제품LOT'
+					name : 'LOG'
 
 				}, {
-					header : '제품코드',
+					header : '순번',
 					align: 'center',
 					className : 'fontClass',
-					name : '제품코드'
+					name : '순번'
 
 				}, {
-					header : '제품명',
+					header : '진행공정코드',
 					align: 'center',
 					className : 'fontClass',
-					name : '제품명'
+					name : '진행공정코드'
 				}, {
-					header : '공정코드',
+					header : '작업시작시간',
 					align: 'center',
 					className : 'fontClass',
-					name : '공정코드'
+					name : '작업시작시간'
 
 				}, {
-					header : '설비코드',
+					header : '작업종료시간',
 					align: 'center',
 					className : 'fontClass',
-					name : '설비코드'
+					name : '작업종료시간'
 
 				}, {
 					header : '생산량',
@@ -308,15 +308,15 @@
 					className : 'fontClass',
 					name : '불량코드'
 				}, {
-					header : '불량명',
+					header : '불량사유',
 					align: 'center',
 					className : 'fontClass',
-					name : '불량명'
+					name : '불량사유'
 				}, {
-					header : '상태',
+					header : '비고',
 					align: 'center',
 					className : 'fontClass',
-					name : '상태'
+					name : '비고'
 				} ],
 				rowHeaders : [ 'rowNum' ],
 				pageOptions : {

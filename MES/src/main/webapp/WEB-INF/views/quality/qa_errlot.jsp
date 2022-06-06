@@ -227,24 +227,51 @@
 		var grid = new tui.Grid({
 			el : document.getElementById('errLotList'),
 			columns : [ {
-				header : '제품LOT',
-				name : '제품LOT'
+				header : 'LOG',
+				name : 'LOG',
+				align: 'center',
+				className : 'fontClass'
 			}, {
-				header : '제품코드',
-				name : '제품코드'
+				header : '순번',
+				name : '순번',
+				align: 'right',
+				className : 'fontClass'
 			}, {
-				header : '제품명',
-				name : '제품명'
+				header : '진행공정코드',
+				name : '진행공정코드',
+				align: 'center',
+				className : 'fontClass'
+			}, {
+				header : '작업시작시간',
+				name : '작업시작시간',
+				align: 'center',
+				className : 'fontClass',
+				width: '100'
+			}, {
+				header : '작업종료시간',
+				name : '작업종료시간',
+				align: 'center',
+				className : 'fontClass',
+				width: '100'
 			}, {
 				header : '불량량',
-				name : '불량량'
+				name : '불량량',
+				align: 'right',
+				className : 'fontClass'
 			}, {
 				header : '불량코드',
-				name : '불량코드'
+				name : '불량코드',
+				className : 'fontClass'
 			}, {
 				header : '불량사유',
 				name : '불량사유',
-				width: '200'
+				className : 'fontClass',
+				width: '170'
+			}, {
+				header : '비고',
+				name : '비고',
+				className : 'fontClass',
+				width: '120'
 			} ],
 			rowHeaders : [ 'rowNum' ],
 			pageOptions : {

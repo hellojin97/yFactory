@@ -208,6 +208,7 @@ SELECT
 		AND B.PROD_CD = P.PROD_CD
 		AND LI.PROD_CD = P.PROD_CD
 		AND LI.LINE_CD = #{line}
+		ORDER BY 2
 	</select>
 		<!-- 필요자재(LOT) 조회-->
 	<select id="ProcNeedMtrlLOT" resultType="map">

@@ -331,7 +331,7 @@
 			const options = {
 					  includeHiddenColumns: true,
 					  onlySelected: true,
-					  fileName: '불량내역',
+					  fileName: '검사결과',
 					};
 			grid.export('xlsx', options);
 		})

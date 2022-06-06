@@ -38,31 +38,50 @@ font-weight : bold;
 input:checked + label {
   color: red;
 }
-button{
+/* button{
 	margin:25px;
 	padding:15px 20px;
 	background-color:#555555;
 	color:white;
 	border-radius: 8px;
- }
+ } */
+button {     
+	color: black;
+    text-align: center;
+    border: solid 1px #2c3e50;
+    margin: 3px;
+    line-height: 25px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px 5px 0px 0px;
+		  }
+button:hover {
+	color: black;
+	background-color: white;
+}
+
 
 </style>
 
 
 </head>
 <body>
-		<h1>설비 실시간 상태</h1>
-		<div id="in/out"></div>
-		<div style="background-color: #e0e0e0; padding: 8px;">
+		
+		<div style="padding-bottom: 70px; ">
+		<div class="mainTitle" style="padding-bottom:15px;">
+			<h1>설비 실시간 상태</h1>
+		</div>
+		<div class="min2">
+			<button type="button" class="btn2" id="refresh">새로고침</button>
+		</div>
+		<div class="min1">
+		<div style="background-color:#e9ecef; padding: 8px;">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
 			<h4>설비 실시간 온도</h4>
 			<hr style="border: solid 1px gray;">
 		</div>
-		<div align="right">
-		<span>
-					<button type="button" id="refresh">새로고침</button>
-		</span>
-		</div>
+		
+		
+	
 		<div id="chart-area" align="center"></div>
 		
 		<div align="center">
@@ -83,10 +102,10 @@ button{
 		<h4>설비 실시간 생산량</h4>
 		<div id="chart-UphArea" align="center">
 		 	<jsp:include page="uph.jsp" flush="false"/>
+			</div>
 		</div>
 	</div>
-
-	
+</div>
 <script>	
 
 //[변수 선언부]
@@ -171,7 +190,8 @@ var lineCd;
 	      });
 		
 	      $(".line-control").on("click" , function(ev){
-	    	  
+	    	  	chart.destroy();
+	    	  	
 		    	lineCd = $("input[name='chk_line']:checked").val();
 		    	console.log(lineCd);
 		    	//console.log(ev.target.previousSibling.previousSibling.innerText);

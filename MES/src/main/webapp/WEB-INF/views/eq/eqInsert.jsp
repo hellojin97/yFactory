@@ -6,7 +6,16 @@
 <head>
 <meta charset="utf-8">
 <!-- 추가 CDN -->
-
+<!-- toastr.CSS -->
+   <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
+<!-- toastr.JS -->
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 <style>
@@ -16,11 +25,25 @@
 }
 
 */
-.btnpart {
+/* .btnpart {
 	background-color: #555555;
 	color: white;
-}
+} */
 
+/* button:hover {
+	color: black;
+	background-color: white;
+} */
+button {     
+	color: black;
+    text-align: center;
+    
+    border: solid 1px #2c3e50;
+    margin: 3px;
+    line-height: 25px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px 5px 0px 0px;
+		  }
 button:hover {
 	color: black;
 	background-color: white;
@@ -28,17 +51,19 @@ button:hover {
 </style>
 </head>
 <body>
-	<h1>설비 등록</h1>
-	<div id="in/out"></div>
 
-
-	<div style="background-color: #e0e0e0; padding: 8px;">
-		<div class="mainTitle" style="padding: 15px;">
-			<div>
-				<button type="button" id="reset" class="button btnpart">초기화</button>
-				<button type="button" id="btnok" class="button btnpart">저장</button>
+		<div style="padding-bottom: 70px; ">
+		<div class="mainTitle" style="padding-bottom:15px;">
+		<h1>설비 등록</h1>
+	 	<!-- <div id="in/out"></div> -->
+		</div>
+			<div class="min2">
+				<button type="button" id="reset" class="btn2">초기화</button>
+				<button type="button" id="btnok" class="btn2" >저장</button>
 			</div>
-
+			<div class="min1" >
+			<div style="background-color: #e9ecef; padding: 8px;">
+			<div class="mainTitle" style="padding: 15px;">
 			<form name="frm" id="frm" method="POST" enctype="multipart/form-data">
 				<div class="row">
 
@@ -204,10 +229,12 @@ button:hover {
 		<hr style="border: solid 2px gray;" />
 	</div>
 	<!-- END OF DIV-->
+	
 
-
-
+</div>
+</div>
 	<div id="modalDiv"></div>
+
 
 </body>
 <script>

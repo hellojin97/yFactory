@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yfactory.mes.proc.service.ProcService;
 
@@ -52,6 +53,13 @@ public class ProcController {
 		
 		return "proc/procProcessCtl";
 	}
+	
+	// 제품공정흐름도
+	@RequestMapping("/procLineForm")
+	public String procLineForm() {
+		return "proc/procLineForm";
+	}
+
 
 	// 주문서목록 모달
 	@GetMapping("/ordermodal")
@@ -100,6 +108,12 @@ public class ProcController {
 		return "proc/procmodal/procResultNmModal";
 	}
 	
+
+	// 미사용 설비 목록 모달
+		@GetMapping("/procNoUseEqSelectModal")
+		public String procNoUseEqSelectModal() {
+			return "proc/procmodal/procNoUseEqSelectModal";
+		}
 
 
 }

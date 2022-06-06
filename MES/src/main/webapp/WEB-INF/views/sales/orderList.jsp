@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 
@@ -140,26 +145,36 @@ window.onload = function (){
          {
            header: '주문코드',
            name: '주문코드',
+           className : 'fontClass',
+           align: 'center'
          },
          {
              header: '업체명',
              name: '업체명',
+             className : 'fontClass',
            },
            {
                header: '주문일자',
                name: '주문일자',
+               className : 'fontClass',
+               align: 'center'
              },
              {
                  header: '납기일자',
                  name: '납기일자',
+                 className : 'fontClass',
+                 align: 'center'
                },             
                  {
-                     header: '수량',
+                     header: '주문수량',
                      name: '주문수량',
+                     className : 'fontClass',
+                     align: 'right'
                    },
                    {
                        header: '진행상황',
                        name: '진행상황',
+                       className : 'fontClass',
                      }],
                   rowHeaders: ['rowNum'],
                      pageOptions: {
@@ -229,8 +244,20 @@ $('#excel').on('click',function(){
 			};
 	ordeList.export('xlsx', options);
 })
-}
 
+
+//마우스 커서 올리면
+ordeList.on('mouseover', function(e){
+	var cn = e.columnName;
+	var tt = e.targetType;
+		if(cn == '주문코드' && tt == 'cell' ){			
+			$('#ordeList').attr("class", "smMouseOver");
+		}else{
+			$('#ordeList').removeClass();					
+		}
+});
+
+}
   </script>
 
 </body>

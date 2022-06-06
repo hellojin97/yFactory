@@ -25,7 +25,7 @@
 
 
 <style>
-.inSearch {
+/* .inSearch {
 	background-color: #555555;
 	color: white;
 	font-family: "Audiowide", sans-serif;
@@ -38,27 +38,50 @@
 	color: black;
 	background-color: white;
 	 border:2px solid green;
-}
+} */
 h3{
  /* color:ghostwhite;
  border: 15px solid #e0e0e0; */
  
 }
+.clickB {     
+	color: black;
+    text-align: center;
+    
+    border: solid 1px #2c3e50;
+    margin: 3px;
+    line-height: 25px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px 5px 0px 0px;
+		  }
 
-
+button:hover {
+	color: black;
+	background-color: white;
+}
 </style>
 
 </head>
 <body>
-	<h1>설비 관리</h1>
-	<div id="in/out"></div>
-	<div style="background-color: #e0e0e0; padding: 8px;">
+	
+	<!-- <div id="in/out"></div> -->
+	<div style="padding-bottom: 70px; ">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
+			<h1>설비 관리</h1>
+					
 			<!-- <h3>설비 데이터</h3> -->
-			<div style="padding-bottom: 10px;" align="right">
-			<button type="button" id="eqUpd" class="inSearch">설비 수정</button>
+			
+			<div class="min2">
+			
+				<button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button>
 			</div>
-			<hr style="border: solid 1px gray;">
+			<div class="min1" >
+			
+			
+			<div style="background-color: #e9ecef; padding: 8px;">
+			<!-- <hr style="border: solid 1px gray;"> -->
+			<div class="mainTitle" style="padding: 15px;">
+
 			
 		</div>
 
@@ -66,8 +89,9 @@ h3{
 
 		<div id="grid"></div>
 		<div id="grid1"></div>
-		
-
+	</div>
+	</div>
+	</div>
 	</div>
 	<script type="text/javascript">
 	// 지역변수로 윈도우에 선언이되있으니까 자식에서 못쳐가지고오는거죠~ 
@@ -92,34 +116,42 @@ h3{
 				columns : [ {
 					header : '설비코드',
 					name : '설비코드',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '설비구분',
 					name : '설비구분',
+					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true }
 				},{
 					header : '설비명',
 					name : '설비명',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정코드',
 					name : '공정코드',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정명',
 					name : '공정명',
+					className : 'fontClass',
 					editor : "text"
 				}, {
 					header : '최저온도',
 					name : '최저온도',
+					className : 'fontClass',
 					editor : "text"
 				}, {
 					header : '최고온도',
 					name : '최고온도',
+					className : 'fontClass',
 					editor : "text"
 				}, {
 					header : '구매일자',
 					name : '구매일자',
+					className : 'fontClass',
 					editor : {
 						type : 'datePicker',
 						options : {
@@ -137,18 +169,19 @@ h3{
 				{
 					header : '사용여부',
 					name : '사용여부',
+					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true },
 					 editor: {
 	                     type: 'select',
 	                     options: {
 	                       listItems: [
 	                         {
-	                           text: 'Y',
-	                           value: 'USE01'
+	                           text: '사용가능',
+	                           value: '사용가능'
 	                         },
 	                         {
-	                           text: 'N',
-	                           value: 'USE02'
+	                           text: '사용불가',
+	                           value: '사용불가'
 	                         }
 	                    ]
 	                 }
@@ -197,28 +230,43 @@ h3{
 			});
 		
 		
-		
+			// 설비 수정 버튼
 		  $("#eqUpd").click(function () {
 			  
 			var chkRows = grid.getCheckedRows();
 			var updRowArr = [];
 			var data = {};
+			var temp1;
+		
 			console.log(chkRows);
 			console.log(JSON.stringify(chkRows));
+			
+			
 			for (var i = 0; i < chkRows.length; i++) {
+				if(chkRows[i].사용여부 == '사용가능'){ // 사용가능 이 선택되어있다면
+					temp1 = 'USE01';
+				}else{ // 사용불가 가 선택되어 있다면
+					temp1 = 'USE02';
+				}
+				
+				console.log(temp1);
 				data = {
 						eq_cd : chkRows[i].설비코드 , 
-						/* eq_nm : chkRows[i].설비명 , */
+						// eq_nm : chkRows[i].설비명 ,
 						proc_cd : chkRows[i].공정코드 ,
 						proc_nm : chkRows[i].공정명 ,
 						eq_min : chkRows[i].최저온도 ,
 						eq_max : chkRows[i].최고온도 ,
 						eq_purdt : chkRows[i].구매일자 ,
-						eq_actst : chkRows[i].사용여부 
+						eq_actst : temp1
+
 				};
+				
 				updRowArr.push(data);
+				
 			};
-			  console.log(updRowArr);
+			 
+			 
 		        Swal.fire({
 		            title: '정말 수정 하시겠습니까?',
 		            icon: 'warning',
@@ -251,7 +299,7 @@ h3{
 					                    '',
 					                    'success'
 					                		);
-			               }); 
+			               });  
 		            }else{
 		            	Swal.fire(
 		                        '수정이 취소되었습니다.',
@@ -264,7 +312,7 @@ h3{
 		        		toastr.error('체크된 행이 없습니다! 확인해주세요');
 		        	}
 		        })
-		    });
+		    }); 
 		
 		
 		}	

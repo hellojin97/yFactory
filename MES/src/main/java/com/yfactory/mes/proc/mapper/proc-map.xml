@@ -268,7 +268,7 @@ SELECT
 	WHERE ins.ins_cd = insdtl.ins_dtlcd
 	AND   insdtl.prod_cd = pd.prod_cd
     AND   cm.comm_cd = ins.ins_st
-    AND   cm.cd_nm ='미지시'
+    AND   cm.cd_nm ='진행전'
 	<if test="date1 != '' ">
 	AND insdtl.ins_dtldt = TO_DATE(#{date1},'YY/MM/DD')
 	</if>
@@ -398,24 +398,66 @@ SELECT
 	
 	<!-- 공정 관리 조회-->
 	<select id="procProcessCtlSelect" resultType="map">
-		SELECT PC.PROC_CD 공정코드,
+    SELECT PC.PROC_CD 공정코드,
 		       CM.CD_NM 공정구분,
 		       PC.PROC_NM 공정명,
 		       EQ.EQ_CD   설비코드,
 		       EQ.EQ_NM   설비명,
 		       EQ.EQ_MDNM 모델명,
-		       EMP.EMP_NM 담당자
+		       EMP.EMP_NM 관리자
 	      FROM PROCESS PC, EQ EQ, EMPLOYEE EMP,COMM_CODE CM 
 		 WHERE PC.EQ_CD = EQ.EQ_CD
 		   AND EQ.EQ_INSTER = EMP.EMP_NO
 		   AND CM.COMM_CD = PC.PROC_CLS
+		   
 	</select>
+	
+	
 	
 	<!-- 공정 체크박스 목록-->
 	<select id="procProcessCheckList" resultType="map">
     select CD_NM from comm_code
+    WHERE  HCOMM_CD = 'hcomm_cd1'
+    <!--  
     WHERE  HCOMM_CD = 'PROC'
+    -->
 	</select>
+		<!-- 공정 구분 선택 조회-->
+	<select id="ProcCdNmSelect" resultType="map">
+    SELECT PC.PROC_CD 공정코드,
+		       CM.CD_NM 공정구분,
+		       PC.PROC_NM 공정명,
+		       EQ.EQ_CD   설비코드,
+		       EQ.EQ_NM   설비명,
+		       EQ.EQ_MDNM 모델명,
+		       EMP.EMP_NM 관리자
+	      FROM PROCESS PC, EQ EQ, EMPLOYEE EMP,COMM_CODE CM 
+		 WHERE PC.EQ_CD = EQ.EQ_CD
+		   AND EQ.EQ_INSTER = EMP.EMP_NO
+		   AND CM.COMM_CD = PC.PROC_CLS
+    <if test="cdNm != '전체'">
+    AND    CM.CD_NM  = #{cdNm}
+    </if>
+	</select>
+	<!-- 미사용 설비 목록 조회-->
+	<select id="ProcNoUseEqSelect" resultType="map">
+    SELECT EQ_CD 설비코드,
+           EQ_NM 설비명,
+           EQ_MDNM 모델명,
+           EMP.EMP_NM  관리자,
+           CM.COMM_CD
+    FROM   EQ EQ, COMM_CODE CM, EMPLOYEE EMP
+    WHERE  EQ.EQ_INSTER = EMP.EMP_NO
+    AND    EQ.EQ_ACTST  = CM.COMM_CD
+    AND    CM.COMM_CD   = 'USE01'
+    <if test="eqCd != ''">
+    AND    EQ.EQ_CD = #{eqCd}
+    </if>
+	</select>
+	
+		<insert id="procProcessMgtInsert" statementType="CALLABLE" parameterType="map" >
+		{CALL PROC_PM_INSERT (#{cdNm}, #{procNm}, #{eqCd}, #{eqNm},#{eqMn}, #{empNm})}
+	</insert>
 	<select id="searchProcResult" resultType="map">
 		SELECT PID.INS_DTLCD AS "생산지시코드",
 	           PRC.PROC_PRCD AS "진행공정코드",
@@ -456,4 +498,28 @@ SELECT
         </if>
 	</select>
 	
+	<!-- 제품공정흐름도 '제품라인정보' -->
+	<select id="procLineAjax" resultType="map">
+		SELECT 		L.LINE_CD "라인코드",
+       				P.PROD_CD "제품코드",
+       				P.PROD_NM "제품명"
+		FROM 		LINE L, 
+					PROD P
+		WHERE P.PROD_CD = L.PROD_CD
+		GROUP BY L.LINE_CD, P.PROD_CD, P.PROD_NM
+		ORDER BY 1
+	</select>
+	
+	<select id="procLineEditAjax" resultType="map">
+		SELECT P.PROC_CD "공정코드",
+       		   P.PROC_NM "공정명",
+       		   E.EQ_CD   "설비코드",
+       		   E.EQ_MDNM   "설비명"
+		FROM   PROCESS P,
+       		   EQ E,
+       		   LINE L
+		WHERE  P.EQ_CD = E.EQ_CD
+		AND    L.PROC_CD = P.PROC_CD
+		AND    L.LINE_CD = #{lineCd}
+	</select>
 </mapper>

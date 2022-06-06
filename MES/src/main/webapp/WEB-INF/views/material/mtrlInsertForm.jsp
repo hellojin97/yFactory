@@ -154,29 +154,37 @@
 		columns : [ {
 			header : '원자재발주코드',
 			name : '원자재발주코드',
+			className : 'fontClass',
 		    sortable: true,
 		    sortingType: 'desc'
 		}, {
 			header : '원자재코드',
-			name : '원자재코드'
+			name : '원자재코드',
+			className : 'fontClass',
 		}, {
 			header : '원자재명',
-			name : '원자재명'
+			name : '원자재명',
+			className : 'fontClass',
 		}, {
 			header : '업체명',
-			name : '업체명'
+			name : '업체명',
+			className : 'fontClass',
 		}, {
 			header : '입고량',
-			name : '입고량'
+			name : '입고량',
+			className : 'fontClass',
 		}, {
 			header : '입고일시',
-			name : '입고일시'
+			name : '입고일시',
+			className : 'fontClass',
 		}, {
 			header : '원자재LOT번호',
-			name : '원자재LOT번호'
+			name : '원자재LOT번호',
+			className : 'fontClass',
 		}, {
 			header : '유통기한',
-			name : '유통기한'
+			name : '유통기한',
+			className : 'fontClass',
 		}
 
 		],

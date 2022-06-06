@@ -79,19 +79,23 @@ var unorder = new tui.Grid({
     columns: [
       {
         header: '생산계획코드',
-        name: 'PP_CD'
+        name: 'PP_CD',
+        className : 'fontClass',
       },
       {
         header: '생산계획명',
-        name: 'PP_NM'
+        name: 'PP_NM',
+        className : 'fontClass',
       },
       {
         header: '계획등록일자',
-        name: 'PP_DT'
+        name: 'PP_DT',
+        className : 'fontClass',
       },
       {
         header: '총 수량',
-        name: 'PD_QTY'
+        name: 'PD_QTY',
+        className : 'fontClass',
       }
       
     ],
@@ -105,28 +109,27 @@ var unorder = new tui.Grid({
   });
 //생산계획코드 불러오기
 $("#select1").on("click",function(e) {
-//debugger
-   let ppCd1 = unorder.getValue(e.rowKey, 'PP_CD');
-   console.log(ppCd1);
+   let ppcd= unorder.getCheckedRows();
+   for (var i = 0; i < ppcd.length; i++) {
+	   let ppCd = ppcd[i];
+   console.log(ppCd);
    $.ajax({
 		url: "mtrlPlan",
-		data : {ppCd : ppCd1},
+		data : {ppCd : ppcd[i].PP_CD},
 		method : "GET",
 		dataType : "JSON",
 		contentType : "application/json; charset=utf-8"
 	  	}).done(function(result){
-
 	  		for (var i = 0; i < result.length; i++) {
-				if(result[i].구분 != null){
-	  				
-					prodPlan.appendRow(result[i]);	
-				} 		
-			}
-	  		console.log(result)
+	  			 /* 원자재코드 */
+    		  prodPlan.appendRow(result[i]);
+    		  console.log(result);
+	  		}
 	  	 }).fail(function(result){
 	  	    console.log(result);
 	     });
    }
+}
 );
   //생산계획별 자재재고 토스트
   var prodPlan = new tui.Grid({
@@ -135,23 +138,28 @@ $("#select1").on("click",function(e) {
     columns: [
       {
         header: '원자재코드',
-        name: '원자재코드'
+        name: '원자재코드',
+        className : 'fontClass',
       },
       {
         header: '계획일자',
-        name: '계획일자'
+        name: '계획일자',
+        className : 'fontClass',
       },
       {
           header: '원자재명',
-          name: '원자재명'
+          name: '원자재명',
+          className : 'fontClass',
         },
       {
           header: '재고 구분',
-          name: '구분'
+          name: '구분',
+          className : 'fontClass',
         },
         {
             header: '생산계획코드',
-            name: '생산계획코드'
+            name: '생산계획코드',
+            className : 'fontClass',
           },
 
 
@@ -202,32 +210,39 @@ $("#select1").on("click",function(e) {
     columns: [
       {
         header: '원자재코드',
-        name: '원자재코드'
+        name: '원자재코드',
+        className : 'fontClass',
       },
       {
         header: '원자재명',
-        name: '원자재명'
+        name: '원자재명',
+        className : 'fontClass',
       },
       {
         header: '업체명',
-        name: '업체명'
+        name: '업체명',
+        className : 'fontClass',
       },
       {
     	    header: '납기요청일자',
     	    name: '납기요청일자',
+    	    className : 'fontClass',
     	    editor: 'datePicker'
     	  },
       {
           header: '현재고',
-          name: '현재고'
+          name: '현재고',
+          className : 'fontClass',
         },
       {
           header: '계획대비 필요수량',
-          name: '계획대비 필요수량'
+          name: '계획대비 필요수량',
+          className : 'fontClass',
         },
       {
           header: '발주량',
           name: '발주량',
+          className : 'fontClass',
           editor : {
         	  type : 'text'
           }

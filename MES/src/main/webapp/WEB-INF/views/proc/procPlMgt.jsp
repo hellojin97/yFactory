@@ -98,32 +98,40 @@ $('#inBtn').on('click', function(){
 			scrollY : false,
 			columns : [ {
 				header : '생산계획코드',
-				name : '생산계획코드'
+				name : '생산계획코드',
+				className : 'fontClass',
 				
 			},{
 				header : '주문코드',
 				name : '주문코드',
+				className : 'fontClass',
 			}, {
 				header : '제품명',
 				name : '완제품명',
+				className : 'fontClass',
 			}, {
 				header : '제품코드',
 				name : '완제품코드',
+				className : 'fontClass',
 			},{
 				header : '주문수량',
 				name : '주문수량',
+				className : 'fontClass',
 			},{
 				header : '계획량',
 				name : '계획량',
+				className : 'fontClass',
 				editor : "text"
 
 			}, {
 				header : '생산일수',
 				name : '생산일수',
+				className : 'fontClass',
 				editor : "text"
 			}, {
 				header : '작업우선순위',
 				name : '작업우선순위',
+				className : 'fontClass',
 				editor : "text"
 			},
 			],
@@ -154,30 +162,38 @@ $("#outBtn").on("click", function(){
 		columns : [ {
 			header : '주문코드',
 			name : '주문코드',
+			className : 'fontClass',
 		}, {
 			header : '제품명',
 			name : '완제품명',
+			className : 'fontClass',
 		}, {
 			header : '제품코드',
 			name : '완제품코드',
+			className : 'fontClass',
 		},{
 			header : '주문수량',
 			name : '주문수량',
+			className : 'fontClass',
 		},{
 			header : '현재고',
 			name : '현재고',
+			className : 'fontClass',
 		},{
 			header : '계획량',
 			name : '계획량',
+			className : 'fontClass',
 			editor : "text"
 
 		}, {
 			header : '생산일수',
 			name : '생산일수',
+			className : 'fontClass',
 			editor : "text"
 		}, {
 			header : '작업우선순위',
 			name : '작업우선순위',
+			className : 'fontClass',
 			editor : "text"
 		},
 		],

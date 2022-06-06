@@ -74,40 +74,25 @@
 	
 	<!-- 제품검사결과 조회 -->
 	<select id="selectProdCheck" resultType="map">
-		SELECT	PER.PROD_LOT AS "제품LOT",
-				PID.PROD_CD AS "제품코드",
-				P.PROD_NM AS "제품명",
-				PPR.PROC_CD AS "공정코드",
-				PC.EQ_CD AS "설비코드",
-				PS.PROC_QTY AS "생산량",
-				PS.PROC_PASSQTY AS "합격량",
-				PE.ERR_QTY AS "불량량",
-				PE.ERR_CD AS "불량코드",
-				ERR.ERR_DTL AS "불량내역",
-				CC.CD_NM AS "상태"
-		
-		FROM 	PROD_ERR PER,
-				PROD_LOT PLO,
-				PRD_INSDTL PID,
-				PROC_PRC PPR,
-				PROCESS PC,
-				PROD P,
-				PROC_ST PS,
-				PROC_ERR PE,
-				ERR_CODE ERR,
-				COMM_CODE CC
-		
-		WHERE 	PER.PROD_LOT = PLO.PROD_LOT
-		AND 	PPR.PRD_DTLCD = PID.PRD_DTLCD
-		AND 	PPR.PROC_CD = PC.PROC_CD
-		AND 	PID.PROD_CD = P.PROD_CD
-		AND 	PS.PROC_PRCD = PPR.PROC_PRCD
-		AND 	PS.LINE_TURN = PPR.LINE_TURN
-		AND		PS.PROC_ST = CC.COMM_CD
-		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
-		AND 	PE.LINE_TURN = PPR.LINE_TURN
-		AND 	PE.PROC_PRCD = PPR.PROC_PRCD
-		AND 	PE.ERR_CD = ERR.ERR_CD
+		SELECT	TO_CHAR(PS.PROC_LOG, 'HH24MISS') "LOG", 
+		        PS.LINE_TURN "순번",
+		        PS.PROC_PRCD "진행공정코드",
+		        TO_CHAR(PPR.PROC_STTM, 'HH24:MM:SS') "작업시작시간",
+		        TO_CHAR(PPR.PROC_EDTM, 'HH24:MM:SS') "작업종료시간",
+		        PS.PROC_QTY "생산량",
+		        PS.PROC_PASSQTY "합격량",
+		        PER.ERR_QTY "불량량",
+		        PER.ERR_CD "불량코드",
+		        ERR.ERR_DTL "불량사유",
+		        PER.ERR_DESC "비고"
+		FROM    PROC_ST PS, PROC_ERR PER, PROC_PRC PPR, ERR_CODE ERR
+		WHERE   PS.LINE_TURN = PPR.LINE_TURN
+		AND     PS.PROC_PRCD = PPR.PROC_PRCD
+		AND     PER.LINE_TURN = PPR.LINE_TURN
+		AND     PER.PROC_PRCD = PPR.PROC_PRCD
+		AND     PS.LINE_TURN = PER.LINE_TURN
+		AND		PS.PROC_PRCD = PER.PROC_PRCD
+		AND		PER.ERR_CD = ERR.ERR_CD
 		ORDER BY 1
 	</select>
 	
@@ -130,18 +115,25 @@
 	</select>
 	<!-- 제품불량내역 조회 -->
 	<select id="selectProdErrList" resultType="map">
-		SELECT	PL.PROD_LOT "제품LOT",
-				P.PROD_CD "제품코드",
-				P.PROD_NM "제품명",
-				PER.CHK_ERRQTY "불량량",
-				PER.ERR_CD "불량코드",
-				ERR.ERR_DTL "불량사유"
-		FROM	PROD_ERR PER, PROD P, ERR_CODE ERR, PROD_LOT PL
-		WHERE	PER.ERR_CD = ERR.ERR_CD
-		AND		P.PROD_CD = PL.PROD_CD
-		AND		PER.PROD_LOT = PL.PROD_LOT
-		AND 	PERL.ERR_CD IS NOT NULL
+		SELECT	TO_CHAR(PS.PROC_LOG, 'HH24MISS') "LOG", 
+		        PS.LINE_TURN "순번",
+		        PS.PROC_PRCD "진행공정코드",
+		        TO_CHAR(PPR.PROC_STTM, 'HH24:MM:SS') "작업시작시간",
+		        TO_CHAR(PPR.PROC_EDTM, 'HH24:MM:SS') "작업종료시간",
+		        PER.ERR_QTY "불량량",
+		        PER.ERR_CD "불량코드",
+		        ERR.ERR_DTL "불량사유",
+		        PER.ERR_DESC "비고"
+		FROM    PROC_ST PS, PROC_ERR PER, PROC_PRC PPR, ERR_CODE ERR
+		WHERE   PS.LINE_TURN = PPR.LINE_TURN
+		AND     PS.PROC_PRCD = PPR.PROC_PRCD
+		AND     PER.LINE_TURN = PPR.LINE_TURN
+		AND     PER.PROC_PRCD = PPR.PROC_PRCD
+		AND     PS.LINE_TURN = PER.LINE_TURN
+		AND     PS.PROC_PRCD = PER.PROC_PRCD
+		AND     PER.ERR_CD = ERR.ERR_CD
 		ORDER BY 1
+
 	</select>
 
 	<!-- 검색 -->

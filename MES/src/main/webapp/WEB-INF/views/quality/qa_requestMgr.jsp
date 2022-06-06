@@ -11,7 +11,7 @@
 		<h1>품질검사관리</h1>
 	</div>
 
-	<div style="background-color: #e0e0e0; padding: 8px;">
+	<div style="background-color: #e9ecef; padding: 8px;">
 		<div class="mainTitle" style="padding: 15px;">
 
 			<!-- grid 테이블 출력 div -->

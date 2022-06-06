@@ -86,9 +86,15 @@
 						className : 'fontClass',
 					}, 
 					{
+						header : '공정명',
+						name : '공정명',
+						className : 'fontClass',
+
+					}, 
+					{
 						header : '공정구분',
 						name : '공정구분',
-          	className : 'fontClass',
+          				className : 'fontClass',
 						  editor: {
                               type: 'select',
                               options: {
@@ -97,21 +103,13 @@
 						  },
 						  validation: { required: true }
 					},
-					{
-						header : '공정명',
-						name : '공정명',
-						className : 'fontClass',
 
-
-						editor : {
-			                  type : 'text',
-			                  },
-						  validation: { required: true }
-					}, 
 					{
 						header : '설비코드',
 						name : '설비코드',
 						className : 'fontClass',
+						  validation: { required: true }
+
 					}, {
 						header : '설비명',
 						name : '설비명',
@@ -120,15 +118,11 @@
 						header : '모델명',
 						name : '모델명',
 						className : 'fontClass',
-					},{
-						header : '담당자',
-						name : '담당자',
-						className : 'fontClass',
-						  validation: { required: true }
-					}, 
+					},
 					{
 						header : '관리자',
 						name : '관리자',
+						className : 'fontClass',
 					},
 					],
 					rowHeaders : [
@@ -194,17 +188,12 @@
 		procProcessCtlGrid.prependRow(0);
 	});
 	btnDelete.addEventListener("click", function() {
-		procProcessCtlGrid.removeCheckedRows(false);
-	});
-	
-	btnSave.addEventListener("click", function() {
-		//저장 ajax 작성 요망
+		//삭제 ajax 작성 요망
 		let eq = procProcessCtlGrid.getCheckedRows();
-		console.log(eq);
 		
 		 /* 확인 CONFIRM  */
 		  Swal.fire({
-	          title: '생산계획을 등록하시겠습니까?',
+	          title: '생산계획을 삭제하시겠습니까?',
 	          icon: 'warning',
 	          showCancelButton: true,
 	          confirmButtonColor: '#3085d6',
@@ -216,14 +205,60 @@
 	      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
 	          if (result.isConfirmed) {
 	        	  
-	        	  for (var i = 0; i < prd.length; i++) {
+	        	  for (var i = 0; i < eq.length; i++) {
 	 				 result = {
-	 		 				 "cdNm" : eq[i].공정구분,
-	 		 				 "procNm" : eq[i].공정명,
-	 		 				 "eqCd" : eq[i].설비코드,
-	 		 				 "eqNm" : eq[i].설비명,
-	 		 				 "eqMn" : eq[i].모델명,
-							 "empNm" : eq[i].관리자
+	 		 				 "procCls" : eq[i].공정구분,
+	 		 				 "eqCd" : eq[i].설비코드
+	  					 };
+	 				 
+		               $.ajax({
+						   url  : "procProcessMgtDelete",
+						   data : result,
+						   async : false,
+						   method : "POST"
+									   }).done(function(result){
+											console.log(result);
+							})
+	 					}
+					        	  swal.fire({
+					        		    title: "성공적으로 계획이 등록되었습니다!",
+					        		    text: "생산계획조회 페이지로 이동합니다.",
+					        		    type: "success"
+					        		}).then(function() {
+					        		    window.location = "procProcessCtl";
+					        		});
+
+	          			}else{
+	          	Swal.fire(
+	                      '승인이 취소되었습니다.',
+	                      '섹시하시네요~!',
+	                      'error'
+	                  )
+	          			}
+	      }) 
+
+	});
+	
+	btnSave.addEventListener("click", function() {
+		//저장 ajax 작성 요망
+		let eq = procProcessCtlGrid.getCheckedRows();
+		
+		 /* 확인 CONFIRM  */
+		  Swal.fire({
+	          title: '생산계획을 등록하시겠습니까?',
+	          icon: 'warning',
+	          showCancelButton: true,
+	          confirmButtonColor: '#3085d6',
+	          cancelButtonColor: '#d33',
+	          confirmButtonText: '승인',
+	          cancelButtonText: '취소'
+	      }).then((result) => {
+	          if (result.isConfirmed) {
+	        	  
+	        	  for (var i = 0; i < eq.length; i++) {
+	 				 result = {
+	 		 				 "procCls" : eq[i].공정구분,
+	 		 				 "eqCd" : eq[i].설비코드
 	  					 };
 	 				 
 		               $.ajax({
@@ -240,7 +275,7 @@
 					        		    text: "생산계획조회 페이지로 이동합니다.",
 					        		    type: "success"
 					        		}).then(function() {
-					        		    //window.location = "procPlSelect";
+					        		    window.location = "procProcessCtl";
 					        		});
 
 	          			}else{

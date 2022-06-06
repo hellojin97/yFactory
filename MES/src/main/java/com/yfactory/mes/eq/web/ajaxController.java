@@ -221,7 +221,8 @@ public class ajaxController {
 		
 		@RequestMapping("/getEqImgAjax")
 		public String getEqImgAjax(@RequestParam String eqDtlCd , Model model) {
-			
-			return mapper.getEqImgAjax(eqDtlCd);
+			String imgPath = mapper.getEqImgAjax(eqDtlCd); 
+			model.addAttribute("imgPath" , imgPath);
+			return imgPath;
 		}
 }

@@ -73,16 +73,20 @@
 			//console.log(rs.이미지);
 			console.log(rs);
 		});
-		/* var url2 =  "getEqImgAjax";
+		console.log(eqDtlCd);
+		var url2 =  "getEqImgAjax";
 		$.ajax(url2 , {
-			
+			method: "get",
 			data : {eqDtlCd : eqDtlCd},
 			dataType:"JSON",
 			contentType : "application/json; charset=utf-8"
 		}).done(function(res){
-			//console.log(rs);
-			$("#img_path").attr("src", res);
-		}); */
+			
+			console.log("res:"+res);
+			console.log("res가 없어요!");
+			$("#grid2").prepend('<img src="'+res+'">');
+			//$("#img_path").attr("src", res);
+		}); 
 
 		var grid2 = new tui.Grid({
 			el : document.getElementById('grid2'),

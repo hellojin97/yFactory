@@ -71,7 +71,8 @@ public interface EquipMapper {
 	List<Map>eqModalSelect(); //비가동 설비 내역 - 설비 modal 조회
 	
 	List<Map> getEqDetailDataAjax(String eqDtlCd); // 설비 관리페이지 - 설비 상세 모달
-	String getEqImgAjax(String eqDtlCd); // 이미지 따로
+	
+	 String getEqImgAjax(String eqDtlCd); // 이미지 따로
 	
 	// -----------------------------------------------------------
 	

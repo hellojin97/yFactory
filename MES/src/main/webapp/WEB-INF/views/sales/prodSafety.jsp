@@ -139,9 +139,8 @@
         dataType: 'JSON',
         contentType : "application/json; charset=utf-8"
      }).done(function(result){
-         console.log(result);
-         listProdLot.resetData(result);
-          
+    	 setTimeout(listColor, 10);
+         listProdLot.resetData(result);          
      });
   })
   

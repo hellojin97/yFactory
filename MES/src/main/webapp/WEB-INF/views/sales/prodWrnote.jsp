@@ -257,6 +257,9 @@
 				header : '유통기한',
 				name : '유통기한',
 				align: 'center'
+			}, {
+				header : '비고',
+				name : '비고',				
 			}
 
 			],

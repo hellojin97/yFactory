@@ -56,9 +56,10 @@ $.ajax({
 	}
 });
 
-var ordDtpList = new tui.Grid({
-	
+var ordDtpList = new tui.Grid({	
     el: document.getElementById('ordDtpList'),
+    scrollX: false,
+    bodyHeight: 200,
     columns: [
     	{
             header: '주문상세코드',
@@ -99,9 +100,9 @@ var ordDtpList = new tui.Grid({
     ],
     rowHeaders: ['rowNum'],
     pageOptions: {
-      useClient: true,
-      perPage: 8
-    }
+        type: 'scroll', 
+        perPage: 5 
+      }
   });
 
 	//출고 현황 리스트

@@ -43,13 +43,13 @@
 								<p>시작</p>
 							</div>
 							
-							<!-- <div class="col-sm-3" style="padding-right: 10px;">
+							<div class="col-sm-3" style="padding-right: 10px;">
 								<input type="datetime-local" class="form-control" id="edDt">
 							</div>
 							
 							<div style="padding: 5px 15px 0px 0px;">
 								<p>종료</p>
-							</div> -->				
+							</div>			
 						</div>
 						
 						<div class="input-group" style="padding-bottom: 10px;">	
@@ -89,43 +89,51 @@
 	$("#btnInsert").on("click", function(){
 		var ec = $("#modalEqCd").val();		
 		var sd = $("#stDt").val();
-		//var ed = $("#edDt").val();
+		var ed = $("#edDt").val();
 		var dc = $("#modalDis").val();
 		var nt = $("#Modalnote").val();
 		var subSd = sd.replace('T', ' ');
-		//var subEd = ed.replace('T', ' ');
-		console.log(subSd);
-		$.ajax({
-			url : "setEqInAjax",
-			method : "POST",
-			data : {
-					"p_eq_cd" : ec,
-					"p_eq_sd" : subSd,
-					//"p_eq_ed" : subEd,
-					"p_eq_dc" : dc,
-					"p_eq_nt" : nt
-					}					
-		}).done(function(result){
-			$('#myModal').modal('hide');
-			//비가동 설비 목록
+		var subEd = ed.replace('T', ' ');
+		if(sd != '' && ed != ''){
 			$.ajax({
-				url: "getEqInListAjax",
-				method : "GET",
-				dataType : "JSON",
-				success : function(result){			
-					eqInaList.resetData(result);
-				}
+				url : "setEqInAjax",
+				method : "POST",
+				data : {
+						"p_eq_cd" : ec,
+						"p_eq_sd" : subSd,
+						"p_eq_ed" : subEd,
+						"p_eq_dc" : dc,
+						"p_eq_nt" : nt
+						}					
+			}).done(function(result){
+				$('#myModal').modal('hide');
+				//비가동 설비 목록
+				$.ajax({
+					url: "getEqInListAjax",
+					method : "GET",
+					dataType : "JSON",
+					success : function(result){			
+						eqInaList.resetData(result);
+					}
+				});
+				// 설비 목록
+				$.ajax({
+					url: "getEqActStatListAjax",
+					method : "GET",
+					dataType : "JSON",
+					success : function(result){		
+						eqList.resetData(result);
+					}
+				});
 			});
-			// 설비 목록
-			$.ajax({
-				url: "getEqActStatListAjax",
-				method : "GET",
-				dataType : "JSON",
-				success : function(result){		
-					eqList.resetData(result);
-				}
-			});
-		});
+		}else {
+			Swal.fire(
+                    '등록이 취소되었습니다.',
+                    '시작시간과 종료시간을 모두 입력해주세요!',
+                    'error'
+                )
+		}
+		
 	})
 	
 	</script>

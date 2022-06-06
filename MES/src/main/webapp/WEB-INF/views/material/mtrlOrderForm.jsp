@@ -203,6 +203,35 @@ $("#select1").on("click",function(e) {
 	 
      }
   ) // end of [prodPlan Event]
+  
+  $('#select2').on('click', function(){
+	  var chkRow = prodPlan.getCheckedRows();
+	  
+	  prodPlan.removeCheckedRows(false);	// 체크된 ROW 삭제 처리
+	  
+	  for (var i = 0; i < chkRow.length; i++) {
+		  $.ajax({
+		 		url : 'mtrlOrderList',
+		 		method : 'GET',
+		 		data : { ppCd : chkRow[i].생산계획코드, mtCd : chkRow[i].원자재코드 },
+		 		dataType : 'JSON',
+		 		async : false,
+		 		contentType : 'application/json; charset=utf-8'
+		 	}).done(function(poList){
+		 		
+		 		for (var j = 0; j < poList.length; j++) {
+		 			mtrlRequest.appendRow(poList[j]);
+				}
+		 		
+		 		
+		 	})
+		  
+		  
+	} // end of chkRow
+	  
+  }); // 발주요청서 등록 Event
+  
+  
   //발주서 요청 조회
   var mtrlRequest = new tui.Grid({
     el: document.getElementById('mtrlRequest'),

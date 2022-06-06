@@ -106,7 +106,11 @@ $(function() {
 			modalGrid.clear();
 			var chkdt1 = $("#chkdt1").val();
 			var chkdt2 = $("#chkdt2").val();
-			
+			console.log(chkdt1);
+			console.log(chkdt2);
+			if(chkdt1==null || chkdt1==''){
+				chkdt1 = chkdt2;
+			}
 			var data = {chkdt1 : chkdt1 , chkdt2 : chkdt2};
 			//console.log(data);
 			const url = "getEqDailyChkListAjax";

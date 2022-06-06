@@ -147,7 +147,7 @@
 			needMtrl = new tui.Grid({
 				el : document.getElementById('needMtrl'),
 				scrollX : false,
-				bodyHeight : 200,
+				bodyHeight : 150,
 				columns : [  {
 					header : '자재코드',
 					name : '자재코드',

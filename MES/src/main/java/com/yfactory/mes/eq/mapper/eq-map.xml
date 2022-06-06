@@ -107,12 +107,14 @@
 					PRC.PROC_CD "공정코드" ,
 					PRC.PROC_NM "공정명" ,
 					E.EQ_CHKCYC "점검주기",
-					CASE WHEN E.EQ_ACTST like 'USE01' THEN 'Y' ELSE 'N' END "사용여부"
+					CD2.CD_NM "사용여부"
 	FROM 			EQ E ,
 					PROCESS PRC,
-                    COMM_CODE CD
+                    COMM_CODE CD,
+                    COMM_CODE CD2
 	WHERE 			E.EQ_CD = PRC.EQ_CD
     AND             E.EQ_NM = CD.COMM_CD
+    AND             E.EQ_ACTST = CD2.COMM_CD
 	ORDER BY 1
 	
 	</select>
@@ -126,12 +128,14 @@
 					PRC.PROC_CD "공정코드" ,
 					PRC.PROC_NM "공정명" ,
 					E.EQ_CHKCYC "점검주기",
-					CASE WHEN E.EQ_ACTST like 'USE01' THEN 'Y' ELSE 'N' END "사용여부"
+					CD2.CD_NM "사용여부"
 	FROM 			EQ E ,
 					PROCESS PRC,
-                    COMM_CODE CD
+                    COMM_CODE CD,
+                    COMM_CODE CD2
 	WHERE 			E.EQ_CD = PRC.EQ_CD
     AND             E.EQ_NM = CD.COMM_CD
+    AND             E.EQ_ACTST = CD2.COMM_CD
 	<if test="key == 1">
 	</if>
 	<if test="key == 2">
@@ -194,7 +198,7 @@
 	
 	<!-- 비가동 설비 내역 추가 -->
 	<insert id="setEqIn" statementType="CALLABLE"  parameterType="map">
-		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_dc}, #{p_eq_nt})}
+		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_ed}, #{p_eq_dc}, #{p_eq_nt})}
 	</insert>
 
 

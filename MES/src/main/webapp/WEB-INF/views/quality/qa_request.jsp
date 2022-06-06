@@ -11,7 +11,7 @@
 		<h1>품질검사요청</h1>
 	</div>
 
-	<div style="background-color: #e0e0e0; padding: 8px;">
+	<div style="background-color: #e9ecef; padding: 8px;">
 		<div class="mainTitle" style="padding: 15px;">
 			<form>
 				<!-- 발주상세코드 -->

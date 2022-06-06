@@ -5,6 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+	<!-- 추가 CDN -->
+<!-- toastr.CSS -->
+   <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
+<!-- toastr.JS -->
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	
 	
 
@@ -152,29 +163,41 @@ var eqList = new tui.Grid({
     columns: [
     	{
             header: '설비코드',
-            name: '설비코드'
+            name: '설비코드',
+            className : 'fontClass',
+            align: 'center'
           },{
               header: '구분명',
-              name: '구분명'
+              name: '구분명',
+              className : 'fontClass',
+              align: 'center'
           },{
             header: '설비명',
-            name: '설비명'
+            name: '설비명',
+            className : 'fontClass',
           },
           {
             header: '공정코드',
-            name: '공정코드'
+            name: '공정코드',
+            className : 'fontClass',
+            align: 'center'
           },
           {
             header: '공정명',
-            name: '공정명'
+            name: '공정명',
+            className : 'fontClass',
           },
           {
               header: '점검주기',
-              name: '점검주기'
+              name: '점검주기',
+              className : 'fontClass',
+              align: 'right'
             },
           {
               header: '사용여부',
-              name: '사용여부'
+              name: '사용여부',
+              className : 'fontClass',
+              align: 'center'
             }
     ],
     rowHeaders: ['rowNum'],
@@ -199,28 +222,40 @@ var eqList = new tui.Grid({
     columns: [    	
       {
         header: '설비가동코드',
-        name: '설비가동코드'
+        name: '설비가동코드',
+        className : 'fontClass',
+        align: 'center'
       },{
         header: '설비코드',
-        name: '설비코드'
+        name: '설비코드',
+        className : 'fontClass',
+        align: 'center'
       },{
           header: '구분명',
-          name: '구분명'
+          name: '구분명',
+          className : 'fontClass',
+          align: 'center'
       },{
         header: '설비명',
-        name: '설비명'
+        name: '설비명',
+        className : 'fontClass',
       },
       {
         header: '사유',
-        name: '사유'
+        name: '사유',
+        className : 'fontClass',
       },
       {
         header: '시작날짜',
-        name: '시작날짜'
+        name: '시작날짜',
+        className : 'fontClass',
+        align: 'center'
       },
       {
           header: '종료날짜',
-          name: '종료날짜'
+          name: '종료날짜',
+          className : 'fontClass',
+          align: 'center'
         }
     ],
     rowHeaders : [ 'rowNum' ],
@@ -239,13 +274,17 @@ var eqList = new tui.Grid({
 	  $("#inEqNm").val(inEqNm);
 	  	  
 	  if(eqc.columnName == '사용여부'){
-		  if(eqc.value == 'Y'){
+		  if(eqc.value == '사용가능'){
 		  $("#test").load("eqInaModal", function() {
 				const eqInaModal = new bootstrap.Modal('#myModal');
 				eqInaModal.show();
 				});
 		  }else{
-			  toastr.warning('비가동중인 설비입니다!');
+			  Swal.fire(
+	                    '등록이 취소되었습니다.',
+	                    '이미 비가동 중인 설비입니다!',
+	                    'error'
+	                )
 		  }
 	  }
   })
@@ -270,49 +309,6 @@ var eqList = new tui.Grid({
 	})
 	});
   
-  eqInaList.on("dblclick", function(e){
-	  let prd = eqInaList.getFocusedCell();	  
-		if (prd.columnName == '종료날짜') {
-			if (prd.value == null) {
-				Swal.fire({
-			          title: '설비를 다시 가동하시겠습니까?',
-			          icon: 'warning',
-			          showCancelButton: true,
-			          confirmButtonColor: '#3085d6',
-			          cancelButtonColor: '#d33',
-			          confirmButtonText: '승인',
-			          cancelButtonText: '취소'
-			      }).then((result) => {			      	
-			          if (result.isConfirmed) {
-							let actcd = eqInaList.getValue(e.rowKey, "설비가동코드");
-							let eqCd = eqInaList.getValue(e.rowKey, "설비코드")
-							$.ajax({
-								url : "updateIna",
-								method : "POST",
-								data : { "p_actcd" : actcd,
-										 "p_eq_cd" : eqCd}								
-							}).done(function(result){
-			        	          	  swal.fire({
-							        		    title: "설비가 재가동되었습니다!",
-							        		    text: "페이지를 새로고침 합니다.",
-							        		    type: "success"
-							        		}).then(function() {
-							        		    window.location = "eqIna";
-							        		});
-								
-							})
-			          		}else{
-			          				Swal.fire(
-			                      '승인이 취소되었습니다.',
-			                      '',
-			                      'error'
-			                  )
-			          			}
-			      })
-				};
-			}
-		
-  })
 </script>
 
 </html>

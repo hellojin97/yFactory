@@ -79,19 +79,23 @@ var unorder = new tui.Grid({
     columns: [
       {
         header: '생산계획코드',
-        name: 'PP_CD'
+        name: 'PP_CD',
+        className : 'fontClass',
       },
       {
         header: '생산계획명',
-        name: 'PP_NM'
+        name: 'PP_NM',
+        className : 'fontClass',
       },
       {
         header: '계획등록일자',
-        name: 'PP_DT'
+        name: 'PP_DT',
+        className : 'fontClass',
       },
       {
         header: '총 수량',
-        name: 'PD_QTY'
+        name: 'PD_QTY',
+        className : 'fontClass',
       }
       
     ],
@@ -134,23 +138,28 @@ $("#select1").on("click",function(e) {
     columns: [
       {
         header: '원자재코드',
-        name: '원자재코드'
+        name: '원자재코드',
+        className : 'fontClass',
       },
       {
         header: '계획일자',
-        name: '계획일자'
+        name: '계획일자',
+        className : 'fontClass',
       },
       {
           header: '원자재명',
-          name: '원자재명'
+          name: '원자재명',
+          className : 'fontClass',
         },
       {
           header: '재고 구분',
-          name: '구분'
+          name: '구분',
+          className : 'fontClass',
         },
         {
             header: '생산계획코드',
-            name: '생산계획코드'
+            name: '생산계획코드',
+            className : 'fontClass',
           },
 
 
@@ -194,6 +203,35 @@ $("#select1").on("click",function(e) {
 	 
      }
   ) // end of [prodPlan Event]
+  
+  $('#select2').on('click', function(){
+	  var chkRow = prodPlan.getCheckedRows();
+	  
+	  prodPlan.removeCheckedRows(false);	// 체크된 ROW 삭제 처리
+	  
+	  for (var i = 0; i < chkRow.length; i++) {
+		  $.ajax({
+		 		url : 'mtrlOrderList',
+		 		method : 'GET',
+		 		data : { ppCd : chkRow[i].생산계획코드, mtCd : chkRow[i].원자재코드 },
+		 		dataType : 'JSON',
+		 		async : false,
+		 		contentType : 'application/json; charset=utf-8'
+		 	}).done(function(poList){
+		 		
+		 		for (var j = 0; j < poList.length; j++) {
+		 			mtrlRequest.appendRow(poList[j]);
+				}
+		 		
+		 		
+		 	})
+		  
+		  
+	} // end of chkRow
+	  
+  }); // 발주요청서 등록 Event
+  
+  
   //발주서 요청 조회
   var mtrlRequest = new tui.Grid({
     el: document.getElementById('mtrlRequest'),
@@ -201,32 +239,39 @@ $("#select1").on("click",function(e) {
     columns: [
       {
         header: '원자재코드',
-        name: '원자재코드'
+        name: '원자재코드',
+        className : 'fontClass',
       },
       {
         header: '원자재명',
-        name: '원자재명'
+        name: '원자재명',
+        className : 'fontClass',
       },
       {
         header: '업체명',
-        name: '업체명'
+        name: '업체명',
+        className : 'fontClass',
       },
       {
     	    header: '납기요청일자',
     	    name: '납기요청일자',
+    	    className : 'fontClass',
     	    editor: 'datePicker'
     	  },
       {
           header: '현재고',
-          name: '현재고'
+          name: '현재고',
+          className : 'fontClass',
         },
       {
           header: '계획대비 필요수량',
-          name: '계획대비 필요수량'
+          name: '계획대비 필요수량',
+          className : 'fontClass',
         },
       {
           header: '발주량',
           name: '발주량',
+          className : 'fontClass',
           editor : {
         	  type : 'text'
           }

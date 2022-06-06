@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Update;
+import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yfactory.mes.eq.mapper.EquipMapper;
 import com.yfactory.mes.eq.service.EquipService;
 
 @RestController
@@ -201,5 +201,27 @@ public class ajaxController {
 		}
 	
 	
-	
+		/*
+		 * public static String convert(Object targetData) throws Exception{
+		 * StringBuffer buffer = new StringBuffer(); BufferedReader reader = new
+		 * BufferedReader(((Clob)targetData).getCharacterStream()); String dummy = "";
+		 * while((dummy = reader.readLine()) != null){ buffer.append(dummy); }
+		 * reader.close(); String path = buffer.toString(); System.out.println(path);
+		 * return path; };
+		 */
+		
+	// 설비관리 페이지 - 설비코드 클릭시 나오는 상세 데이터 모달	
+		@RequestMapping("/getEqDetailDataAjax")
+		public List<Map> getEqDetailDataAjax(@RequestParam String eqDtlCd , Model model) {
+			
+			return mapper.getEqDetailDataAjax(eqDtlCd);
+		}
+		
+		
+		
+		@RequestMapping("/getEqImgAjax")
+		public String getEqImgAjax(@RequestParam String eqDtlCd , Model model) {
+			
+			return mapper.getEqImgAjax(eqDtlCd);
+		}
 }

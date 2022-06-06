@@ -73,7 +73,7 @@ button:hover {
 			
 			<div class="min2">
 			
-				<button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button>
+				<!-- <button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button> -->
 			</div>
 			<div class="min1" >
 			
@@ -99,6 +99,7 @@ button:hover {
 	var grid;
 	var rowKey;
 	var gridRowCell;
+	var eqDtlCd;
 		window.onload = function() {
 			const url = "getEqMngList";
 			$.ajax(url, {
@@ -116,34 +117,43 @@ button:hover {
 				columns : [ {
 					header : '설비코드',
 					name : '설비코드',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '설비구분',
 					name : '설비구분',
+					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true }
 				},{
 					header : '설비명',
 					name : '설비명',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정코드',
 					name : '공정코드',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정명',
 					name : '공정명',
-					editor : "text"
+					className : 'fontClass',
+					
 				}, {
 					header : '최저온도',
 					name : '최저온도',
+					className : 'fontClass',
 					editor : "text"
 				}, {
 					header : '최고온도',
 					name : '최고온도',
+					className : 'fontClass',
 					editor : "text"
-				}, {
+				}, 
+				/* {
 					header : '구매일자',
 					name : '구매일자',
+					className : 'fontClass',
 					editor : {
 						type : 'datePicker',
 						options : {
@@ -156,11 +166,12 @@ button:hover {
 								operator:'OR',
 								
 								}
-				},
+				}, */
 
-				{
+				/* {
 					header : '사용여부',
 					name : '사용여부',
+					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true },
 					 editor: {
 	                     type: 'select',
@@ -177,7 +188,8 @@ button:hover {
 	                    ]
 	                 }
 	            }
-				}, ],
+				}, */
+				],
 				 rowHeaders: [ { type: 'checkbox' },{ type: 'rowNum' }],
 				pageOptions : {
 					useClient : true,
@@ -197,6 +209,7 @@ button:hover {
 				
 				let eqCdCol = grid.getFocusedCell('설비코드');
 				let eqPrcCol = grid.getFocusedCell('공정코드');
+				eqDtlCd = grid.getValue(e.rowKey, '설비코드');
 				/* 	if(eqCdCol.columnName == '설비코드'){ // 설비코드 컬럼을 클릭했다면
 						$("#grid1").load("mngmodal", function(){
 
@@ -209,13 +222,23 @@ button:hover {
 							});
 					}
 					else  */
-						if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
+						/* if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
 							$("#grid1").load("eqPrcmodal", function(){
 									const mngModal = new bootstrap.Modal('#myModal');
 									mngModal.show();
 							
 							});
-					};
+					}; */
+					
+					if(eqCdCol.columnName == '설비코드'){
+						$("#grid1").load("eqDetailmodal", function(){
+							
+							const mngModal = new bootstrap.Modal('#myModal');
+							console.log(eqDtlCd);
+							mngModal.show();
+						});
+					}
+					
 				
 				
 			});
@@ -223,10 +246,12 @@ button:hover {
 		
 			// 설비 수정 버튼
 		  $("#eqUpd").click(function () {
-			  
+			 
 			var chkRows = grid.getCheckedRows();
 			var updRowArr = [];
+			var updRowArr2 = [];
 			var data = {};
+			var data2 = {};
 			var temp1;
 		
 			console.log(chkRows);
@@ -257,6 +282,11 @@ button:hover {
 				
 			};
 			 
+			/*  if(confirm('TEST입니다') ==  true){
+				 alert('성공');
+			 }; */
+			
+			
 			 
 		        Swal.fire({
 		            title: '정말 수정 하시겠습니까?',
@@ -276,21 +306,77 @@ button:hover {
 		            	
 		            	 $.ajax({
 			            	   url : "eqMngUpdateAjax",
+			            	   
 			            	   method: "POST",
 			            	   traditional : true,
 			            	   data : JSON.stringify(updRowArr),
 			            	   dataType : "JSON",
-			            	   contentType : "application/json; charset=utf-8"
+			            	   contentType : "application/json; charset=utf-8",
+			            	   success : function(){
+			            		   
+			            		   
+			            	   }
 			            	   
 			            	   
-			               }).done(function(){
+			               }).done(function(data){
 			            	   toastr.success('수정완료!');
 			            	   Swal.fire(
 					                    '수정이 완료되었습니다.',
 					                    '',
 					                    'success'
 					                		);
-			               });  
+			            	   console.log(data);
+			            	  /*  for (var i = 0; i < chkRows.length; i++) {
+								data2 = {
+										p_eq_cd : chkRows[i].설비코드,
+										p_eq_sd :  systimestamp,
+										
+								
+								};
+							}; */
+			            /* 	   // 비가동 테이블 등록
+			            	   $.ajax({
+			           			url : "setEqInAjax",
+			           			method : "POST",
+			           			data : {
+			           					"p_eq_cd" : ec,
+			           					"p_eq_sd" : systimestamp,
+			           					//"p_eq_ed" : subEd,
+			           					"p_eq_dc" : dc,
+			           					"p_eq_nt" : nt
+			           					};					
+			           		}).done(function(result){
+			           			
+			           			}); */
+			            	   
+			            	   
+			            	   
+			            	 /*   if(confirm('비가동페이지로 이동합니다') ==  true){
+			            		   document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
+			      			 }; */
+			      			 for (var i = 0; i < chkRows.length; i++) {
+								if(chkRows[i].사용여부.valueOf()=='사용불가' ){
+									 Swal.fire({
+						 		            title: '비가동 관리페이지로 접속합니다',
+						 		            icon: 'question',
+						 		            showCancelButton: true,
+						 		            confirmButtonColor: '#3085d6',
+						 		            cancelButtonColor: '#d33',
+						 		            confirmButtonText: '확인',
+						 		            cancelButtonText: '취소'
+						 		        }).then((result) => {
+						 		        	console.log(result);
+						 		        	console.log(result.isConfirmed); // 승인시 FALSE / 취소시 TRUE
+						 		        	  if (result.isConfirmed) {
+						 		        		 document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
+						 		        	  }
+						      			 
+						               });
+									
+								}
+							}
+			      			  
+			      			 });
 		            }else{
 		            	Swal.fire(
 		                        '수정이 취소되었습니다.',

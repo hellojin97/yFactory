@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -185,6 +186,18 @@ public class ProcAjaxController {
 		
 		return procService.procProcessCheckList();
 	}
+	// 공정 관리 선택 조회
+	@GetMapping("/procCdNmSelect")
+	public List<Map> procCdNmSelect(String cdNm){
+		
+		return procService.ProcCdNmSelect(cdNm);
+	}
+	// 미사용 설비 목록 조회
+	@GetMapping("/procNoUseEqSelect")
+	public List<Map> ProcNoUseEqSelect(String eqCd){
+		
+		return procService.ProcNoUseEqSelect(eqCd);
+	}
 	
 	// 공정 실적 조회 - 단건 조회
 	@PostMapping("/searchProcResult")
@@ -223,5 +236,15 @@ public class ProcAjaxController {
 		}
 	}
 	
+	@GetMapping("/procLineAjax")
+	public List<Map> procLineAjax(){
+		return procService.procLineAjax();
+	}
+	
+	@GetMapping("/procLineEdit")
+	public List<Map> procLineEdit(@RequestParam Map<String,String> lineCd){
+			String lineCdStr = lineCd.get("lineCd");
+		return procService.procLineEditAjax(lineCdStr);
+	}
 	
 }

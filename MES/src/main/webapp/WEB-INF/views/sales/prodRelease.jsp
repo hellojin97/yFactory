@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>발주관리</title>
-
-
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 	<div style="padding-bottom:15px; color: ;">
@@ -53,39 +56,53 @@ $.ajax({
 	}
 });
 
-var ordDtpList = new tui.Grid({
+var ordDtpList = new tui.Grid({	
     el: document.getElementById('ordDtpList'),
+    scrollX: false,
+    bodyHeight: 200,
     columns: [
     	{
             header: '주문상세코드',
-            name: '주문상세코드'
+            name: '주문상세코드',
+            className : 'fontClass',
+			align: 'center'
           },
           {
             header: '주문코드',
-            name: '주문코드'
+            name: '주문코드',
+            className : 'fontClass',
+			align: 'center'
           },
           {
             header: '완제품코드',
-            name: '완제품코드'
+            name: '완제품코드',
+            className : 'fontClass',
+			align: 'center'
           },
           {
             header: '제품명',
+            className : 'fontClass',
             name: '제품명'
+            
           },
           {
               header: '주문수량',
-              name: '주문수량'
+              className : 'fontClass',
+              name: '주문수량',
+  			align: 'right'
             },
           {
               header: '납기일자',
-              name: '납기일자'
+              name: '납기일자',
+              className : 'fontClass',
+  			align: 'center'
             }      
     ],
     rowHeaders: ['rowNum'],
     pageOptions: {
-      useClient: true,
-      perPage: 10
-    }
+        type: 'scroll', 
+        perPage: 5 
+      }
   });
 
 	//출고 현황 리스트
@@ -103,31 +120,45 @@ var ordDtpList = new tui.Grid({
     columns: [
       {
         header: '주문상세코드',
-        name: '주문상세코드'
+        name: '주문상세코드',
+        className : 'fontClass',
+		align: 'center'
       },
       {
         header: '완제품코드',
-        name: '완제품코드'
+        name: '완제품코드',
+        className : 'fontClass',
+		align: 'center'
       },
       {
         header: '완제품LOT번호',
-        name: '완제품LOT번호'
-      },
-      {
-        header: '출고날짜',
-        name: '출고날짜'
+        name: '완제품LOT번호',
+        className : 'fontClass',
+		align: 'center'
       },
       {
           header: '출고량',
-          name: '출고량'
+          name: '출고량',
+          className : 'fontClass',
+			align: 'right'
         },
+        {
+            header: '출고날짜',
+            name: '출고날짜',
+            className : 'fontClass',
+    		align: 'center'
+          },
       {
           header: '제조일자',
-          name: '제조일자'
+          name: '제조일자',
+          className : 'fontClass',
+			align: 'center'
         },
         {
             header: '유통기한',
-            name: '유통기한'
+            name: '유통기한',
+            className : 'fontClass',
+			align: 'center'
           }
     ],
     rowHeaders : [ 'checkbox' ]
@@ -229,7 +260,17 @@ var ordDtpList = new tui.Grid({
           }
       });
 	 
-  })
+  });
+  	
+//마우스 커서 올리면
+  ordDtpList.on('mouseover', function(e){
+  	var tt = e.targetType;
+  		if(tt == 'cell'){			
+  			$('#ordDtpList').attr("class", "smMouseOver");
+  		}else{
+  			$('#ordDtpList').removeClass();					
+  		}
+  });
   
 </script>
 

@@ -123,34 +123,42 @@ window.onload = function (){
 
            header: '생산지시코드',
            name: '생산지시코드',
+           className : 'fontClass',
          },
          {
              header: '제품코드',
              name: '제품코드',
+             className : 'fontClass',
            },
            {
                header: '제품명',
                name: '제품명',
+               className : 'fontClass',
              },
              {
                  header: '생산수량',
                  name: '생산수량',
+                 className : 'fontClass',
                },
              {
                  header: '라인코드',
                  name: '라인코드',
+                 className : 'fontClass',
                },
                {
                    header: '지시우선순위',
                    name: '지시우선순위',
+                   className : 'fontClass',
                  },
                  {
                      header: '진행구분',
                      name: '진행구분',
+                     className : 'fontClass',
                    },
                    {
                        header: '비고',
                        name: '비고',
+                       className : 'fontClass',
 
                      }],
                   rowHeaders: ['rowNum'],

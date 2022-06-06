@@ -94,26 +94,33 @@
 		columns : [ {
 			header : '생산계획코드',
 			name : '생산계획코드',
+			className : 'fontClass',
 		}, {
 			header : '계획명',
 			name : '계획명',
+			className : 'fontClass',
 		}, {
 			header : '생산계획상세코드',
 			name : '생산계획상세코드',
+			className : 'fontClass',
 		}, {
 			header : '제품명',
 			name : '완제품명',
+			className : 'fontClass',
 
 		}, {
 			header : '계획량',
 			name : '계획량',
+			className : 'fontClass',
 		}, {
 			header : '작업우선순위',
 			name : '작업우선순위',
+			className : 'fontClass',
 		},
 		 {
 			header : '생산일수',
 			name : '생산일수',
+			className : 'fontClass',
 		},
 		],
 		rowHeaders : [ 'rowNum' ],

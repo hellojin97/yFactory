@@ -193,6 +193,13 @@
               <i class="bi bi-circle"></i><span>공정관리</span>
             </a>
           </li>
+
+          <li>
+            <a href="procLineForm">
+              <i class="bi bi-circle"></i><span>제품 공정 흐름도</span>
+            </a>
+          </li>
+
         </ul>
       </li>
       

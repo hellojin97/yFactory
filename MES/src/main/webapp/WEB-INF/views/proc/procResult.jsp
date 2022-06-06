@@ -98,59 +98,84 @@ var procResultList = new tui.Grid({
     columns: [
     	{
             header: '생산지시코드',
-            name: '생산지시코드'
+            name: '생산지시코드',
+            className : 'fontClass',
+            align: 'center'
           },
           {
             header: '진행공정코드',
-            name: '진행공정코드'
+            name: '진행공정코드',
+            className : 'fontClass',
+            align: 'center'
           },
           {
             header: '공정명',
-            name: '공정명'
+            name: '공정명',
+            className : 'fontClass',
+            align: 'center'
           },
           {
             header: '설비코드',
-            name: '설비코드'
+            name: '설비코드',
+            className : 'fontClass',
+            align: 'center'
           },
           {
               header: '설비명',
-              name: '설비명'
+              name: '설비명',
+              className : 'fontClass',
             },
           {
               header: '투입량',
-              name: '투입량'
+              name: '투입량',
+              className : 'fontClass',
+              align: 'right'
             },
             {
                 header: '생산량',
-                name: '생산량'
+                name: '생산량',
+                className : 'fontClass',
+                align: 'right'
               },
             {
                 header: '불량량',
-                name: '불량량'
+                name: '불량량',
+                className : 'fontClass',
+                align: 'right'
               },
               {
                   header: '불량코드',
-                  name: '불량코드'
+                  name: '불량코드',
+                  className : 'fontClass',
+                  align: 'center'
                 }
               ,{
                   header: '불량상세',
-                  name: '불량상세'
+                  name: '불량상세',
+                  className : 'fontClass',
                 }
               ,{
                   header: '공정시작시간',
-                  name: '공정시작시간'
+                  name: '공정시작시간',
+                  className : 'fontClass',
+                  align: 'center'
                 }
               ,{
                   header: '공정종료시간',
-                  name: '공정종료시간'
+                  name: '공정종료시간',
+                  className : 'fontClass',
+                  align: 'center'
                 }
               ,{
                   header: '담당자',
-                  name: '담당자'
+                  name: '담당자',
+                  className : 'fontClass',
                 }
               ,{
                   header: '생산지시일자',
-                  name: '생산지시일자'
+                  name: '생산지시일자',
+                  className : 'fontClass',
+                  align: 'center'
                 }
     ],
     rowHeaders: ['rowNum'],

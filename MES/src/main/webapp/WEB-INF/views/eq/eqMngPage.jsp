@@ -67,7 +67,7 @@ button:hover {
 	<!-- <div id="in/out"></div> -->
 	<div style="padding-bottom: 70px; ">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
-			<h1>설비 관리</h1>
+			<h1>설비 정보</h1>
 					
 			<!-- <h3>설비 데이터</h3> -->
 			
@@ -114,7 +114,8 @@ button:hover {
 				el : document.getElementById('grid'),
 				scrollX : false,
 				scrollY : false,
-				columns : [ {
+				columns : [ 
+					{
 					header : '설비코드',
 					name : '설비코드',
 					className : 'fontClass',
@@ -143,54 +144,20 @@ button:hover {
 					header : '최저온도',
 					name : '최저온도',
 					className : 'fontClass',
-					editor : "text"
+					//editor : "text"
 				}, {
 					header : '최고온도',
 					name : '최고온도',
 					className : 'fontClass',
-					editor : "text"
-				}, 
-				/* {
-					header : '구매일자',
-					name : '구매일자',
-					className : 'fontClass',
-					editor : {
-						type : 'datePicker',
-						options : {
-							format : 'yyyy-MM-dd'
-						}
-					},
-					filter: { type: 'date', 
-								showApplyBtn: true, 
-								showClearBtn: true,
-								operator:'OR',
-								
-								}
-				}, */
-
-				/* {
-					header : '사용여부',
-					name : '사용여부',
-					className : 'fontClass',
-					filter: { type: 'select', showApplyBtn: true, showClearBtn: true },
-					 editor: {
-	                     type: 'select',
-	                     options: {
-	                       listItems: [
-	                         {
-	                           text: '사용가능',
-	                           value: '사용가능'
-	                         },
-	                         {
-	                           text: '사용불가',
-	                           value: '사용불가'
-	                         }
-	                    ]
-	                 }
-	            }
-				}, */
+					//editor : "text"
+				}
+				
 				],
+				
 				 rowHeaders: [ { type: 'checkbox' },{ type: 'rowNum' }],
+				 columnOptions: {
+				        resizable: true
+				      },
 				pageOptions : {
 					useClient : true,
 					perPage : 10

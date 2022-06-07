@@ -190,7 +190,18 @@ var lineCd;
 	      });
 		
 	      $(".line-control").on("click" , function(ev){
-	    	  	chart.destroy();
+	    	 // 	chart.destroy();
+	    		/*  chart.setData({
+					  categories: ['0','0','0','0','0','0','0','0','0','0'],
+					  series: [
+					    {
+					      name: '',
+					      data: [],
+					    }
+					    
+					  ]
+					}); */
+	    		
 	    	  	
 		    	lineCd = $("input[name='chk_line']:checked").val();
 		    	console.log(lineCd);
@@ -210,6 +221,8 @@ var lineCd;
 	      }).done(function(res){
 	    	  //console.log(res);
 	    	for (var i = 0; i < res.length; i++) {
+	    	
+	    		
 				//console.log(res[i].설비코드);
 				minTemOne = res[0].최소온도;
 				maxTemOne = res[0].최대온도;

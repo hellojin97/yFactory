@@ -58,16 +58,17 @@
       FROM eq e, process prc
       WHERE e.eq_cd = prc.eq_cd(+)
       ORDER BY 1 -->
-      SELECT e.eq_cd "설비코드" , 
+      SELECT DISTINCT e.eq_cd "설비코드" , 
 				COMM.CD_NM "설비구분",
                 e.eq_mdnm "설비명" , prc.proc_cd "공정코드" , 
-				prc.proc_nm	"공정명", e.eq_min "최저온도" , e.eq_max "최고온도"
-      			,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자",
-      			comm2.cd_nm "사용여부"
+				prc.proc_nm	"공정명", e.eq_min "최저온도" 
+				, e.eq_max "최고온도"
+      			<!-- ,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자", -->
+      			<!-- comm2.cd_nm "사용여부" -->
       FROM eq e, process prc , COMM_CODE COMM , COMM_CODE COMM2
       WHERE e.eq_cd = prc.eq_cd(+)
       AND e.eq_nm = comm.comm_cd
-      AND e.eq_actst = comm2.comm_cd
+      <!-- AND e.eq_actst = comm2.comm_cd -->
       ORDER BY 1
 	</select>
 
@@ -388,6 +389,35 @@ AND line_cd = #{lineCd}
 	WHERE   e.eq_nm = c.comm_cd
 </select>
 
+
+<select id="getEqDetailDataAjax" resultType="map">
+SELECT      DISTINCT e.eq_cd "설비코드",
+				e.eq_mdnm "설비명",
+				prc.proc_cd "공정코드",
+				prc.proc_nm "공정명",
+				e.eq_chkcyc "점검주기",
+				TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
+				TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+				emp.emp_nm "등록인",
+				comm.CD_NM "사용여부"
+
+	FROM eq e, process prc , eq_chk chk , employee emp , vendor vdr , comm_code comm 
+	
+	WHERE e.eq_cd = prc.eq_cd
+	<!-- AND   e.eq_cd = chk.eq_cd; -->
+	AND  e.eq_inster = emp.emp_no
+    AND e.eq_actst = comm.comm_cd
+    AND e.eq_cd = #{eqDtlCd}
+    ORDER BY e.eq_cd
+</select>
+
+<select id="getEqImgAjax" resultType="map">
+<!-- SELECT  TO_CHAR(SUBSTR(img.img_path,1,4000)) -->
+SELECT img.img_path
+FROM EQ e , IMG_ATTATCH img
+WHERE e.uuid = img.uuid
+AND e.eq_cd = #{eqDtlCd}
+</select>
 
 
 </mapper>

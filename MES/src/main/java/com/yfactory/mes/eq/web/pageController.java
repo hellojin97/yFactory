@@ -158,7 +158,12 @@ public class pageController {
 	public String popup() {
 		return "/eq/popup";
 	}
-	
+
+	// 설비 코드 클릭시 상세 데이터 (이미지 포함)
+		@GetMapping("/eqDetailmodal")
+		public String eqDetailmadal() {
+			return "/eq/eqmodal/eqDetailmodal";
+		}
 	
 
 	

@@ -73,17 +73,17 @@
 			//console.log(rs.이미지);
 			console.log(rs);
 		});
+		
 		console.log(eqDtlCd);
 		var url2 =  "getEqImgAjax";
 		$.ajax(url2 , {
 			method: "get",
 			data : {eqDtlCd : eqDtlCd},
-			dataType:"JSON",
+			
 			contentType : "application/json; charset=utf-8"
 		}).done(function(res){
 			
-			console.log("res:"+res);
-			console.log("res가 없어요!");
+			
 			$("#grid2").prepend('<img src="'+res+'">');
 			//$("#img_path").attr("src", res);
 		}); 
@@ -135,6 +135,7 @@
 
 			],
 			rowHeaders : [ 'rowNum' ],
+			
 			pageOptions : {
 				useClient : true,
 				perPage : 5

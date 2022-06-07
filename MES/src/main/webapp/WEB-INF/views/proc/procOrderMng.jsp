@@ -67,6 +67,11 @@
 			name : '생산계획코드',
 			className : 'fontClass',
 		}, {
+			header : '계획상세코드',
+			name : '생산계획상세코드',
+			className : 'fontClass',
+		},
+		{
 			header : '제품명',
 			name : '완제품명',
 			className : 'fontClass',

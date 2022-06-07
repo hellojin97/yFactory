@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,37 +8,37 @@
 
 </head>
 <body>
-	<div style="padding-bottom: 70px; ">
-		<div class="mainTitle" style="padding-bottom:15px;">
+	<div style="padding-bottom: 70px;">
+		<div class="mainTitle" style="padding-bottom: 15px;">
 			<h1>발주 관리/등록</h1>
 		</div>
-		<div class="min2" >
-			<button  class="btn2" id="btnMg">등록</button>
+		<div class="min2">
+			<button class="btn2" id="btnMg">등록</button>
 			<button class="btn3" id="btnIn">관리</button>
 		</div>
-		<div class="min1" >
-		<div>
-			<h4>미지시 생산계획조회</h4>
-			<div id="unorder" style="padding-bottom: 4px;"></div>
-			<input type="hidden" id="ppCd">
-			<button type="button" class="btn1" id="select1">선택</button>
-		</div>
-		<div style="padding-top : 30px;">
-			<h4>생산계획별 자재 재고</h4>
-			<div id="prodPlan" style="padding-bottom: 4px;"></div>
-			<button  class="btn1" id="select2">선택</button>
-		</div>
-			<div style="padding-top : 30px;">
+		<div class="min1">
+			<div>
+				<h4>미지시 생산계획조회</h4>
+				<div id="unorder" style="padding-bottom: 4px;"></div>
+				<input type="hidden" id="ppCd">
+				<button type="button" class="btn1" id="select1">선택</button>
+			</div>
+			<div style="padding-top: 30px;">
+				<h4>생산계획별 자재 재고</h4>
+				<div id="prodPlan" style="padding-bottom: 4px;"></div>
+				<button class="btn1" id="select2">선택</button>
+			</div>
+			<div style="padding-top: 30px;">
 				<h4>발주요청서 등록</h4>
 				<div id="mtrlRequest" style="padding-bottom: 4px;"></div>
 				<div>
-					<button  class="btn1" id="mtrlsave">저장</button>
+					<button class="btn1" id="mtrlsave">저장</button>
 					<button class="btn1" id="mtrlcancel">취소</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 
 </body>
 
@@ -175,63 +175,36 @@ $("#select1").on("click",function(e) {
   });
   
 //생산계획코드,자재코드 불러오기
-  prodPlan.on("dblclick",function(e) {
-	 let ppCd = prodPlan.getValue(e.rowKey, '생산계획코드');
-	 let mtCd =	prodPlan.getValue(e.rowKey, '원자재코드');
-     let row = prodPlan.getRow(e);
-		console.log(e.rowKey);
-		prodPlan.removeRow(e.rowKey);
-	
-	
-	 
- 	 	// AJAX 발주등록 DATA 요청
-	 	$.ajax({
-	 		url : 'mtrlOrderList',
-	 		method : 'GET',
-	 		data : { ppCd : ppCd, mtCd : mtCd },
-	 		dataType : 'JSON',
-	 		contentType : 'application/json; charset=utf-8'
-	 	}).done(function (result){
-	 			console.log(result);
-	 			for (var i = 0; i < result.length; i++) {
-	 				mtrlRequest.appendRow(result[i]);
-				}
-	 			
-	 			
-	 	}) 
-	 	
-	 
-     }
-  ) // end of [prodPlan Event]
-  
-  $('#select2').on('click', function(){
-	  var chkRow = prodPlan.getCheckedRows();
-	  
-	  prodPlan.removeCheckedRows(false);	// 체크된 ROW 삭제 처리
-	  
-	  for (var i = 0; i < chkRow.length; i++) {
-		  $.ajax({
-		 		url : 'mtrlOrderList',
-		 		method : 'GET',
-		 		data : { ppCd : chkRow[i].생산계획코드, mtCd : chkRow[i].원자재코드 },
-		 		dataType : 'JSON',
-		 		async : false,
-		 		contentType : 'application/json; charset=utf-8'
-		 	}).done(function(poList){
-		 		
-		 		for (var j = 0; j < poList.length; j++) {
-		 			mtrlRequest.appendRow(poList[j]);
-				}
-		 		
-		 		
-		 	})
-		  
-		  
-	} // end of chkRow
-	  
-  }); // 발주요청서 등록 Event
-  
-  
+
+$("#select2").on("click",function(e) {
+   let ppcd= prodPlan.getCheckedRows();
+   prodPlan.removeCheckedRows();
+   for (var i = 0; i < ppcd.length; i++) {
+	   let ppCd = ppcd[i];
+   console.log(ppCd);
+   
+   $.ajax({
+		url: "mtrlOrderList",
+		data : {ppCd : ppcd[i].생산계획코드,
+			    mtCd : ppcd[i].원자재코드
+				},
+		method : "GET",
+		dataType : "JSON",
+		contentType : "application/json; charset=utf-8"
+	  	}).done(function(result){
+	  		for (var i = 0; i < result.length; i++) {
+	  			 /* 원자재코드 */
+    		  mtrlRequest.appendRow(result[i]);
+    		  console.log(result);
+	  		}
+	  	 }).fail(function(result){
+	  	    console.log(result);
+	     });
+   }
+}
+); 
+ // end of [prodPlan Event]
+
   //발주서 요청 조회
   var mtrlRequest = new tui.Grid({
     el: document.getElementById('mtrlRequest'),
@@ -338,10 +311,15 @@ $("#select1").on("click",function(e) {
         		  				},
         		  		}).done(function(result){
         		  			console.log(result);
-        		  			location.reload();
+
         		  		});  	
         		};
-        	                
+          	  Swal.fire(
+                      '승인이 완료되었습니다.',
+                      '화끈하시네요~!',
+                      'success'
+                  ) 
+		
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',
@@ -349,14 +327,10 @@ $("#select1").on("click",function(e) {
                       'error'
                   )
           }
+			location.reload();
       });
-	 
+      
   		}) //end of event
-  		
-  		
-  		/* 클릭시 row 삭제 */
-  		
-  		
 
 </script>
 

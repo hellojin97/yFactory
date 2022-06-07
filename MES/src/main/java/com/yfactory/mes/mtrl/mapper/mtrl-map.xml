@@ -183,7 +183,10 @@ order by 4
 <!-- 입고페이지 -->	
 	<!-- 입고조회 -->
 		<select id="selectMtrlReqList" resultType="map">
-		   	SELECT 
+		   		    SELECT 
+		   		    
+		   		    DISTINCT
+
 			        MTD.PO_CD   "원자재발주코드",
 			        MTD.MT_CD   "원자재코드",
 			        M.MT_NM     "원자재명",
@@ -203,7 +206,7 @@ order by 4
 			WHERE   MTD.MT_CD = M.MT_CD
 			AND     M.VDR_CD = V.VDR_CD
 			AND     MTD.CHK_CD = BIM.CHK_CD
-            AND     lot.mt_cd = m.mt_cd
+            AND     lot.mt_cd(+) = m.mt_cd
 			AND     MTD.CHK_DTL_INSP = 'MTRL02'
             AND     m.mt_cd = #{원자재코드}
 		</select>

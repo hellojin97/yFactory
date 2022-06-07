@@ -125,8 +125,8 @@
 	                  type : 'text',
 	                  }
 			}, {
-				header : '일자별 우선순위',
-				name : '일자별 우선순위',
+				header : '일자별우선순위',
+				name : '일자별우선순위',
 				editor : {
 	                  type : 'text',
 	                  }
@@ -228,7 +228,7 @@
 	lineCode = procOrder.getValue(selectedRowKey, '라인코드');
 	workDate = procOrder.getValue(selectedRowKey, '작업일자');
 	workQty = procOrder.getValue(selectedRowKey, '작업수량');
-	dateRank = procOrder.getValue(selectedRowKey, '일자별 우선순위');
+	dateRank = procOrder.getValue(selectedRowKey, '일자별우선순위');
 	if(workQty != null){
 	procDtPlan.setValue(ev.rowKey,'생산지시량', workQty);
 	let Qty = procDtPlan.getValue(ev.rowKey, '계획량');
@@ -311,24 +311,30 @@
 	
 	$("#prdInsert").click(function() {
 		let checkAry = needMtrlLOT.getCheckedRows();
-		for(var i = 0; i < checkAry.length; i++) {
-		
+		let lot = [];
+		var result = {};
+		  for(var i = 0; i < checkAry.length; i++) {
 			result = {
 					"ppCd" : procDtPlan.getData()[0].생산계획코드,
 					"pdNm" : procDtPlan.getData()[0].완제품명,
 					"line" : procOrder.getData()[0].라인코드,
 					"dtlDt" : procOrder.getData()[0].작업일자,
 					"insQty" : procOrder.getData()[0].작업수량,
-					"rank" : procOrder.getData()[0].일자별 우선순위,
+					"rank" : procOrder.getData()[0].일자별우선순위,
 					"mLot" : needMtrlLOT.getData()[i].자재LOT번호,
 					"procQty" : needMtrlLOT.getData()[i].사용수량
 			}
-			$.ajax({
-				url: "prdInsInsert",
-				data: result,
-				method: "POST"
-			})
-		}
+			lot.push(result);
+		} 
+		  console.log(lot);
+		  $.ajax({
+			  url: "prdInsInsert",
+			  data :  JSON.stringify(lot),
+			   dataType : "JSON",
+			   type : "POST",
+			   contentType : "application/json; charset = UTF-8;"
+		  }).done(function(result){
+		  })
 	});
 	</script>
 

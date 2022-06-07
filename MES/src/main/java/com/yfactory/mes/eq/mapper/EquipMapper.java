@@ -6,10 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
+import com.yfactory.mes.common.vo.ImageAttachVO;
 import com.yfactory.mes.eq.vo.EqVO;
 
 public interface EquipMapper {
@@ -72,7 +69,7 @@ public interface EquipMapper {
 	
 	List<Map> getEqDetailDataAjax(String eqDtlCd); // 설비 관리페이지 - 설비 상세 모달
 	
-	 String getEqImgAjax(String eqDtlCd); // 이미지 따로
+	String getEqImgAjax(String eqDtlCd); // 이미지 따로
 	
 	// -----------------------------------------------------------
 	

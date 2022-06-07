@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yfactory.mes.eq.mapper.EquipMapper">
 
+		<resultMap type="com.yfactory.mes.common.vo.ImageAttachVO" id="img">
+			<result property="img_path" column="img_img_path" javaType="java.lang.String" jdbcType="CLOB"/>
+		</resultMap>
+		
+		
+
+
 	<!-- 모달창에 설비 코드와 설비명 출력 쿼리 -->
 	<select id="searchEq" resultType="map">
 
@@ -352,9 +359,6 @@ SELECT      DISTINCT e.eq_cd "설비코드",
     ORDER BY e.eq_cd
 </select>
 
-<resultMap type="HashMap" id="test">
-<result property="컬럼명" column="컬럼명" jdbcType="CLOB" javaType="java.lang.String" />
-</resultMap>
 
 <select id="getEqImgAjax" resultType="String">
 

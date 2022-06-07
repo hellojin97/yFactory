@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}	
+</style>
 </head>
 <body>
 	<!-- 업체명모달  -->
@@ -79,12 +84,19 @@
 		      vendorList.refreshLayout(); // success 시에 리프레쉬 안되면 이 코드를  대신 넣기
 		  })
 		  
-	//업체명 검색
-	$("#vdrnmSearch").on("click",function(){
-		console.log("확인")
+	//업체명 검색 버튼
+	$("#vdrnmSearch").on("click", function(){
+		vdrSearch();
+	});
+		  
+	$("#vdrnm").on("keydown", function(e){
+		if(e.keyCode == 13){
+		vdrSearch();			
+		}
+	})
+		  
+	function vdrSearch(){
 		var vdrnm = $("#vdrnm").val();
-		console.log(vdrnm);
-	
 		$.ajax({
 			url : "vdrnmSelectSearch",
 			data : {
@@ -93,10 +105,9 @@
 			dataType: 'JSON',
 			contentType : "application/json; charset=utf-8"
 		}).done(function(result){
-			vendorList.resetData(result); 
-			 console.log(result)
-		})
-	})
+			vendorList.resetData(result);
+		});
+	}
 	
 		  
 	//모달 데이터값 받아오기
@@ -109,7 +120,19 @@
          $("#vcd").val(vdrCd);
          $('#venModal').modal('hide');
          }
-      ); 
+      );
+	
+	//마우스 커서 올리면
+	vendorList.on('mouseover', function(e){		
+		var tt = e.targetType;
+			if(tt == 'cell' ){			
+				$('#vdrGrid').attr("class", "smMouseOver");
+			}else{
+				$('#vdrGrid').removeClass();
+			}
+	});
+
+	
 		  
 	</script>
 </body>

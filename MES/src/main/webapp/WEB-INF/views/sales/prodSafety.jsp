@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 		<div style="padding-bottom:15px; color: ;">
@@ -20,7 +25,7 @@
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">제품명</label>
 						<input type="text" id="pnm" class="form-control" style="width: 50px" placeholder="제품명">
 						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>
 						<input type="text" id="pcd" class="form-control" readonly="readonly">
 					</div>
@@ -86,26 +91,35 @@
 		el : document.getElementById('prodLotorder'),
 		columns : [ {
 			header : '제품코드',
-			name : '제품코드'
+			name : '제품코드',
+			className : 'fontClass',
+			align: 'center'
 		}, {
 			header : '제품명',
-			name : '제품명'
+			name : '제품명',
+			className : 'fontClass',
 		}, {
 			header : '단위',
-			name : '단위'
+			name : '단위',
+			className : 'fontClass',
+			align: 'center'
 		}, {
 			header : '완제품수량',
-			name : '완제품수량'
+			name : '완제품수량',
+			className : 'fontClass',
+			align: 'right'
 		}, {
 			header : '안전수량',
-			name : '안전수량'
+			name : '안전수량',
+			className : 'fontClass',
+			align: 'right'
 		}
 
 		],
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 1
+			perPage : 5
 		}
 	});
 	
@@ -125,9 +139,8 @@
         dataType: 'JSON',
         contentType : "application/json; charset=utf-8"
      }).done(function(result){
-         console.log(result);
-         listProdLot.resetData(result);
-          
+    	 setTimeout(listColor, 10);
+         listProdLot.resetData(result);          
      });
   })
   
@@ -203,6 +216,16 @@
 		setTimeout(listColor, 10);
 	})
 }
+  
+//마우스 커서 올리면
+  listProdLot.on('mouseover', function(e){
+  	var tt = e.targetType;
+  		if(tt == 'cell' ){	
+  			$('#prodLotorder').attr("class", "smMouseOver");
+  		}else{
+  			$('#prodLotorder').removeClass();					
+  		}
+  });
 
  </script>
 

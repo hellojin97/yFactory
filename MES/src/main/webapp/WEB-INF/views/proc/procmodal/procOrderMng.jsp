@@ -39,12 +39,14 @@
 	</div>
 	<div>
 	<h3>필요자재LOT</h3>
+	<hr>
 	<div id="needMtrlLOT"></div>
 	</div>
 		
 	<div id="procDtPlanDiv"></div>
 	<div id="needMtrlDiv"></div>
 	<input type="hidden" id="modalState" />
+	
 	<script>
 	var procDtPlan
 	var procOrder
@@ -60,6 +62,9 @@
 			header : '생산계획코드',
 			name : '생산계획코드',
 		}, {
+			header : '계획상세코드',
+			name : '생산계획상세코드'
+		},{
 			header : '제품명',
 			name : '완제품명',
 

@@ -25,7 +25,7 @@
 
 
 <style>
-.inSearch {
+/* .inSearch {
 	background-color: #555555;
 	color: white;
 	font-family: "Audiowide", sans-serif;
@@ -38,27 +38,50 @@
 	color: black;
 	background-color: white;
 	 border:2px solid green;
-}
+} */
 h3{
  /* color:ghostwhite;
  border: 15px solid #e0e0e0; */
  
 }
+.clickB {     
+	color: black;
+    text-align: center;
+    
+    border: solid 1px #2c3e50;
+    margin: 3px;
+    line-height: 25px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px 5px 0px 0px;
+		  }
 
-
+button:hover {
+	color: black;
+	background-color: white;
+}
 </style>
 
 </head>
 <body>
-	<h1>설비 관리</h1>
-	<div id="in/out"></div>
-	<div style="background-color: #e0e0e0; padding: 8px;">
+	
+	<!-- <div id="in/out"></div> -->
+	<div style="padding-bottom: 70px; ">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
+			<h1>설비 관리</h1>
+					
 			<!-- <h3>설비 데이터</h3> -->
-			<div style="padding-bottom: 10px;" align="right">
-			<button type="button" id="eqUpd" class="inSearch">설비 수정</button>
+			
+			<div class="min2">
+			
+				<!-- <button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button> -->
 			</div>
-			<hr style="border: solid 1px gray;">
+			<div class="min1" >
+			
+			
+			<div style="background-color: #e9ecef; padding: 8px;">
+			<!-- <hr style="border: solid 1px gray;"> -->
+			<div class="mainTitle" style="padding: 15px;">
+
 			
 		</div>
 
@@ -66,8 +89,9 @@ h3{
 
 		<div id="grid"></div>
 		<div id="grid1"></div>
-		
-
+	</div>
+	</div>
+	</div>
 	</div>
 	<script type="text/javascript">
 	// 지역변수로 윈도우에 선언이되있으니까 자식에서 못쳐가지고오는거죠~ 
@@ -75,6 +99,7 @@ h3{
 	var grid;
 	var rowKey;
 	var gridRowCell;
+	var eqDtlCd;
 		window.onload = function() {
 			const url = "getEqMngList";
 			$.ajax(url, {
@@ -92,34 +117,43 @@ h3{
 				columns : [ {
 					header : '설비코드',
 					name : '설비코드',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '설비구분',
 					name : '설비구분',
+					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true }
 				},{
 					header : '설비명',
 					name : '설비명',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정코드',
 					name : '공정코드',
+					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, {
 					header : '공정명',
 					name : '공정명',
-					editor : "text"
+					className : 'fontClass',
+					
 				}, {
 					header : '최저온도',
 					name : '최저온도',
+					className : 'fontClass',
 					editor : "text"
 				}, {
 					header : '최고온도',
 					name : '최고온도',
+					className : 'fontClass',
 					editor : "text"
-				}, {
+				}, 
+				/* {
 					header : '구매일자',
 					name : '구매일자',
+					className : 'fontClass',
 					editor : {
 						type : 'datePicker',
 						options : {
@@ -132,11 +166,12 @@ h3{
 								operator:'OR',
 								
 								}
-				},
+				}, */
 
-				{
+				/* {
 					header : '사용여부',
 					name : '사용여부',
+					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true },
 					 editor: {
 	                     type: 'select',
@@ -153,7 +188,8 @@ h3{
 	                    ]
 	                 }
 	            }
-				}, ],
+				}, */
+				],
 				 rowHeaders: [ { type: 'checkbox' },{ type: 'rowNum' }],
 				pageOptions : {
 					useClient : true,
@@ -173,6 +209,7 @@ h3{
 				
 				let eqCdCol = grid.getFocusedCell('설비코드');
 				let eqPrcCol = grid.getFocusedCell('공정코드');
+				eqDtlCd = grid.getValue(e.rowKey, '설비코드');
 				/* 	if(eqCdCol.columnName == '설비코드'){ // 설비코드 컬럼을 클릭했다면
 						$("#grid1").load("mngmodal", function(){
 
@@ -185,13 +222,23 @@ h3{
 							});
 					}
 					else  */
-						if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
+						/* if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
 							$("#grid1").load("eqPrcmodal", function(){
 									const mngModal = new bootstrap.Modal('#myModal');
 									mngModal.show();
 							
 							});
-					};
+					}; */
+					
+					if(eqCdCol.columnName == '설비코드'){
+						$("#grid1").load("eqDetailmodal", function(){
+							
+							const mngModal = new bootstrap.Modal('#myModal');
+							console.log(eqDtlCd);
+							mngModal.show();
+						});
+					}
+					
 				
 				
 			});
@@ -199,10 +246,12 @@ h3{
 		
 			// 설비 수정 버튼
 		  $("#eqUpd").click(function () {
-			  
+			 
 			var chkRows = grid.getCheckedRows();
 			var updRowArr = [];
+			var updRowArr2 = [];
 			var data = {};
+			var data2 = {};
 			var temp1;
 		
 			console.log(chkRows);
@@ -215,6 +264,7 @@ h3{
 				}else{ // 사용불가 가 선택되어 있다면
 					temp1 = 'USE02';
 				}
+				
 				console.log(temp1);
 				data = {
 						eq_cd : chkRows[i].설비코드 , 
@@ -232,6 +282,11 @@ h3{
 				
 			};
 			 
+			/*  if(confirm('TEST입니다') ==  true){
+				 alert('성공');
+			 }; */
+			
+			
 			 
 		        Swal.fire({
 		            title: '정말 수정 하시겠습니까?',
@@ -251,21 +306,77 @@ h3{
 		            	
 		            	 $.ajax({
 			            	   url : "eqMngUpdateAjax",
+			            	   
 			            	   method: "POST",
 			            	   traditional : true,
 			            	   data : JSON.stringify(updRowArr),
 			            	   dataType : "JSON",
-			            	   contentType : "application/json; charset=utf-8"
+			            	   contentType : "application/json; charset=utf-8",
+			            	   success : function(){
+			            		   
+			            		   
+			            	   }
 			            	   
 			            	   
-			               }).done(function(){
+			               }).done(function(data){
 			            	   toastr.success('수정완료!');
 			            	   Swal.fire(
 					                    '수정이 완료되었습니다.',
 					                    '',
 					                    'success'
 					                		);
-			               });  
+			            	   console.log(data);
+			            	  /*  for (var i = 0; i < chkRows.length; i++) {
+								data2 = {
+										p_eq_cd : chkRows[i].설비코드,
+										p_eq_sd :  systimestamp,
+										
+								
+								};
+							}; */
+			            /* 	   // 비가동 테이블 등록
+			            	   $.ajax({
+			           			url : "setEqInAjax",
+			           			method : "POST",
+			           			data : {
+			           					"p_eq_cd" : ec,
+			           					"p_eq_sd" : systimestamp,
+			           					//"p_eq_ed" : subEd,
+			           					"p_eq_dc" : dc,
+			           					"p_eq_nt" : nt
+			           					};					
+			           		}).done(function(result){
+			           			
+			           			}); */
+			            	   
+			            	   
+			            	   
+			            	 /*   if(confirm('비가동페이지로 이동합니다') ==  true){
+			            		   document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
+			      			 }; */
+			      			 for (var i = 0; i < chkRows.length; i++) {
+								if(chkRows[i].사용여부.valueOf()=='사용불가' ){
+									 Swal.fire({
+						 		            title: '비가동 관리페이지로 접속합니다',
+						 		            icon: 'question',
+						 		            showCancelButton: true,
+						 		            confirmButtonColor: '#3085d6',
+						 		            cancelButtonColor: '#d33',
+						 		            confirmButtonText: '확인',
+						 		            cancelButtonText: '취소'
+						 		        }).then((result) => {
+						 		        	console.log(result);
+						 		        	console.log(result.isConfirmed); // 승인시 FALSE / 취소시 TRUE
+						 		        	  if (result.isConfirmed) {
+						 		        		 document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
+						 		        	  }
+						      			 
+						               });
+									
+								}
+							}
+			      			  
+			      			 });
 		            }else{
 		            	Swal.fire(
 		                        '수정이 취소되었습니다.',

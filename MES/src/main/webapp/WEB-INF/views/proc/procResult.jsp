@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>발주관리</title>
-
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 	<div style="padding-bottom:15px; color: ;">
@@ -27,7 +31,7 @@
 							<input type="text" class="form-control" placeholder="생산지시코드" id="prdCd">
 						</div>
 						<a class="nav-link nav-icon search-bar-toggle" id="procCdBtn" onclick="procCdBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>											
 					</div>
 				</div>
@@ -40,7 +44,7 @@
 							<input type="text" class="form-control" placeholder="공정명" id="procNm">
 							
 						<a class="nav-link nav-icon search-bar-toggle" id="procNmBtn" onclick="procNmBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>
 						
 						<input type="text" id="procCd" class="form-control" readonly="readonly">
@@ -74,6 +78,9 @@
 				</form>
 				</div>
 	<div id="procResultList"></div>
+	<div>
+		<button type="button" class="btn1" id="excel">Excel</button>
+	</div>
 	</div>
 	
 <div id="procResultCdModal"></div>
@@ -98,59 +105,84 @@ var procResultList = new tui.Grid({
     columns: [
     	{
             header: '생산지시코드',
-            name: '생산지시코드'
+            name: '생산지시코드',
+            className : 'fontClass',
+            align: 'center'
           },
           {
             header: '진행공정코드',
-            name: '진행공정코드'
+            name: '진행공정코드',
+            className : 'fontClass',
+            align: 'center'
           },
           {
             header: '공정명',
-            name: '공정명'
+            name: '공정명',
+            className : 'fontClass',
+            align: 'center'
           },
           {
             header: '설비코드',
-            name: '설비코드'
+            name: '설비코드',
+            className : 'fontClass',
+            align: 'center'
           },
           {
               header: '설비명',
-              name: '설비명'
+              name: '설비명',
+              className : 'fontClass',
             },
           {
               header: '투입량',
-              name: '투입량'
+              name: '투입량',
+              className : 'fontClass',
+              align: 'right'
             },
             {
                 header: '생산량',
-                name: '생산량'
+                name: '생산량',
+                className : 'fontClass',
+                align: 'right'
               },
             {
                 header: '불량량',
-                name: '불량량'
+                name: '불량량',
+                className : 'fontClass',
+                align: 'right'
               },
               {
                   header: '불량코드',
-                  name: '불량코드'
+                  name: '불량코드',
+                  className : 'fontClass',
+                  align: 'center'
                 }
               ,{
                   header: '불량상세',
-                  name: '불량상세'
+                  name: '불량상세',
+                  className : 'fontClass',
                 }
               ,{
                   header: '공정시작시간',
-                  name: '공정시작시간'
+                  name: '공정시작시간',
+                  className : 'fontClass',
+                  align: 'center'
                 }
               ,{
                   header: '공정종료시간',
-                  name: '공정종료시간'
+                  name: '공정종료시간',
+                  className : 'fontClass',
+                  align: 'center'
                 }
               ,{
                   header: '담당자',
-                  name: '담당자'
+                  name: '담당자',
+                  className : 'fontClass',
                 }
               ,{
                   header: '생산지시일자',
-                  name: '생산지시일자'
+                  name: '생산지시일자',
+                  className : 'fontClass',
+                  align: 'center'
                 }
     ],
     rowHeaders: ['rowNum'],
@@ -191,6 +223,16 @@ $("#search").on("click", function(){
 	}).done(function(result){
 		procResultList.resetData(result);
 	})
+})
+
+//excel호출
+$('#excel').on('click',function(){
+	const options = {
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: '공정실적조회',
+			};
+	procResultList.export('xlsx', options);
 })
 
   

@@ -1,12 +1,8 @@
 package com.yfactory.mes.proc.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -278,6 +274,88 @@ public class ProcServiceImpl implements ProcService{
 	public List<Map> searchProcResult(Map<String, String> result) {
 		return map.searchProcResult(result);
 	}
+
+
+
+
+@Override
+public List<Map> ProcNoUseEqSelect(String eqCd) {
+	// TODO Auto-generated method stub
+	return map.ProcNoUseEqSelect(eqCd);
+}
+
+
+
+
+@Override
+public List<Map> ProcCdNmSelect(String cdNm) {
+	// TODO Auto-generated method stub
+	return map.ProcCdNmSelect(cdNm);
+}
+@Override
+public List<Map> procLineAjax() {
+	// TODO Auto-generated method stub
+	return map.procLineAjax();
+
+}
+
+
+
+
+@Override
+public List<Map> procLineEditAjax(String lineCd) {
+	// TODO Auto-generated method stub
+	return map.procLineEditAjax(lineCd);
+}
+
+
+
+
+@Override
+public int ProcProcessMgtInsert(Map<String, String> Eq) {
+	// TODO Auto-generated method stub
+	return map.ProcProcessMgtInsert(Eq);
+}
+
+
+
+
+@Override
+public int ProcProcessMgtDelete(Map<String, String> Eq) {
+	// TODO Auto-generated method stub
+	return map.ProcProcessMgtDelete(Eq);
+}
+
+
+
+
+@Override
+public List<Map> ProcCdList(String prCd) {
+	// TODO Auto-generated method stub
+	return map.ProcCdList(prCd);
+}
+
+
+
+
+@Override
+public int ProcLineDelete(Map<String, String> lineCd) {
+	// TODO Auto-generated method stub
+	return map.ProcLineDelete(lineCd);
+}
+
+
+
+
+@Override
+public int ProcLineInsert(List<HashMap<String, Object>> list) {
+	// TODO Auto-generated method stub
+	for(HashMap<String, Object>mapper : list) {
+		map.ProcLineInsert(mapper);
+
+	}
+	return 1;
+}
 
 
 

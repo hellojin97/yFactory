@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <head>
 
 
@@ -9,10 +10,25 @@
 <div class="blank" >a</div>
 <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-   
+  	<c:if test="${not empty loginUser.emp_no}">
+   	<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#">
+            <img src="${profile}" alt="Profile" class="rounded-circle" width="100px;" height="100px;" style="margin-right: 40px;">
+            <p style="color: white;">
+            	<br>  
+            	${loginUser.emp_nm } <br>
+            	${userDept }		 <br>
+            	ID : ${loginUser.emp_no } 
+            </p>
+    </a><!-- End Profile Iamge Icon -->
+            <button type="button" class="btn-warning btn-block" style="width: 100%" onclick="location.href='userLogOut'">로그아웃</button>
+    </c:if>
+    <c:if test="${empty loginUser.emp_no }">
+            <button type="button" class="btn-warning btn-block" style="width: 100%" onclick="location.href='loginForm.do'">로그인</button>
+    </c:if>
+   	<hr>
     <ul class="sidebar-nav" id="sidebar-nav">
 
-
+		
    <!-- ================ 공통코드관리 ================ -->
       <li class="nav-item">
       
@@ -177,6 +193,13 @@
               <i class="bi bi-circle"></i><span>공정관리</span>
             </a>
           </li>
+
+          <li>
+            <a href="procLineForm">
+              <i class="bi bi-circle"></i><span>제품 공정 흐름도</span>
+            </a>
+          </li>
+
         </ul>
       </li>
       

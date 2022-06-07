@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -185,6 +186,18 @@ public class ProcAjaxController {
 		
 		return procService.procProcessCheckList();
 	}
+	// 공정 관리 선택 조회
+	@GetMapping("/procCdNmSelect")
+	public List<Map> procCdNmSelect(String cdNm){
+		
+		return procService.ProcCdNmSelect(cdNm);
+	}
+	// 미사용 설비 목록 조회
+	@GetMapping("/procNoUseEqSelect")
+	public List<Map> ProcNoUseEqSelect(String eqCd){
+		
+		return procService.ProcNoUseEqSelect(eqCd);
+	}
 	
 	// 공정 실적 조회 - 단건 조회
 	@PostMapping("/searchProcResult")
@@ -223,5 +236,53 @@ public class ProcAjaxController {
 		}
 	}
 	
+	// 공정 관리 추가
+	@PostMapping("/procProcessMgtInsert")
+	public int ProcProcessMgtInsert(@RequestParam Map<String, String> Eq) {
+				
+		
+		return procService.ProcProcessMgtInsert(Eq);
+	}
+	// 공정 관리 삭제
+	@PostMapping("/procProcessMgtDelete")
+	public int ProcProcessMgtDelete(@RequestParam Map<String, String> Eq) {
+				
+		
+		return procService.ProcProcessMgtDelete(Eq);
+	}
+	// 공정 목록 조회
+	@GetMapping("/procCdList")
+	public List<Map> ProcCdList(String prCd){
+		System.out.println(prCd);
+		return procService.ProcCdList(prCd);
+	}
 	
+	@GetMapping("/procLineAjax")
+	public List<Map> procLineAjax(){
+		return procService.procLineAjax();
+	}
+	
+	@GetMapping("/procLineEdit")
+	public List<Map> procLineEdit(@RequestParam Map<String,String> lineCd){
+			String lineCdStr = lineCd.get("lineCd");
+		return procService.procLineEditAjax(lineCdStr);
+	}
+	// 제품 라인 정보 삭제
+	@PostMapping("/procLineDelete")
+	public int ProcLineDelete(@RequestParam Map<String, String> lineCd) {
+				
+		
+		return procService.ProcLineDelete(lineCd);
+	}
+	// 제품 라인 정보 추가
+	@PostMapping("/procLineInsert")
+	public int ProcLineInsert(@RequestBody List<HashMap<String, Object>> list) {
+		System.out.println(list);
+		int result = procService.ProcLineInsert(list);
+		if(result > 0) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 }

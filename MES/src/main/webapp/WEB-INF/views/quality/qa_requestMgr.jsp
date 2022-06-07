@@ -11,7 +11,7 @@
 		<h1>품질검사관리</h1>
 	</div>
 
-	<div style="background-color: #e0e0e0; padding: 8px;">
+	<div style="background-color: #e9ecef; padding: 8px;">
 		<div class="mainTitle" style="padding: 15px;">
 
 			<!-- grid 테이블 출력 div -->
@@ -44,39 +44,50 @@
 		columns : [ {
 			header: '발주코드',
 			name: '발주코드',
+			className : 'fontClass',
 			width:'130'
 		}, {
 			header: '품질검사코드',
 			name: '품질검사코드',
+			className : 'fontClass',
 			width:'130'
 		},{
 			header: '자재코드',
-			name: '자재코드'
+			name: '자재코드',
+			className : 'fontClass',
 		}, {
 			header: '자재명',
-			name: '자재명'
+			name: '자재명',
+			className : 'fontClass',
 		}, {
 			header: '담당인',
-			name: '담당인'
+			name: '담당인',
+			className : 'fontClass',
 		}, {
 			header: '발주량',
-			name: '발주량'
+			name: '발주량',
+			className : 'fontClass',
 		}, {
 			header: '합격량',
 			name: '합격량',
+			className : 'fontClass',
 			editor : "text"
 		}, {
 			header: '불량량',
-			name: '불량량'
+			name: '불량량',
+			className : 'fontClass',
 		}, {
 			header: '불량코드',
-			name: '불량코드'
+			name: '불량코드',
+			className : 'fontClass',
 		}, {
 			header: '불량명',
-			name: '불량명'
+			name: '불량명',
+			className : 'fontClass',
 		}, {
 			header: '상태',
-			name: '상태'
+			name: '상태',
+			className : 'fontClass',
 		} ],
 		rowHeaders : [ 'checkbox' ],
 		pageOptions : {

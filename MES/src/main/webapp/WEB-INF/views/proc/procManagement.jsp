@@ -52,24 +52,30 @@ resultGrid = new tui.Grid({
 			columns : [ {
 				header : '생산지시상세코드',
 				name : '생산지시상세코드',
+				className : 'fontClass',
 			}, 
 			 {
 				header : '생산지시코드',
 				name : '생산지시코드',
+				className : 'fontClass',
 			},
 			 {
 				header : '제품명',
 				name : '제품명',
+				className : 'fontClass',
 			}, {
 				header : '제품코드',
 				name : '제품코드',
+				className : 'fontClass',
 			}, {
 				header : '생산수량',
 				name : '생산수량',
+				className : 'fontClass',
 
 			}, {
 				header : '라인코드',
 				name : '라인코드',
+				className : 'fontClass',
 			}, 
 			],
 			rowHeaders : [ 'rowNum' ],
@@ -86,68 +92,82 @@ resultGrid = new tui.Grid({
       {
         header: '진행공정코드',
         name: '진행공정코드',
+        className : 'fontClass',
       },
       {
         header: '순번',
         name: '순번',
+        className : 'fontClass',
         width: 20
       },
       {
         header: '공정코드',
         name: '공정코드',
+        className : 'fontClass',
         width: 120
 
       },
       {
         header: '공정명',
-        name: '공정명'
+        name: '공정명',
+        className : 'fontClass',
       },
       {
         header: '설비코드',
-        name: '설비코드'
+        name: '설비코드',
+        className : 'fontClass',
       },
       {
           header: '설비명',
-          name: '설비명'
+          name: '설비명',
+          className : 'fontClass',
         },
         {
             header: '담당자',
-            name: '담당자'
+            name: '담당자',
+            className : 'fontClass',
           },
       {
           header: '투입량',
           name: '투입량',
+          className : 'fontClass',
 
         },
 
           {
               header: '합격량',
               name: '합격량',
+              className : 'fontClass',
 
             },
             {
                 header: '불량량',
                 name: '불량량',
+                className : 'fontClass',
 
               },
           {
               header: '생산량',
               name: '생산량',
+              className : 'fontClass',
 
             },
             {
                 header: '작업시작시간',
                 name: '작업시작시간',
+                className : 'fontClass',
 
               },
               {
                   header: '작업종료시간',
                   name: '작업종료시간',
+                  className : 'fontClass',
 
                 },
                 {
                     header: '상태',
                     name: '상태',
+                    className : 'fontClass',
 
                   },
     ],

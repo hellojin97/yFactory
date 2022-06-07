@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 <!-- 업체명모달  -->
@@ -32,7 +37,7 @@
 								<input type="date" class="form-control" id="req2">&nbsp;&nbsp;&nbsp;&nbsp;
 							</div>
 							<a class="nav-link nav-icon search-bar-toggle " id="vdrnmSearch" onclick="vdrnmSearch"> 
-								<i class="bi bi-search" style="color: #2c3e50"></i>
+								<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 							</a>
 						</div>
 					</div>
@@ -61,7 +66,8 @@
 	columns: [
 	  {
 	    header: '생산지시코드',
-	    name: '생산지시코드'
+	    name: '생산지시코드',
+	    align: 'center'
 	  },
 	  {
 	    header: '제품명',
@@ -69,11 +75,13 @@
 	  },
 	  {
 	    header: '생산수량',
-	    name: '생산수량'
+	    name: '생산수량',
+	    align: 'right'
 	  },
 	  {
 	    header: '생산지시일자',
-	    name: '생산지시일자'
+	    name: '생산지시일자',
+	    align: 'center'
 	  }
 	],
 	rowHeaders : [ 'rowNum' ]
@@ -96,7 +104,17 @@
 		  var getVal = procOrderList.getValue(e.rowKey, "생산지시코드");
 		  $("#prdCd").val(getVal);
 		  $("#cdModal").modal('hide');
-	  })
+	  });
+	  
+	//마우스 커서 올리면
+	  procOrderList.on('mouseover', function(e){	  	
+	  	var tt = e.targetType;
+	  		if(tt == 'cell' ){			
+	  			$('#procOrderList').attr("class", "smMouseOver");
+	  		}else{
+	  			$('#procOrderList').removeClass();					
+	  		}
+	  });
 </script>
 </body>
 </html>

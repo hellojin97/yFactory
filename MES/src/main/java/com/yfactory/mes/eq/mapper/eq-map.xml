@@ -58,16 +58,17 @@
       FROM eq e, process prc
       WHERE e.eq_cd = prc.eq_cd(+)
       ORDER BY 1 -->
-      SELECT e.eq_cd "설비코드" , 
+      SELECT DISTINCT e.eq_cd "설비코드" , 
 				COMM.CD_NM "설비구분",
                 e.eq_mdnm "설비명" , prc.proc_cd "공정코드" , 
-				prc.proc_nm	"공정명", e.eq_min "최저온도" , e.eq_max "최고온도"
-      			,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자",
-      			comm2.cd_nm "사용여부"
+				prc.proc_nm	"공정명", e.eq_min "최저온도" 
+				, e.eq_max "최고온도"
+      			<!-- ,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자", -->
+      			<!-- comm2.cd_nm "사용여부" -->
       FROM eq e, process prc , COMM_CODE COMM , COMM_CODE COMM2
       WHERE e.eq_cd = prc.eq_cd(+)
       AND e.eq_nm = comm.comm_cd
-      AND e.eq_actst = comm2.comm_cd
+      <!-- AND e.eq_actst = comm2.comm_cd -->
       ORDER BY 1
 	</select>
 
@@ -107,12 +108,14 @@
 					PRC.PROC_CD "공정코드" ,
 					PRC.PROC_NM "공정명" ,
 					E.EQ_CHKCYC "점검주기",
-					CASE WHEN E.EQ_ACTST like 'USE01' THEN 'Y' ELSE 'N' END "사용여부"
+					CD2.CD_NM "사용여부"
 	FROM 			EQ E ,
 					PROCESS PRC,
-                    COMM_CODE CD
+                    COMM_CODE CD,
+                    COMM_CODE CD2
 	WHERE 			E.EQ_CD = PRC.EQ_CD
     AND             E.EQ_NM = CD.COMM_CD
+    AND             E.EQ_ACTST = CD2.COMM_CD
 	ORDER BY 1
 	
 	</select>
@@ -126,12 +129,14 @@
 					PRC.PROC_CD "공정코드" ,
 					PRC.PROC_NM "공정명" ,
 					E.EQ_CHKCYC "점검주기",
-					CASE WHEN E.EQ_ACTST like 'USE01' THEN 'Y' ELSE 'N' END "사용여부"
+					CD2.CD_NM "사용여부"
 	FROM 			EQ E ,
 					PROCESS PRC,
-                    COMM_CODE CD
+                    COMM_CODE CD,
+                    COMM_CODE CD2
 	WHERE 			E.EQ_CD = PRC.EQ_CD
     AND             E.EQ_NM = CD.COMM_CD
+    AND             E.EQ_ACTST = CD2.COMM_CD
 	<if test="key == 1">
 	</if>
 	<if test="key == 2">
@@ -194,20 +199,21 @@
 	
 	<!-- 비가동 설비 내역 추가 -->
 	<insert id="setEqIn" statementType="CALLABLE"  parameterType="map">
-		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_dc}, #{p_eq_nt})}
+		{CALL eq_ina_pro (#{p_eq_cd}, #{p_eq_sd}, #{p_eq_ed}, #{p_eq_dc}, #{p_eq_nt})}
 	</insert>
 
 
 <select id="getEqChkList" resultType="map">
+
 <!-- SELECT  e.eq_cd "설비코드" ,
            e.eq_mdnm "설비명" , 
            e.eq_nm "설비구분" , 
            e.EQ_CHKCYC "점검주기", 
            TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
            TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
-           case when chk.chk_rscd = 'DIV01' then '재점검 필요' 
+           case when chk.chk_rscd = 'DIV01' then '재점검필요' 
            when chk.chk_rscd = 'DIV02' then '통과' 
-           END "판정",
+           END "결과",
            chk.EQ_CHKDTL "점검내역" ,
            case when chk.eq_chkr = 1011 then '김세명'
            when chk.eq_chkr = 1021 then '박진영'
@@ -217,44 +223,94 @@
            end  "검수자"
 FROM eq e , eq_chk chk
 WHERE e.eq_cd = chk.eq_cd -->
- SELECT e.eq_cd "설비코드" , e.eq_mdnm "설비명"  , comm.cd_nm "설비구분",
+
+<!--  SELECT e.eq_cd "설비코드" , e.eq_mdnm "설비명"  , comm.cd_nm "설비구분",
             e.EQ_CHKCYC "점검주기", TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자", 
-            TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일", 
-            comm2.CD_NM "판정",
-            chk.EQ_CHKDTL "점검내역" , 
+            TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+            chk.EQ_CHKDTL "점검내역",  
+            comm2.CD_NM "결과",
             emp.emp_nm "검수자" 
 FROM eq e , eq_chk chk  , EMPLOYEE emp , 
             COMM_CODE comm , COMM_CODE comm2
 WHERE e.eq_cd = chk.eq_cd
 AND e.eq_inster = emp.emp_no
 AND e.eq_nm = comm.comm_cd
-AND chk.chk_rscd = comm2.comm_cd
+AND chk.chk_rscd = comm2.comm_cd -->
+<!-- AND chk.chk_rscd LIKE 'DIV02' -->
+SELECT DISTINCT E.eq_cd "설비코드", 
+        chk.eq_cd "점검설비코드",
+        TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
+        E.EQ_MDNM "설비명" , 
+ 		E.EQ_CHKCYC "점검주기",
+        TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일"
+        ,chk.EQ_CHKDTL "점검내역"
+        ,comm.cd_nm "결과"
+        ,emp.emp_nm "검수자"
+FROM   EQ E, EQ_CHK CHK , EMPLOYEE EMP
+, COMM_CODE COMM
+WHERE  E.EQ_CD =  CHK.EQ_CD
+AND CHK.CHK_RSCD = COMM.COMM_CD
+AND CHK.EQ_CHKR = EMP.EMP_NO
 </select>
 
 
 <!-- 설비구분명 기준 점검미지정 설비 조회 (점검테이블에 존재하지 않는 설비들)  -->
 <select id="getEqChkSelectList" resultType="map">
-SELECT  	E.EQ_CD "설비코드" ,
- 				E.EQ_MDNM "설비명" , 
- 				E.EQ_CHKCYC "점검주기"
-FROM 		EQ E
-WHERE 		E.eq_cd not in (select eq_cd from eq_chk)
-AND     		E.eq_nm  LIKE '%'||#{eq_nm}||'%'
-<!-- AND 		chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd') --> 
+<!-- SELECT  	DISTINCT E.EQ_CD "설비코드" ,
+ 			E.EQ_MDNM "설비명" , 
+ 			E.EQ_CHKCYC "점검주기",
+ 			TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
+ 			TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+ 			comm.CD_NM "결과"
+FROM 		EQ E , EQ_CHK CHK , COMM_CODE comm
+WHERE		CHK.chk_rscd = comm.comm_cd
+AND			E.eq_cd = CHK.eq_cd	 -->	
+<!-- E.eq_cd not in (select eq_cd from eq_chk) -->
+<!-- AND -->
+<!-- SELECT E.EQ_CD "설비코드" ,
+	   E.EQ_MDNM "설비명" , 
+	   TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
+	   E.EQ_CHKCYC "점검주기",
+       TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+       CHK.EQ_CHKDTL "점검내역" ,
+       COMM.CD_NM "결과"
+FROM   EQ E, EQ_CHK CHK , COMM_CODE COMM
+WHERE  E.EQ_CD =  CHK.EQ_CD(+)
+AND    CHK.CHK_RSCD = COMM.COMM_CD(+)	
+AND 	E.EQ_ACTST = 'USE02' -->
+<!-- 비가동 종료시점이 NULL로 되어있는 설비들 조회 (없다면 아무것도 뿌려지지 않는다) -->
+SELECT DISTINCT E.EQ_CD "설비코드" , 
+            E.EQ_MDNM "설비명" ,
+            E.EQ_CHKCYC "점검주기" ,
+            TO_CHAR(TRUNC(EQ_CHKDT), 'yyyy-MM-dd') "점검일자",
+            TO_CHAR(TO_DATE(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+            CHK.EQ_CHKDTL "점검내역",
+            COMM.CD_NM "결과"
+FROM EQ E , EQ_INA INA , EQ_CHK chk, comm_code comm
+WHERE E.EQ_CD = INA.EQ_CD
+AND E.EQ_CD = CHK.EQ_CD
+AND CHK.CHK_RSCD = COMM.COMM_CD
+AND INA.EQ_INAED IS NULL 
+<if test="eq_nm != null and eq_nm != ''">
+AND    E.eq_mdnm LIKE #{eq_nm}
+</if>
+
+<!-- <if test="#{eq_chkdt1} !=null and #{eq_chkdt2} !=null">
+AND chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd')
+</if>
+ -->
+ <!-- AND 		chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd') -->
+ORDER BY E.EQ_CD
 </select>
 
 
 <!--  일 점검 건수 조회-->
 <select id="getEqDailyChkCount" resultType="map">
+
 SELECT TO_CHAR(TRUNC(EQ_CHKDT), 'yyyy-MM-dd') "점검일자", COUNT(TRUNC(EQ_CHKDT)) "건수"
 FROM 		eq_chk
 WHERE		
-<if test="#{chkdt1} == null">
-eq_chkdt BETWEEN #{chkdt2} AND #{chkdt2}
-</if>
-<if test="#{chkdt1} != null">
-eq_chkdt BETWEEN #{chkdt1} AND #{chkdt2}
-</if>
+TO_DATE(eq_chkdt , 'yy/MM/dd') BETWEEN #{chkdt1} AND #{chkdt2}
 GROUP BY TRUNC(EQ_CHKDT)
 </select>
 
@@ -279,7 +335,7 @@ SELECT  e.eq_cd "설비코드" ,
            e.EQ_CHKCYC "점검주기", 
            TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
            TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
-           comm2.CD_NM "판정",
+           comm2.CD_NM "결과",
            chk.EQ_CHKDTL "점검내역" ,
           emp.emp_nm  "검수자"
 FROM 	eq e , eq_chk chk , EMPLOYEE emp , 
@@ -333,6 +389,34 @@ AND line_cd = #{lineCd}
 	WHERE   e.eq_nm = c.comm_cd
 </select>
 
+
+<select id="getEqDetailDataAjax" resultType="map">
+SELECT      DISTINCT e.eq_cd "설비코드",
+				e.eq_mdnm "설비명",
+				prc.proc_cd "공정코드",
+				prc.proc_nm "공정명",
+				e.eq_chkcyc "점검주기",
+				TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
+				TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+				emp.emp_nm "등록인",
+				comm.CD_NM "사용여부"
+
+	FROM eq e, process prc , eq_chk chk , employee emp , vendor vdr , comm_code comm 
+	
+	WHERE e.eq_cd = prc.eq_cd
+	<!-- AND   e.eq_cd = chk.eq_cd; -->
+	AND  e.eq_inster = emp.emp_no
+    AND e.eq_actst = comm.comm_cd
+    AND e.eq_cd = #{eqDtlCd}
+    ORDER BY e.eq_cd
+</select>
+
+<select id="getEqImgAjax" resultType="String">
+SELECT  TO_CHAR(SUBSTR(img.img_path,1,4000))
+FROM EQ e , IMG_ATTATCH img
+WHERE e.uuid = img.uuid
+AND e.eq_cd = #{eqDtlCd}
+</select>
 
 
 </mapper>

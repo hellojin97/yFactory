@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script> --%>
-	 <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
-
-
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 	<div class="m-4">
@@ -25,8 +25,7 @@
 					</div>
 
 					<div class="modal-body">
-						<div id="grid2"></div>
-						<div class="modal-footer"></div>
+						<div id="grid2"></div>						
 					</div>
 				</div>
 			</div>
@@ -53,10 +52,12 @@
 
 			{
 				header : '설비코드',
-				name : '설비코드'
+				name : '설비코드',
+				align: 'center'
 			},{
 				header : '구분명',
-				name : '구분명'
+				name : '구분명',
+				align: 'center'
 			},{
 				header : '설비명',
 				name : '설비명'
@@ -86,8 +87,18 @@
 			 $("#eqNm").val(eqNm);
 		}
 		})
-		});
 	
+	//마우스 커서 올리면
+	  grid2.on('mouseover', function(e){	  	
+	  	var tt = e.targetType;
+	  		if(tt == 'cell' ){			
+	  			$('#grid2').attr("class", "smMouseOver");
+	  		}else{
+	  			$('#grid2').removeClass();					
+	  		}
+	  });
+	
+});
 </script>
 
 </html>

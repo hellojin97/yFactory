@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 <!-- 업체명모달  -->
@@ -44,15 +49,18 @@
 	columns: [
 	  {
 	    header: '공정명',
-	    name: '공정명'
+	    name: '공정명',
+	    align: 'center'
 	  },
 	  {
 	    header: '공정코드',
-	    name: '공정코드'
+	    name: '공정코드',
+	    align: 'center'
 	  },
 	  {
 	    header: '설비코드',
-	    name: '설비코드'
+	    name: '설비코드',
+	    align: 'center'
 	  }
 	],
 	rowHeaders : [ 'rowNum' ],
@@ -81,7 +89,17 @@
 		  $("#procNm").val(getNm);
 		  $("#procCd").val(getCd);
 		  $("#nmModal").modal('hide');
-	  })
+	  });
+	  
+	//마우스 커서 올리면
+	  processList.on('mouseover', function(e){	  	
+	  	var tt = e.targetType;
+	  		if(tt == 'cell' ){			
+	  			$('#processList').attr("class", "smMouseOver");
+	  		}else{
+	  			$('#processList').removeClass();					
+	  		}
+	  });
 </script>
 </body>
 </html>

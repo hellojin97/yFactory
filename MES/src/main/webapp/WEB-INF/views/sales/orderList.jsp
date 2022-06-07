@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 
@@ -17,7 +22,7 @@
 				<!-- 구분 -->				
 				<fieldset class="col-md-5" style="padding-bottom: 10px;">				
                   	<div class="input-group">
-                  		<p style="padding-right: 30px;">구분</p>
+                  		<p style="padding-right: 30px;">진행상황 구분</p>
 	                    <div class="form-check">
 	                      <input class="form-check-input" type="radio" name="radios" id="1" value="1" checked>
 	                      <label class="form-check-label" for="gridRadios1" style="padding-right: 10px;">
@@ -46,7 +51,7 @@
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">업체명</label>
 						<input type="text" class="form-control" style="width: 50px" placeholder="업체명" id="vnm">
 						<a class="nav-link nav-icon search-bar-toggle" id="venderBtn" onclick="venderBtn"> 
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>
 						<input type="text" id="vcd" class="form-control" readonly="readonly">
 					</div>
@@ -140,26 +145,36 @@ window.onload = function (){
          {
            header: '주문코드',
            name: '주문코드',
+           className : 'fontClass',
+           align: 'center'
          },
          {
              header: '업체명',
              name: '업체명',
+             className : 'fontClass',
            },
            {
                header: '주문일자',
                name: '주문일자',
+               className : 'fontClass',
+               align: 'center'
              },
              {
                  header: '납기일자',
                  name: '납기일자',
+                 className : 'fontClass',
+                 align: 'center'
                },             
                  {
-                     header: '수량',
+                     header: '주문수량',
                      name: '주문수량',
+                     className : 'fontClass',
+                     align: 'right'
                    },
                    {
                        header: '진행상황',
                        name: '진행상황',
+                       className : 'fontClass',
                      }],
                   rowHeaders: ['rowNum'],
                      pageOptions: {
@@ -229,8 +244,20 @@ $('#excel').on('click',function(){
 			};
 	ordeList.export('xlsx', options);
 })
-}
 
+
+//마우스 커서 올리면
+ordeList.on('mouseover', function(e){
+	var cn = e.columnName;
+	var tt = e.targetType;
+		if(cn == '주문코드' && tt == 'cell' ){			
+			$('#ordeList').attr("class", "smMouseOver");
+		}else{
+			$('#ordeList').removeClass();					
+		}
+});
+
+}
   </script>
 
 </body>

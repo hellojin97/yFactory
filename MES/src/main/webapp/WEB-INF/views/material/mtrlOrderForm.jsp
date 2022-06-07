@@ -79,19 +79,23 @@ var unorder = new tui.Grid({
     columns: [
       {
         header: '생산계획코드',
-        name: 'PP_CD'
+        name: 'PP_CD',
+        className : 'fontClass',
       },
       {
         header: '생산계획명',
-        name: 'PP_NM'
+        name: 'PP_NM',
+        className : 'fontClass',
       },
       {
         header: '계획등록일자',
-        name: 'PP_DT'
+        name: 'PP_DT',
+        className : 'fontClass',
       },
       {
         header: '총 수량',
-        name: 'PD_QTY'
+        name: 'PD_QTY',
+        className : 'fontClass',
       }
       
     ],
@@ -134,23 +138,28 @@ $("#select1").on("click",function(e) {
     columns: [
       {
         header: '원자재코드',
-        name: '원자재코드'
+        name: '원자재코드',
+        className : 'fontClass',
       },
       {
         header: '계획일자',
-        name: '계획일자'
+        name: '계획일자',
+        className : 'fontClass',
       },
       {
           header: '원자재명',
-          name: '원자재명'
+          name: '원자재명',
+          className : 'fontClass',
         },
       {
           header: '재고 구분',
-          name: '구분'
+          name: '구분',
+          className : 'fontClass',
         },
         {
             header: '생산계획코드',
-            name: '생산계획코드'
+            name: '생산계획코드',
+            className : 'fontClass',
           },
 
 
@@ -166,6 +175,7 @@ $("#select1").on("click",function(e) {
   });
   
 //생산계획코드,자재코드 불러오기
+
 $("#select2").on("click",function(e) {
    let ppcd= prodPlan.getCheckedRows();
    prodPlan.removeCheckedRows();
@@ -194,6 +204,7 @@ $("#select2").on("click",function(e) {
 }
 ); 
  // end of [prodPlan Event]
+
   //발주서 요청 조회
   var mtrlRequest = new tui.Grid({
     el: document.getElementById('mtrlRequest'),
@@ -201,32 +212,39 @@ $("#select2").on("click",function(e) {
     columns: [
       {
         header: '원자재코드',
-        name: '원자재코드'
+        name: '원자재코드',
+        className : 'fontClass',
       },
       {
         header: '원자재명',
-        name: '원자재명'
+        name: '원자재명',
+        className : 'fontClass',
       },
       {
         header: '업체명',
-        name: '업체명'
+        name: '업체명',
+        className : 'fontClass',
       },
       {
     	    header: '납기요청일자',
     	    name: '납기요청일자',
+    	    className : 'fontClass',
     	    editor: 'datePicker'
     	  },
       {
           header: '현재고',
-          name: '현재고'
+          name: '현재고',
+          className : 'fontClass',
         },
       {
           header: '계획대비 필요수량',
-          name: '계획대비 필요수량'
+          name: '계획대비 필요수량',
+          className : 'fontClass',
         },
       {
           header: '발주량',
           name: '발주량',
+          className : 'fontClass',
           editor : {
         	  type : 'text'
           }

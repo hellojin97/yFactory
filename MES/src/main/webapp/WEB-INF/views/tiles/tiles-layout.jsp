@@ -68,14 +68,16 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/js/tui-chart.js"></script>
 <style type="text/css"> 
   /* 폰트 */ 
-
+   .fontClass {
+   	font-family: GongGothicLight;
+   }
 	@font-face {
     font-family: 'GongGothicLight';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
- 	.font_fm{
+ 	.font_fm, h1,h2, h3, h4, h5, p{
  		font-family: GongGothicLight;
  	}
    #header {

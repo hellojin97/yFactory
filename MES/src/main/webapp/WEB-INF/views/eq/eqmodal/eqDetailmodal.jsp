@@ -74,7 +74,11 @@
 			console.log(rs);
 		});
 		
+
+		console.log(eqDtlCd);
+
 		
+
 		var url2 =  "getEqImgAjax";
 		$.ajax(url2 , {
 			method: "get",
@@ -82,6 +86,10 @@
 			
 			contentType : "application/json; charset=utf-8"
 		}).done(function(res){
+
+			
+			
+
 			$("#grid2").prepend('<img src="'+res+'">');
 		}); 
 
@@ -132,6 +140,7 @@
 
 			],
 			rowHeaders : [ 'rowNum' ],
+			
 			pageOptions : {
 				useClient : true,
 				perPage : 5

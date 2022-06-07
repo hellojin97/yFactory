@@ -212,38 +212,6 @@
 
 <select id="getEqChkList" resultType="map">
 
-<!-- SELECT  e.eq_cd "설비코드" ,
-           e.eq_mdnm "설비명" , 
-           e.eq_nm "설비구분" , 
-           e.EQ_CHKCYC "점검주기", 
-           TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
-           TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
-           case when chk.chk_rscd = 'DIV01' then '재점검필요' 
-           when chk.chk_rscd = 'DIV02' then '통과' 
-           END "결과",
-           chk.EQ_CHKDTL "점검내역" ,
-           case when chk.eq_chkr = 1011 then '김세명'
-           when chk.eq_chkr = 1021 then '박진영'
-           when chk.eq_chkr = 1031 then '홍석민'
-           when chk.eq_chkr = 1041 then '이웅재'
-           when chk.eq_chkr = 1051 then '김진환'
-           end  "검수자"
-FROM eq e , eq_chk chk
-WHERE e.eq_cd = chk.eq_cd -->
-
-<!--  SELECT e.eq_cd "설비코드" , e.eq_mdnm "설비명"  , comm.cd_nm "설비구분",
-            e.EQ_CHKCYC "점검주기", TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자", 
-            TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
-            chk.EQ_CHKDTL "점검내역",  
-            comm2.CD_NM "결과",
-            emp.emp_nm "검수자" 
-FROM eq e , eq_chk chk  , EMPLOYEE emp , 
-            COMM_CODE comm , COMM_CODE comm2
-WHERE e.eq_cd = chk.eq_cd
-AND e.eq_inster = emp.emp_no
-AND e.eq_nm = comm.comm_cd
-AND chk.chk_rscd = comm2.comm_cd -->
-<!-- AND chk.chk_rscd LIKE 'DIV02' -->
 SELECT DISTINCT E.eq_cd "설비코드", 
         chk.eq_cd "점검설비코드",
         TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
@@ -263,29 +231,7 @@ AND CHK.EQ_CHKR = EMP.EMP_NO
 
 <!-- 설비구분명 기준 점검미지정 설비 조회 (점검테이블에 존재하지 않는 설비들)  -->
 <select id="getEqChkSelectList" resultType="map">
-<!-- SELECT  	DISTINCT E.EQ_CD "설비코드" ,
- 			E.EQ_MDNM "설비명" , 
- 			E.EQ_CHKCYC "점검주기",
- 			TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
- 			TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
- 			comm.CD_NM "결과"
-FROM 		EQ E , EQ_CHK CHK , COMM_CODE comm
-WHERE		CHK.chk_rscd = comm.comm_cd
-AND			E.eq_cd = CHK.eq_cd	 -->	
-<!-- E.eq_cd not in (select eq_cd from eq_chk) -->
-<!-- AND -->
-<!-- SELECT E.EQ_CD "설비코드" ,
-	   E.EQ_MDNM "설비명" , 
-	   TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
-	   E.EQ_CHKCYC "점검주기",
-       TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
-       CHK.EQ_CHKDTL "점검내역" ,
-       COMM.CD_NM "결과"
-FROM   EQ E, EQ_CHK CHK , COMM_CODE COMM
-WHERE  E.EQ_CD =  CHK.EQ_CD(+)
-AND    CHK.CHK_RSCD = COMM.COMM_CD(+)	
-AND 	E.EQ_ACTST = 'USE02' -->
-<!-- 비가동 종료시점이 NULL로 되어있는 설비들 조회 (없다면 아무것도 뿌려지지 않는다) -->
+
 SELECT DISTINCT E.EQ_CD "설비코드" , 
             E.EQ_MDNM "설비명" ,
             E.EQ_CHKCYC "점검주기" ,
@@ -302,11 +248,6 @@ AND INA.EQ_INAED IS NULL
 AND    E.eq_mdnm LIKE #{eq_nm}
 </if>
 
-<!-- <if test="#{eq_chkdt1} !=null and #{eq_chkdt2} !=null">
-AND chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd')
-</if>
- -->
- <!-- AND 		chk.eq_chkdt BETWEEN TO_DATE(#{eq_chkdt1} , 'yy/MM/dd') AND TO_DATE(#{eq_chkdt2} , 'yy/MM/dd') -->
 ORDER BY E.EQ_CD
 </select>
 
@@ -351,9 +292,9 @@ WHERE e.eq_cd = chk.eq_cd
 AND e.eq_inster = emp.emp_no
 AND e.eq_nm = comm.comm_cd
 AND chk.chk_rscd = comm2.comm_cd
-AND 		chk.eq_chkdt IN 
+AND 		TO_CHAR(chk.eq_chkdt,'yy/MM/dd') IN 
 <foreach collection="list" item="item" open="(" separator=", "  close=")">
-		#{item.eq_chkdt}
+		TO_DATE(#{item.eq_chkdt},'yy/MM/dd') 
 </foreach>
 ORDER BY chk.eq_chkdt
 
@@ -417,6 +358,7 @@ SELECT      DISTINCT e.eq_cd "설비코드",
     AND e.eq_cd = #{eqDtlCd}
     ORDER BY e.eq_cd
 </select>
+
 
 <select id="getEqImgAjax" resultType="String">
 

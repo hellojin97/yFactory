@@ -316,10 +316,8 @@
 	
 	$("#prdInsert").click(function() {
 		let checkAry = needMtrlLOT.getCheckedRows();
-		let lot = [];
-		var result = {};
 		  for(var i = 0; i < checkAry.length; i++) {
-			result = {
+			var result = {
 					"ppCd" : procDtPlan.getData()[0].생산계획코드,
 					"pdNm" : procDtPlan.getData()[0].완제품명,
 					"line" : procOrder.getData()[0].라인코드,
@@ -328,18 +326,23 @@
 					"rank" : procOrder.getData()[0].일자별우선순위,
 					"mLot" : needMtrlLOT.getData()[i].자재LOT번호,
 					"procQty" : needMtrlLOT.getData()[i].사용수량
-			}
-			lot.push(result);
+			};
+			console.log(result);
+			  // AJAX START
+ 			  $.ajax({
+				  url: "prdInsInsert",
+				  data :  result,
+				   dataType : "JSON",
+				   async : false,
+				   type : "POST",
+				   
+			  }).done(function(result){
+			  }) 
+			  // END OF AJAX
+			
 		} 
-		  console.log(lot);
-		  $.ajax({
-			  url: "prdInsInsert",
-			  data :  JSON.stringify(lot),
-			   dataType : "JSON",
-			   type : "POST",
-			   contentType : "application/json; charset = UTF-8;"
-		  }).done(function(result){
-		  })
+		  
+
 	});
 	</script>
 

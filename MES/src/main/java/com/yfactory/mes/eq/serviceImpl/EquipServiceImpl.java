@@ -157,7 +157,7 @@ public class EquipServiceImpl implements EquipService{
 	}
 
 	@Override
-	public String getEqDetailDataAjax(String eqDtlCd) {
+	public List<Map> getEqDetailDataAjax(String eqDtlCd) {
 		
 		return mapper.getEqDetailDataAjax(eqDtlCd);
 	}

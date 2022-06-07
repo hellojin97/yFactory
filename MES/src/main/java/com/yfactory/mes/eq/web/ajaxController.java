@@ -212,7 +212,7 @@ public class ajaxController {
 		
 	// 설비관리 페이지 - 설비코드 클릭시 나오는 상세 데이터 모달	
 		@RequestMapping("/getEqDetailDataAjax")
-		public String getEqDetailDataAjax(@RequestParam String eqDtlCd , Model model) {
+		public List<Map> getEqDetailDataAjax(@RequestParam String eqDtlCd , Model model) {
 			
 			return mapper.getEqDetailDataAjax(eqDtlCd);
 		}
@@ -221,7 +221,8 @@ public class ajaxController {
 		
 		@RequestMapping("/getEqImgAjax")
 		public String getEqImgAjax(@RequestParam String eqDtlCd , Model model) {
-			
-			return mapper.getEqImgAjax(eqDtlCd);
+			String imgPath = mapper.getEqImgAjax(eqDtlCd); 
+			model.addAttribute("imgPath" , imgPath);
+			return imgPath;
 		}
 }

@@ -28,15 +28,18 @@
 		<div class="procLineEditor" >
 			<h3>제품 라인정보 관리</h3>
 			<hr style="margin-top: auto;">
-			<button type="button" class="btn1" style="float: right; margin-bottom: 1em;">변경정보 수정</button>
-			<button type="button" class="btn1" style="float: right;">행삭제</button>
-			<button type="button" class="btn1" style="float: right;">행추가</button>
+			<button type="button" id="btnUpdate"class="btn1" style="float: right; margin-bottom: 1em;">변경정보 수정</button>
+			<button type="button" id="btnDelete"class="btn1" style="float: right;">행삭제</button>
+			<button type="button" id="btnInsert" class="btn1" style="float: right;">행추가</button>
 		</div>
 			<div id="procLineEditor" ></div>
 			<hr>
 	</div>
+		<div id="test"></div>
 </div>
 <script>
+		var lineCd //라인 코드
+		var prodCd //제품 코드
 /* ====================================== 제품 라인정보 그리드 ====================================== */
 procLine = new tui.Grid({
 		el : document.getElementById('procLine'),
@@ -65,6 +68,7 @@ procLine = new tui.Grid({
 
 	});
 /* ====================================== 제품 라인정보 ====================================== */
+
 /* ====================================== 라인정보 수정 그리드 ====================================== */
 procLineEdit = new tui.Grid({
 		el : document.getElementById('procLineEditor'),
@@ -73,7 +77,8 @@ procLineEdit = new tui.Grid({
 		columns : [ {
 			header : '공정코드',
 			name : '공정코드',
-			className : 'fontClass'
+			className : 'fontClass',
+			validation: { required: true }
 		}, {
 			header : '공정명',
 			name : '공정명',
@@ -86,17 +91,102 @@ procLineEdit = new tui.Grid({
 		},{
 			header : '설비명',
 			name : '설비명',
-			className : 'blue fontClass',
+			//className : 'blue fontClass',
 		}	],
-		rowHeaders : [ 'rowNum' ],
+		rowHeaders : [
+	          		{
+			        type: 'checkbox',
+			          },
+		        	{
+		            type: 'rowNum',
+		          }
+		          ],
 		pageOptions : {
-			useClient : true,
 			type: 'scroll',
 			perPage : 5
 		}
 
 	});
-/* ====================================== 라인정보 수정 ====================================== */
+/* ===================================== 행 추가 ========================================*/
+btnInsert.addEventListener("click", function() {
+	procLineEdit.appendRow();
+});
+/* =====================================  행 삭제 ========================================*/
+btnDelete.addEventListener("click", function() {
+	procLineEdit.removeCheckedRows(false);
+});
+/* ===================================== 변경 정보 수정  ========================================*/
+btnUpdate.addEventListener("click", function() {
+
+
+				 data1 = {
+						 lineCd : lineCd
+					 };
+				 
+	               $.ajax({
+					   url  : "procLineDelete",
+					   data : data1,
+					   async : false,
+					   method : "POST"
+						}).done(function(result){
+						console.log(result);
+						})
+						
+				  		let idx = procLineEdit.getRowCount();
+	               		console.log(idx);
+				 		let eqArr = [];
+				 		var data = {};
+				 		for (var i = 0; i < idx; i++) {
+					  		  data= {
+					  				lineCd : lineCd,
+					  				lineTurn : i + 1,
+					  				procCd : procLineEdit.getRow(i).공정코드,
+					  				prodCd : prodCd
+			
+				   				 };
+					  		eqArr.push(data);	
+				 			
+					}
+				 		console.log(eqArr);
+				 
+	               $.ajax({
+					   url  : "procLineInsert",
+					   data : JSON.stringify(eqArr), 
+					   async : false,
+					   method : "POST",
+					   contentType : "application/json; charset = UTF-8;"
+					 }).done(function(result){
+						console.log(result);
+								})
+
+    }); 
+	
+
+
+
+    	  
+ 				  
+					
+
+
+
+/* ===================================== 공정 모달 호출 ========================================*/
+procLineEdit.on("click", function(e) {
+	
+	let prCd = procLineEdit.getFocusedCell('공정코드');
+	console.log(prCd);
+	console.log(prCd.columnName);
+	if (prCd.columnName == '공정코드') {
+		if (prCd.value == null) {
+			$("#test").load("procCdModal", function() {
+				const procCdModal = new bootstrap.Modal('#procCdModal');
+				procCdModal.show();
+
+			})
+		}
+	}
+
+})
  
 /* ====================================== Window.onload ====================================== */ 
  
@@ -130,8 +220,8 @@ procLineEdit = new tui.Grid({
 		}); 
 /* ====================================== End Line ====================================== */
 	procLine.on('dblclick',function(e){
-		var lineCd = procLine.getValue(e.rowKey,'라인코드');
-		
+		 lineCd = procLine.getValue(e.rowKey,'라인코드');
+		 prodCd = procLine.getValue(e.rowKey,'제품코드');
 		$.ajax({
 			url : 'procLineEdit',
 			data : {"lineCd" : lineCd},

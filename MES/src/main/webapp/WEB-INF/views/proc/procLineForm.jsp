@@ -67,6 +67,8 @@ procLine = new tui.Grid({
 		}
 
 	});
+
+		
 /* ====================================== 제품 라인정보 ====================================== */
 
 /* ====================================== 라인정보 수정 그리드 ====================================== */
@@ -118,7 +120,17 @@ btnDelete.addEventListener("click", function() {
 /* ===================================== 변경 정보 수정  ========================================*/
 btnUpdate.addEventListener("click", function() {
 
-
+	Swal.fire({
+        title: '제품 라인정보 관리를 변경하시겠습니까?',
+        text: "다시 되돌릴 수 없습니다. 신중하세요.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '승인',
+        cancelButtonText: '취소'
+    }).then((result) => {
+    	if (result.isConfirmed) {
 				 data1 = {
 						 lineCd : lineCd
 					 };
@@ -158,15 +170,26 @@ btnUpdate.addEventListener("click", function() {
 					 }).done(function(result){
 						console.log(result);
 								})
+								
+								Swal.fire(
+						                  '승인이 완료되었습니다.',
+						                  '변경이 완료되었습니다.',
+						                  'success'
+						              ).then(function(){
+						            	  location.reload(true);	  
+						          	  });
+							        	}else{
+							              	Swal.fire(
+							                        '승인이 취소되었습니다.',
+							                        '섹시하시네요~!',
+							                        'error'
+							                    )
+							            }
+							           })
 
     }); 
 	
 
-
-
-    	  
- 				  
-					
 
 
 
@@ -220,6 +243,7 @@ procLineEdit.on("click", function(e) {
 		}); 
 /* ====================================== End Line ====================================== */
 	procLine.on('dblclick',function(e){
+		
 		 lineCd = procLine.getValue(e.rowKey,'라인코드');
 		 prodCd = procLine.getValue(e.rowKey,'제품코드');
 		$.ajax({

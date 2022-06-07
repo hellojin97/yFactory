@@ -76,8 +76,19 @@ public interface ProcMapper {
     
     List<Map> ProcCdNmSelect(String cdNm); // 공정 관리 선택 조회
 
+    int ProcProcessMgtInsert(@RequestParam Map<String, String> Eq);	//제품 공정 추가
+   
+    int ProcProcessMgtDelete(@RequestParam Map<String, String> Eq);	//제품 공정 추가
+    
+    
     List<Map> procLineAjax(); // 공정흐름도
     
     List<Map> procLineEditAjax(String lineCd); // 제품 라인별 공정정보
 
+    List<Map> ProcCdList(String prCd); // 공정 목록 조회
+    
+    int ProcLineDelete(@RequestParam Map<String, String> lineCd); // 제품 라인 정보 삭제
+    
+    int ProcLineInsert(HashMap<String, Object> list); // 제품 라인 정보 추가 
+    
 }

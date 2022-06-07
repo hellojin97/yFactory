@@ -25,7 +25,7 @@
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">제품명</label>
 						<input type="text" id="pnm" class="form-control" style="width: 50px" placeholder="제품명">
 						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>
 						<input type="text" id="pcd" class="form-control" readonly="readonly">
 					</div>
@@ -119,7 +119,7 @@
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 1
+			perPage : 5
 		}
 	});
 	

@@ -102,6 +102,7 @@ $.ajax({
 
 var procResultList = new tui.Grid({
     el: document.getElementById('procResultList'),
+    scrollX: true,
     columns: [
     	{
             header: '생산지시코드',
@@ -186,6 +187,11 @@ var procResultList = new tui.Grid({
                 }
     ],
     rowHeaders: ['rowNum'],
+    columnOptions: {
+        frozenCount: 1,
+        frozenBorderWidth: 2,
+        minWidth: 300
+      },
     pageOptions: {
       useClient: true,
       perPage: 10

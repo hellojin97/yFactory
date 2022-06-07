@@ -156,6 +156,12 @@
 			className : 'fontClass',
 		    sortable: true,
 		    sortingType: 'asc'
+		},{
+			header : '폐기여부',
+			name : 'cd_nm',
+			className : 'fontClass',
+		    sortable: true,
+		    sortingType: 'asc'
 		}
 
 		],

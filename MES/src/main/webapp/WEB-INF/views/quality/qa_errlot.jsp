@@ -232,13 +232,13 @@
 				align: 'center',
 				className : 'fontClass'
 			}, {
-				header : '순번',
-				name : '순번',
-				align: 'right',
-				className : 'fontClass'
-			}, {
 				header : '진행공정코드',
 				name : '진행공정코드',
+				align: 'center',
+				className : 'fontClass'
+			}, {
+				header : '순번',
+				name : '순번',
 				align: 'center',
 				className : 'fontClass'
 			}, {

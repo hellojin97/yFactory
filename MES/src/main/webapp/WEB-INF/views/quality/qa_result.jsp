@@ -262,16 +262,16 @@
 					name : 'LOG'
 
 				}, {
+					header : '진행공정코드',
+					align: 'center',
+					className : 'fontClass',
+					name : '진행공정코드'
+				}, {
 					header : '순번',
 					align: 'center',
 					className : 'fontClass',
 					name : '순번'
 
-				}, {
-					header : '진행공정코드',
-					align: 'center',
-					className : 'fontClass',
-					name : '진행공정코드'
 				}, {
 					header : '작업시작시간',
 					align: 'center',
@@ -285,10 +285,10 @@
 					name : '작업종료시간'
 
 				}, {
-					header : '생산량',
+					header : '투입량',
 					align: 'right',
 					className : 'fontClass',
-					name : '생산량'
+					name : '투입량'
 
 				}, {
 					header : '합격량',

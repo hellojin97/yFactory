@@ -22,7 +22,7 @@
 	</div>
 	<div>
 		<button id="btnNoPlanSelect" class="btn1" style="margin-bottom: 1em;">미지시 계획 조회</button>
-		
+		<button id="prdInsert" class="btn1">생산지시 등록</button>
 	</div>
 	<div>
 	<h3>상세생산계획</h3>
@@ -130,8 +130,8 @@
 	                  type : 'text',
 	                  }
 			}, {
-				header : '일자별 우선순위',
-				name : '일자별 우선순위',
+				header : '일자별우선순위',
+				name : '일자별우선순위',
 				editor : {
 	                  type : 'text',
 	                  }
@@ -233,18 +233,15 @@
 	lineCode = procOrder.getValue(selectedRowKey, '라인코드');
 	workDate = procOrder.getValue(selectedRowKey, '작업일자');
 	workQty = procOrder.getValue(selectedRowKey, '작업수량');
-	dateRank = procOrder.getValue(selectedRowKey, '일자별 우선순위');
+	dateRank = procOrder.getValue(selectedRowKey, '일자별우선순위');
 	if(workQty != null){
 	procDtPlan.setValue(ev.rowKey,'생산지시량', workQty);
 	let Qty = procDtPlan.getValue(ev.rowKey, '계획량');
-	procDtPlan.setValue(ev.rowKey,'잔량', workQty-Qty);
+	procDtPlan.setValue(ev.rowKey,'잔량', Qty-workQty);
 		
 	}
 	
 	temp = 
-	//if (lineCode != null){
-		//procOrder.focus(selectedRowKey, '작업일자');
-	//}
 	console.log(workDate + ' ' + workQty + ' ' + dateRank);
 	$("#btnNeedMtrl").click(function () {
 		let rowCount = procOrder.getRowCount();
@@ -261,19 +258,18 @@
 			if(line != null){
 			//ajax 실행
 				 	  $.ajax({
-					   url  : "procNeedMtrl",
-						 data :  JSON.stringify(data), 
-					   dataType : "JSON",
-					   type : "POST",
-					   contentType : "application/json; charset = UTF-8;"
-				   }).done(function(result){
+						url  : "procNeedMtrl",
+						data :  JSON.stringify(data), 
+						dataType : "JSON",
+						type : "POST",
+						contentType : "application/json; charset = UTF-8;"
+				   	  }).done(function(result){
 							for (var i = 0; i < result.length; i++) {
 								result[i].소모량 = result[i].소모량 * workQty;
 								needMtrl.appendRow(result[i]);
 								dtlCd.push(result[i].생산지시상세코드);
 							}
 							console.log(result);
-
 				   })
 	        }
 			bworkDate = workDate;
@@ -313,16 +309,38 @@
 			$("#needMtrlDiv").load("procodermngModal", function() {
 				const needMtrlModal = new bootstrap.Modal('#needMtrlModal');
 				needMtrlModal.show();
-
-		
 			})
 		})
 	
 	});
 	
-
-	
-			
+	$("#prdInsert").click(function() {
+		let checkAry = needMtrlLOT.getCheckedRows();
+		let lot = [];
+		var result = {};
+		  for(var i = 0; i < checkAry.length; i++) {
+			result = {
+					"ppCd" : procDtPlan.getData()[0].생산계획코드,
+					"pdNm" : procDtPlan.getData()[0].완제품명,
+					"line" : procOrder.getData()[0].라인코드,
+					"dtlDt" : procOrder.getData()[0].작업일자,
+					"insQty" : procOrder.getData()[0].작업수량,
+					"rank" : procOrder.getData()[0].일자별우선순위,
+					"mLot" : needMtrlLOT.getData()[i].자재LOT번호,
+					"procQty" : needMtrlLOT.getData()[i].사용수량
+			}
+			lot.push(result);
+		} 
+		  console.log(lot);
+		  $.ajax({
+			  url: "prdInsInsert",
+			  data :  JSON.stringify(lot),
+			   dataType : "JSON",
+			   type : "POST",
+			   contentType : "application/json; charset = UTF-8;"
+		  }).done(function(result){
+		  })
+	});
 	</script>
 
 </body>

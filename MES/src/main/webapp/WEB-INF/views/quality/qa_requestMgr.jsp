@@ -151,6 +151,7 @@
 			}
 		}).done(function(result) {
 			defaultMt.removeCheckedRows(false);
+			location.href = 'qa_reseult';
 		}).fail(function(result) {
 			console.log(result);
 		})

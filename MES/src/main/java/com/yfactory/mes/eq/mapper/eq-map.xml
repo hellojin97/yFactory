@@ -411,8 +411,9 @@ SELECT      DISTINCT e.eq_cd "설비코드",
     ORDER BY e.eq_cd
 </select>
 
-<select id="getEqImgAjax" resultType="String">
-SELECT  TO_CHAR(SUBSTR(img.img_path,1,4000))
+<select id="getEqImgAjax" resultType="map">
+<!-- SELECT  TO_CHAR(SUBSTR(img.img_path,1,4000)) -->
+SELECT img.img_path
 FROM EQ e , IMG_ATTATCH img
 WHERE e.uuid = img.uuid
 AND e.eq_cd = #{eqDtlCd}

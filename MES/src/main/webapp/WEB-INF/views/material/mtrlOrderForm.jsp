@@ -124,6 +124,7 @@ $("#select1").on("click",function(e) {
 	  			 /* 원자재코드 */
     		  prodPlan.appendRow(result[i]);
     		  console.log(result);
+    		  prodPlan.resetData(result)
 	  		}
 	  	 }).fail(function(result){
 	  	    console.log(result);

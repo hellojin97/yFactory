@@ -38,7 +38,7 @@ public class CommonController {
 	         session.setAttribute("userDept", service.userDept(empNo));
 	         int Emp = loginUser.getEmp_no();
 	         String profile =  service.userProfile(Emp);
-	         
+	         	
 	         if(profile != null) {
 	        	 
 	        	 session.setAttribute("profile", profile);

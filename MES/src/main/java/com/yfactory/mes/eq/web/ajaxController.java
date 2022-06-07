@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yfactory.mes.common.vo.ImageAttachVO;
 import com.yfactory.mes.eq.service.EquipService;
 
 @RestController
@@ -219,10 +220,10 @@ public class ajaxController {
 		
 		
 		
-		@RequestMapping("/getEqImgAjax")
+		@GetMapping("/getEqImgAjax")
 		public String getEqImgAjax(@RequestParam String eqDtlCd , Model model) {
-			String imgPath = mapper.getEqImgAjax(eqDtlCd); 
-			model.addAttribute("imgPath" , imgPath);
-			return imgPath;
+			String result = mapper.getEqImgAjax(eqDtlCd);  
+				System.out.println(result);
+			return result;
 		}
 }

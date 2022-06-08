@@ -194,19 +194,34 @@ $(function(){
 		               name: '유통기한',
 		             },
 		             ],
-		   					rowHeaders: [
-		   				        {
-		   				            type: 'rowNum',
+ 				rowHeaders: [
+ 				        {
+ 				            type: 'rowNum',
 
-		   				          },
-		   				          {
-		   				            type: 'checkbox',
-		   				          }
-		   				          ],
-		                     pageOptions: {
-		                         useClient: true,
-		                         perPage: 5
-		                    }
+ 				          },
+ 				          {
+ 				            type: 'checkbox',
+ 				          }
+ 				          ],
+ 				          
+ 				summary: {
+ 				        height: 40,
+ 				        position: 'bottom', // or 'top'
+ 				        columnContent: {
+	 				       사용수량: {
+	 				            template: function(valueMap) {
+						
+	 				              return `TOTAL: \${valueMap.sum}`;
+	  				 			
+	 				            }
+	 				          }
+ 				        }
+ 				      },
+
+                   pageOptions: {
+                       useClient: true,
+                       perPage: 5
+                  }
 		     });  
 		   
 
@@ -234,9 +249,13 @@ $(function(){
 			});
 			
 			needMtrlLOTGrid.on('mousedown', (ev) => {
+
 				selectedRowKey = ev.rowKey;
 				needMtrlLOTGrid.check(selectedRowKey);
+
 			});
+			
+			
 			setTimeout(function(){
 				
 				 needMtrlLOTGrid.refreshLayout();

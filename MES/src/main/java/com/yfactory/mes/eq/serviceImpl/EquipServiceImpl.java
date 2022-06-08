@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yfactory.mes.common.vo.ImageAttachVO;
 import com.yfactory.mes.eq.mapper.EquipMapper;
 import com.yfactory.mes.eq.service.EquipService;
 import com.yfactory.mes.eq.vo.EqVO;
@@ -155,6 +156,19 @@ public class EquipServiceImpl implements EquipService{
 	public List<Map> eqModalSelect() {
 		return mapper.eqModalSelect();
 	}
+
+	@Override
+	public List<Map> getEqDetailDataAjax(String eqDtlCd) {
+		
+		return mapper.getEqDetailDataAjax(eqDtlCd);
+	}
+
+	@Override
+	public String getEqImgAjax(String eqDtlCd) {
+		// TODO Auto-generated method stub
+		return mapper.getEqImgAjax(eqDtlCd);
+	}
+
 
 
 	

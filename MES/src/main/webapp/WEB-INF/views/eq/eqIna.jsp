@@ -5,19 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-	<!-- 추가 CDN -->
-<!-- toastr.CSS -->
-   <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
-<!-- toastr.JS -->
-	<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	
-	
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 
 </head>
 <body>
@@ -85,7 +77,7 @@
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">설비명</label> 
 							<input type="text" class="form-control" style="width: 50px" placeholder="설비명" id="eqNm">
 						<a class="nav-link nav-icon search-bar-toggle" id="prodBtn" onclick="prodBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>
 						<input type="text" id="eqCd" class="form-control" readonly="readonly">&nbsp;&nbsp;&nbsp;&nbsp;
 						
@@ -98,7 +90,10 @@
 				</form>
 				</div>
 	<!-- 비가동 설비 목록 -->
-	<div id="eqInaList" style="padding-bottom:15px;"></div>	
+	<div id="eqInaList" style="padding-bottom:15px;"></div>
+	<div>
+		<button type="button" class="btn1" id="excel">Excel</button>
+	</div>	
 	</div>
 		
 		
@@ -308,6 +303,27 @@ var eqList = new tui.Grid({
 		searchModal.show();
 	})
 	});
+  
+//마우스 커서 올리면
+  eqList.on('mouseover', function(e){
+  	var cn = e.columnName;
+  	var tt = e.targetType;
+  		if(cn == '사용여부' && tt == 'cell' ){			
+  			$('#eqList').attr("class", "smMouseOver");
+  		}else{
+  			$('#eqList').removeClass();					
+  		}
+  });
+  
+//excel호출
+  $('#excel').on('click',function(){
+  	const options = {
+  			  includeHiddenColumns: true,
+  			  onlySelected: true,
+  			  fileName: '비가동설비내역',
+  			};
+  	eqInaList.export('xlsx', options);
+  });
   
 </script>
 

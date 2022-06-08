@@ -51,7 +51,7 @@
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">업체명</label>
 						<input type="text" class="form-control" style="width: 50px" placeholder="업체명" id="vnm">
 						<a class="nav-link nav-icon search-bar-toggle" id="venderBtn" onclick="venderBtn"> 
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>
 						<input type="text" id="vcd" class="form-control" readonly="readonly">
 					</div>

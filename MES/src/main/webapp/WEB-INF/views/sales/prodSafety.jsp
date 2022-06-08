@@ -25,7 +25,7 @@
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">제품명</label>
 						<input type="text" id="pnm" class="form-control" style="width: 50px" placeholder="제품명">
 						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>
 						<input type="text" id="pcd" class="form-control" readonly="readonly">
 					</div>
@@ -84,6 +84,13 @@
 		success : function(result) {
 			listProdLot.resetData(result);
 			setTimeout(listColor, 10);
+			/*var vall = listProdLot.getData();
+			console.log(vall);
+			for(i=0; i < vall.length; i++){
+				var num = listProdLot.getValue(vall[i].rowKey, '완제품수량');
+				var cn1 = num.toLocaleString('ko-KR');
+				listProdLot.setValue(vall[i].rowKey, '완제품수량', cn1);
+			}*/
 		}
 	});
 
@@ -107,19 +114,27 @@
 			header : '완제품수량',
 			name : '완제품수량',
 			className : 'fontClass',
-			align: 'right'
+			align: 'right',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
 		}, {
 			header : '안전수량',
 			name : '안전수량',
 			className : 'fontClass',
-			align: 'right'
+			align: 'right',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
 		}
 
 		],
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 1
+			perPage : 5
 		}
 	});
 	
@@ -203,9 +218,13 @@
   
   function listColor(){
 	$("#prodLotorder").find(".tui-grid-body-area tbody tr").each(function(){
-		var data1 =parseInt($(this).find("[data-column-name = '완제품수량']").find("div").text());
-		var data2 =parseInt($(this).find("[data-column-name = '안전수량']").find("div").text());
-	    if(data1 < data2){
+		var data1 = $(this).find("[data-column-name = '완제품수량']").find("div").text();
+		var data2 = $(this).find("[data-column-name = '안전수량']").find("div").text();
+		var subDt1 = data1.replace(',', '');
+		var subDt2 = data2.replace(',', '');
+		dt1 = parseInt(subDt1);
+		dt2 = parseInt(subDt2);
+	    if(dt1 < dt2){
 	    	$(this).find("[data-column-name = '완제품수량']").css("background-color", "pink");
 	    }else{
 	    	$(this).find("[data-column-name = '완제품수량']").css("background-color", "#f4f4f4");

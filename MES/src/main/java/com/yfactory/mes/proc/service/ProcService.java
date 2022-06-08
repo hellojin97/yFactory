@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface ProcService {
 	List<Map> ProcOrderSelectAll(); // 주문서 조회
@@ -33,7 +34,7 @@ public interface ProcService {
 
 	List<Map> ProcPlanAll(); // 생산계획전체조회
 	
-	int prdInsInsert(Map<String, Object> prdIns);
+	int prdInsInsert(Map<String, String> prdIns);
 	
 	List<Map> NoPlanSelect(String state); //생산미지시계획
 	
@@ -75,7 +76,17 @@ public interface ProcService {
     
     List<Map> ProcCdNmSelect(String cdNm); // 공정 관리 선택 조회
   
+    int ProcProcessMgtInsert(@RequestParam Map<String, String> Eq);	//제품 공정 추가
+    
+    int ProcProcessMgtDelete(@RequestParam Map<String, String> Eq);	//제품 공정 추가
+
     List<Map> procLineAjax(); // 공정흐름도
     
     List<Map> procLineEditAjax(String lineCd); // 제품 라인별 공정정보
+    
+    List<Map> ProcCdList(String prCd); // 공정 목록 조회
+    
+    int ProcLineDelete(@RequestParam Map<String, String> lineCd); // 제품 라인 정보 삭제
+    
+    int ProcLineInsert(@RequestBody List<HashMap<String, Object>> list); // 제품 라인 정보 추가
 }

@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.yfactory.mes.common.vo.ImageAttachVO;
 import com.yfactory.mes.eq.vo.EqVO;
 
 public interface EquipService {
@@ -87,6 +87,9 @@ public interface EquipService {
 	
 	List<Map>eqModalSelect(); //비가동 설비 내역 - 설비 modal 조회
 	
+	List<Map>  getEqDetailDataAjax(String eqDtlCd); //설비 관리 페이지 -설비 상세 모달 데이터
+
+	String getEqImgAjax(String eqDtlCd); // 이미지 따로
 	
 
 }

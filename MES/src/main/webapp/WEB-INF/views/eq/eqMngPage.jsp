@@ -67,13 +67,13 @@ button:hover {
 	<!-- <div id="in/out"></div> -->
 	<div style="padding-bottom: 70px; ">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
-			<h1>설비 관리</h1>
+			<h1>설비 정보</h1>
 					
 			<!-- <h3>설비 데이터</h3> -->
 			
 			<div class="min2">
 			
-				<button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button>
+				<!-- <button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button> -->
 			</div>
 			<div class="min1" >
 			
@@ -99,6 +99,7 @@ button:hover {
 	var grid;
 	var rowKey;
 	var gridRowCell;
+	var eqDtlCd;
 		window.onload = function() {
 			const url = "getEqMngList";
 			$.ajax(url, {
@@ -113,99 +114,94 @@ button:hover {
 				el : document.getElementById('grid'),
 				scrollX : false,
 				scrollY : false,
-				columns : [ {
+				columns : [ 
+					{
 					header : '설비코드',
 					name : '설비코드',
 					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
-				}, {
+					}, 
+				{
 					header : '설비구분',
 					name : '설비구분',
 					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true }
-				},{
+				},
+				{
 					header : '설비명',
 					name : '설비명',
 					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
-				}, {
+				}, 
+				{
 					header : '공정코드',
 					name : '공정코드',
 					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
-				}, {
+				}, 
+				{
 					header : '공정명',
 					name : '공정명',
 					className : 'fontClass',
-					editor : "text"
-				}, {
+					
+				}, 
+				{
 					header : '최저온도',
 					name : '최저온도',
 					className : 'fontClass',
-					editor : "text"
-				}, {
+					//editor : "text"
+				}, 
+				{
 					header : '최고온도',
 					name : '최고온도',
 					className : 'fontClass',
-					editor : "text"
-				}, {
-					header : '구매일자',
-					name : '구매일자',
-					className : 'fontClass',
-					editor : {
-						type : 'datePicker',
-						options : {
-							format : 'yyyy-MM-dd'
-						}
-					},
-					filter: { type: 'date', 
-								showApplyBtn: true, 
-								showClearBtn: true,
-								operator:'OR',
-								
-								}
-				},
-
-				{
-					header : '사용여부',
-					name : '사용여부',
-					className : 'fontClass',
-					filter: { type: 'select', showApplyBtn: true, showClearBtn: true },
-					 editor: {
-	                     type: 'select',
-	                     options: {
-	                       listItems: [
-	                         {
-	                           text: '사용가능',
-	                           value: '사용가능'
-	                         },
-	                         {
-	                           text: '사용불가',
-	                           value: '사용불가'
-	                         }
-	                    ]
-	                 }
-	            }
-				}, ],
+					//editor : "text"
+				}
+				
+				],
+				
 				 rowHeaders: [ { type: 'checkbox' },{ type: 'rowNum' }],
+				 
 				pageOptions : {
 					useClient : true,
 					perPage : 10
 				}
 			});
 			
-			
+			  grid.on('focusChange', (ev) => {
+				
+				    console.log("focusChange");
+				    grid.setSelectionRange({
+				      start: [ev.rowKey, 0 ],
+				      end: [ev.rowKey, grid.getColumns().length-1],
+				     // color:'#fee'
+				    });
+				  }); 
+			 
+		
 			
 			
 			grid.on("dblclick",function(e) {
+				 tui.Grid.applyTheme('default',{
+					cell: {
+						selectedHeader: {
+					            background:'#fee'
+					        },
+					        
+					 }, 
+					
+				});  
+				// Grid 전체를 기준으로 전부를 묶어서 처리 	
+				
 				//debugger
 				//let eqCd = grid.getValue(e.rowKey, '설비코드');
 				console.log("Parent_e.rowKey: "+e.rowKey);
 				rowKey = e.rowKey;
 				gridRowCell = grid.getFocusedCell().rowKey;
-				
+				console.log(gridRowCell);
 				let eqCdCol = grid.getFocusedCell('설비코드');
 				let eqPrcCol = grid.getFocusedCell('공정코드');
+				eqDtlCd = grid.getValue(e.rowKey, '설비코드');
 				/* 	if(eqCdCol.columnName == '설비코드'){ // 설비코드 컬럼을 클릭했다면
 						$("#grid1").load("mngmodal", function(){
 
@@ -218,13 +214,25 @@ button:hover {
 							});
 					}
 					else  */
-						if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
+						/* if(eqCdCol.columnName == '공정코드'){ // 설비코드 컬럼을 클릭했다면
 							$("#grid1").load("eqPrcmodal", function(){
 									const mngModal = new bootstrap.Modal('#myModal');
 									mngModal.show();
 							
 							});
-					};
+					}; */
+					
+					if(eqCdCol.columnName == '설비코드'){
+						
+						
+						$("#grid1").load("eqDetailmodal", function(){
+							
+							const mngModal = new bootstrap.Modal('#myModal');
+							console.log(eqDtlCd);
+							mngModal.show();
+						});
+					}
+					
 				
 				
 			});
@@ -312,34 +320,7 @@ button:hover {
 					                    'success'
 					                		);
 			            	   console.log(data);
-			            	  /*  for (var i = 0; i < chkRows.length; i++) {
-								data2 = {
-										p_eq_cd : chkRows[i].설비코드,
-										p_eq_sd :  systimestamp,
-										
-								
-								};
-							}; */
-			            /* 	   // 비가동 테이블 등록
-			            	   $.ajax({
-			           			url : "setEqInAjax",
-			           			method : "POST",
-			           			data : {
-			           					"p_eq_cd" : ec,
-			           					"p_eq_sd" : systimestamp,
-			           					//"p_eq_ed" : subEd,
-			           					"p_eq_dc" : dc,
-			           					"p_eq_nt" : nt
-			           					};					
-			           		}).done(function(result){
-			           			
-			           			}); */
-			            	   
-			            	   
-			            	   
-			            	 /*   if(confirm('비가동페이지로 이동합니다') ==  true){
-			            		   document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
-			      			 }; */
+			            	  
 			      			 for (var i = 0; i < chkRows.length; i++) {
 								if(chkRows[i].사용여부.valueOf()=='사용불가' ){
 									 Swal.fire({

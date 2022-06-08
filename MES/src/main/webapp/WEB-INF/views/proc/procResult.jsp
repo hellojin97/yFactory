@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>발주관리</title>
-
+<style>
+.smMouseOver {
+		cursor:pointer;
+	}
+</style>
 </head>
 <body>
 	<div style="padding-bottom:15px; color: ;">
@@ -27,7 +31,7 @@
 							<input type="text" class="form-control" placeholder="생산지시코드" id="prdCd">
 						</div>
 						<a class="nav-link nav-icon search-bar-toggle" id="procCdBtn" onclick="procCdBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>											
 					</div>
 				</div>
@@ -40,7 +44,7 @@
 							<input type="text" class="form-control" placeholder="공정명" id="procNm">
 							
 						<a class="nav-link nav-icon search-bar-toggle" id="procNmBtn" onclick="procNmBtn">
-							<i class="bi bi-search" style="color: #2c3e50"></i>
+							<i class="bi bi-search smMouseOver" style="color: #2c3e50"></i>
 						</a>
 						
 						<input type="text" id="procCd" class="form-control" readonly="readonly">
@@ -74,6 +78,9 @@
 				</form>
 				</div>
 	<div id="procResultList"></div>
+	<div>
+		<button type="button" class="btn1" id="excel">Excel</button>
+	</div>
 	</div>
 	
 <div id="procResultCdModal"></div>
@@ -95,6 +102,7 @@ $.ajax({
 
 var procResultList = new tui.Grid({
     el: document.getElementById('procResultList'),
+    scrollX: true,
     columns: [
     	{
             header: '생산지시코드',
@@ -179,6 +187,11 @@ var procResultList = new tui.Grid({
                 }
     ],
     rowHeaders: ['rowNum'],
+    columnOptions: {
+        frozenCount: 1,
+        frozenBorderWidth: 2,
+        minWidth: 300
+      },
     pageOptions: {
       useClient: true,
       perPage: 10
@@ -216,6 +229,16 @@ $("#search").on("click", function(){
 	}).done(function(result){
 		procResultList.resetData(result);
 	})
+})
+
+//excel호출
+$('#excel').on('click',function(){
+	const options = {
+			  includeHiddenColumns: true,
+			  onlySelected: true,
+			  fileName: '공정실적조회',
+			};
+	procResultList.export('xlsx', options);
 })
 
   

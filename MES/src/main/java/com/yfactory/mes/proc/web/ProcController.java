@@ -110,10 +110,16 @@ public class ProcController {
 	
 
 	// 미사용 설비 목록 모달
-		@GetMapping("/procNoUseEqSelectModal")
-		public String procNoUseEqSelectModal() {
-			return "proc/procmodal/procNoUseEqSelectModal";
+	@GetMapping("/procNoUseEqSelectModal")
+	public String procNoUseEqSelectModal() {
+		return "proc/procmodal/procNoUseEqSelectModal";
 		}
+	
+	// 공정 목록 모달
+	@GetMapping("/procCdModal")
+	public String procCdModal() {
+		return "proc/procmodal/procCdModal";
+	}
 
 
 }

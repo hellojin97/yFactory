@@ -21,10 +21,12 @@
 	<div class="mainTitle" style="padding-bottom: 15px; color:;">
 		<h1>주문서 조회</h1>
 	</div>
-	<div>
-		<button type="button" id="inBtn" class="btn1">관리</button>
-		<button type="button" id="outBtn" class="clickB">등록</button>
+	<div class="min2">
+		<button type="button" id="inBtn" class="btn2">관리</button>
+		<button type="button" id="outBtn" class="btn3">등록</button>
 	</div>
+			
+
 	<div style="background-color: #e0e0e0; padding: 8px;">
 		<div class="mainTitle" style="padding: 15px;">
 
@@ -88,9 +90,9 @@ $('#inBtn').on('click', function(){
 	$('#PNM1').show();
 	$('#orderList1').empty();
 	$('#outBtn').removeClass();
-	$('#outBtn').attr("class", "clickB");
+	$('#outBtn').attr("class", "btn3");
 	$('#inBtn').removeClass();
-	$('#inBtn').attr("class", "btn1");
+	$('#inBtn').attr("class", "btn2");
 	
 	 resultGrid = new tui.Grid({
 			el : document.getElementById('orderList1'),
@@ -151,9 +153,9 @@ $("#outBtn").on("click", function(){
 	$('#PNM').show();
 	$('#orderList').empty();
 	$('#inBtn').removeClass();
-	$('#inBtn').attr("class", "clickB");
+	$('#inBtn').attr("class", "btn3");
 	$('#outBtn').removeClass();
-	$('#outBtn').attr("class", "btn1");
+	$('#outBtn').attr("class", "btn2");
 	
 	 resultGrid = new tui.Grid({
 		el : document.getElementById('orderList'),

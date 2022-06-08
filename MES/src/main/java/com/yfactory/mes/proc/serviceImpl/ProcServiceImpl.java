@@ -69,7 +69,7 @@ public class ProcServiceImpl implements ProcService{
 	}
 	
 	@Override
-	public int prdInsInsert(Map<String, Object> prdIns) {
+	public int prdInsInsert(Map<String, String> prdIns) {
 		return map.prdInsInsert(prdIns);
 	}
 

@@ -92,7 +92,7 @@ public class ProcAjaxController {
 	
 	// 생산지시등록
 	@PostMapping("/prdInsInsert")
-	public int prdInsInsert(@RequestParam Map<String, Object> prdIns) {
+	public int prdInsInsert(@RequestParam Map<String, String> prdIns) {
 		System.out.println(prdIns);
 		return procService.prdInsInsert(prdIns);
 	}

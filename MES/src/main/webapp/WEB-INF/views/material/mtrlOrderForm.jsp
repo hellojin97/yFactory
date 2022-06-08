@@ -81,6 +81,8 @@ var unorder = new tui.Grid({
         header: '생산계획코드',
         name: 'PP_CD',
         className : 'fontClass',
+	    sortable: true,
+	    sortingType: 'asc'
       },
       {
         header: '생산계획명',
@@ -140,7 +142,9 @@ $("#select1").on("click",function(e) {
       {
         header: '원자재코드',
         name: '원자재코드',
-        className : 'fontClass',
+        className : 'fontClass',	    
+        sortable: true,
+	    sortingType: 'asc'
       },
       {
         header: '계획일자',
@@ -215,6 +219,8 @@ $("#select2").on("click",function(e) {
         header: '원자재코드',
         name: '원자재코드',
         className : 'fontClass',
+	    sortable: true,
+	    sortingType: 'asc'
       },
       {
         header: '원자재명',
@@ -319,8 +325,9 @@ $("#select2").on("click",function(e) {
                       '승인이 완료되었습니다.',
                       '화끈하시네요~!',
                       'success'
-                  ) 
-		
+                  ).then(function(){
+                	  location.reload(true);	  
+              	  });
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',
@@ -328,7 +335,7 @@ $("#select2").on("click",function(e) {
                       'error'
                   )
           }
-			location.reload();
+		
       });
       
   		}) //end of event

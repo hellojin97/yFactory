@@ -121,7 +121,7 @@ btnDelete.addEventListener("click", function() {
 btnUpdate.addEventListener("click", function() {
 
 	Swal.fire({
-        title: '제품 라인정보 관리를 변경하시겠습니까?',
+        title: '생산지시등록을 하시겠습니까?',
         text: "다시 되돌릴 수 없습니다. 신중하세요.",
         icon: 'warning',
         showCancelButton: true,

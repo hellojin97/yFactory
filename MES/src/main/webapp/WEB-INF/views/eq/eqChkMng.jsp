@@ -104,11 +104,8 @@ button:hover {
 		
 			<div id="modalDiv"></div>
 			<div id="modalDiv2"></div>
-			
-			
+
 		</div>
-
-
 
 			<hr style="border: solid 1px gray;">
 		</div>

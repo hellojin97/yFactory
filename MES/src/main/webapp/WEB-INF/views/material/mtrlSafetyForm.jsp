@@ -230,8 +230,13 @@
 		var data2 =parseInt($(this).find("[data-column-name = '안전재고']").find("div").text());
 	    if(data1 < data2){
 	    	$(this).find("[data-column-name = '현재고']").css("background-color", "pink");
+	    } else{
+	    	$(this).find("[data-column-name = '현재고']").css("background-color", "#f4f4f4");
 	    } 
 	});
+	mtrlSafetyGrid.on("afterPageMove", function(e){		
+		setTimeout(listColor, 10);
+	})
 }
 
  </script>

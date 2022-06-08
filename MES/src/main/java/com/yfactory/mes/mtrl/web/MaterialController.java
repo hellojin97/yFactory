@@ -1,19 +1,29 @@
 package com.yfactory.mes.mtrl.web;
 
-import java.util.List;
-import java.util.Map;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yfactory.mes.mtrl.service.MtrlService;
+
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
 public class MaterialController {
 	@Autowired MtrlService service;
+	@Autowired DataSource  datasource;
 	
 	//발주등록폼
 	@RequestMapping("/mtrlOrderForm")
@@ -80,6 +90,19 @@ public class MaterialController {
 	public String mtrlExpectModal() {
 		return "material/mtrlModal/mtrlExpectModal";
 	}
+	
+	/*
+	 * jasper
+	 */
+	@RequestMapping("mtrlOrderJasper")
+	public void report(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	Connection conn = datasource.getConnection();
+	InputStream jasperStream = getClass().getResourceAsStream("/jasper/mtrlOrder.jasper");
+	JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream); //파라미터 맵
+	JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+	JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+	}
+
 	
 }
  

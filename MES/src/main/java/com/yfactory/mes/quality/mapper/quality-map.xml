@@ -74,12 +74,12 @@
 	
 	<!-- 제품검사결과 조회 -->
 	<select id="selectProdCheck" resultType="map">
-		SELECT	TO_CHAR(PS.PROC_LOG, 'HH24MISS') "LOG", 
+		SELECT	TO_CHAR(PS.PROC_LOG, 'YYYY-MM-DD HH24:MI:SS') "LOG", 
 		        PS.LINE_TURN "순번",
 		        PS.PROC_PRCD "진행공정코드",
-		        TO_CHAR(PPR.PROC_STTM, 'HH24:MM:SS') "작업시작시간",
-		        TO_CHAR(PPR.PROC_EDTM, 'HH24:MM:SS') "작업종료시간",
-		        PS.PROC_QTY "생산량",
+		        TO_CHAR(PPR.PROC_STTM, 'HH24:MI:SS') "작업시작시간",
+		        TO_CHAR(PPR.PROC_EDTM, 'HH24:MI:SS') "작업종료시간",
+		        PPR.PROC_QTY "투입량",
 		        PS.PROC_PASSQTY "합격량",
 		        PER.ERR_QTY "불량량",
 		        PER.ERR_CD "불량코드",
@@ -93,7 +93,7 @@
 		AND     PS.LINE_TURN = PER.LINE_TURN
 		AND		PS.PROC_PRCD = PER.PROC_PRCD
 		AND		PER.ERR_CD = ERR.ERR_CD
-		ORDER BY 1
+		ORDER BY 1, 2
 	</select>
 	
 	<!-- 자재불량내역 조회 -->
@@ -115,11 +115,11 @@
 	</select>
 	<!-- 제품불량내역 조회 -->
 	<select id="selectProdErrList" resultType="map">
-		SELECT	TO_CHAR(PS.PROC_LOG, 'HH24MISS') "LOG", 
+		SELECT	TO_CHAR(PS.PROC_LOG, 'YYYY-MM-DD HH24:MI:SS') "LOG", 
 		        PS.LINE_TURN "순번",
 		        PS.PROC_PRCD "진행공정코드",
-		        TO_CHAR(PPR.PROC_STTM, 'HH24:MM:SS') "작업시작시간",
-		        TO_CHAR(PPR.PROC_EDTM, 'HH24:MM:SS') "작업종료시간",
+		        TO_CHAR(PPR.PROC_STTM, 'HH24:MI:SS') "작업시작시간",
+		        TO_CHAR(PPR.PROC_EDTM, 'HH24:MI:SS') "작업종료시간",
 		        PER.ERR_QTY "불량량",
 		        PER.ERR_CD "불량코드",
 		        ERR.ERR_DTL "불량사유",
@@ -132,7 +132,7 @@
 		AND     PS.LINE_TURN = PER.LINE_TURN
 		AND     PS.PROC_PRCD = PER.PROC_PRCD
 		AND     PER.ERR_CD = ERR.ERR_CD
-		ORDER BY 1
+		ORDER BY 1, 2
 
 	</select>
 

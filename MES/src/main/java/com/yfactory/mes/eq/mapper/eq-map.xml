@@ -368,5 +368,22 @@ WHERE e.uuid = img.uuid
 AND e.eq_cd = #{eqDtlCd}
 </select>
 
+<select id="getEqUph" resultType="map">
+SELECT PS.PROC_PASSQTY "합격량",
+        PRO.EQ_CD "설비코드",
+        PRO.PROC_NM "공정명",
+        LN.LINE_CD "라인코드",
+        PS.PROC_ST "상태코드",
+        E.EQ_MDNM "설비명"
+FROM PROC_ST PS, PROC_PRC PC, PROCESS PRO, LINE LN, EQ E
+WHERE PS.PROC_PRCD = PC.PROC_PRCD
+AND PS.LINE_TURN = PC.LINE_TURN
+AND PC.PROC_CD = PRO.PROC_CD
+AND LN.PROC_CD = PRO.PROC_CD
+AND E.EQ_CD = PRO.EQ_CD
+AND LN.LINE_CD = #{lineCd}
+ORDER BY 2
+</select>
+
 
 </mapper>

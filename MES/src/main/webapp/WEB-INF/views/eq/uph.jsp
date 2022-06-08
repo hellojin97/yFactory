@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>UPH PAGE</title>
+<title>TEMPERATURE / UPH CHART PAGE</title>
 <style>
 
 
@@ -13,27 +13,19 @@
 
 </head>
 <body>
-<div align="center">
-				<span>
-					<input type="radio" name="chk_line2" class="line-control" value="L-PPR001" checked>
-					<label>LINE01</label>
-					<input type="radio" name="chk_line2" class="line-control" value="L-PPR002">
-					<label>LINE02</label>
-					<input type="radio" name="chk_line2" class="line-control" value="L-PPR003">
-					<label>LINE03</label>
-					<input type="radio" name="chk_line2" class="line-control" value="L-PPR004">
-					<label>LINE04</label>
-				</span>
-		</div>
+
+
 
 
 <script>
+
 $(function(){
+	// 공정 하나하나 지정할 전역변수 정의
 	var uphOne;
 	var uphTwo;
 	var uphThre;
 	var uphFour;
-	
+	var uphLineCd;
 	
 	
 	
@@ -47,26 +39,13 @@ $(function(){
     	  
       };
 	
-     /*  function firstTemp(){  	
-    	  return setInterval( (Math.floor(Math.random() * (110-30) )+30) , 2000);	};
-      function secTemp(){
-    	  return setInterval( (Math.floor( Math.random() * (110-40) )+40) , 2000); }; */
+  
     	  
 	const el = document.getElementById('chart-UphArea');
       const data = {
-        categories: ['0','0','0','0','0','0','0','0','0','0','0','0','0','0'],
+        categories: ['0','0','0','0','0','0','0','0','0','0'],
         series: [
-        /*   {
-            name: 'A',
-          	data: [0],
-          
-          },
-          {
-            name: 'B',
-        	data: [0],
-          
-           
-          }, */
+        	
         ],
       };
       const options = {
@@ -95,68 +74,88 @@ $(function(){
         },
       };
 
-      
-      $.ajax({
-    	  url : "getEqTemp",
-    	  method:"GET",
-    	  contentType:"application/json; charset=utf-8"
-      }).done(function(res){
-    	  //console.log(res);
-    	for (var i = 0; i < res.length; i++) {
-			//console.log(res[i].설비코드);
-			uphOne = res[0].초당생산량;
-			
-			uphTwo = res[1].초당생산량;
-			
-			uphThre = res[2].초당생산량;
-
-			uphFour = res[3].초당생산량; 
-			chart.addSeries(
-					  {
-					    name: res[i].설비코드,
-						data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-					  },
-					  { chartType: 'line' }
-					);
-		
-			
-		}
-      })
-      
-      const chart = toastui.Chart.lineChart({ el, data, options });
-
-      let index = 1;
-     const intervalId = setInterval(() => {
-    	 // DB에서 생산되는 누적 수량만 가져와야합니다
-       var firstData = Math.round(   Math.random() * (uphOne / 3600)  );
-	   var secData = Math.round(    Math.random() * (uphTwo / 3600)   );
-	   var thirdData = Math.round(  Math.random() * (uphThre / 3600)  );
-	   var fourthData = Math.floor(	Math.random() * (uphFour / 3600 ) )
+       // step  :  input 에서 출력할 라인을 가져온다 > 가져온 라인cd를 가지고 ajax처리를 한다 > 변수에 담아서 또는 배열로 담아서 addData 또는 addSeries 한다
        
-	    if(firstData == 0){
-	    	firstData = 3;
-	    }
-	    if(secData == 0){
-	    	secData = 3;
-	    }
-	    if(thirdData == 0){
-	    	thirdData = 3;
-	    }
-	    if(fourthData == 0){
-	    	fourthData = 3;
-	    }
+     var resArr = [];
+      
+      var chart2 = toastui.Chart.lineChart({ el, data, options });
+      uphLineCd =  $("input[name='chk_line2']:checked").val();
+      $("input[name='chk_line2']").on("click", function(e){
+		  resArr=[];
+		  uphLineCd =  $("input[name='chk_line2']:checked").val();
+		
+      $.ajax({
+    	  url : "getEqUph",
+    	  data : {lineCd : uphLineCd},
+    	  method:"GET",
+    	  contentType:"application/json; charset=utf-8",
+    	  error : function(){
+    		  toastr.error('-');
+    	  }
+      }).done(function(res){
+    	  
+    	  chart2.destroy();
+		  chart2 = toastui.Chart.lineChart({ el, data, options });
+    	  
+    	  for (var i = 0; i < res.length; i++) {
+			resArr.push(res[i].설비코드);			
+		}
+    	  for(var i = 0; i < resArr.length; i++){
+    		  chart2.addSeries(
+    				  {
+    				    name: resArr[i],
+    					data: [0,0,0,0,0,0,0,0,0,0],
+    				  },
+    				  { chartType: 'line' }
+    				);    		  
+    	  }
+      
+      });
+      });
+      let index = 1;
+      //$(".line-control").on("click" , function(ev){ // 라인클릭시 ajax후 인터벌 메서드를 호출하여 값을 뿌려본다
+     const intervalId = setInterval(() => {
+      //uphLineCd =  $("input[name='chk_line2']:checked").val();
+      
+      
+	    $.ajax({
+	    	  url : "getEqUph",
+	    	  data : {lineCd : uphLineCd},
+	    	  method:"GET",
+	    	  contentType:"application/json; charset=utf-8",
+	    	  error : function(){
+	    		  toastr.error('라인이 비가동중이에요!');
+	    	  }
+	      }).done(function(res){
+	    	  console.log(res);
+	    	 	
+				//console.log(res[i].설비코드);
+				uphOne = res[0].합격량;
+				
+				uphTwo = res[1].합격량;
+				
+				uphThre = res[2].합격량;
+
+				uphFour = res[3].합격량;
+				
+				console.log(uphOne);
+				console.log(uphTwo);
+				chart2.addData([uphOne, uphTwo , uphThre ,uphFour], getTime()); 
+			 
+	      })
 	    
-	    
-	    
-        chart.addData([firstData, secData , thirdData ,fourthData], getTime()); // 각 데이터의 Y값(온도)을 업데이트 , 하단X값의 업데이트 되는 항목들
+	    // [] 은 각 데이터의 Y값(온도)을 업데이트 , getTime()은 하단X값의 업데이트 되는 항목들
+     
        
         index += 1;
        
        /*  if (index === 100) {
           clearInterval(intervalId);
         } */
-      }, 1500); 
-
+      }, 1500);
+     
+     
+      //});// END OF 
 });
 </script>
 

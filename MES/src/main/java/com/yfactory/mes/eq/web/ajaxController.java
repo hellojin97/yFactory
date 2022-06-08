@@ -227,4 +227,12 @@ public class ajaxController {
 			return result;
 
 		}
+		
+		
+		// 설비 uph 리스트 
+	@GetMapping("/getEqUph")
+	public List<Map> getEqUph(String lineCd) {
+	return mapper.getEqUph(lineCd); 
+	}
+		
 }

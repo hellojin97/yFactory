@@ -169,6 +169,12 @@ public class EquipServiceImpl implements EquipService{
 		return mapper.getEqImgAjax(eqDtlCd);
 	}
 
+	@Override
+	public List<Map> getEqUph(String lineCd) {
+		
+		return mapper.getEqUph(lineCd);
+	}
+
 
 
 	

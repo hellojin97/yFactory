@@ -77,6 +77,8 @@ button:hover {
 		<div style="background-color:#e9ecef; padding: 8px;">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
 			<h4>설비 실시간 온도</h4>
+			<!-- <h6>표기상 오류가 존재합니다</h6> -->
+			
 			<hr style="border: solid 1px gray;">
 		</div>
 		
@@ -85,7 +87,9 @@ button:hover {
 		<div id="chart-area" align="center"></div>
 		
 		<div align="center">
+		
 				<span>
+					라인구분					
 					<input type="radio" name="chk_line" class="line-control" value="L-PPR001" checked>
 					<label>LINE01</label>
 					<input type="radio" name="chk_line" class="line-control" value="L-PPR002">
@@ -100,6 +104,21 @@ button:hover {
 		
 		<hr style="border: solid 2px gray;" />
 		<h4>설비 실시간 생산량</h4>
+		
+		<div align="center">
+				<span>
+				라인구분
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR001" checked>
+					<label>LINE01</label>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR002">
+					<label>LINE02</label>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR003">
+					<label>LINE03</label>
+					<input type="radio" name="chk_line2" class="line-control" value="L-PPR004">
+					<label>LINE04</label>
+				</span>
+	</div>
+		
 		<div id="chart-UphArea" align="center">
 		 	<jsp:include page="uph.jsp" flush="false"/>
 			</div>
@@ -124,8 +143,9 @@ var thirdData;
 var fourthData;
 
 var lineCd;
-	$(function(){
 
+	$(function(){
+	toastr.info('표기상 오류가 존재합니다!');
 	    function getTime(){ // 현재시간 데이터 가져오기
 	    	  var now = new Date();
 	    	  var hours = now.getHours();
@@ -135,78 +155,58 @@ var lineCd;
 	    	  return hours+':'+minutes+':'+seconds;
 	    	  
 	      };
+	      const el = document.getElementById('chart-area');
+	     
 
-		const el = document.getElementById('chart-area');
-	      const data = {
-	        categories: ['0','0','0','0','0','0','0','0','0','0'],
-	        series: [
-	         /*  {
-	            name: 'A',
-	          	data: [0,0,0,0,0],
-	          
-	          },
-	          {
-	            name: 'B',
-	        	data: [0,0,0,0,0],
-	          
-	           
-	        },
-	        {
-		            name: 'C',
-		        	data: [0,0,0,0,0],
-		          
-		           
-		    }, */
-	        ],
-	      };
-	      const options = {
-	        chart: { title: 'RealTime Temperature', width: 1000, height: 300 },
-	        xAxis: {
-	          title: 'CurrentTime',
-	       
-	        },
-	        yAxis: {
-	          title: 'Temperature',
-	          scale: {
-	              min: -200,
-	              max: 200,
-	              stepSize: 50,
-	            },
-	        },
-	        
-	        legend: {
-	          align: 'top',
-	        },
-	        series: { 
-	        	shift: true,
-	        	spline:true,
-	        	
-	        },
-	  
-	      };
-	      
+			const data = {
+			        categories: ['0','0','0','0','0','0','0','0','0','0'],
+			        series: [
+			     
+			        ],
+			      };
+			      const options = {
+			        chart: { title: 'RealTime Temperature', width: 1000, height: 300 },
+			        xAxis: {
+			          title: 'CurrentTime',
+			       
+			        },
+			        yAxis: {
+			          title: 'Temperature',
+			          scale: {
+			              min: -200,
+			              max: 200,
+			              stepSize: 50,
+			            },
+			        },
+			        
+			        legend: {
+			          align: 'top',
+			        },
+			        series: { 
+			        	shift: true,
+			        	spline:true,
+			        	
+			        },
+			  
+			      };
+			      
+		var chart = toastui.Chart.lineChart({ el, data, options });
+
 	      $("#refresh").on("click" , function(){
 	    	  	location.reload();
 	      });
 		
-	      $(".line-control").on("click" , function(ev){
-	    	 // 	chart.destroy();
-	    		/*  chart.setData({
-					  categories: ['0','0','0','0','0','0','0','0','0','0'],
-					  series: [
-					    {
-					      name: '',
-					      data: [],
-					    }
-					    
-					  ]
-					}); */
+	      $("input[name='chk_line']").on("click" , function(ev){
+	    	 	chart.destroy();
+	    	 	chart = toastui.Chart.lineChart({ el, data, options });
+	    
 	    		
 	    	  	
 		    	lineCd = $("input[name='chk_line']:checked").val();
-		    	console.log(lineCd);
+		    	//console.log(lineCd);
+		    	
 		    	//console.log(ev.target.previousSibling.previousSibling.innerText);
-		    	var pick = ev.target.previousSibling.previousSibling.innerText;
+		    	//var pick = ev.target.previousSibling.previousSibling.innerText;
 	      
 	      $.ajax({
 	    	  url : "getEqTemp",
@@ -244,32 +244,21 @@ var lineCd;
 	      	});// END OF AJAX AFTER  
 	     }); // END OF RADIO BOX CLICK EVENT
 	      
-	      const chart = toastui.Chart.lineChart({ el, data, options });
+	      
 
 	      let index = 1;
 	    	var intervalId = setInterval(() => {
-	    		//if(minTemOne <= -1){ // 음수일경우
-	    		//	var firstData = Math.floor( ( Math.random() * (maxTemOne + ( minTemOne ) ) ) + minTemOne);
-	    		//}else if (minTemOne >= 0){
+	    	
 	    			var firstData = Math.floor( ( Math.random() * (maxTemOne - ( minTemOne ) ) ) + minTemOne);		
-	    		//}
-	        	//if(minTemTwo <= -1){ //음수일경우
-	        	//	var secData = Math.floor((Math.random() * (maxTemTwo + ( minTemTwo ) ) ) + minTemTwo);	
-	        	//}else if(minTemTwo >= 0){
+	    	
 	        		var secData = Math.floor((Math.random() * (maxTemTwo - ( minTemTwo ) ) ) + minTemTwo);
-	        	//}
-	        	//if(minTemThre <=-1){ // 음수일경우
-	        	//	var thirdData = Math.floor((Math.random() * (maxTemThre + ( minTemThre ) ) ) + minTemThre);
-	        	//}else if(minTemThre >=0){
+	        	
 	        		var thirdData = Math.floor((Math.random() * (maxTemThre - ( minTemThre ) ) ) + minTemThre); 		
-	        	//}
-	        	// if(minTemFour <=-1){ // 음수일경우
-	        	//	var fourthData = Math.floor((Math.random() * (maxTemFour + ( minTemFour ) ) ) + minTemFour);
-	        	//}else if(minTemFour >=0){
+	        	
 	        		var fourthData = Math.floor((Math.random() * (maxTemFour - ( minTemFour ) ) ) + minTemFour);
-	        	//} 
 	       
-	    //	var fourthData = Math.floor((Math.random() * (maxTemFour - ( minTemFour ) ) ) + minTemFour);
+	       
+	   
 	        chart.addData([firstData, secData ,thirdData, fourthData], getTime()); // 각 데이터의 Y값(온도)을 업데이트 , 하단X값의 업데이트 되는 항목들
 	       
 	        index += 1;
@@ -282,18 +271,7 @@ var lineCd;
 	     
 	     //---------------▲실시간 설비 온도▲----------------//
 	     
-	   
 
-   //    $.ajax({
-    //	  url : "get",
-    	//  method : "POST",
-    	  //data : ,
-    	  // dataType : "JSON",
-    	  //contentType : "application/json; charset=utf-8"
-      //}).done(function(rs){
-    	  
-      //});
-  
       
 	});
 	</script>

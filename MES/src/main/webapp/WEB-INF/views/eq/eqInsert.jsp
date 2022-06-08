@@ -111,7 +111,7 @@ button:hover {
 							<div class="input-group ">
 								<label for="inputText" class="col-form-label"
 									style="padding-right: 27px;">구분코드</label> <input type="text"
-									id="eq_divCd" name="eq_nm" class="form-control" />
+									id="eq_divCd" name="eq_nm" class="form-control"/>
 								<button type="button" id="eqdiv">조회</button>
 
 								<input type="text" id="eq_divNm" class="form-control">

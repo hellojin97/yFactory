@@ -8,6 +8,13 @@
 
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/assets/toast/data/dummy.js"></script> --%>
 	 <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<style>
+img{
+	display: block;
+ 	margin-left: auto;
+ 	margin-right: auto;
+}
+</style>
 
 
 </head>
@@ -25,7 +32,7 @@
 					</div>
 					
 					<div class="modal-body">
-					<img src="" id="img_path" name="img_path">
+					<img src="" id="img_path" name="img_path" style="width:50%;">
 					
 					<div class="min1" >
 				<!-- <div style="background-color: #e9ecef; padding: 8px;">
@@ -95,56 +102,75 @@
 
 		var grid2 = new tui.Grid({
 			el : document.getElementById('grid2'),
-			scrollX : false,
-			scrollY : false,
+			bodyHeight:30,
+			scrollX : true,
+			
 			columns : [
 
 			{
 				header : '설비코드',
-				name : '설비코드'
+				name : '설비코드',
+				 className : 'fontClass',
+				 align: 'center'
 			},
 
 			{
 				header : '설비명',
 				name : '설비명'
+				,className : 'fontClass',
+				align: 'center'
 			},
 			{
 				header : '공정코드',
 				name : '공정코드'
+				,className : 'fontClass',
+				align: 'center'
 			},
 			{
 				header : '공정명',
 				name : '공정명'
+				,className : 'fontClass',
+				
 			},
 			{
 				header : '점검주기',
 				name : '점검주기'
+				,className : 'fontClass',
+				 align: 'right'
 			},
 			{
 				header : '점검일자',
 				name : '점검일자'
+				,className : 'fontClass'
 			},
 			{
 				header : '차기점검일',
 				name : '차기점검일'
+				,className : 'fontClass'
 			},
 			{
 				header : '등록인',
 				name : '등록인'
+				,className : 'fontClass'
 			},
 			
 			{
 				header : '사용여부',
 				name : '사용여부'
+				,className : 'fontClass'
+				,align: 'center'
 			},
 
 			],
 			rowHeaders : [ 'rowNum' ],
-			
+			columnOptions: {
+		        resizable: true
+		      },
 			pageOptions : {
 				useClient : true,
+				type:'scroll',
 				perPage : 5
-			}
+			} 
 		});
 
 		setTimeout(function() {

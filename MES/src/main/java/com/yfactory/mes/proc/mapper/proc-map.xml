@@ -229,8 +229,8 @@ SELECT
 	
 	<!-- 생산지시 조회 -->
 	<select id="ProcOrderSelect" resultType="map">
-        SELECT DISTINCT
-        	   ins.ins_cd "생산지시코드",
+		 SELECT DISTINCT
+              ins.ins_cd "생산지시코드",
                pd.prod_cd "제품코드",
                pd.prod_nm "제품명",
                insdtl.ins_qty "생산수량",
@@ -240,17 +240,17 @@ SELECT
         FROM    prd_ins ins, prod pd, prd_insdtl insdtl, line li, plan_dtl dtl,comm_code cc,PRDT_PL pl
         WHERE  insdtl.ins_dtlcd = ins.ins_cd
         AND    dtl.pp_cd = ins.pp_cd
-        AND    dtl.pd_cd = ins.pd_cd
         AND    insdtl.ins_dtlcd = ins.ins_cd
         AND    pd.prod_cd = insdtl.prod_cd
         AND    pd.prod_cd = li.prod_cd
         AND    pl.pp_cd   = dtl.pp_cd
+        AND   ins.ins_st = cc.comm_cd
         
 	   <if test = "state == '진행'"> 
-         AND    cc.comm_cd = 'PRST01'
+         AND    cc.comm_cd = 'PRDT01'
         </if>
         <if test = "state == '완료'"> 
-      	 AND    cc.comm_cd = 'PRST02'
+      	 AND    cc.comm_cd = 'PRDT02'
         </if>
 
 		<if test="date1 != '' and date2 != ''">
@@ -378,7 +378,7 @@ SELECT
 	AND      PID.PRD_DTLCD = PRC.PRD_DTLCD
 	AND      PST.PROC_PRCD = PRC.PROC_PRCD
 	AND      PST.LINE_TURN = PRC.LINE_TURN
-	AND      PST.PROC_ST = 'PLAN05'
+	AND      PST.PROC_ST = 'PLAN02'
 	</select>
 	
 	<select id="procResultProcessList" resultType="map">

@@ -62,10 +62,7 @@ $('#btnMg').on('click', function(){
   location.href = 'mtrlOrderForm';
 }) 
 
-//
-$('#mtrlOrderJasper').on('click', function(){
-	window.open('mtrlOrderJasper','발주서인쇄.PDF','width=500, height=500'); 
-})
+
 
 // 발주 관리
 $('#btnIn').on('click', function(){
@@ -194,6 +191,13 @@ $('#excel').on('click',function(){
 			  fileName: '원자재발주조회',
 			};
 	mtrlReqList.export('xlsx', options);
+})
+
+//발주서PDF
+mtrlReqList.on('dblclick', function(e){
+	var poCd = mtrlReqList.getValue(e.rowKey,'원자재발주코드');
+	console.log(poCd);
+	window.open('mtrlOrderJasper?poCd='+poCd,'발주서인쇄.PDF','width=500, height=500'); 
 })
 	
 </script>

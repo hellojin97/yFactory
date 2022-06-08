@@ -94,13 +94,18 @@ public class MaterialController {
 	/*
 	 * jasper
 	 */
+	//발주서 PDF
 	@RequestMapping("mtrlOrderJasper")
 	public void report(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	Connection conn = datasource.getConnection();
-	InputStream jasperStream = getClass().getResourceAsStream("/jasper/mtrlOrder.jasper");
-	JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream); //파라미터 맵
-	JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
-	JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+		Connection conn = datasource.getConnection();
+		
+		InputStream jasperStream = getClass().getResourceAsStream("/jasper/mtrlOrder.jasper");
+		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream); 
+		//파라미터 맵
+		HashMap<String,Object> map = new HashMap<>(); 
+		map.put("p_po_cd", request.getParameter("poCd"));
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+		JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
 	}
 
 	

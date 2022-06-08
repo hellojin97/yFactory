@@ -141,7 +141,16 @@ $(function(){
 				console.log(uphOne);
 				console.log(uphTwo);
 				chart2.addData([uphOne, uphTwo , uphThre ,uphFour], getTime()); 
-			 
+			 	
+				chart2.setOptions({
+					yAxis: {
+				          title: 'Production Volume',
+				          scale: {
+				              min: 0,
+				              max: parseInt(res[0].투입량),
+				              stepSize: 100,
+				            }
+					}})
 	      })
 	    
 	    // [] 은 각 데이터의 Y값(온도)을 업데이트 , getTime()은 하단X값의 업데이트 되는 항목들

@@ -52,8 +52,8 @@ public class QualityServiceImpl implements QualityService {
 		return map.selectProdErrList();
 	}
 	
-	public List<Map> searchErrName(String key) {
-		return map.searchErrName(key);
+	public List<Map> errNmModalSearch(String errName) {
+		return map.errNmModalSearch(errName);
 	}
 	
 	@Override

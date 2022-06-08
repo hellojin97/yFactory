@@ -28,7 +28,7 @@ public interface QualityMapper {
 	List<Map> selectProdErrList();
 	
 	// 불량코드(modal) 검색
-	List<Map> searchErrName(@Param("errName") String key);
+	List<Map> errNmModalSearch(String errName);
 	
 	// 자재 품질검사요청(modal) 검색
 	List<Map> searchpoDtlRequest(@Param("mtName") String key);

@@ -36,7 +36,7 @@ public interface QualityService {
 	
 	// 검색
 	// 불량코드(modal)
-	List<Map> searchErrName(String key);
+	List<Map> errNmModalSearch(String errName);
 	
 	// 자재 품질검사요청(modal)
 	List<Map> searchpoDtlRequest(String key);

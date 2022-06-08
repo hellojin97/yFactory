@@ -84,12 +84,11 @@
 	$.ajax({
 		url : "errNmModalSearch",
 		data : {
-			key : key
-		},
-		dataType: 'JSON',
-		contentType : "application/json; charset=utf-8"
+			"errName" : key
+		}
 	}).done(function(result){
 		grid.resetData(result);
+		grid.refreshLayout();
 		})
 	});
 	

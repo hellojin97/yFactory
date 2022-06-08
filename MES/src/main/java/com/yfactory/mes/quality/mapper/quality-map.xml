@@ -138,8 +138,8 @@
 
 	<!-- 검색 -->
 	<!-- 불량코드(modal) 검색 -->
-	<select id="searchErrName" resultType="map">
-		SELECT 	*
+	<select id="errNmModalSearch" resultType="map">
+		SELECT 	ERR_CD "불량코드", ERR_NM "불량명"
 		FROM 	ERR_CODE
 		WHERE	ERR_NM LIKE '%' || #{errName} || '%'
 	</select>

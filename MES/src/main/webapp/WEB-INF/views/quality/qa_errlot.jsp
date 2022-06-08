@@ -284,7 +284,7 @@
 				header : '불량량',
 				name : '불량량',
 				align: 'right',
-				width: '60'
+				width: '60',
 				className : 'fontClass',
 		         formatter(myNum) {                
 		               return myNum.value.toString()

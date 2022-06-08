@@ -222,7 +222,6 @@ public class ajaxController {
 		
 		@GetMapping("/getEqImgAjax")
 		public String getEqImgAjax(@RequestParam String eqDtlCd , Model model) {
-
 			String result = mapper.getEqImgAjax(eqDtlCd);  
 				System.out.println(result);
 			return result;

@@ -120,32 +120,38 @@ button:hover {
 					name : '설비코드',
 					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
-				}, {
+					}, 
+				{
 					header : '설비구분',
 					name : '설비구분',
 					className : 'fontClass',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true }
-				},{
+				},
+				{
 					header : '설비명',
 					name : '설비명',
 					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
-				}, {
+				}, 
+				{
 					header : '공정코드',
 					name : '공정코드',
 					className : 'fontClass',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
-				}, {
+				}, 
+				{
 					header : '공정명',
 					name : '공정명',
 					className : 'fontClass',
 					
-				}, {
+				}, 
+				{
 					header : '최저온도',
 					name : '최저온도',
 					className : 'fontClass',
 					//editor : "text"
-				}, {
+				}, 
+				{
 					header : '최고온도',
 					name : '최고온도',
 					className : 'fontClass',
@@ -155,25 +161,44 @@ button:hover {
 				],
 				
 				 rowHeaders: [ { type: 'checkbox' },{ type: 'rowNum' }],
-				 columnOptions: {
-				        resizable: true
-				      },
+				 
 				pageOptions : {
 					useClient : true,
 					perPage : 10
 				}
 			});
 			
-			
+			  grid.on('focusChange', (ev) => {
+				
+				    console.log("focusChange");
+				    grid.setSelectionRange({
+				      start: [ev.rowKey, 0 ],
+				      end: [ev.rowKey, grid.getColumns().length-1],
+				     // color:'#fee'
+				    });
+				  }); 
+			 
+		
 			
 			
 			grid.on("dblclick",function(e) {
+				 tui.Grid.applyTheme('default',{
+					cell: {
+						selectedHeader: {
+					            background:'#fee'
+					        },
+					        
+					 }, 
+					
+				});  
+				// Grid 전체를 기준으로 전부를 묶어서 처리 	
+				
 				//debugger
 				//let eqCd = grid.getValue(e.rowKey, '설비코드');
 				console.log("Parent_e.rowKey: "+e.rowKey);
 				rowKey = e.rowKey;
 				gridRowCell = grid.getFocusedCell().rowKey;
-				
+				console.log(gridRowCell);
 				let eqCdCol = grid.getFocusedCell('설비코드');
 				let eqPrcCol = grid.getFocusedCell('공정코드');
 				eqDtlCd = grid.getValue(e.rowKey, '설비코드');
@@ -198,6 +223,8 @@ button:hover {
 					}; */
 					
 					if(eqCdCol.columnName == '설비코드'){
+						
+						
 						$("#grid1").load("eqDetailmodal", function(){
 							
 							const mngModal = new bootstrap.Modal('#myModal');
@@ -293,34 +320,7 @@ button:hover {
 					                    'success'
 					                		);
 			            	   console.log(data);
-			            	  /*  for (var i = 0; i < chkRows.length; i++) {
-								data2 = {
-										p_eq_cd : chkRows[i].설비코드,
-										p_eq_sd :  systimestamp,
-										
-								
-								};
-							}; */
-			            /* 	   // 비가동 테이블 등록
-			            	   $.ajax({
-			           			url : "setEqInAjax",
-			           			method : "POST",
-			           			data : {
-			           					"p_eq_cd" : ec,
-			           					"p_eq_sd" : systimestamp,
-			           					//"p_eq_ed" : subEd,
-			           					"p_eq_dc" : dc,
-			           					"p_eq_nt" : nt
-			           					};					
-			           		}).done(function(result){
-			           			
-			           			}); */
-			            	   
-			            	   
-			            	   
-			            	 /*   if(confirm('비가동페이지로 이동합니다') ==  true){
-			            		   document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
-			      			 }; */
+			            	  
 			      			 for (var i = 0; i < chkRows.length; i++) {
 								if(chkRows[i].사용여부.valueOf()=='사용불가' ){
 									 Swal.fire({

@@ -49,7 +49,7 @@
 		</div>
 	<div>
 		<button  class="btn1" id="excel">Excel</button>
-		<button class="btn1" id="mtrlcancel">발주서인쇄</button>
+		<button class="btn1" id="mtrlOrderJasper">발주서인쇄</button>
 	</div>
 	</div>
 	</div>
@@ -62,6 +62,10 @@ $('#btnMg').on('click', function(){
   location.href = 'mtrlOrderForm';
 }) 
 
+//
+$('#mtrlOrderJasper').on('click', function(){
+	window.open('mtrlOrderJasper','발주서인쇄.PDF','width=500, height=500'); 
+})
 
 // 발주 관리
 $('#btnIn').on('click', function(){
@@ -92,6 +96,8 @@ $.ajax({
 	        header: '원자재발주코드',
 	        name: '원자재발주코드',
 	        className : 'fontClass',
+		    sortable: true,
+		    sortingType: 'asc'
 	      },
 	      {
 	        header: '원자재코드',

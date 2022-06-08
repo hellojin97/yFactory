@@ -95,19 +95,31 @@
 				name: '불량량',
 				width: '60',
 				align: 'right',
-				className : 'fontClass'
+				className : 'fontClass',
+		         formatter(myNum) {                
+		               return myNum.value.toString()
+		               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		         }
 			}, {
 				header: '단가',
 				name: '단가',
 				width: '80',
 				align: 'right',
-				className : 'fontClass'
+				className : 'fontClass',
+		         formatter(myNum) {                
+		               return myNum.value.toString()
+		               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		         }
 			}, {
 				header: '청구금액',
 				name:  '청구금액',
 				width: '80',
 				align: 'right',
-				className : 'fontClass'
+				className : 'fontClass',
+		         formatter(myNum) {                
+		               return myNum.value.toString()
+		               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		         }
 			} ],
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
@@ -186,19 +198,31 @@
 					name: '불량량',
 					width: '60',
 					align: 'right',
-					className : 'fontClass'
+					className : 'fontClass',
+			         formatter(myNum) {                
+			               return myNum.value.toString()
+			               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			         }
 				}, {
 					header: '단가',
 					name: '단가',
 					width: '80',
 					align: 'right',
-					className : 'fontClass'
+					className : 'fontClass',
+			         formatter(myNum) {                
+			               return myNum.value.toString()
+			               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			         }
 				}, {
 					header: '청구금액',
 					name:  '청구금액',
 					width: '80',
 					align: 'right',
-					className : 'fontClass'
+					className : 'fontClass',
+			         formatter(myNum) {                
+			               return myNum.value.toString()
+			               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			         }
 				} ],
 			rowHeaders : [ 'rowNum' ],
 			pageOptions : {
@@ -230,16 +254,19 @@
 				header : 'LOG',
 				name : 'LOG',
 				align: 'center',
-				className : 'fontClass'
-			}, {
-				header : '순번',
-				name : '순번',
-				align: 'right',
+				width: '150',
 				className : 'fontClass'
 			}, {
 				header : '진행공정코드',
 				name : '진행공정코드',
 				align: 'center',
+				width: '120',
+				className : 'fontClass'
+			}, {
+				header : '순번',
+				name : '순번',
+				align: 'center',
+				width: '50',
 				className : 'fontClass'
 			}, {
 				header : '작업시작시간',
@@ -257,7 +284,12 @@
 				header : '불량량',
 				name : '불량량',
 				align: 'right',
-				className : 'fontClass'
+				width: '60'
+				className : 'fontClass',
+		         formatter(myNum) {                
+		               return myNum.value.toString()
+		               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		         }
 			}, {
 				header : '불량코드',
 				name : '불량코드',

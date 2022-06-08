@@ -53,7 +53,9 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.13.2.2</version>
 		</dependency>
-
+		
+		
+		
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -230,7 +232,12 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>4.2.2.RELEASE</version>
 		</dependency>
-
+		<!-- 제스퍼 -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.4.0</version>
+		</dependency>
 		
 	</dependencies>
 	<build>
@@ -261,8 +268,19 @@
 					<showDeprecation>true</showDeprecation>
 					<encoding>UTF-8</encoding>
 				</configuration>
-			</plugin>
-
+			</plugin>		
 		</plugins>
+		<!-- 스프링 부트에서 마이바티스 XML로 설정하기 -->
+			<resources>
+          		<resource>
+          			<directory>src/main/resources</directory>
+          		</resource>
+          		<resource>
+          			<directory>src/main/java</directory>
+          			<includes>
+          				<include>**/*.xml</include>
+          			</includes>
+          		</resource>
+          	</resources>
 	</build>
 </project>

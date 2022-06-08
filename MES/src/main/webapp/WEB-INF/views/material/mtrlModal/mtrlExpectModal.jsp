@@ -60,7 +60,9 @@
  	       bodyWidth: 600,
 			columns : [ {
 				header : '원자재발주코드',
-				name : '원자재발주코드'
+				name : '원자재발주코드',
+				sortable: true,
+				sortingType: 'asc'
 			}, {
 				header : '원자재코드',
 				name : '원자재코드'

@@ -88,21 +88,33 @@
 				name: '발주량',
 				align: 'right',
 				className : 'fontClass',
-				width: '60'
+				width: '60',
+		         formatter(myNum) {                
+		               return myNum.value.toString()
+		               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		         }
 
 			}, {
 				header: '합격량',
 				name: '합격량',
 				align: 'right',
 				className : 'fontClass',
-				width: '60'
+				width: '60',
+		         formatter(myNum) {                
+		               return myNum.value.toString()
+		               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		         }
 
 			}, {
 				header: '불량량',
 				name: '불량량',
 				align: 'right',
 				className : 'fontClass',
-				width: '60'
+				width: '60',
+		         formatter(myNum) {                
+		               return myNum.value.toString()
+		               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		         }
 
 			}, {
 				header: '불량코드',
@@ -192,21 +204,33 @@
 					name: '발주량',
 					align: 'right',
 					className : 'fontClass',
-					width: '60'
+					width: '60',
+			         formatter(myNum) {                
+			               return myNum.value.toString()
+			               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			         }
 
 				}, {
 					header: '합격량',
 					name: '합격량',
 					align: 'right',
 					className : 'fontClass',
-					width: '60'
+					width: '60',
+			         formatter(myNum) {                
+			               return myNum.value.toString()
+			               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			         }
 
 				}, {
 					header: '불량량',
 					name: '불량량',
 					align: 'right',
 					className : 'fontClass',
-					width: '60'
+					width: '60',
+			         formatter(myNum) {                
+			               return myNum.value.toString()
+			               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			         }
 
 				}, {
 					header: '불량코드',
@@ -258,12 +282,14 @@
 				columns : [ {
 					header : 'LOG',
 					align: 'center',
+					width: '125',
 					className : 'fontClass',
 					name : 'LOG'
 
 				}, {
 					header : '진행공정코드',
 					align: 'center',
+					width: '120',
 					className : 'fontClass',
 					name : '진행공정코드'
 				}, {
@@ -288,19 +314,31 @@
 					header : '투입량',
 					align: 'right',
 					className : 'fontClass',
-					name : '투입량'
+					name : '투입량',
+			         formatter(myNum) {                
+			               return myNum.value.toString()
+			               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			         }
 
 				}, {
 					header : '합격량',
 					align: 'right',
 					className : 'fontClass',
-					name : '합격량'
+					name : '합격량',
+			         formatter(myNum) {                
+			               return myNum.value.toString()
+			               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			         }
 
 				}, {
 					header : '불량량',
 					align: 'right',
 					className : 'fontClass',
-					name : '불량량'
+					name : '불량량',
+			         formatter(myNum) {                
+			               return myNum.value.toString()
+			               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			         }
 
 				}, {
 					header : '불량코드',

@@ -82,7 +82,8 @@ var unorder = new tui.Grid({
         name: 'PP_CD',
         className : 'fontClass',
 	    sortable: true,
-	    sortingType: 'asc'
+	    sortingType: 'asc',
+	    align : 'center'
       },
       {
         header: '생산계획명',
@@ -93,11 +94,13 @@ var unorder = new tui.Grid({
         header: '계획등록일자',
         name: 'PP_DT',
         className : 'fontClass',
+	    align : 'center'
       },
       {
         header: '총 수량',
         name: 'PD_QTY',
         className : 'fontClass',
+	    align : 'right'
       }
       
     ],
@@ -144,12 +147,14 @@ $("#select1").on("click",function(e) {
         name: '원자재코드',
         className : 'fontClass',	    
         sortable: true,
-	    sortingType: 'asc'
+	    sortingType: 'asc',
+	    align : 'center'
       },
       {
         header: '계획일자',
         name: '계획일자',
         className : 'fontClass',
+	    align : 'center'
       },
       {
           header: '원자재명',
@@ -160,11 +165,14 @@ $("#select1").on("click",function(e) {
           header: '재고 구분',
           name: '구분',
           className : 'fontClass',
+  	      align : 'center'
+          
         },
         {
             header: '생산계획코드',
             name: '생산계획코드',
             className : 'fontClass',
+    	    align : 'center'
           },
 
 
@@ -220,12 +228,13 @@ $("#select2").on("click",function(e) {
         name: '원자재코드',
         className : 'fontClass',
 	    sortable: true,
-	    sortingType: 'asc'
+	    sortingType: 'asc',
+	    align : 'center'
       },
       {
         header: '원자재명',
         name: '원자재명',
-        className : 'fontClass',
+        className : 'fontClass'
       },
       {
         header: '업체명',
@@ -235,6 +244,7 @@ $("#select2").on("click",function(e) {
       {
     	    header: '납기요청일자',
     	    name: '납기요청일자',
+    	    align : 'center',
     	    className : 'fontClass',
     	    editor: 'datePicker'
     	  },
@@ -242,16 +252,19 @@ $("#select2").on("click",function(e) {
           header: '현재고',
           name: '현재고',
           className : 'fontClass',
+  	      align : 'right'
         },
       {
           header: '계획대비 필요수량',
           name: '계획대비 필요수량',
           className : 'fontClass',
+  	      align : 'right'
         },
       {
           header: '발주량',
           name: '발주량',
           className : 'fontClass',
+  	      align : 'right',
           editor : {
         	  type : 'text'
           }

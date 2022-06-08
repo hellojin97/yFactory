@@ -156,11 +156,13 @@
 			name : '원자재발주코드',
 			className : 'fontClass',
 		    sortable: true,
-		    sortingType: 'desc'
+		    sortingType: 'desc',
+		    align : 'center'
 		}, {
 			header : '원자재코드',
 			name : '원자재코드',
 			className : 'fontClass',
+		    align : 'center'
 		}, {
 			header : '원자재명',
 			name : '원자재명',
@@ -173,25 +175,29 @@
 			header : '입고량',
 			name : '입고량',
 			className : 'fontClass',
+			align : 'right'
 		}, {
 			header : '입고일시',
 			name : '입고일시',
 			className : 'fontClass',
+			align : 'center'
 		}, {
 			header : '원자재LOT번호',
 			name : '원자재LOT번호',
 			className : 'fontClass',
+			 align : 'center'
 		}, {
 			header : '유통기한',
 			name : '유통기한',
 			className : 'fontClass',
+			align : 'center'
 		}
 
 		],
 		rowHeaders : [ 'checkbox' ],
 		pageOptions : {
 			useClient : true,
-			perPage : 5
+			perPage : 10
 		}
 	});
 

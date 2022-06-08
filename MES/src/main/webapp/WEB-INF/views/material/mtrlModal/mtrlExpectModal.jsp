@@ -57,15 +57,17 @@
 
 		var mtrlExpectList = new tui.Grid({
 			el : document.getElementById('expectGrid'),
- 	       bodyWidth: 600,
+ 	       bodyWidth: 650,
 			columns : [ {
 				header : '원자재발주코드',
 				name : '원자재발주코드',
 				sortable: true,
-				sortingType: 'asc'
+				sortingType: 'asc',
+			    align : 'center'
 			}, {
 				header : '원자재코드',
-				name : '원자재코드'
+				name : '원자재코드',
+			    align : 'center'
 			}, {
 				header : '원자재명',
 				name : '원자재명'
@@ -74,10 +76,12 @@
 				name : '업체명'
 			}, {
 				header : '입고예정량',
-				name : '입고예정량'
+				name : '입고예정량',
+			    align : 'right'
 			}, {
 				header : '검사일자',
-				name : '검사일자'
+				name : '검사일자',
+			    align : 'center'
 			}
 			
 			],

@@ -5,6 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 추가 CDN -->
+<!-- toastr.CSS -->
+   <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
+<!-- toastr.JS -->
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <title>Insert title here</title>
 <style type="text/css">
 .clickB {
@@ -165,38 +176,45 @@ $("#outBtn").on("click", function(){
 			header : '주문코드',
 			name : '주문코드',
 			className : 'fontClass',
+			
 		}, {
 			header : '제품명',
 			name : '완제품명',
 			className : 'fontClass',
+			validation: { required: true }
 		}, {
 			header : '제품코드',
 			name : '완제품코드',
 			className : 'fontClass',
+			validation: { required: true }
 		},{
 			header : '주문수량',
 			name : '주문수량',
 			className : 'fontClass',
+			validation: { required: true }
 		},{
 			header : '현재고',
 			name : '현재고',
 			className : 'fontClass',
+			validation: { required: true }
 		},{
 			header : '계획량',
 			name : '계획량',
 			className : 'fontClass',
-			editor : "text"
-
+			editor : "text",
+			validation: { required: true }
 		}, {
 			header : '생산일수',
 			name : '생산일수',
 			className : 'fontClass',
-			editor : "text"
+			editor : "text",
+			validation: { required: true }
 		}, {
 			header : '작업우선순위',
 			name : '작업우선순위',
 			className : 'fontClass',
-			editor : "text"
+			editor : "text",
+			validation: { required: true }
 		},
 		],
 		rowHeaders : [ 'checkbox' ],
@@ -209,6 +227,7 @@ $("#outBtn").on("click", function(){
 
 			resultGrid.on("click", function(e) {
 			let prd = resultGrid.getFocusedCell('완제품코드');
+			console.log(prd);
 			if (prd.columnName == '완제품명') {
 				if (prd.value == null) {
 					$("#test").load("prdmodal", function() {
@@ -225,16 +244,7 @@ $("#outBtn").on("click", function(){
 	//날짜 
 	document.getElementById('date').value = new Date().toISOString().substring(0, 10);
 		
-		//제품목록 테스트
-		/* 	btntest.addEventListener("click", function() {
-		 $("#test").load("prdmodal", function() {
-		
-		 const prdModal = new bootstrap.Modal('#prdModal');
-		 prdModal.show();
-		
 
-		 })
-		 }); */
 		 //초기화 버튼클릭시
 		 BtnClear.addEventListener("click", function() {
 			 $('#ProcPN').val('');
@@ -246,19 +256,14 @@ $("#outBtn").on("click", function(){
 		 
 		 
 		 btnDtlInsert.addEventListener("click", function() {
+			 
 			 let ppNm = $('#ProcPN').val();
 			 let ppDt = $('#date').val();
-			 
-			 let prd = resultGrid.getCheckedRows();
-
-			 
+			 let prd = resultGrid.getCheckedRows();			 
 			 let result;
-			 
-			
-			 
-			 
-			 
-			 /* 확인 CONFIRM  */
+			 let prdRow = resultGrid.getRowCount();
+
+			  /* 확인 CONFIRM  */
 			  Swal.fire({
 		          title: '생산계획을 등록하시겠습니까?',
 		          icon: 'warning',
@@ -270,7 +275,54 @@ $("#outBtn").on("click", function(){
 		      }).then((result) => {
 		      	console.log(result);
 		      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
-		          if (result.isConfirmed) {
+		      	console.log(prd);
+		      // 	console.log(prd[0].rowKey);
+				 //console.log(prdRow); 
+				//console.log(resultGrid.getValue(0,'제품명') == null);
+				//prd[i].제품명
+				 for (var i = 0; i < prd.length; i++) {
+			      		if(prd[i].제품명 == null){
+			      			toastr.error((prd[i].rowKey)+1 + '번째 완제품명을 채워주세요!');
+			      		}
+			      		
+			      		  if(prd[i].주문수량 == null){
+			      			toastr.error((prd[i].rowKey)+1 + '번째 주문수량을 채워주세요!');
+			      		}
+			      		if(prd[i].현재고 == null){
+			      			toastr.error((prd[i].rowKey)+1 + '번째 현재고를 채워주세요!');
+			      		}
+			      		if(prd[i].계획량 == null){
+			      			toastr.error((prd[i].rowKey)+1 + '번째 계획량을 채워주세요!');
+			      		}
+			      		if(prd[i].생산일수 == null){
+			      			toastr.error((prd[i].rowKey)+1 + '번째 생산일수를 채워주세요!');
+			      		}
+			      		if(prd[i].작업우선순위 == null){
+				  			toastr.error((prd[i].rowKey)+1 + '번째 작업우선순위를 채워주세요!');
+			      		}  
+			      	} 
+		      	/* for (var i = 1; i <= prdRow; i++) {
+			      		if(resultGrid.getValue(i,'제품명') == null){
+			      			toastr.error(i + '번째 완제품명을 채워주세요!');
+			      		}
+			      		
+			      		 if(resultGrid.getValue(i,'주문수량') == null){
+			      			toastr.error(i + '번째 주문수량을 채워주세요!');
+			      		}
+			      		if(resultGrid.getValue(i,'현재고') == null){
+			      			toastr.error(i + '번째 현재고를 채워주세요!');
+			      		}
+			      		if(resultGrid.getValue(i,'계획량') == null){
+			      			toastr.error(i + '번째 계획량을 채워주세요!');
+			      		}
+			      		if(resultGrid.getValue(i,'생산일수') == null){
+			      			toastr.error(i + '번째 생산일수를 채워주세요!');
+			      		}
+			      		if(resultGrid.getValue(i,'작업우선순위') == null){
+			      			toastr.error(i + '번째 작업우선순위를 채워주세요!');
+			      		} 
+			      	} */
+		          /* if (result.isConfirmed) {
 		        	  
 		        	  for (var i = 0; i < prd.length; i++) {
 		 				 result = {
@@ -301,7 +353,7 @@ $("#outBtn").on("click", function(){
 						        		    text: "생산계획조회 페이지로 이동합니다.",
 						        		    type: "success"
 						        		}).then(function() {
-						        		    window.location = "procPlSelect";
+						        		    //window.location = "procPlSelect";
 						        		});
 
 		          			}else{
@@ -310,7 +362,7 @@ $("#outBtn").on("click", function(){
 		                      '섹시하시네요~!',
 		                      'error'
 		                  )
-		          			}
+		          			} */
 		      }) 
 		});
 		 

@@ -16,13 +16,7 @@
 				<div class="modal-body">
 					<div id="grid"></div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Cancel</button>
-					<button type="button" id="btnSav" class="btn btn-primary">Save
-						changes</button>
-					<!-- 사용시 필히 onclick 이용 onclick="location.href='/board'"  -->
-				</div>
+			
 
 			</div>
 		</div>
@@ -53,12 +47,7 @@
 		</div>
 					<div id="pGrid"></div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Cancel</button>
-					<button type="button" id="btnSav" class="btn btn-primary">Save
-						changes</button>
-				</div>
+				
 
 		</div>
 	</div>

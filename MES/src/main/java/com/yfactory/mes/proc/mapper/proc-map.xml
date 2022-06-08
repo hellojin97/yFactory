@@ -378,7 +378,7 @@ SELECT
 	AND      PID.PRD_DTLCD = PRC.PRD_DTLCD
 	AND      PST.PROC_PRCD = PRC.PROC_PRCD
 	AND      PST.LINE_TURN = PRC.LINE_TURN
-	AND      PST.PROC_ST = 'PLAN02'
+	AND      PST.PROC_ST = 'PLAN05'
 	</select>
 	
 	<select id="procResultProcessList" resultType="map">

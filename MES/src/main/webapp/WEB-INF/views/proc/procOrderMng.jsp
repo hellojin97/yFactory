@@ -316,6 +316,19 @@
 	
 	$("#prdInsert").click(function() {
 		let checkAry = needMtrlLOT.getCheckedRows();
+	
+		Swal.fire({
+	        title: '제품 라인정보 관리를 변경하시겠습니까?',
+	        text: "다시 되돌릴 수 없습니다. 신중하세요.",
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        confirmButtonText: '승인',
+	        cancelButtonText: '취소'
+	    }).then((result) => {
+	    	if (result.isConfirmed) {
+		
 		  for(var i = 0; i < checkAry.length; i++) {
 			var result = {
 					"ppCd" : procDtPlan.getData()[0].생산계획코드,
@@ -341,6 +354,21 @@
 			  // END OF AJAX
 			
 		} 
+		  Swal.fire(
+                  '승인이 완료되었습니다.',
+                  '변경이 완료되었습니다.',
+                  'success'
+              ).then(function(){
+            	  location.reload(true);	  
+          	  });
+	        	}else{
+	              	Swal.fire(
+	                        '승인이 취소되었습니다.',
+	                        '섹시하시네요~!',
+	                        'error'
+	                    )
+	            }
+	           })
 		  
 
 	});

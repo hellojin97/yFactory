@@ -282,7 +282,7 @@
 				columns : [ {
 					header : 'LOG',
 					align: 'center',
-					width: '125',
+					width: '150',
 					className : 'fontClass',
 					name : 'LOG'
 
@@ -296,6 +296,7 @@
 					header : '순번',
 					align: 'center',
 					className : 'fontClass',
+					width: '50',
 					name : '순번'
 
 				}, {
@@ -314,6 +315,7 @@
 					header : '투입량',
 					align: 'right',
 					className : 'fontClass',
+					width: '60',
 					name : '투입량',
 			         formatter(myNum) {                
 			               return myNum.value.toString()
@@ -324,6 +326,7 @@
 					header : '합격량',
 					align: 'right',
 					className : 'fontClass',
+					width: '60',
 					name : '합격량',
 			         formatter(myNum) {                
 			               return myNum.value.toString()
@@ -334,6 +337,7 @@
 					header : '불량량',
 					align: 'right',
 					className : 'fontClass',
+					width: '60',
 					name : '불량량',
 			         formatter(myNum) {                
 			               return myNum.value.toString()

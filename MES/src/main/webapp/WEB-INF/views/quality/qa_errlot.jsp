@@ -254,7 +254,7 @@
 				header : 'LOG',
 				name : 'LOG',
 				align: 'center',
-				width: '125',
+				width: '150',
 				className : 'fontClass'
 			}, {
 				header : '진행공정코드',
@@ -266,6 +266,7 @@
 				header : '순번',
 				name : '순번',
 				align: 'center',
+				width: '50',
 				className : 'fontClass'
 			}, {
 				header : '작업시작시간',
@@ -283,6 +284,7 @@
 				header : '불량량',
 				name : '불량량',
 				align: 'right',
+				width: '60'
 				className : 'fontClass',
 		         formatter(myNum) {                
 		               return myNum.value.toString()

@@ -110,7 +110,12 @@
 				}
 			}
 		} else {
-			alert("불량량이 없습니다");
+			let err = defaultMt.getFocusedCell('불량코드');
+			if(err.columnName == '불량코드') {
+				if(err.value == null) {
+					alert("불량량이 없습니다.");
+				}
+			}
 		}
 	})
 
@@ -151,7 +156,7 @@
 			}
 		}).done(function(result) {
 			defaultMt.removeCheckedRows(false);
-			location.href = 'qa_reseult';
+			location.href = 'qa_result';
 		}).fail(function(result) {
 			console.log(result);
 		})

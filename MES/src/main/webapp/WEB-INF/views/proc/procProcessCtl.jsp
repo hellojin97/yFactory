@@ -84,17 +84,19 @@
 						header : '공정코드',
 						name : '공정코드',
 						className : 'fontClass',
+		        		align: 'center',
 					}, 
 					{
 						header : '공정명',
 						name : '공정명',
 						className : 'fontClass',
-
+		        		align: 'center',
 					}, 
 					{
 						header : '공정구분',
 						name : '공정구분',
           				className : 'fontClass',
+                		align: 'center',
 						  editor: {
                               type: 'select',
                               options: {
@@ -107,12 +109,14 @@
 					{
 						header : '설비코드',
 						name : '설비코드',
+		        		align: 'center',
 						className : 'fontClass',
 						  validation: { required: true }
 
 					}, {
 						header : '설비명',
 						name : '설비명',
+		        		align: 'center',
 						className : 'fontClass',
 					},{
 						header : '모델명',
@@ -122,6 +126,7 @@
 					{
 						header : '관리자',
 						name : '관리자',
+		        		align: 'center',
 						className : 'fontClass',
 					},
 					],

@@ -115,7 +115,9 @@
 		columns : [ {
 			header : '생산계획코드',
 			name : '생산계획코드',
+			width: 200,
 			className : 'fontClass',
+			align : 'center',
 		}, {
 			header : '계획명',
 			name : '계획명',
@@ -123,7 +125,9 @@
 		}, {
 			header : '생산계획상세코드',
 			name : '생산계획상세코드',
+			width: 200,
 			className : 'fontClass',
+			align : 'center',
 		}, {
 			header : '제품명',
 			name : '완제품명',
@@ -133,15 +137,23 @@
 			header : '계획량',
 			name : '계획량',
 			className : 'fontClass',
+			align: 'right',
+			formatter(myNum) {                
+				               return myNum.value.toString()
+				               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				         		}
 		}, {
 			header : '작업우선순위',
 			name : '작업우선순위',
+
 			className : 'fontClass',
+			align: 'right',
 		},
 		 {
 			header : '생산일수',
 			name : '생산일수',
 			className : 'fontClass',
+			align: 'right',
 		},
 		],
 		rowHeaders : [ 'rowNum' ],

@@ -302,7 +302,7 @@ $("#outBtn").on("click", function(){
 			      		if(prd[i].작업우선순위 == null){
 				  			toastr.error((prd[i].rowKey)+1 + '번째 작업우선순위를 채워주세요!');
 			      		}  
-			      		if(prd[i].완제품명 == null || 
+			      		/* if(prd[i].완제품명 == null || 
 			      		   prd[i].주문수량 == null || 
 			      		   prd[i].현재고 == null ||
 			      		   prd[i].계획량 == null ||
@@ -311,8 +311,8 @@ $("#outBtn").on("click", function(){
 			      			result.isConfirmed = true;
 			      		} else{
 			      			result.isConfirmed = false;
-			      		}
-			      	} 
+			      		} */
+			      	} // END OF FOR 
 		      
 		          if (result.isConfirmed) {
 		        	  

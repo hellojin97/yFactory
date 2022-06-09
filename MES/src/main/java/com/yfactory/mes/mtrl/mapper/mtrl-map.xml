@@ -148,6 +148,7 @@ order by 4
 		                                     from mt_podtl
 		                                     where po_cd not IN (select po_cd
 		                                                                      from mt_chk))
+		ORDER BY 2
 		</select>
 	<!-- 발주검색 -->
 		<select id="mtrlReqSelectSearch" resultType="map">

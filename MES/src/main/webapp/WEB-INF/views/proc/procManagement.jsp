@@ -284,8 +284,41 @@ resultGrid = new tui.Grid({
 		   })  
 		   
 	});
-  	
-  
+  	/* ===============자동 옵션 ================ */
+  	var grid_data = resultGrid.getData(); 
+  	console.log(grid_data);
+  	if(grid_data != ''){	// start of Auto
+  		let lineTurn = releaseList.getValue(0,"순번");
+  		let procPrcd = releaseList.getValue(0,"진행공정코드");
+  		let num = releaseList.getRowCount();
+  		let state = releaseList.getValue(num-1, "상태");
+  		let line  = resultGrid.getValue(0, "라인코드");
+  		 
+  		var interval = setInterval(function() {
+  		  if (state != '완료') {
+  			$.ajax({
+				   url  : "procOrderLineSelectOne",
+				   data : {line : line},
+				   dataType : "JSON",
+				   contentType : "application/json; charset = UTF-8;"
+			   }).done(function(result){
+				   		releaseList.resetData(result);
+
+			   })
+  		    
+  			  
+  			  
+  			state = releaseList.getValue(num-1, "상태");
+  		  } else {
+  		    console.log("stopped")
+  		    clearInterval(interval) 
+  		    // 밖에서 선언한 interval을 안에서 중지시킬 수 있음
+  		  }
+  		}, 500)
+  		
+
+	    
+  	}	// end of Auto
   	
   	
 </script>

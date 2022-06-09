@@ -321,6 +321,14 @@ resultGrid = new tui.Grid({
   	}	// end of Auto
   	},5000);
   	
+  	
+  	$('#btnProcMoveTable').on('click', function(){
+  		let line  = resultGrid.getValue(0, "라인코드");
+  		
+  		window.open('procMoveDialog?line_cd=' + line, '공정이동표.PDF', 'width=1500, height=1500');
+  	})
+  	
+  	
 </script>
 
 </html>

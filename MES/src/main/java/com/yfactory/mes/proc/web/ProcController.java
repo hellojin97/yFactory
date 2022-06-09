@@ -1,21 +1,34 @@
 package com.yfactory.mes.proc.web;
 
-import java.util.List;
-import java.util.Map;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yfactory.mes.proc.service.ProcService;
+
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
 public class ProcController {
 
 	@Autowired
 	private ProcService procService;
+	
+	@Autowired
+	private DataSource datasource;
 
 	@GetMapping("/procPlMgt")
 	public String procPlMgt() {
@@ -120,6 +133,21 @@ public class ProcController {
 	public String procCdModal() {
 		return "proc/procmodal/procCdModal";
 	}
+	
+	// 공정이동표 JASPER
+	//발주서 PDF
+		@RequestMapping("procMoveDialog")
+		public void report(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			Connection conn = datasource.getConnection();
+			
+			InputStream jasperStream = getClass().getResourceAsStream("/jasper/procMoveDialog.jasper");
+			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream); 
+			//파라미터 맵
+			HashMap<String,Object> map = new HashMap<>(); 
+			map.put("LINE_CD", request.getParameter("line_cd"));
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+			JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+		}
 
 
 }

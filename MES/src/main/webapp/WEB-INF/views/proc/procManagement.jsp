@@ -285,9 +285,9 @@ resultGrid = new tui.Grid({
 		   
 	});
   	/* ===============자동 옵션 ================ */
+  	setInterval(function(){ // set interval
   	var grid_data = resultGrid.getData(); 
-  	console.log(grid_data);
-  	if(grid_data != ''){	// start of Auto
+  	if(grid_data != null){	// start of Auto
   		let lineTurn = releaseList.getValue(0,"순번");
   		let procPrcd = releaseList.getValue(0,"진행공정코드");
   		let num = releaseList.getRowCount();
@@ -314,12 +314,12 @@ resultGrid = new tui.Grid({
   		    clearInterval(interval) 
   		    // 밖에서 선언한 interval을 안에서 중지시킬 수 있음
   		  }
-  		}, 500)
+  		}, 5000)
   		
 
 	    
   	}	// end of Auto
-  	
+  	},5000);
   	
 </script>
 

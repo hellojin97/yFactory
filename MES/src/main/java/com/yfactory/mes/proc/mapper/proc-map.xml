@@ -109,19 +109,21 @@
 	</select>
 	<!-- 생산 계획 단건조회 -->
 	<select id="ProcPlanSelect" resultType="map">
-		SELECT
- 		dtl.pp_cd "생산계획코드",
- 		pl.pp_nm "계획명",
-		pd.prod_nm "완제품명",
-		pd.prod_cd "완제품코드",
-		pl.ord_cd "주문코드",
-		dtl.pd_qty "계획량",
-		dtl.pd_dt "생산일수",
-		dtl.pd_rank "작업우선순위"
-		FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord
-		WHERE pl.pp_cd = dtl.pp_cd
-		AND pl.ord_cd = ord.ord_cd(+)
-		AND dtl.prod_cd = pd.prod_cd
+	  SELECT
+      dtl.pp_cd "생산계획코드",
+      pl.pp_nm "계획명",
+      pd.prod_nm "완제품명",
+      pd.prod_cd "완제품코드",
+      pl.ord_cd "주문코드",
+      odtl.ord_qty "주문수량",
+      dtl.pd_qty "계획량",
+      dtl.pd_dt "생산일수",
+      dtl.pd_rank "작업우선순위"
+      FROM PRDT_PL pl, PLAN_DTL dtl, PROD pd,ORDERS ord, ORD_DTL odtl
+      WHERE pl.pp_cd = dtl.pp_cd
+      AND ord.ord_cd = odtl.ord_cd
+      AND pl.ord_cd = ord.ord_cd(+)
+      AND dtl.prod_cd = pd.prod_cd
 		AND dtl.pp_cd = #{ppCd}
 	</select>
 	<!--  생산계획조회 조건조회 -->
@@ -148,9 +150,6 @@
         </if>
         <if test = "state == '완료'"> 
         AND  pl.pp_prog = 'PLAN02'
-        </if>
-        <if test = "state == '취소'"> 
-        AND  pl.pp_prog = 'PLAN03'
         </if>
 		<if test="prdNm != ''">
 		AND pd.prod_nm = #{prdNm}

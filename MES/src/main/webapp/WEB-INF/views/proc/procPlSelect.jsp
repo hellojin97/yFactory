@@ -40,11 +40,7 @@
 					value="완료"> <label class="form-check-label"
 					for="gridRadios3" style="padding-right: 10px;"> 완료 </label>
 			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="radios" id="radioD"
-					value="취소"> <label class="form-check-label"
-					for="gridRadios3" style="padding-right: 10px;"> 취소 </label>
-			</div>
+			
 		</div>
 	</fieldset>
 	<!-- 생산계획명 -->
@@ -87,6 +83,31 @@
  */	// * 자식그리드에서 부모그리드를 사용하려면 전역변수로 지정되어있어야한다 *
 	var resultGrid
 	$(function(){
+		 let prdNm = '';
+		 let date1 = '';
+		 let date2 = '';
+		 let state = '';
+	
+		var data= {
+				 prdNm : prdNm,
+				   date1 : date1,
+				   date2 : date2,
+				   state : state
+		 }
+	 
+		  $.ajax({
+				   url  : "procPlanSelectState",
+				   data : JSON.stringify(data),
+				   type : "POST",
+			   dataType : "JSON",
+    		   contentType : "application/json; charset = UTF-8;"
+			   }).done(function(result){
+				   console.log(result);
+				   resultGrid.resetData(result);
+
+		
+			   })	
+	
 	resultGrid = new tui.Grid({
 		el : document.getElementById('testGrid'),
 		scrollX : false,

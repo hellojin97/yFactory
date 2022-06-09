@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yfactory.mes.proc.service.ProcService;
 
+import net.sf.jasperreports.components.barbecue.BarbecueComponent;
+
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -145,6 +147,7 @@ public class ProcController {
 			//파라미터 맵
 			HashMap<String,Object> map = new HashMap<>(); 
 			map.put("LINE_CD", request.getParameter("line_cd"));
+			map.put("PROC_PRCD", request.getParameter("proc_prcd"));
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
 			JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
 		}

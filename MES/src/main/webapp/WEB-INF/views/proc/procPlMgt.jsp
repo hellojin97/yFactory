@@ -301,28 +301,8 @@ $("#outBtn").on("click", function(){
 				  			toastr.error((prd[i].rowKey)+1 + '번째 작업우선순위를 채워주세요!');
 			      		}  
 			      	} 
-		      	/* for (var i = 1; i <= prdRow; i++) {
-			      		if(resultGrid.getValue(i,'제품명') == null){
-			      			toastr.error(i + '번째 완제품명을 채워주세요!');
-			      		}
-			      		
-			      		 if(resultGrid.getValue(i,'주문수량') == null){
-			      			toastr.error(i + '번째 주문수량을 채워주세요!');
-			      		}
-			      		if(resultGrid.getValue(i,'현재고') == null){
-			      			toastr.error(i + '번째 현재고를 채워주세요!');
-			      		}
-			      		if(resultGrid.getValue(i,'계획량') == null){
-			      			toastr.error(i + '번째 계획량을 채워주세요!');
-			      		}
-			      		if(resultGrid.getValue(i,'생산일수') == null){
-			      			toastr.error(i + '번째 생산일수를 채워주세요!');
-			      		}
-			      		if(resultGrid.getValue(i,'작업우선순위') == null){
-			      			toastr.error(i + '번째 작업우선순위를 채워주세요!');
-			      		} 
-			      	} */
-		          /* if (result.isConfirmed) {
+		      
+		          if (result.isConfirmed) {
 		        	  
 		        	  for (var i = 0; i < prd.length; i++) {
 		 				 result = {
@@ -362,7 +342,7 @@ $("#outBtn").on("click", function(){
 		                      '섹시하시네요~!',
 		                      'error'
 		                  )
-		          			} */
+		          			} 
 		      }) 
 		});
 		 

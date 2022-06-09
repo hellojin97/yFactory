@@ -202,19 +202,11 @@ window.onload = function (){
 		procOrderGrid.refreshLayout();
 	},300);
 
-/* $('#btnReset').on('click',function(){
 
-	const url = "salesOrder";
-	   $.ajax(url,{
-	      dataType : "JSON",
-	      method: "GET"
-	   }).done(function(result){
-	      grid.resetData(result);
-	     console.log(result);
-	   });
-
-}) */
-
+	$("#btnReset").click(function() {
+		$("input[name='radios'][value='전체']").prop("checked", true);
+		procOrderGrid.clear();
+	 });
 }
   </script>
 

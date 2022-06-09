@@ -154,12 +154,14 @@ order by 4
 		</select>
 	<!-- 발주검색 -->
 		<select id="mtrlReqSelectSearch" resultType="map">
-						SELECT      
+		   SELECT      
+                   po.po_cd   "원자재발주코드",
                    m.mt_cd    "원자재코드",
 			       m.mt_nm    "원자재명",
 			       vdr.vdr_nm   "업체명",
 			       pdl.po_qty   "발주수량",
 			       m.mt_unit  "단위",
+			       po.po_reqdt "발주신청일",
 			       to_char(lot.mt_wdt, 'YYYY-MM-DD') "입고신청일",
 			       to_char(pdl.po_reqdt, 'YYYY-MM-DD') "납기신청일",
 			       m.mt_prc   "단가",
@@ -448,12 +450,35 @@ SELECT po.po_cd "원자재발주코드",
 <!-- 안전재고 페이지 -->	
 	<!-- 안전재고 전체조회 -->
 	<select id="mtrlSafetyList" resultType="map">
-
-	SELECT m.mt_cd "원자재코드",
+		SELECT m.mt_cd "원자재코드",
 		       m.mt_nm "원자재명",
 		       m.mt_unit "단위",
-		       CASE WHEN c.mt_qty IS NULL THEN 0
-               ELSE C.MT_QTY 
+		       CASE WHEN SUM(c.mt_qty) IS NULL THEN 0
+	              ELSE SUM(C.MT_QTY)
+	              END AS "현재고",
+		       m.mt_sfqty "안전재고"
+		       
+		FROM   mt m,
+		       mt_lot lot,
+		       mt_curqty c
+		
+		WHERE  m.mt_cd = lot.mt_cd
+		AND    lot.mt_lot = c.mt_lot(+)
+	       
+	       GROUP BY
+	              m.mt_cd,
+		       m.mt_nm,
+		       m.mt_unit,
+	              m.mt_sfqty
+	</select>   
+	
+	<!-- 안전재고 단건조회 -->
+	<select id="mtrlSafetySearch" resultType="map">
+		SELECT m.mt_cd "원자재코드",
+		       m.mt_nm "원자재명",
+		       m.mt_unit "단위",
+		       CASE WHEN SUM(c.mt_qty) IS NULL THEN 0
+               ELSE SUM(C.MT_QTY)
                END AS "현재고",
 		       m.mt_sfqty "안전재고"
 		       
@@ -463,23 +488,13 @@ SELECT po.po_cd "원자재발주코드",
 		
 		WHERE  m.mt_cd = lot.mt_cd
 		AND    lot.mt_lot = c.mt_lot(+)
-	</select>   
-	
-	<!-- 안전재고 단건조회 -->
-	<select id="mtrlSafetySearch" resultType="map">
-		SELECT m.mt_cd "원자재코드",
-		       m.mt_nm "원자재명",
-		       m.mt_unit "단위",
-		       c.mt_qty "현재고",
-		       m.mt_sfqty "안전재고"
-		       
-		FROM   mt m,
-		       mt_lot lot,
-		       mt_curqty c
+        AND    m.mt_nm LIKE '%'||#{m1}||'%'
+        GROUP BY
+               m.mt_cd,
+		       m.mt_nm,
+		       m.mt_unit,
+               m.mt_sfqty
 		
-		WHERE  m.mt_cd = lot.mt_cd
-		AND    lot.mt_lot = c.mt_lot
-		AND    m.mt_nm LIKE '%'||#{m1}||'%'
 	</select>  
 	
 	<update id="mtrlUpdateSafe" parameterType="map">

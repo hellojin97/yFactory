@@ -49,7 +49,6 @@
 		</div>
 	<div>
 		<button  class="btn1" id="excel">Excel</button>
-		<button class="btn1" id="mtrlOrderJasper">발주서인쇄</button>
 	</div>
 	</div>
 	</div>
@@ -168,39 +167,38 @@ $.ajax({
 	      perPage: 10
 	    }
 	  });
-	  // 발주코드 검색
-	  $("#search").on("click", function() {
+// 발주코드 검색
+$("#search").on("click", function() {
 
-	   var poCdinput = $("#poCdinput").val();
-		console.log(poCdinput);
-	   $.ajax({
-		      url : "mtrlReqSelectSearch",
-		      data : {
-		    	  poCdinput : poCdinput,
+ var poCdinput = $("#poCdinput").val();
+  $.ajax({
+      url : "mtrlReqSelectSearch",
+      data : {
+    	  poCdinput : poCdinput,
 
-		      },
-		      method : 'get',
-		      dataType: 'JSON',
-		      contentType : "application/json; charset=utf-8"
-		   }).done(function(result){
-			   mtrlReqList.resetData(result);
-		       console.log(result);
-		       
-		   }).fail(function(result){
-			   console.log(result);
-		   });
-	})
+      },
+      method : 'get',
+      dataType: 'JSON',
+      contentType : "application/json; charset=utf-8"
+   }).done(function(result){
+	   mtrlReqList.resetData(result);
+       console.log(result);
+       
+   }).fail(function(result){
+	   console.log(result);
+   });
+})
 
-	/* 검색 결과 초기화  */
-	$('#reset').on('click',function(){
-	const url = "mtrlRequestList";
-	   $.ajax(url,{
-	      dataType : "JSON",
-	      method: "GET"
-	   }).done(function(result){
-		   mtrlReqList.resetData(result);
-	     console.log(result);
-	   });
+/* 검색 결과 초기화  */
+$('#reset').on('click',function(){
+const url = "mtrlRequestList";
+   $.ajax(url,{
+      dataType : "JSON",
+      method: "GET"
+   }).done(function(result){
+	   mtrlReqList.resetData(result);
+     console.log(result);
+   });
 })
 
 //excel호출
@@ -215,9 +213,11 @@ $('#excel').on('click',function(){
 
 //발주서PDF
 mtrlReqList.on('dblclick', function(e){
+	if(mtrlReqList != null){
 	var poCd = mtrlReqList.getValue(e.rowKey,'원자재발주코드');
 	console.log(poCd);
 	window.open('mtrlOrderJasper?poCd='+poCd,'발주서인쇄.PDF','width=500, height=500'); 
+	}
 })
 	
 </script>

@@ -299,7 +299,7 @@ order by 4
 			AND    m.vdr_cd = v.vdr_cd
 			AND    lot.mt_cd = m.mt_cd
 			AND    lot.mt_lot = c.mt_lot
-            AND    lot.mt_wdt = SYSDATE
+            AND    lot.mt_wdt = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
 		</select>
 	<!-- 입고 단건조회 -->
 			<select id="mtrlInSearch" resultType="map">

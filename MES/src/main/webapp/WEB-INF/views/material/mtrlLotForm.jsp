@@ -7,9 +7,11 @@
 <title>LOT재고조회</title>
 </head>
 <body onkeyup="on_key_up()">
-
+		<div style="padding-bottom: 10px;">
+		<div class="mainTitle" style="padding-bottom: 15px;">
 		<h1>자재 LOT재고조회</h1>
-<form>
+		</div>
+		<div class="min1">
 		<div style="background-color: #e9ecef; padding: 8px;">
 			<div class="mainTitle" style="padding: 15px;">
 				<!-- 자재명 -->
@@ -41,7 +43,7 @@
 				<div class="col-md-12">
 					<div class="input-group">
 						<label for="inputText" class="col-form-label"
-							style="padding-right: 10px;">유통기한</label>
+							style="padding-right: 12px;">유통기한</label>
 						<div class="col-sm-2">
 							<input type="date" id="req1" class="form-control">
 						</div>
@@ -67,16 +69,17 @@
 			<hr style="border: solid 1px gray;">
 
 			<!-- 테이블 -->
-			<div class="code-html contents" style="padding-bottom: 10px;">
+			<div class="code-html contents" >
 				<div id="mtrlLotorder"></div>
 				<div id="test"></div>
 			</div>
 			<div>
 				<button  class="btn1" id="excel">Excel</button>
-				<button class="btn1" id="mtrlcancel">발주서인쇄</button>
+				
 			</div>
 		</div>
-</form>
+		</div>
+		</div>
 	
 
 </body>
@@ -125,11 +128,13 @@
 			name : 'mt_lot',
 			className : 'fontClass',
 		    sortable: true,
-		    sortingType: 'asc'
+		    sortingType: 'asc',
+		    align : 'center'
 		}, {
 			header : '자재코드',
 			name : 'mt_cd',
 			className : 'fontClass',
+			align : 'center'
 
 		}, {
 			header : '자재명',
@@ -145,16 +150,23 @@
 			header : '수량',
 			name : 'mt_qty',
 			className : 'fontClass',
+			align : 'right',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
 
 		}, {
 			header : '유통기한',
 			name : 'mt_exp',
 			className : 'fontClass',
+			align : 'center'
 
 		},{
 			header : '폐기여부',
 			name : 'cd_nm',
 			className : 'fontClass',
+			align : 'center'
 
 		}
 

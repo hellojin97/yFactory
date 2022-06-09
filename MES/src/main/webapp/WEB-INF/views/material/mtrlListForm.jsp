@@ -117,7 +117,11 @@ $.ajax({
 	    header: '발주수량',
 	    name: '발주수량',
 	    className : 'fontClass',
-	    align : 'right'
+	    align : 'right',
+		formatter(myNum) { 					
+		      return myNum.value.toString()
+		      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		}
 	  },
 	      {
   	    header: '단위',
@@ -141,13 +145,21 @@ $.ajax({
   	    header: '단가',
   	    name: '단가',
   	    className : 'fontClass',
-	    align : 'right'
+	    align : 'right',
+		formatter(myNum) { 					
+		      return myNum.value.toString()
+		      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		}
   	  },
 	      {
   	    header: '금액',
   	    name: '금액',
   	    className : 'fontClass',
-	    align : 'right'
+	    align : 'right',
+		formatter(myNum) { 					
+		      return myNum.value.toString()
+		      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		}
   	  },
 	    ],
 	    rowHeaders: ['rowNum'],

@@ -8,7 +8,7 @@
 
 </head>
 <body>
-	<div style="padding-bottom: 70px;">
+	<div style="padding-bottom: 10px;">
 		<div class="mainTitle" style="padding-bottom: 15px;">
 			<h1>발주 관리/등록</h1>
 		</div>

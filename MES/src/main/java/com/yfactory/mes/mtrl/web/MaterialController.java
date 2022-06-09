@@ -58,13 +58,7 @@ public class MaterialController {
 	@RequestMapping("/mtrlSafetyForm")
 	public String mtrlSafetyForm() {
 		return "material/mtrlSafetyForm";
-	}
-	//원자재재고조회
-	@RequestMapping("/mtrlStorageForm")
-	public String mtrlStorageForm() {
-		return "material/mtrlStorageForm";
-	}
-	
+	}	
 	
 	/*
 	 * MODAL 이동 

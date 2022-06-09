@@ -63,7 +63,6 @@
 		</div>
 		<div>
 			<button  class="btn1" id="excel">Excel</button>
-			<button class="btn1" id="mtrlcancel">발주서인쇄</button>
 		</div>
 	</div>
 
@@ -101,23 +100,28 @@
 			name : '원자재코드',
 			className : 'fontClass',
 	        sortable: true,
-	        sortingType: 'asc'
+	        sortingType: 'asc',
+	        align : 'center'
 		}, {
 			header : '원자재명',
 			name : '원자재명',
 			className : 'fontClass',
+			
 		}, {
 			header : '단위',
 			name : '단위',
 			className : 'fontClass',
+			align : 'center'
 		}, {
 			header : '현재고',
 			name : '현재고',
 			className : 'fontClass',
+			align : 'right'
 		}, {
 			header : '안전재고',
 			name : '안전재고',
 			className : 'fontClass',
+			align : 'right'
 		}
 
 		],

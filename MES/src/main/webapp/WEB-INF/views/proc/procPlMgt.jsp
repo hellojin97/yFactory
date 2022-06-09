@@ -113,39 +113,52 @@ $('#inBtn').on('click', function(){
 				header : '생산계획코드',
 				name : '생산계획코드',
 				className : 'fontClass',
+				align: 'center',
 				
 			},{
 				header : '주문코드',
 				name : '주문코드',
 				className : 'fontClass',
+				align: 'center',
 			}, {
 				header : '제품명',
 				name : '완제품명',
 				className : 'fontClass',
+
 			}, {
 				header : '제품코드',
 				name : '완제품코드',
 				className : 'fontClass',
+				align: 'center',
 			},{
 				header : '주문수량',
 				name : '주문수량',
 				className : 'fontClass',
+				align: 'right',
+				formatter(myNum) { 					
+				      return myNum.value.toString()
+				      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				}
 			},{
 				header : '계획량',
 				name : '계획량',
 				className : 'fontClass',
-				editor : "text"
+				align: 'right',
+				formatter(myNum) { 					
+				      return myNum.value.toString()
+				      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				}
 
 			}, {
 				header : '생산일수',
 				name : '생산일수',
 				className : 'fontClass',
-				editor : "text"
+				align: 'center',
 			}, {
 				header : '작업우선순위',
 				name : '작업우선순위',
 				className : 'fontClass',
-				editor : "text"
+				align: 'center',
 			},
 			],
 			rowHeaders : [ 'checkbox' ],
@@ -176,6 +189,7 @@ $("#outBtn").on("click", function(){
 			header : '주문코드',
 			name : '주문코드',
 			className : 'fontClass',
+			align: 'center',
 			
 		}, {
 			header : '제품명',
@@ -186,36 +200,46 @@ $("#outBtn").on("click", function(){
 			header : '제품코드',
 			name : '완제품코드',
 			className : 'fontClass',
+			align: 'center',
 			validation: { required: true }
 		},{
 			header : '주문수량',
 			name : '주문수량',
 			editor : "text",
-			className : 'fontClass'
+			className : 'fontClass',
+			align: 'right',
+
 
 		},{
 			header : '현재고',
 			name : '현재고',
 			editor : "text",
-			className : 'fontClass'
+			className : 'fontClass',
+			align: 'right',
+
 
 		},{
 			header : '계획량',
 			name : '계획량',
 			className : 'fontClass',
 			editor : "text",
-			validation: { required: true }
+			validation: { required: true },
+			align: 'right',
+
+		
 		}, {
 			header : '생산일수',
 			name : '생산일수',
 			className : 'fontClass',
 			editor : "text",
+			align : 'center',
 			validation: { required: true }
 		}, {
 			header : '작업우선순위',
 			name : '작업우선순위',
 			className : 'fontClass',
 			editor : "text",
+			align: 'center',
 			validation: { required: true }
 		},
 		],
@@ -287,12 +311,7 @@ $("#outBtn").on("click", function(){
 			      			toastr.error((prd[i].rowKey)+1 + '번째 제품명을 채워주세요!');
 			      		}
 			      		
-			      		  if(prd[i].주문수량 == null){
-			      			toastr.error((prd[i].rowKey)+1 + '번째 주문수량을 채워주세요!');
-			      		}
-			      		if(prd[i].현재고 == null){
-			      			toastr.error((prd[i].rowKey)+1 + '번째 현재고를 채워주세요!');
-			      		}
+
 			      		if(prd[i].계획량 == null){
 			      			toastr.error((prd[i].rowKey)+1 + '번째 계획량을 채워주세요!');
 			      		}
@@ -302,17 +321,24 @@ $("#outBtn").on("click", function(){
 			      		if(prd[i].작업우선순위 == null){
 				  			toastr.error((prd[i].rowKey)+1 + '번째 작업우선순위를 채워주세요!');
 			      		}  
-			      		/* if(prd[i].완제품명 == null || 
+
+			      		 if(prd[i].완제품명 == null || 
 			      		   prd[i].주문수량 == null || 
 			      		   prd[i].현재고 == null ||
+
 			      		   prd[i].계획량 == null ||
 			      		   prd[i].생산일수 == null ||
 			      		   prd[i].작업우선순위 == null){
-			      			result.isConfirmed = true;
-			      		} else{
 			      			result.isConfirmed = false;
-			      		} */
+
+			      		} else{
+			      			result.isConfirmed = true;
+			      		}
+			      	} 
+
+			      		} 
 			      	} // END OF FOR 
+
 		      
 		          if (result.isConfirmed) {
 		        	  
@@ -345,7 +371,7 @@ $("#outBtn").on("click", function(){
 						        		    text: "생산계획조회 페이지로 이동합니다.",
 						        		    type: "success"
 						        		}).then(function() {
-						        		    //window.location = "procPlSelect";
+						        		    window.location = "procPlSelect";
 						        		});
 
 		          			}else{

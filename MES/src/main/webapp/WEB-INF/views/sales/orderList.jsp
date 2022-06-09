@@ -115,7 +115,7 @@
 			</div>
             </div>
 <input type="hidden" id="hdOrdtlCd">
-
+<input type="hidden" id="ordPdfOcd">
 <script type="text/javascript">
 
 
@@ -226,8 +226,9 @@ $('#reset').on('click',function(){
 })
 ordeList.on("dblclick", function(e){
 	let odClick = ordeList.getFocusedCell();
-	let odc = ordeList.getValue(e.rowKey, "주문코드");
+	let odc = ordeList.getValue(e.rowKey, "주문코드");	
 	$("#hdOrdtlCd").val(odc);
+	console.log(odc);
 	if(odClick.columnName == "주문코드"){
 		$("#ordtlList").load("ordtlModal", function() {
 			const ordtlModal = new bootstrap.Modal('#ordtlModal');

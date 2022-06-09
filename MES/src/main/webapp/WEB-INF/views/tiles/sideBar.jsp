@@ -269,11 +269,11 @@
               <i class="bi bi-circle"></i><span>실시간 설비 상태</span>
             </a>
           </li>
-           <li>
+           <!-- <li>
             <a href="popupTest">
               <i class="bi bi-circle"></i><span>팝업테스트</span>
             </a>
-          </li>
+          </li> -->
           
           
         </ul>

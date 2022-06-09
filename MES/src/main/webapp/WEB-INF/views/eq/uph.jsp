@@ -93,12 +93,19 @@ $(function(){
     		  toastr.error('-');
     	  }
       }).done(function(res){
-    	  
+    	
     	  chart2.destroy();
 		  chart2 = toastui.Chart.lineChart({ el, data, options });
-    	  
+	
+    		
+    		 
+    		
     	  for (var i = 0; i < res.length; i++) {
-			resArr.push(res[i].설비코드);			
+			resArr.push(res[i].설비코드);	
+			
+			 
+			
+			
 		}
     	  for(var i = 0; i < resArr.length; i++){
     		  chart2.addSeries(
@@ -109,6 +116,10 @@ $(function(){
     				  { chartType: 'line' }
     				);    		  
     	  }
+    	  
+    	  
+    	 
+    	  
       
       });
       });
@@ -127,8 +138,36 @@ $(function(){
 	    		  toastr.error('라인이 비가동중이에요!');
 	    	  }
 	      }).done(function(res){
-	    	  console.log(res);
-	    	 	
+		    	  console.log("res:"+res.투입량);
+				
+		    	  
+		    		/* chart.setOptions({
+	    		  chart: { title: 'RealTime PRODUCTION', width: 1000, height: 300 },
+	    	       
+	    	        xAxis: {
+	    	          title: 'CurrentTime',
+	    	       
+	    	        },
+	    	        yAxis: {
+	    	          title: 'Production Volume',
+	    	          scale: {
+	    	              min: 0,
+	    	              max: res.투입량,
+	    	              stepSize: 100,
+	    	            },
+	    	        },
+	    	      
+	    	        legend: {
+	    	          align: 'top',
+	    	        },
+	    	        series: {
+	    	        	shift: true,
+	    	        	spline:true,
+	    	        	
+	    	        },
+	    		
+	    		}); */
+		    	  
 				//console.log(res[i].설비코드);
 				uphOne = res[0].합격량;
 				
@@ -140,6 +179,10 @@ $(function(){
 				
 				console.log(uphOne);
 				console.log(uphTwo);
+				
+				
+				
+				
 				chart2.addData([uphOne, uphTwo , uphThre ,uphFour], getTime()); 
 			 
 	      })

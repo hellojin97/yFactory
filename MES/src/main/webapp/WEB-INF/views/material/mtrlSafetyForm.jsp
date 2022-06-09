@@ -36,9 +36,9 @@
 							style="padding-right: 27px;">안전수량</label>
 						<div class="col-sm-6" style="padding-right: 10px;">
 							<input type="text" id="safe" class="form-control"
-								placeholder="안전수량">
+								placeholder="안전수량" style="width: 425px;">
 						</div>
-						<div style="padding-right: 10px;">
+						<div style="padding-right: 10px; margin-left: 30px;">
 							<button type="button" id="search" class="btn1">조회</button>
 						</div>
 

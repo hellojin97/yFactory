@@ -92,5 +92,7 @@ public interface EquipService {
 	String getEqImgAjax(String eqDtlCd); // 이미지 따로
 	
 	List<Map>getEqUph(String lineCd); // 설비 uph 리스트 조회
+	
+	List<Map>eqDivChkAjax(); // 설비 구분명 리스트 조회
 
 }

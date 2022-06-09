@@ -50,10 +50,10 @@ button:hover {
 							style="padding-right: 27px;">설비구분</label> 
 							<select id="eq_nm" name="eq_nm">
 							<option value="">전체</option>
-							<option value="YAFS01">반죽기</option>
+							<!-- <option value="YAFS01">반죽기</option>
 							<option value="YAFS02">성형기</option>
 							<option value="YAFS03">냉각기</option>
-							<option value="YAFS04">포장기</option>
+							<option value="YAFS04">포장기</option> -->
 						</select>&nbsp;&nbsp;&nbsp;
 					<button type="submit" class="btn btnpart" id="noChksearch">점검 조회</button>	
 						
@@ -157,6 +157,30 @@ $(function(){
 		location.reload(); // 페이지 새로고침
 	});
 	
+	
+	var selectBox = [];
+	const url2 = "eqDivChkAjax";
+	$.ajax({
+		url : url2,
+		method : "GET",
+		dataType:"JSON"
+		
+	}).done(function(res){
+		console.log(res);
+		for (var i = 0; i < res.length; i++) {
+			
+			
+			var divList = {};
+			divList.text = res[i].CD_NM;
+			divList.value = res[i].CD_NM;
+			
+			selectBox.push(divList);
+			
+			$("#eq_nm").append('<option value="'+res[i].CD_NM+'">'+res[i].CD_NM+'</option>');
+		};
+		console.log(selectBox);
+	})
+	
 		 	
 		   	 	modalGrid  = new tui.Grid({
 		       el: document.getElementById('grid'),
@@ -187,7 +211,7 @@ $(function(){
 		                 header: '점검주기',
 		                 name: '점검주기',
 		                 className : 'fontClass',
-		                 align: 'center'
+		                 align: 'right'
 		           },
 		               
 		           {

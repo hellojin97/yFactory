@@ -65,11 +65,11 @@
       FROM eq e, process prc
       WHERE e.eq_cd = prc.eq_cd(+)
       ORDER BY 1 -->
-      SELECT DISTINCT E.EQ_CD "설비코드" , 
+      SELECT DISTINCT E.EQ_CD "설비코드", 
 				COMM.CD_NM "설비구분"
                 ,E.EQ_MDNM "설비명"
-                ,PRC.PROC_CD "공정코드" 
-				,PRC.PROC_NM	"공정명"
+                ,PRC.PROC_CD "공정코드"  
+	            ,PRC.PROC_NM "공정명" 
 				,E.EQ_MIN "최저온도" 
 				,E.EQ_MAX "최고온도"
       			,COMM2.CD_NM "사용여부"
@@ -128,8 +128,8 @@
 	SELECT   E.EQ_CD "설비코드", 
 	            CD.CD_NM "구분명", 
 	            E.EQ_MDNM "설비명", 
-	            NVL(PRC.PROC_CD, 'Not Exist') "공정코드" , 
-	            NVL(PRC.PROC_NM,'Not Exist') "공정명" 
+	            PRC.PROC_CD "공정코드" , 
+	            PRC.PROC_NM "공정명" 
 	            ,E.EQ_CHKCYC "점검주기", 
 	            CD2.CD_NM "사용여부" 
 	FROM EQ E , PROCESS PRC, COMM_CODE CD, COMM_CODE CD2 
@@ -146,24 +146,29 @@
 	SELECT			E.EQ_CD "설비코드",
 					CD.CD_NM "구분명",
 					E.EQ_MDNM "설비명",
-					PRC.PROC_CD "공정코드" ,
-					PRC.PROC_NM "공정명" ,
+					NVL(PRC.PROC_CD, 'Not Exist') "공정코드" , 
+	            	NVL(PRC.PROC_NM,'Not Exist') "공정명" , 
 					E.EQ_CHKCYC "점검주기",
 					CD2.CD_NM "사용여부"
 	FROM 			EQ E ,
 					PROCESS PRC,
                     COMM_CODE CD,
                     COMM_CODE CD2
-	WHERE 			E.EQ_CD = PRC.EQ_CD
+	<!-- WHERE 			E.EQ_CD = PRC.EQ_CD
     AND             E.EQ_NM = CD.COMM_CD
-    AND             E.EQ_ACTST = CD2.COMM_CD
+    AND             E.EQ_ACTST = CD2.COMM_CD -->
+    WHERE E.EQ_NM = CD.COMM_CD 
+	AND E.EQ_ACTST = CD2.COMM_CD
 	<if test="key == 1">
+	AND E.EQ_CD = PRC.EQ_CD(+)
 	</if>
 	<if test="key == 2">
-	AND  E.EQ_ACTST = 'USE01'
+	AND	E.EQ_CD = PRC.EQ_CD
+	AND	E.EQ_ACTST = 'USE01'
 	</if>
 	<if test="key == 3">
-	AND  E.EQ_ACTST = 'USE02'
+	AND	E.EQ_CD = PRC.EQ_CD
+	AND	E.EQ_ACTST = 'USE02'
 	</if>
 	ORDER BY 1	
 	</select>
@@ -404,6 +409,12 @@ AND E.EQ_CD = PRO.EQ_CD
 AND LN.LINE_CD = #{lineCd}
 AND PS.PROC_ST NOT LIKE 'PLAN05'
 ORDER BY 2
+</select>
+
+<select id="eqDivChkAjax" resultType="map">
+SELECT CD_NM 
+FROM COMM_CODE
+WHERE HCOMM_CD LIKE 'YAFS'
 </select>
 
 

@@ -128,29 +128,34 @@ img{
 			},
 			{
 				header : '공정명',
-				name : '공정명'
+				name : '공정명',
+				align: 'center'
 				,className : 'fontClass',
 				
 			},
 			{
 				header : '점검주기',
-				name : '점검주기'
-				,className : 'fontClass',
-				 align: 'right'
+				name : '점검주기',
+				align: 'right',
+				className : 'fontClass'
+				 
 			},
 			{
 				header : '점검일자',
-				name : '점검일자'
+				name : '점검일자',
+				align: 'center'
 				,className : 'fontClass'
 			},
 			{
 				header : '차기점검일',
-				name : '차기점검일'
+				name : '차기점검일',
+				align: 'center'
 				,className : 'fontClass'
 			},
 			{
 				header : '등록인',
-				name : '등록인'
+				name : '등록인',
+				align: 'center'
 				,className : 'fontClass'
 			},
 			

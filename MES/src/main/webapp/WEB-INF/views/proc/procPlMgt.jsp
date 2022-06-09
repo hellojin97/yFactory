@@ -86,6 +86,7 @@
 		<div id="orderList1"></div>
 		<button id="btnPlanSelect" class="btn1">계획조회</button>
 		<button id="btnPlanCancel" class="btn1">계획취소</button>
+		<button type="button" class="btn1" id="excel">Excel</button>
 	</div>
 
 	<div id="test"></div>
@@ -468,6 +469,15 @@ $("#outBtn").on("click", function(){
 			$("#inBtn").trigger('click'); 
 
 		}
+		//excel호출
+		$('#excel').on('click',function(){
+			const options = {
+					  includeHiddenColumns: true,
+					  onlySelected: true,
+					  fileName: '생산계획관리',
+					};
+			resultGrid.export('xlsx', options);
+		})
 	</script>
 
 </body>

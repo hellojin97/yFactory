@@ -28,9 +28,9 @@
 		<div class="procLineEditor" >
 			<h3>제품 라인정보 관리</h3>
 			<hr style="margin-top: auto;">
-			<button type="button" id="btnUpdate"class="btn1" style="float: right; margin-bottom: 1em;">변경정보 수정</button>
-			<button type="button" id="btnDelete"class="btn1" style="float: right;">행삭제</button>
-			<button type="button" id="btnInsert" class="btn1" style="float: right;">행추가</button>
+			<button type="button" id="btnUpdate"class="btn1" style="float: right; margin-bottom: 1em;">변경사항 저장</button>
+			<button type="button" id="btnDelete"class="btn1" style="float: right;">공정삭제</button>
+			<button type="button" id="btnInsert" class="btn1" style="float: right;">공정추가</button>
 		</div>
 			<div id="procLineEditor" ></div>
 			<hr>

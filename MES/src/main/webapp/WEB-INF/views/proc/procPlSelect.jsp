@@ -75,7 +75,9 @@
 
 	<div id="procGrid"></div>
 	<div id="testGrid"></div>
-
+		<div>
+			<button type="button" class="btn1" id="excel">Excel</button>
+	</div>
 	<script>
 	 /* document.getElementById('dateA').value = new Date().toISOString().substring(0, 10);
 	 document.getElementById('dateB').value = new Date().toISOString().substring(0, 10); 
@@ -224,6 +226,15 @@
 		
 
 	});
+		//excel호출
+		$('#excel').on('click',function(){
+			const options = {
+					  includeHiddenColumns: true,
+					  onlySelected: true,
+					  fileName: '생산계획조회',
+					};
+			resultGrid.export('xlsx', options);
+		})
 	
 	</script>
 

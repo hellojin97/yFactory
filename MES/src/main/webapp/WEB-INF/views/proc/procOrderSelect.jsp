@@ -81,7 +81,9 @@
 
 
             </div>
-
+		<div>
+			<button type="button" class="btn1" id="excel">Excel</button>
+	</div>
 
 <script type="text/javascript">
 
@@ -207,6 +209,15 @@ window.onload = function (){
 		$("input[name='radios'][value='전체']").prop("checked", true);
 		procOrderGrid.clear();
 	 });
+	//excel호출
+	$('#excel').on('click',function(){
+		const options = {
+				  includeHiddenColumns: true,
+				  onlySelected: true,
+				  fileName: '생산지시조회',
+				};
+		procOrderGrid.export('xlsx', options);
+	})
 }
   </script>
 

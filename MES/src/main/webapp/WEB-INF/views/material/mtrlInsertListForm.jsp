@@ -9,15 +9,20 @@
 
 <body onkeyup="on_key_up()">
 
-		<h1>원자재 입고조회</h1>
-<form>
-		<div style="background-color: #e9ecef; padding: 8px;">
-			<div class="mainTitle" style="padding: 15px;">
+	<div>
+		<div class="mainTitle">
+			<h1 style="padding-bottom: 15px;">원자재입고관리</h1>
+		</div>
+	
+		<div class="min2">
+			<button class="btn2" id="btnMg">등록</button>
+			<button class="btn3" id="btnIn">관리</button>
+		</div>
+		
+		<div class="min1">
 				<!-- 자재명 -->
-				
 				<div class="col-md-5 " style="padding-bottom: 20px;">
 					<div class="input-group ">
-					
 						<label for="inputText" class="col-form-label" style="padding-right: 27px;">자재명</label> 
 						<input type="text" class="form-control" style="width: 50px" id="mtNminput" placeholder="자재명">
 						<a class="nav-link nav-icon search-bar-toggle " id="myBtn" onclick="myBtn"> 
@@ -64,7 +69,7 @@
 					</div>
 				</div>
 
-			</div>
+			
 			<hr style="border: solid 1px gray;">
 
 			<!-- 테이블 -->
@@ -72,24 +77,41 @@
 				<div id="mtrlInTable"></div>
 				<div id="test"></div>
 			</div>
+			<!-- 버튼 -->
 			<div>
 				<button  class="btn1" id="excel">Excel</button>
-				<button class="btn1" id="mtrlcancel">발주서인쇄</button>
+				<button class="btn1" id="mtrlcancel">구매전표</button>
+			</div>
+			
 			</div>
 		</div>
-</form>
+	</div>
 	
 
 </body>
 
 <script>
+
+	//입고 관리
+	$('#btnIn').on('click', function(){
+		location.href = 'mtrlInsertListForm';
+	
+	})
+	
+	  
+	//입고 등록
+	  $('#btnMg').on('click', function(){
+		location.href = 'mtrlInsertForm';
+	  }) 
+
+	//자재명 모달  
 	myBtn.addEventListener("click", function(){
 	$("#test").load("mtcdModal", function(){
 		const myModal = new bootstrap.Modal('#myModal');
 		myModal.show();
 	})
 	});
-
+	//업체명 모달
 	vdr.addEventListener("click", function(){
 		$("#test").load("vdrModal", function(){
 			const myModal = new bootstrap.Modal('#myModal');
@@ -143,6 +165,10 @@
 			header : '입고량',
 			name : '입고량',
 			className : 'fontClass',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
 		}, {
 			header : '입고일시',
 			name : '입고일시',

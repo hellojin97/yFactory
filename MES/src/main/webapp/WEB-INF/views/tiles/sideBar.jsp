@@ -117,27 +117,21 @@
 
           <li>
             <a href="mtrlInsertForm">
-              <i class="bi bi-circle"></i><span>원자재 입고관리</span>
+              <i class="bi bi-circle"></i><span>원자재 입고등록</span>
             </a>
           </li>
           
           <li>
             <a href="mtrlInsertListForm">
-              <i class="bi bi-circle"></i><span>원자재 입고조회</span>
+              <i class="bi bi-circle"></i><span>원자재 입고관리</span>
             </a>
           </li>
           
           <li>
             <a href="mtrlLotForm">
-              <i class="bi bi-circle"></i><span>LOT재고조회</span>
+              <i class="bi bi-circle"></i><span>LOT재고관리</span>
             </a>
-          </li>
-          
-          <li>
-            <a href="mtrlStorageForm">
-              <i class="bi bi-circle"></i><span>원자재 재고조회</span>
-            </a>
-          </li>         
+          </li>        
            
           <li>
             <a href="mtrlSafetyForm">

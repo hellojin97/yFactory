@@ -146,10 +146,10 @@
 		
 
 	   <if test = "state == '진행'"> 
-        AND  pl.pp_prog = 'PRDT01'	
+        AND  pl.pp_prog = 'PLAN01'	
         </if>
         <if test = "state == '완료'"> 
-        AND  pl.pp_prog = 'PRDT02'
+        AND  pl.pp_prog = 'PLAN03'
         </if>
 		<if test="prdNm != ''">
 		AND pd.prod_nm = #{prdNm}
@@ -246,10 +246,10 @@ SELECT
         AND   ins.ins_st = cc.comm_cd
         
 	   <if test = "state == '진행'"> 
-         AND    cc.comm_cd = 'PLAN01'
+         AND    cc.comm_cd = 'PRDT01'
         </if>
         <if test = "state == '완료'"> 
-      	 AND    cc.comm_cd = 'PLAN03'
+      	 AND    cc.comm_cd = 'PRDT02'
         </if>
 
 		<if test="date1 != '' and date2 != ''">

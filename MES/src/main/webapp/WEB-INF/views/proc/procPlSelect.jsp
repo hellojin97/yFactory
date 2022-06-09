@@ -48,7 +48,7 @@
 		<div class="col-md-3 " style="padding-bottom: 10px;">
 			<div class="input-group  " style="padding-bottom: 10px;">
 				<label for="inputText" class="col-form-label">제품명</label> <input
-					type="text" id="PrdNm" class="form-control" placeholder="생산계획명"
+					type="text" id="PrdNm" class="form-control" placeholder="제품명"
 					style="left: 65px; width: 100px">
 			</div>
 		</div>

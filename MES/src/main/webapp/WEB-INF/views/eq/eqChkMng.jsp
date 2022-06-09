@@ -175,10 +175,9 @@ $(function(){
 			divList.value = res[i].CD_NM;
 			
 			selectBox.push(divList);
-			
+			console.log(selectBox);
 			$("#eq_nm").append('<option value="'+res[i].CD_NM+'">'+res[i].CD_NM+'</option>');
-		};
-		console.log(selectBox);
+		}
 	})
 	
 		 	

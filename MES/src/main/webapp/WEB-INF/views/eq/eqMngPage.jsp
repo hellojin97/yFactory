@@ -309,8 +309,8 @@ button:hover {
 						// eq_nm : chkRows[i].설비명 ,
 						//proc_cd : chkRows[i].공정코드 ,
 						//proc_nm : chkRows[i].공정명 ,
-						eq_min : chkRows[i].최저온도 ,
-						eq_max : chkRows[i].최고온도 ,
+						//eq_min : chkRows[i].최저온도 ,
+						//eq_max : chkRows[i].최고온도 ,
 						//eq_purdt : chkRows[i].구매일자 ,
 						eq_actst : temp1
 
@@ -387,11 +387,13 @@ button:hover {
 						      			 
 						               });
 									
-								}else{// 체크된 cell이 사용가능으로 되어져있다면 패이지 새로고침
-									setTimeout(function(){location.reload();}
-									 , 1500);
 								}
-							} //  END OF FOR SYNTAX
+								else{
+									// 체크된 cell이 사용가능으로 되어져있다면 패이지 새로고침
+									/* setTimeout(function(){toastr.error('불가합니다');}
+									 , 1500); */
+								}
+							}//  END OF FOR SYNTAX
 			      			  
 			      			 }); // END OF AJAX DONE SYNTAX
 		            }else{

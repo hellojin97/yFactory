@@ -370,6 +370,7 @@ AND e.eq_cd = #{eqDtlCd}
 
 <select id="getEqUph" resultType="map">
 SELECT PS.PROC_PASSQTY "합격량",
+		PC.PROC_QTY "투입량",
         PRO.EQ_CD "설비코드",
         PRO.PROC_NM "공정명",
         LN.LINE_CD "라인코드",

@@ -19,8 +19,11 @@
 				<!-- 모달 내용 -->
 				<div class="modal-body">					
 					<div id="ordtlModalList"></div>
+					<button type="button" id="orderPdf" class="btn1">PDF</button>
 				</div>
-				<!-- 내용끝 -->				
+				<div>
+				</div>
+				<!-- 내용끝 -->
 			</div>
 		</div>
 	</div>
@@ -73,6 +76,13 @@
 	myModal.addEventListener('shown.bs.modal', function () {		 
 	      ordtlModalList.refreshLayout(); 
 	  })
+	  
+	  
+	 $("#orderPdf").on("click", function(){
+		 var pdfOcd = $("#hdOrdtlCd").val();
+		 console.log(pdfOcd);
+		 window.open('orderJasper?pdfOcd='+pdfOcd,'주문서인쇄.PDF','width=500, height=500'); 
+	 })
 	</script>
 </body>
 </html>

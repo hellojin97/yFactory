@@ -216,6 +216,12 @@ var lineCd;
 	    	  contentType:"application/json; charset=utf-8",
 	    	  success : function(rs){
   		  		console.log(rs);
+  		  	toastr.options = {
+		            closeButton: true,
+		            progressBar: true,
+		            positionClass: "",
+		            timeOut: 3000
+		        	};
   		  			toastr.success('선택하신 ['+rs[0].라인코드+'] 라인을 줄력!');
   		  			} 
 	      }).done(function(res){

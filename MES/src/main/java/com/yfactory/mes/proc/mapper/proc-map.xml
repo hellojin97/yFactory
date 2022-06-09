@@ -260,19 +260,28 @@ SELECT
 
 	</select>
 	<select id="ProcOrderList" resultType="map">
-	select ins.ins_cd "생산지시코드",
+	<![CDATA[
+		select 
+    DISTINCT
+    ins.ins_cd "생산지시코드",
 	pd.prod_nm "제품명",
 	insdtl.ins_qty "생산수량",
 	TO_CHAR(insdtl.ins_dtldt, 'YYYY-MM-DD') "생산지시일자",
     cm.cd_nm
-	from PRD_INS ins, prod pd, PRD_INSDTL insdtl, COMM_CODE CM
+	from PRD_INS ins, prod pd, PRD_INSDTL insdtl, COMM_CODE CM,
+           PROC_PRC PC, PROC_ST PST
 	WHERE ins.ins_cd = insdtl.ins_dtlcd
 	AND   insdtl.prod_cd = pd.prod_cd
     AND   cm.comm_cd = ins.ins_st
-    AND   cm.comm_cd ='PRDT01'
+    AND   pc.prd_dtlcd = insdtl.prd_dtlcd
+    AND   pst.proc_prcd = pc.proc_prcd
+    AND   pst.line_turn = pc.line_turn
+    AND   pst.proc_st <> 'PLAN05'
+    ]]>
 	<if test="date1 != '' ">
 	AND insdtl.ins_dtldt = TO_DATE(#{date1},'YY/MM/DD')
 	</if>
+	
 	</select>
 
 	<select id="ProcOrderCdSelectOne" resultType="map">
@@ -289,6 +298,7 @@ SELECT
     AND   ins.ins_cd = #{dtlCd}
 	</select>
 	<select id="ProcOrderLineSelectOne" resultType="map">
+	<![CDATA[
 	SELECT DISTINCT 
      PRC.PROC_PRCD "진행공정코드",
      PRC.LINE_TURN "순번",
@@ -314,8 +324,10 @@ SELECT
     AND PRC.PROC_PRCD = ERR.PROC_PRCD
     AND ST.PROC_PRCD = PRC.PROC_PRCD
     AND cm.comm_cd = ST.PROC_ST
+    AND ST.PROC_ST <> 'PLAN05'
 	AND LI.LINE_CD = #{line}
 	ORDER BY 1
+	]]>
 	</select>
 	<update id="ProcStartLogic" statementType="CALLABLE" parameterType="map">
 

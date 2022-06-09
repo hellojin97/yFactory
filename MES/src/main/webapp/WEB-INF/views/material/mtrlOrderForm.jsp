@@ -126,10 +126,14 @@ $("#select1").on("click",function(e) {
 		contentType : "application/json; charset=utf-8"
 	  	}).done(function(result){
 	  		for (var i = 0; i < result.length; i++) {
-	  			 /* 원자재코드 */
-    		  prodPlan.appendRow(result[i]);
-    		  console.log(result);
-    		  prodPlan.resetData(result)
+	  			
+	  			if(result[i].구분 != null){
+	  			
+			  			 /* 원자재코드 */
+		    		  prodPlan.appendRow(result[i]);
+		    		  console.log(result);
+		    		  prodPlan.resetData(result)
+	  			}
 	  		}
 	  	 }).fail(function(result){
 	  	    console.log(result);

@@ -121,6 +121,11 @@ var procResultList = new tui.Grid({
             name: '공정명',
             className : 'fontClass',
             align: 'center'
+          },{
+        	  header: '라인코드',
+              name: '라인코드',
+              className : 'fontClass',
+              align: 'center'
           },
           {
             header: '설비코드',
@@ -249,6 +254,13 @@ $('#excel').on('click',function(){
 	procResultList.export('xlsx', options);
 })
 
+procResultList.on('dblclick',function(e){
+	let lineCd = procResultList.getValue(e.rowKey,'라인코드');
+	let prcd = procResultList.getValue(e.rowKey, '진행공정코드');
+	console.log(lineCd);
+	
+	window.open('procMoveDialog?line_cd=' + lineCd + '&proc_prcd=' + prcd, '공정이동표.PDF', 'width=1000,height=1500');
+})
   
 </script>
 

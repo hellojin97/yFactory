@@ -313,8 +313,8 @@ $("#outBtn").on("click", function(){
 			      			result.isConfirmed = false;
 			      		}
 			      	} 
-		      		console.log(result.isConfirmed);
-		          /* if (result.isConfirmed) {
+		      
+		          if (result.isConfirmed) {
 		        	  
 		        	  for (var i = 0; i < prd.length; i++) {
 		 				 result = {
@@ -354,7 +354,7 @@ $("#outBtn").on("click", function(){
 		                      '섹시하시네요~!',
 		                      'error'
 		                  )
-		          			} */
+		          			} 
 		      }) 
 		});
 		 

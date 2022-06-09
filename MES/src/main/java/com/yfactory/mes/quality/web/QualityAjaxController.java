@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -62,9 +63,9 @@ public class QualityAjaxController {
 	
 	// 검색
 	// 불량코드
-	@GetMapping("/searchErrName")
-	public List<Map> searchErrName(String key) {
-		return qas.searchErrName(key);
+	@GetMapping("/errNmModalSearch")
+	public List<Map> errNmModalSearch(String errName) {
+		return qas.errNmModalSearch(errName);
 	}
 	
 	// 자재 품질검사요청(modal)

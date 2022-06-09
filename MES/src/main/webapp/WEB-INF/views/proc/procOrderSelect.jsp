@@ -155,12 +155,7 @@ window.onload = function (){
                      name: '진행구분',
                      className : 'fontClass',
                    },
-                   {
-                       header: '비고',
-                       name: '비고',
-                       className : 'fontClass',
-
-                     }],
+                   ],
                   rowHeaders: ['rowNum'],
                      pageOptions: {
                          useClient: true,

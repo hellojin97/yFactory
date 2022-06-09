@@ -190,13 +190,15 @@ $("#outBtn").on("click", function(){
 		},{
 			header : '주문수량',
 			name : '주문수량',
-			className : 'fontClass',
-			validation: { required: true }
+			editor : "text",
+			className : 'fontClass'
+
 		},{
 			header : '현재고',
 			name : '현재고',
-			className : 'fontClass',
-			validation: { required: true }
+			editor : "text",
+			className : 'fontClass'
+
 		},{
 			header : '계획량',
 			name : '계획량',
@@ -274,15 +276,15 @@ $("#outBtn").on("click", function(){
 		          cancelButtonText: '취소'
 		      }).then((result) => {
 		      	console.log(result);
-		      	console.log(result.isDismissed); // 승인시 FALSE / 취소시 TRUE
+		      	console.log('승인결과' + result.isDismissed); // 승인시 FALSE / 취소시 TRUE
 		      	console.log(prd);
 		      // 	console.log(prd[0].rowKey);
 				 //console.log(prdRow); 
 				//console.log(resultGrid.getValue(0,'제품명') == null);
 				//prd[i].제품명
 				 for (var i = 0; i < prd.length; i++) {
-			      		if(prd[i].제품명 == null){
-			      			toastr.error((prd[i].rowKey)+1 + '번째 완제품명을 채워주세요!');
+			      		if(prd[i].완제품명 == null){
+			      			toastr.error((prd[i].rowKey)+1 + '번째 제품명을 채워주세요!');
 			      		}
 			      		
 			      		  if(prd[i].주문수량 == null){
@@ -300,6 +302,16 @@ $("#outBtn").on("click", function(){
 			      		if(prd[i].작업우선순위 == null){
 				  			toastr.error((prd[i].rowKey)+1 + '번째 작업우선순위를 채워주세요!');
 			      		}  
+			      		if(prd[i].완제품명 == null || 
+			      		   prd[i].주문수량 == null || 
+			      		   prd[i].현재고 == null ||
+			      		   prd[i].계획량 == null ||
+			      		   prd[i].생산일수 == null ||
+			      		   prd[i].작업우선순위 == null){
+			      			result.isConfirmed = true;
+			      		} else{
+			      			result.isConfirmed = false;
+			      		}
 			      	} 
 		      
 		          if (result.isConfirmed) {

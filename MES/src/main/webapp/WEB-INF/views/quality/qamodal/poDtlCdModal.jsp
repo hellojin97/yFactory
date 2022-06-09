@@ -88,9 +88,10 @@
 	
 	$.ajax({
 		url : "pocdModalSearch",
-		data : {
+		type: "GET",
+		data : JSON.stringify({
 			key : key
-		},
+		}),
 		dataType: 'JSON',
 		contentType : "application/json; charset=utf-8"
 	}).done(function(result){

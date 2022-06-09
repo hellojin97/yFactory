@@ -366,10 +366,14 @@ SELECT
 		AND    PS.PROC_PRCD = PRC.PROC_PRCD
 		AND    PS.LINE_TURN = PRC.LINE_TURN
 		AND    PERR.ERR_CD = ERR.ERR_CD
+        AND     PS.PROC_ST = 'PLAN05'
+		ORDER BY 1
 	</select>
 	
 	<select id="procResultOrdersList" resultType="map">
-	SELECT   PID.INS_DTLCD AS "생산지시코드",
+	SELECT   
+            
+            PID.INS_DTLCD AS "생산지시코드",
              PD.PROD_NM AS "제품명",
              PST.PROC_QTY AS "생산수량",
              TO_CHAR(PID.INS_DTLDT,'YYYY-MM-DD') AS "생산지시일자"
@@ -378,7 +382,9 @@ SELECT
 	AND      PID.PRD_DTLCD = PRC.PRD_DTLCD
 	AND      PST.PROC_PRCD = PRC.PROC_PRCD
 	AND      PST.LINE_TURN = PRC.LINE_TURN
-	AND      PST.PROC_ST = 'PLAN02'
+    AND      PST.LINE_TURN = (SELECT MAX(LINE_TURN) FROM LINE WHERE PROD_CD = PD.PROD_CD)
+    AND      PST.PROC_ST = 'PLAN05'
+	ORDER BY 1
 	</select>
 	
 	<select id="procResultProcessList" resultType="map">
@@ -493,6 +499,7 @@ SELECT
 		AND    PS.PROC_PRCD = PRC.PROC_PRCD
 		AND    PS.LINE_TURN = PRC.LINE_TURN
 		AND    PERR.ERR_CD = ERR.ERR_CD
+        AND     PS.PROC_ST = 'PLAN05'
 		<if test="prdCd != ''">
 		AND    PID.INS_DTLCD LIKE #{prdCd}
 		</if>
@@ -502,6 +509,7 @@ SELECT
         <if test="req1 != '' and req2 != ''">
         AND    PID.INS_DTLDT BETWEEN TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
         </if>
+		ORDER BY 1
 	</select>
 	
 	<!-- 제품공정흐름도 '제품라인정보' -->

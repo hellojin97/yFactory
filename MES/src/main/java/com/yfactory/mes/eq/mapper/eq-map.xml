@@ -49,7 +49,7 @@
 	</insert>
 
 	
-	<!-- 설비관리페이지 전체 리스트 -->
+	<!-- 설비정보관리페이지 전체 리스트 -->
 	<select id="searchEqMngList" resultType="map">
 	<!-- SELECT e.eq_cd "설비코드" , 
 				case when lower(eq_nm) like 'yafs01' then '반죽기'
@@ -65,18 +65,19 @@
       FROM eq e, process prc
       WHERE e.eq_cd = prc.eq_cd(+)
       ORDER BY 1 -->
-      SELECT DISTINCT e.eq_cd "설비코드" , 
-				COMM.CD_NM "설비구분",
-                e.eq_mdnm "설비명" , prc.proc_cd "공정코드" , 
-				prc.proc_nm	"공정명", e.eq_min "최저온도" 
-				, e.eq_max "최고온도"
-      			<!-- ,TO_CHAR(e.eq_purdt,'yyyy-MM-dd') "구매일자", -->
-      			<!-- comm2.cd_nm "사용여부" -->
-      FROM eq e, process prc , COMM_CODE COMM , COMM_CODE COMM2
-      WHERE e.eq_cd = prc.eq_cd(+)
-      AND e.eq_nm = comm.comm_cd
-      <!-- AND e.eq_actst = comm2.comm_cd -->
-      ORDER BY 1
+      SELECT DISTINCT E.EQ_CD "설비코드" , 
+				COMM.CD_NM "설비구분"
+                ,E.EQ_MDNM "설비명"
+                ,PRC.PROC_CD "공정코드" 
+				,PRC.PROC_NM	"공정명"
+				,E.EQ_MIN "최저온도" 
+				,E.EQ_MAX "최고온도"
+      			,COMM2.CD_NM "사용여부"
+      FROM EQ E, PROCESS PRC, COMM_CODE COMM, COMM_CODE COMM2
+      WHERE E.EQ_CD = PRC.EQ_CD(+)
+      AND E.EQ_NM = COMM.COMM_CD
+      AND E.EQ_ACTST = COMM2.COMM_CD
+      ORDER BY E.EQ_CD
 	</select>
 
 
@@ -109,7 +110,7 @@
 
 
 	<select id="getEqActStatList" resultType="map">
-	SELECT			E.EQ_CD "설비코드",
+	<!-- SELECT			E.EQ_CD "설비코드",
 					CD.CD_NM "구분명",
 					E.EQ_MDNM "설비명",
 					PRC.PROC_CD "공정코드" ,
@@ -123,8 +124,20 @@
 	WHERE 			E.EQ_CD = PRC.EQ_CD
     AND             E.EQ_NM = CD.COMM_CD
     AND             E.EQ_ACTST = CD2.COMM_CD
+	ORDER BY 1 -->
+	SELECT   E.EQ_CD "설비코드", 
+	            CD.CD_NM "구분명", 
+	            E.EQ_MDNM "설비명", 
+	            NVL(PRC.PROC_CD, 'Not Exist') "공정코드" , 
+	            NVL(PRC.PROC_NM,'Not Exist') "공정명" 
+	            ,E.EQ_CHKCYC "점검주기", 
+	            CD2.CD_NM "사용여부" 
+	FROM EQ E , PROCESS PRC, COMM_CODE CD, COMM_CODE CD2 
+	WHERE E.EQ_CD = PRC.EQ_CD(+) 
+	AND E.EQ_NM = CD.COMM_CD 
+	AND E.EQ_ACTST = CD2.COMM_CD 
+	<!-- AND E.EQ_ACTST = 'USE01' --> 
 	ORDER BY 1
-	
 	</select>
 	
 	
@@ -243,7 +256,8 @@ FROM EQ E , EQ_INA INA , EQ_CHK chk, comm_code comm
 WHERE E.EQ_CD = INA.EQ_CD
 AND E.EQ_CD = CHK.EQ_CD
 AND CHK.CHK_RSCD = COMM.COMM_CD
-AND INA.EQ_INAED IS NULL 
+AND INA.EQ_INAED IS NULL
+AND E.EQ_ACTST LIKE 'USE02'
 <if test="eq_nm != null and eq_nm != ''">
 AND    E.eq_mdnm LIKE #{eq_nm}
 </if>
@@ -316,9 +330,7 @@ WHERE EQ_CD IN
 
 
 <update id="eqMngUpdateAjax" parameterType="map" statementType="CALLABLE" >
-{CALL eq_update(#{eq_cd},#{proc_cd},#{proc_nm},#{eq_min},#{eq_max},#{eq_purdt},
-						  #{eq_actst}
-						  )}
+{CALL eq_update(#{eq_cd},#{eq_min},#{eq_max},#{eq_actst})}
 </update>
 
 <select id="getEqTemp" resultType="map">
@@ -341,22 +353,28 @@ AND line_cd = #{lineCd}
 <select id="getEqDetailDataAjax" resultType="map">
 SELECT      DISTINCT e.eq_cd "설비코드",
 				e.eq_mdnm "설비명",
-				prc.proc_cd "공정코드",
-				prc.proc_nm "공정명",
+				NVL(prc.proc_cd,'Not Exist') "공정코드",
+				NVL(prc.proc_nm,'Not Exist') "공정명",
 				e.eq_chkcyc "점검주기",
-				TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd') "점검일자",
-				TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd') "차기점검일",
+				NVL(TO_CHAR(chk.eq_chkdt, 'yyyy-MM-dd'),'Not Exist') "점검일자",
+				NVL(TO_CHAR(to_date(chk.eq_chkdt,'yy/MM/dd') + e.eq_chkcyc , 'yyyy-MM-dd'),'Not Exist') "차기점검일",
 				emp.emp_nm "등록인",
 				comm.CD_NM "사용여부"
 
-	FROM eq e, process prc , eq_chk chk , employee emp , vendor vdr , comm_code comm 
+	FROM EQ E, PROCESS PRC , EQ_CHK CHK , EMPLOYEE EMP , VENDOR VDR , COMM_CODE COMM 
 	
-	WHERE e.eq_cd = prc.eq_cd
+	<!-- WHERE e.eq_cd = prc.eq_cd -->
 	<!-- AND   e.eq_cd = chk.eq_cd; -->
-	AND  e.eq_inster = emp.emp_no
+	<!-- AND  e.eq_inster = emp.emp_no
     AND e.eq_actst = comm.comm_cd
     AND e.eq_cd = #{eqDtlCd}
-    ORDER BY e.eq_cd
+    ORDER BY e.eq_cd -->
+    WHERE E.EQ_CD = PRC.EQ_CD(+)
+	AND  E.EQ_INSTER = EMP.EMP_NO
+    AND E.EQ_ACTST = COMM.COMM_CD
+    AND CHK.EQ_CD(+) = E.EQ_CD
+    AND E.EQ_CD LIKE #{eqDtlCd}
+    ORDER BY E.EQ_CD
 </select>
 
 

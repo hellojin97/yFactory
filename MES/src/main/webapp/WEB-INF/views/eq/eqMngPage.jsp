@@ -67,13 +67,13 @@ button:hover {
 	<!-- <div id="in/out"></div> -->
 	<div style="padding-bottom: 70px; ">
 		<div class="mainTitle" style="padding-bottom: 15px; color:;">
-			<h1>설비 정보</h1>
+			<h1>설비 정보 관리</h1>
 					
 			<!-- <h3>설비 데이터</h3> -->
 			
 			<div class="min2">
 			
-				<!-- <button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button> -->
+				<button type="button" id="eqUpd" class="btn2" class="inSearch">설비 수정</button>
 			</div>
 			<div class="min1" >
 			
@@ -156,7 +156,27 @@ button:hover {
 					name : '최고온도',
 					className : 'fontClass',
 					//editor : "text"
-				}
+				},
+				{
+					header : '사용여부',
+					name : '사용여부',
+					className : 'fontClass',
+					 editor: {
+					      type: 'select',
+					      options: {
+					        listItems: [
+					          {
+					            text: '사용가능',
+					            value: '사용가능'
+					          },
+					          {
+					            text: '사용불가',
+					            value: '사용불가'
+					          }
+					          ]
+					      }
+					 },
+				},
 				
 				],
 				
@@ -168,7 +188,7 @@ button:hover {
 				}
 			});
 			
-			  grid.on('focusChange', (ev) => {
+			  /* grid.on('focusChange', (ev) => {
 				
 				    console.log("focusChange");
 				    grid.setSelectionRange({
@@ -176,7 +196,7 @@ button:hover {
 				      end: [ev.rowKey, grid.getColumns().length-1],
 				     // color:'#fee'
 				    });
-				  }); 
+				  });  */
 			 
 		
 			
@@ -263,11 +283,11 @@ button:hover {
 				data = {
 						eq_cd : chkRows[i].설비코드 , 
 						// eq_nm : chkRows[i].설비명 ,
-						proc_cd : chkRows[i].공정코드 ,
-						proc_nm : chkRows[i].공정명 ,
+						//proc_cd : chkRows[i].공정코드 ,
+						//proc_nm : chkRows[i].공정명 ,
 						eq_min : chkRows[i].최저온도 ,
 						eq_max : chkRows[i].최고온도 ,
-						eq_purdt : chkRows[i].구매일자 ,
+						//eq_purdt : chkRows[i].구매일자 ,
 						eq_actst : temp1
 
 				};
@@ -336,14 +356,20 @@ button:hover {
 						 		        	console.log(result.isConfirmed); // 승인시 FALSE / 취소시 TRUE
 						 		        	  if (result.isConfirmed) {
 						 		        		 document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
+						 		        	  }else{// 취소시 1.5초 텀을 두고 페이지 새로고침
+						 		        		 setTimeout(function(){location.reload();}
+												 , 1500);
 						 		        	  }
 						      			 
 						               });
 									
+								}else{// 체크된 cell이 사용가능으로 되어져있다면 패이지 새로고침
+									setTimeout(function(){location.reload();}
+									 , 1500);
 								}
-							}
+							} //  END OF FOR SYNTAX
 			      			  
-			      			 });
+			      			 }); // END OF AJAX DONE SYNTAX
 		            }else{
 		            	Swal.fire(
 		                        '수정이 취소되었습니다.',
@@ -359,7 +385,7 @@ button:hover {
 		    }); 
 		
 		
-		}	
+		}// END OF DOM LOADED	
 		
 		
 	</script>

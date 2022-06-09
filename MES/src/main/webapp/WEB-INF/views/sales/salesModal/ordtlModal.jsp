@@ -54,7 +54,11 @@
 			name : '제품명'
 		}, {
 			header : '주문량',
-			name : '주문량'
+			name : '주문량',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
 		},{
 			header : '진행상황',
 			name : '진행상황'

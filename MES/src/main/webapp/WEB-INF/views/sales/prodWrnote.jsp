@@ -131,7 +131,11 @@
 			header : '입고량',
 			className : 'fontClass',
 			name : '입고량',
-			align: 'right'
+			align: 'right',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
 		}, {
 			header : '입고일자',
 			name : '입고일자',
@@ -192,7 +196,11 @@
 				}, {
 					header : '입고량',
 					name : '입고량',
-					align: 'right'
+					align: 'right',
+					formatter(myNum) { 					
+					      return myNum.value.toString()
+					      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+					}
 				}, {
 					header : '입고일자',
 					name : '입고일자',
@@ -248,7 +256,11 @@
 			}, {
 				header : '출고량',
 				name : '출고량',
-				align: 'right'
+				align: 'right',
+				formatter(myNum) { 					
+				      return myNum.value.toString()
+				      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				}
 			}, {
 				header : '출고일자',
 				name : '출고일자',
@@ -293,7 +305,11 @@
     				name : '제품명'
     			}, {
     				header : '입고량',
-    				name : '입고량'
+    				name : '입고량',
+    				formatter(myNum) { 					
+    				      return myNum.value.toString()
+    				      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    				}
     			}, {
     				header : '입고일자',
     				name : '입고일자'
@@ -338,7 +354,11 @@
  				name : '제품명'
  			}, {
  				header : '출고량',
- 				name : '출고량'
+ 				name : '출고량',
+ 				formatter(myNum) { 					
+ 				      return myNum.value.toString()
+ 				      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+ 				}
  			}, {
  				header : '출고일자',
  				name : '출고일자'

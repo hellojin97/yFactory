@@ -89,7 +89,11 @@ var ordDtpList = new tui.Grid({
               header: '주문수량',
               className : 'fontClass',
               name: '주문수량',
-  			align: 'right'
+  			align: 'right',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
             },
           {
               header: '납기일자',
@@ -140,7 +144,11 @@ var ordDtpList = new tui.Grid({
           header: '출고량',
           name: '출고량',
           className : 'fontClass',
-			align: 'right'
+			align: 'right',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
         },
         {
             header: '출고날짜',

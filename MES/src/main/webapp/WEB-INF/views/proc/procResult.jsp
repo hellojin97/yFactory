@@ -137,13 +137,21 @@ var procResultList = new tui.Grid({
               header: '투입량',
               name: '투입량',
               className : 'fontClass',
-              align: 'right'
+              align: 'right',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
             },
             {
                 header: '생산량',
                 name: '생산량',
                 className : 'fontClass',
-                align: 'right'
+                align: 'right',
+    			formatter(myNum) { 					
+  			      return myNum.value.toString()
+  			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  			}
               },
             {
                 header: '불량량',

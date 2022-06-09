@@ -115,7 +115,11 @@
 			header : '완제품수량',
 			name : '완제품수량',
 			className : 'fontClass',
-			align: 'right'
+			align: 'right',
+			formatter(myNum) { 					
+			      return myNum.value.toString()
+			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
 		}, {
 			header : '제조일자',
 			name : '제조일자',

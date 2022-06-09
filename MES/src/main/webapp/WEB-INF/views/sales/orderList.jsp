@@ -169,7 +169,11 @@ window.onload = function (){
                      header: '주문수량',
                      name: '주문수량',
                      className : 'fontClass',
-                     align: 'right'
+                     align: 'right',
+         			formatter(myNum) { 					
+       			      return myNum.value.toString()
+       			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+       			}
                    },
                    {
                        header: '진행상황',

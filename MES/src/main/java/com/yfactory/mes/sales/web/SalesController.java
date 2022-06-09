@@ -1,15 +1,30 @@
 package com.yfactory.mes.sales.web;
 
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 
 
 @Controller
 public class SalesController {
 
-	
+	@Autowired DataSource datasource;
 	
 	@RequestMapping("/orderList")
 	public String  OrderList() {
@@ -72,6 +87,23 @@ public class SalesController {
 	@RequestMapping("/ordtlModal")
 	public String ordtlModal() {
 		return "sales/salesModal/ordtlModal";
+	}
+	
+	/*
+	 * jasper
+	 */
+	//발주서 PDF
+	@RequestMapping("orderJasper")
+	public void report(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Connection conn = datasource.getConnection();
+		
+		InputStream jasperStream = getClass().getResourceAsStream("/jasper/salesOrder.jasper");
+		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream); 
+		//파라미터 맵
+		HashMap<String,Object> map = new HashMap<>(); 
+		map.put("key", request.getParameter("pdfOcd"));
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+		JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
 	}
 
 }

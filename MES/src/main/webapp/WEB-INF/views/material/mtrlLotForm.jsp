@@ -41,7 +41,7 @@
 				<div class="col-md-12">
 					<div class="input-group">
 						<label for="inputText" class="col-form-label"
-							style="padding-right: 10px;">입고날짜</label>
+							style="padding-right: 10px;">유통기한</label>
 						<div class="col-sm-2">
 							<input type="date" id="req1" class="form-control">
 						</div>

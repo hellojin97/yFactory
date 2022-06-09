@@ -149,16 +149,13 @@ public class pageController {
 		return "/eq/eqmodal/eqDailyChkCount";
 	}
 	
-	@GetMapping("/popupTest")
-	public String popupTest() {
-		return "/eq/Test";
-	}
+	/*
+	 * @GetMapping("/popupTest") public String popupTest() { return "/eq/Test"; }
+	 */
 	
-	@GetMapping("/popup")
-	public String popup() {
-		return "/eq/popup";
-	}
-
+	/*
+	 * @GetMapping("/popup") public String popup() { return "/eq/popup"; }
+	 */
 	// 설비 코드 클릭시 상세 데이터 (이미지 포함)
 		@GetMapping("/eqDetailmodal")
 		public String eqDetailmadal() {

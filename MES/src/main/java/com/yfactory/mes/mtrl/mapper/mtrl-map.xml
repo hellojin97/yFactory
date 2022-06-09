@@ -144,6 +144,7 @@ order by 4
 		   WHERE  po.po_cd = pdl.po_cd
 		   AND    pdl.mt_cd = m.mt_cd
 		   AND    m.vdr_cd = vdr.vdr_cd
+		   AND    po.po_reqdt = SYSDATE
 		   AND    po.po_cd IN (select po_cd
 		                                     from mt_podtl
 		                                     where po_cd not IN (select po_cd
@@ -151,8 +152,8 @@ order by 4
 		</select>
 	<!-- 발주검색 -->
 		<select id="mtrlReqSelectSearch" resultType="map">
-			SELECT po.po_cd    "원자재발주코드",
-			       m.mt_cd    "원자재코드",
+						SELECT      
+                   m.mt_cd    "원자재코드",
 			       m.mt_nm    "원자재명",
 			       vdr.vdr_nm   "업체명",
 			       pdl.po_qty   "발주수량",
@@ -167,8 +168,9 @@ order by 4
 			       vendor vdr,
 			       mt_podtl pdl,
 			       mt_lot lot
+                   
 			WHERE  po.po_cd = pdl.po_cd
-			AND    po.mt_cd = m.mt_cd
+			AND    pdl.mt_cd = m.mt_cd
 			AND    m.mt_cd = lot.mt_cd
 			AND    m.vdr_cd = vdr.vdr_cd
 				<if test="poCdinput != ''">
@@ -386,7 +388,7 @@ SELECT po.po_cd "원자재발주코드",
          AND    vd.vdr_nm LIKE '%'||#{m2}||'%'
             </if>
             <if test="req1 != '' and req2 != ''">
-         AND    lot.mt_wdt between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
+         AND    lot.mt_exp between TO_DATE(#{req1},'YYYY-MM-DD') AND TO_DATE(#{req2},'YYYY-MM-DD')
             </if>
       </select>   
 <!-- END LOT페이지 -->      

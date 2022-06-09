@@ -30,7 +30,7 @@
 </head>
 <body>
 	<div class="mainTitle" style="padding-bottom: 15px; color:;">
-		<h1>주문서 조회</h1>
+		<h1>생산계획관리</h1>
 	</div>
 	<div class="min2">
 		<button type="button" id="inBtn" class="btn2">관리</button>
@@ -47,7 +47,7 @@
 				<div class="input-group  " style="padding-bottom: 10px;">
 					<label for="inputText" class="col-form-label"
 						style="padding-right: 27px;">생산계획명</label> <input type="text"
-						id="ProcPN" class="form-control" style="width: 50px"
+						id="ProcPN" class="form-control" style="width: 30px" maxlength='10'
 						placeholder="생산계획명">
 					<!-- 							<a class="nav-link nav-icon search-bar-toggle" id="NmSearch" onclick="NmSearch">
 							<i class="bi bi-search" style="color: #2c3e50"></i>
@@ -153,12 +153,12 @@ $('#inBtn').on('click', function(){
 				header : '생산일수',
 				name : '생산일수',
 				className : 'fontClass',
-				align: 'center',
+				align: 'right',
 			}, {
 				header : '작업우선순위',
 				name : '작업우선순위',
 				className : 'fontClass',
-				align: 'center',
+				align: 'right',
 			},
 			],
 			rowHeaders : [ 'checkbox' ],
@@ -232,14 +232,14 @@ $("#outBtn").on("click", function(){
 			name : '생산일수',
 			className : 'fontClass',
 			editor : "text",
-			align : 'center',
+			align: 'right',
 			validation: { required: true }
 		}, {
 			header : '작업우선순위',
 			name : '작업우선순위',
 			className : 'fontClass',
 			editor : "text",
-			align: 'center',
+			align: 'right',
 			validation: { required: true }
 		},
 		],
@@ -321,22 +321,27 @@ $("#outBtn").on("click", function(){
 			      		if(prd[i].작업우선순위 == null){
 				  			toastr.error((prd[i].rowKey)+1 + '번째 작업우선순위를 채워주세요!');
 			      		}  
-
+			      		if($("#ProcPN").val() == ''){
+		      				toastr.error('생산계획명을 채워주세요!');
+			      		}
 			      		 if(prd[i].완제품명 == null || 
 			      		   prd[i].주문수량 == null || 
 			      		   prd[i].현재고 == null ||
 
 			      		   prd[i].계획량 == null ||
 			      		   prd[i].생산일수 == null ||
-			      		   prd[i].작업우선순위 == null){
-			      			result.isConfirmed = false;
+			      		   prd[i].작업우선순위 == null || $("#ProcPN").val() == '' ){
+			      			  
+					      			result.isConfirmed = false;
+			      			 
 
 			      		} else{
 			      			result.isConfirmed = true;
+			      			 
 			      		}
-			      	} 
+			      	
 
-			      		} 
+			      		
 			      	} // END OF FOR 
 
 		      

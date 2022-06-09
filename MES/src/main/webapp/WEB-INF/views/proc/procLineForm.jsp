@@ -48,16 +48,19 @@ procLine = new tui.Grid({
 		columns : [ {
 			header : '제품코드',
 			name : '제품코드',
-			className : 'fontClass'
+			className : 'fontClass',
+    		align: 'center',
 		}, {
 			header : '제품명',
 			name : '제품명',
-			className : 'fontClass'
+			className : 'fontClass',
+			
 
 		}, {
 			header : '라인코드',
 			name : '라인코드',
-			className : 'fontClass'
+			className : 'fontClass',
+    		align: 'center',
 		}	],
 		rowHeaders : [ 'rowNum' ],
 		pageOptions : {
@@ -80,19 +83,22 @@ procLineEdit = new tui.Grid({
 			header : '공정코드',
 			name : '공정코드',
 			className : 'fontClass',
+    		align: 'center',
 			validation: { required: true }
 		}, {
 			header : '공정명',
 			name : '공정명',
-			className : 'fontClass'
-
+			className : 'fontClass',
+    		align: 'center',
 		}, {
 			header : '설비코드',
 			name : '설비코드',
-			className : 'fontClass'
+			className : 'fontClass',
+    		align: 'center',
 		},{
 			header : '설비명',
 			name : '설비명',
+    		align: 'center',
 			//className : 'blue fontClass',
 		}	],
 		rowHeaders : [

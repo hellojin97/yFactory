@@ -124,11 +124,13 @@ window.onload = function (){
            header: '생산지시코드',
            name: '생산지시코드',
            className : 'fontClass',
+			align: 'center',
          },
          {
              header: '제품코드',
              name: '제품코드',
              className : 'fontClass',
+ 			align: 'center',
            },
            {
                header: '제품명',
@@ -139,21 +141,25 @@ window.onload = function (){
                  header: '생산수량',
                  name: '생산수량',
                  className : 'fontClass',
+     			align: 'right',
                },
              {
                  header: '라인코드',
                  name: '라인코드',
                  className : 'fontClass',
+      			align: 'center',
                },
                {
                    header: '지시우선순위',
                    name: '지시우선순위',
                    className : 'fontClass',
+        			align: 'right',
                  },
                  {
                      header: '진행구분',
                      name: '진행구분',
                      className : 'fontClass',
+                     
                    },
                    ],
                   rowHeaders: ['rowNum'],

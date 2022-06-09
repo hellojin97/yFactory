@@ -126,13 +126,12 @@ $("#select1").on("click",function(e) {
 		contentType : "application/json; charset=utf-8"
 	  	}).done(function(result){
 	  		for (var i = 0; i < result.length; i++) {
-	  			
-	  			if(result[i].구분 != null){
-	  			
+	  			console.log(result[i].구분);
+	  			if(result[i].구분 == '부족'){
 			  			 /* 원자재코드 */
 		    		  prodPlan.appendRow(result[i]);
 		    		  console.log(result);
-		    		  prodPlan.resetData(result)
+		    		  
 	  			}
 	  		}
 	  	 }).fail(function(result){

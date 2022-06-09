@@ -43,17 +43,19 @@
 			
 		</div>
 	</fieldset>
+
 	<!-- 생산계획명 -->
 	<div id="PNM">
 		<div class="col-md-3 " style="padding-bottom: 10px;">
 			<div class="input-group  " style="padding-bottom: 10px;">
 				<label for="inputText" class="col-form-label">제품명</label> <input
-					type="text" id="PrdNm" class="form-control" placeholder="생산계획명"
+					type="text" id="PrdNm" class="form-control" placeholder="제품명"
 					style="left: 65px; width: 100px">
 			</div>
 		</div>
 	</div>
 	<!-- 생산 계획 일자 -->
+
 	<div class="input-group" style="padding-bottom: 15px">
 		<label for="inputText" class="col-form-label"
 			style="padding-right: 40px;">생성 계획 일자</label>
@@ -67,13 +69,10 @@
 			<input type="date" class="form-control" id="dateB">
 		</div>
 		<button id="dateSearch" class="btn1">검색</button>
-		<button id="dateClear" class="btn1">초기화</button>
+		<button type="reset" id="dateClear" class="btn1">초기화</button>
 	
-
-
-
-
 </div>
+
 	<div id="procGrid"></div>
 	<div id="testGrid"></div>
 
@@ -210,10 +209,14 @@
 				const ProcPlModal = new bootstrap.Modal('#myModal');
 				ProcPlModal.show();
 	 });
+			
 	$("#dateClear").click(function() {
-	 
-		 $('#PrdNm').val('');
-		 resultGrid.clear();
+		
+		$("input[name='radios'][value='전체']").prop("checked", true);
+		$("#PrdNm").val('');
+		$("#dateA").val('');
+		$("#dateB").val('');
+		resultGrid.clear();
 	 });
 	
 	

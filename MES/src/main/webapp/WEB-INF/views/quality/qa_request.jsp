@@ -83,13 +83,20 @@
 			data: {
 				pdt: pdt
 			}
-			
-			
 		}).done(function() {
-			alert(pdt + '의 품질검사 신청이 완료되었습니다.');
-			location.href = 'qa_requestMgr';
+			Swal.fire({
+                icon: 'success',
+                title: '품질검사신청완료.',
+                text: '품질검사 신청이 완료되었습니다.',
+            }).then(function(){
+				location.href = 'qa_requestMgr';
+            }
 		}).fail(function() {
-			alert(pdt + '의 품질검사 신청이 실패하였습니다.');
+			Swal.fire({
+                icon: 'error',
+                title: '품질검사신청완료.',
+                text: '품질검사 신청이 실패하였습니다.',
+            })
 		})
 	});
 	</script>

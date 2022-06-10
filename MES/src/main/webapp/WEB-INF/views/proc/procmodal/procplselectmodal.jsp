@@ -43,10 +43,13 @@ $(function(){
 	    	 {
 		           header: '제품코드',
 		           name: '완제품코드',
+					className : 'fontClass',
+					align: 'center',
 		      },
 	         {
 	           header: '제품명',
 	           name: '완제품명',
+				className : 'fontClass',
 	         },
 
 	             ],

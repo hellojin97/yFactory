@@ -61,25 +61,51 @@
 		columns : [ {
 			header : '생산계획코드',
 			name : '생산계획코드',
+			className : 'fontClass',
+			align: 'center',
 		}, {
 			header : '계획상세코드',
-			name : '생산계획상세코드'
+			name : '생산계획상세코드',
+			className : 'fontClass',
+			align: 'center',
+			
 		},{
 			header : '제품명',
 			name : '완제품명',
+			className : 'fontClass',
 
 		}, {
 			header : '생산일수',
 			name : '생산일수',
+			className : 'fontClass',
+			align: 'center',
 		},{
 			header : '수량',
 			name : '계획량',
+			className : 'fontClass',
+			align: 'right',
+			formatter(myNum) {                
+				               return myNum.value.toString()
+				               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				         		}
 		},{
 			header : '생산지시량',
 			name : '생산지시량',
+			className : 'fontClass',
+			align: 'right',
+			formatter(myNum) {                
+				               return myNum.value.toString()
+				               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				         		}
 		},{
 			header : '잔량',
 			name : '잔량',
+			className : 'fontClass',
+			align: 'right',
+			formatter(myNum) {                
+				               return myNum.value.toString()
+				               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				         		}
 		},
 		
 		],
@@ -99,9 +125,13 @@
 			columns : [ {
 				header : '라인코드',
 				name : '라인코드',
+				className : 'fontClass',
+				align: 'center',
 			}, {
 				header : '작업일자',
 				name : '작업일자',
+				className : 'fontClass',
+				align: 'center',
 				editor : {
 	                  type : 'datePicker',
 	                  options : {
@@ -111,18 +141,24 @@
 			}, {
 				header : '작업수량',
 				name : '작업수량',
+				className : 'fontClass',
+				align: 'right',
 				editor : {
 	                  type : 'text',
 	                  }
 			}, {
 				header : '일자별 우선순위',
 				name : '일자별 우선순위',
+				className : 'fontClass',
+				align: 'center',
 				editor : {
 	                  type : 'text',
 	                  }
 			},{
 				header : '비고',
 				name : '비고',
+				className : 'fontClass',
+				align: 'center',
 				editor : {
 	                  type : 'text',
 	                  }
@@ -145,16 +181,27 @@
 				columns : [ {
 					header : '제품코드',
 					name : '제품코드',
+					className : 'fontClass',
+					align: 'center',
 				}, {
 					header : '자재코드',
 					name : '자재코드',
-
+					className : 'fontClass',
+					align: 'center',
 				}, {
 					header : '자재명',
 					name : '자재명',
+					className : 'fontClass',
+
 				}, {
 					header : '소모량',
 					name : '소모량',
+					className : 'fontClass',
+					align: 'right',
+					formatter(myNum) {                
+						               return myNum.value.toString()
+						               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+						         		}
 				},
 				],
 				rowHeaders : [ 'rowNum' ],
@@ -173,19 +220,32 @@
 					columns : [ {
 						header : '자재명',
 						name : '자재명',
+						className : 'fontClass',
 					}, {
 						header : '자재LOT번호',
 						name : '자재LOT번호',
+						className : 'fontClass',
+						align: 'center',
 
 					}, {
 						header : '사용수량',
 						name : '사용수량',
+						className : 'fontClass',
+						align: 'right',
+						formatter(myNum) {                
+							               return myNum.value.toString()
+							               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+							         		}
 					}, {
 						header : '유통기한',
 						name : '유통기한',
+						className : 'fontClass',
+						align: 'center',
 					},{
 						header : '지시디테일코드',
 						name : '지시디테일코드',
+						className : 'fontClass',
+						align: 'center',
 					},
 					
 					],

@@ -293,7 +293,7 @@ $("#outBtn").on("click", function(){
 			  /* 확인 CONFIRM  */
 			  Swal.fire({
 		          title: '생산계획을 등록하시겠습니까?',
-		          icon: 'warning',
+		          icon: 'question',
 		          showCancelButton: true,
 		          confirmButtonColor: '#3085d6',
 		          cancelButtonColor: '#d33',
@@ -383,7 +383,7 @@ $("#outBtn").on("click", function(){
 		          			}else{
 		          	Swal.fire(
 		                      '승인이 취소되었습니다.',
-		                      '섹시하시네요~!',
+		                      '',
 		                      'error'
 		                  )
 		          			} 

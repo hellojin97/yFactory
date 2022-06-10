@@ -127,9 +127,8 @@ btnDelete.addEventListener("click", function() {
 btnUpdate.addEventListener("click", function() {
 
 	Swal.fire({
-        title: '생산지시등록을 하시겠습니까?',
-        text: "다시 되돌릴 수 없습니다. 신중하세요.",
-        icon: 'warning',
+        title: '변경사항을 저장 하시겠습니까?',
+        icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
@@ -187,7 +186,7 @@ btnUpdate.addEventListener("click", function() {
 							        	}else{
 							              	Swal.fire(
 							                        '승인이 취소되었습니다.',
-							                        '섹시하시네요~!',
+							                        '',
 							                        'error'
 							                    )
 							            }

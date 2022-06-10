@@ -45,20 +45,28 @@ $(function(){
 	    	 {
 		           header: '설비코드',
 		           name: '설비코드',
+		   			className : 'fontClass',
+					align : 'center',
 		      },
 	         {
 	           header: '설비명',
 	           name: '설비명',
+	   			className : 'fontClass',
+				align : 'center',
 	         }
 		      ,
 		         {
 		           header: '모델명',
 		           name: '모델명',
+		   			className : 'fontClass',
+
 		         }
 		      ,
 		         {
 		           header: '관리자',
 		           name: '관리자',
+		   			className : 'fontClass',
+					align : 'center',
 		         }
 		      ],
 	        

@@ -247,8 +247,13 @@ $(function(){
 		    $('#btnCheck').off('click');
 		
 			$('#btnCheck').on('click',function(){
-				console.log(Sum);
-				console.log($("#pdQtyText").val());
+				toastr.options = {
+                        closeButton: true,
+                        progressBar: true,
+                        //positionClass: "toast-bottom-right",
+                        timeOut: 1500
+                       };
+			
 	 		if($("#pdQtyText").val() == Sum){
 	 			toastr.success('수량이 일치합니다.');
 	 		
@@ -275,16 +280,22 @@ $(function(){
 	 		}
 			});
 			
-/* 			needMtrlLOTGrid.on('mousedown', (ev) => {
 
-				selectedRowKey = ev.rowKey;
-				needMtrlLOTGrid.check(selectedRowKey);
-
-			}); */
 			needMtrlLOTGrid.on('afterChange', (ev) => {
 				orgin: 'cell';
 				selectedRowKey = ev.changes;
 				needMtrlLOTGrid.check(selectedRowKey[0].rowKey);
+				let qty = needMtrlLOTGrid.getValue(selectedRowKey[0].rowKey, '현재고');
+				let needQty = needMtrlLOTGrid.getValue(selectedRowKey[0].rowKey, '사용수량');
+								
+				console.log(test);
+				if (qty <  needQty){
+					toastr.error('필요용량을 넘어섯습니다!');
+					needMtrlLOTGrid.setValue(selectedRowKey[0].rowKey, '사용수량','');
+					needMtrlLOTGrid.uncheck(selectedRowKey[0].rowKey);
+				}
+
+				
 				
 			});
 			

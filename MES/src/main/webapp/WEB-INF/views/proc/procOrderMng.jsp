@@ -264,25 +264,28 @@
 	let temp;
 
 	
-	//procOrder.on('mousedown', (ev) => {
-	procOrder.on('mousedown', (ev) => {
-	selectedRowKey = ev.rowKey;
-	lineCode = procOrder.getValue(selectedRowKey, '라인코드');
-	workDate = procOrder.getValue(selectedRowKey, '작업일자');
-	workQty = procOrder.getValue(selectedRowKey, '작업수량');
-	dateRank = procOrder.getValue(selectedRowKey, '일자별우선순위');
-	if(workQty != null){
-	procDtPlan.setValue(ev.rowKey,'생산지시량', workQty);
-	let Qty = procDtPlan.getValue(ev.rowKey, '계획량');
-	procDtPlan.setValue(ev.rowKey,'잔량', Qty-workQty);
-		
-	}
+
+	procOrder.on('afterChange', (ev) => {
+		orgin: 'cell';
+		selectedRowKey = ev.changes;
+		lineCode = procOrder.getValue(selectedRowKey, '라인코드');
+		workDate = procOrder.getValue(selectedRowKey, '작업일자');
+		workQty = procOrder.getValue(selectedRowKey, '작업수량');
+		dateRank = procOrder.getValue(selectedRowKey, '일자별우선순위');
+			
+		if(workQty != null){
+		procDtPlan.setValue(selectedRowKey[0].rowKey,'생산지시량', workQty);
+		let Qty = procDtPlan.getValue(selectedRowKey[0].rowKey, '계획량');
+		procDtPlan.setValue(selectedRowKey[0].rowKey,'잔량', Qty-workQty);
+			
+		}
 	
 
 
 	$("#btnNeedMtrl").click(function () {
+
 		let rowCount = procOrder.getRowCount();
-	if(workDate != null && workQty != null && dateRank != null ){
+	if(workDate != null && workQty != null && dateRank != null){
 		if(workDate != bworkDate || bworkQty != workQty || bdateRank != dateRank){
 			needMtrl.clear();
 			
@@ -315,9 +318,9 @@
 		}
 		}
 	}
-
-	});
 	
+	});
+
 	});
 	
 

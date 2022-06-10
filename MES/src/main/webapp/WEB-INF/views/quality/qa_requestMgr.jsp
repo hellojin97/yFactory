@@ -113,7 +113,11 @@
 			let err = defaultMt.getFocusedCell('불량코드');
 			if(err.columnName == '불량코드') {
 				if(err.value == null) {
-					alert("불량량이 없습니다.");
+					Swal.fire({
+		                icon: 'error',
+		                title: '오류',
+		                text: '불량량이 없어 불량코드를 등록할 수 없습니다.',
+		            })
 				}
 			}
 		}
@@ -157,8 +161,8 @@
 		}).done(function(result) {
 			Swal.fire({
                 icon: 'success',
-                title: 'Alert가 실행되었습니다.',
-                text: '이곳은 내용이 나타나는 곳입니다.',
+                title: '품질검사완료.',
+                text: '자재품질 검사가 완료되었습니다.',
             }).then(function(){
             	location.href = 'qa_result';
             })

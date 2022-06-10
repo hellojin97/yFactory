@@ -145,6 +145,7 @@ public class ajaxController {
 		return mapper.getEqDailyChkCount(chkdt1 , chkdt2);
 	}
 	
+	// 점검관리 페이지 저장 버튼 클릭시 업데이트 진행
 	@RequestMapping(value="/eqChkResultAjax" , method=RequestMethod.POST)
 	public int eqChkResultAjax(@RequestBody List<HashMap<String, Object>> list){
 		

@@ -149,14 +149,14 @@ button:hover {
 					header : '설비명',
 					name : '설비명',
 					className : 'fontClass',
-					align: 'center',
+					align: 'left',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, 
 				{
 					header : '공정코드',
 					name : '공정코드',
 					className : 'fontClass',
-					align: 'center',
+					align: 'left',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, 
 				{
@@ -364,7 +364,10 @@ button:hover {
 					                    'success'
 					                		);
 			            	   console.log(data);
-			            	  
+			            	   
+								
+			            	   
+			            	   
 			      			 for (var i = 0; i < chkRows.length; i++) {
 								if(chkRows[i].사용여부.valueOf()=='사용불가' ){
 									 Swal.fire({
@@ -382,7 +385,7 @@ button:hover {
 						 		        		 document.location.href="./eqIna"; // 비가동 관리 페이지로 이동
 						 		        	  }else{// 취소시 1.5초 텀을 두고 페이지 새로고침
 						 		        		 setTimeout(function(){location.reload();}
-												 , 1500);
+												 , 1200);
 						 		        	  }
 						      			 
 						               });
@@ -392,6 +395,9 @@ button:hover {
 									// 체크된 cell이 사용가능으로 되어져있다면 패이지 새로고침
 									/* setTimeout(function(){toastr.error('불가합니다');}
 									 , 1500); */
+									 setTimeout(function(){location.reload();}
+									 , 1200);
+				            	   
 								}
 							}//  END OF FOR SYNTAX
 			      			  

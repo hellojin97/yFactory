@@ -61,18 +61,30 @@
 
 	           header: '생산지시코드',
 	           name: '생산지시코드',
+	   			className : 'fontClass',
+				align: 'center',
 	         },
 	           {
 	               header: '제품명',
 	               name: '제품명',
+		   			className : 'fontClass',
+
 	             },
 	             {
 	                 header: '생산수량',
 	                 name: '생산수량',
+			   			className : 'fontClass',
+						align: 'right',
+						formatter(myNum) {                
+							               return myNum.value.toString()
+							               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+							         		}
 	               },
 	               {
 		                 header: '생산지시일자',
 		                 name: '생산지시일자',
+				   		className : 'fontClass',
+						align: 'center',
 		               }
 	             ],
 	                  rowHeaders: ['rowNum'],

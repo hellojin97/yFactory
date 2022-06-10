@@ -162,7 +162,11 @@ var procResultList = new tui.Grid({
                 header: '불량량',
                 name: '불량량',
                 className : 'fontClass',
-                align: 'right'
+                align: 'right',
+    			formatter(myNum) { 					
+  			      return myNum.value.toString()
+  			      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  			}
               },
               {
                   header: '불량코드',

@@ -130,7 +130,7 @@ resultGrid = new tui.Grid({
           header: '설비명',
           name: '설비명',
           className : 'fontClass',
-          
+  		align: 'center',
         },
         {
             header: '담당자',
@@ -141,28 +141,44 @@ resultGrid = new tui.Grid({
       {
           header: '투입량',
           name: '투입량',
-          className : 'fontClass',
-  		  align: 'right',
+			className : 'fontClass',
+			align: 'right',
+			formatter(myNum) {                
+				               return myNum.value.toString()
+				               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				         		}
 
         },
 
           {
               header: '합격량',
               name: '합격량',
-              className : 'fontClass',
-      		  align: 'right',
+				className : 'fontClass',
+				align: 'right',
+				formatter(myNum) {                
+					               return myNum.value.toString()
+					               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+					         		}
             },
             {
                 header: '불량량',
                 name: '불량량',
-                className : 'fontClass',
-        		align: 'right',
+				className : 'fontClass',
+				align: 'right',
+				formatter(myNum) {                
+					               return myNum.value.toString()
+					               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+					         		}
               },
           {
               header: '생산량',
               name: '생산량',
-              className : 'fontClass',
-      		  align: 'right',
+				className : 'fontClass',
+				align: 'right',
+				formatter(myNum) {                
+					               return myNum.value.toString()
+					               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+					         		}
             },
             {
                 header: '작업시작시간',

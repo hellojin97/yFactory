@@ -4,6 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 추가 CDN -->
+<!-- toastr.CSS -->
+   <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></link>
+<!-- toastr.JS -->
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+	integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <title>Insert title here</title>
 <style type="text/css">
 .clickB {
@@ -127,13 +138,14 @@
 				header : '작업일자',
 				name : '작업일자',
 				className : 'fontClass',
-				align: 'right',
+				align: 'center',
 				editor : {
 	                  type : 'datePicker',
 	                  options : {
 	                     format : 'yyyy-MM-dd'
 	                  }
-				}
+				},
+			validation: { required: true }
 			}, {
 				header : '작업수량',
 				name : '작업수량',
@@ -141,14 +153,16 @@
 				align: 'right',
 				editor : {
 	                  type : 'text',
-	                  }
+	                  },
+			validation: { required: true }
 			}, {
 				header : '일자별우선순위',
 				name : '일자별우선순위',
-				align: 'right',
+				align: 'center',
 				editor : {
 	                  type : 'text',
-	                  }
+	                  },
+			validation: { required: true }
 			}
 			
 			],
@@ -181,6 +195,10 @@
 					name : '소모량',
 					className : 'fontClass',
 					align: 'right',
+					formatter(myNum) {                
+						               return myNum.value.toString()
+						               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+						         		}
 				},
 				],
 				rowHeaders : [ 'rowNum' ],
@@ -216,7 +234,7 @@
 						header : '유통기한',
 						name : '유통기한',
 						className : 'fontClass',
-						align: 'right',
+						align: 'center',
 					},
 					],
 					rowHeaders : [
@@ -246,6 +264,7 @@
 	let temp;
 
 	
+	//procOrder.on('mousedown', (ev) => {
 	procOrder.on('mousedown', (ev) => {
 	selectedRowKey = ev.rowKey;
 	lineCode = procOrder.getValue(selectedRowKey, '라인코드');
@@ -259,8 +278,8 @@
 		
 	}
 	
-	temp = 
-	console.log(workDate + ' ' + workQty + ' ' + dateRank);
+
+
 	$("#btnNeedMtrl").click(function () {
 		let rowCount = procOrder.getRowCount();
 	if(workDate != null && workQty != null && dateRank != null ){
@@ -287,7 +306,7 @@
 								needMtrl.appendRow(result[i]);
 								dtlCd.push(result[i].생산지시상세코드);
 							}
-							console.log(result);
+
 				   })
 	        }
 			bworkDate = workDate;
@@ -296,7 +315,9 @@
 		}
 		}
 	}
+
 	});
+	
 	});
 	
 
@@ -314,8 +335,7 @@
 	needMtrl.on("dblclick",function(e) {
 		 let dtlCdRow = dtlCd[e.rowKey];
 		 $("#dtlCdText").val(dtlCdRow);
-/* 		 console.log(dtlCdRow);
-		 console.log(dtlCd); */
+
 		 $("#modalState").val('2');
 		 let ppCd = needMtrl.getValue(e.rowKey, '자재명');
 		 let mtNm = needMtrl.getValue(e.rowKey, '자재코드');
@@ -336,9 +356,8 @@
 		let checkAry = needMtrlLOT.getCheckedRows();
 	
 		Swal.fire({
-	        title: '제품 라인정보 관리를 변경하시겠습니까?',
-	        text: "다시 되돌릴 수 없습니다. 신중하세요.",
-	        icon: 'warning',
+	        title: '생산지시를 등록하시겠습니까?',
+	        icon: 'question',
 	        showCancelButton: true,
 	        confirmButtonColor: '#3085d6',
 	        cancelButtonColor: '#d33',
@@ -358,7 +377,7 @@
 					"mLot" : needMtrlLOT.getData()[i].자재LOT번호,
 					"procQty" : needMtrlLOT.getData()[i].사용수량
 			};
-			console.log(result);
+
 			  // AJAX START
  			  $.ajax({
 				  url: "prdInsInsert",
@@ -377,12 +396,12 @@
                   '변경이 완료되었습니다.',
                   'success'
               ).then(function(){
-            	  location.reload(true);	  
+            	  window.location = "procOrderSelect";	  
           	  });
 	        	}else{
 	              	Swal.fire(
 	                        '승인이 취소되었습니다.',
-	                        '섹시하시네요~!',
+	                        '',
 	                        'error'
 	                    )
 	            }

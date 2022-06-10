@@ -198,7 +198,7 @@
 		
 		 /* 확인 CONFIRM  */
 		  Swal.fire({
-	          title: '생산계획을 삭제하시겠습니까?',
+	          title: '공정관리를 삭제하시겠습니까?',
 	          icon: 'warning',
 	          showCancelButton: true,
 	          confirmButtonColor: '#3085d6',
@@ -226,17 +226,17 @@
 							})
 	 					}
 					        	  swal.fire({
-					        		    title: "성공적으로 계획이 등록되었습니다!",
-					        		    text: "생산계획조회 페이지로 이동합니다.",
+					        		    title: "성공적으로 공정이 삭제 되었습니다!",
+					        		    text: "새로고침합니다.",
 					        		    type: "success"
 					        		}).then(function() {
-					        		    window.location = "procProcessCtl";
+					        			location.reload();
 					        		});
 
 	          			}else{
 	          	Swal.fire(
 	                      '승인이 취소되었습니다.',
-	                      '섹시하시네요~!',
+	                      '',
 	                      'error'
 	                  )
 	          			}
@@ -250,8 +250,8 @@
 		
 		 /* 확인 CONFIRM  */
 		  Swal.fire({
-	          title: '생산계획을 등록하시겠습니까?',
-	          icon: 'warning',
+	          title: '변경사항을 저장 하시겠습니까?',
+	          icon: 'question',
 	          showCancelButton: true,
 	          confirmButtonColor: '#3085d6',
 	          cancelButtonColor: '#d33',
@@ -276,17 +276,18 @@
 							})
 	 					}
 					        	  swal.fire({
-					        		    title: "성공적으로 계획이 등록되었습니다!",
-					        		    text: "생산계획조회 페이지로 이동합니다.",
+					        		    title: "성공적으로 저장이 등록되었습니다!",
+					        		    text: "새로고침합니다.",
 					        		    type: "success"
 					        		}).then(function() {
-					        		    window.location = "procProcessCtl";
+					        		    //window.location = "procProcessCtl";
+					        			location.reload();
 					        		});
 
 	          			}else{
 	          	Swal.fire(
 	                      '승인이 취소되었습니다.',
-	                      '섹시하시네요~!',
+	                      '',
 	                      'error'
 	                  )
 	          			}

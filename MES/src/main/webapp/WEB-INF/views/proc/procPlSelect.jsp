@@ -146,15 +146,14 @@
 		}, {
 			header : '작업우선순위',
 			name : '작업우선순위',
-
 			className : 'fontClass',
-			align: 'right',
+			align: 'center',
 		},
 		 {
 			header : '생산일수',
 			name : '생산일수',
 			className : 'fontClass',
-			align: 'right',
+			align: 'center',
 		},
 		],
 		rowHeaders : [ 'rowNum' ],

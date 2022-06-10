@@ -49,7 +49,7 @@
 		</div>
 <script>
 $(function(){
-
+	var sum;
 	
 	if($("#modalState").val() == 1){
 	const url = "NoPlanSelect";
@@ -71,18 +71,25 @@ $(function(){
 	    	 {
 		           header: '생산계획코드',
 		           name: '생산계획코드',
+		   			className : 'fontClass',
+					align : 'center',
 		      },
 	         {
 	           header: '계획명',
 	           name: '계획명',
+	   			className : 'fontClass',
+
 	         },
 	         {
 	             header: '계획등록일자',
 	             name: '계획등록일자',
+		   			className : 'fontClass',
+					align : 'center',
 	           },
 	           {
 	               header: '상태',
 	               name: '상태',
+	               
 	             },
 	             ],
 	   					rowHeaders: ['rowNum'],
@@ -179,19 +186,31 @@ $(function(){
 		    	 {
 			           header: '자재LOT번호',
 			           name: '자재LOT번호',
+			   			className : 'fontClass',
+						align : 'center',
 			      },
 		         {
 		           header: '현재고',
 		           name: '현재고',
+		   			className : 'fontClass',
+					align: 'right',
+					formatter(myNum) {                
+						               return myNum.value.toString()
+						               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+						         		}
 		         },
 		         {
 		             header: '사용수량',
 		             name: '사용수량',
-		             editor : "text"
+		             editor : "text",
+				   	className : 'fontClass',
+					align: 'right',
 		           },
 		           {
 		               header: '유통기한',
 		               name: '유통기한',
+			   			className : 'fontClass',
+						align: 'center',
 		             },
 		             ],
  				rowHeaders: [
@@ -210,7 +229,7 @@ $(function(){
  				        columnContent: {
 	 				       사용수량: {
 	 				            template: function(valueMap) {
-						
+	 				              Sum = valueMap.sum;
 	 				              return `TOTAL: \${valueMap.sum}`;
 	  				 			
 	 				            }
@@ -228,6 +247,11 @@ $(function(){
 		    $('#btnCheck').off('click');
 		
 			$('#btnCheck').on('click',function(){
+				console.log(Sum);
+				console.log($("#pdQtyText").val());
+	 		if($("#pdQtyText").val() == Sum){
+	 			toastr.success('수량이 일치합니다.');
+	 		
 			let checkedAry = [];
 			let rowindex = [];
 			let prd = needMtrlLOTGrid.getCheckedRows();
@@ -246,14 +270,24 @@ $(function(){
 					
 				} 
 			 $('#needMtrlModal').modal('hide');
+	 		}else{
+	 			toastr.error('수량이 불일치합니다.');
+	 		}
 			});
 			
-			needMtrlLOTGrid.on('mousedown', (ev) => {
+/* 			needMtrlLOTGrid.on('mousedown', (ev) => {
 
 				selectedRowKey = ev.rowKey;
 				needMtrlLOTGrid.check(selectedRowKey);
 
+			}); */
+			needMtrlLOTGrid.on('afterChange', (ev) => {
+				orgin: 'cell';
+				selectedRowKey = ev.changes;
+				needMtrlLOTGrid.check(selectedRowKey[0].rowKey);
+				
 			});
+			
 			
 			
 			setTimeout(function(){

@@ -87,10 +87,7 @@
 
 <script type="text/javascript">
 
-/* document.getElementById('dateA').value = new Date().toISOString().substring(0, 10);
-document.getElementById('dateB').value = new Date().toISOString().substring(0, 10);  */
 
-//업체명 modal
 
 
 /* 주문서 전체 조회 */
@@ -142,8 +139,12 @@ window.onload = function (){
              {
                  header: '생산수량',
                  name: '생산수량',
-                 className : 'fontClass',
-     			align: 'right',
+ 				className : 'fontClass',
+				align: 'right',
+				formatter(myNum) {                
+					               return myNum.value.toString()
+					               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+					         		}
                },
              {
                  header: '라인코드',
@@ -155,7 +156,7 @@ window.onload = function (){
                    header: '지시우선순위',
                    name: '지시우선순위',
                    className : 'fontClass',
-        			align: 'right',
+        			align: 'center',
                  },
                  {
                      header: '진행구분',

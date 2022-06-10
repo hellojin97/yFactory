@@ -184,7 +184,7 @@ var eqList = new tui.Grid({
           },{
             header: '설비명',
             name: '설비명',
-            align: 'center',
+            align: 'left',
             className : 'fontClass',
           },
           {

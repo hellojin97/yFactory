@@ -128,7 +128,7 @@ var eq_chkdt2;
 //document.getElementById('eq_chkdt1').value = new Date().toISOString().substring(0, 10);
 //document.getElementById('eq_chkdt2').value = new Date().toISOString().substring(0, 10);
 var modalGrid;
-
+var chkResult;
 var now = new Date();	// 현재 날짜 및 시간
 //console.log("현재 : ", now);
 //var aweekAgo = new Date(now.setDate(now.getDate() - 7)).toISOString().substring(0, 10);// 일주일전 
@@ -198,7 +198,7 @@ $(function(){
 		             header: '설비명',
 		             name: '설비명',
 		             className : 'fontClass',
-		             align: 'center'
+		             align: 'left'
 		          },
 		          { 	
 		               header: '점검일자',
@@ -325,12 +325,18 @@ $(function(){
 				for (var i = 0; i < chkRows.length; i++) {
 					console.log(chkRows[i].설비코드);
 					console.log(chkRows[i]);
+					if(chkRows[i].결과 == '재점검 필요'){
+						 chkResult = 'DIV01';
+					}else{
+						chkResult = 'DIV02';
+					}
 					//console.log(modalGrid.getValue(modalGrid.getCheckedRowKeys(),'설비코드'));
 					data = {
 						설비코드 : chkRows[i].설비코드,
-						점검주기 : chkRows[i].점검주기,
+						//점검주기 : chkRows[i].점검주기,
 						점검내역 : chkRows[i].점검내역,
-						결과 : chkRows[i].결과,
+						//결과 : chkRows[i].결과,
+						결과 : chkResult,
 						검수자 : parseInt(1041)
 						};
 				
@@ -346,7 +352,7 @@ $(function(){
 						dataType: "JSON",
 						contentType : "application/json; charset=UTF-8",
 						success : function(res){
-								toastr.success('등록이 완료되었습니다!');
+								
 								modalGrid.clear();
 								
 								
@@ -354,7 +360,9 @@ $(function(){
 						error : function(){toastr.error('등록이 실패했어요!');}
 					
 					}).done(function(){
-						location.reload(); // 현재 화면 새로고침
+						toastr.success('등록이 완료되었습니다!');
+						 setTimeout(function(){location.reload();}
+						 , 1200);
 					
 					})	// END OF AJAX 
 

@@ -43,11 +43,11 @@
 						</div>
 
 						<div style="padding-right: 10px;">
-							<button type="button" id="safeSave" class="btn1">저장</button>
+							<button type="button" id="safeSave" class="btn1">수정</button>
 						</div>
 
 						<div>
-							<button type="reset" class="btn1">초기화</button>
+							<button id="reset" type="button" class="btn1">초기화</button>
 						</div>
 
 					</div>
@@ -140,7 +140,7 @@
 	  if(mtNminput == ''){
 		  Swal.fire({
               icon: 'error',
-              title: '저장이 취소되었습니다.',
+              title: '입력값이 없습니다.',
               text: '원자재명을 입력해주세요!',
 			});
 
@@ -168,13 +168,13 @@
 	  if(safe == '' || mtNminput == ''){
 		  Swal.fire({
               icon: 'error',
-              title: '저장이 취소되었습니다.',
-              text: '제품 코드와 안전 수량을 입력해주세요!',
+              title: '수정이 취소되었습니다.',
+              text: '원자재코드와 안전 수량을 입력해주세요!',
 			});
 	  }else	{
 		  Swal.fire({
 	            title: '안전재고수량을 변경하시겠습니까?',
-	            text: "다시 되돌릴 수 없습니다. 신중하세요.",
+	            text: "다시 되돌릴 수 없습니다.",
 	            icon: 'warning',
 	            showCancelButton: true,
 	            confirmButtonColor: '#3085d6',
@@ -201,13 +201,27 @@
 	        	}else{
 	              	Swal.fire(
 	                        '승인이 취소되었습니다.',
-	                        '섹시하시네요~!',
+	                        ' ',
 	                        'error'
 	                    )
 	            }
 	           })
 	  }
   });
+  
+/* 검색 결과 초기화  */
+$('#reset').on('click',function(){
+const url = "mtrlSafetyList";
+   $.ajax(url,{
+      dataType : "JSON",
+      method: "GET"
+   }).done(function(result){
+	   mtrlSafetyGrid.resetData(result);
+     console.log(result);
+   });
+})
+  
+  
 //테이블 클릭시 데이터값 호출  
   mtrlSafetyGrid.on("dblclick", function(e){
 	  var mnm = mtrlSafetyGrid.getValue(e.rowKey, "원자재명");

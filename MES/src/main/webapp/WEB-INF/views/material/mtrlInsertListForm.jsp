@@ -181,7 +181,12 @@
 			header : '유통기한',
 			name : '유통기한',
 			className : 'fontClass',
+		},{
+			header : '유통기한',
+			name : '유통기한',
+			className : 'fontClass',
 		}
+		
 
 		],
 		rowHeaders : [ 'rowNum' ],

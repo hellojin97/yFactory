@@ -234,5 +234,12 @@ public class ajaxController {
 	public List<Map> getEqUph(String lineCd) {
 	return mapper.getEqUph(lineCd); 
 	}
-		
+	
+	// 설비 구분 리스트 
+	@GetMapping("/eqDivChkAjax")
+	public List<Map> eqDivChkAjax() {
+	return mapper.eqDivChkAjax(); 
+	}
+	
+	
 }

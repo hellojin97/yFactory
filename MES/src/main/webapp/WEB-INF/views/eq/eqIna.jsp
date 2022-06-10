@@ -13,6 +13,7 @@
 
 </head>
 <body>
+<!-- 숫자 천자리는 ","구분 적용 / 표기될 문자길이가 길다면 왼쪽정렬 / 숫자는 우측정렬 /나머지 가운데 정렬 -->
 	<div style="padding-bottom:15px; color: ;">
 		<h1>설비 비가동 관리</h1>
 	</div>
@@ -149,6 +150,20 @@ $.ajax({
 	success : function(result){		
 		eqList.resetData(result);
 	}
+}).done(function(result){
+	for (var i = 0; i < result.length; i++) {
+		if(result[i].공정코드 == '' || result[i].공정코드==null){
+			console.log((i+1)+"번째 열의 공정코드가 비었습니다!");
+			result[i].공정코드 = 'Not Exist';
+			//console.log(result[i]);
+			
+		};
+		if(result[i].공정명 == '' || result[i].공정명==null){
+			console.log((i+1)+"번째 열의 공정명이 비었습니다!");
+			result[i].공정명 = 'Not Exist';
+		};
+	};
+	
 });
 
 var eqList = new tui.Grid({
@@ -169,6 +184,7 @@ var eqList = new tui.Grid({
           },{
             header: '설비명',
             name: '설비명',
+            align: 'center',
             className : 'fontClass',
           },
           {
@@ -180,6 +196,7 @@ var eqList = new tui.Grid({
           {
             header: '공정명',
             name: '공정명',
+            align: 'center',
             className : 'fontClass',
           },
           {
@@ -233,11 +250,13 @@ var eqList = new tui.Grid({
       },{
         header: '설비명',
         name: '설비명',
+        align: 'center',
         className : 'fontClass',
       },
       {
         header: '사유',
         name: '사유',
+        align: 'center',
         className : 'fontClass',
       },
       {

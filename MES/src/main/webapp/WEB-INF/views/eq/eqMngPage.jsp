@@ -107,6 +107,22 @@ button:hover {
 				method : "GET"
 			}).done(function(result) {
 				grid.resetData(result);
+				console.log('----------------');
+				console.log('result: '+result[0].공정코드);
+				for (var i = 0; i < result.length; i++) {
+					if(result[i].공정코드 == '' || result[i].공정코드==null){
+						console.log(result[i].공정코드+"가 비었습니다!");
+						result[i].공정코드 = 'Not Exist';
+						//console.log(result[i]);
+						
+					};
+					if(result[i].공정명 == '' || result[i].공정명==null){
+						console.log(result[i].공정명+"가 비었습니다!");
+						result[i].공정명 = 'Not Exist';
+						
+						
+					};
+				};
 				console.log(result);
 			})
 
@@ -119,41 +135,48 @@ button:hover {
 					header : '설비코드',
 					name : '설비코드',
 					className : 'fontClass',
+					align: 'center',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 					}, 
 				{
 					header : '설비구분',
 					name : '설비구분',
 					className : 'fontClass',
+					align: 'center',
 					filter: { type: 'select', showApplyBtn: true, showClearBtn: true }
 				},
 				{
 					header : '설비명',
 					name : '설비명',
 					className : 'fontClass',
+					align: 'center',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, 
 				{
 					header : '공정코드',
 					name : '공정코드',
 					className : 'fontClass',
+					align: 'center',
 					filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
 				}, 
 				{
 					header : '공정명',
 					name : '공정명',
+					align: 'center',
 					className : 'fontClass',
 					
 				}, 
 				{
 					header : '최저온도',
 					name : '최저온도',
+					align: 'right',
 					className : 'fontClass',
 					//editor : "text"
 				}, 
 				{
 					header : '최고온도',
 					name : '최고온도',
+					align: 'right',
 					className : 'fontClass',
 					//editor : "text"
 				},
@@ -161,6 +184,7 @@ button:hover {
 					header : '사용여부',
 					name : '사용여부',
 					className : 'fontClass',
+					align: 'center',
 					 editor: {
 					      type: 'select',
 					      options: {
@@ -285,8 +309,8 @@ button:hover {
 						// eq_nm : chkRows[i].설비명 ,
 						//proc_cd : chkRows[i].공정코드 ,
 						//proc_nm : chkRows[i].공정명 ,
-						eq_min : chkRows[i].최저온도 ,
-						eq_max : chkRows[i].최고온도 ,
+						//eq_min : chkRows[i].최저온도 ,
+						//eq_max : chkRows[i].최고온도 ,
 						//eq_purdt : chkRows[i].구매일자 ,
 						eq_actst : temp1
 
@@ -363,11 +387,13 @@ button:hover {
 						      			 
 						               });
 									
-								}else{// 체크된 cell이 사용가능으로 되어져있다면 패이지 새로고침
-									setTimeout(function(){location.reload();}
-									 , 1500);
 								}
-							} //  END OF FOR SYNTAX
+								else{
+									// 체크된 cell이 사용가능으로 되어져있다면 패이지 새로고침
+									/* setTimeout(function(){toastr.error('불가합니다');}
+									 , 1500); */
+								}
+							}//  END OF FOR SYNTAX
 			      			  
 			      			 }); // END OF AJAX DONE SYNTAX
 		            }else{

@@ -62,12 +62,14 @@
 
 			{
 				header : '구분코드',
-				name : '구분코드'
+				name : '구분코드',
+				align: 'center'
 			},
 
 			{
 				header : '구분명',
-				name : '구분명'
+				name : '구분명',
+				align: 'center'
 			}
 
 			],

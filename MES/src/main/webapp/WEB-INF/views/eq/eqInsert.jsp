@@ -74,7 +74,7 @@ button:hover {
 						<div class="col-md-5 " style="padding-bottom: 20px;">
 							<div class="input-group ">
 								<label for="inputText" class="col-form-label"
-									style="padding-right: 27px;">모델명*</label> <input type="text"
+									style="padding-right: 27px;">모델명<span style="color:red">*</span></label> <input type="text"
 									id="eq_mdnm" name="eq_mdnm" class="form-control"
 									style="width: 30px" data-name="모델명" title="업체명+제품명+설비구분 ex)태진빼빼로반죽기" onkeypress="addKeyword(event)" required autofocus>
 

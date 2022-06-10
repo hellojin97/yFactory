@@ -203,7 +203,7 @@
             bomGrid.setValue(evn[0].rowKey, "소요량", num);
           	Swal.fire(
                     '승인이 취소되었습니다.',
-                    '섹시하시네요~!',
+                    '변경이 취소되었습니다.',
                     'error'
                 )
         }

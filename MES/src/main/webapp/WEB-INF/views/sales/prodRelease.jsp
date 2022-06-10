@@ -262,7 +262,7 @@ var ordDtpList = new tui.Grid({
           }else{
           	Swal.fire(
                       '승인이 취소되었습니다.',
-                      '섹시하시네요~!',
+                      '출고등록이 취소되었습니다.',
                       'error'
                   )
           }

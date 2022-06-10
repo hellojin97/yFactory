@@ -303,7 +303,8 @@ order by 4
 		</select>
 	<!-- 입고 단건조회 -->
 			<select id="mtrlInSearch" resultType="map">
-SELECT po.po_cd "원자재발주코드",
+			SELECT 
+				   po.po_cd "원자재발주코드",
 			       m.mt_cd "원자재코드",
 			       m.mt_nm "원자재명",
 			       v.vdr_nm "업체명",
@@ -324,7 +325,6 @@ SELECT po.po_cd "원자재발주코드",
 			AND    m.vdr_cd = v.vdr_cd
 			AND    lot.mt_cd = m.mt_cd
 			AND    lot.mt_lot = c.mt_lot
-            AND    lot.mt_wdt = SYSDATE
 			 <if test="m1 != ''">
 		        AND    m.mt_nm LIKE '%'||#{m1}||'%'
 		     </if>

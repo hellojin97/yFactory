@@ -197,7 +197,8 @@ const url = "mtrlRequestList";
       method: "GET"
    }).done(function(result){
 	   mtrlReqList.resetData(result);
-     console.log(result);
+       console.log(result);
+       
    });
 })
 

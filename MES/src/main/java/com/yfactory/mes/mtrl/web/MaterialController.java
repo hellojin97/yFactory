@@ -93,7 +93,7 @@ public class MaterialController {
 	public void report(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Connection conn = datasource.getConnection();
 		
-		InputStream jasperStream = getClass().getResourceAsStream("/jasper/mtrlOrder.jasper");
+		InputStream jasperStream = getClass().getResourceAsStream("/jasper/mtrlOrderJasper.jasper");
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream); 
 		//파라미터 맵
 		HashMap<String,Object> map = new HashMap<>(); 

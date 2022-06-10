@@ -155,24 +155,18 @@
 				"errcd" : errcd
 			}
 		}).done(function(result) {
-			defaultMt.removeCheckedRows(false);
-			location.href = 'qa_result';
+			Swal.fire({
+                icon: 'success',
+                title: 'Alert가 실행되었습니다.',
+                text: '이곳은 내용이 나타나는 곳입니다.',
+            }).then(function(){
+            	location.href = 'qa_result';
+            })
 		}).fail(function(result) {
 			console.log(result);
 		})
 		
 	}
-		
-		 $("#alertSuccess").click(function () {
-            Swal.fire({
-                icon: 'success',
-                title: 'Alert가 실행되었습니다.',
-                text: '이곳은 내용이 나타나는 곳입니다.',
-            }).then(function(){
-            	location.reload();
-            })
-		
-		});
 	});	 
 	</script>
 </body>

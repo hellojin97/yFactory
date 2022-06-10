@@ -194,11 +194,9 @@
 				}, {
 					header: '검사일',
 					name: '검사일',
-					width: '90',
 					align: 'center',
 					className : 'fontClass',
 					width: '90'
-
 				}, {
 					header: '발주량',
 					name: '발주량',

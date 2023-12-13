@@ -145,7 +145,7 @@ var fourthData;
 var lineCd;
 
 	$(function(){
-	toastr.info('표기상 오류가 존재합니다!');
+	//toastr.info('표기상 오류가 존재합니다!');
 	    function getTime(){ // 현재시간 데이터 가져오기
 	    	  var now = new Date();
 	    	  var hours = now.getHours();

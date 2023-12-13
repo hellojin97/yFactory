@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <!-- 추가 CDN -->
 <!-- toastr.CSS -->
    <link rel="stylesheet"
